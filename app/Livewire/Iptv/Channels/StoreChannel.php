@@ -1,0 +1,110 @@
+<?php
+
+namespace App\Livewire\Iptv\Channels;
+
+use App\Models\Channel;
+use App\Models\ChannelCategory;
+use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\Attributes\Validate;
+
+class StoreChannel extends Component
+{
+    use WithFileUploads, NotificationTrait;
+
+    #[Validate('required', message: "Vyplňte název kanálu")]
+    #[Validate('max:250', message: "Maxilnálně 250 znaků")]
+    #[Validate('string', message: "Neplatný formát")]
+    #[Validate('unique:channels,name', message: "Kanál s tímto název již existuje")]
+    public string $name = "";
+
+    #[Validate('max:1024', message: "Maximální velikost obrázku je 1Mb")]
+    #[Validate('nullable')]
+    public $logo;
+
+    #[Validate('required', message: "Vyberte kvalitu")]
+    public $quality;
+
+    #[Validate('required', message: "Vyberte žánr")]
+    #[Validate('exists:channel_categories,id', message: "Neexistující žánr")]
+    public $category;
+
+    #[Validate('boolean', message: "Neplatný formát")]
+    public bool $is_radio = false;
+
+    #[Validate('boolean', message: "Neplatný formát")]
+    public bool $is_multiscreen = true;
+
+    #[Validate('nullable')]
+    #[Validate('string', message: "Neplatný formát")]
+    #[Validate('unique:channels,nangu_chunk_store_id', message: "Toto chuntkStoreId již existuje")]
+    public string|null $nangu_chunk_store_id = null;
+
+    #[Validate('nullable')]
+    #[Validate('string', message: "Neplatný formát")]
+    #[Validate('unique:channels,nangu_channel_code', message: "Toto nanguChannelCode již existuje")]
+    public string|null $nangu_channel_code = null;
+
+    #[Validate('string', message: "Neplatný formát")]
+    #[Validate('nullable')]
+    public $description;
+
+    public bool $storeModal = false;
+    public $qualities = Channel::QUALITIES;
+    public $channelCategories;
+
+    public function mount()
+    {
+        $this->channelCategories = ChannelCategory::orderBy('name')->get(['id', 'name']);
+    }
+
+    public function store()
+    {
+        $this->validate();
+
+        if (!is_null($this->logo)) {
+            $path = $this->logo->store(path: 'public/Logos');
+        }
+
+        $channel = Channel::create([
+            'name' => $this->name,
+            'logo' => isset($path) ? $path : null,
+            'is_radio' => $this->is_radio,
+            'is_multiscreen' => $this->is_multiscreen,
+            'quality' => Channel::QUALITIES[$this->quality]['name'],
+            'category' => $this->category,
+            'description' => $this->description,
+            'nangu_chunk_store_id' => $this->nangu_chunk_store_id,
+            'nangu_channel_code' => $this->nangu_channel_code
+        ]);
+
+        $this->dispatch('update_channels_sidebar');
+        // $this->closeDialog();
+
+        $this->success_alert("Kanál byl přidán");
+        return $this->redirect("/channels/" . $channel->id . "/multicast", true);
+    }
+
+    public function closeDialog()
+    {
+        $this->storeModal = false;
+        $this->resetErrorBag();
+        $this->reset(
+            'name',
+            'logo',
+            'is_radio',
+            'is_multiscreen',
+            'quality',
+            'category',
+            'description',
+            'nangu_chunk_store_id',
+            'nangu_channel_code'
+        );
+    }
+
+    public function render()
+    {
+        return view('livewire.iptv.channels.store-channel');
+    }
+}

@@ -31,4 +31,25 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'api' => [
+        'nanguTv' => [
+            'url' => env('NANGU_URL'),
+            'ssl_url' => env('NANGU_SSL_URL'),
+            'ssl_key' => env('NANGU_SSL_KEY'),
+            'isp_code' => env('NANGU_ISP_CODE')
+        ],
+        'iptvDohled' => [
+            'url' => env('IPTVDOHLED_URL'),
+            'username' => env('IPTVDOHLED_USERNAME'),
+            'password' => env('IPTVDOHLED_PASSWORD'),
+        ],
+        [
+            'nms' => [
+                'url' => env('NMS_URL'),
+                'username' => env('NMS_USER'),
+                'password' => env('NMS_PASSWORD')
+            ]
+        ]
+    ]
+
 ];
