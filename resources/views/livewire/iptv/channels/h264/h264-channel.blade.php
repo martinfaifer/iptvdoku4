@@ -14,12 +14,12 @@
     </div>
     @if (!empty($h264))
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12 sm:col-span-6 mb-4">
+            <div class="col-span-12 md:col-span-6 mb-4">
                 <x-share.cards.base-card title="Informace o unicastu">
                     {{-- list of multicast datas --}}
                     @foreach ($h264 as $unicast)
                         <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold">
-                            <div class="flex justify-between sm:col-span-12">
+                            <div class="flex justify-between md:col-span-12">
                                 <p>
                                     <span class="font-normal">
                                         {{ $unicast['quality']['name'] }}p:
@@ -30,6 +30,12 @@
                                     <span class="ml-3 font-thin text-xs italic">
                                         {{ $unicast['quality']['bitrate'] }}kbps
                                     </span>
+                                    @if ($this->isInIptvDohledDohled($unicast['ip']))
+                                        <span>
+                                            <x-badge class="bg-green-800 rounded-md text-white text-xs italic"
+                                                value="Dohleduje se" />
+                                        </span>
+                                    @endif
                                 </p>
                                 <div class="sm:col-span-1 -mt-2">
                                     <button class="btn btn-sm btn-circle bg-transparent border-none"
@@ -80,8 +86,14 @@
 
                 </x-modal>
             </div>
-            <div class="col-span-12 sm:col-span-6 mb-4">
+            <div class="col-span-12 md:col-span-6 mb-4">
+                {{--  --}}
+            </div>
+            <div class="col-span-12 md:col-span-6 mb-4">
                 <livewire:notes.note-component column="h264_id" id="{{ $channel->h264->id }}">
+            </div>
+            <div class="col-span-12 md:col-span-6 mb-4">
+                <livewire:log-component columnValue="h264:{{ $channel->id }}" column="item">
             </div>
             @if (!$devices->isEmpty())
                 <div class="col-span-12 mb-4">
@@ -96,7 +108,7 @@
                 <div class="col-span-12 mb-4">
                     <div class="grid grid-cols-12 gap-4">
                         @foreach ($devices as $device)
-                            <div class="col-span-6 mb-4">
+                            <div class="col-span-12 md:col-span-6 mb-4">
                                 <livewire:iptv.channels.device-has-channel-component :device="$device" :channel="$channel"
                                     channelType="h264">
                             </div>
@@ -125,6 +137,12 @@
                     </div>
                 </div>
             @endif
+
+            @foreach ($h264 as $unicast)
+                <div class="col-span-12 mb-4 gap-4">
+                    <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component ip="{{ $unicast['ip'] }}">
+                </div>
+            @endforeach
         </div>
     @endif
 </div>

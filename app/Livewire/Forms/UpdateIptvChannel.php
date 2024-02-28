@@ -7,6 +7,7 @@ use App\Models\Channel;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
+use App\Models\GeniusTvChannelPackage;
 use App\Traits\Array\FindKeyByValueTrait;
 
 class UpdateIptvChannel extends Form
@@ -23,6 +24,7 @@ class UpdateIptvChannel extends Form
     public $channelCategories;
     public $nangu_chunk_store_id;
     public $nangu_channel_code;
+    public array $geniustvChannelPackage;
 
     public function rules()
     {
@@ -74,21 +76,30 @@ class UpdateIptvChannel extends Form
         $this->description = $channel->description;
         $this->nangu_chunk_store_id = $channel->nangu_chunk_store_id;
         $this->nangu_channel_code = $channel->nangu_channel_code;
+        $this->geniustvChannelPackage = is_null(json_decode($channel->geniustv_channel_packages_id)) ? [] : json_decode($channel->geniustv_channel_packages_id);
     }
 
     public function update()
     {
         $this->validate();
 
+        $collectionQualities = collect(Channel::QUALITIES);
+        $filteredQuality = $collectionQualities->where('id', $this->quality)->all();
+
+        foreach ($filteredQuality as $q) {
+            $qualityToChannel = $q['name'];
+        }
+
         $this->channel->update([
             'name' => $this->name,
             'is_radio' => $this->is_radio,
             'is_multiscreen' => $this->is_multiscreen,
-            'quality' => Channel::QUALITIES[$this->quality]['name'],
+            'quality' => $qualityToChannel,
             'category' => $this->category,
             'description' => $this->description,
             'nangu_chunk_store_id' => $this->nangu_chunk_store_id,
-            'nangu_channel_code' => $this->nangu_channel_code
+            'nangu_channel_code' => $this->nangu_channel_code,
+            'geniustv_channel_packages_id' => json_encode($this->geniustvChannelPackage)
         ]);
 
         $this->reset('name', 'logo', 'quality', 'category', 'description', 'nangu_chunk_store_id', 'nangu_channel_code');

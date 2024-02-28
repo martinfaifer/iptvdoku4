@@ -9,6 +9,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.svg') }}">
     <link rel="manifest" href="/site.webmanifest">
     <title>{{ $title ?? 'IPTVdokumentace4' }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/github.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/a6yh9ynf4jozp4fh5ifm4ge2jyxhqtpzbisgvawi52igqueb/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
@@ -17,23 +21,17 @@
 
 <body class="bg-gradient-to-r bg-[#0A0F19] min-h-screen">
 
-    @persist('toast')
-        <x-toast />
-    @endpersist
+    <x-toast />
 
     @auth
         <x-spotlight search-text="Vyhledejte ... " no-results-text="Ops! Nenalezeno." class="justify-center bg-[#132231]"
             shortcut="alt.space" />
-        @persist('navbar')
-            <livewire:navbar></livewire:navbar>
-        @endpersist
     @endauth
 
     <x-main full-width>
-
         @auth
             <x-slot:sidebar class="bg-[#111827] border-r border-[#1f2937] !w-[320px]">
-                <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2">
+                <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
                     <ul class="menu bg-[#0A0F19] h-full fixed ml-2">
                         <li href="/channels" wire:navigate @class([
                             'rounded-lg',
@@ -54,7 +52,7 @@
                     </ul>
                 </x-menu>
                 {{-- main dynamic navigation --}}
-                <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 !h-full">
+                <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 !h-full ">
                     <div class="overflow-y-auto">
                         @if (request()->is('/') || request()->is('channels') || request()->is('channels/*'))
                             <livewire:iptv.channels.menu.channels-menu />
@@ -66,8 +64,13 @@
                 </x-menu>
                 </div>
             </x-slot:sidebar>
+
+
         @endauth
         <x-slot:content class="mt-14">
+            @persist('navbar')
+                <livewire:navbar></livewire:navbar>
+            @endpersist
             {{ $slot }}
         </x-slot:content>
     </x-main>

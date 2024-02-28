@@ -6,6 +6,7 @@ use App\Models\Channel;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\ChannelCategory;
+use App\Models\GeniusTvChannelPackage;
 use App\Livewire\Forms\UpdateIptvChannel;
 use App\Traits\Livewire\NotificationTrait;
 
@@ -21,10 +22,12 @@ class UpdateChannel extends Component
 
     public $qualities = Channel::QUALITIES;
     public $channelCategories;
+    public $geniusTVChannelPackages;
 
     public function mount($channelType = null)
     {
         $this->channelCategories = ChannelCategory::orderBy('name')->get(['id', 'name']);
+        $this->geniusTVChannelPackages = GeniusTvChannelPackage::get();
     }
 
     public function update()

@@ -1,17 +1,17 @@
 <div>
-    <div class="navbar top-0 right-0 w-10/12 fixed bg-transparent mb-11 z-30" wire:poll.20s>
+    <div class="navbar fixed bg-[#0A0F19] bg-opacity-80 mb-1 top-0 right-0 z-10 min-h-8" wire:poll.20s>
         <div class="flex-1">
-            {{--  --}}
+            IPTV doku
         </div>
-        <div class="flex-none gap-2">
+        <div class="flex-none gap-4">
             <div class="form-control">
                 <input @click.stop="$dispatch('mary-search-open')" type="text" placeholder="Vyhledejte ...           ⌘G"
                     class="input input-bordered input-sm bg-opacity-20 text-white w-24 md:w-auto" />
             </div>
             <div>
                 <div class="dropdown dropdown-end">
-                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                        <div class="w-10 rounded-full">
+                    <div tabindex="0" role="button" class="btn btn-sm btn-ghost btn-circle avatar">
+                        <div class="w-9 rounded-full">
                             <img alt="e_avatar"
                                 src="https://ui-avatars.com/api/?background=132231&color=fff&name={{ Auth::user()->name }}" />
                         </div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div>
-                <label for="alert-drawer" class="btn btn-sm bg-transparent border-none">
+                <label for="alert-drawer" class="btn btn-sm btn-circle bg-transparent border-none">
                     <x-heroicon-c-bell @class([
                         'h-6 w-6',
                         'text-red-500' => !empty($iptv_dohled_alerts),
@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-
+    {{-- bg-[#0A0F19] --}}
     <x-drawer id="alert-drawer" right class="lg:w-1/4 !bg-[#0A0F19]">
         {{-- alerts --}}
         @if (!empty($iptv_dohled_alerts))

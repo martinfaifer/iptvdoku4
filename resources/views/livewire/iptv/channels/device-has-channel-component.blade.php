@@ -34,26 +34,44 @@
                 </div>
             @endif
 
-            <div class="flex justify-between sm:col-span-6">
-                <div>
-                    <span>
-                        Status:
-                    </span>
-                    <span class="ml-4 font-normal">
-                        ???
-                    </span>
+            @if (!is_null($nmsCahedData))
+                <div class="flex justify-between sm:col-span-6">
+                    <div>
+                        <span>
+                            Status:
+                        </span>
+                        <span class="ml-4 inline-block">
+                            @if ($nmsCahedData[0]['nms_device_status_id']['nms_device_status_type_id'] == 1)
+                                <div class="bg-[#1EB15B] text-white text-sm font-semibold rounded-md">
+                                    <span class="mx-3">
+                                        Online
+                                    </span>
+                                </div>
+                            @endif
+                            @if ($nmsCahedData[0]['nms_device_status_id']['nms_device_status_type_id'] == 3)
+                                <div class="bg-red-500 text-white text-sm font-semibold rounded-md">
+                                    <span class="mx-3">
+                                        Offline
+                                    </span>
+                                </div>
+                            @endif
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="flex justify-between sm:col-span-12">
-                <div>
-                    <span>
-                        Přístupy do zařízeni:
-                    </span>
-                    <span class="ml-4 font-normal">
-                        {{ $device->username }} {{ $device->password }}
-                    </span>
+            @endif
+
+            @if (!is_null($device->username) || !is_null($device->password))
+                <div class="flex justify-between sm:col-span-12">
+                    <div>
+                        <span>
+                            Přístupy do zařízeni:
+                        </span>
+                        <span class="ml-4 font-normal">
+                            {{ $device->username }} / {{ $device->password }}
+                        </span>
+                    </div>
                 </div>
-            </div>
+            @endif
             @if (!is_null($device->template))
                 <div class="flex justify-between sm:col-span-12">
                     <div>

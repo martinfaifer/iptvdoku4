@@ -13,7 +13,7 @@
     </div>
     @if (!empty($h265))
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12 sm:col-span-6 mb-4">
+            <div class="col-span-12 md:col-span-6 mb-4">
                 <x-share.cards.base-card title="Informace o unicastu">
                     {{-- list of multicast datas --}}
                     @foreach ($h265 as $unicast)
@@ -29,6 +29,12 @@
                                     <span class="ml-3 font-thin text-xs italic">
                                         {{ $unicast['quality']['bitrate'] }}kbps
                                     </span>
+                                    @if ($this->isInIptvDohledDohled($unicast['ip']))
+                                        <span>
+                                            <x-badge class="bg-green-800 rounded-md text-white text-xs italic"
+                                                value="Dohleduje se" />
+                                        </span>
+                                    @endif
                                 </p>
                                 <div class="sm:col-span-1 -mt-2">
                                     <button class="btn btn-sm btn-circle bg-transparent border-none"
@@ -79,51 +85,57 @@
 
                 </x-modal>
             </div>
-            <div class="col-span-12 sm:col-span-6 mb-4">
+            <div class="col-span-12 md:col-span-6 mb-4">
+                {{--  --}}
+            </div>
+            <div class="col-span-12 md:col-span-6 mb-4">
                 <livewire:notes.note-component column="h265_id" id="{{ $channel->h265->id }}">
             </div>
+            <div class="col-span-12 md:col-span-6 mb-4">
+                <livewire:log-component columnValue="h265:{{ $channel->id }}" column="item">
+            </div>
             @if (!$devices->isEmpty())
-            <div class="col-span-12 mb-4">
-                <div class="flex">
-                    <hr
-                        class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                    <span class="text-xs italic">Primár</span>
-                    <hr
-                        class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                <div class="col-span-12 mb-4">
+                    <div class="flex">
+                        <hr
+                            class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                        <span class="text-xs italic">Primár</span>
+                        <hr
+                            class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                    </div>
                 </div>
-            </div>
-            <div class="col-span-12 mb-4">
-                <div class="grid grid-cols-12 gap-4">
-                    @foreach ($devices as $device)
-                        <div class="col-span-6 mb-4">
-                            <livewire:iptv.channels.device-has-channel-component :device="$device" :channel="$channel"
-                                channelType="h265">
-                        </div>
-                    @endforeach
+                <div class="col-span-12 mb-4">
+                    <div class="grid grid-cols-12 gap-4">
+                        @foreach ($devices as $device)
+                            <div class="col-span-12 md:col-span-6 mb-4">
+                                <livewire:iptv.channels.device-has-channel-component :device="$device" :channel="$channel"
+                                    channelType="h265">
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-        @endif
-        @if (!$backupDevices->isEmpty())
-            <div class="col-span-12 mb-4">
-                <div class="flex">
-                    <hr
-                        class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                    <span class="text-xs italic">Backup</span>
-                    <hr
-                        class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+            @endif
+            @if (!$backupDevices->isEmpty())
+                <div class="col-span-12 mb-4">
+                    <div class="flex">
+                        <hr
+                            class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                        <span class="text-xs italic">Backup</span>
+                        <hr
+                            class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                    </div>
                 </div>
-            </div>
-            <div class="col-span-12 mb-4">
-                <div class="grid grid-cols-12 gap-4">
-                    @foreach ($backupDevices as $backupDevice)
-                        <div class="col-span-6 mb-4">
-                            <livewire:iptv.channels.device-has-channel-component :device="$backupDevice" :channel="$channel"
-                                isBackup="true" channelType="h265">
-                        </div>
-                    @endforeach
+                <div class="col-span-12 mb-4">
+                    <div class="grid grid-cols-12 gap-4">
+                        @foreach ($backupDevices as $backupDevice)
+                            <div class="col-span-6 mb-4">
+                                <livewire:iptv.channels.device-has-channel-component :device="$backupDevice" :channel="$channel"
+                                    isBackup="true" channelType="h265">
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-        @endif
+            @endif
         </div>
     @endif
 </div>

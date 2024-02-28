@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('iptv-dohled:alerts')->everyTwentySeconds();
         $schedule->command('devices:snmp-get')->everyFiveMinutes();
         $schedule->command('devices:data-from-nms')->everyThirtyMinutes();
+        $schedule->command('channels:get-informartions-from-dohled')->everyMinute();
     }
 
     /**

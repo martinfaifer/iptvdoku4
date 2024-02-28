@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Iptv\Channels;
 
-use App\Actions\Devices\RemoveChannelFromDeviceAction;
 use App\Models\Device;
 use App\Models\Channel;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
+use Illuminate\Support\Facades\Cache;
+use App\Traits\Livewire\NotificationTrait;
+use App\Actions\Devices\RemoveChannelFromDeviceAction;
 
 class DeviceHasChannelComponent extends Component
 {
@@ -19,6 +20,8 @@ class DeviceHasChannelComponent extends Component
     public ?Channel $channel;
 
     public $channelType;
+
+    public null|array $nmsCahedData = null;
 
     public array $deviceInterfaces;
 
@@ -169,6 +172,9 @@ class DeviceHasChannelComponent extends Component
 
     public function render()
     {
+        if (isset($this->device)) {
+            $this->nmsCahedData = Cache::get('nms_' . $this->device->id);
+        }
         return view('livewire.iptv.channels.device-has-channel-component', [
             'searcheableChannelName' => $this->getChannelNameByType()
         ]);

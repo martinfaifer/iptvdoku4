@@ -7,30 +7,36 @@
             @endif
         </div>
         @if (!$multicasts->isEmpty())
-            <div class="flex-none gap-2">
+            <div class="md:flex-none gap-2 md:overflow-x-auto">
                 <livewire:iptv.channels.multicast.store-multicast-channel :channel="$channel">
-                <livewire:iptv.channels.store-device-to-channel-component :channel="$channel" channelType="multicast">
+                    <livewire:iptv.channels.store-device-to-channel-component :channel="$channel" channelType="multicast">
             </div>
         @endif
     </div>
     @if (!$multicasts->isEmpty())
-        <div class="grid grid-cols-12">
+        <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12 mb-4">
                 <x-share.cards.base-card title="Informace o multicastu">
                     {{-- list of multicast datas --}}
                     @foreach ($multicasts as $multicast)
                         <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold">
-                            <div class="flex justify-between sm:col-span-3">
-                                <p>
-                                    <span class="font-normal">
-                                        Zdrojová IP:
-                                    </span>
-                                    <span class="ml-3">
-                                        {{ $multicast->source_ip }}
-                                    </span>
-                                </p>
+                            <div class="col-span-12 sm:col-span-3">
+                                <div class="lg:flex">
+                                    <p>
+                                        <span class="font-normal">
+                                            Zdrojová IP:
+                                        </span>
+                                        <span class="ml-3">
+                                            {{ $multicast->source_ip }}
+                                        </span>
+                                        @if ($this->isInIptvDohledDohled($multicast->source_ip))
+                                            <x-badge class="bg-green-800 rounded-md text-white text-xs italic"
+                                                value="Dohleduje se" />
+                                        @endif
+                                    </p>
+                                </div>
                             </div>
-                            <div class="flex justify-between sm:col-span-3 sm:inline-flex">
+                            <div class="col-span-12 sm:col-span-3 sm:inline-flex">
                                 <p>
                                     <span class="font-normal">
                                         Zdroj:
@@ -40,18 +46,23 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="sm:col-span-3">
-                                <p>
-                                    <span class="font-normal">
-                                        STB IP:
-                                    </span>
-                                    <span class="ml-3">
-                                        {{ $multicast->stb_ip }}
-                                    </span>
-                                </p>
-
+                            <div class="sm:col-span-3 col-span-12">
+                                <div class="lg:flex">
+                                    <p>
+                                        <span class="font-normal">
+                                            STB IP:
+                                        </span>
+                                        <span class="ml-3">
+                                            {{ $multicast->stb_ip }}
+                                        </span>
+                                        @if ($this->isInIptvDohledDohled($multicast->stb_ip))
+                                            <x-badge class="bg-green-800 rounded-md text-white text-xs italic"
+                                                value="Dohleduje se" />
+                                        @endif
+                                    </p>
+                                </div>
                             </div>
-                            <div class="sm:col-span-2">
+                            <div class="col-span-12 sm:col-span-2">
                                 <p>
                                     <span class="font-normal">
                                         Typ:
@@ -69,7 +80,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="sm:col-span-1 -mt-2">
+                            <div class="col-span-12 sm:col-span-1 -mt-2">
                                 <button class="btn btn-sm btn-circle bg-transparent border-none"
                                     wire:click='edit({{ $multicast->id }})'>
                                     <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />
@@ -80,8 +91,7 @@
                                 </button>
                             </div>
                         </div>
-                        <hr
-                            class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                        <x-share.lines.small-hr></x-share.lines.small-hr>
                     @endforeach
                 </x-share.cards.base-card>
                 {{-- edit dialog --}}
@@ -147,8 +157,11 @@
 
                 </x-modal>
             </div>
-            <div class="col-span-6 mb-4">
+            <div class="col-span-12 md:col-span-6">
                 <livewire:notes.note-component column="channel_id" :id="$channel->id" />
+            </div>
+            <div class="col-span-12 md:col-span-6 mb-4">
+                <livewire:log-component columnValue="multicast:{{ $channel->id }}" column="item" />
             </div>
             @if (!$devices->isEmpty())
                 <div class="col-span-12 mb-4">
@@ -163,7 +176,7 @@
                 <div class="col-span-12 mb-4">
                     <div class="grid grid-cols-12 gap-4">
                         @foreach ($devices as $device)
-                            <div class="col-span-6 mb-4">
+                            <div class="col-span-12 md:col-span-6 mb-4">
                                 <livewire:iptv.channels.device-has-channel-component :device="$device" :channel="$channel"
                                     channelType="multicast">
                             </div>
@@ -184,7 +197,7 @@
                 <div class="col-span-12 mb-4">
                     <div class="grid grid-cols-12 gap-4">
                         @foreach ($backupDevices as $backupDevice)
-                            <div class="col-span-6 mb-4">
+                            <div class="col-span-12 md:col-span-6 mb-4">
                                 <livewire:iptv.channels.device-has-channel-component :device="$backupDevice" :channel="$channel"
                                     isBackup="true" channelType="multicast">
                             </div>
@@ -192,6 +205,19 @@
                     </div>
                 </div>
             @endif
+
+            {{-- iptvdohled section --}}
+            @foreach ($multicasts as $multicast)
+                <div class="col-span-12 mb-4 gap-4">
+                    <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
+                        ip="{{ $multicast->source_ip }}">
+                </div>
+                <div class="col-span-12 mb-4 gap-4">
+                    <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
+                        ip="{{ $multicast->stb_ip }}">
+                </div>
+            @endforeach
+
         </div>
     @endif
 </div>

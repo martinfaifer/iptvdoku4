@@ -10,10 +10,11 @@ use Illuminate\Support\Collection;
 use App\Models\ChannelQualityWithIp;
 use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\UpdateH265ChannelForm;
+use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
 
 class H265Channel extends Component
 {
-    use NotificationTrait;
+    use NotificationTrait, CheckIfChannelIsInIptvDohledTrait;
 
     public UpdateH265ChannelForm $form;
 

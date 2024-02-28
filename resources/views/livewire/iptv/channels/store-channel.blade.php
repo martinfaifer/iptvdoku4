@@ -4,7 +4,7 @@
         Přidat kanál
     </button>
 
-    <x-modal wire:model="storeModal" title="Nový kanál" persistent class="modal-bottom sm:modal-middle">
+    <x-modal wire:model="storeModal" title="Nový kanál" persistent class="modal-bottom sm:modal-middle backdrop-blur-sm">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 {{-- qualities --}}
-                <div class="col-span-6 mb-4">
+                <div class="col-span-4 mb-4">
                     <x-choices label="Kvalita" wire:model="quality" :options="$qualities" single />
                     <div>
                         @error('form.quality')
@@ -36,10 +36,19 @@
                     </div>
                 </div>
                 {{-- channel category --}}
-                <div class="col-span-6 mb-4">
+                <div class="col-span-4 mb-4">
                     <x-choices label="Žánr" wire:model="category" :options="$channelCategories" single />
                     <div>
                         @error('form.category')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                {{-- geniustv packages --}}
+                <div class="col-span-4 mb-4">
+                    <x-choices label="GeniusTV balíčky" wire:model="geniustvChannelPackage" :options="$geniusTVChannelPackages" multiple/>
+                    <div>
+                        @error('form.geniustvChannelPackage')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>

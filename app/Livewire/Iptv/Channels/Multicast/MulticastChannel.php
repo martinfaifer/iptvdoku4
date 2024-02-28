@@ -11,13 +11,15 @@ use App\Models\ChannelMulticast;
 use Livewire\Attributes\Reactive;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Modelable;
+use Illuminate\Support\Facades\Cache;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Contracts\Database\Query\Builder;
 use App\Livewire\Forms\UpdateMulticastChannelForm;
+use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
 
 class MulticastChannel extends Component
 {
-    use NotificationTrait;
+    use NotificationTrait , CheckIfChannelIsInIptvDohledTrait;
 
     public UpdateMulticastChannelForm $form;
 
@@ -32,15 +34,15 @@ class MulticastChannel extends Component
     {
         $this->channelSources = ChannelSource::get();
 
-        $this->devices = Device::get()->filter(function($device) {
-            if(is_array($device->has_channels)) {
-                    return in_array("multicast:".$this->channel->id, $device->has_channels);
+        $this->devices = Device::get()->filter(function ($device) {
+            if (is_array($device->has_channels)) {
+                return in_array("multicast:" . $this->channel->id, $device->has_channels);
             }
         });
 
-        $this->backupDevices = Device::get()->filter(function($device) {
-            if(is_array($device->has_channels)) {
-                    return in_array("multicast:".$this->channel->id.":backup", $device->has_channels);
+        $this->backupDevices = Device::get()->filter(function ($device) {
+            if (is_array($device->has_channels)) {
+                return in_array("multicast:" . $this->channel->id . ":backup", $device->has_channels);
             }
         });
     }

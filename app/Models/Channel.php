@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Observers\ChannelObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
@@ -39,13 +40,22 @@ class Channel extends Model
         'category',
         'description',
         'nangu_chunk_store_id',
-        'nangu_channel_code'
+        'nangu_channel_code',
+        'geniustv_channel_packages_id'
     ];
 
     protected $casts = [
         'is_radio' => 'boolean',
         'is_multiscreen' => 'boolean',
     ];
+
+    // protected function geniustv_channel_packages_id(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn ($value) => json_decode($value, true),
+    //         set: fn ($value) => json_encode($value)
+    //     );
+    // }
 
     public function channelCategory(): HasOne
     {

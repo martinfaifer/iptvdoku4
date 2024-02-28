@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             DeviceCategorySeeder::class,
             DeviceVendorsSeeder::class,
             DeviceSnmpSeeder::class,
-            DeviceVendorSnmpSeeder::class
+            DeviceVendorSnmpSeeder::class,
+            GeniusTvChannelPackageSeeder::class
         ]);
     }
 }

@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\ChannelQualityWithIpObserver;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
+#[ObservedBy(ChannelQualityWithIpObserver::class)]
 class ChannelQualityWithIp extends Model
 {
     protected $fillable = [

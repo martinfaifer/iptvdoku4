@@ -4,6 +4,7 @@ namespace App\Livewire\Iptv\Channels;
 
 use App\Models\Channel;
 use App\Models\ChannelCategory;
+use App\Models\GeniusTvChannelPackage;
 use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -50,13 +51,18 @@ class StoreChannel extends Component
     #[Validate('nullable')]
     public $description;
 
+    #[Validate('nullable')]
+    public array $geniustvChannelPackage;
+
     public bool $storeModal = false;
     public $qualities = Channel::QUALITIES;
+    public $geniusTVChannelPackages;
     public $channelCategories;
 
     public function mount()
     {
         $this->channelCategories = ChannelCategory::orderBy('name')->get(['id', 'name']);
+        $this->geniusTVChannelPackages = GeniusTvChannelPackage::get();
     }
 
     public function store()
@@ -67,16 +73,24 @@ class StoreChannel extends Component
             $path = $this->logo->store(path: 'public/Logos');
         }
 
+        $collectionQualities = collect(Channel::QUALITIES);
+        $filteredQuality = $collectionQualities->where('id', $this->quality)->all();
+
+        foreach ($filteredQuality as $q) {
+            $qualityToChannel = $q['name'];
+        }
+
         $channel = Channel::create([
             'name' => $this->name,
             'logo' => isset($path) ? $path : null,
             'is_radio' => $this->is_radio,
             'is_multiscreen' => $this->is_multiscreen,
-            'quality' => Channel::QUALITIES[$this->quality]['name'],
+            'quality' => $qualityToChannel,
             'category' => $this->category,
             'description' => $this->description,
             'nangu_chunk_store_id' => $this->nangu_chunk_store_id,
-            'nangu_channel_code' => $this->nangu_channel_code
+            'nangu_channel_code' => $this->nangu_channel_code,
+            'geniustv_channel_packages_id' => json_encode($this->geniustvChannelPackage)
         ]);
 
         $this->dispatch('update_channels_sidebar');

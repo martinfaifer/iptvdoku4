@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use App\Livewire\Iptv\Channels\Multicast\MulticastChannel;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Observers\MulticastChannelObserver;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use App\Livewire\Iptv\Channels\Multicast\MulticastChannel;
 
+#[ObservedBy(MulticastChannelObserver::class)]
 class ChannelMulticast extends Model
 {
     protected $fillable = [

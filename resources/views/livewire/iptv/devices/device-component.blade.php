@@ -238,7 +238,7 @@
                     @endif
 
                     {{-- poznámky --}}
-                    <div class="col-span-6 mb-4">
+                    <div class="col-span-12 sm:col-span-8 mb-4">
                         <livewire:notes.note-component column="device_id" :id="$device->id" />
                     </div>
 

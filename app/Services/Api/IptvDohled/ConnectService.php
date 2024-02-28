@@ -15,15 +15,25 @@ class ConnectService
             'endpoint' => '/api/v2/stream/alerts',
             'formData' => null
         ],
+        'get-stream-by-ip' => [
+            'method' => 'get',
+            'endpoint' => '/api/v2/stream/by-ip/%params%',
+            'formData' => null
+        ]
     ];
 
 
-    public function __construct($endpointType, null|array $formData = null)
+    public function __construct($endpointType, null|array $formData = null, string|null $params = null)
     {
         try {
             if (is_array($formData)) {
                 $this->endPoints[$endpointType]['formData'] = $formData;
             }
+
+            if (!is_null($params)) {
+                $this->endPoints[$endpointType]['endpoint'] = str_replace("%params%", $params, $this->endPoints[$endpointType]['endpoint']);
+            }
+
             $requestType = match ($this->endPoints[$endpointType]['method']) {
                 'get' => "get",
                 'post' => "post",
@@ -47,14 +57,14 @@ class ConnectService
         $response = $this->connection;
         if (is_null($response)) {
             if (!is_null($cacheKey)) {
-                Cache::put($cacheKey, []);
+                Cache::put($cacheKey, [], 3600);
             } else {
                 return [];
             }
         } else {
             if ($response->ok()) {
                 if (!is_null($cacheKey)) {
-                    Cache::put($cacheKey, $response->json());
+                    Cache::put($cacheKey, $response->json(), 3600);
                 } else {
                     return $response->json();
                 }
