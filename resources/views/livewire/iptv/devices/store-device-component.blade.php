@@ -1,5 +1,5 @@
 <div>
-    <button @class(['btn bg-[#082f49] btn-sm']) wire:click="openModal()">
+    <button class='btn bg-[#082f49] btn-sm border-none' wire:click="openModal()">
         <x-heroicon-o-plus-circle class="w-5 h-5" />
         Přidat zařízení
     </button>

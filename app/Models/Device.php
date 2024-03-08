@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use App\Observers\DeviceObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
+#[ObservedBy(DeviceObserver::class)]
 class Device extends Model
 {
     protected $fillable = [
@@ -32,6 +36,11 @@ class Device extends Model
     protected $casts = [
         'has_channels' => 'array',
     ];
+
+    public function ssh(): HasOne
+    {
+        return $this->hasOne(DeviceSsh::class, 'device_id', 'id');
+    }
 
     protected function template(): Attribute
     {
@@ -67,6 +76,12 @@ class Device extends Model
     public function oids(): HasMany
     {
         return $this->hasMany(DeviceOid::class, 'device_id', 'id');
+    }
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        return $this->where('name', "like", "%" . $search . "%")
+            ->orWhere('ip', "like", "%" . $search . "%");
     }
 
     // public function scopeGetChannels(Builder $query, string $channel)

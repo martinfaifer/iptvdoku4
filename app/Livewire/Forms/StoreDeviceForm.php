@@ -117,7 +117,8 @@ class StoreDeviceForm extends Form
             'is_snmp' => $this->is_snmp,
             'snmp_version' => !is_null($this->snmp_version) ? DeviceSnmp::find($this->snmp_version)->name : $this->snmp_version,
             'snmp_private_comunity' => $this->snmp_private_comunity,
-            'snmp_public_comunity' => $this->snmp_public_comunity
+            'snmp_public_comunity' => $this->snmp_public_comunity,
+            'has_channels' => []
         ]);
         $this->reset();
         return $device;

@@ -17,7 +17,7 @@
                 <x-share.cards.base-card title="Informace o unicastu">
                     {{-- list of multicast datas --}}
                     @foreach ($h265 as $unicast)
-                        <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold">
+                        <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold text-[#A3ABB8]">
                             <div class="flex justify-between sm:col-span-12">
                                 <p>
                                     <span class="font-normal">

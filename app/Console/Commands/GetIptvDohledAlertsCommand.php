@@ -2,8 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Services\Api\IptvDohled\ConnectService;
 use Illuminate\Console\Command;
+use App\Jobs\GetAlertsFromIptvDohledJob;
+use App\Services\Api\IptvDohled\ConnectService;
 
 class GetIptvDohledAlertsCommand extends Command
 {
@@ -26,6 +27,6 @@ class GetIptvDohledAlertsCommand extends Command
      */
     public function handle()
     {
-        (new ConnectService('alerts'))->connect('iptv_dohled_alerts');
+        GetAlertsFromIptvDohledJob::dispatch();
     }
 }

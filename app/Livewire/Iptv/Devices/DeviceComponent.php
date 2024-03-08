@@ -15,6 +15,8 @@ class DeviceComponent extends Component
 
     public null|array $nmsCahedData = null;
 
+    public null|array $nimbleCachedData = null;
+
     public function mount()
     {
         //
@@ -24,7 +26,9 @@ class DeviceComponent extends Component
     {
         if (isset($this->device)) {
             $this->nmsCahedData = Cache::get('nms_' . $this->device->id);
+            $this->nimbleCachedData = Cache::get('nimble_' . $this->device->id . "_incoming_streams");
         }
+
         return view('livewire.iptv.devices.device-component');
     }
 }

@@ -8,7 +8,7 @@ trait FindKeyByValueTrait
     {
         foreach ($array as $key => $value) {
             if ($value[$arraySearcheableKey] == $needle) {
-                return $key;
+                return $value['id'];
             };
         }
 

@@ -1,5 +1,8 @@
 <div>
-    <div class="bg-[#131B2F] rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm shadow-md shadow-gray-850">
+    {{-- #1E263B --}}
+    {{-- bg-[#111827] --}}
+    {{-- bg-gradient-to-r from-[#162131]/80 to-[#0e151f]/80 --}}
+    <div class="bg-gradient-to-b from-[#111827]/50 to-transparent rounded-lg bg-clip-padding backdrop-blur-lg">
         <div class="pt-2">
             <p class="text-center text-sm font-semibold">
                 {{ $title }}

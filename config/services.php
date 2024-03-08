@@ -49,6 +49,20 @@ return [
                 'username' => env('NMS_USER'),
                 'password' => env('NMS_PASSWORD')
             ]
+        ],
+        [
+            'epg' => [
+                'url' => env('EPG_URL'),
+                'key' => env('EPG_KEY')
+            ]
+        ],
+        [
+            'nimble' => [
+                'url' => env('NIMBLE_WMS_URL'),
+                'api_key' => env('NIMBLE_WMS_API_KEY'),
+                'client_id' => env('NIMBLE_WMS_API_CLIENT_ID'),
+                'data_slice' => env('NIMBLE_WMS_DATA_SLICE')
+            ]
         ]
     ]
 

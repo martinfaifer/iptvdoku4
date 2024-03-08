@@ -33,10 +33,14 @@ class CreateDeviceTemplateComponent extends Component
     public bool $hasInInterfaceLnb = false;
     public bool $hasInInterfaceLnb22 = false;
     public bool $hasIntinterfaceSatCard = false;
+    public bool $hasInInterfaceParabolaDiameter = false; // průměr anteny
+    public bool $hasInInterfaceSatelit = false;
 
     public string|null $outInterfaceName = "";
     public bool $hasOutInterfaceInInterface = false;
     public bool $hasOutInterfaceSatCard = false;
+    public bool $hasOutInterfaceLnb = false;
+    public bool $hasOutInterfacefaceSatelit = false;
 
     public string|null $moduleName = "";
 
@@ -96,12 +100,16 @@ class CreateDeviceTemplateComponent extends Component
                 'hasInInterfaceLnb' => $this->hasInInterfaceLnb,
                 'hasInInterfaceLnb22' => $this->hasInInterfaceLnb22,
                 'hasIntinterfaceSatCard' => $this->hasIntinterfaceSatCard,
+                'hasInInterfaceParabolaDiameter' => $this->hasInInterfaceParabolaDiameter,
+                'hasInInterfaceSatelit' => $this->hasInInterfaceSatelit
             ],
             outputs: [
                 'outInterfaceName' => $this->outInterfaceName,
                 'numberOfOutInterfaces' => $this->numberOfOutInterfaces,
                 'hasOutInterfaceInInterface' => $this->hasOutInterfaceInInterface,
                 'hasOutInterfaceSatCard' => $this->hasOutInterfaceSatCard,
+                'hasOutInterfaceLnb' => $this->hasOutInterfaceLnb,
+                'hasOutInterfacefaceSatelit' => $this->hasOutInterfacefaceSatelit
             ],
             modules: [
                 'moduleName' => $this->moduleName,

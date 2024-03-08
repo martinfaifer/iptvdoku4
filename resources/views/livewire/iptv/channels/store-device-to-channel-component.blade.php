@@ -4,13 +4,14 @@
         Přidat vazbu na zařízení
     </button>
 
-    <x-modal wire:model="storeModal" title="Nová vazba na zařízení" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" title="Nová vazba na zařízení" persistent
+        class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="store">
-            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
+            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Zařízení" wire:model="deviceId" :options="$devices" single
-                        searchable />
+                    <x-choices-offline label="Zařízení" wire:model="deviceId" :options="$devices" single searchable />
                 </div>
                 <div class="col-span-12 mb-4">
                     <x-toggle label="Záloha" wire:model="is_backup" />

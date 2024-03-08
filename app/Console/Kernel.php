@@ -13,8 +13,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('iptv-dohled:alerts')->everyTwentySeconds();
-        $schedule->command('devices:snmp-get')->everyFiveMinutes();
-        $schedule->command('devices:data-from-nms')->everyThirtyMinutes();
+        $schedule->command('devices:snmp-get')->everyFiveMinutes()->runInBackground();
+        $schedule->command('tag:execute-actions')->everyFiveMinutes()->runInBackground();
+        $schedule->command('devices:data-from-nms')->everyFifteenMinutes()->runInBackground();
+        $schedule->command('epg:get-channels-ids')->everyThirtyMinutes()->runInBackground();
         $schedule->command('channels:get-informartions-from-dohled')->everyMinute();
     }
 

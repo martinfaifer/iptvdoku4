@@ -6,6 +6,7 @@ use Livewire\Form;
 use App\Models\Channel;
 use App\Models\ChannelMulticast;
 use Livewire\Attributes\Validate;
+use App\Jobs\StoreStreamToIptvDohledJob;
 
 class StoreMulticastChannelForm extends Form
 {
@@ -13,6 +14,7 @@ class StoreMulticastChannelForm extends Form
     public $source_ip;
     public $channel_source_id;
     public bool $is_backup = false;
+    public bool $to_dohled = true;
     public $channel_id;
 
 
@@ -31,6 +33,9 @@ class StoreMulticastChannelForm extends Form
             ],
             'is_backup' => [
                 'required', 'boolean'
+            ],
+            'to_dohled' => [
+                'required', 'boolean'
             ]
         ];
     }
@@ -46,7 +51,9 @@ class StoreMulticastChannelForm extends Form
             'channel_source_id.required' => "Vyberte zdroj příjmu",
             'channel_source_id.exists' => "Zdroj neexistuje",
             'is_backup.required' => "Zvolte true / false",
-            'is_backup.boolean' => "Neplatný formát"
+            'is_backup.boolean' => "Neplatný formát",
+            'to_dohled.required' => "Zvolte true / false",
+            'to_dohled.boolean' => "Neplatný formát"
         ];
     }
 
@@ -70,12 +77,19 @@ class StoreMulticastChannelForm extends Form
                 ->first() ? true :  $this->is_backup
         ]);
 
+        if ($this->to_dohled == true) {
+            StoreStreamToIptvDohledJob::dispatch(
+                Channel::find($this->channel_id)->name . "_multicast",
+                $this->stb_ip
+            );
+        }
+
         $this->closeForm();
     }
 
     public function closeForm()
     {
-        $this->reset('stb_ip', 'source_ip', 'channel_source_id', 'is_backup');
+        $this->reset('stb_ip', 'source_ip', 'channel_source_id', 'is_backup', 'to_dohled');
         $this->resetErrorBag();
     }
 }

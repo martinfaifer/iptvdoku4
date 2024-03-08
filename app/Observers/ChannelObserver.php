@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Jobs\LogJob;
 use App\Models\Loger;
 use App\Models\Channel;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
 use App\Services\Logger\LoggerService;
 
@@ -65,5 +66,7 @@ class ChannelObserver
                 'name' => $channel->name,
             ])
         );
+        // delete channel contacts
+        Contact::where('type', "channel")->where('item_id', $channel->id)->delete();
     }
 }

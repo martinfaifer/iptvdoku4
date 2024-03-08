@@ -63,6 +63,17 @@ trait InterfaceGeneratorTrait
             'replace' => "%satCard%",
             "human_description" => "Satelitní karta"
         ],
+        'hasInInterfaceParabolaDiameter' => [
+            'default' => false,
+            'replace' => "%diameter%",
+            "human_description" => "Průměr paraboly"
+        ],
+        'hasInInterfaceSatelit' => [
+            'default' => false,
+            'replace' => "%hasInInterfaceSatelit%",
+            "human_description" => "Vazba na satelit"
+        ],
+
         'outInterfaceName' => [
             'default' => "",
             'replace' => "%outInterfaceName%",
@@ -77,6 +88,38 @@ trait InterfaceGeneratorTrait
             'default' => false,
             'replace' => "%satCard%",
             "human_description" => "Satelitní karta"
+        ],
+        'hasOutInterfacefaceSatelit' => [
+            'default' => false,
+            'replace' => "%hasOutInterfacefaceSatelit%",
+            "human_description" => "Vazba na satelit"
+        ],
+        'hasOutInterfaceLnb' => [
+            'default' => false,
+            'replace' => "%hasOutInterfaceLnb%",
+            "human_description" => "LNB typ",
+            "nested" => [
+                [
+                    'default' => false,
+                    'replace' => "%vl%",
+                    "human_description" => "Vertial low",
+                ],
+                [
+                    'default' => false,
+                    'replace' => "%vh%",
+                    "human_description" => "Vertial high",
+                ],
+                [
+                    'default' => false,
+                    'replace' => "%hl%",
+                    "human_description" => "Horizontal low",
+                ],
+                [
+                    'default' => false,
+                    'replace' => "%hh%",
+                    "human_description" => "Horizontal high",
+                ],
+            ]
         ],
 
         'moduleName' => [
@@ -98,8 +141,16 @@ trait InterfaceGeneratorTrait
                 if ($posibility['default'] != $interfaceData[$key]) {
                     if (!is_bool($interfaceData[$key])) {
                         $interface[$posibility['human_description']] = $interfaceData[$key] . " " . $interfaceNumber;
+                        if (array_key_exists('nested', $posibility)) {
+                            if (array_key_exists('nested', $posibility)) {
+                                $interface['nested_'.$posibility['human_description']] = $posibility['nested'];
+                            }
+                        }
                     } else {
                         $interface[$posibility['human_description']] = $posibility['replace'];
+                        if (array_key_exists('nested', $posibility)) {
+                            $interface['nested_'.$posibility['human_description']] = $posibility['nested'];
+                        }
                     }
                 }
             }
@@ -120,7 +171,8 @@ trait InterfaceGeneratorTrait
                     'oid' => $snmp->oid,
                     'human_description' => $snmp->human_description,
                     'value' => "",
-                    'type' => $snmp->type
+                    'type' => $snmp->type,
+                    'can_chart' => $snmp->can_chart
                 ];
             }
         }

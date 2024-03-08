@@ -22,7 +22,13 @@ class LineChartComponent extends Component
     public function mount(array $xaxis, array $yaxis, string $label)
     {
         $this->chart['data']['labels'] = $xaxis;
-        $this->chart['data']['datasets'][0]['data'] = $yaxis[0]['data'];
+
+        if (isset($yaxis[0]['data'])) {
+            $this->chart['data']['datasets'][0]['data'] = $yaxis[0]['data'];
+        } else {
+            $this->chart['data']['datasets'][0]['data'] = $yaxis;
+        }
+
         $this->chart['data']['datasets'][0]['label'] = $label;
     }
 

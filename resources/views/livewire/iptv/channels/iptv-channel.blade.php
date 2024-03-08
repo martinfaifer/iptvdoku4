@@ -37,15 +37,19 @@
                 <x-share.alerts.info title="Vyberte kanál z menu vlevo"></x-share.alerts.info>
             </div>
         @else
+            {{-- tags --}}
+            <div>
+                <livewire:tag-component type="channel" itemId="{{ $channel->id }}"></livewire:tag-component>
+            </div>
             <div class="grid grid-cols-12">
                 <div class="col-span-1 mt-4">
                     @if (!is_null($channel->logo))
-                        <img class="w-12 h-12" src="/storage/{{ str_replace('public/', '', $channel->logo) }}"
+                        <img class="object-cover w-16 h-12" src="/storage/{{ str_replace('public/', '', $channel->logo) }}"
                             alt="" />
                     @endif
                 </div>
                 <div class="col-span-11 flex">
-                    <h1 class="text-2xl text-white subpixel-antialiased font-bold mt-6 ">
+                    <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
                         {{ $channel->name }}
                     </h1>
                     @if ($channel->is_radio == true)
@@ -67,13 +71,13 @@
                 </div>
             </div>
             <hr
-                class="w-full h-1 mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                class="w-full h-1 mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-none rounded">
             <div ">
                 {{-- split to multicast , h264, h265 --}}
                 {{-- multicast --}}
-                 @if (request()->is('channels/' . $channel->id . '/multicast'))
-                    <livewire:iptv.channels.multicast.multicast-channel :channel="$channel">
-                @endif
+                  @if (request()->is('channels/' . $channel->id . '/multicast'))
+                <livewire:iptv.channels.multicast.multicast-channel :channel="$channel">
+        @endif
         {{-- h264 --}}
         @if (request()->is('channels/' . $channel->id . '/h264'))
             <livewire:iptv.channels.h264.h264-channel :channel="$channel">

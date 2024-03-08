@@ -19,8 +19,8 @@
                 <x-share.cards.base-card title="Informace o multicastu">
                     {{-- list of multicast datas --}}
                     @foreach ($multicasts as $multicast)
-                        <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold">
-                            <div class="col-span-12 sm:col-span-3">
+                        <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold text-[#A3ABB8]">
+                            <div class="col-span-12 md:col-span-3">
                                 <div class="lg:flex">
                                     <p>
                                         <span class="font-normal">
@@ -36,7 +36,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-span-12 sm:col-span-3 sm:inline-flex">
+                            <div class="col-span-12 md:col-span-3 sm:inline-flex">
                                 <p>
                                     <span class="font-normal">
                                         Zdroj:
@@ -46,7 +46,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="sm:col-span-3 col-span-12">
+                            <div class="md:col-span-3 col-span-12">
                                 <div class="lg:flex">
                                     <p>
                                         <span class="font-normal">
@@ -62,7 +62,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-span-12 sm:col-span-2">
+                            <div class="col-span-12 md:col-span-2">
                                 <p>
                                     <span class="font-normal">
                                         Typ:
@@ -80,7 +80,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="col-span-12 sm:col-span-1 -mt-2">
+                            <div class="col-span-12 md:col-span-1 -mt-2">
                                 <button class="btn btn-sm btn-circle bg-transparent border-none"
                                     wire:click='edit({{ $multicast->id }})'>
                                     <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />
@@ -110,7 +110,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            {{-- logo --}}
                             <div class="col-span-12 mb-4">
                                 <x-input label="Zdrojová IP" wire:model="form.source_ip" />
                                 <div>
@@ -119,7 +118,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            {{-- qualities --}}
                             <div class="col-span-12 mb-4">
                                 <x-choices label="Zdroj" wire:model="form.channel_source_id" :options="$channelSources"
                                     single />
@@ -139,6 +137,26 @@
                                     @enderror
                                 </div>
                             </div>
+                            @if ($form->isInDohled)
+                                <div class="col-span-6 mb-4">
+                                    <x-toggle label="Odebrat z dohledu" wire:model="form.delete_from_dohled" />
+                                    <div>
+                                        @error('delete_from_dohled')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endif
+                            @if (!$form->isInDohled)
+                                <div class="col-span-6 mb-4">
+                                    <x-toggle label="Přidat do dohledu" wire:model="form.to_dohled" />
+                                    <div>
+                                        @error('to_dohled')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endif
                         </div>
 
                         {{-- action section --}}
@@ -157,10 +175,13 @@
 
                 </x-modal>
             </div>
-            <div class="col-span-12 md:col-span-6">
+            <div class="col-span-12 md:col-span-4">
                 <livewire:notes.note-component column="channel_id" :id="$channel->id" />
             </div>
-            <div class="col-span-12 md:col-span-6 mb-4">
+            <div class="col-span-12 md:col-span-4">
+                <livewire:contact-component type="channel" :item_id="$channel->id" />
+            </div>
+            <div class="col-span-12 md:col-span-4 mb-4">
                 <livewire:log-component columnValue="multicast:{{ $channel->id }}" column="item" />
             </div>
             @if (!$devices->isEmpty())

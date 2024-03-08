@@ -1,5 +1,5 @@
 <div>
-    <button @class(['btn bg-[#082f49] btn-sm']) wire:click="openModal()">
+    <button class='btn bg-[#082f49] btn-sm border-none' wire:click="openModal()">
         <x-heroicon-o-plus-circle class="w-5 h-5" />
         Přidat multicast
     </button>
@@ -17,7 +17,6 @@
                         @enderror
                     </div>
                 </div>
-                {{-- logo --}}
                 <div class="col-span-12 mb-4">
                     <x-input label="Zdrojová IP" wire:model="form.source_ip" />
                     <div>
@@ -26,7 +25,6 @@
                         @enderror
                     </div>
                 </div>
-                {{-- qualities --}}
                 <div class="col-span-12 mb-4">
                     <x-choices label="Zdroj" wire:model="form.channel_source_id" :options="$channelSources" single />
                     <div>
@@ -41,6 +39,15 @@
                     <x-toggle label="Záloha" wire:model="form.is_backup" />
                     <div>
                         @error('is_backup')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                {{-- store to dohled --}}
+                <div class="col-span-6 mb-4">
+                    <x-toggle label="Uložit do dohledu" wire:model="form.to_dohled" />
+                    <div>
+                        @error('to_dohled')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>

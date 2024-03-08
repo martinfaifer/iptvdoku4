@@ -11,18 +11,20 @@
                 <x-heroicon-o-trash class="w-4 h-4" />
             </button>
         </div>
-        <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold">
-            <div class="flex justify-between sm:col-span-6">
+        <div class="flex flex-col gap-4 md:grid sm:grid-cols-12 font-semibold text-[#A3ABB8]">
+            <div class="flex justify-between md:col-span-6">
                 <div>
                     <span>
                         Zařízení:
                         <span class="ml-4 font-normal">
-                            {{ $device->name }}
+                            <a class="text-blue-500 hover:underline" href="/devices/{{ $device->id }}" wire:navigate>
+                                {{ $device->name }}
+                            </a>
                         </span>
                 </div>
             </div>
             @if (!is_null($device->ip))
-                <div class="flex justify-between sm:col-span-6">
+                <div class="flex justify-between md:col-span-6">
                     <div>
                         <span>
                             IP:
@@ -35,7 +37,7 @@
             @endif
 
             @if (!is_null($nmsCahedData))
-                <div class="flex justify-between sm:col-span-6">
+                <div class="flex justify-between md:col-span-6">
                     <div>
                         <span>
                             Status:
@@ -61,7 +63,7 @@
             @endif
 
             @if (!is_null($device->username) || !is_null($device->password))
-                <div class="flex justify-between sm:col-span-12">
+                <div class="flex justify-between md:col-span-12">
                     <div>
                         <span>
                             Přístupy do zařízeni:
@@ -73,7 +75,7 @@
                 </div>
             @endif
             @if (!is_null($device->template))
-                <div class="flex justify-between sm:col-span-12">
+                <div class="flex justify-between md:col-span-12">
                     <div>
                         <span>
                             Vazba na port(y):
@@ -89,6 +91,26 @@
                                 @endforeach
                             @endforeach
                         </span>
+                    </div>
+                </div>
+            @endif
+
+            @if (!is_null($linuxPathToStream))
+                <div class="flex justify-between md:col-span-12">
+                    <div>
+                        <span>
+                            Cesta ke spuštění / restartu streamu:
+                        </span>
+                        <span class="ml-4 font-normal">
+                            {{ $linuxPathToStream->path }}
+                        </span>
+                    </div>
+                    <div>
+                        <div class="tooltip tooltip-bottom" data-tip="Restart kanálu">
+                            <button wire:click='reboot_channel' wire:confirm='Opravdu si přejete restartovat?' class="btn btn-sm btm-circle border-none bg-transparent">
+                                <x-heroicon-o-arrow-path class="h-4 w-4 text-orange-500" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             @endif
@@ -202,4 +224,37 @@
         </x-form>
     </x-modal>
     {{-- end of update modal --}}
+
+    {{-- linux path modal --}}
+    <x-modal wire:model="storeLinuxPathModal" title="Cesta k souboru pro spuštění streamu" persistent
+        class="modal-bottom sm:modal-middle fixed">
+        <x-form wire:submit="store_path">
+            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                wire:click='closeDialog'>✕</x-button>
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 mb-4">
+                    <x-input label="Cesta k souboru" wire:model="path" />
+                    <div>
+                        @error('form.path')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
+            {{-- action section --}}
+            <div class="flex justify-between">
+                <div>
+                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                        wire:click='closeDialog' />
+                </div>
+                <div>
+                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
+                        type="submit" spinner="save2" />
+                </div>
+            </div>
+        </x-form>
+
+    </x-modal>
+    {{-- end of linux path modal --}}
 </div>

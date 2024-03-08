@@ -1,5 +1,5 @@
 <div>
-    <button class="btn bg-[#082f49] btn-sm" wire:click="$toggle('storeModal')">
+    <button class="btn bg-[#082f49] btn-sm border-none" wire:click="$toggle('storeModal')">
         <x-heroicon-o-plus-circle class="w-5 h-5" />
         Přidat kanál
     </button>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 {{-- qualities --}}
-                <div class="col-span-4 mb-4">
+                <div class="col-span-6 mb-4">
                     <x-choices label="Kvalita" wire:model="quality" :options="$qualities" single />
                     <div>
                         @error('form.quality')
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 {{-- channel category --}}
-                <div class="col-span-4 mb-4">
+                <div class="col-span-6 mb-4">
                     <x-choices label="Žánr" wire:model="category" :options="$channelCategories" single />
                     <div>
                         @error('form.category')
@@ -45,10 +45,19 @@
                     </div>
                 </div>
                 {{-- geniustv packages --}}
-                <div class="col-span-4 mb-4">
+                <div class="col-span-6 mb-4">
                     <x-choices label="GeniusTV balíčky" wire:model="geniustvChannelPackage" :options="$geniusTVChannelPackages" multiple/>
                     <div>
                         @error('form.geniustvChannelPackage')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                {{-- epgs --}}
+                <div class="col-span-6 mb-4">
+                    <x-choices-offline label="EPG" wire:model="epgId" :options="$channelsEpgs" searchable single/>
+                    <div>
+                        @error('form.epgId')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
@@ -102,7 +111,7 @@
                         wire:click='closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
+                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700  hover:shadow-sky-700/50 border-none text-white font-semibold w-full sm:w-28"
                         type="submit" spinner="save2" />
                 </div>
             </div>

@@ -10,11 +10,19 @@ use Illuminate\Support\Facades\Cache;
 class DevicesMenu extends Component
 {
 
-    #[On('update_devices_menu')]
-    public function render()
+    public $categoriesWithDevices;
+
+    public function mount()
     {
-        $categoriesWithDevices = DeviceCategory::with('devices:id,name,device_category_id')->get();
-        foreach ($categoriesWithDevices as $category) {
+        $this->loadDevices();
+    }
+
+    #[On('echo:refresh-devices-menu,BroadcastDevicesMenuEvent')]
+    #[On('update_devices_menu')]
+    public function loadDevices()
+    {
+        $this->categoriesWithDevices = DeviceCategory::with('devices:id,name,device_category_id')->get();
+        foreach ($this->categoriesWithDevices as $category) {
             if (!$category->devices->isEmpty()) {
                 foreach ($category->devices as $device) {
                     $nmsCachedData = Cache::get('nms_' . $device->id);
@@ -24,8 +32,10 @@ class DevicesMenu extends Component
                 }
             }
         }
-        return view('livewire.iptv.devices.menu.devices-menu', [
-            'categoriesWithDevices' => $categoriesWithDevices
-        ]);
+    }
+
+    public function render()
+    {
+        return view('livewire.iptv.devices.menu.devices-menu');
     }
 }

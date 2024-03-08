@@ -60,7 +60,8 @@ class DeviceTemplateEngine
                     'oid' => $snmp->oid,
                     'human_description' => $snmp->human_description,
                     'value' => "",
-                    'type' => $snmp->type
+                    'type' => $snmp->type,
+                    'can_chart' => $snmp->can_chart
                 ];
             }
         }

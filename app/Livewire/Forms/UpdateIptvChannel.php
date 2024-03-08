@@ -25,6 +25,7 @@ class UpdateIptvChannel extends Form
     public $nangu_chunk_store_id;
     public $nangu_channel_code;
     public array $geniustvChannelPackage;
+    public null|string $epgId = null;
 
     public function rules()
     {
@@ -36,7 +37,8 @@ class UpdateIptvChannel extends Form
             'is_multiscreen' => ['required', 'boolean'],
             'description' => ['nullable', 'string', 'max:1000'],
             'nangu_chunk_store_id' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_chunk_store_id,' . $this->channel->id],
-            'nangu_channel_code' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_channel_code,' . $this->channel->id]
+            'nangu_channel_code' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_channel_code,' . $this->channel->id],
+            'epgId' => ['nullable']
         ];
     }
 
@@ -77,6 +79,7 @@ class UpdateIptvChannel extends Form
         $this->nangu_chunk_store_id = $channel->nangu_chunk_store_id;
         $this->nangu_channel_code = $channel->nangu_channel_code;
         $this->geniustvChannelPackage = is_null(json_decode($channel->geniustv_channel_packages_id)) ? [] : json_decode($channel->geniustv_channel_packages_id);
+        $this->epgId = $channel->epg_id;
     }
 
     public function update()
@@ -99,7 +102,8 @@ class UpdateIptvChannel extends Form
             'description' => $this->description,
             'nangu_chunk_store_id' => $this->nangu_chunk_store_id,
             'nangu_channel_code' => $this->nangu_channel_code,
-            'geniustv_channel_packages_id' => json_encode($this->geniustvChannelPackage)
+            'geniustv_channel_packages_id' => json_encode($this->geniustvChannelPackage),
+            'epg_id' => $this->epgId
         ]);
 
         $this->reset('name', 'logo', 'quality', 'category', 'description', 'nangu_chunk_store_id', 'nangu_channel_code');

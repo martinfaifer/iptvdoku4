@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Models\ChannelMulticast;
 use App\Models\ChannelQualityWithIp;
 use App\Services\Api\IptvDohled\ConnectService;
+use App\Jobs\GetChannelsInformaetionsFromIptvDohledJob;
 
 class GetChannelsInformaetionsFromIptvDohled extends Command
 {
@@ -30,18 +31,12 @@ class GetChannelsInformaetionsFromIptvDohled extends Command
     {
         // multicasts
         ChannelMulticast::get()->each(function ($multicast) {
-            (new ConnectService(
-                endpointType: 'get-stream-by-ip',
-                params: str_contains($multicast->stb_ip, ':1234') ? $multicast->stb_ip : $multicast->stb_ip . ":1234"
-            ))->connect(cacheKey: $multicast->stb_ip);
+            GetChannelsInformaetionsFromIptvDohledJob::dispatch($multicast->stb_ip);
         });
 
         // h264s && h265s
         ChannelQualityWithIp::get()->each(function ($unicast) {
-            (new ConnectService(
-                endpointType: 'get-stream-by-ip',
-                params: str_contains($unicast->ip, ':1234') ? $unicast->ip : $unicast->ip . ":1234"
-            ))->connect(cacheKey: $unicast->ip);
+            GetChannelsInformaetionsFromIptvDohledJob::dispatch($unicast->ip);
         });
     }
 }

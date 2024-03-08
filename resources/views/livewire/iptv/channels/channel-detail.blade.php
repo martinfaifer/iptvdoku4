@@ -6,7 +6,7 @@
         </label>
     </div>
     {{-- info drawer --}}
-    <x-drawer id="channel-detail-drawer" separator right class="lg:w-1/4 !bg-[#0A0F19]">
+    <x-drawer id="channel-detail-drawer" separator right class="lg:w-1/4 !bg-[#0c111b]">
         {{-- informations about channel quality, category, description --}}
         <div>
             <div class="col-span-12 mb-2">
@@ -33,7 +33,9 @@
                 <div class="flex">
                     <hr
                         class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                    <span class="text-xs italic">Kvality</span>
+                    <span class="text-xs italic">
+                        Informace
+                    </span>
                     <hr
                         class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                 </div>
@@ -53,18 +55,19 @@
                         {{ $channel->channelCategory->name }}
                     </div>
                 </div>
+
+                @if ($epg != '')
+                    <div class="tooltip" data-tip="EPG">
+                        <div
+                            class="text-xs inline-flex items-center font-semibold leading-sm px-3 py-1 bg-sky-800 text-sky-200 rounded-lg w-18 h-6">
+                            {{ $epg }}
+                        </div>
+                    </div>
+                @endif
+
             </div>
         </div>
         <div class="mt-4">
-            <div class="col-span-12 mb-2">
-                <div class="flex">
-                    <hr
-                        class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                    <span class="text-xs italic">Popis</span>
-                    <hr
-                        class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                </div>
-            </div>
             <div>
                 <article class="text-wrap">
                     <p class="text-sm italic">{{ $channel->description }}</p>

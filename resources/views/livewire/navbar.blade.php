@@ -1,12 +1,12 @@
 <div>
-    <div class="navbar fixed bg-[#0A0F19] bg-opacity-80 mb-1 top-0 right-0 z-10 min-h-8" wire:poll.20s>
+    <div class="navbar fixed bg-[#06090e] bg-opacity-20 mb-1 top-0 right-0 z-10 min-h-8 backdrop-blur-md">
         <div class="flex-1">
-            IPTV doku
+
         </div>
         <div class="flex-none gap-4">
             <div class="form-control">
-                <input @click.stop="$dispatch('mary-search-open')" type="text" placeholder="Vyhledejte ...           ⌘G"
-                    class="input input-bordered input-sm bg-opacity-20 text-white w-24 md:w-auto" />
+                <input @click.stop="$dispatch('mary-search-open')" type="text" placeholder="Vyhledejte ... ctrl+space"
+                    class="input input-bordered input-sm bg-opacity-20 text-white placeholder:text-xs w-24 md:w-auto" />
             </div>
             <div>
                 <div class="dropdown dropdown-end">
@@ -17,15 +17,14 @@
                         </div>
                     </div>
                     <ul tabindex="0"
-                        class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-gray-400 bg-clip-padding  backdrop-filter
-                    backdrop-blur-sm
-                    bg-opacity-10 rounded-box w-52">
+                        class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-[#0e151f] bg-clip-padding backdrop-filter
+                    backdrop-blur-sm rounded-box w-52">
                         <li>
                             <a class="justify-between" href="/profile" wire:navigate>
                                 Profil
                             </a>
                         </li>
-                        <li><a href="/settings/dashboard" wire:navigate>Nastavení</a></li>
+                        <li><a href="/settings" wire:navigate>Nastavení</a></li>
                         <li wire:click='logout()'><a>Odhlásit se</a></li>
                     </ul>
                 </div>
@@ -47,7 +46,7 @@
         </div>
     </div>
     {{-- bg-[#0A0F19] --}}
-    <x-drawer id="alert-drawer" right class="lg:w-1/4 !bg-[#0A0F19]">
+    <x-drawer id="alert-drawer" right class="lg:w-1/4 !bg-[#0c111b]">
         {{-- alerts --}}
         @if (!empty($iptv_dohled_alerts))
             @foreach ($iptv_dohled_alerts as $iptv_dohled_alert)

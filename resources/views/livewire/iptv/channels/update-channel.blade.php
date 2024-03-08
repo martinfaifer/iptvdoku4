@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 {{-- qualities --}}
-                <div class="col-span-4 mb-4">
+                <div class="col-span-6 mb-4">
                     <x-choices label="Kvalita" wire:model="form.quality" :options="$qualities" single />
                     <div>
                         @error('quality')
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 {{-- channel category --}}
-                <div class="col-span-4 mb-4">
+                <div class="col-span-6 mb-4">
                     <x-choices label="Žánr" wire:model="form.category" :options="$channelCategories" single />
                     <div>
                         @error('category')
@@ -43,10 +43,19 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-4 mb-4">
+                <div class="col-span-6 mb-4">
                     <x-choices label="GeniusTV balíčky" wire:model="form.geniustvChannelPackage" :options="$geniusTVChannelPackages" multiple/>
                     <div>
                         @error('geniustvChannelPackage')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                   {{-- epgs --}}
+                   <div class="col-span-6 mb-4">
+                    <x-choices-offline label="EPG" wire:model="form.epgId" :options="$channelsEpgs" searchable single/>
+                    <div>
+                        @error('epgId')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
@@ -106,7 +115,7 @@
                 </div>
                 <div>
                     <x-button label="Upravit"
-                        class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28" type="submit"
+                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-sky-700/50 border-none text-white font-semibold w-full sm:w-28" type="submit"
                         spinner="save2" />
                 </div>
             </div>

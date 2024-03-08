@@ -23,7 +23,10 @@ class DatabaseSeeder extends Seeder
             DeviceVendorsSeeder::class,
             DeviceSnmpSeeder::class,
             DeviceVendorSnmpSeeder::class,
-            GeniusTvChannelPackageSeeder::class
+            GeniusTvChannelPackageSeeder::class,
+            TagSeeder::class,
+            CssColorSeeder::class,
+            SatelitCardVendorSeeder::class
         ]);
     }
 }

@@ -3,12 +3,14 @@
 namespace App\Livewire\Iptv\Channels;
 
 use App\Models\Channel;
-use App\Models\ChannelCategory;
-use App\Models\GeniusTvChannelPackage;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Models\ChannelCategory;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Cache;
+use App\Models\GeniusTvChannelPackage;
+use App\Jobs\StoreStreamToIptvDohledJob;
+use App\Traits\Livewire\NotificationTrait;
 
 class StoreChannel extends Component
 {
@@ -54,15 +56,20 @@ class StoreChannel extends Component
     #[Validate('nullable')]
     public array $geniustvChannelPackage;
 
+    #[Validate('nullable')]
+    public null|string $epgId = null;
+
     public bool $storeModal = false;
     public $qualities = Channel::QUALITIES;
     public $geniusTVChannelPackages;
     public $channelCategories;
+    public array $channelsEpgs;
 
     public function mount()
     {
         $this->channelCategories = ChannelCategory::orderBy('name')->get(['id', 'name']);
         $this->geniusTVChannelPackages = GeniusTvChannelPackage::get();
+        $this->channelsEpgs = !Cache::has('channelEpgIds') ? [] : Cache::get('channelEpgIds');
     }
 
     public function store()
@@ -90,7 +97,8 @@ class StoreChannel extends Component
             'description' => $this->description,
             'nangu_chunk_store_id' => $this->nangu_chunk_store_id,
             'nangu_channel_code' => $this->nangu_channel_code,
-            'geniustv_channel_packages_id' => json_encode($this->geniustvChannelPackage)
+            'geniustv_channel_packages_id' => json_encode($this->geniustvChannelPackage),
+            'epg_id' => $this->epgId
         ]);
 
         $this->dispatch('update_channels_sidebar');

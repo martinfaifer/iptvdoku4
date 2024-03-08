@@ -9,16 +9,16 @@
                 href="/channels/{{ $channel->id }}/multicast" wire:navigate>
                 <a class="grid grid-cols-12">
                     <div class="col-span-2">
-                        @if ($channel->is_radio == true)
-                            <div class="tooltip tooltip-bottom " data-tip="rádio">
-                                <x-icon name="o-radio" class="inline-flex items-center w-4 h-4 -mt-1" />
-                            </div>
+                        @if (!is_null($channel->logo))
+                            <img class="object-cover w-6 h-6" src="/storage/{{ str_replace('public/', '', $channel->logo) }}"
+                                alt="" />
                         @endif
                     </div>
                     <div class="col-span-2">
-                        @if (!is_null($channel->logo))
-                            <img class="w-6 h-6" src="/storage/{{ str_replace('public/', '', $channel->logo) }}"
-                                alt="" />
+                        @if ($channel->is_radio == true)
+                            <div class="tooltip tooltip-bottom " data-tip="rádio">
+                                <x-icon name="o-radio" class="inline-flex items-center w-4 h-4 -mt-1 text-orange-500/50" />
+                            </div>
                         @endif
                     </div>
                     <div class="col-span-8 font-semibold">

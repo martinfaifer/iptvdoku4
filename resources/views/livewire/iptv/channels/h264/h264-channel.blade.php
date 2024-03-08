@@ -18,7 +18,7 @@
                 <x-share.cards.base-card title="Informace o unicastu">
                     {{-- list of multicast datas --}}
                     @foreach ($h264 as $unicast)
-                        <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold">
+                        <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 text-white/80 font-semibold text-[#A3ABB8]">
                             <div class="flex justify-between md:col-span-12">
                                 <p>
                                     <span class="font-normal">
@@ -32,7 +32,7 @@
                                     </span>
                                     @if ($this->isInIptvDohledDohled($unicast['ip']))
                                         <span>
-                                            <x-badge class="bg-green-800 rounded-md text-white text-xs italic"
+                                            <x-badge class="bg-green-800 rounded-md text-white/80 text-xs italic"
                                                 value="Dohleduje se" />
                                         </span>
                                     @endif

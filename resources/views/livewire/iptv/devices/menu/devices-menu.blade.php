@@ -1,12 +1,13 @@
 <div>
-    <ul class="menu w-60" wire:poll.5min>
+    <ul class="menu w-60">
         @foreach ($categoriesWithDevices as $category)
             <li wire:key=='category_{{ $category->id }}'>
                 <details open>
                     <summary class="font-semibold">
-                        {{-- <x-icon name="gmdi.ip" /> --}}
-                        {{-- <x-gmdi-ip class="w-6 h-6 text-gray-500"/> --}}
-
+                        @if (!is_null($category->icon))
+                            <img class="object-cover w-4 h-4"
+                                src="/storage/{{ str_replace('public/', '', $category->icon) }}" alt="" />
+                        @endif
                         {{ $category->name }}
                     </summary>
                     <ul>
@@ -19,16 +20,32 @@
                                         request()->is('devices/' . $device->id) ||
                                         request()->is('devices/' . $device->id . '/*'),
                                 ]) href="/devices/{{ $device->id }}" wire:navigate><a>
-                                    @if (isset($device->nms_status) && $device->nms_status == 1)
-                                        <div class="bg-green-500 w-1 h-1 rounded-full">
+
+                                    <div class="grid grid-cols-12 gap-1">
+                                        <div class="col-span-1 mt-2">
+                                            @if (isset($device->nms_status) && $device->nms_status == 1)
+                                                <div class="bg-green-500 w-1 h-1 rounded-full">
+                                                </div>
+                                            @endif
+                                            @if (isset($device->nms_status) && $device->nms_status == 3)
+                                                <div class="bg-red-500 w-1 h-1 rounded-full">
+                                                </div>
+                                            @endif
                                         </div>
-                                    @endif
-                                    @if (isset($device->nms_status) && $device->nms_status == 3)
-                                    <div class="bg-red-500 w-1 h-1 rounded-full">
+                                        <div class="col-span-2">
+                                            @if (!is_null($category->icon))
+                                                <img class="object-cover w-4 h-4"
+                                                    src="/storage/{{ str_replace('public/', '', $category->icon) }}"
+                                                    alt="" />
+                                            @endif
+                                        </div>
+                                        <div class="col-span-9">
+                                            {{ $device->name }}
+                                        </div>
                                     </div>
-                                    @endif
-                                    {{ $device->name }}
-                                </a></li>
+
+                                </a>
+                            </li>
                         @endforeach
                     </ul>
                 </details>

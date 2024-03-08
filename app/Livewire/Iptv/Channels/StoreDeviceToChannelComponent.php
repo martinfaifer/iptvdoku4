@@ -10,7 +10,6 @@ use App\Traits\Livewire\NotificationTrait;
 
 class StoreDeviceToChannelComponent extends Component
 {
-
     use NotificationTrait;
 
     public bool $storeModal = false;
@@ -46,7 +45,6 @@ class StoreDeviceToChannelComponent extends Component
             $channelToDevice = $this->channelType . ":" . $this->channel->id;
         }
 
-
         $device = Device::find($this->deviceId);
         $channels = $device->has_channels;
         if (is_null($channels)) {
@@ -67,6 +65,7 @@ class StoreDeviceToChannelComponent extends Component
         }
 
         $this->redirect('/channels/' . $this->channel->id . "/" . $this->channelType);
+
         return $this->success_alert("Upraveno");
     }
 

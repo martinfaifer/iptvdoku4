@@ -13,6 +13,7 @@ class Note extends Model
         'h264_id',
         'h265_id',
         'device_id',
+        'satelit_card_id',
         'note',
         'user'
     ];
@@ -35,5 +36,10 @@ class Note extends Model
     public function device(): BelongsTo
     {
         return $this->belongsTo(Device::class, 'device_id');
+    }
+
+    public function satelit_card(): BelongsTo
+    {
+        return $this->belongsTo(SatelitCard::class, 'satelit_card_id', 'id');
     }
 }

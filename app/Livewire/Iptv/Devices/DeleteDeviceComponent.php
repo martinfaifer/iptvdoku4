@@ -14,7 +14,8 @@ class DeleteDeviceComponent extends Component
 
     public function destroy(Device $device)
     {
-
+        // delete ssh and delete alerts
+        $device->ssh->delete();
         $device->delete();
 
         return $this->redirect("/devices", true);

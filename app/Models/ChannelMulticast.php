@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\MulticastChannelObserver;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
@@ -36,5 +37,10 @@ class ChannelMulticast extends Model
     public function channel_source(): HasOne
     {
         return $this->hasOne(ChannelSource::class, 'id', 'channel_source_id');
+    }
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        return $query->where('stb_ip', "like", "%" . $search . "%")->orWhere('source_ip', "like", "%" . $search . "%");
     }
 }

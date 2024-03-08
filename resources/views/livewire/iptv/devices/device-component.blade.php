@@ -12,9 +12,13 @@
                 <x-share.alerts.info title="Vyberte zařízení z menu vlevo"></x-share.alerts.info>
             </div>
         @else
+            {{-- tags --}}
+            <div>
+                <livewire:tag-component type="device" itemId="{{ $device->id }}"></livewire:tag-component>
+            </div>
             <div class="grid grid-cols-12 mt-8">
                 <div class="col-span-12 flex">
-                    <h1 class="text-2xl text-white subpixel-antialiased font-bold mt-6 ">
+                    <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
                         {{ $device->name }}
                     </h1>
 
@@ -48,24 +52,32 @@
             <div class="mt-4">
                 <div class="grid grid-cols-12 gap-4">
                     @if (!is_null($device->template))
-                        <div class="col-span-12 sm:col-span-12 mb-4">
+                        <div class="col-span-12 mb-4">
                             <livewire:iptv.devices.device-template-component :device="$device"
                                 :template="$device->template"></livewire:iptv.devices.device-template-component>
                         </div>
                     @else
                         {{-- device has not template but if has oids can we show dialog for create one --}}
-                        <div class="navbar bg-transparent">
-                            <div class="flex-1">
-                            </div>
-                            <div class="flex-none">
-                                <livewire:iptv.devices.create-device-template-component class="my-4"
-                                    :device="$device"></livewire:iptv.devices.create-device-template-component>
+                        <div class="col-span-12 mb-4">
+                            <div class="navbar bg-transparent">
+                                <div class="flex-1">
+                                    <livewire:iptv.devices.create-device-template-component class="my-4"
+                                        :device="$device"></livewire:iptv.devices.create-device-template-component>
+                                </div>
+                                <div class="flex-none">
+                                </div>
                             </div>
                         </div>
                     @endif
-                    <div class="col-span-12 sm:col-span-12 mb-4">
+                    <div @class([
+                        'col-span-12 mb-4',
+                        'md:col-span-12' => is_null($nmsCahedData),
+                        'md:col-span-12' => empty($nmsCahedData),
+                        'md:col-span-8' => !is_null($nmsCahedData),
+                        'md:col-span-8' => !empty($nmsCahedData),
+                    ])>
                         <x-share.cards.base-card title="Informace o zařízení">
-                            <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold">
+                            <div class="flex flex-col gap-4 md:grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
                                 @if (!is_null($device->ip))
                                     <div class="flex justify-between sm:col-span-4">
                                         <p>
@@ -200,11 +212,10 @@
                             </div>
                         </x-share.cards.base-card>
                     </div>
-
-                    @if (!is_null($nmsCahedData))
-                        <div class="col-span-12 sm:col-span-4 mb-4">
+                    @if (!is_null($nmsCahedData) && !empty($nmsCahedData))
+                        <div class="col-span-12 md:col-span-4 mb-4">
                             <x-share.cards.base-card title="Informace o zařízení z NMS">
-                                <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold">
+                                <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold text-[#A3ABB8]">
                                     <div class="col-span-12">
                                         <span class="font-normal">
                                             Název v NMS:
@@ -236,14 +247,41 @@
                             </x-share.cards.base-card>
                         </div>
                     @endif
+                </div>
 
+                {{-- device ssh --}}
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12 md:col-span-6 mb-4">
+                        <livewire:iptv.devices.device-ssh-component :device="$device" />
+                    </div>
+                </div>
+
+                {{-- nimble api cached result --}}
+                @if (!is_null($nimbleCachedData))
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 md:col-span-12 mb-4">
+                            <livewire:iptv.devices.nimble-api-component
+                                :device="$device"></livewire:iptv.devices.nimble-api-component>
+                        </div>
+                    </div>
+                @endif
+
+                <div class="grid grid-cols-12 gap-4">
+                    {{-- logs --}}
+                    <div class="col-span-12 md:col-span-4 mb-4">
+                        <livewire:log-component columnValue="device:{{ $device->id }}" column="item" />
+                    </div>
+                    {{-- contacts --}}
+                    <div class="col-span-12 md:col-span-4">
+                        <livewire:contact-component type="device" :item_id="$device->id" />
+                    </div>
                     {{-- poznámky --}}
-                    <div class="col-span-12 sm:col-span-8 mb-4">
+                    <div class="col-span-12 md:col-span-4 mb-4">
                         <livewire:notes.note-component column="device_id" :id="$device->id" />
                     </div>
 
                     {{-- vazba na kanály --}}
-                    <div class="col-span-12 sm:col-span-12 mb-4 ">
+                    <div class="col-span-12 md:col-span-12 mb-4 ">
                         <x-share.cards.base-card title="Kanály na zařízení">
                             <div class="grid grid-cols-12">
                                 <div class="col-span-12 sm:col-span-12 mb-4 ">

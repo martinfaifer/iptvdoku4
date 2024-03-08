@@ -2,7 +2,7 @@
     <x-share.cards.base-card title="Historie">
         <div class="h-44">
             <div class="overflow-x-auto">
-                <table class="table table-sm w-full">
+                <table class="table table-sm w-full text-[#A3ABB8]">
                     <thead>
                         <tr>
                             <th></th>
@@ -41,19 +41,12 @@
 
     <x-modal wire:model="detailModal" title="Provedené změny">
         <div class="my-4">
-            <div class="grig grid-cols-12 gap-4">
-                @foreach ($selectedLogDetail as $logKey => $logValue)
-                    <div class="col-span-12">
-                        <p class="font-semibold">
-                            <span class="font-normal">
-                                {{ $logKey }}:
-                            </span>
-                            <span class="ml-3">
-                                {{ $logValue }}
-                            </span>
-                        </p>
-                    </div>
-                @endforeach
+            <div>
+                <pre>
+                    <code>
+                        {{ json_encode($selectedLogDetail, JSON_PRETTY_PRINT) }}
+                    </code>
+            </pre>
             </div>
         </div>
         <div class="flex justify-between">

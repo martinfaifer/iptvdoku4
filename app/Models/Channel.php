@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Observers\ChannelObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -41,7 +42,8 @@ class Channel extends Model
         'description',
         'nangu_chunk_store_id',
         'nangu_channel_code',
-        'geniustv_channel_packages_id'
+        'geniustv_channel_packages_id',
+        'epg_id'
     ];
 
     protected $casts = [
@@ -80,5 +82,10 @@ class Channel extends Model
     public function notes(): HasMany
     {
         return $this->hasMany(Note::class, 'channel_id');
+    }
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        return $query->where('name', "like", "%" . $search . "%");
     }
 }

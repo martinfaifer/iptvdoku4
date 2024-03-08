@@ -8,7 +8,7 @@
                 class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
         </div>
         <x-share.cards.base-card title="Informace z dohledu o {{ $ip }}">
-            <div class="grid grid-cols-12 gap-4">
+            <div class="grid grid-cols-12 gap-4 text-[#A3ABB8]" >
                 <div class="col-span-12 sm:col-span-3">
                     <img src="{{ $channelDataOnIptvDohled['data']['img'] }}" alt="dohled_img"
                         class="object-cover h-48 w-96 rounded-md" />

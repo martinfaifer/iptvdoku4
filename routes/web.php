@@ -1,8 +1,10 @@
 <?php
 
 use App\Livewire\Auth\Login;
+use App\Livewire\Iptv\Cards\SatelitCardComponent;
 use App\Livewire\Iptv\Channels\IptvChannel;
 use App\Livewire\Iptv\Devices\DeviceComponent;
+use App\Livewire\Settings\Tags\SettingsTagComponent;
 use Illuminate\Support\Facades\Route;
 
 Route::get('login', Login::class)->name('login');
@@ -14,4 +16,11 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get("devices/{device?}/{component?}", DeviceComponent::class);
+
+    Route::get("sat-cards/{satelitCard?}", SatelitCardComponent::class);
+
+    Route::prefix('settings')->group(function () {
+        Route::get('', SettingsTagComponent::class);
+        Route::get('tags', SettingsTagComponent::class);
+    });
 });

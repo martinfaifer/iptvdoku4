@@ -38,7 +38,9 @@
                                             <x-heroicon-c-trash class="w-3 h-3" />
                                         </button>
                                     </div>
-                                    <div class="chat-bubble w-full">{{ $note->note }}</div>
+                                    <div class="chat-bubble w-full">
+                                        {{ $note->note }}
+                                    </div>
                                     <div class="chat-footer opacity-50">
                                         <time class="text-xs opacity-50">{{ $note->created_at }}</time>
                                     </div>

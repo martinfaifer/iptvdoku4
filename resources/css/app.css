@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    background-color: #000000;
+}
+
 .mary-table-pagination span[aria-current="page"] > span {
     @apply bg-sky-950 text-white;
 }
@@ -31,7 +35,8 @@
 }
 
 .modal-box {
-    @apply bg-[#132231] !max-w-6xl;
+    @apply bg-[#0c111b] !max-w-6xl;
+    /* @apply bg-gradient-to-r from-[#162131] to-[#0e151f] backdrop-blur-lg !max-w-6xl; */
 }
 
 .drawer-side {
@@ -39,13 +44,526 @@
 }
 
 .input-primary {
-    @apply bg-[#132231] border border-sky-950 focus:border-blue-800;
+    @apply bg-[#0F151F] border-none;
+}
+
+.input:focus-within {
+    box-shadow: none;
+    border-color: #162131;
+    outline-style: solid;
+    outline-width: 0px;
+    outline-offset: 1px;
+    outline-color: #162131;
 }
 
 .select-primary {
-    @apply bg-[#132231] border border-sky-950 focus:border-blue-800;
+    @apply bg-[#0F151F] border-none;
+}
+
+.select:focus-within {
+    box-shadow: none;
+    border-color: #162131;
+    outline-style: solid;
+    outline-width: 0px;
+    outline-offset: 1px;
+    outline-color: #162131;
 }
 
 .textarea-primary {
-    @apply bg-[#132231] border border-sky-950 focus:border-blue-800;
+    @apply bg-[#0F151F] border-none;
+}
+
+.textarea:focus-within {
+    box-shadow: none;
+    border-color: #162131;
+    outline-style: solid;
+    outline-width: 0px;
+    outline-offset: 1px;
+    outline-color: #162131;
+}
+
+/* colors for dynamic import */
+
+.cs-slate-50 {
+    @apply bg-[#f8fafc];
+}
+
+.cs-slate-100 {
+    @apply bg-[#f1f5f9];
+}
+
+.cs-slate-300 {
+    @apply bg-[#cbd5e1];
+}
+
+.cs-slate-600 {
+    @apply bg-[#475569];
+}
+
+.cs-slate-700 {
+    @apply bg-[#334155];
+}
+
+.cs-slate-800 {
+    @apply bg-[#1e293b];
+}
+
+.cs-slate-900 {
+    @apply bg-[#0f172a];
+}
+
+.cs-slate-950 {
+    @apply bg-[#020617];
+}
+
+.cs-gray-500 {
+    @apply bg-[#6b7280];
+}
+
+.cs-gray-700 {
+    @apply bg-[#374151];
+}
+
+.cs-gray-900 {
+    @apply bg-[#111827];
+}
+
+.cs-gray-950 {
+    @apply bg-[#030712];
+}
+
+.cs-zinc-500 {
+    @apply bg-[#71717a];
+}
+
+.cs-zinc-800 {
+    @apply bg-[#27272a];
+}
+
+.cs-zinc-900 {
+    @apply bg-[#18181b];
+}
+
+.cs-zinc-950 {
+    @apply bg-[#09090b];
+}
+
+.cs-red-200 {
+    @apply bg-[#fecaca];
+}
+
+.cs-red-300 {
+    @apply bg-[#fca5a5];
+}
+
+.cs-red-400 {
+    @apply bg-[#f87171];
+}
+
+.cs-red-500 {
+    @apply bg-[#ef4444];
+}
+
+.cs-red-600 {
+    @apply bg-[#dc2626];
+}
+
+.cs-red-700 {
+    @apply bg-[#b91c1c];
+}
+
+.cs-red-800 {
+    @apply bg-[#991b1b];
+}
+
+.cs-red-900 {
+    @apply bg-[#7f1d1d];
+}
+
+.cs-red-950 {
+    @apply bg-[#450a0a];
+}
+
+.cs-orange-200 {
+    @apply bg-[#fed7aa];
+}
+
+.cs-orange-300 {
+    @apply bg-[#fdba74];
+}
+
+.cs-orange-400 {
+    @apply bg-[#fb923c];
+}
+
+.cs-orange-500 {
+    @apply bg-[#f97316];
+}
+
+.cs-orange-600 {
+    @apply bg-[#ea580c];
+}
+
+.cs-orange-700 {
+    @apply bg-[#c2410c];
+}
+
+.cs-orange-800 {
+    @apply bg-[#9a3412];
+}
+
+.cs-orange-900 {
+    @apply bg-[#7c2d12];
+}
+
+.cs-orange-950 {
+    @apply bg-[#431407];
+}
+
+.cs-amber-200 {
+    @apply bg-[#fde68a];
+}
+
+.cs-amber-300 {
+    @apply bg-[#fcd34d];
+}
+
+.cs-amber-400 {
+    @apply bg-[#fbbf24];
+}
+
+.cs-amber-500 {
+    @apply bg-[#f59e0b];
+}
+
+.cs-amber-600 {
+    @apply bg-[#d97706];
+}
+
+.cs-amber-700 {
+    @apply bg-[#b45309];
+}
+
+.cs-amber-800 {
+    @apply bg-[#92400e];
+}
+
+.cs-amber-900 {
+    @apply bg-[#78350f];
+}
+
+.cs-amber-950 {
+    @apply bg-[#451a03];
+}
+
+.cs-yellow-200 {
+    @apply bg-[#fef08a];
+}
+
+.cs-yellow-300 {
+    @apply bg-[#fde047];
+}
+
+.cs-yellow-400 {
+    @apply bg-[#facc15];
+}
+
+.cs-yellow-500 {
+    @apply bg-[#eab308];
+}
+
+.cs-yellow-600 {
+    @apply bg-[#ca8a04];
+}
+
+.cs-yellow-700 {
+    @apply bg-[#a16207];
+}
+
+.cs-yellow-800 {
+    @apply bg-[#854d0e];
+}
+
+.cs-yellow-900 {
+    @apply bg-[#713f12];
+}
+
+.cs-yellow-950 {
+    @apply bg-[#422006];
+}
+
+.cs-lime-200 {
+    @apply bg-[#d9f99d];
+}
+
+.cs-lime-300 {
+    @apply bg-[#bef264];
+}
+
+.cs-lime-400 {
+    @apply bg-[#a3e635];
+}
+
+.cs-lime-500 {
+    @apply bg-[#84cc16];
+}
+
+.cs-lime-600 {
+    @apply bg-[#65a30d];
+}
+
+.cs-lime-700 {
+    @apply bg-[#4d7c0f];
+}
+
+.cs-lime-800 {
+    @apply bg-[#3f6212];
+}
+
+.cs-lime-900 {
+    @apply bg-[#365314];
+}
+
+.cs-lime-950 {
+    @apply bg-[#1a2e05];
+}
+
+.cs-green-200 {
+    @apply bg-[#bbf7d0];
+}
+
+.cs-green-300 {
+    @apply bg-[#86efac];
+}
+
+.cs-green-400 {
+    @apply bg-[#4ade80];
+}
+
+.cs-green-500 {
+    @apply bg-[#22c55e];
+}
+
+.cs-green-600 {
+    @apply bg-[#16a34a];
+}
+
+.cs-green-700 {
+    @apply bg-[#15803d];
+}
+
+.cs-green-800 {
+    @apply bg-[#166534];
+}
+
+.cs-green-900 {
+    @apply bg-[#14532d];
+}
+
+.cs-green-950 {
+    @apply bg-[#052e16];
+}
+
+.cs-emerald-200 {
+    @apply bg-[#a7f3d0];
+}
+
+.cs-emerald-300 {
+    @apply bg-[#6ee7b7];
+}
+
+.cs-emerald-400 {
+    @apply bg-[#34d399];
+}
+
+.cs-emerald-500 {
+    @apply bg-[#10b981];
+}
+
+.cs-emerald-600 {
+    @apply bg-[#059669];
+}
+
+.cs-emerald-700 {
+    @apply bg-[#047857];
+}
+
+.cs-emerald-800 {
+    @apply bg-[#065f46];
+}
+
+.cs-emerald-900 {
+    @apply bg-[#064e3b];
+}
+
+.cs-emerald-950 {
+    @apply bg-[#022c22];
+}
+
+.cs-cyan-200 {
+    @apply bg-[#a5f3fc];
+}
+
+.cs-cyan-300 {
+    @apply bg-[#67e8f9];
+}
+
+.cs-cyan-400 {
+    @apply bg-[#22d3ee];
+}
+
+.cs-cyan-500 {
+    @apply bg-[#06b6d4];
+}
+
+.cs-cyan-600 {
+    @apply bg-[#0891b2];
+}
+
+.cs-cyan-700 {
+    @apply bg-[#0e7490];
+}
+
+.cs-cyan-800 {
+    @apply bg-[#155e75];
+}
+
+.cs-cyan-900 {
+    @apply bg-[#164e63];
+}
+
+.cs-cyan-950 {
+    @apply bg-[#083344];
+}
+
+.cs-sky-200 {
+    @apply bg-[#bae6fd];
+}
+
+.cs-sky-300 {
+    @apply bg-[#7dd3fc];
+}
+
+.cs-sky-400 {
+    @apply bg-[#38bdf8];
+}
+
+.cs-sky-500 {
+    @apply bg-[#0ea5e9];
+}
+
+.cs-sky-600 {
+    @apply bg-[#0284c7];
+}
+
+.cs-sky-700 {
+    @apply bg-[#0369a1];
+}
+
+.cs-sky-800 {
+    @apply bg-[#075985];
+}
+
+.cs-sky-900 {
+    @apply bg-[#0c4a6e];
+}
+
+.cs-sky-950 {
+    @apply bg-[#082f49];
+}
+
+.cs-blue-200 {
+    @apply bg-[#bfdbfe];
+}
+
+.cs-blue-300 {
+    @apply bg-[#93c5fd];
+}
+
+.cs-blue-400 {
+    @apply bg-[#60a5fa];
+}
+
+.cs-blue-500 {
+    @apply bg-[#3b82f6];
+}
+
+.cs-blue-600 {
+    @apply bg-[#2563eb];
+}
+
+.cs-blue-700 {
+    @apply bg-[#1d4ed8];
+}
+
+.cs-blue-800 {
+    @apply bg-[#1e40af];
+}
+
+.cs-blue-900 {
+    @apply bg-[#1e3a8a];
+}
+
+.cs-blue-950 {
+    @apply bg-[#172554];
+}
+
+.cs-indigo-400 {
+    @apply bg-[#818cf8];
+}
+
+.cs-indigo-500 {
+    @apply bg-[#6366f1];
+}
+
+.cs-indigo-600 {
+    @apply bg-[#4f46e5];
+}
+
+.cs-indigo-700 {
+    @apply bg-[#4338ca];
+}
+
+.cs-indigo-800 {
+    @apply bg-[#3730a3];
+}
+
+.cs-indigo-900 {
+    @apply bg-[#312e81];
+}
+
+.cs-rose-200 {
+    @apply bg-[#fecdd3];
+}
+
+.cs-rose-300 {
+    @apply bg-[#fda4af];
+}
+
+.cs-rose-400 {
+    @apply bg-[#fb7185];
+}
+
+.cs-rose-500 {
+    @apply bg-[#f43f5e];
+}
+
+.cs-rose-600 {
+    @apply bg-[#e11d48];
+}
+
+.cs-rose-700 {
+    @apply bg-[#be123c];
+}
+
+.cs-rose-800 {
+    @apply bg-[#9f1239];
+}
+
+.cs-rose-900 {
+    @apply bg-[#881337];
+}
+
+.cs-rose-950 {
+    @apply bg-[#4c0519];
 }

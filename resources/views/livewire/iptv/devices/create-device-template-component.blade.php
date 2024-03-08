@@ -1,10 +1,10 @@
 <div>
-    <button @class(['btn bg-[#082f49] btn-sm']) wire:click="openModal()">
+    <button class='btn bg-[#082f49] btn-sm border-none' wire:click="openModal()">
         <x-heroicon-o-plus-circle class="w-5 h-5" />
         Přidat šablonu zařízení
     </button>
 
-    <x-drawer wire:model="storeDrawer" right class="lg:w-2/3 !bg-[#0A0F19]" >
+    <x-drawer wire:model="storeDrawer" right class="lg:w-2/3 !bg-[#0c111b]">
         @if (!$availableTemplates->isEmpty())
             <x-form wire:submit="storePrebuildTemplateToDevice">
                 <x-choices label="Dostupné šablony" wire:model="templateId" :options="$availableTemplates" single />
@@ -128,6 +128,20 @@
                                                             </p>
                                                         </div>
                                                     @endif
+                                                    @if ($hasInInterfaceParabolaDiameter == true)
+                                                        <div class="col-span-12 mt-4">
+                                                            <p>
+                                                                Průměr paraboly: %diameter%
+                                                            </p>
+                                                        </div>
+                                                    @endif
+                                                    @if ($hasInInterfaceSatelit == true)
+                                                        <div class="col-span-12 mt-4">
+                                                            <p>
+                                                                Satelit: %satelit%
+                                                            </p>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -172,6 +186,44 @@
                                                         <div class="col-span-12 mt-4">
                                                             <p>
                                                                 Vstupní interface: %OutInterfaceInInterface%
+                                                            </p>
+                                                        </div>
+                                                    @endif
+                                                    @if ($hasOutInterfaceLnb == true)
+                                                        <div class="col-span-12 mt-4">
+                                                            <p>
+                                                                LNB typ: %lnbType%
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-span-12 mt-4">
+                                                            <div class="grid grid-cols-12 gap-4">
+                                                                <div class="col-span-12">
+                                                                    <p>
+                                                                        Vertical low: %vl%
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-span-12">
+                                                                    <p>
+                                                                        Vertical high: %vh%
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-span-12">
+                                                                    <p>
+                                                                        Horizontal low: %hl%
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-span-12 ">
+                                                                    <p>
+                                                                        Horizontal high: %hh%
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                    @if ($hasOutInterfacefaceSatelit == true)
+                                                        <div class="col-span-12 mt-4">
+                                                            <p>
+                                                                Satelit: %hasOutInterfacefaceSatelit%
                                                             </p>
                                                         </div>
                                                     @endif
@@ -333,6 +385,25 @@
                                         @enderror
                                     </div>
                                 </div>
+                                {{-- has parabola diameter - průměr --}}
+                                <div class="col-span-6 mb-4">
+                                    <x-checkbox wire:model.live="hasInInterfaceParabolaDiameter"
+                                        label="Průměr paraboly?" />
+                                    <div>
+                                        @error('form.hasInInterfaceParabolaDiameter')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                {{-- has satelit --}}
+                                <div class="col-span-6 mb-4">
+                                    <x-checkbox wire:model.live="hasInInterfaceSatelit" label="Vazba na satelit?" />
+                                    <div>
+                                        @error('form.hasInInterfaceSatelit')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-span-4 mb-4">
@@ -369,6 +440,22 @@
                                         label="Má vazbu na vstupní interface?" />
                                     <div>
                                         @error('form.hasOutInterfaceInInterface')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-span-6 mb-4">
+                                    <x-checkbox wire:model.live="hasOutInterfaceLnb" label="Má LNB?" />
+                                    <div>
+                                        @error('form.hasOutInterfaceLnb')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-span-6 mb-4">
+                                    <x-checkbox wire:model.live="hasOutInterfacefaceSatelit" label="Vazba na satelit?" />
+                                    <div>
+                                        @error('form.hasOutInterfacefaceSatelit')
                                             <span class="error">{{ $message }}</span>
                                         @enderror
                                     </div>

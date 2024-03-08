@@ -4,6 +4,7 @@ namespace App\Services\Api\IptvDohled;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use App\Events\BroadcastIptvDohledAlertsEvent;
 
 class ConnectService
 {
@@ -18,6 +19,16 @@ class ConnectService
         'get-stream-by-ip' => [
             'method' => 'get',
             'endpoint' => '/api/v2/stream/by-ip/%params%',
+            'formData' => null
+        ],
+        'store-stream' => [
+            'method' => "post",
+            'endpoint' => "/api/v2/stream",
+            'formData' => null
+        ],
+        'delete-stream' => [
+            'method' => "delete",
+            'endpoint' => "/api/v2/stream/by-ip/%params%",
             'formData' => null
         ]
     ];
@@ -70,5 +81,8 @@ class ConnectService
                 }
             }
         }
+
+        // dispatch event
+        BroadcastIptvDohledAlertsEvent::dispatch();
     }
 }

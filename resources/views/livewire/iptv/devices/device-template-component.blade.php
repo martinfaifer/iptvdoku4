@@ -10,6 +10,17 @@
         ],
     ];
 
+    $lnbTyps = [
+        [
+            'id' => 'Quatro',
+            'name' => 'Quatro',
+        ],
+        [
+            'id' => 'QUAD',
+            'name' => 'QUAD',
+        ],
+    ];
+
     $lnbs22 = [
         [
             'id' => 'on',
@@ -55,8 +66,8 @@
     if (array_key_exists('inputs', $device->template)) {
         foreach ($device->template['inputs'] as $key => $value) {
             $inputs[] = [
-                'id' => $value['Název'],
-                'name' => $value['Název'],
+                'id' => array_key_exists('Název', $value) ? $value['Název'] : rand(10, 20),
+                'name' => array_key_exists('Název', $value) ? $value['Název'] : '',
             ];
         }
     }
@@ -65,8 +76,24 @@
 @endphp
 <div>
     <x-share.cards.base-card title="Šablona zařízení">
+        <div>
+            <button class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-1 text-red-500"
+                wire:click='delete' wire:confirm='Opravdu odebrat šablonu?'>
+                <x-heroicon-s-trash class="w-4 h-4" />
+            </button>
+        </div>
+        @if ($hasCharts)
+            <div class="navbar bg-transparent !min-h-4">
+                <div class="flex-1">
+                </div>
+                <div class="flex-none">
+                    <button class="btn btn-sm text-slate-200 bg-[#1E293B]" wire:click='loadCharts()'>
+                        <x-heroicon-s-chart-bar class="h-4 w-4" />
+                        Zobrazit grafy</button>
+                </div>
+            </div>
+        @endif
         <div class="grid grid-cols-12 mt-2 bg-transparent rounded-sm">
-
             <div class="col-span-12 mb-0">
                 @if (array_key_exists('snmp', $template))
                     <p class="font-semibold text-center mb-4">
@@ -86,7 +113,7 @@
                                                 @if ($deviceSnmpData['human_description'] == 'Uptime')
                                                     @php
                                                         $days = '';
-                                                        if ($deviceSnmpData['value'] != '') {
+                                                        if ($deviceSnmpData['value'] != '' && !str_contains($deviceSnmpData['value'], 'n/a')) {
                                                             $days = \Carbon\CarbonInterval::days($deviceSnmpData['value'] / 8640000)
                                                                 ->cascade()
                                                                 ->forHumans();
@@ -152,7 +179,7 @@
                                                 @foreach ($interface as $interfaceValueName => $interfaceValue)
                                                     @if (is_array($interfaceValue) && !empty($interfaceValue))
                                                         @foreach ($interfaceValue as $snmp)
-                                                            @if ($snmp['value'] != '' && $snmp['value'] != 'n/a')
+                                                            @if (!empty($snmp['value']))
                                                                 <div class="col-span-12 my-4 flex justify-between">
                                                                     <div>
                                                                         {{ $snmp['human_description'] }}:
@@ -195,9 +222,13 @@
                         <p class="font-semibold text-center mb-4">
                             Výstupy
                         </p>
-                        <div class="grid grid-cols-12 gap-4 min-h-20 h-[320px]">
+                        <div class="grid grid-cols-12 gap-4 min-h-20">
                             @foreach ($interfacesData as $interfaceKey => $interface)
-                                <div class="col-span-3 mb-4 overflow-scroll">
+                                <div @class([
+                                    'mb-4 overflow-scroll',
+                                    'col-span-2' => count($interfacesData) > 4,
+                                    'col-span-3' => count($interfacesData) <= 4
+                                    ]) class="col-span-3 mb-4 overflow-scroll">
                                     <div
                                         class=" bg-[#082F49]
                              rounded-lg
@@ -211,56 +242,85 @@
                                             <div class="grid grid-cols-12 mb-4">
                                                 @foreach ($interface as $interfaceValueName => $interfaceValue)
                                                     @if (is_array($interfaceValue) && !empty($interfaceValue))
+                                                        {{-- snmp --}}
                                                         @foreach ($interfaceValue as $snmp)
-                                                            @if ($snmp['type'] == 'write')
-                                                                @if (str_contains($snmp['human_description'], 'reset'))
-                                                                    <x-button
-                                                                        class="bg-[#131B2F] text-red-500 btn-sm w-32 h-4"
-                                                                        wire:click="restartInterface('{{ $snmp['oid'] }}')">
-                                                                        <div class="flex">
-                                                                            <div>
-                                                                                Restart
+                                                            @if (array_key_exists('type', $snmp))
+                                                                @if ($snmp['type'] == 'write')
+                                                                    @if (str_contains($snmp['human_description'], 'reset'))
+                                                                        <x-button
+                                                                            class="bg-[#131B2F] text-red-500 btn-sm w-32 h-4"
+                                                                            wire:click="restartInterface('{{ $snmp['oid'] }}')">
+                                                                            <div class="flex">
+                                                                                <div>
+                                                                                    Restart
+                                                                                </div>
+                                                                                <div wire:loading
+                                                                                    wire:target="restartInterface('{{ $snmp['oid'] }}')">
+                                                                                    <span
+                                                                                        class="loading loading-spinner loading-md"></span>
+                                                                                </div>
                                                                             </div>
-                                                                            <div wire:loading
-                                                                                wire:target="restartInterface('{{ $snmp['oid'] }}')">
-                                                                                <span
-                                                                                    class="loading loading-spinner loading-md"></span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </x-button>
+                                                                        </x-button>
+                                                                    @endif
                                                                 @endif
                                                             @endif
-                                                            @if ($snmp['value'] != '' && $snmp['value'] != 'n/a')
-                                                                <div class="col-span-12 my-4 flex justify-between">
-                                                                    <div>
-                                                                        {{ $snmp['human_description'] }}:
+                                                            @if (array_key_exists('value', $snmp))
+                                                                @if ($snmp['value'] != '' && $snmp['value'] != 'n/a')
+                                                                    <div class="col-span-12 my-4 flex justify-between">
+                                                                        <div>
+                                                                            {{ $snmp['human_description'] }}:
+                                                                        </div>
+                                                                        <div @class([
+                                                                            'font-semibold',
+                                                                            'text-red-500' => $snmp['value'] == 'UNLOCKED',
+                                                                            'text-green-500' => $snmp['value'] == 'LOCKED',
+                                                                            'text-red-500' => $snmp['value'] == 'not inserted',
+                                                                            'text-green-500' => $snmp['value'] == 'OK',
+                                                                        ])>
+                                                                            {{ $snmp['value'] }}
+                                                                        </div>
                                                                     </div>
-                                                                    <div @class([
-                                                                        'font-semibold',
-                                                                        'text-red-500' => $snmp['value'] == 'UNLOCKED',
-                                                                        'text-green-500' => $snmp['value'] == 'LOCKED',
-                                                                        'text-red-500' => $snmp['value'] == 'not inserted',
-                                                                        'text-green-500' => $snmp['value'] == 'OK',
-                                                                    ])>
-                                                                        {{ $snmp['value'] }}
-                                                                    </div>
-                                                                </div>
+                                                                @endif
                                                             @endif
                                                         @endforeach
                                                     @endif
                                                 @endforeach
                                                 @foreach ($interface as $interfaceValueName => $interfaceValue)
-                                                    @if (is_string($interfaceValue))
+                                                    @if (is_string($interfaceValue) || is_int($interfaceValue))
                                                         <div class="col-span-12 my-4 flex justify-between">
                                                             <div class="font-semibold">
                                                                 {{ $interfaceValueName }} :
                                                             </div>
                                                             <div class="font-semibold">
+                                                                @if ($interfaceValueName == 'Vazba na satelit')
+                                                                    @php
+                                                                        $satelitName = '';
+                                                                        if (is_int($interfaceValue)) {
+                                                                            $device = App\Models\Device::find($interfaceValue);
+                                                                            if ($device) {
+                                                                                $satelitName = $device->name;
+                                                                            }
+                                                                        }
+                                                                    @endphp
+                                                                    {{ $satelitName }}
+                                                                @endif
                                                                 @if (!str_contains($interfaceValue, '%'))
                                                                     {{ $interfaceValue }}
                                                                 @endif
                                                             </div>
                                                         </div>
+                                                    @endif
+                                                    @if (str_contains($interfaceValueName, 'nested'))
+                                                        @foreach ($interfaceValue as $nestedItem)
+                                                            <div class="col-span-12 my-4 flex justify-between">
+                                                                <div class="font-semibold">
+                                                                    {{ $nestedItem['human_description'] }}:
+                                                                </div>
+                                                                <div class="font-semibold">
+                                                                    {{ $nestedItem['replace'] }}
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
                                                     @endif
                                                 @endforeach
                                             </div>
@@ -315,14 +375,27 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-drawer wire:model="updateDrawer" right class="lg:w-2/3 !bg-[#0A0F19]">
+    <x-drawer wire:model="updateDrawer" right class="lg:w-2/3 !bg-[#0c111b]">
         <x-form wire:submit="update">
             <div class="grid grid-cols-12 mt-12 rounded-sm">
                 <div class="col-span-12 mb-4">
                     <div class="mx-4 mt-4">
                         @foreach ($updatedInterface as $name => $value)
+                            @if (str_contains($name, 'nested'))
+                                @foreach ($value as $nestedItemKey => $nestedItem)
+                                    <div class="mb-4">
+                                        <x-input label="{{ $nestedItem['human_description'] }}"
+                                            wire:model="updatedInterface.{{ $name }}.{{ $nestedItemKey }}.replace"></x-input>
+                                    </div>
+                                @endforeach
+                            @endif
                             <div class="mb-4">
                                 @if ($name == 'Název')
+                                    <x-input label="{{ $name }}"
+                                        wire:model="updatedInterface.{{ $name }}"></x-input>
+                                @endif
+
+                                @if ($name == 'Průměr paraboly')
                                     <x-input label="{{ $name }}"
                                         wire:model="updatedInterface.{{ $name }}"></x-input>
                                 @endif
@@ -371,6 +444,16 @@
                                     <x-choices label="Vstupní interface" :options="$inputs"
                                         wire:model="updatedInterface.{{ $name }}" single />
                                 @endif
+
+                                @if ($name == 'LNB typ')
+                                    <x-choices label="{{ $name }}" :options="$lnbTyps"
+                                        wire:model="updatedInterface.{{ $name }}" single />
+                                @endif
+
+                                @if ($name == 'Vazba na satelit')
+                                    <x-choices-offline label="{{ $name }}" :options="$satelits"
+                                        wire:model="updatedInterface.{{ $name }}" single searchable/>
+                                @endif
                             </div>
                         @endforeach
                     </div>
@@ -406,6 +489,7 @@
         </x-form>
     </x-drawer>
 
+    {{-- modal log --}}
     <x-modal wire:model="logModal" title="Log ze zařízení" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -433,13 +517,42 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
+
+                </div>
+                <div>
                     <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
                         wire:click='closeDialog' />
                 </div>
-                <div>
-                    {{--  --}}
-                </div>
             </div>
         </x-form>
+    </x-modal>
+
+    {{-- modal charts --}}
+    <x-modal wire:model="chartModal" title="" persistent class="modal-bottom sm:modal-middle fixed">
+
+        <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
+        <div class="grid grid-cols-12 gap-4">
+            @foreach ($charts as $chartKey => $chart)
+                <div class="col-span-6 mb-4">
+                    @php
+                        $exploded = explode(':', $chartKey);
+                        $label = $exploded[2];
+                    @endphp
+                    <livewire:charts.line-chart-component :xaxis="$chart[0]['xaxis']" :yaxis="$chart[0]['yaxis']" :label="$label">
+                </div>
+            @endforeach
+        </div>
+
+        {{-- action section --}}
+        <div class="flex justify-between">
+            <div>
+
+            </div>
+            <div>
+                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    wire:click='closeDialog' />
+            </div>
+        </div>
+
     </x-modal>
 </div>

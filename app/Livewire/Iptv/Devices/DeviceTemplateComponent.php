@@ -2,19 +2,29 @@
 
 namespace App\Livewire\Iptv\Devices;
 
-use App\Engines\Devices\SNMP\DeviceSnmpEngine;
+use App\Models\Chart;
 use App\Models\Device;
 use Livewire\Component;
-use App\Engines\Devices\Templates\DeviceTemplateEngine;
+use Livewire\Attributes\On;
+use App\Traits\Charts\GetItemChartsTrait;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Database\Eloquent\Collection;
+use App\Engines\Devices\SNMP\DeviceSnmpEngine;
+use App\Engines\Devices\Templates\DeviceTemplateEngine;
 
 class DeviceTemplateComponent extends Component
 {
-    use NotificationTrait;
+    use NotificationTrait, GetItemChartsTrait;
 
     public ?Device $device;
 
     public $template;
+
+    public bool $hasCharts = false;
+
+    public array $charts = [];
+
+    public bool $chartModal = false;
 
     public array $logs = [];
 
@@ -31,6 +41,10 @@ class DeviceTemplateComponent extends Component
     public function mount($template)
     {
         $this->template = $template;
+
+        if (Chart::itemCharts("device:" . $this->device->id)->first()) {
+            $this->hasCharts = true;
+        }
     }
 
     public function openUpdateDrawer($key, $interfaceType)
@@ -80,7 +94,29 @@ class DeviceTemplateComponent extends Component
     public function closeDialog()
     {
         $this->logs = [];
+        $this->charts = [];
+        $this->chartModal = false;
         return $this->logModal = false;
+    }
+
+    public function delete()
+    {
+        $this->device->update([
+            'template' => null
+        ]);
+
+        $this->redirect('/devices/' . $this->device->id, true);
+        return $this->success_alert("Šablona odebrána");
+    }
+
+    public function loadCharts()
+    {
+        $this->charts = $this->get_charts(
+            item: "device:" . $this->device->id,
+            useDisctinct: true
+        );
+
+        return $this->chartModal = true;
     }
 
     public function render()
