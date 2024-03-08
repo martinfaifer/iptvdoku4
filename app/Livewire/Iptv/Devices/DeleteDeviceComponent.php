@@ -3,8 +3,8 @@
 namespace App\Livewire\Iptv\Devices;
 
 use App\Models\Device;
-use Livewire\Component;
 use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 class DeleteDeviceComponent extends Component
 {
@@ -18,7 +18,7 @@ class DeleteDeviceComponent extends Component
         $device->ssh->delete();
         $device->delete();
 
-        return $this->redirect("/devices", true);
+        return $this->redirect('/devices', true);
     }
 
     public function render()

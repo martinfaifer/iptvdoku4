@@ -2,13 +2,13 @@
 
 namespace App\Livewire;
 
-use App\Models\Contact;
-use Livewire\Component;
-use Livewire\Attributes\On;
 use App\Livewire\Forms\StoreContactForm;
 use App\Livewire\Forms\UpdateContact;
+use App\Models\Contact;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class ContactComponent extends Component
 {
@@ -21,6 +21,7 @@ class ContactComponent extends Component
     public Collection $contacts;
 
     public bool $storeModal = false;
+
     public bool $updateModal = false;
 
     public string $type;
@@ -49,18 +50,20 @@ class ContactComponent extends Component
 
         $this->dispatch('refresh_contacts');
 
-        return $this->success_alert("Kontakt přidán");
+        return $this->success_alert('Kontakt přidán');
     }
 
     public function closeDialog()
     {
         $this->updateModal = false;
+
         return $this->storeModal = false;
     }
 
     public function edit(Contact $contact)
     {
         $this->updateForm->set_contact($contact);
+
         return $this->updateModal = true;
     }
 
@@ -74,7 +77,7 @@ class ContactComponent extends Component
 
         $this->dispatch('refresh_contacts');
 
-        return $this->success_alert("Kontakt upraven");
+        return $this->success_alert('Kontakt upraven');
     }
 
     public function destroy(Contact $contact)
@@ -83,7 +86,7 @@ class ContactComponent extends Component
 
         $this->dispatch('refresh_contacts');
 
-        return $this->success_alert("Kontakt odebrán");
+        return $this->success_alert('Kontakt odebrán');
     }
 
     #[On('refresh_contacts')]

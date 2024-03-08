@@ -13,7 +13,7 @@ class RemoveChannelFromDeviceAction
 
     public function __invoke(): void
     {
-        Device::where('template', "!=", null)->each(function ($device) {
+        Device::where('template', '!=', null)->each(function ($device) {
             $template = $device->template;
 
             if (array_key_exists('inputs', $template)) {
@@ -24,7 +24,7 @@ class RemoveChannelFromDeviceAction
             }
 
             $device->update([
-                'template' => $template
+                'template' => $template,
             ]);
         });
     }
@@ -47,8 +47,9 @@ class RemoveChannelFromDeviceAction
     public function getChannelNameByType()
     {
         if ($this->isBackup == true) {
-            return $this->channelType . ":" . $this->channelId . ":backup";
+            return $this->channelType.':'.$this->channelId.':backup';
         }
-        return $this->channelType . ":" . $this->channelId;
+
+        return $this->channelType.':'.$this->channelId;
     }
 }

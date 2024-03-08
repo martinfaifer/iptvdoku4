@@ -2,12 +2,10 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
 use App\Models\Channel;
-use App\Models\ChannelQuality;
 use App\Models\ChannelQualityWithIp;
 use App\Models\H264;
-use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class StoreH264ChannelForm extends Form
 {
@@ -27,9 +25,9 @@ class StoreH264ChannelForm extends Form
         }
         // store h264
         $h264 = H264::where('channel_id', $this->channel->id)->first();
-        if (!$h264) {
+        if (! $h264) {
             $h264 = H264::create([
-                'channel_id' => $this->channel->id
+                'channel_id' => $this->channel->id,
             ]);
         }
 
@@ -37,7 +35,7 @@ class StoreH264ChannelForm extends Form
             ChannelQualityWithIp::create([
                 'h264_id' => $h264->id,
                 'channel_quality_id' => $qualityId,
-                'ip' => $ip
+                'ip' => $ip,
             ]);
         }
 

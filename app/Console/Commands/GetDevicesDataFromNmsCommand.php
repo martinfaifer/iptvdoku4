@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Device;
-use Illuminate\Console\Command;
-use App\Services\Api\NMS\ConnectService;
 use App\Events\BroadcastDevicesMenuEvent;
+use App\Models\Device;
+use App\Services\Api\NMS\ConnectService;
+use Illuminate\Console\Command;
 
 class GetDevicesDataFromNmsCommand extends Command
 {
@@ -28,7 +28,7 @@ class GetDevicesDataFromNmsCommand extends Command
      */
     public function handle()
     {
-        Device::where('ip', "!=", null)->each(function ($device) {
+        Device::where('ip', '!=', null)->each(function ($device) {
             (new ConnectService($device, 'search'))->connect();
         });
 

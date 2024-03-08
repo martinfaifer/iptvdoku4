@@ -20,7 +20,7 @@ trait NotificationTrait
         );
     }
 
-    public function error_alert(string $text = "Něco se nepovedlo")
+    public function error_alert(string $text = 'Něco se nepovedlo')
     {
         $this->error(
             $text,

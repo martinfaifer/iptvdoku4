@@ -11,6 +11,6 @@ class Contact extends Model
         'item_id',
         'full_name',
         'email',
-        'phone'
+        'phone',
     ];
 }

@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Iptv\Cards;
 
-use Livewire\Component;
-use App\Models\SatelitCardVendor;
 use App\Livewire\Forms\StoreSatelitCardForm;
+use App\Models\SatelitCardVendor;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Component;
 
 class CreateSatelitCard extends Component
 {
@@ -31,9 +31,9 @@ class CreateSatelitCard extends Component
 
         $this->closeDialog();
 
-        $this->success_alert("Vytvořeno");
+        $this->success_alert('Vytvořeno');
 
-        return $this->redirect("/sat-cards/" . $satCard->id, true);
+        return $this->redirect('/sat-cards/'.$satCard->id, true);
     }
 
     public function openModal()
@@ -44,6 +44,7 @@ class CreateSatelitCard extends Component
     public function closeDialog()
     {
         $this->resetErrorBag();
+
         return $this->storeModal = false;
     }
 

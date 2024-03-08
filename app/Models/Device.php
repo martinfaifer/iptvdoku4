@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use App\Observers\DeviceObserver;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[ObservedBy(DeviceObserver::class)]
 class Device extends Model
@@ -30,7 +30,7 @@ class Device extends Model
         'snmp_public_comunity',
         'template',
         'showed_create_template',
-        'has_channels'
+        'has_channels',
     ];
 
     protected $casts = [
@@ -54,7 +54,7 @@ class Device extends Model
     {
         return Attribute::make(
             // get: fn ($value) => json_decode($value, true),
-            set: fn ($value) => (array)$value
+            set: fn ($value) => (array) $value
         );
     }
 
@@ -80,8 +80,8 @@ class Device extends Model
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $this->where('name', "like", "%" . $search . "%")
-            ->orWhere('ip', "like", "%" . $search . "%");
+        return $this->where('name', 'like', '%'.$search.'%')
+            ->orWhere('ip', 'like', '%'.$search.'%');
     }
 
     // public function scopeGetChannels(Builder $query, string $channel)

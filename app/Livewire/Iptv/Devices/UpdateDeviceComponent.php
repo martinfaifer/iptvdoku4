@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Iptv\Devices;
 
+use App\Livewire\Forms\UpdateDeviceForm;
 use App\Models\Device;
-use Livewire\Component;
+use App\Models\DeviceCategory;
 use App\Models\DeviceSnmp;
 use App\Models\DeviceVendor;
-use App\Models\DeviceCategory;
-use App\Livewire\Forms\UpdateDeviceForm;
 use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 class UpdateDeviceComponent extends Component
 {
@@ -19,8 +19,11 @@ class UpdateDeviceComponent extends Component
     public ?Device $device;
 
     public bool $updateModal = false;
+
     public $deviceCategories;
+
     public $devicesVendors;
+
     public $deviceSnmps;
 
     public function mount()
@@ -33,12 +36,14 @@ class UpdateDeviceComponent extends Component
     public function edit()
     {
         $this->form->setDevice($this->device);
+
         return $this->updateModal = true;
     }
 
     public function closeDialog()
     {
         $this->resetErrorBag();
+
         return $this->updateModal = false;
     }
 
@@ -47,11 +52,11 @@ class UpdateDeviceComponent extends Component
         $device = $this->form->update();
         $this->closeDialog();
 
-        $this->dispatch("update_devices_menu");
+        $this->dispatch('update_devices_menu');
 
-        $this->redirect("/devices/" . $this->device->id, true);
+        $this->redirect('/devices/'.$this->device->id, true);
 
-        return $this->success_alert("Zařízení upraveno");
+        return $this->success_alert('Zařízení upraveno');
     }
 
     public function render()

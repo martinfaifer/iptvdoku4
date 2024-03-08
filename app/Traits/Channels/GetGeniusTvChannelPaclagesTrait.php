@@ -6,7 +6,7 @@ use App\Models\GeniusTvChannelPackage;
 
 trait GetGeniusTvChannelPaclagesTrait
 {
-    public function get_packages(array|null $packagesIds = null): array
+    public function get_packages(?array $packagesIds = null): array
     {
         $packages = [];
 

@@ -14,9 +14,13 @@ class StoreDeviceComponent extends Component
     use NotificationTrait;
 
     public StoreDeviceForm $form;
+
     public bool $storeModal = false;
+
     public $deviceCategories;
+
     public $devicesVendors;
+
     public $deviceSnmps;
 
     public function mount()
@@ -34,6 +38,7 @@ class StoreDeviceComponent extends Component
     public function closeDialog()
     {
         $this->resetErrorBag();
+
         return $this->storeModal = false;
     }
 
@@ -42,11 +47,11 @@ class StoreDeviceComponent extends Component
         $device = $this->form->store();
         $this->closeDialog();
 
-        $this->dispatch("update_devices_menu");
+        $this->dispatch('update_devices_menu');
 
-        $this->redirect("/devices/" . $device->id, true);
+        $this->redirect('/devices/'.$device->id, true);
 
-        return $this->success_alert("Zařízení přidáno");
+        return $this->success_alert('Zařízení přidáno');
     }
 
     public function render()

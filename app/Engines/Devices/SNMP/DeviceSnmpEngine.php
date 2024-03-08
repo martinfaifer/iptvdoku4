@@ -2,13 +2,12 @@
 
 namespace App\Engines\Devices\SNMP;
 
-use SNMP;
-use FreeDSx\Snmp\Oid;
 use App\Models\Device;
 use App\Models\DeviceOid;
-use FreeDSx\Snmp\SnmpClient;
 use App\Traits\Network\CheckIfPortIsOpenTrait;
-use FreeDSx\Snmp\Exception\SnmpRequestException;
+use FreeDSx\Snmp\Oid;
+use FreeDSx\Snmp\SnmpClient;
+use SNMP;
 
 class DeviceSnmpEngine
 {
@@ -27,7 +26,7 @@ class DeviceSnmpEngine
                 $this->snmp = new SnmpClient([
                     'host' => $device->ip,
                     'version' => (int) $device->snmp_version,
-                    'community' => $device->snmp_public_comunity
+                    'community' => $device->snmp_public_comunity,
                 ]);
             }
         }
@@ -50,7 +49,7 @@ class DeviceSnmpEngine
         try {
             $response[] = $this->get($oid);
             for ($i = 0; $i <= $maxRepetitions; $i++) {
-                $response[] = $this->get($oid . "." . $i);
+                $response[] = $this->get($oid.'.'.$i);
             }
         } catch (\Throwable $th) {
             //throw $th;
@@ -67,23 +66,23 @@ class DeviceSnmpEngine
 
             $walk->subtreeOnly(false);
 
-            # Keep the walk going until there are no more OIDs left
+            // Keep the walk going until there are no more OIDs left
             while ($walk->hasOids()) {
                 try {
                     $oid = $walk->next();
-                    echo $oid->getValue() . PHP_EOL;
+                    echo $oid->getValue().PHP_EOL;
                     DeviceOid::firstOrCreate(
                         [
                             'device_id' => $this->device->id,
                             'oid' => $oid->getOid(),
                         ],
                         [
-                            'value' => $oid->getValue()
+                            'value' => $oid->getValue(),
                         ]
                     );
                 } catch (\Exception $e) {
-                    # If we had an issue, display it here (network timeout, etc)
-                    echo $this->device->id . " Unable to retrieve OID. " . $e->getMessage() . PHP_EOL;
+                    // If we had an issue, display it here (network timeout, etc)
+                    echo $this->device->id.' Unable to retrieve OID. '.$e->getMessage().PHP_EOL;
                 }
             }
         }
@@ -96,7 +95,7 @@ class DeviceSnmpEngine
             $this->snmp = new SnmpClient([
                 'host' => $this->device->ip,
                 'version' => (int) $this->device->snmp_version,
-                'community' => $this->device->snmp_private_comunity
+                'community' => $this->device->snmp_private_comunity,
             ]);
             $this->snmp->set(Oid::fromString($oid, $value));
 
@@ -105,6 +104,7 @@ class DeviceSnmpEngine
             if (str_contains($th->getMessage(), ' is inconsistent')) {
                 return true;
             }
+
             return false;
         }
     }

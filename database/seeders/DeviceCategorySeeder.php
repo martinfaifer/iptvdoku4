@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\DeviceCategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DeviceCategorySeeder extends Seeder
@@ -13,38 +12,38 @@ class DeviceCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        if (!DeviceCategory::first()) {
+        if (! DeviceCategory::first()) {
 
             DeviceCategory::create([
-                'name' => "Multiplexor"
+                'name' => 'Multiplexor',
             ]);
 
             DeviceCategory::create([
-                'name' => "Satelitní přijímač"
+                'name' => 'Satelitní přijímač',
             ]);
 
             DeviceCategory::create([
-                'name' => "Transcoder"
+                'name' => 'Transcoder',
             ]);
 
             DeviceCategory::create([
-                'name' => "Po IP"
+                'name' => 'Po IP',
             ]);
 
             DeviceCategory::create([
-                'name' => "Linux"
+                'name' => 'Linux',
             ]);
 
             DeviceCategory::create([
-                'name' => "Satelity"
+                'name' => 'Satelity',
             ]);
 
             DeviceCategory::create([
-                'name' => "Paraboly"
+                'name' => 'Paraboly',
             ]);
 
             DeviceCategory::create([
-                'name' => "Multiswitche"
+                'name' => 'Multiswitche',
             ]);
         }
     }

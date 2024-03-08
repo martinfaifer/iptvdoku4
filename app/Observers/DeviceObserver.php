@@ -5,14 +5,13 @@ namespace App\Observers;
 use App\Jobs\LogJob;
 use App\Models\Alert;
 use App\Models\Chart;
-use App\Models\Loger;
-use App\Models\Device;
 use App\Models\Contact;
+use App\Models\Device;
+use App\Models\Loger;
 use Illuminate\Support\Facades\Auth;
 
 class DeviceObserver
 {
-
     public function created(Device $device)
     {
         LogJob::dispatch(
@@ -34,7 +33,7 @@ class DeviceObserver
                 'snmp_public_comunity' => $device->snmp_public_comunity,
                 'template' => $device->template,
                 'showed_create_template' => $device->showed_create_template,
-                'has_channels' => $device->has_channels
+                'has_channels' => $device->has_channels,
             ])
         );
     }
@@ -61,7 +60,7 @@ class DeviceObserver
                     'snmp_public_comunity' => $device->snmp_public_comunity,
                     'template' => $device->template,
                     'showed_create_template' => $device->showed_create_template,
-                    'has_channels' => $device->has_channels
+                    'has_channels' => $device->has_channels,
                 ])
             );
         }
@@ -70,11 +69,11 @@ class DeviceObserver
     public function deleted(Device $device)
     {
         // delete charts
-        Chart::where('item', "like", "%device:" . $device->id . ":%")->delete();
+        Chart::where('item', 'like', '%device:'.$device->id.':%')->delete();
         // delete alerts
-        Alert::where('type', "gpu_check_failed")->where('item_id', $device->id)->delete();
-        Alert::where('type', "gpu_problem")->where('item_id', $device->id)->delete();
+        Alert::where('type', 'gpu_check_failed')->where('item_id', $device->id)->delete();
+        Alert::where('type', 'gpu_problem')->where('item_id', $device->id)->delete();
         // delete device contacts
-        Contact::where('type', "device")->where('item_id', $device->id)->delete();
+        Contact::where('type', 'device')->where('item_id', $device->id)->delete();
     }
 }

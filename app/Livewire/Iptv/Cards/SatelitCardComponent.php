@@ -3,13 +3,12 @@
 namespace App\Livewire\Iptv\Cards;
 
 use App\Models\SatelitCard;
-use Livewire\Component;
 use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 class SatelitCardComponent extends Component
 {
     use NotificationTrait;
-
 
     public ?SatelitCard $satelitCard;
 

@@ -8,13 +8,13 @@ use Livewire\Form;
 
 class StoreSatelitCardForm extends Form
 {
-    #[Validate('required', message: "Vyplňte satelitní kartu")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    #[Validate('unique:satelit_cards,name', message: "Karta již existuje")]
-    public string $name = "";
+    #[Validate('required', message: 'Vyplňte satelitní kartu')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    #[Validate('unique:satelit_cards,name', message: 'Karta již existuje')]
+    public string $name = '';
 
-    #[Validate('required', message: "Vyberte distributra")]
+    #[Validate('required', message: 'Vyberte distributra')]
     public $satelit_card_vendor_id;
 
     public function create()
@@ -23,7 +23,7 @@ class StoreSatelitCardForm extends Form
 
         $satCard = SatelitCard::create([
             'name' => $this->name,
-            'satelit_card_vendor_id' => $this->satelit_card_vendor_id
+            'satelit_card_vendor_id' => $this->satelit_card_vendor_id,
         ]);
 
         $this->reset('name', 'satelit_card_vendor_id');

@@ -2,28 +2,28 @@
 
 namespace App\Livewire\Settings\Tags;
 
-use App\Models\Tag;
-use Livewire\Component;
 use App\Models\CssColor;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use Livewire\Attributes\Validate;
+use App\Models\Tag;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsTagComponent extends Component
 {
-    use WithPagination, NotificationTrait;
+    use NotificationTrait, WithPagination;
 
     public bool $createModal = false;
 
     public $query = '';
 
-    #[Validate('required', message: "Vyplňte název")]
-    public string $name = "";
+    #[Validate('required', message: 'Vyplňte název')]
+    public string $name = '';
 
-    #[Validate('required', message: "Vyberte barvu")]
-    public string $color = "";
+    #[Validate('required', message: 'Vyberte barvu')]
+    public string $color = '';
 
     public Collection $cssColors;
 
@@ -42,22 +42,23 @@ class SettingsTagComponent extends Component
         $this->validate();
         Tag::create([
             'name' => $this->name,
-            'color' => CssColor::find($this->color)->color
+            'color' => CssColor::find($this->color)->color,
         ]);
 
-        $this->success_alert("Přidáno");
+        $this->success_alert('Přidáno');
         $this->closeDialog();
     }
 
     public function destroy(Tag $tag)
     {
-        if($tag->items->isEmpty()) {
+        if ($tag->items->isEmpty()) {
             $tag->delete();
             $this->dispatch('refresh-settings-tags');
-            return $this->success_alert("Odebráno");
+
+            return $this->success_alert('Odebráno');
         }
 
-        return $this->error_alert("Štítek má vazbu");
+        return $this->error_alert('Štítek má vazbu');
     }
 
     public function closeDialog()
@@ -72,10 +73,10 @@ class SettingsTagComponent extends Component
         return view('livewire.settings.tags.settings-tag-component', [
             'tags' => Tag::search($this->query)->paginate(),
             'headers' => [
-                ['key' => 'name', 'label' => 'Název', 'class' => "text-white/80"],
-                ['key' => 'color', 'label' => 'Barva', 'class' => "text-white/80"],
-                ['key' => 'actions', 'label' => '', 'class' => "text-white/80"],
-            ]
+                ['key' => 'name', 'label' => 'Název', 'class' => 'text-white/80'],
+                ['key' => 'color', 'label' => 'Barva', 'class' => 'text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+            ],
         ]);
     }
 }

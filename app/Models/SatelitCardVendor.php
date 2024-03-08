@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class SatelitCardVendor extends Model
 {
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     public function satelit_cards(): HasMany

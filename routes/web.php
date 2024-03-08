@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('login', Login::class)->name('login');
 
 Route::middleware('auth')->group(function () {
-    Route::get("/", IptvChannel::class);
-    Route::prefix("channels/{channel?}/{channelType?}")->group(function () {
-        Route::get("", IptvChannel::class);
+    Route::get('/', IptvChannel::class);
+    Route::prefix('channels/{channel?}/{channelType?}')->group(function () {
+        Route::get('', IptvChannel::class);
     });
 
-    Route::get("devices/{device?}/{component?}", DeviceComponent::class);
+    Route::get('devices/{device?}/{component?}', DeviceComponent::class);
 
-    Route::get("sat-cards/{satelitCard?}", SatelitCardComponent::class);
+    Route::get('sat-cards/{satelitCard?}', SatelitCardComponent::class);
 
     Route::prefix('settings')->group(function () {
         Route::get('', SettingsTagComponent::class);

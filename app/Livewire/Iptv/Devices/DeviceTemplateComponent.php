@@ -2,19 +2,17 @@
 
 namespace App\Livewire\Iptv\Devices;
 
-use App\Models\Chart;
-use App\Models\Device;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use App\Traits\Charts\GetItemChartsTrait;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Database\Eloquent\Collection;
 use App\Engines\Devices\SNMP\DeviceSnmpEngine;
 use App\Engines\Devices\Templates\DeviceTemplateEngine;
+use App\Models\Chart;
+use App\Models\Device;
+use App\Traits\Charts\GetItemChartsTrait;
+use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 class DeviceTemplateComponent extends Component
 {
-    use NotificationTrait, GetItemChartsTrait;
+    use GetItemChartsTrait, NotificationTrait;
 
     public ?Device $device;
 
@@ -30,9 +28,9 @@ class DeviceTemplateComponent extends Component
 
     public $updatedInterface = [];
 
-    public $updatedInterfaceKey = "";
+    public $updatedInterfaceKey = '';
 
-    public $interfaceType = "";
+    public $interfaceType = '';
 
     public bool $updateDrawer = false;
 
@@ -42,7 +40,7 @@ class DeviceTemplateComponent extends Component
     {
         $this->template = $template;
 
-        if (Chart::itemCharts("device:" . $this->device->id)->first()) {
+        if (Chart::itemCharts('device:'.$this->device->id)->first()) {
             $this->hasCharts = true;
         }
     }
@@ -52,6 +50,7 @@ class DeviceTemplateComponent extends Component
         $this->updatedInterface = $this->template[$interfaceType][$key];
         $this->updatedInterfaceKey = $key;
         $this->interfaceType = $interfaceType;
+
         return $this->updateDrawer = true;
     }
 
@@ -65,17 +64,16 @@ class DeviceTemplateComponent extends Component
         );
 
         $this->success('Upraveno');
-        $this->redirect('/devices/' . $this->device->id, true);
+        $this->redirect('/devices/'.$this->device->id, true);
     }
 
     public function closeDrawer()
     {
         $this->updatedInterface = [];
-        $this->updatedInterfaceKey = "";
-        $this->interfaceType = "";
+        $this->updatedInterfaceKey = '';
+        $this->interfaceType = '';
         $this->updateDrawer = false;
     }
-
 
     public function loadLog($oid)
     {
@@ -86,8 +84,8 @@ class DeviceTemplateComponent extends Component
 
     public function restartInterface($oid)
     {
-        return ((new DeviceSnmpEngine($this->device))->set($oid, "") == true)
-            ? $this->success_alert("Interface restartován")
+        return ((new DeviceSnmpEngine($this->device))->set($oid, '') == true)
+            ? $this->success_alert('Interface restartován')
             : $this->error_alert('Nepodařilo se restartovat');
     }
 
@@ -96,23 +94,25 @@ class DeviceTemplateComponent extends Component
         $this->logs = [];
         $this->charts = [];
         $this->chartModal = false;
+
         return $this->logModal = false;
     }
 
     public function delete()
     {
         $this->device->update([
-            'template' => null
+            'template' => null,
         ]);
 
-        $this->redirect('/devices/' . $this->device->id, true);
-        return $this->success_alert("Šablona odebrána");
+        $this->redirect('/devices/'.$this->device->id, true);
+
+        return $this->success_alert('Šablona odebrána');
     }
 
     public function loadCharts()
     {
         $this->charts = $this->get_charts(
-            item: "device:" . $this->device->id,
+            item: 'device:'.$this->device->id,
             useDisctinct: true
         );
 

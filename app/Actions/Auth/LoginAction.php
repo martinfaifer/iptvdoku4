@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginAction
 {
-
     public function __construct(public string $email, public string $password)
     {
         //
@@ -23,6 +22,7 @@ class LoginAction
         if ($attempt) {
             return true;
         }
+
         return false;
     }
 }

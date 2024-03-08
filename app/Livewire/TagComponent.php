@@ -2,14 +2,13 @@
 
 namespace App\Livewire;
 
-use App\Models\DeviceSsh;
 use App\Models\Tag;
-use Livewire\Component;
 use App\Models\TagOnItem;
-use Livewire\Attributes\On;
-use Livewire\Attributes\Validate;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class TagComponent extends Component
 {
@@ -23,7 +22,7 @@ class TagComponent extends Component
 
     public $itemId;
 
-    #[Validate('required', message: "Vyberte alespoň jeden štítek")]
+    #[Validate('required', message: 'Vyberte alespoň jeden štítek')]
     public array $selectedTags = [];
 
     public bool $storeModal = false;
@@ -44,6 +43,7 @@ class TagComponent extends Component
     public function closeDialog()
     {
         $this->reset('selectedTags');
+
         return $this->storeModal = false;
     }
 
@@ -54,25 +54,26 @@ class TagComponent extends Component
             TagOnItem::create([
                 'item_id' => $this->itemId,
                 'type' => $this->type,
-                'tag_id' => $selectedTag
+                'tag_id' => $selectedTag,
             ]);
         }
 
-        $this->dispatch('tag-component.' . $this->type . "." . $this->itemId);
+        $this->dispatch('tag-component.'.$this->type.'.'.$this->itemId);
         if ($this->type == 'device') {
-            $this->dispatch('check_if_need_ssh.' . $this->itemId);
+            $this->dispatch('check_if_need_ssh.'.$this->itemId);
         }
         $this->closeDialog();
-        return $this->success_alert("Upraveno");
+
+        return $this->success_alert('Upraveno');
     }
 
     public function destroy(TagOnItem $tagOnItem)
     {
         $tag = $tagOnItem->tag;
         $tagOnItem->delete();
-        $this->dispatch('tag-component.' . $this->type . "." . $this->itemId);
+        $this->dispatch('tag-component.'.$this->type.'.'.$this->itemId);
 
-        return $this->success_alert("Upraveno");
+        return $this->success_alert('Upraveno');
     }
 
     #[On('tag-component.{type}.{itemId}')]

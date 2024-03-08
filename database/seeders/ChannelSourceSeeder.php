@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\ChannelSource;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ChannelSourceSeeder extends Seeder
@@ -13,53 +12,53 @@ class ChannelSourceSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!ChannelSource::first()) {
+        if (! ChannelSource::first()) {
             ChannelSource::create([
-                'name' => "Grape SC"
+                'name' => 'Grape SC',
             ]);
 
             ChannelSource::create([
-                'name' => "Kabel 1"
+                'name' => 'Kabel 1',
             ]);
 
             ChannelSource::create([
-                'name' => "WMS"
+                'name' => 'WMS',
             ]);
 
             ChannelSource::create([
-                'name' => "CBCnet"
+                'name' => 'CBCnet',
             ]);
 
             ChannelSource::create([
-                'name' => "JMnet"
+                'name' => 'JMnet',
             ]);
 
             ChannelSource::create([
-                'name' => "RytněNet"
+                'name' => 'RytněNet',
             ]);
 
             ChannelSource::create([
-                'name' => "Sat+ (UPC-CeColo)"
+                'name' => 'Sat+ (UPC-CeColo)',
             ]);
 
             ChannelSource::create([
-                'name' => "Sledování TV"
+                'name' => 'Sledování TV',
             ]);
 
             ChannelSource::create([
-                'name' => "ITself"
+                'name' => 'ITself',
             ]);
 
             ChannelSource::create([
-                'name' => "HBO"
+                'name' => 'HBO',
             ]);
 
             ChannelSource::create([
-                'name' => "ČRA"
+                'name' => 'ČRA',
             ]);
 
             ChannelSource::create([
-                'name' => "SPI Filmbox"
+                'name' => 'SPI Filmbox',
             ]);
         }
     }

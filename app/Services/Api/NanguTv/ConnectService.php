@@ -6,7 +6,6 @@ use SoapClient;
 
 class ConnectService
 {
-
     public $soap;
 
     public $endPoints = [
@@ -14,14 +13,14 @@ class ConnectService
         'subscription' => '/adminws/provisioning/SubscriptionEndpoint?wsdl',
         'subscriber' => '/adminws/provisioning/SubscriberEndpoint?wsdl',
         'identity' => '/adminws/provisioning/IdentityEndpoint?wsdl',
-        'iptv' => '/adminws/iptv/IptvEndpoint?wsdl'
+        'iptv' => '/adminws/iptv/IptvEndpoint?wsdl',
     ];
 
     public function __construct(string $wsdl)
     {
         try {
-            $this->soap = (!is_null(config('services.api.nanguTv.url')))
-                ? new SoapClient(config('services.api.nanguTv.url') . $this->endPoints[$wsdl])
+            $this->soap = (! is_null(config('services.api.nanguTv.url')))
+                ? new SoapClient(config('services.api.nanguTv.url').$this->endPoints[$wsdl])
                 : [];
         } catch (\Throwable $th) {
             $this->soap = [];

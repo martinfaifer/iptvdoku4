@@ -3,21 +3,21 @@
 namespace App\Observers;
 
 use App\Jobs\LogJob;
+use App\Models\ChannelQualityWithIp;
 use App\Models\H264;
 use App\Models\Loger;
-use App\Models\ChannelQualityWithIp;
 use Illuminate\Support\Facades\Auth;
 
 class ChannelQualityWithIpObserver
 {
     public function cerated(ChannelQualityWithIp $channelQualityWithIp)
     {
-        if (!is_null($channelQualityWithIp->h264_id)) {
-            $item = "h264:" . H264::find($channelQualityWithIp->h264_id)->channel_id;
+        if (! is_null($channelQualityWithIp->h264_id)) {
+            $item = 'h264:'.H264::find($channelQualityWithIp->h264_id)->channel_id;
         }
 
-        if (!is_null($channelQualityWithIp->h265_id)) {
-            $item = "h265:" . H264::find($channelQualityWithIp->h265_id)->channel_id;
+        if (! is_null($channelQualityWithIp->h265_id)) {
+            $item = 'h265:'.H264::find($channelQualityWithIp->h265_id)->channel_id;
         }
 
         LogJob::dispatch(
@@ -27,19 +27,19 @@ class ChannelQualityWithIpObserver
             payload: json_encode([
                 'id' => $channelQualityWithIp->id,
                 'channel_quality_id' => $channelQualityWithIp->channel_quality_id,
-                'ip' => $channelQualityWithIp->ip
+                'ip' => $channelQualityWithIp->ip,
             ])
         );
     }
 
     public function updated(ChannelQualityWithIp $channelQualityWithIp)
     {
-        if (!is_null($channelQualityWithIp->h264_id)) {
-            $item = "h264:" . H264::find($channelQualityWithIp->h264_id)->channel_id;
+        if (! is_null($channelQualityWithIp->h264_id)) {
+            $item = 'h264:'.H264::find($channelQualityWithIp->h264_id)->channel_id;
         }
 
-        if (!is_null($channelQualityWithIp->h265_id)) {
-            $item = "h265:" . H264::find($channelQualityWithIp->h265_id)->channel_id;
+        if (! is_null($channelQualityWithIp->h265_id)) {
+            $item = 'h265:'.H264::find($channelQualityWithIp->h265_id)->channel_id;
         }
 
         LogJob::dispatch(
@@ -49,19 +49,19 @@ class ChannelQualityWithIpObserver
             payload: json_encode([
                 'id' => $channelQualityWithIp->id,
                 'channel_quality_id' => $channelQualityWithIp->channel_quality_id,
-                'ip' => $channelQualityWithIp->ip
+                'ip' => $channelQualityWithIp->ip,
             ])
         );
     }
 
     public function deleted(ChannelQualityWithIp $channelQualityWithIp)
     {
-        if (!is_null($channelQualityWithIp->h264_id)) {
-            $item = "h264:" . H264::find($channelQualityWithIp->h264_id)->channel_id;
+        if (! is_null($channelQualityWithIp->h264_id)) {
+            $item = 'h264:'.H264::find($channelQualityWithIp->h264_id)->channel_id;
         }
 
-        if (!is_null($channelQualityWithIp->h265_id)) {
-            $item = "h265:" . H264::find($channelQualityWithIp->h265_id)->channel_id;
+        if (! is_null($channelQualityWithIp->h265_id)) {
+            $item = 'h265:'.H264::find($channelQualityWithIp->h265_id)->channel_id;
         }
 
         LogJob::dispatch(
@@ -71,7 +71,7 @@ class ChannelQualityWithIpObserver
             payload: json_encode([
                 'id' => $channelQualityWithIp->id,
                 'channel_quality_id' => $channelQualityWithIp->channel_quality_id,
-                'ip' => $channelQualityWithIp->ip
+                'ip' => $channelQualityWithIp->ip,
             ])
         );
     }

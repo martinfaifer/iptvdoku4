@@ -4,7 +4,6 @@ namespace App\Actions\Devices;
 
 use App\Models\Alert;
 use App\Models\Device;
-use Illuminate\Support\Facades\Cache;
 use App\Services\Api\Ssh\ConnectService;
 
 class CheckIfGpuWorkingAction
@@ -16,7 +15,7 @@ class CheckIfGpuWorkingAction
 
     public function __invoke()
     {
-        echo $this->device->name . PHP_EOL;
+        echo $this->device->name.PHP_EOL;
         try {
             $commandResponse = (new ConnectService(
                 ip: $this->device->ip,
@@ -27,21 +26,21 @@ class CheckIfGpuWorkingAction
             if (str_contains($commandResponse, 'CUDA')) {
                 Alert::where('type', 'gpu_problem')->where('item_id', $this->device->id)->delete();
             } else {
-                if (!Alert::where('type', 'gpu_problem')->where('item_id', $this->device->id)->first()) {
+                if (! Alert::where('type', 'gpu_problem')->where('item_id', $this->device->id)->first()) {
                     Alert::create([
-                        'type' => "gpu_problem",
+                        'type' => 'gpu_problem',
                         'item_id' => $this->device->id,
-                        'message' => "Zařízení " . $this->device->name . " nefunguje GPU"
+                        'message' => 'Zařízení '.$this->device->name.' nefunguje GPU',
                     ]);
                 }
             }
         } catch (\Throwable $th) {
             // not logged in
-            echo $this->device->name . " not logged in" . PHP_EOL;
+            echo $this->device->name.' not logged in'.PHP_EOL;
             Alert::create([
-                'type' => "gpu_check_failed",
+                'type' => 'gpu_check_failed',
                 'item_id' => $this->device->id,
-                'message' => "Nepodařilo se přihlásit do " . $this->device->name
+                'message' => 'Nepodařilo se přihlásit do '.$this->device->name,
             ]);
         }
     }

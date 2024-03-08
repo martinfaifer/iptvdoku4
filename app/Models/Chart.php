@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 
 class Chart extends Model
@@ -12,7 +12,7 @@ class Chart extends Model
 
     protected $fillable = [
         'item', // 'device:id || channel:id ...
-        'value'
+        'value',
     ];
 
     public function prunable(): Builder
@@ -22,11 +22,11 @@ class Chart extends Model
 
     public function scopeItemCharts(Builder $query, string $item)
     {
-        $query->where('item', 'like', "%" . $item . ":%");
+        $query->where('item', 'like', '%'.$item.':%');
     }
 
     public function scopeSpecificItemCharts(Builder $query, string $item, int $rows = 20)
     {
-        $query->where('item', $item)->orderBy('id', "DESC")->take($rows);
+        $query->where('item', $item)->orderBy('id', 'DESC')->take($rows);
     }
 }

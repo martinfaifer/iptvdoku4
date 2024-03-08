@@ -8,6 +8,6 @@ trait CheckIfPortIsOpenTrait
     {
         $fp = @fsockopen(trim($url), $portNumber, $errno, $errstr, 2);
 
-        return (!$fp) ? false : true;
+        return (! $fp) ? false : true;
     }
 }

@@ -10,6 +10,6 @@ trait CheckIfChannelIsInIptvDohledTrait
     {
         $isIn = Cache::get($ip);
 
-        return !$isIn ? false : true;
+        return ! $isIn ? false : true;
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Iptv\Channels\IptvDohled;
 
-use Livewire\Component;
 use App\Traits\Channels\GetChannelDataOnIptvDohledTrait;
+use Livewire\Component;
 
 class ChannelDataOnIptvDohledComponent extends Component
 {
@@ -29,9 +29,9 @@ class ChannelDataOnIptvDohledComponent extends Component
                     [
                         'label' => '# of Votes',
                         'data' => $streamData['seriesData'],
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
     }
 

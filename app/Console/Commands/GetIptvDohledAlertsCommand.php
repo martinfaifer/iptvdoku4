@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Jobs\GetAlertsFromIptvDohledJob;
-use App\Services\Api\IptvDohled\ConnectService;
+use Illuminate\Console\Command;
 
 class GetIptvDohledAlertsCommand extends Command
 {

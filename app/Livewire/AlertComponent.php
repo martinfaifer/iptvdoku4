@@ -3,13 +3,12 @@
 namespace App\Livewire;
 
 use App\Models\Alert;
-use Livewire\Component;
-use Livewire\Attributes\On;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class AlertComponent extends Component
 {
-
     public bool $showAlert = false;
 
     public bool $showAlerts = false;
@@ -19,7 +18,6 @@ class AlertComponent extends Component
     public int $numberOfAlerts = 0;
 
     public Collection $alerts;
-
 
     public function mount()
     {
@@ -51,7 +49,7 @@ class AlertComponent extends Component
 
     public function changeStack()
     {
-        return $this->isStacked = !$this->isStacked;
+        return $this->isStacked = ! $this->isStacked;
     }
 
     public function render()

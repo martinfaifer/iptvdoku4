@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Iptv\Channels\Multicast;
 
+use App\Livewire\Forms\StoreMulticastChannelForm;
 use App\Models\Channel;
-use Livewire\Component;
 use App\Models\ChannelSource;
 use App\Traits\Livewire\NotificationTrait;
-use App\Livewire\Forms\StoreMulticastChannelForm;
+use Livewire\Component;
 
 class StoreMulticastChannel extends Component
 {
@@ -36,7 +36,8 @@ class StoreMulticastChannel extends Component
         $this->form->store();
         $this->closeDialog();
         $this->dispatch('update_multicasts.'.$this->channel->id);
-        return $this->success_alert("Přidáno");
+
+        return $this->success_alert('Přidáno');
     }
 
     public function closeDialog()

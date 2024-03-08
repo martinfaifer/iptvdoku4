@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class DeviceVendor extends Model
 {
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     public function devices(): HasMany

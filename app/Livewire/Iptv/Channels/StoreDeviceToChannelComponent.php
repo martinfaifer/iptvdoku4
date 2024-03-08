@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Iptv\Channels;
 
-use App\Models\Device;
 use App\Models\Channel;
-use Livewire\Component;
-use Livewire\Attributes\Validate;
+use App\Models\Device;
 use App\Traits\Livewire\NotificationTrait;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class StoreDeviceToChannelComponent extends Component
 {
@@ -20,12 +20,12 @@ class StoreDeviceToChannelComponent extends Component
 
     public $devices;
 
-    #[Validate('required', message: "Vyberte zařízení")]
-    #[Validate('exists:devices,id', message: "Zařízení neexistuje v DB")]
+    #[Validate('required', message: 'Vyberte zařízení')]
+    #[Validate('exists:devices,id', message: 'Zařízení neexistuje v DB')]
     public $deviceId;
 
-    #[Validate('required', message: "Hodnota musí být vyplněna true / false")]
-    #[Validate('boolean', message: "Neplatný formát")]
+    #[Validate('required', message: 'Hodnota musí být vyplněna true / false')]
+    #[Validate('boolean', message: 'Neplatný formát')]
     public bool $is_backup = false;
 
     public $device = null;
@@ -40,9 +40,9 @@ class StoreDeviceToChannelComponent extends Component
         $this->validate();
 
         if ($this->is_backup == true) {
-            $channelToDevice = $this->channelType . ":" . $this->channel->id . ":backup";
+            $channelToDevice = $this->channelType.':'.$this->channel->id.':backup';
         } else {
-            $channelToDevice = $this->channelType . ":" . $this->channel->id;
+            $channelToDevice = $this->channelType.':'.$this->channel->id;
         }
 
         $device = Device::find($this->deviceId);
@@ -51,22 +51,22 @@ class StoreDeviceToChannelComponent extends Component
             $channels = [];
             array_push($channels, $channelToDevice);
             $device->update([
-                'has_channels' => $channels
+                'has_channels' => $channels,
             ]);
         } else {
             array_push($channels, $channelToDevice);
             $device->update([
-                'has_channels' => $channels
+                'has_channels' => $channels,
             ]);
         }
 
         if ($this->channelType == 'multicast') {
-            $this->dispatch('update_multicasts.' . $this->channel->id);
+            $this->dispatch('update_multicasts.'.$this->channel->id);
         }
 
-        $this->redirect('/channels/' . $this->channel->id . "/" . $this->channelType);
+        $this->redirect('/channels/'.$this->channel->id.'/'.$this->channelType);
 
-        return $this->success_alert("Upraveno");
+        return $this->success_alert('Upraveno');
     }
 
     public function openModal()

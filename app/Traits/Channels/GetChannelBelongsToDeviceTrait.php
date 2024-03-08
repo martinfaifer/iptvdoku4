@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Traits\Channels;
 
 use App\Models\ChannelMulticast;
@@ -7,21 +8,21 @@ use App\Models\H265;
 
 trait GetChannelBelongsToDeviceTrait
 {
-    public function channel(string $channelType = 'multicast', int $channel_id, bool $isBackup):null|array
+    public function channel(string $channelType, int $channel_id, bool $isBackup): ?array
     {
-        if($channelType == 'multicast') {
+        if ($channelType == 'multicast') {
             $channel = ChannelMulticast::where('channel_id', $channel_id)->first();
         }
 
-        if($channelType == 'h264') {
+        if ($channelType == 'h264') {
             $channel = H264::where('channel_id', $channel_id)->first();
         }
 
-        if($channelType == 'h265') {
+        if ($channelType == 'h265') {
             $channel = H265::where('channel_id', $channel_id)->first();
         }
 
-        if(!isset($channel)) {
+        if (! isset($channel)) {
             return null;
         }
 
@@ -29,7 +30,7 @@ trait GetChannelBelongsToDeviceTrait
             'id' => $channel_id,
             'channelType' => $channelType,
             'name' => $channel->channel->name,
-            'isBackup' => $isBackup
+            'isBackup' => $isBackup,
         ];
     }
 }

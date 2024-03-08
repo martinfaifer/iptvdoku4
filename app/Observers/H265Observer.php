@@ -18,7 +18,7 @@ class H265Observer
             payload: json_encode([
                 'id' => $h265->id,
                 'devices_id' => $h265->device_id,
-                'status' => $h265->status
+                'status' => $h265->status,
             ])
         );
     }
@@ -32,7 +32,7 @@ class H265Observer
             payload: json_encode([
                 'id' => $h265->id,
                 'devices_id' => $h265->device_id,
-                'status' => $h265->status
+                'status' => $h265->status,
             ])
         );
     }
@@ -46,7 +46,7 @@ class H265Observer
             payload: json_encode([
                 'id' => $h265->id,
                 'devices_id' => $h265->device_id,
-                'status' => $h265->status
+                'status' => $h265->status,
             ])
         );
     }

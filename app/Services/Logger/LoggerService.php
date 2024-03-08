@@ -6,7 +6,7 @@ use App\Models\Loger;
 
 class LoggerService
 {
-    public function __construct(public string $user = "", public string $type = "", public string $item = "", public $payload = "")
+    public function __construct(public string $user = '', public string $type = '', public string $item = '', public $payload = '')
     {
         //
     }
@@ -17,7 +17,7 @@ class LoggerService
             'user' => $this->user,
             'type' => $this->type,
             'item' => $this->item,
-            'payload' => $this->payload
+            'payload' => $this->payload,
         ]);
     }
 

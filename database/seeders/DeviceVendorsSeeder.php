@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\DeviceVendor;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DeviceVendorsSeeder extends Seeder
@@ -13,50 +12,50 @@ class DeviceVendorsSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!DeviceVendor::first()) {
+        if (! DeviceVendor::first()) {
 
             DeviceVendor::create([
-                'name' => "Blankom"
+                'name' => 'Blankom',
             ]);
 
             DeviceVendor::create([
-                'name' => "FTE"
+                'name' => 'FTE',
             ]);
 
             DeviceVendor::create([
-                'name' => "NoisyPeak"
+                'name' => 'NoisyPeak',
             ]);
 
             DeviceVendor::create([
-                'name' => "nVidia"
+                'name' => 'nVidia',
             ]);
 
             DeviceVendor::create([
-                'name' => "Cisco"
+                'name' => 'Cisco',
             ]);
 
             DeviceVendor::create([
-                'name' => "Titan"
+                'name' => 'Titan',
             ]);
 
             DeviceVendor::create([
-                'name' => "Atlanta"
+                'name' => 'Atlanta',
             ]);
 
             DeviceVendor::create([
-                'name' => "ProStream"
+                'name' => 'ProStream',
             ]);
 
             DeviceVendor::create([
-                'name' => "Nimble"
+                'name' => 'Nimble',
             ]);
 
             DeviceVendor::create([
-                'name' => "Linux"
+                'name' => 'Linux',
             ]);
 
             DeviceVendor::create([
-                'name' => "Neznámé"
+                'name' => 'Neznámé',
             ]);
         }
     }

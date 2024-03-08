@@ -3,12 +3,11 @@
 namespace App\Livewire\Iptv\Cards\Menu;
 
 use App\Models\SatelitCardVendor;
-use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Component;
 
 class SatelitCardsMenu extends Component
 {
-
     public $satelitCardsWithVendor;
 
     public function mount()

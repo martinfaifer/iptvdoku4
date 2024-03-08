@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Services\Api\Epg\EpgConnectService;
+use Illuminate\Console\Command;
 
 class GetChannelsEpgIdsCommand extends Command
 {
@@ -26,6 +26,6 @@ class GetChannelsEpgIdsCommand extends Command
      */
     public function handle()
     {
-        (new EpgConnectService())->connect(cacheKey: "channelEpgIds");
+        (new EpgConnectService())->connect(cacheKey: 'channelEpgIds');
     }
 }

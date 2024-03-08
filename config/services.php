@@ -36,7 +36,7 @@ return [
             'url' => env('NANGU_URL'),
             'ssl_url' => env('NANGU_SSL_URL'),
             'ssl_key' => env('NANGU_SSL_KEY'),
-            'isp_code' => env('NANGU_ISP_CODE')
+            'isp_code' => env('NANGU_ISP_CODE'),
         ],
         'iptvDohled' => [
             'url' => env('IPTVDOHLED_URL'),
@@ -47,23 +47,23 @@ return [
             'nms' => [
                 'url' => env('NMS_URL'),
                 'username' => env('NMS_USER'),
-                'password' => env('NMS_PASSWORD')
-            ]
+                'password' => env('NMS_PASSWORD'),
+            ],
         ],
         [
             'epg' => [
                 'url' => env('EPG_URL'),
-                'key' => env('EPG_KEY')
-            ]
+                'key' => env('EPG_KEY'),
+            ],
         ],
         [
             'nimble' => [
                 'url' => env('NIMBLE_WMS_URL'),
                 'api_key' => env('NIMBLE_WMS_API_KEY'),
                 'client_id' => env('NIMBLE_WMS_API_CLIENT_ID'),
-                'data_slice' => env('NIMBLE_WMS_DATA_SLICE')
-            ]
-        ]
-    ]
+                'data_slice' => env('NIMBLE_WMS_DATA_SLICE'),
+            ],
+        ],
+    ],
 
 ];

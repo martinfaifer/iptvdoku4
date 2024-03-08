@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Observers\ChannelQualityWithIpObserver;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[ObservedBy(ChannelQualityWithIpObserver::class)]
 class ChannelQualityWithIp extends Model
 {
     protected $fillable = [
-        'h264_id', 'h265_id', 'channel_quality_id', 'ip'
+        'h264_id', 'h265_id', 'channel_quality_id', 'ip',
     ];
 
     public function h264(): BelongsTo

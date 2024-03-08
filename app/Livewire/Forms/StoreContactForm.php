@@ -8,21 +8,20 @@ use Livewire\Form;
 
 class StoreContactForm extends Form
 {
-
-    #[Validate('required', message: "Vyplňte kontaktní osobu / společnost")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    public string $full_name = "";
-
-    #[Validate('nullable')]
-    #[Validate('email', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    public string $email = "";
+    #[Validate('required', message: 'Vyplňte kontaktní osobu / společnost')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    public string $full_name = '';
 
     #[Validate('nullable')]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    public string $phone = "";
+    #[Validate('email', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    public string $email = '';
+
+    #[Validate('nullable')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    public string $phone = '';
 
     public function create(string $type, int $item_id)
     {
@@ -33,7 +32,7 @@ class StoreContactForm extends Form
             'item_id' => $item_id,
             'full_name' => $this->full_name,
             'email' => $this->email,
-            'phone' => $this->phone
+            'phone' => $this->phone,
         ]);
 
         $this->reset('full_name', 'email', 'phone');

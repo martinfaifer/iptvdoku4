@@ -2,12 +2,12 @@
 
 namespace App\Jobs;
 
+use App\Services\Api\IptvDohled\ConnectService;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Services\Api\IptvDohled\ConnectService;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class StoreStreamToIptvDohledJob implements ShouldQueue
 {
@@ -27,10 +27,10 @@ class StoreStreamToIptvDohledJob implements ShouldQueue
     public function handle(): void
     {
         (new ConnectService(
-            endpointType: "store-stream",
+            endpointType: 'store-stream',
             formData: [
                 'nazev' => $this->name,
-                'stream_url' => str_contains($this->ip, ':1234') ? $this->ip : $this->ip . ":1234"
+                'stream_url' => str_contains($this->ip, ':1234') ? $this->ip : $this->ip.':1234',
             ]
         ))->connect();
     }

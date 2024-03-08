@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
 
 class DeviceTemplate extends Model
 {
     protected $fillable = [
-        'name', 'template'
+        'name', 'template',
     ];
 
     protected function template(): Attribute

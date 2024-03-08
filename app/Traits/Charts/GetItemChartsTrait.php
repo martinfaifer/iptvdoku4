@@ -6,7 +6,7 @@ use App\Models\Chart;
 
 trait GetItemChartsTrait
 {
-    public function get_charts(string $item, bool $useDisctinct = false, string $chartType = "line")
+    public function get_charts(string $item, bool $useDisctinct = false, string $chartType = 'line')
     {
         $charts = [];
         // select unique items
@@ -25,7 +25,7 @@ trait GetItemChartsTrait
         return $this->createAxis(chartsData: Chart::specificItemCharts($item)->get(), chartType: $chartType);
     }
 
-    public function createAxis($chartsData, string $chartType = "line"): array
+    public function createAxis($chartsData, string $chartType = 'line'): array
     {
         $labels = [];
         $data = [];
@@ -37,7 +37,7 @@ trait GetItemChartsTrait
 
         return [
             'xaxis' => $labels,
-            'yaxis' => $data
+            'yaxis' => $data,
         ];
     }
 }

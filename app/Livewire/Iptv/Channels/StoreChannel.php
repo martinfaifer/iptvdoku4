@@ -3,53 +3,52 @@
 namespace App\Livewire\Iptv\Channels;
 
 use App\Models\Channel;
+use App\Models\ChannelCategory;
+use App\Models\GeniusTvChannelPackage;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Models\ChannelCategory;
-use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\Cache;
-use App\Models\GeniusTvChannelPackage;
-use App\Jobs\StoreStreamToIptvDohledJob;
-use App\Traits\Livewire\NotificationTrait;
 
 class StoreChannel extends Component
 {
-    use WithFileUploads, NotificationTrait;
+    use NotificationTrait, WithFileUploads;
 
-    #[Validate('required', message: "Vyplňte název kanálu")]
-    #[Validate('max:250', message: "Maxilnálně 250 znaků")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('unique:channels,name', message: "Kanál s tímto název již existuje")]
-    public string $name = "";
+    #[Validate('required', message: 'Vyplňte název kanálu')]
+    #[Validate('max:250', message: 'Maxilnálně 250 znaků')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('unique:channels,name', message: 'Kanál s tímto název již existuje')]
+    public string $name = '';
 
-    #[Validate('max:1024', message: "Maximální velikost obrázku je 1Mb")]
+    #[Validate('max:1024', message: 'Maximální velikost obrázku je 1Mb')]
     #[Validate('nullable')]
     public $logo;
 
-    #[Validate('required', message: "Vyberte kvalitu")]
+    #[Validate('required', message: 'Vyberte kvalitu')]
     public $quality;
 
-    #[Validate('required', message: "Vyberte žánr")]
-    #[Validate('exists:channel_categories,id', message: "Neexistující žánr")]
+    #[Validate('required', message: 'Vyberte žánr')]
+    #[Validate('exists:channel_categories,id', message: 'Neexistující žánr')]
     public $category;
 
-    #[Validate('boolean', message: "Neplatný formát")]
+    #[Validate('boolean', message: 'Neplatný formát')]
     public bool $is_radio = false;
 
-    #[Validate('boolean', message: "Neplatný formát")]
+    #[Validate('boolean', message: 'Neplatný formát')]
     public bool $is_multiscreen = true;
 
     #[Validate('nullable')]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('unique:channels,nangu_chunk_store_id', message: "Toto chuntkStoreId již existuje")]
-    public string|null $nangu_chunk_store_id = null;
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('unique:channels,nangu_chunk_store_id', message: 'Toto chuntkStoreId již existuje')]
+    public ?string $nangu_chunk_store_id = null;
 
     #[Validate('nullable')]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('unique:channels,nangu_channel_code', message: "Toto nanguChannelCode již existuje")]
-    public string|null $nangu_channel_code = null;
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('unique:channels,nangu_channel_code', message: 'Toto nanguChannelCode již existuje')]
+    public ?string $nangu_channel_code = null;
 
-    #[Validate('string', message: "Neplatný formát")]
+    #[Validate('string', message: 'Neplatný formát')]
     #[Validate('nullable')]
     public $description;
 
@@ -57,26 +56,30 @@ class StoreChannel extends Component
     public array $geniustvChannelPackage;
 
     #[Validate('nullable')]
-    public null|string $epgId = null;
+    public ?string $epgId = null;
 
     public bool $storeModal = false;
+
     public $qualities = Channel::QUALITIES;
+
     public $geniusTVChannelPackages;
+
     public $channelCategories;
+
     public array $channelsEpgs;
 
     public function mount()
     {
         $this->channelCategories = ChannelCategory::orderBy('name')->get(['id', 'name']);
         $this->geniusTVChannelPackages = GeniusTvChannelPackage::get();
-        $this->channelsEpgs = !Cache::has('channelEpgIds') ? [] : Cache::get('channelEpgIds');
+        $this->channelsEpgs = ! Cache::has('channelEpgIds') ? [] : Cache::get('channelEpgIds');
     }
 
     public function store()
     {
         $this->validate();
 
-        if (!is_null($this->logo)) {
+        if (! is_null($this->logo)) {
             $path = $this->logo->store(path: 'public/Logos');
         }
 
@@ -98,14 +101,15 @@ class StoreChannel extends Component
             'nangu_chunk_store_id' => $this->nangu_chunk_store_id,
             'nangu_channel_code' => $this->nangu_channel_code,
             'geniustv_channel_packages_id' => json_encode($this->geniustvChannelPackage),
-            'epg_id' => $this->epgId
+            'epg_id' => $this->epgId,
         ]);
 
         $this->dispatch('update_channels_sidebar');
         // $this->closeDialog();
 
-        $this->success_alert("Kanál byl přidán");
-        return $this->redirect("/channels/" . $channel->id . "/multicast", true);
+        $this->success_alert('Kanál byl přidán');
+
+        return $this->redirect('/channels/'.$channel->id.'/multicast', true);
     }
 
     public function closeDialog()

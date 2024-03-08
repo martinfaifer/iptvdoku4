@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\GetSnmpDataFromDeviceJob;
 use App\Models\Device;
 use Illuminate\Console\Command;
-use App\Jobs\GetSnmpDataFromDeviceJob;
-use App\Engines\Devices\SNMP\DeviceSnmpEngine;
 
 class GetSnmpDataFromDevicesCommand extends Command
 {

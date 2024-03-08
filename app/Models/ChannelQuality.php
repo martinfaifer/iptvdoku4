@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ChannelQuality extends Model
@@ -12,7 +12,7 @@ class ChannelQuality extends Model
         'name',
         'bitrate',
         'port',
-        'format'
+        'format',
     ];
 
     public function ips(): HasMany

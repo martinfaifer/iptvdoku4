@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Observers\MulticastChannelObserver;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Contracts\Database\Query\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use App\Livewire\Iptv\Channels\Multicast\MulticastChannel;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[ObservedBy(MulticastChannelObserver::class)]
 class ChannelMulticast extends Model
@@ -21,7 +20,7 @@ class ChannelMulticast extends Model
         'channel_source_id',
         'is_backup',
         'devices_id',
-        'status'
+        'status',
     ];
 
     public function channel(): BelongsTo
@@ -41,6 +40,6 @@ class ChannelMulticast extends Model
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $query->where('stb_ip', "like", "%" . $search . "%")->orWhere('source_ip', "like", "%" . $search . "%");
+        return $query->where('stb_ip', 'like', '%'.$search.'%')->orWhere('source_ip', 'like', '%'.$search.'%');
     }
 }

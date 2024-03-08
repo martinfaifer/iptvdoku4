@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\CssColor;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 // cs- is custom color
@@ -14,490 +13,490 @@ class CssColorSeeder extends Seeder
      */
     public function run(): void
     {
-        if(!CssColor::first()) {
+        if (! CssColor::first()) {
 
             CssColor::create([
-                'color' => "cs-slate-50"
+                'color' => 'cs-slate-50',
             ]);
 
             CssColor::create([
-                'color' => "cs-slate-100"
+                'color' => 'cs-slate-100',
             ]);
 
             CssColor::create([
-                'color' => "cs-slate-300"
+                'color' => 'cs-slate-300',
             ]);
 
             CssColor::create([
-                'color' => "cs-slate-600"
+                'color' => 'cs-slate-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-slate-700"
+                'color' => 'cs-slate-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-slate-800"
+                'color' => 'cs-slate-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-slate-900"
+                'color' => 'cs-slate-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-slate-950"
+                'color' => 'cs-slate-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-gray-500"
+                'color' => 'cs-gray-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-gray-700"
+                'color' => 'cs-gray-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-gray-900"
+                'color' => 'cs-gray-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-gray-950"
+                'color' => 'cs-gray-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-zinc-500"
+                'color' => 'cs-zinc-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-zinc-800"
+                'color' => 'cs-zinc-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-zinc-900"
+                'color' => 'cs-zinc-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-zinc-950"
+                'color' => 'cs-zinc-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-red-200"
+                'color' => 'cs-red-200',
             ]);
 
             CssColor::create([
-                'color' => "cs-red-300"
+                'color' => 'cs-red-300',
             ]);
 
             CssColor::create([
-                'color' => "cs-red-400"
+                'color' => 'cs-red-400',
             ]);
 
             CssColor::create([
-                'color' => "cs-red-500"
+                'color' => 'cs-red-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-red-600"
+                'color' => 'cs-red-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-red-700"
+                'color' => 'cs-red-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-red-800"
+                'color' => 'cs-red-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-red-900"
+                'color' => 'cs-red-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-red-950"
+                'color' => 'cs-red-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-orange-200"
+                'color' => 'cs-orange-200',
             ]);
 
             CssColor::create([
-                'color' => "cs-orange-300"
+                'color' => 'cs-orange-300',
             ]);
 
             CssColor::create([
-                'color' => "cs-orange-400"
+                'color' => 'cs-orange-400',
             ]);
 
             CssColor::create([
-                'color' => "cs-orange-500"
+                'color' => 'cs-orange-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-orange-600"
+                'color' => 'cs-orange-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-orange-700"
+                'color' => 'cs-orange-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-orange-800"
+                'color' => 'cs-orange-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-orange-900"
+                'color' => 'cs-orange-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-orange-950"
+                'color' => 'cs-orange-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-amber-200"
+                'color' => 'cs-amber-200',
             ]);
 
             CssColor::create([
-                'color' => "cs-amber-300"
+                'color' => 'cs-amber-300',
             ]);
 
             CssColor::create([
-                'color' => "cs-amber-400"
+                'color' => 'cs-amber-400',
             ]);
 
             CssColor::create([
-                'color' => "cs-amber-500"
+                'color' => 'cs-amber-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-amber-600"
+                'color' => 'cs-amber-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-amber-700"
+                'color' => 'cs-amber-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-amber-800"
+                'color' => 'cs-amber-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-amber-900"
+                'color' => 'cs-amber-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-amber-950"
+                'color' => 'cs-amber-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-yellow-200"
+                'color' => 'cs-yellow-200',
             ]);
 
             CssColor::create([
-                'color' => "cs-yellow-300"
+                'color' => 'cs-yellow-300',
             ]);
 
             CssColor::create([
-                'color' => "cs-yellow-400"
+                'color' => 'cs-yellow-400',
             ]);
 
             CssColor::create([
-                'color' => "cs-yellow-500"
+                'color' => 'cs-yellow-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-yellow-600"
+                'color' => 'cs-yellow-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-yellow-700"
+                'color' => 'cs-yellow-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-yellow-800"
+                'color' => 'cs-yellow-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-yellow-900"
+                'color' => 'cs-yellow-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-yellow-950"
+                'color' => 'cs-yellow-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-lime-200"
+                'color' => 'cs-lime-200',
             ]);
 
             CssColor::create([
-                'color' => "cs-lime-300"
+                'color' => 'cs-lime-300',
             ]);
 
             CssColor::create([
-                'color' => "cs-lime-400"
+                'color' => 'cs-lime-400',
             ]);
 
             CssColor::create([
-                'color' => "cs-lime-500"
+                'color' => 'cs-lime-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-lime-600"
+                'color' => 'cs-lime-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-lime-700"
+                'color' => 'cs-lime-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-lime-800"
+                'color' => 'cs-lime-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-lime-900"
+                'color' => 'cs-lime-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-lime-950"
+                'color' => 'cs-lime-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-green-200"
+                'color' => 'cs-green-200',
             ]);
 
             CssColor::create([
-                'color' => "cs-green-300"
+                'color' => 'cs-green-300',
             ]);
 
             CssColor::create([
-                'color' => "cs-green-400"
+                'color' => 'cs-green-400',
             ]);
 
             CssColor::create([
-                'color' => "cs-green-500"
+                'color' => 'cs-green-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-green-600"
+                'color' => 'cs-green-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-green-700"
+                'color' => 'cs-green-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-green-800"
+                'color' => 'cs-green-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-green-900"
+                'color' => 'cs-green-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-green-950"
+                'color' => 'cs-green-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-emerald-200"
+                'color' => 'cs-emerald-200',
             ]);
 
             CssColor::create([
-                'color' => "cs-emerald-300"
+                'color' => 'cs-emerald-300',
             ]);
 
             CssColor::create([
-                'color' => "cs-emerald-400"
+                'color' => 'cs-emerald-400',
             ]);
 
             CssColor::create([
-                'color' => "cs-emerald-500"
+                'color' => 'cs-emerald-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-emerald-600"
+                'color' => 'cs-emerald-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-emerald-700"
+                'color' => 'cs-emerald-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-emerald-800"
+                'color' => 'cs-emerald-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-emerald-900"
+                'color' => 'cs-emerald-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-emerald-950"
+                'color' => 'cs-emerald-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-cyan-200"
+                'color' => 'cs-cyan-200',
             ]);
 
             CssColor::create([
-                'color' => "cs-cyan-300"
+                'color' => 'cs-cyan-300',
             ]);
 
             CssColor::create([
-                'color' => "cs-cyan-400"
+                'color' => 'cs-cyan-400',
             ]);
 
             CssColor::create([
-                'color' => "cs-cyan-500"
+                'color' => 'cs-cyan-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-cyan-600"
+                'color' => 'cs-cyan-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-cyan-700"
+                'color' => 'cs-cyan-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-cyan-800"
+                'color' => 'cs-cyan-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-cyan-900"
+                'color' => 'cs-cyan-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-cyan-950"
+                'color' => 'cs-cyan-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-sky-200"
+                'color' => 'cs-sky-200',
             ]);
 
             CssColor::create([
-                'color' => "cs-sky-300"
+                'color' => 'cs-sky-300',
             ]);
 
             CssColor::create([
-                'color' => "cs-sky-400"
+                'color' => 'cs-sky-400',
             ]);
 
             CssColor::create([
-                'color' => "cs-sky-500"
+                'color' => 'cs-sky-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-sky-600"
+                'color' => 'cs-sky-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-sky-700"
+                'color' => 'cs-sky-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-sky-800"
+                'color' => 'cs-sky-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-sky-900"
+                'color' => 'cs-sky-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-sky-950"
+                'color' => 'cs-sky-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-blue-200"
+                'color' => 'cs-blue-200',
             ]);
 
             CssColor::create([
-                'color' => "cs-blue-300"
+                'color' => 'cs-blue-300',
             ]);
 
             CssColor::create([
-                'color' => "cs-blue-400"
+                'color' => 'cs-blue-400',
             ]);
 
             CssColor::create([
-                'color' => "cs-blue-500"
+                'color' => 'cs-blue-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-blue-600"
+                'color' => 'cs-blue-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-blue-700"
+                'color' => 'cs-blue-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-blue-800"
+                'color' => 'cs-blue-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-blue-900"
+                'color' => 'cs-blue-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-blue-950"
+                'color' => 'cs-blue-950',
             ]);
 
             CssColor::create([
-                'color' => "cs-indigo-400"
+                'color' => 'cs-indigo-400',
             ]);
 
             CssColor::create([
-                'color' => "cs-indigo-500"
+                'color' => 'cs-indigo-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-indigo-600"
+                'color' => 'cs-indigo-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-indigo-700"
+                'color' => 'cs-indigo-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-indigo-800"
+                'color' => 'cs-indigo-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-indigo-900"
+                'color' => 'cs-indigo-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-rose-200"
+                'color' => 'cs-rose-200',
             ]);
 
             CssColor::create([
-                'color' => "cs-rose-300"
+                'color' => 'cs-rose-300',
             ]);
 
             CssColor::create([
-                'color' => "cs-rose-400"
+                'color' => 'cs-rose-400',
             ]);
 
             CssColor::create([
-                'color' => "cs-rose-500"
+                'color' => 'cs-rose-500',
             ]);
 
             CssColor::create([
-                'color' => "cs-rose-600"
+                'color' => 'cs-rose-600',
             ]);
 
             CssColor::create([
-                'color' => "cs-rose-700"
+                'color' => 'cs-rose-700',
             ]);
 
             CssColor::create([
-                'color' => "cs-rose-800"
+                'color' => 'cs-rose-800',
             ]);
 
             CssColor::create([
-                'color' => "cs-rose-900"
+                'color' => 'cs-rose-900',
             ]);
 
             CssColor::create([
-                'color' => "cs-rose-950"
+                'color' => 'cs-rose-950',
             ]);
 
         }

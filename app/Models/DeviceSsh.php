@@ -11,7 +11,7 @@ class DeviceSsh extends Model
         'device_id',
         'username',
         'password',
-        'port'
+        'port',
     ];
 
     public function device(): BelongsTo

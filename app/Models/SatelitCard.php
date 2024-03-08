@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -11,7 +10,7 @@ class SatelitCard extends Model
     protected $fillable = [
         'name',
         'satelit_card_vendor_id',
-        'status'
+        'status',
     ];
 
     public function vendor(): BelongsTo

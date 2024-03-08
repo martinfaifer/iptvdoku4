@@ -2,19 +2,19 @@
 
 namespace App\Livewire\Iptv\Channels\H264;
 
-use App\Models\Device;
-use App\Models\Channel;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use Illuminate\Support\Collection;
-use App\Models\ChannelQualityWithIp;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\UpdateH264ChannelForm;
+use App\Models\Channel;
+use App\Models\ChannelQualityWithIp;
+use App\Models\Device;
 use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class H264Channel extends Component
 {
-    use NotificationTrait, CheckIfChannelIsInIptvDohledTrait;
+    use CheckIfChannelIsInIptvDohledTrait, NotificationTrait;
 
     public UpdateH264ChannelForm $form;
 
@@ -25,24 +25,24 @@ class H264Channel extends Component
     public array $h264 = [];
 
     public Collection $devices;
+
     public Collection $backupDevices;
 
     public bool $updateModal = false;
 
     public $quality;
 
-
     public function mount()
     {
-        $this->devices = Device::get()->filter(function($device) {
-            if(is_array($device->has_channels)) {
-                    return in_array("h264:".$this->channel->id, $device->has_channels);
+        $this->devices = Device::get()->filter(function ($device) {
+            if (is_array($device->has_channels)) {
+                return in_array('h264:'.$this->channel->id, $device->has_channels);
             }
         });
 
-        $this->backupDevices = Device::get()->filter(function($device) {
-            if(is_array($device->has_channels)) {
-                    return in_array("h264:".$this->channel->id.":backup", $device->has_channels);
+        $this->backupDevices = Device::get()->filter(function ($device) {
+            if (is_array($device->has_channels)) {
+                return in_array('h264:'.$this->channel->id.':backup', $device->has_channels);
             }
         });
     }
@@ -58,8 +58,9 @@ class H264Channel extends Component
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_h264.' . $this->channel->id);
-        return $this->success_alert("Změněno");
+        $this->dispatch('update_h264.'.$this->channel->id);
+
+        return $this->success_alert('Změněno');
     }
 
     public function closeModal(): void
@@ -71,15 +72,16 @@ class H264Channel extends Component
     public function destroy(ChannelQualityWithIp $channelQualityWithIp)
     {
         $channelQualityWithIp->delete();
-        $this->dispatch('update_h264.' . $this->channel->id);
-        return $this->success_alert("Odebráno");
+        $this->dispatch('update_h264.'.$this->channel->id);
+
+        return $this->success_alert('Odebráno');
     }
 
     #[On('update_h264.{channel.id}')]
     public function render()
     {
         $this->h264 = [];
-        if (!is_null($this->channel->h264)) {
+        if (! is_null($this->channel->h264)) {
             foreach ($this->channel->h264->ips as $ip) {
                 $this->h264[] = [
                     'id' => $ip->id,
@@ -87,14 +89,14 @@ class H264Channel extends Component
                     'quality' => [
                         'id' => $ip->channelQuality->id,
                         'name' => $ip->channelQuality->name,
-                        'bitrate' => $ip->channelQuality->bitrate
-                    ]
+                        'bitrate' => $ip->channelQuality->bitrate,
+                    ],
                 ];
             }
         }
 
         return view('livewire.iptv.channels.h264.h264-channel', [
-            'h264' => $this->h264
+            'h264' => $this->h264,
         ]);
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Tag;
+use App\Actions\Devices\CheckIfGpuWorkingAction;
+use App\Actions\Devices\GetNimbleDataAction;
+use App\Events\BroadcastAlertEvent;
 use App\Models\Device;
+use App\Models\Tag;
 use App\Models\TagOnItem;
 use Illuminate\Console\Command;
-use App\Events\BroadcastAlertEvent;
-use App\Actions\Devices\GetNimbleDataAction;
-use App\Actions\Devices\CheckIfGpuWorkingAction;
 
 class TagActionsCommand extends Command
 {
@@ -44,7 +44,6 @@ class TagActionsCommand extends Command
         // nimble actions
         // get all devices on nimble api and bound ids
         (new GetNimbleDataAction())();
-
 
         BroadcastAlertEvent::dispatch();
     }

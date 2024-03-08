@@ -3,9 +3,9 @@
 namespace App\Livewire\Iptv\Devices;
 
 use App\Models\Device;
-use Livewire\Component;
-use Livewire\Attributes\On;
 use App\Traits\Channels\GetChannelBelongsToDeviceTrait;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class DeviceChannelsComponent extends Component
 {
@@ -18,9 +18,10 @@ class DeviceChannelsComponent extends Component
         $this->device = $device;
     }
 
-    public function get_channel($channelWithType): array | null
+    public function get_channel($channelWithType): ?array
     {
-        $explodedChannelWithType = explode(":", $channelWithType);
+        $explodedChannelWithType = explode(':', $channelWithType);
+
         return $this->channel(
             channelType: $explodedChannelWithType[0],
             channel_id: $explodedChannelWithType[1],

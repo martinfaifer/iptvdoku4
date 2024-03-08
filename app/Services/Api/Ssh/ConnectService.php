@@ -6,7 +6,6 @@ use phpseclib3\Net\SSH2;
 
 class ConnectService
 {
-
     public $ssh;
 
     public function __construct(public string $ip, public string $username, public string $password)
@@ -19,7 +18,7 @@ class ConnectService
         try {
             $this->ssh = new SSH2($this->ip);
 
-            if (!$this->ssh->login($this->username, $this->password)) {
+            if (! $this->ssh->login($this->username, $this->password)) {
                 return false;
             }
 
@@ -36,7 +35,8 @@ class ConnectService
             return false;
         }
 
-        $this->ssh->write($command . PHP_EOL);
+        $this->ssh->write($command.PHP_EOL);
+
         return $this->ssh->read();
     }
 }

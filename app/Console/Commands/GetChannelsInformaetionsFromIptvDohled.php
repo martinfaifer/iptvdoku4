@@ -2,11 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
+use App\Jobs\GetChannelsInformaetionsFromIptvDohledJob;
 use App\Models\ChannelMulticast;
 use App\Models\ChannelQualityWithIp;
-use App\Services\Api\IptvDohled\ConnectService;
-use App\Jobs\GetChannelsInformaetionsFromIptvDohledJob;
+use Illuminate\Console\Command;
 
 class GetChannelsInformaetionsFromIptvDohled extends Command
 {

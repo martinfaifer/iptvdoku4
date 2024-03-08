@@ -3,13 +3,8 @@
 namespace App\Livewire\Iptv\Channels;
 
 use App\Models\Channel;
-use Livewire\Component;
-use App\Models\ChannelType;
-use Livewire\Attributes\On;
-use App\Models\ChannelCategory;
-use Livewire\Attributes\Reactive;
-use App\Livewire\Forms\UpdateIptvChannel;
 use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 class IptvChannel extends Component
 {

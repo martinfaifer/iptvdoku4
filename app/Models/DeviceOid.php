@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -12,7 +11,7 @@ class DeviceOid extends Model
         'device_id',
         'oid',
         'value',
-        'is_chart'
+        'is_chart',
     ];
 
     public function device(): BelongsTo

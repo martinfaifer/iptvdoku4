@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use App\Observers\ChannelObserver;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[ObservedBy(ChannelObserver::class)]
 class Channel extends Model
@@ -16,19 +16,19 @@ class Channel extends Model
     const QUALITIES = [
         [
             'id' => 1,
-            'name' => "UHD"
+            'name' => 'UHD',
         ],
         [
             'id' => 2,
-            'name' => "FullHD"
+            'name' => 'FullHD',
         ],
         [
             'id' => 3,
-            'name' => "HD"
+            'name' => 'HD',
         ],
         [
             'id' => 4,
-            'name' => "SD"
+            'name' => 'SD',
         ],
     ];
 
@@ -43,7 +43,7 @@ class Channel extends Model
         'nangu_chunk_store_id',
         'nangu_channel_code',
         'geniustv_channel_packages_id',
-        'epg_id'
+        'epg_id',
     ];
 
     protected $casts = [
@@ -86,6 +86,6 @@ class Channel extends Model
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $query->where('name', "like", "%" . $search . "%");
+        return $query->where('name', 'like', '%'.$search.'%');
     }
 }

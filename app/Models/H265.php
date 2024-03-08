@@ -6,7 +6,6 @@ use App\Observers\H265Observer;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[ObservedBy(H265Observer::class)]
@@ -15,7 +14,7 @@ class H265 extends Model
     protected $fillable = [
         'channel_id',
         'devices_id',
-        'status'
+        'status',
     ];
 
     public function channel(): BelongsTo

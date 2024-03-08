@@ -3,8 +3,8 @@
 namespace App\Observers;
 
 use App\Jobs\LogJob;
-use App\Models\Loger;
 use App\Models\ChannelMulticast;
+use App\Models\Loger;
 use Illuminate\Support\Facades\Auth;
 
 class MulticastChannelObserver
@@ -23,7 +23,7 @@ class MulticastChannelObserver
                 'channel_source_id' => $multicast->channel_source_id,
                 'is_backup' => $multicast->is_backup,
                 'devices_id' => $multicast->devices_id,
-                'status' => $multicast->status
+                'status' => $multicast->status,
             ])
         );
     }
@@ -42,7 +42,7 @@ class MulticastChannelObserver
                 'channel_source_id' => $multicast->channel_source_id,
                 'is_backup' => $multicast->is_backup,
                 'devices_id' => $multicast->devices_id,
-                'status' => $multicast->status
+                'status' => $multicast->status,
             ])
         );
     }

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -15,7 +14,7 @@ class Note extends Model
         'device_id',
         'satelit_card_id',
         'note',
-        'user'
+        'user',
     ];
 
     public function channel(): BelongsTo

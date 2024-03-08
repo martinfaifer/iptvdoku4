@@ -9,7 +9,7 @@ class DeviceCategory extends Model
 {
     protected $fillable = [
         'name',
-        'icon'
+        'icon',
     ];
 
     public function devices(): HasMany

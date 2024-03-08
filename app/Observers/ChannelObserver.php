@@ -3,11 +3,10 @@
 namespace App\Observers;
 
 use App\Jobs\LogJob;
-use App\Models\Loger;
 use App\Models\Channel;
 use App\Models\Contact;
+use App\Models\Loger;
 use Illuminate\Support\Facades\Auth;
-use App\Services\Logger\LoggerService;
 
 class ChannelObserver
 {
@@ -28,7 +27,7 @@ class ChannelObserver
                 'description' => $channel->description,
                 'nangu_chunk_store_id' => $channel->nangu_chunk_store_id,
                 'nangu_channel_code' => $channel->nangu_channel_code,
-                'geniustv_channel_packages_id' => $channel->geniustv_channel_packages_id
+                'geniustv_channel_packages_id' => $channel->geniustv_channel_packages_id,
             ])
         );
     }
@@ -50,7 +49,7 @@ class ChannelObserver
                 'description' => $channel->description,
                 'nangu_chunk_store_id' => $channel->nangu_chunk_store_id,
                 'nangu_channel_code' => $channel->nangu_channel_code,
-                'geniustv_channel_packages_id' => $channel->geniustv_channel_packages_id
+                'geniustv_channel_packages_id' => $channel->geniustv_channel_packages_id,
             ])
         );
     }
@@ -67,6 +66,6 @@ class ChannelObserver
             ])
         );
         // delete channel contacts
-        Contact::where('type', "channel")->where('item_id', $channel->id)->delete();
+        Contact::where('type', 'channel')->where('item_id', $channel->id)->delete();
     }
 }

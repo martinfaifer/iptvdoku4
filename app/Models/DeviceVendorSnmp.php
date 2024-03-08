@@ -14,6 +14,6 @@ class DeviceVendorSnmp extends Model
         'type',
         'interface',
         'interface_number',
-        'can_chart'
+        'can_chart',
     ];
 }

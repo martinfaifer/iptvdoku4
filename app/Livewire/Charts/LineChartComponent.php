@@ -14,9 +14,9 @@ class LineChartComponent extends Component
                 [
                     'label' => 'bitrate',
                     'data' => null,
-                ]
-            ]
-        ]
+                ],
+            ],
+        ],
     ];
 
     public function mount(array $xaxis, array $yaxis, string $label)

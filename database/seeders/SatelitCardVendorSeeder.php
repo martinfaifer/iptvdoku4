@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\SatelitCardVendor;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SatelitCardVendorSeeder extends Seeder
@@ -13,30 +12,30 @@ class SatelitCardVendorSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!SatelitCardVendor::first()) {
+        if (! SatelitCardVendor::first()) {
 
             SatelitCardVendor::create([
-                'name' => "Skylink"
+                'name' => 'Skylink',
             ]);
 
             SatelitCardVendor::create([
-                'name' => "UPC direct"
+                'name' => 'UPC direct',
             ]);
 
             SatelitCardVendor::create([
-                'name' => "Irdeto Premium"
+                'name' => 'Irdeto Premium',
             ]);
 
             SatelitCardVendor::create([
-                'name' => "Discovery/Eurosport"
+                'name' => 'Discovery/Eurosport',
             ]);
 
             SatelitCardVendor::create([
-                'name' => "Viacom CBS"
+                'name' => 'Viacom CBS',
             ]);
 
             SatelitCardVendor::create([
-                'name' => "Antik Telecom"
+                'name' => 'Antik Telecom',
             ]);
         }
     }

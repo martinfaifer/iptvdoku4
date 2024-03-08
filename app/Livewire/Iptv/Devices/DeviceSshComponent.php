@@ -2,15 +2,14 @@
 
 namespace App\Livewire\Iptv\Devices;
 
-use App\Models\Tag;
 use App\Models\Device;
-use Livewire\Component;
 use App\Models\DeviceSsh;
+use App\Models\Tag;
 use App\Models\TagOnItem;
+use App\Traits\Livewire\NotificationTrait;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
-use Illuminate\Support\Collection;
-use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 // #[On('echo:check_if_need_ssh.{device.id},BroadcastCheckIfDeviceNeedSshEvent')]
 class DeviceSshComponent extends Component
@@ -27,15 +26,15 @@ class DeviceSshComponent extends Component
 
     public $deviceSsh;
 
-    #[Validate('required', message: "Vyplňte uživatelské jméno")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:100', message: "Maximální počet znaků je :max")]
-    public string $username = "";
+    #[Validate('required', message: 'Vyplňte uživatelské jméno')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:100', message: 'Maximální počet znaků je :max')]
+    public string $username = '';
 
-    #[Validate('required', message: "Vyplňte heslo jméno")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:100', message: "Maximální počet znaků je :max")]
-    public string $password = "";
+    #[Validate('required', message: 'Vyplňte heslo jméno')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:100', message: 'Maximální počet znaků je :max')]
+    public string $password = '';
 
     public function mount(Device $device)
     {
@@ -43,7 +42,6 @@ class DeviceSshComponent extends Component
         $this->deviceSsh = $device->ssh;
         $this->checkIfNeedSsh();
     }
-
 
     #[On('check_if_need_ssh.{device.id}')]
     public function checkIfNeedSsh()
@@ -53,8 +51,7 @@ class DeviceSshComponent extends Component
         // tag action ssh_login id 4
         $tags = Tag::where('action', 1)->orwhere('action', 4)->get();
         foreach ($tags as $tag) {
-            if (TagOnItem
-                ::where('type', "device")
+            if (TagOnItem::where('type', 'device')
                 ->where('item_id', $this->device->id)
                 ->where('tag_id', $tag->id)->first()
             ) {
@@ -78,13 +75,15 @@ class DeviceSshComponent extends Component
         $this->closeDialog();
 
         $this->dispatch('refresh_device_ssh');
-        return $this->success_alert("Přidáno");
+
+        return $this->success_alert('Přidáno');
     }
 
     public function openUpdateModal()
     {
         $this->username = $this->deviceSsh->username;
         $this->password = $this->deviceSsh->password;
+
         return $this->updateModal = true;
     }
 
@@ -100,7 +99,8 @@ class DeviceSshComponent extends Component
         $this->closeDialog();
 
         $this->dispatch('refresh_device_ssh');
-        return $this->success_alert("Upraveno");
+
+        return $this->success_alert('Upraveno');
     }
 
     public function closeDialog()
@@ -108,6 +108,7 @@ class DeviceSshComponent extends Component
         $this->reset('username', 'password');
         $this->storeModal = false;
         $this->updateModal = false;
+
         return $this->resetErrorBag();
     }
 
@@ -116,7 +117,8 @@ class DeviceSshComponent extends Component
         $this->deviceSsh->delete();
 
         $this->dispatch('refresh_device_ssh');
-        return $this->success_alert("Odebráno");
+
+        return $this->success_alert('Odebráno');
     }
 
     #[On('echo:refresh_device_ssh.{device.id},BroadcastCheckIfDeviceNeedSshEvent')]

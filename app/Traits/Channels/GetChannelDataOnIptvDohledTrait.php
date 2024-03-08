@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 
 trait GetChannelDataOnIptvDohledTrait
 {
-    public function channel_on_dohled($ip): null|array
+    public function channel_on_dohled($ip): ?array
     {
         return Cache::get($ip);
     }

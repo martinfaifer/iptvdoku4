@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\GeniusTvChannelPackage;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class GeniusTvChannelPackageSeeder extends Seeder
@@ -13,46 +12,46 @@ class GeniusTvChannelPackageSeeder extends Seeder
      */
     public function run(): void
     {
-        if(!GeniusTvChannelPackage::first()) {
+        if (! GeniusTvChannelPackage::first()) {
 
             GeniusTvChannelPackage::create([
-                'name' => "G.TV Základ"
+                'name' => 'G.TV Základ',
             ]);
 
             GeniusTvChannelPackage::create([
-                'name' => "G.TV Standard"
+                'name' => 'G.TV Standard',
             ]);
 
             GeniusTvChannelPackage::create([
-                'name' => "G.TV Komplet"
+                'name' => 'G.TV Komplet',
             ]);
 
             GeniusTvChannelPackage::create([
-                'name' => "G.TV Plus"
+                'name' => 'G.TV Plus',
             ]);
 
             GeniusTvChannelPackage::create([
-                'name' => "G.TV Filmbox"
+                'name' => 'G.TV Filmbox',
             ]);
 
             GeniusTvChannelPackage::create([
-                'name' => "G.TV HBO"
+                'name' => 'G.TV HBO',
             ]);
 
             GeniusTvChannelPackage::create([
-                'name' => "G.TV Cinemax"
+                'name' => 'G.TV Cinemax',
             ]);
 
             GeniusTvChannelPackage::create([
-                'name' => "G.TV HBO MAX"
+                'name' => 'G.TV HBO MAX',
             ]);
 
             GeniusTvChannelPackage::create([
-                'name' => "G.TV 4K"
+                'name' => 'G.TV 4K',
             ]);
 
             GeniusTvChannelPackage::create([
-                'name' => "G.TV Sport"
+                'name' => 'G.TV Sport',
             ]);
 
         }

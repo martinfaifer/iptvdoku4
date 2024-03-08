@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\ChannelCategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ChannelCategorySeeder extends Seeder
@@ -13,69 +12,69 @@ class ChannelCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        if(!ChannelCategory::first()) {
+        if (! ChannelCategory::first()) {
             ChannelCategory::create([
-                'name' => "Dětský"
+                'name' => 'Dětský',
             ]);
 
             ChannelCategory::create([
-                'name' => "Dokumentární"
+                'name' => 'Dokumentární',
             ]);
 
             ChannelCategory::create([
-                'name' => "Erotický"
+                'name' => 'Erotický',
             ]);
 
             ChannelCategory::create([
-                'name' => "Filmový"
+                'name' => 'Filmový',
             ]);
 
             ChannelCategory::create([
-                'name' => "Hudební"
+                'name' => 'Hudební',
             ]);
 
             ChannelCategory::create([
-                'name' => "Interaktivní"
+                'name' => 'Interaktivní',
             ]);
 
             ChannelCategory::create([
-                'name' => "Internetová"
+                'name' => 'Internetová',
             ]);
 
             ChannelCategory::create([
-                'name' => "Kultura"
+                'name' => 'Kultura',
             ]);
 
             ChannelCategory::create([
-                'name' => "Móda"
+                'name' => 'Móda',
             ]);
 
             ChannelCategory::create([
-                'name' => "Regionální"
+                'name' => 'Regionální',
             ]);
 
             ChannelCategory::create([
-                'name' => "Smíšený"
+                'name' => 'Smíšený',
             ]);
 
             ChannelCategory::create([
-                'name' => "Soukromá"
+                'name' => 'Soukromá',
             ]);
 
             ChannelCategory::create([
-                'name' => "Sportovní"
+                'name' => 'Sportovní',
             ]);
 
             ChannelCategory::create([
-                'name' => "Veřejnoprávní"
+                'name' => 'Veřejnoprávní',
             ]);
 
             ChannelCategory::create([
-                'name' => "Zábava"
+                'name' => 'Zábava',
             ]);
 
             ChannelCategory::create([
-                'name' => "Zpravodajská"
+                'name' => 'Zpravodajská',
             ]);
         }
     }

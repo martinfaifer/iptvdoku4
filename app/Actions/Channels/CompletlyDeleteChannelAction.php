@@ -2,10 +2,10 @@
 
 namespace App\Actions\Channels;
 
+use App\Actions\Devices\RemoveChannelFromDeviceAction;
 use App\Models\Channel;
 use App\Models\ChannelMulticast;
 use App\Models\ChannelQualityWithIp;
-use App\Actions\Devices\RemoveChannelFromDeviceAction;
 
 class CompletlyDeleteChannelAction
 {
@@ -18,7 +18,7 @@ class CompletlyDeleteChannelAction
     {
         try {
             // delete h264 & h265
-            if (!is_null($this->channel->h264)) {
+            if (! is_null($this->channel->h264)) {
                 ChannelQualityWithIp::where('h264_id', $this->channel->h264->id)->delete();
                 $this->channel->h264->delete();
                 // dispatch delete channel from device
@@ -34,7 +34,7 @@ class CompletlyDeleteChannelAction
                 ))();
             }
 
-            if (!is_null($this->channel->h265)) {
+            if (! is_null($this->channel->h265)) {
                 ChannelQualityWithIp::where('h265_id', $this->channel->h265->id)->delete();
                 $this->channel->h265->delete();
                 // dispatch delete channel from device
@@ -50,7 +50,7 @@ class CompletlyDeleteChannelAction
                 ))();
             }
 
-            if (!$this->channel->multicasts->isEmpty()) {
+            if (! $this->channel->multicasts->isEmpty()) {
                 ChannelMulticast::where('channel_id', $this->channel->id)->delete();
                 // dispatch delete channel from device
                 (new RemoveChannelFromDeviceAction(
@@ -66,6 +66,7 @@ class CompletlyDeleteChannelAction
             }
 
             $this->channel->delete();
+
             return true;
         } catch (\Throwable $th) {
             return false;

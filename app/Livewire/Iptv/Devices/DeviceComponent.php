@@ -3,9 +3,9 @@
 namespace App\Livewire\Iptv\Devices;
 
 use App\Models\Device;
-use Livewire\Component;
-use Illuminate\Support\Facades\Cache;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Component;
 
 class DeviceComponent extends Component
 {
@@ -13,9 +13,9 @@ class DeviceComponent extends Component
 
     public ?Device $device;
 
-    public null|array $nmsCahedData = null;
+    public ?array $nmsCahedData = null;
 
-    public null|array $nimbleCachedData = null;
+    public ?array $nimbleCachedData = null;
 
     public function mount()
     {
@@ -25,8 +25,8 @@ class DeviceComponent extends Component
     public function render()
     {
         if (isset($this->device)) {
-            $this->nmsCahedData = Cache::get('nms_' . $this->device->id);
-            $this->nimbleCachedData = Cache::get('nimble_' . $this->device->id . "_incoming_streams");
+            $this->nmsCahedData = Cache::get('nms_'.$this->device->id);
+            $this->nimbleCachedData = Cache::get('nimble_'.$this->device->id.'_incoming_streams');
         }
 
         return view('livewire.iptv.devices.device-component');

@@ -2,22 +2,22 @@
 
 namespace App\Services\Api\Epg;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class EpgConnectService
 {
-    public string $url = "";
+    public string $url = '';
 
     public function __construct()
     {
         $this->url = str_replace('%key%', config('services.api.1.epg.key'), config('services.api.1.epg.url'));
     }
 
-    public function connect(string|null $query = null, string $cacheKey = 'channelEpgIds')
+    public function connect(?string $query = null, string $cacheKey = 'channelEpgIds')
     {
-        if (!is_null($query)) {
-            $this->url = $this->url . $query;
+        if (! is_null($query)) {
+            $this->url = $this->url.$query;
         }
 
         $httpResponse = Http::get($this->url);
@@ -42,7 +42,7 @@ class EpgConnectService
 
         $newArr = json_decode($con, true);
 
-        if (!$isShifted) {
+        if (! $isShifted) {
             return $newArr;
         }
 
@@ -52,20 +52,20 @@ class EpgConnectService
     public function get_epg_name_by_id($epgId)
     {
         if (is_null($epgId)) {
-            return "";
+            return '';
         }
         $epgs = Cache::get('channelEpgIds');
 
         if (is_null($epgs)) {
-            return "";
+            return '';
         }
 
         foreach ($epgs as $epg) {
             if ($epgId == $epg['id']) {
-                return ($epg['name']);
+                return $epg['name'];
             }
         }
 
-        return "";
+        return '';
     }
 }

@@ -5,8 +5,8 @@ namespace App\Models;
 use App\Observers\H264Observer;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[ObservedBy(H264Observer::class)]
 class H264 extends Model
@@ -14,7 +14,7 @@ class H264 extends Model
     protected $fillable = [
         'channel_id',
         'devices_id',
-        'status'
+        'status',
     ];
 
     public function channel(): BelongsTo

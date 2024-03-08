@@ -12,7 +12,7 @@ class Spotlight
 {
     public function search(Request $request)
     {
-        if (!Auth::user()) {
+        if (! Auth::user()) {
             return [];
         }
 
@@ -26,11 +26,11 @@ class Spotlight
     {
         return Device::search($search)->get()->map(function (Device $device) {
             return [
-                'id' => 'device_' . $device->id,
+                'id' => 'device_'.$device->id,
                 'name' => $device->name,
-                'description' => "Zařízení",
+                'description' => 'Zařízení',
                 // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
-                'link' => "/devices/{$device->id}"
+                'link' => "/devices/{$device->id}",
             ];
         });
     }
@@ -39,11 +39,11 @@ class Spotlight
     {
         return Channel::search($search)->get()->map(function (Channel $channel) {
             return [
-                'id' => 'channel_' . $channel->id,
+                'id' => 'channel_'.$channel->id,
                 'name' => $channel->name,
-                'description' => "Kanál",
+                'description' => 'Kanál',
                 // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
-                'link' => "/channels/{$channel->id}/multicast"
+                'link' => "/channels/{$channel->id}/multicast",
             ];
         });
     }
@@ -52,11 +52,11 @@ class Spotlight
     {
         return ChannelMulticast::search($search)->with('channel')->get()->map(function (ChannelMulticast $channelMulticast) {
             return [
-                'id' => 'multicast_' . $channelMulticast->id,
+                'id' => 'multicast_'.$channelMulticast->id,
                 'name' => $channelMulticast->channel->name,
-                'description' => "Kanál",
+                'description' => 'Kanál',
                 // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
-                'link' => "/channels/{$channelMulticast->channel_id}/multicast"
+                'link' => "/channels/{$channelMulticast->channel_id}/multicast",
             ];
         });
     }

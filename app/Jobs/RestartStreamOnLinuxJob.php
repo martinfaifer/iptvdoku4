@@ -2,12 +2,12 @@
 
 namespace App\Jobs;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
 use App\Services\Api\Ssh\ConnectService;
-use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class RestartStreamOnLinuxJob implements ShouldQueue
 {
@@ -33,6 +33,6 @@ class RestartStreamOnLinuxJob implements ShouldQueue
         ));
 
         // $connection->send_command('bash ' . $this->path);
-        dd($connection->send_command('bash ' . $this->path));
+        dd($connection->send_command('bash '.$this->path));
     }
 }

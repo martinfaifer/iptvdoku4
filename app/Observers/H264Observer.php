@@ -18,7 +18,7 @@ class H264Observer
             payload: json_encode([
                 'id' => $h264->id,
                 'devices_id' => $h264->device_id,
-                'status' => $h264->status
+                'status' => $h264->status,
             ])
         );
     }
@@ -32,7 +32,7 @@ class H264Observer
             payload: json_encode([
                 'id' => $h264->id,
                 'devices_id' => $h264->device_id,
-                'status' => $h264->status
+                'status' => $h264->status,
             ])
         );
     }
@@ -46,7 +46,7 @@ class H264Observer
             payload: json_encode([
                 'id' => $h264->id,
                 'devices_id' => $h264->device_id,
-                'status' => $h264->status
+                'status' => $h264->status,
             ])
         );
     }

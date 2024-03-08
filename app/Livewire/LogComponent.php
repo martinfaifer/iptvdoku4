@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class LogComponent extends Component
 {
-
     public $columnValue;
 
     public $column;
@@ -26,12 +25,14 @@ class LogComponent extends Component
     public function openModal($payload)
     {
         $this->selectedLogDetail = $payload;
+
         return $this->detailModal = true;
     }
 
     public function closeModal()
     {
         $this->selectedLogDetail = [];
+
         return $this->detailModal = false;
     }
 
