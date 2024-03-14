@@ -73,6 +73,8 @@
     }
 
     $satelits = App\Models\Device::where('device_category_id', App\Models\DeviceCategory::where('name', 'Satelity')->first()->id)->get();
+
+    $satelitCards = App\Models\SatelitCard::get();
 @endphp
 <div>
     <x-share.cards.base-card title="Šablona zařízení">
@@ -294,15 +296,24 @@
                                                             <div class="font-semibold">
                                                                 @if ($interfaceValueName == 'Vazba na satelit')
                                                                     @php
-                                                                        $satelitName = '';
                                                                         if (is_int($interfaceValue)) {
                                                                             $device = App\Models\Device::find($interfaceValue);
                                                                             if ($device) {
-                                                                                $satelitName = $device->name;
+                                                                                $interfaceValue = $device->name;
                                                                             }
                                                                         }
                                                                     @endphp
-                                                                    {{ $satelitName }}
+                                                                @endif
+
+                                                                @if ($interfaceValueName == 'Satelitní karta')
+                                                                    @php
+                                                                        if (is_int($interfaceValue)) {
+                                                                            $card = App\Models\SatelitCard::find($interfaceValue);
+                                                                            if ($card) {
+                                                                                $interfaceValue = $card->name;
+                                                                            }
+                                                                        }
+                                                                    @endphp
                                                                 @endif
                                                                 @if (!str_contains($interfaceValue, '%'))
                                                                     {{ $interfaceValue }}
@@ -452,6 +463,11 @@
 
                                 @if ($name == 'Vazba na satelit')
                                     <x-choices-offline label="{{ $name }}" :options="$satelits"
+                                        wire:model="updatedInterface.{{ $name }}" single searchable/>
+                                @endif
+
+                                @if ($name == 'Satelitní karta')
+                                    <x-choices-offline label="{{ $name }}" :options="$satelitCards"
                                         wire:model="updatedInterface.{{ $name }}" single searchable/>
                                 @endif
                             </div>

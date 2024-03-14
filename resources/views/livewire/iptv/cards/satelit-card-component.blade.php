@@ -24,7 +24,7 @@
                     @if ($satelitCard->status == 1)
                         <div class="bg-[#1EB15B] text-white text-xs my-auto ml-6 mt-9 rounded-md">
                             <span class="mx-3">
-                                užito
+                                použito
                             </span>
                         </div>
                     @endif
@@ -37,10 +37,11 @@
                     @endif
 
                     {{-- actions --}}
-                    {{-- <livewire:iptv.devices.update-device-component
-                        :device="$device"></livewire:iptv.devices.update-device-component>
-                    <livewire:iptv.devices.delete-device-component
-                        :device="$device"></livewire:iptv.devices.delete-device-component> --}}
+                    <livewire:iptv.cards.update-satelit-card-component
+                        :satelitCard="$satelitCard"></livewire:iptv.cards.update-satelit-card-component>
+
+                    <livewire:iptv.cards.delete-satelit-card-component
+                        :satelitCard="$satelitCard"></livewire:iptv.cards.delete-satelit-card-component>
                     {{-- end of actions --}}
                 </div>
             </div>
@@ -51,7 +52,7 @@
                     <div class="col-span-12">
                         <x-share.cards.base-card title="Informace o kartě">
                             <div class="flex flex-col gap-4 md:grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
-                                <div class="flex justify-between sm:col-span-4 sm:inline-flex">
+                                <div class="flex justify-between md:col-span-4 md:inline-flex">
                                     <p>
                                         <span class="font-normal">
                                             Distributor:
@@ -61,6 +62,20 @@
                                         </span>
                                     </p>
                                 </div>
+                                @if ($device != false)
+                                    <div class="col-span-12 md:col-span-4 flex">
+                                        <div>
+                                            <p>
+                                                <span class="font-normal">
+                                                    Zařízení:
+                                                </span>
+                                                <span class="ml-3">
+                                                    {{ $device->name }}
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </x-share.cards.base-card>
                     </div>
@@ -79,8 +94,6 @@
                     <div class="col-span-12 md:col-span-4 mb-4">
                         <livewire:notes.note-component column="satelit_card_id" :id="$satelitCard->id" />
                     </div>
-
-
                 </div>
             </div>
         @endif

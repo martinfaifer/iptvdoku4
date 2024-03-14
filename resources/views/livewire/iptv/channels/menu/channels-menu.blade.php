@@ -10,7 +10,7 @@
                 <a class="grid grid-cols-12">
                     <div class="col-span-2">
                         @if (!is_null($channel->logo))
-                            <img class="object-cover w-6 h-6" src="/storage/{{ str_replace('public/', '', $channel->logo) }}"
+                            <img class="object-contain w-6 h-6" src="/storage/{{ str_replace('public/', '', $channel->logo) }}"
                                 alt="" />
                         @endif
                     </div>

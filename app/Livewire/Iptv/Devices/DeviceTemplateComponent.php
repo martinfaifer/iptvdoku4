@@ -63,8 +63,8 @@ class DeviceTemplateComponent extends Component
             updatedInterfaceKey: $this->updatedInterfaceKey
         );
 
-        $this->success('Upraveno');
         $this->redirect('/devices/'.$this->device->id, true);
+        return $this->success('Upraveno');
     }
 
     public function closeDrawer()
@@ -72,14 +72,14 @@ class DeviceTemplateComponent extends Component
         $this->updatedInterface = [];
         $this->updatedInterfaceKey = '';
         $this->interfaceType = '';
-        $this->updateDrawer = false;
+        return $this->updateDrawer = false;
     }
 
     public function loadLog($oid)
     {
         $this->logs = (new DeviceSnmpEngine($this->device))->get_bulk($oid);
 
-        $this->logModal = true;
+        return $this->logModal = true;
     }
 
     public function restartInterface($oid)

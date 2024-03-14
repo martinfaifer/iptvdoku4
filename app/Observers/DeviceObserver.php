@@ -5,10 +5,11 @@ namespace App\Observers;
 use App\Jobs\LogJob;
 use App\Models\Alert;
 use App\Models\Chart;
-use App\Models\Contact;
-use App\Models\Device;
 use App\Models\Loger;
+use App\Models\Device;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SearchIfSatCardIsUsedInDeviceJob;
 
 class DeviceObserver
 {
@@ -64,6 +65,9 @@ class DeviceObserver
                 ])
             );
         }
+
+        // search for sat card
+        SearchIfSatCardIsUsedInDeviceJob::dispatch();
     }
 
     public function deleted(Device $device)
@@ -75,5 +79,7 @@ class DeviceObserver
         Alert::where('type', 'gpu_problem')->where('item_id', $device->id)->delete();
         // delete device contacts
         Contact::where('type', 'device')->where('item_id', $device->id)->delete();
+
+        SearchIfSatCardIsUsedInDeviceJob::dispatch();
     }
 }

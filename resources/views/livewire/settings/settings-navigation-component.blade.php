@@ -8,6 +8,14 @@
                 <x-heroicon-s-tag class="w-4 h-4"/>
                 Štítky
             </a></li>
+            <li @class([
+                'ml-1',
+                'rounded-lg',
+                'bg-sky-950' => request()->is('settings/users'),
+            ]) href="/settings/users" wire:navigate><a>
+                    <x-heroicon-o-user-group class="w-4 h-4"/>
+                    Uživatelé
+                </a></li>
         <li>
             <details open>
                 <summary class="font-semibold">

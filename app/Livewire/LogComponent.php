@@ -2,8 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Services\Logger\LoggerService;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use App\Services\Logger\LoggerService;
 
 class LogComponent extends Component
 {
@@ -19,7 +20,7 @@ class LogComponent extends Component
 
     public function mount()
     {
-        $this->logs = (new LoggerService())->show($this->column, columnValue: $this->columnValue);
+        $this->refreshLogs();
     }
 
     public function openModal($payload)
@@ -34,6 +35,12 @@ class LogComponent extends Component
         $this->selectedLogDetail = [];
 
         return $this->detailModal = false;
+    }
+
+    #[On('echo:refresh_logs_{column}_{columnValue},BroadcastLogEvent')]
+    public function refreshLogs()
+    {
+        return $this->logs = (new LoggerService())->show($this->column, columnValue: $this->columnValue);
     }
 
     public function render()

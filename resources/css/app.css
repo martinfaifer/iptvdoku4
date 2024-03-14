@@ -20,6 +20,27 @@
     @apply bg-[#132231] text-white;
 }
 
+.w-fit {
+    @apply !w-auto;
+}
+
+.vanilla-calendar {
+    /* @apply !bg-[#0c111b]; */
+    @apply bg-gradient-to-b from-slate-950/80 to-black/40 backdrop-blur-xl border-[1px] border-solid border-[#64748b] border-opacity-10 rounded-lg;
+}
+
+.EasyMDEContainer .CodeMirror {
+    @apply !border-[1px] !border-solid !border-[#64748b] !border-opacity-10;
+}
+
+.editor-toolbar {
+    @apply !border-[1px] !border-solid !border-[#64748b] !border-opacity-10;
+}
+
+.CodeMirror {
+    @apply !bg-[#0c111b] !text-white/80;
+}
+
 .modal {
     --tw-backdrop-blur: blur(4px);
     -webkit-backdrop-filter: var(--tw-backdrop-blur)

@@ -44,7 +44,7 @@
             <div class="grid grid-cols-12">
                 <div class="col-span-1 mt-4">
                     @if (!is_null($channel->logo))
-                        <img class="object-cover w-16 h-12" src="/storage/{{ str_replace('public/', '', $channel->logo) }}"
+                        <img class="object-contain w-16 h-12" src="/storage/{{ str_replace('public/', '', $channel->logo) }}"
                             alt="" />
                     @endif
                 </div>

@@ -16,28 +16,35 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/a6yh9ynf4jozp4fh5ifm4ge2jyxhqtpzbisgvawi52igqueb/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@uvarov.frontend/vanilla-calendar@2.7.0/build/vanilla-calendar.min.css"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@uvarov.frontend/vanilla-calendar@2.7.0/build/themes/light.min.css"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@uvarov.frontend/vanilla-calendar@2.7.0/build/themes/dark.min.css"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@uvarov.frontend/vanilla-calendar@2.7.0/build/vanilla-calendar.min.js" defer>
+    </script>
+
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-{{-- [#1E293B] --}}
-
-<body class="bg-[#06090e] min-h-screen">
-
+<body class="bg-[#000100] min-h-screen">
     <x-toast />
-
     @auth
         <x-spotlight search-text="Vyhledejte ... " no-results-text="Ops! Nenalezeno."
             class="justify-center bg-gradient-to-b from-[#111827]/50 to-transparent" shortcut="ctrl.space" />
-
         {{-- show alerts --}}
         <livewire:alert-component>
         @endauth
 
         <x-main full-width>
             @auth
-                <x-slot:sidebar class="bg-[#0A0F19]/80 border-r border-[#141b25] !w-[320px]">
+                <x-slot:sidebar class="bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] border-opacity-10 !w-[320px]">
                     <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
-                        <ul class="menu bg-[#0A0F19]/80 border-r border-[#0e151f] h-full fixed ml-2">
+                        <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
                             <li href="/channels" wire:navigate @class([
                                 'rounded-lg',
                                 'bg-[#1A1E2A]' => request()->is('channels') || request()->is('channels/*'),
@@ -63,11 +70,19 @@
                                     <x-heroicon-o-credit-card class="h-6 w-6 text-white/80" fill="none" />
                                 </a>
                             </li>
+                            <li href="/calendar" wire:navigate @class([
+                                'rounded-lg',
+                                'bg-[#1A1E2A]' => request()->is('calendar') || request()->is('calendar/*'),
+                            ])>
+                                <a>
+                                    <x-heroicon-o-calendar-days class="h-6 w-6 text-white/80" fill="none" />
+                                </a>
+                            </li>
                         </ul>
                     </x-menu>
                     {{-- main dynamic navigation --}}
-                    <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 !h-full ">
-                        <div class="overflow-y-auto">
+                    <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 fixed !h-full">
+                        <div class="overflow-y-scroll hover:overflow-scroll">
                             @if (request()->is('/') || request()->is('channels') || request()->is('channels/*'))
                                 <livewire:iptv.channels.menu.channels-menu />
                             @endif
@@ -82,7 +97,6 @@
                             @endif
                         </div>
                     </x-menu>
-                    </div>
                 </x-slot:sidebar>
 
 

@@ -1,9 +1,8 @@
 <div>
     <x-share.cards.base-card title="Poznámky">
         <div class="h-44">
-            <div>
-                <button
-                    class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-1 text-green-500"
+            <div class="overflow-hidden absolute -top-2 -right-2 rounded-full bg-[#06090e] w-10 h-10">
+                <button class="btn btn-circle btn-outline btn-xs border-none bg-transparent text-green-500 fixed top-0 right-0"
                     wire:click='openModal()'>
                     <x-heroicon-o-plus-circle class="w-4 h-4" />
                 </button>

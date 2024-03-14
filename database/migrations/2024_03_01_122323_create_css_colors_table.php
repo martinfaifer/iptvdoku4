@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('css_colors', function (Blueprint $table) {
             $table->id();
             $table->string('color', 100)->unique();
+            $table->string('hex', 100)->unique();
             $table->timestamps();
 
             $table->index('color');
