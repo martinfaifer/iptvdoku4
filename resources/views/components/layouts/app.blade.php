@@ -50,7 +50,7 @@
                                 'bg-[#1A1E2A]' => request()->is('channels') || request()->is('channels/*'),
                             ])>
                                 <a>
-                                    <x-sui-tv-mode class="h-6 w-6 text-white" fill="none" />
+                                    <x-sui-tv-mode class="size-6 text-white" fill="none" />
                                 </a>
                             </li>
                             <li href="/devices" wire:navigate @class([
@@ -58,7 +58,7 @@
                                 'bg-[#1A1E2A]' => request()->is('devices') || request()->is('devices/*'),
                             ])>
                                 <a>
-                                    <x-sui-flip-view class="h-6 w-6 text-white" fill="none" />
+                                    <x-sui-flip-view class="size-6 text-white" fill="none" />
                                 </a>
                             </li>
                             <li href="/sat-cards" wire:navigate @class([
@@ -67,7 +67,7 @@
                                     request()->is('sat-cards') || request()->is('sat-cards/*'),
                             ])>
                                 <a>
-                                    <x-heroicon-o-credit-card class="h-6 w-6 text-white/80" fill="none" />
+                                    <x-heroicon-o-credit-card class="size-6 text-white/80" fill="none" />
                                 </a>
                             </li>
                             <li href="/calendar" wire:navigate @class([
@@ -75,7 +75,15 @@
                                 'bg-[#1A1E2A]' => request()->is('calendar') || request()->is('calendar/*'),
                             ])>
                                 <a>
-                                    <x-heroicon-o-calendar-days class="h-6 w-6 text-white/80" fill="none" />
+                                    <x-heroicon-o-calendar-days class="size-6 text-white/80" fill="none" />
+                                </a>
+                            </li>
+                            <li href="/sftps" wire:navigate @class([
+                                'rounded-lg',
+                                'bg-[#1A1E2A]' => request()->is('sftps') || request()->is('sftps/*'),
+                            ])>
+                                <a>
+                                    <x-heroicon-o-arrow-up-on-square-stack class="size-6 text-white/80" fill="none"/>
                                 </a>
                             </li>
                         </ul>
@@ -92,6 +100,9 @@
                             @if (request()->is('sat-cards') || request()->is('sat-cards/*'))
                                 <livewire:iptv.cards.menu.satelit-cards-menu class="fixed" />
                             @endif
+                            @if (request()->is('sftps') || request()->is('sftps/*'))
+                            <livewire:iptv.sftps.menu.sftps-menu class="fixed" />
+                        @endif
                             @if (request()->is('settings') || request()->is('settings/*'))
                                 <livewire:settings.settings-navigation-component class="fixed" />
                             @endif

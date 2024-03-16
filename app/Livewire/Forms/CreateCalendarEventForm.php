@@ -19,8 +19,6 @@ class CreateCalendarEventForm extends Form
     #[Validate('string', message: "Neplatný formát")]
     public string $description = "";
 
-    public string $color = "";
-
     #[Validate('required', message: "Vyberte začátek události")]
     public string $start_date = "";
 
@@ -34,7 +32,16 @@ class CreateCalendarEventForm extends Form
     public $end_time = null;
 
     #[Validate('nullable')]
-    public null|array $users;
+    public array $users = [];
+
+    #[Validate('nullable')]
+    public array $channels = [];
+
+    #[Validate('nullable')]
+    public null|string $color = null;
+
+    #[Validate('nullable')]
+    public null|string $tag_id = null;
 
     public function create()
     {
@@ -45,9 +52,11 @@ class CreateCalendarEventForm extends Form
             'start_time' => $this->start_time,
             'end_date' => $this->end_date,
             'end_time' => $this->end_time,
-            'color' => "cs-rose-950",
+            'color' => is_null($this->color) ? 1 : $this->color,
             'users' => json_encode($this->users),
-            'creator' => Auth::user()->email
+            'creator' => Auth::user()->email,
+            'channels' => json_encode($this->channels),
+            'tag_id' => $this->tag_id
         ]);
 
 

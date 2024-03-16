@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             TagSeeder::class,
             CssColorSeeder::class,
             SatelitCardVendorSeeder::class,
+            NanguIspSeeder::class,
+            SftpServerSeeder::class
         ]);
     }
 }

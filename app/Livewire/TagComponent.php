@@ -79,7 +79,7 @@ class TagComponent extends Component
     #[On('tag-component.{type}.{itemId}')]
     public function refreshTags()
     {
-        $this->tagsOnItem = TagOnItem::where('type', $this->type)->where('item_id', $this->itemId)->with('tag')->get();
+        return $this->tagsOnItem = TagOnItem::where('type', $this->type)->where('item_id', $this->itemId)->with('tag')->get();
     }
 
     public function render()

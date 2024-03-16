@@ -12,7 +12,7 @@
             </div>
         </div>
         <div>
-            <x-table :headers="$headers" :rows="$tags">
+            <x-table :headers="$headers" :rows="$tags" with-pagination>
                 @scope('cell_color', $tag)
                     <x-share.cards.color-card color="{{ $tag->color }}"></x-share.cards.color-card>
                 @endscope

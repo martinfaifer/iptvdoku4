@@ -15,7 +15,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 md:col-span-6 mb-4">
                     <x-input type="date" label="Den začátku události" wire:model="form.start_date" />
                     <div>
                         @error('start_date')
@@ -23,7 +23,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 md:col-span-6 mb-4">
                     <x-input type="time" label="Čas začátku události" wire:model="form.start_time" />
                     <div>
                         @error('start_time')
@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 md:col-span-6 mb-4">
                     <x-input type="date" label="Den konce události" wire:model="form.end_date" />
                     <div>
                         @error('end_date')
@@ -39,7 +39,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 md:col-span-6 mb-4">
                     <x-input type="time" label="Čas konce události" wire:model="form.end_time" />
                     <div>
                         @error('end_time')
@@ -47,7 +47,28 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-choices-offline label="Vyberte kanál/y" wire:model="form.channels"
+                        :options="$channels" searchable>
+                    </x-choices-offline>
+                    <div>
+                        @error('users')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-choices-offline label="Štítek s akcí" wire:model="form.tag_id"
+                        :options="$tags" searchable single>
+                    </x-choices-offline>
+                    <div>
+                        @error('users')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                {{-- notifications  --}}
+                <div class="col-span-12 md:col-span-6 mb-4">
                     <x-choices-offline label="Vyberte uživatele pro upozornění" wire:model="form.users"
                         :options="$users" option-label="email" searchable>
                     </x-choices-offline>
@@ -57,6 +78,22 @@
                         @enderror
                     </div>
                 </div>
+                {{-- <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-choices-offline label="Barva" wire:model="form.color" :options="$cssColors" option-label="color" single
+                        searchable>
+                        @scope('item', $cssColor)
+                            <x-list-item :item="$cssColor" sub-value="color">
+                                <x-slot:avatar>
+                                    <x-share.cards.color-card color="{{ $cssColor->color }}"></x-share.cards.color-card>
+                                </x-slot:avatar>
+                            </x-list-item>
+                        @endscope
+
+                        @scope('selection', $cssColor)
+                            <x-share.cards.color-card color="{{ $cssColor->color }}"></x-share.cards.color-card>
+                        @endscope
+                    </x-choices-offline>
+                </div> --}}
                 <div class="col-span-12 mb-4">
                     <x-markdown wire:model="form.description" label="Popis události" />
 

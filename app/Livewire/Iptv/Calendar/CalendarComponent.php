@@ -2,17 +2,19 @@
 
 namespace App\Livewire\Iptv\Calendar;
 
-use App\Livewire\Forms\UpdateCalendarEventForm;
-use App\Models\CssColor;
 use App\Models\Event;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
+use App\Models\CssColor;
 use Illuminate\Support\Str;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Calendar\RunningEventsTrait;
+use App\Traits\Calendar\UpcomingEventsTrait;
 use Illuminate\Database\Eloquent\Collection;
+use App\Livewire\Forms\UpdateCalendarEventForm;
 
 class CalendarComponent extends Component
 {
-    use NotificationTrait;
+    use NotificationTrait, UpcomingEventsTrait, RunningEventsTrait;
 
     public UpdateCalendarEventForm $form;
 
@@ -20,33 +22,35 @@ class CalendarComponent extends Component
 
     public array $upcomingEvents;
 
+    public array $runningEvents;
+
     public array $dayEvents;
 
     public bool $updateModal = false;
 
     public function mount()
     {
-        $this->upcomingEvents = Event::where('start_date', ">=",now()->format('Y-m-d'))->orderBy('start_date', "ASC")->with('user')->get()->toArray();
+        $this->upcomingEvents = $this->upcoming_events();
+        $this->runningEvents = $this->running_events();
         $this->show_events();
     }
 
     public function show_events()
     {
-        $allEvents = Event::take(50)->get();
+        $allEvents = Event::take(50)->with('background_color')->get();
         foreach ($allEvents as $singleEvent) {
-            $color = CssColor::where('color', $singleEvent->color)->first()->hex;
-            if($singleEvent->start_date == $singleEvent->end_date || is_null($singleEvent->end_date )) {
+            if ($singleEvent->start_date == $singleEvent->end_date || is_null($singleEvent->end_date)) {
                 $this->events[] = [
                     'label' => $singleEvent->label,
                     'description' => $singleEvent->description,
-                    'css' => "!bg-". str_replace("cs-", "", $singleEvent->color),
+                    'css' => $singleEvent->background_color->color,
                     'date' => now()->createFromFormat("Y-m-d", $singleEvent->start_date),
                 ];
             } else {
                 $this->events[] = [
                     'label' => $singleEvent->label,
                     'description' => $singleEvent->description,
-                    'css' => "!bg-". str_replace("cs-", "", $singleEvent->color),
+                    'css' => $singleEvent->background_color->color,
                     'range' => [now()->createFromFormat("Y-m-d", $singleEvent->start_date), now()->createFromFormat("Y-m-d", $singleEvent->end_date)],
                 ];
             }
@@ -71,6 +75,7 @@ class CalendarComponent extends Component
     public function closeModal()
     {
         $this->resetErrorBag();
+        $this->redirect('/calendar', true);
         return $this->updateModal = false;
     }
 

@@ -12,9 +12,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('calendar:start-daily-event')->daily();
+        $schedule->command('calendar:end-daily-event')->daily();
+        $schedule->command('calendar:start-event')->everyMinute();
+        $schedule->command('calendar:end-event')->everyMinute();
+
+
         $schedule->command('iptv-dohled:alerts')->everyTwentySeconds();
+
         $schedule->command('devices:snmp-get')->everyFiveMinutes()->runInBackground();
         $schedule->command('tag:execute-actions')->everyFiveMinutes()->runInBackground();
+        $schedule->command('channels:get-detail-from-nangu-api')->everyFifteenMinutes();
         $schedule->command('devices:data-from-nms')->everyFifteenMinutes()->runInBackground();
         $schedule->command('epg:get-channels-ids')->everyThirtyMinutes()->runInBackground();
         $schedule->command('channels:get-informartions-from-dohled')->everyMinute();
@@ -25,7 +33,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

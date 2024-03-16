@@ -2,8 +2,10 @@
 
 namespace App\Observers;
 
-use App\Jobs\SendDeletedEventNotificationJob;
+use App\Models\User;
 use App\Models\Event;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendDeletedEventNotificationMail;
 
 class EventObserver
 {
@@ -11,7 +13,9 @@ class EventObserver
     {
         // send notification about deleted event if had users
         if (!is_null($event->users)) {
-            SendDeletedEventNotificationJob::dispatch(json_decode($event->users), $event);
+            foreach (json_decode($event->users) as $userId) {
+                Mail::to(User::find($userId)->email)->send(new SendDeletedEventNotificationMail($event));
+            }
         }
     }
 }

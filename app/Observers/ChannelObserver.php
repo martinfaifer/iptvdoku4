@@ -3,10 +3,12 @@
 namespace App\Observers;
 
 use App\Jobs\LogJob;
+use App\Models\Loger;
 use App\Models\Channel;
 use App\Models\Contact;
-use App\Models\Loger;
 use Illuminate\Support\Facades\Auth;
+use App\Services\Api\NanguTv\ChannelsService;
+use Illuminate\Support\Facades\Artisan;
 
 class ChannelObserver
 {
@@ -30,6 +32,8 @@ class ChannelObserver
                 'geniustv_channel_packages_id' => $channel->geniustv_channel_packages_id,
             ])
         );
+
+        Artisan::call('channels:get-detail-from-nangu-api');
     }
 
     public function updated(Channel $channel)
@@ -52,6 +56,8 @@ class ChannelObserver
                 'geniustv_channel_packages_id' => $channel->geniustv_channel_packages_id,
             ])
         );
+
+        Artisan::call('channels:get-detail-from-nangu-api');
     }
 
     public function deleted(Channel $channel)

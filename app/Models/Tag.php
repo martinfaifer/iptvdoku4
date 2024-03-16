@@ -38,9 +38,14 @@ class Tag extends Model
         return $this->hasMany(TagOnItem::class, 'tag_id', 'id');
     }
 
+    public function nangu_isps(): HasMany
+    {
+        return $this->hasMany(NanguIspTagToChannelPackage::class, 'tag_id', 'id');
+    }
+
     public function scopeSearch(Builder $query, string $search)
     {
         $query
-            ->where('name', 'like', '%'.$search.'%');
+            ->where('name', 'like', '%' . $search . '%');
     }
 }

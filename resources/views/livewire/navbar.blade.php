@@ -9,6 +9,15 @@
                     class="input input-bordered input-sm bg-opacity-20 text-white placeholder:text-xs w-24 md:w-auto" />
             </div>
             <div>
+                <label for="calendarEventsDrawer" class="btn btn-sm btn-circle bg-transparent border-none">
+                    <x-heroicon-o-calendar-days @class([
+                        'size-6',
+                        'text-white/80' => !empty($runningEvents),
+                        'text-white/20' => empty($runningEvents)
+                        ])  fill="none" />
+                </label>
+            </div>
+            <div>
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-sm btn-ghost btn-circle avatar">
                         <div class="w-9 rounded-full">
@@ -45,7 +54,7 @@
             </div>
         </div>
     </div>
-    {{-- bg-[#0A0F19] --}}
+    {{-- alert drawer --}}
     <x-drawer id="alert-drawer" right class="lg:w-1/4 !bg-[#0c111b]">
         {{-- alerts --}}
         @if (!empty($iptv_dohled_alerts))
@@ -59,6 +68,117 @@
                     <span>{{ $iptv_dohled_alert['nazev'] }}</span>
                 </div>
             @endforeach
+        @endif
+    </x-drawer>
+    {{-- calendar events drawer --}}
+    <x-drawer id="calendarEventsDrawer" class="lg:w-1/4 !bg-[#0c111b]" right>
+        @if (!empty($runningEvents))
+            <div class="col-span-12 mb-6">
+                <p class="font-semibold text-lg">Probíhající události</p>
+                <div class="mt-4">
+                    <div class="overflow-auto max-h-80">
+                        @foreach ($runningEvents as $event)
+                            <x-list-item :item="$event" class="bg-sky-600/20 hover:bg-sky-600/50 mb-2 rounded-lg">
+                                <x-slot:avatar>
+                                    <div class="avatar placeholder">
+                                        <div class="bg-neutral text-neutral-content rounded-full w-11">
+                                            <span class="text-lg">
+                                                {{ $event['user']['first_name'][0] }}
+                                                {{ $event['user']['last_name'][0] }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </x-slot:avatar>
+                                <x-slot:value>
+                                    {{ $event['label'] }}
+                                </x-slot:value>
+                                <x-slot:sub-value>
+                                    <div class="grid grid-cols-12 gap-4">
+                                        <div class="col-span-7">
+                                            <article>
+                                                {!! $event['description'] !!}
+                                            </article>
+                                        </div>
+                                        <div class="col-span-5 text-white/50">
+                                            <div class="grid grid-rows-1 gap-1 text-xs">
+                                                {{-- channels --}}
+                                                <div>
+                                                    @if (!is_null($event['channels']) && !empty(json_decode($event['channels'])))
+                                                        <span class="font-semibold">
+                                                            Kanály:
+                                                        </span>
+                                                        @foreach (json_decode($event['channels']) as $channelId)
+                                                            @php
+                                                                $channel = null;
+                                                                $channel = App\Models\Channel::find($channelId);
+
+                                                            @endphp
+                                                            <span class="text-sky-300 text-wrap">
+                                                                <a target="_blank" class="hover:underline"
+                                                                    href="channels/{{ $channel->id }}/multicast">{{ $channel->name }}</a>
+                                                                ,
+                                                            </span>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                                <div>
+                                                    @if (!is_null($event['users']) && !empty(json_decode($event['users'])))
+                                                        <span class="font-semibold">
+                                                            Uživatelé co jsou upozornění:
+                                                        </span>
+                                                        @foreach (json_decode($event['users']) as $userId)
+                                                            @php
+                                                                $user = App\Models\User::find($userId);
+
+                                                                if ($user) {
+                                                                    $inicials = $user->first_name[0] . $user->last_name[0];
+                                                                }
+                                                            @endphp
+                                                            <div class="avatar placeholder">
+                                                                <div
+                                                                    class="bg-neutral text-neutral-content rounded-full w-8">
+                                                                    <span class="text-md">
+                                                                        {{ $inicials }}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+
+                                                <div class="text-wrap">
+                                                    @php
+                                                        $formtedStartDate = now()
+                                                            ->createFromFormat('Y-m-d', $event['start_date'])
+                                                            ->format('d.m. Y');
+                                                    @endphp
+                                                    {{ $formtedStartDate }} {{ $event['start_time'] }}
+                                                    @if (!is_null($event['end_date']) || !is_null($event['end_time']))
+                                                        -
+                                                        @php
+                                                            $formtedEndDate = '';
+                                                            if (!is_null($event['end_date'])) {
+                                                                $formtedEndDate = now()
+                                                                    ->createFromFormat('Y-m-d', $event['end_date'])
+                                                                    ->format('d.m. Y');
+                                                            }
+                                                        @endphp
+                                                        {{ $formtedEndDate }} {{ $event['end_time'] }}
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </x-slot:sub-value>
+                            </x-list-item>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            @else
+            <div class="col-span-12">
+                <x-share.alerts.info title="Neprobíhají žádné události"></x-share.alerts.info>
+            </div>
         @endif
     </x-drawer>
 </div>
