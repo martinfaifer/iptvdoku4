@@ -37,6 +37,8 @@ return [
             'ssl_url' => env('NANGU_SSL_URL'),
             'ssl_key' => env('NANGU_SSL_KEY'),
             'isp_code' => env('NANGU_ISP_CODE'),
+            'cert' => env('NANGU_CERT'),
+            'pk' => env('NANGU_PK')
         ],
         'iptvDohled' => [
             'url' => env('IPTVDOHLED_URL'),

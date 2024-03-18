@@ -7,7 +7,7 @@ use App\Livewire\Iptv\Channels\IptvChannel;
 use App\Livewire\Iptv\Devices\DeviceComponent;
 use App\Livewire\Iptv\Calendar\CalendarComponent;
 use App\Livewire\Iptv\Cards\SatelitCardComponent;
-use App\Livewire\Iptv\Sftps\Menu\SftpComponent;
+use App\Livewire\Iptv\Sftps\SftpComponent;
 use App\Livewire\Settings\Tags\SettingsTagComponent;
 use App\Livewire\Settings\Users\SettingsUsersComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('calendar', CalendarComponent::class);
 
-    Route::get('sftps', SftpComponent::class);
+    Route::get('sftps/{sftpServer?}', SftpComponent::class);
 
     Route::prefix('settings')->group(function () {
         Route::get('', SettingsTagComponent::class);

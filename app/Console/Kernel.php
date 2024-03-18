@@ -17,15 +17,17 @@ class Kernel extends ConsoleKernel
         $schedule->command('calendar:start-event')->everyMinute();
         $schedule->command('calendar:end-event')->everyMinute();
 
-
         $schedule->command('iptv-dohled:alerts')->everyTwentySeconds();
 
-        $schedule->command('devices:snmp-get')->everyFiveMinutes()->runInBackground();
-        $schedule->command('tag:execute-actions')->everyFiveMinutes()->runInBackground();
-        $schedule->command('channels:get-detail-from-nangu-api')->everyFifteenMinutes();
         $schedule->command('devices:data-from-nms')->everyFifteenMinutes()->runInBackground();
-        $schedule->command('epg:get-channels-ids')->everyThirtyMinutes()->runInBackground();
+        $schedule->command('devices:snmp-get')->everyFiveMinutes()->runInBackground();
+
+        $schedule->command('tag:execute-actions')->everyFiveMinutes()->runInBackground();
+
+        $schedule->command('channels:get-detail-from-nangu-api')->everyFifteenMinutes();
         $schedule->command('channels:get-informartions-from-dohled')->everyMinute();
+
+        $schedule->command('epg:get-channels-ids')->everyThirtyMinutes()->runInBackground();
     }
 
     /**
