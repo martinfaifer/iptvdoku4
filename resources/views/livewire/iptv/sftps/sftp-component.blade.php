@@ -2,7 +2,7 @@
     <div class="flex flex-col">
         <div class="relative">
             <div class="absolute left">
-                {{-- <livewire:iptv.cards.create-satelit-card> --}}
+                <livewire:iptv.sftps.create-sftp-server-component>
             </div>
         </div>
         {{-- show alert about no sat card found --}}
@@ -11,17 +11,21 @@
                 <x-share.alerts.info title="Vyberte server z menu vlevo"></x-share.alerts.info>
             </div>
         @else
+            @if (empty($sftpServerContent))
+                <x-alert title="Nepodařilo se připojit k serveru" icon="o-exclamation-triangle"
+                    class="bg-amber-600 !text-white/80 mb-4" />
+            @endif
             <div class="grid grid-cols-12 mt-8">
                 <div class="col-span-12 flex">
                     <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
                         {{ $sftpServer->name }}
                     </h1>
                     {{-- actions --}}
-                    {{-- <livewire:iptv.cards.update-satelit-card-component
-                        :satelitCard="$satelitCard"></livewire:iptv.cards.update-satelit-card-component>
+                    <livewire:iptv.sftps.update-sftp-server-component
+                        :sftpServer="$sftpServer"></livewire:iptv.sftps.update-sftp-server-component>
 
-                    <livewire:iptv.cards.delete-satelit-card-component
-                        :satelitCard="$satelitCard"></livewire:iptv.cards.delete-satelit-card-component> --}}
+                    <livewire:iptv.sftps.delete-sftp-server-component
+                        :sftpServer="$sftpServer"></livewire:iptv.sftps.delete-sftp-server-component>
                     {{-- end of actions --}}
                 </div>
             </div>
@@ -66,66 +70,68 @@
                             </div>
                         </x-share.cards.base-card>
                     </div>
-                    <div class="col-span-12">
-                        <x-share.cards.base-card title="Obsah">
-                            <div>
-                                <button
-                                    class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-1 text-green-500"
-                                    wire:click='openUploadDialog()'>
-                                    <x-heroicon-o-arrow-up-tray class="size-4" />
-                                </button>
-                            </div>
-                            <div class=" h-96 overflow-auto">
-                                <div class="grid grid-cols-12 font-semibold text-[#A3ABB8]">
-                                    <div class="col-span-12">
-                                        <div class="overflow-x-auto">
-                                            <table class="table">
-                                                <!-- head -->
-                                                <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>Soubor</th>
-                                                        <th>Velikost</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($sftpServerContent as $item)
+                    @if (!empty($sftpServerContent))
+                        <div class="col-span-12">
+                            <x-share.cards.base-card title="Obsah">
+                                <div>
+                                    <button
+                                        class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-1 text-green-500"
+                                        wire:click='openUploadDialog()'>
+                                        <x-heroicon-o-arrow-up-tray class="size-4" />
+                                    </button>
+                                </div>
+                                <div class=" h-96 overflow-auto">
+                                    <div class="grid grid-cols-12 font-semibold text-[#A3ABB8]">
+                                        <div class="col-span-12">
+                                            <div class="overflow-x-auto">
+                                                <table class="table">
+                                                    <!-- head -->
+                                                    <thead>
                                                         <tr>
-                                                            <th>
-                                                                <img class="object-contain size-10"
-                                                                    src="http://{{ $sftpServer->url }}/{{ $item['filename'] }}"
-                                                                    alt="{{ $item['filename'] }}" />
-                                                            </th>
-                                                            <td>{{ $item['filename'] }}</td>
-                                                            <td>{{ $item['size'] }}</td>
-                                                            <td>
-                                                                @if ($item['filename'] != '..' && $item['filename'] != '.')
-                                                                    <button wire:key='{{ $item['filename'] }}'
-                                                                        wire:click="download_file({{ json_encode($item) }})"
-                                                                        wire:loading.attr="disabled"
-                                                                        class="btn btn-sm btn-circle bg-transparent border-none">
-                                                                        <x-heroicon-o-arrow-down-tray
-                                                                            class="size-4 text-blue-500" />
-                                                                        <div wire:loading
-                                                                            wire:target="download_file({{ json_encode($item) }})">
-                                                                            <span
-                                                                                class="loading loading-spinner loading-md size-2 text-blue-500"></span>
-                                                                        </div>
-                                                                    </button>
-                                                                @endif
-                                                            </td>
+                                                            <th></th>
+                                                            <th>Soubor</th>
+                                                            <th>Velikost</th>
+                                                            <th></th>
                                                         </tr>
-                                                    @endforeach
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($sftpServerContent as $item)
+                                                            <tr>
+                                                                <th>
+                                                                    <img class="object-contain size-10"
+                                                                        src="http://{{ $sftpServer->url }}/{{ $item['filename'] }}"
+                                                                        alt="{{ $item['filename'] }}" />
+                                                                </th>
+                                                                <td>{{ $item['filename'] }}</td>
+                                                                <td>{{ $item['size'] }}</td>
+                                                                <td>
+                                                                    @if ($item['filename'] != '..' && $item['filename'] != '.')
+                                                                        <button wire:key='{{ $item['filename'] }}'
+                                                                            wire:click="download_file({{ json_encode($item) }})"
+                                                                            wire:loading.attr="disabled"
+                                                                            class="btn btn-sm btn-circle bg-transparent border-none">
+                                                                            <x-heroicon-o-arrow-down-tray
+                                                                                class="size-4 text-blue-500" />
+                                                                            <div wire:loading
+                                                                                wire:target="download_file({{ json_encode($item) }})">
+                                                                                <span
+                                                                                    class="loading loading-spinner loading-md size-2 text-blue-500"></span>
+                                                                            </div>
+                                                                        </button>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
 
-                                                </tbody>
-                                            </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </x-share.cards.base-card>
-                    </div>
+                            </x-share.cards.base-card>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="grid grid-cols-12 gap-4 mt-4">

@@ -66,6 +66,12 @@ return [
                 'data_slice' => env('NIMBLE_WMS_DATA_SLICE'),
             ],
         ],
+        [
+            'open_weather_map' => [
+                'url' => env('OPEN_WEATHER_MAP_URL'),
+                'api_key' => env('OPEN_WEATHER_MAP_API_KEY')
+            ]
+        ]
     ],
 
 ];

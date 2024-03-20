@@ -47,8 +47,9 @@ class DeviceHasChannelComponent extends Component
     #[Validate('max:255', message: 'Maximální počet znaků je :max')]
     public string $path = '';
 
-    public function mount()
+    public function mount(Device $device)
     {
+        $this->device = $device->load('category');
         $this->checkIfNeedToAddLinuxPath();
     }
 

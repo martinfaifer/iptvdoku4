@@ -4,11 +4,11 @@
             <button
                 class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-8 text-green-500"
                 wire:click='openUpdateModal()'>
-                <x-heroicon-o-pencil class="w-4 h-4" />
+                <x-heroicon-o-pencil class="size-4" />
             </button>
             <button class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-1 text-red-500"
                 wire:click='delete()' wire:confirm='Opravdu odebrat vazbu?'>
-                <x-heroicon-o-trash class="w-4 h-4" />
+                <x-heroicon-o-trash class="size-4" />
             </button>
         </div>
         <div class="flex flex-col gap-4 md:grid sm:grid-cols-12 font-semibold text-[#A3ABB8]">

@@ -28,6 +28,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('channels:get-informartions-from-dohled')->everyMinute();
 
         $schedule->command('epg:get-channels-ids')->everyThirtyMinutes()->runInBackground();
+
+        $schedule->command('weather:get')->everyThirtyMinutes();
     }
 
     /**

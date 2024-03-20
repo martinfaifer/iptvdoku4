@@ -81,7 +81,7 @@
             <ul class="list-disc list-outside ml-4 text-sm">
                 @foreach ($nanguChannelDetail as $nanguChannelKey => $nanguChannelDetail)
                     @if (!is_array($nanguChannelDetail))
-                        <li>
+                        <li class="mt-2">
                             <span class="font-normal">
                                 {{ $nanguChannelKey }} :
                             </span>

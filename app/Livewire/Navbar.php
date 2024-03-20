@@ -2,22 +2,30 @@
 
 namespace App\Livewire;
 
-use App\Traits\Calendar\RunningEventsTrait;
-use Illuminate\Support\Facades\Cache;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use App\Traits\Calendar\RunningEventsTrait;
+use App\Traits\Weather\GetCachedWeatherTrait;
 
 class Navbar extends Component
 {
-    use RunningEventsTrait;
+    use RunningEventsTrait, GetCachedWeatherTrait;
 
     public array $iptv_dohled_alerts;
 
     public array $runningEvents;
 
+    public $user;
+
+    public array $weather;
+
     public function mount()
     {
         $this->runningEvents = $this->running_events();
+        $this->user = Auth::user();
+        $this->weather = $this->get_weather();
     }
 
     #[On('echo:iptvAlerts,BroadcastIptvDohledAlertsEvent')]

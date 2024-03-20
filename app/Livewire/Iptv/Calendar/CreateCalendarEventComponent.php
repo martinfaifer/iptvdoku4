@@ -61,6 +61,7 @@ class CreateCalendarEventComponent extends Component
 
     public function closeModal()
     {
+        $this->form->reset();
         return $this->storeModal = false;
     }
 

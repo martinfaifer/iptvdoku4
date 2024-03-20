@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Laravel\Fortify\Fortify;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Model::shouldBeStrict();
         JsonResource::withoutWrapping();
         // Fortify::loginView(function() {
         //     return view('livewire.auth.login');

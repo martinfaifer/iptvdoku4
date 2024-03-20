@@ -33,13 +33,15 @@ class MulticastChannel extends Component
     {
         $this->channelSources = ChannelSource::get();
 
-        $this->devices = Device::get()->filter(function ($device) {
+        $temporaryDevices = Device::with('category')->get();
+
+        $this->devices = $temporaryDevices->filter(function ($device) {
             if (is_array($device->has_channels)) {
                 return in_array('multicast:'.$this->channel->id, $device->has_channels);
             }
         });
 
-        $this->backupDevices = Device::get()->filter(function ($device) {
+        $this->backupDevices = $temporaryDevices->filter(function ($device) {
             if (is_array($device->has_channels)) {
                 return in_array('multicast:'.$this->channel->id.':backup', $device->has_channels);
             }
@@ -78,7 +80,8 @@ class MulticastChannel extends Component
     public function render()
     {
         return view('livewire.iptv.channels.multicast.multicast-channel', [
-            'multicasts' => ChannelMulticast::where('channel_id', $this->channel->id)->with('channel_source')->get(),
+            // 'multicasts' => ChannelMulticast::where('channel_id', $this->channel->id)->with('channel_source')->get(),
+            'multicasts' => $this->channel->multicasts
         ]);
     }
 }

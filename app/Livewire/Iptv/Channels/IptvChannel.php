@@ -12,6 +12,11 @@ class IptvChannel extends Component
 
     public ?Channel $channel;
 
+    public function mount(Channel $channel)
+    {
+        $this->channel = $channel->load(['multicasts', 'multicasts.channel_source']);
+    }
+
     public function render()
     {
         return view('livewire.iptv.channels.iptv-channel');

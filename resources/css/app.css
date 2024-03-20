@@ -41,6 +41,10 @@
     @apply !bg-[#0c111b] !text-white/80;
 }
 
+.CodeMirror-cursor {
+    @apply !border-white
+}
+
 .modal {
     --tw-backdrop-blur: blur(4px);
     -webkit-backdrop-filter: var(--tw-backdrop-blur)

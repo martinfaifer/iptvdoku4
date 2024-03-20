@@ -82,7 +82,7 @@ class H264Channel extends Component
     {
         $this->h264 = [];
         if (! is_null($this->channel->h264)) {
-            foreach ($this->channel->h264->ips as $ip) {
+            foreach ($this->channel->h264->ips->load('channelQuality') as $ip) {
                 $this->h264[] = [
                     'id' => $ip->id,
                     'ip' => $ip->ip,

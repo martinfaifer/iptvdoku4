@@ -42,7 +42,8 @@
 
         <x-main full-width>
             @auth
-                <x-slot:sidebar class="bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] border-opacity-10 !w-[320px]">
+                <x-slot:sidebar
+                    class="bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] border-opacity-10 !w-[320px]">
                     <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
                         <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
                             <li href="/channels" wire:navigate @class([
@@ -83,7 +84,15 @@
                                 'bg-[#1A1E2A]' => request()->is('sftps') || request()->is('sftps/*'),
                             ])>
                                 <a>
-                                    <x-heroicon-o-arrow-up-on-square-stack class="size-6 text-white/80" fill="none"/>
+                                    <x-heroicon-o-arrow-up-on-square-stack class="size-6 text-white/80" fill="none" />
+                                </a>
+                            </li>
+                            <li href="/wiki" wire:navigate @class([
+                                'rounded-lg',
+                                'bg-[#1A1E2A]' => request()->is('wiki') || request()->is('wiki/*'),
+                            ])>
+                                <a>
+                                    <x-heroicon-o-academic-cap class="size-6 text-white/80" fill="none" />
                                 </a>
                             </li>
                         </ul>
@@ -101,8 +110,11 @@
                                 <livewire:iptv.cards.menu.satelit-cards-menu class="fixed" />
                             @endif
                             @if (request()->is('sftps') || request()->is('sftps/*'))
-                            <livewire:iptv.sftps.menu.sftps-menu class="fixed" />
-                        @endif
+                                <livewire:iptv.sftps.menu.sftps-menu class="fixed" />
+                            @endif
+                            @if (request()->is('wiki') || request()->is('wiki/*'))
+                                <livewire:wiki.menu.wiki-menu-component class="fixed" />
+                            @endif
                             @if (request()->is('settings') || request()->is('settings/*'))
                                 <livewire:settings.settings-navigation-component class="fixed" />
                             @endif

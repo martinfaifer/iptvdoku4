@@ -38,9 +38,13 @@ class DeviceSshComponent extends Component
 
     public function mount(Device $device)
     {
-        $this->device = $device;
-        $this->deviceSsh = $device->ssh;
-        $this->checkIfNeedSsh();
+        try {
+            $this->device = $device;
+            $this->deviceSsh = $device->ssh;
+            $this->checkIfNeedSsh();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     #[On('check_if_need_ssh.{device.id}')]

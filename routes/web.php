@@ -12,6 +12,7 @@ use App\Livewire\Settings\Tags\SettingsTagComponent;
 use App\Livewire\Settings\Users\SettingsUsersComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
+use App\Livewire\Wiki\WikiComponent;
 
 Route::get('login', Login::class)->name('login');
 
@@ -28,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::get('calendar', CalendarComponent::class);
 
     Route::get('sftps/{sftpServer?}', SftpComponent::class);
+
+    Route::get('wiki/{topic?}', WikiComponent::class);
 
     Route::prefix('settings')->group(function () {
         Route::get('', SettingsTagComponent::class);
