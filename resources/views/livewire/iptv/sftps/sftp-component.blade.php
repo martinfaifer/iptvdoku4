@@ -11,11 +11,13 @@
                 <x-share.alerts.info title="Vyberte server z menu vlevo"></x-share.alerts.info>
             </div>
         @else
-            @if (empty($sftpServerContent))
-                <x-alert title="Nepodařilo se připojit k serveru" icon="o-exclamation-triangle"
-                    class="bg-amber-600 !text-white/80 mb-4" />
-            @endif
             <div class="grid grid-cols-12 mt-8">
+                @if (empty($sftpServerContent))
+                    <div class="col-span-12 mt-4">
+                        <x-alert title="Nepodařilo se připojit k serveru" icon="o-exclamation-triangle"
+                            class="bg-amber-600 !text-white/80 mb-4" />
+                    </div>
+                @endif
                 <div class="col-span-12 flex">
                     <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
                         {{ $sftpServer->name }}

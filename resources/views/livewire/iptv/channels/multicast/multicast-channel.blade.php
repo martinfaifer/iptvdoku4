@@ -19,7 +19,8 @@
                 <x-share.cards.base-card title="Informace o multicastu">
                     {{-- list of multicast datas --}}
                     @foreach ($multicasts as $multicast)
-                        <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold text-[#A3ABB8]">
+                        <div wire:key='multicast_{{ $multicast->id }}'
+                            class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold text-[#A3ABB8]">
                             <div class="col-span-12 md:col-span-3">
                                 <div class="lg:flex">
                                     <p>
@@ -176,13 +177,13 @@
                 </x-modal>
             </div>
             <div class="col-span-12 md:col-span-4">
-                <livewire:notes.note-component column="channel_id" :id="$channel->id" />
+                <livewire:notes.note-component column="channel_id" :id="$channel->id" lazy />
             </div>
             <div class="col-span-12 md:col-span-4">
-                <livewire:contact-component type="channel" :item_id="$channel->id" />
+                <livewire:contact-component type="channel" :item_id="$channel->id" lazy />
             </div>
             <div class="col-span-12 md:col-span-4 mb-4">
-                <livewire:log-component columnValue="multicast:{{ $channel->id }}" column="item" />
+                <livewire:log-component columnValue="multicast:{{ $channel->id }}" column="item" lazy />
             </div>
             @if (!$devices->isEmpty())
                 <div class="col-span-12 mb-4">
@@ -198,8 +199,9 @@
                     <div class="grid grid-cols-12 gap-4">
                         @foreach ($devices as $device)
                             <div class="col-span-12 md:col-span-6 mb-4">
-                                <livewire:iptv.channels.device-has-channel-component :device="$device" :channel="$channel"
-                                    channelType="multicast">
+                                <livewire:iptv.channels.device-has-channel-component
+                                    wire:key="device_{{ $device->id }}" :device="$device" :channel="$channel"
+                                    channelType="multicast" lazy>
                             </div>
                         @endforeach
                     </div>
@@ -219,8 +221,9 @@
                     <div class="grid grid-cols-12 gap-4">
                         @foreach ($backupDevices as $backupDevice)
                             <div class="col-span-12 md:col-span-6 mb-4">
-                                <livewire:iptv.channels.device-has-channel-component :device="$backupDevice" :channel="$channel"
-                                    isBackup="true" channelType="multicast">
+                                <livewire:iptv.channels.device-has-channel-component
+                                    wire:key="backupDevice_{{ $device->id }}" :device="$backupDevice" :channel="$channel"
+                                    isBackup="true" channelType="multicast" lazy>
                             </div>
                         @endforeach
                     </div>
@@ -231,11 +234,11 @@
             @foreach ($multicasts as $multicast)
                 <div class="col-span-12 mb-4 gap-4">
                     <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
-                        ip="{{ $multicast->source_ip }}">
+                        wire:key='iptvDohled_{{ $multicast->source_ip }}' ip="{{ $multicast->source_ip }}" lazy>
                 </div>
                 <div class="col-span-12 mb-4 gap-4">
                     <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
-                        ip="{{ $multicast->stb_ip }}">
+                        wire:key='iptvDohled_{{ $multicast->stb_ip }}' ip="{{ $multicast->stb_ip }}" lazy>
                 </div>
             @endforeach
 

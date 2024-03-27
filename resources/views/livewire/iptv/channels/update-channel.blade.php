@@ -116,7 +116,7 @@
                 <div>
                     <x-button label="Upravit"
                         class="bg-sky-800 hover:bg-sky-700 hover:shadow-sky-700/50 border-none text-white font-semibold w-full sm:w-28" type="submit"
-                        spinner="save2" />
+                        spinner="update" />
                 </div>
             </div>
         </x-form>

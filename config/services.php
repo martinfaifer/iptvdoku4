@@ -71,6 +71,13 @@ return [
                 'url' => env('OPEN_WEATHER_MAP_URL'),
                 'api_key' => env('OPEN_WEATHER_MAP_API_KEY')
             ]
+        ],
+        [
+            'old_iptv_doku' => [
+                'url' => env('OLD_IPTV_DOKU_URL'),
+                'user' => env('OLD_IPTV_DOKU_USER'),
+                'password' => env('OLD_IPTV_DOKU_PASSWORD')
+            ]
         ]
     ],
 

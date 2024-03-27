@@ -122,7 +122,7 @@
         class="modal-bottom sm:modal-middle ">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                wire:click='closeDialog'>✕</x-button>
+                wire:click='closeDialog()'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 {{-- šablona zařízení --}}
                 <div class="col-span-12 mb-4">
@@ -213,7 +213,7 @@
             <div class="flex justify-between">
                 <div>
                     <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                        wire:click='closeDialog' />
+                        wire:click='closeDialog()' />
                 </div>
                 <div>
                     <x-button label="Upravit"

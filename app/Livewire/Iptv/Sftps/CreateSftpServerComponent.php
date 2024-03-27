@@ -4,6 +4,7 @@ namespace App\Livewire\Iptv\Sftps;
 
 use Livewire\Component;
 use App\Livewire\Forms\CreateSftpServerForm;
+use App\Models\SftpServer;
 use App\Traits\Livewire\NotificationTrait;
 
 class CreateSftpServerComponent extends Component
@@ -13,6 +14,8 @@ class CreateSftpServerComponent extends Component
     public CreateSftpServerForm $storeForm;
 
     public bool $storeModal = false;
+
+    public array $connectionTypes = SftpServer::CONNECTION_TYPES;
 
     public function create()
     {

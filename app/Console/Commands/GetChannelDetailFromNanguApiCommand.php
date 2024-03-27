@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Channel;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use App\Jobs\GetChannelDetailFromNanguApiJob;
 use App\Services\Api\NanguTv\ChannelsService;
 
 class GetChannelDetailFromNanguApiCommand extends Command
@@ -31,23 +32,7 @@ class GetChannelDetailFromNanguApiCommand extends Command
         $ttl = 3600;
 
         Channel::get()->each(function ($channel) use ($ttl) {
-            rescue(function () use ($channel, $ttl) {
-                // get information from nangu
-                $nanguResponse = (new ChannelsService())->detail($channel->nangu_channel_code);
-                // separate all informations about it and store to cache.
-
-                // app order
-                Cache::put('nangu_channel_' . $channel->id . '_app_order', [
-                    "order" => $nanguResponse['weight']
-                ], $ttl);
-
-                Cache::put('nangu_channel_' . $channel->id . '_timeshift', [
-                    "timeshift" => $nanguResponse['storedMediaDuration']
-                ], $ttl);
-
-                // store all result for future manipulation
-                Cache::put('nangu_channel_' . $channel->id, $nanguResponse, $ttl);
-            });
+            GetChannelDetailFromNanguApiJob::dispatch($channel, $ttl);
         });
     }
 }

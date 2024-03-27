@@ -62,7 +62,7 @@
                 </div>
                 <div>
                     <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                        type="submit" spinner="store" />
                 </div>
             </div>
         </x-form>

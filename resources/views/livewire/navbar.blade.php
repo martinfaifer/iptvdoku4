@@ -9,7 +9,7 @@
                     class="input input-bordered input-sm bg-opacity-20 text-white placeholder:text-xs w-24 md:w-auto" />
             </div>
             <div>
-                <label for="calendarEventsDrawer" class="btn btn-sm btn-circle bg-transparent border-none">
+                <label wire:click='openCalendarEventsDrawer' class="btn btn-sm btn-circle bg-transparent border-none">
                     <x-heroicon-o-calendar-days @class([
                         'size-6',
                         'text-white/80' => !empty($runningEvents),
@@ -67,7 +67,7 @@
                     </div>
                     @if (!empty($weather))
                         <div tabindex="0"
-                            class="card compact dropdown-content z-[1] shadow bg-base-100 rounded-box w-96">
+                            class="card compact dropdown-content z-[1] shadow bg-[#0c111b] rounded-box w-96">
                             <div tabindex="0" class="card-body">
                                 <div class="grid grid-cols-12 gap-4">
                                     <div class="col-span-12">
@@ -197,7 +197,7 @@
                 </div>
             </div>
             <div>
-                <label for="alert-drawer" class="btn btn-sm btn-circle bg-transparent border-none">
+                <label wire:click='openAlertDrawer' class="btn btn-sm btn-circle bg-transparent border-none">
                     <x-heroicon-c-bell @class([
                         'h-6 w-6',
                         'text-red-500' => !empty($iptv_dohled_alerts),
@@ -213,7 +213,7 @@
         </div>
     </div>
     {{-- alert drawer --}}
-    <x-drawer id="alert-drawer" right class="lg:w-1/4 !bg-[#0c111b]">
+    <x-drawer wire:model="alertDrawer" id="alert-drawer" right class="lg:w-1/4 !bg-[#0c111b]">
         {{-- alerts --}}
         @if (!empty($iptv_dohled_alerts))
             @foreach ($iptv_dohled_alerts as $iptv_dohled_alert)
@@ -229,7 +229,7 @@
         @endif
     </x-drawer>
     {{-- calendar events drawer --}}
-    <x-drawer id="calendarEventsDrawer" class="lg:w-1/4 !bg-[#0c111b]" right>
+    <x-drawer wire:model='calendarEventsDrawer' class="lg:w-1/4 !bg-[#0c111b]" right>
         @if (!empty($runningEvents))
             <div class="col-span-12 mb-6">
                 <p class="font-semibold text-lg">Probíhající události</p>
@@ -270,13 +270,14 @@
                                                             @php
                                                                 $channel = null;
                                                                 $channel = App\Models\Channel::find($channelId);
-
                                                             @endphp
-                                                            <span class="text-sky-300 text-wrap">
-                                                                <a target="_blank" class="hover:underline"
-                                                                    href="channels/{{ $channel->id }}/multicast">{{ $channel->name }}</a>
-                                                                ,
-                                                            </span>
+                                                            @if (!is_null($channel))
+                                                                <span class="text-sky-300 text-wrap">
+                                                                    <a target="_blank" class="hover:underline"
+                                                                        href="channels/{{ $channel->id }}/multicast">{{ $channel->name }}</a>
+                                                                    ,
+                                                                </span>
+                                                            @endif
                                                         @endforeach
                                                     @endif
                                                 </div>
@@ -290,7 +291,8 @@
                                                                 $user = App\Models\User::find($userId);
 
                                                                 if ($user) {
-                                                                    $inicials = $user->first_name[0] . $user->last_name[0];
+                                                                    $inicials =
+                                                                        $user->first_name[0] . $user->last_name[0];
                                                                 }
                                                             @endphp
                                                             <div class="avatar placeholder">

@@ -15,6 +15,13 @@ class ChannelDetail extends Component
 
     public Channel $channel;
 
+    public bool $channelDetailDrawer = false;
+
+    public function openChannelDetailDrawer()
+    {
+        return $this->channelDetailDrawer = true;
+    }
+
     public function render()
     {
         return view('livewire.iptv.channels.channel-detail', [

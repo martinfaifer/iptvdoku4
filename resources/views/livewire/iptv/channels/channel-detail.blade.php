@@ -1,12 +1,12 @@
-<div>
+<div wire.poll.5s>
     <div class="tooltip tooltip-left absolute mt-6 right-8" data-tip="informace o kanálu">
-        <label for="channel-detail-drawer" class="btn btn-sm bg-transparent border-none" label="Bottom"
-            tooltip-bottom="Joe">
+        <label  wire:click='openChannelDetailDrawer' class="btn btn-sm bg-transparent border-none" label="Bottom"
+            tooltip-bottom="Detail o kanálu">
             <x-heroicon-o-information-circle class="w-6 h-6 text-sky-500" />
         </label>
     </div>
     {{-- info drawer --}}
-    <x-drawer id="channel-detail-drawer" separator right class="lg:w-1/4 !bg-[#0c111b]">
+    <x-drawer wire:model='channelDetailDrawer' separator right class="lg:w-1/4 !bg-[#0c111b]">
         {{-- informations about channel quality, category, description --}}
         <div>
             <div class="col-span-12 mb-2">
@@ -52,7 +52,7 @@
                 <div class="tooltip" data-tip="Žánr">
                     <div
                         class="text-xs inline-flex items-center font-semibold leading-sm px-3 py-1 bg-sky-800 text-sky-200 rounded-lg w-18 h-6">
-                        {{ $channel->channelCategory->name }}
+                        {{ $channel->channelCategory?->name }}
                     </div>
                 </div>
 

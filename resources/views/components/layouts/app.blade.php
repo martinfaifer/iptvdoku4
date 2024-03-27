@@ -8,7 +8,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.svg') }}">
     <link rel="manifest" href="/site.webmanifest">
-    <title>{{ $title ?? 'IPTVdokumentace4' }}</title>
+    <title>{{ $title ?? 'IPTV dokumentace' }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/github.min.css" />
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
@@ -31,11 +31,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-[#000100] min-h-screen">
+<body class="bg-gradient-to-b from-[#020313] min-h-screen">
     <x-toast />
     @auth
-        <x-spotlight search-text="Vyhledejte ... " no-results-text="Ops! Nenalezeno."
-            class="justify-center bg-gradient-to-b from-[#111827]/50 to-transparent" shortcut="ctrl.space" />
+        <x-spotlight search-text="Vyhledejte ... " no-results-text="Ops! Nenalezeno." class="justify-center"
+            shortcut="ctrl.space" />
         {{-- show alerts --}}
         <livewire:alert-component>
         @endauth
@@ -46,55 +46,68 @@
                     class="bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] border-opacity-10 !w-[320px]">
                     <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
                         <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
-                            <li href="/channels" wire:navigate @class([
-                                'rounded-lg',
-                                'bg-[#1A1E2A]' => request()->is('channels') || request()->is('channels/*'),
-                            ])>
-                                <a>
-                                    <x-sui-tv-mode class="size-6 text-white" fill="none" />
-                                </a>
-                            </li>
-                            <li href="/devices" wire:navigate @class([
-                                'rounded-lg',
-                                'bg-[#1A1E2A]' => request()->is('devices') || request()->is('devices/*'),
-                            ])>
-                                <a>
-                                    <x-sui-flip-view class="size-6 text-white" fill="none" />
-                                </a>
-                            </li>
-                            <li href="/sat-cards" wire:navigate @class([
-                                'rounded-lg',
-                                'bg-[#1A1E2A]' =>
-                                    request()->is('sat-cards') || request()->is('sat-cards/*'),
-                            ])>
-                                <a>
-                                    <x-heroicon-o-credit-card class="size-6 text-white/80" fill="none" />
-                                </a>
-                            </li>
-                            <li href="/calendar" wire:navigate @class([
-                                'rounded-lg',
-                                'bg-[#1A1E2A]' => request()->is('calendar') || request()->is('calendar/*'),
-                            ])>
-                                <a>
-                                    <x-heroicon-o-calendar-days class="size-6 text-white/80" fill="none" />
-                                </a>
-                            </li>
-                            <li href="/sftps" wire:navigate @class([
-                                'rounded-lg',
-                                'bg-[#1A1E2A]' => request()->is('sftps') || request()->is('sftps/*'),
-                            ])>
-                                <a>
-                                    <x-heroicon-o-arrow-up-on-square-stack class="size-6 text-white/80" fill="none" />
-                                </a>
-                            </li>
-                            <li href="/wiki" wire:navigate @class([
-                                'rounded-lg',
-                                'bg-[#1A1E2A]' => request()->is('wiki') || request()->is('wiki/*'),
-                            ])>
-                                <a>
-                                    <x-heroicon-o-academic-cap class="size-6 text-white/80" fill="none" />
-                                </a>
-                            </li>
+                            <div class="tooltip tooltip-bottom" data-tip="Kanály">
+                                <li href="/channels" wire:navigate @class([
+                                    'rounded-lg',
+                                    'bg-[#1A1E2A]' => request()->is('channels') || request()->is('channels/*'),
+                                ])>
+                                    <a>
+                                        <x-sui-tv-mode class="size-6 text-white" fill="none" />
+                                    </a>
+                                </li>
+                            </div>
+                            <div class="tooltip tooltip-bottom" data-tip="Zařízení">
+                                <li href="/devices" wire:navigate @class([
+                                    'rounded-lg',
+                                    'bg-[#1A1E2A]' => request()->is('devices') || request()->is('devices/*'),
+                                ])>
+                                    <a>
+                                        <x-sui-flip-view class="size-6 text-white" fill="none" />
+                                    </a>
+                                </li>
+                            </div>
+                            <div class="tooltip tooltip-bottom" data-tip="Satelitní karty">
+                                <li href="/sat-cards" wire:navigate @class([
+                                    'rounded-lg',
+                                    'bg-[#1A1E2A]' =>
+                                        request()->is('sat-cards') || request()->is('sat-cards/*'),
+                                ])>
+                                    <a>
+                                        <x-heroicon-o-credit-card class="size-6 text-white/80" fill="none" />
+                                    </a>
+                                </li>
+                            </div>
+                            <div class="tooltip tooltip-bottom" data-tip="Kalendář">
+                                <li href="/calendar" wire:navigate @class([
+                                    'rounded-lg',
+                                    'bg-[#1A1E2A]' => request()->is('calendar') || request()->is('calendar/*'),
+                                ])>
+                                    <a>
+                                        <x-heroicon-o-calendar-days class="size-6 text-white/80" fill="none" />
+                                    </a>
+                                </li>
+                            </div>
+                            <div class="tooltip tooltip-bottom" data-tip="Sftp servery">
+                                <li href="/sftps" wire:navigate @class([
+                                    'rounded-lg',
+                                    'bg-[#1A1E2A]' => request()->is('sftps') || request()->is('sftps/*'),
+                                ])>
+                                    <a>
+                                        <x-heroicon-o-arrow-up-on-square-stack class="size-6 text-white/80"
+                                            fill="none" />
+                                    </a>
+                                </li>
+                            </div>
+                            <div class="tooltip tooltip-bottom" data-tip="Wiki">
+                                <li href="/wiki" wire:navigate @class([
+                                    'rounded-lg',
+                                    'bg-[#1A1E2A]' => request()->is('wiki') || request()->is('wiki/*'),
+                                ])>
+                                    <a>
+                                        <x-heroicon-o-academic-cap class="size-6 text-white/80" fill="none" />
+                                    </a>
+                                </li>
+                            </div>
                         </ul>
                     </x-menu>
                     {{-- main dynamic navigation --}}

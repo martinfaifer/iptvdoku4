@@ -26,8 +26,10 @@ class DevicesMenu extends Component
                 foreach ($category->devices as $device) {
                     $nmsCachedData = Cache::get('nms_' . $device->id);
 
-                    if (!is_null($nmsCachedData) && array_key_exists(0, $nmsCachedData)) {
+                    try {
                         $device->nms_status = $nmsCachedData[0]['nms_device_status_id']['nms_device_status_type_id'];
+                    } catch (\Throwable $th) {
+                        //throw $th;
                     }
                 }
             }

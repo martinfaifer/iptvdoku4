@@ -43,11 +43,13 @@
                                                                         $channel = App\Models\Channel::find($channelId);
 
                                                                     @endphp
-                                                                    <span class="text-sky-300 text-wrap">
-                                                                        <a target="_blank" class="hover:underline"
-                                                                            href="channels/{{ $channel->id }}/multicast">{{ $channel->name }}</a>
-                                                                        ,
-                                                                    </span>
+                                                                    @if (!is_null($channel))
+                                                                        <span class="text-sky-300 text-wrap">
+                                                                            <a target="_blank" class="hover:underline"
+                                                                                href="channels/{{ $channel->id }}/multicast">{{ $channel->name }}</a>
+                                                                            ,
+                                                                        </span>
+                                                                    @endif
                                                                 @endforeach
                                                             @endif
                                                         </div>
@@ -61,7 +63,9 @@
                                                                         $user = App\Models\User::find($userId);
 
                                                                         if ($user) {
-                                                                            $inicials = $user->first_name[0] . $user->last_name[0];
+                                                                            $inicials =
+                                                                                $user->first_name[0] .
+                                                                                $user->last_name[0];
                                                                         }
                                                                     @endphp
                                                                     <div class="avatar placeholder">
@@ -89,7 +93,10 @@
                                                                     $formtedEndDate = '';
                                                                     if (!is_null($event['end_date'])) {
                                                                         $formtedEndDate = now()
-                                                                            ->createFromFormat('Y-m-d', $event['end_date'])
+                                                                            ->createFromFormat(
+                                                                                'Y-m-d',
+                                                                                $event['end_date'],
+                                                                            )
                                                                             ->format('d.m. Y');
                                                                     }
                                                                 @endphp
@@ -182,7 +189,9 @@
                                                                         $user = App\Models\User::find($userId);
 
                                                                         if ($user) {
-                                                                            $inicials = $user->first_name[0] . $user->last_name[0];
+                                                                            $inicials =
+                                                                                $user->first_name[0] .
+                                                                                $user->last_name[0];
                                                                         }
                                                                     @endphp
                                                                     <div class="avatar placeholder">
@@ -210,7 +219,10 @@
                                                                     $formtedEndDate = '';
                                                                     if (!is_null($event['end_date'])) {
                                                                         $formtedEndDate = now()
-                                                                            ->createFromFormat('Y-m-d', $event['end_date'])
+                                                                            ->createFromFormat(
+                                                                                'Y-m-d',
+                                                                                $event['end_date'],
+                                                                            )
                                                                             ->format('d.m. Y');
                                                                     }
                                                                 @endphp

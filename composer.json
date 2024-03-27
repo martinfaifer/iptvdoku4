@@ -19,6 +19,7 @@
         "laravel/reverb": "@beta",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
+        "league/flysystem-ftp": "^3.0",
         "livewire/livewire": "^3.4",
         "phpseclib/phpseclib": "^3.0",
         "pusher/pusher-php-server": "^7.2",

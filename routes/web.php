@@ -2,17 +2,22 @@
 
 use App\Livewire\Auth\Login;
 
+use App\Livewire\Wiki\WikiComponent;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Iptv\Sftps\SftpComponent;
 use App\Livewire\Iptv\Channels\IptvChannel;
 use App\Livewire\Iptv\Devices\DeviceComponent;
 use App\Livewire\Iptv\Calendar\CalendarComponent;
 use App\Livewire\Iptv\Cards\SatelitCardComponent;
-use App\Livewire\Iptv\Sftps\SftpComponent;
 use App\Livewire\Settings\Tags\SettingsTagComponent;
 use App\Livewire\Settings\Users\SettingsUsersComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
-use App\Livewire\Wiki\WikiComponent;
+use App\Livewire\Settings\Geniustv\Discounts\SettingsGeniusTvDiscountsComponent;
+use App\Livewire\Settings\Geniustv\OfferTaxes\SettingsGeniusTvOfferTaxesComponent;
+use App\Livewire\Settings\Geniustv\StaticTaxes\SettingsGeniusTvStaticTaxesComponent;
+use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
+use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
 
 Route::get('login', Login::class)->name('login');
 
@@ -39,6 +44,13 @@ Route::middleware('auth')->group(function () {
         Route::prefix('nangu')->group(function () {
             Route::get('isps', SettingsIspComponent::class);
             Route::get('isps-channel-packages-to-tags', SettingsTagToChannelPackageComponent::class);
+        });
+        Route::prefix('geniustv')->group(function () {
+            Route::get('static-taxes', SettingsGeniusTvStaticTaxesComponent::class);
+            Route::get('channels-taxes', SettingsGeniusTvChannelsTaxesComponent::class);
+            Route::get('channel-packages', SettingsGeniusTvChannelPackagesTaxesComponent::class);
+            Route::get('offer-taxes', SettingsGeniusTvOfferTaxesComponent::class);
+            Route::get('discounts', SettingsGeniusTvDiscountsComponent::class);
         });
     });
 });

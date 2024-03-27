@@ -98,18 +98,17 @@ class StoreChannel extends Component
             'quality' => $qualityToChannel,
             'category' => $this->category,
             'description' => $this->description,
-            'nangu_chunk_store_id' => $this->nangu_chunk_store_id,
-            'nangu_channel_code' => $this->nangu_channel_code,
+            'nangu_chunk_store_id' => trim($this->nangu_chunk_store_id),
+            'nangu_channel_code' => trim($this->nangu_channel_code),
             'geniustv_channel_packages_id' => json_encode($this->geniustvChannelPackage),
             'epg_id' => $this->epgId,
         ]);
 
-        $this->dispatch('update_channels_sidebar');
+        // $this->dispatch('update_channels_sidebar');
         // $this->closeDialog();
 
-        $this->success_alert('Kanál byl přidán');
-
-        return $this->redirect('/channels/'.$channel->id.'/multicast', true);
+        $this->redirect('/channels/'.$channel->id.'/multicast', true);
+        return $this->success_alert('Kanál přidán');
     }
 
     public function closeDialog()

@@ -81,7 +81,7 @@ class MulticastChannel extends Component
     {
         return view('livewire.iptv.channels.multicast.multicast-channel', [
             // 'multicasts' => ChannelMulticast::where('channel_id', $this->channel->id)->with('channel_source')->get(),
-            'multicasts' => $this->channel->multicasts
+            'multicasts' => $this->channel->multicasts->load('channel_source')
         ]);
     }
 }

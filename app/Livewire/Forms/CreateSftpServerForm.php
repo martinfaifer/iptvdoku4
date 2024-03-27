@@ -34,6 +34,9 @@ class CreateSftpServerForm extends Form
     #[Validate('string', message: "Neplatný formát")]
     public string|null $path_to_folder = null;
 
+    #[Validate('required', message: "Vybrrte typ připojení")]
+    public string $connection_type = "";
+
     public function create()
     {
         $this->validate();
@@ -43,7 +46,8 @@ class CreateSftpServerForm extends Form
             'url' => $this->url,
             'username' => $this->username,
             'password' => $this->password,
-            'path_to_folder' => $this->path_to_folder
+            'path_to_folder' => $this->path_to_folder,
+            'connection_type' => $this->connection_type
         ]);
 
         $this->reset();

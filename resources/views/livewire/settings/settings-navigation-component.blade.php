@@ -35,12 +35,78 @@
                     <li @class([
                         'ml-1',
                         'rounded-lg',
-                        'bg-sky-950' => request()->is('settings/nangu/isps-channel-packages-to-tags'),
-                    ]) href="/settings/nangu/isps-channel-packages-to-tags" wire:navigate><a>
-                            <x-heroicon-s-user-group class="size-4"/>
+                        'bg-sky-950' => request()->is(
+                            'settings/nangu/isps-channel-packages-to-tags'),
+                    ]) href="/settings/nangu/isps-channel-packages-to-tags" wire:navigate>
+                        <a>
+                            <x-heroicon-s-user-group class="size-4" />
                             Správa balíčků
+                        </a>
+                    </li>
+
+                </ul>
+            </details>
+        </li>
+        <li>
+            <details open>
+                <summary class="font-semibold ml-1">
+                    <x-heroicon-o-currency-dollar class="size-4" />
+                    Geniustv poplatky
+                </summary>
+                <ul>
+                    <li @class([
+                        'ml-1',
+                        'rounded-lg',
+                        'bg-sky-950' => request()->is('settings/geniustv/static-taxes'),
+                    ]) href="/settings/geniustv/static-taxes" wire:navigate><a>
+                            <x-heroicon-o-currency-dollar class="w-4 h-4" />
+                            Statické poplatky
                         </a></li>
 
+                    <li @class([
+                        'ml-1',
+                        'rounded-lg',
+                        'bg-sky-950' => request()->is(
+                            'settings/geniustv/channels-taxes'),
+                    ]) href="/settings/geniustv/channels-taxes" wire:navigate>
+                        <a>
+                            <x-heroicon-o-currency-dollar class="size-4" />
+                            Poplatky za kanály
+                        </a>
+                    </li>
+                    <li @class([
+                        'ml-1',
+                        'rounded-lg',
+                        'bg-sky-950' => request()->is(
+                            'settings/geniustv/channel-packages'),
+                    ]) href="/settings/geniustv/channel-packages" wire:navigate>
+                        <a>
+                            <x-heroicon-o-currency-dollar class="size-4" />
+                            Poplatky za balíčky
+                        </a>
+                    </li>
+                    <li @class([
+                        'ml-1',
+                        'rounded-lg',
+                        'bg-sky-950' => request()->is(
+                            'settings/geniustv/offer-taxes'),
+                    ]) href="/settings/geniustv/offer-taxes" wire:navigate>
+                        <a>
+                            <x-heroicon-o-currency-dollar class="size-4" />
+                            Poplatky za offery
+                        </a>
+                    </li>
+                    <li @class([
+                        'ml-1',
+                        'rounded-lg',
+                        'bg-sky-950' => request()->is(
+                            'settings/geniustv/discounts'),
+                    ]) href="/settings/geniustv/discounts" wire:navigate>
+                        <a>
+                            <x-heroicon-o-currency-dollar class="size-4" />
+                            Slevy
+                        </a>
+                    </li>
                 </ul>
             </details>
         </li>

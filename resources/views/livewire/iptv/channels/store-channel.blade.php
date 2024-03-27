@@ -46,7 +46,8 @@
                 </div>
                 {{-- geniustv packages --}}
                 <div class="col-span-6 mb-4">
-                    <x-choices label="GeniusTV balíčky" wire:model="geniustvChannelPackage" :options="$geniusTVChannelPackages" multiple/>
+                    <x-choices label="GeniusTV balíčky" wire:model="geniustvChannelPackage" :options="$geniusTVChannelPackages"
+                        multiple />
                     <div>
                         @error('form.geniustvChannelPackage')
                             <span class="error">{{ $message }}</span>
@@ -55,7 +56,7 @@
                 </div>
                 {{-- epgs --}}
                 <div class="col-span-6 mb-4">
-                    <x-choices-offline label="EPG" wire:model="epgId" :options="$channelsEpgs" searchable single/>
+                    <x-choices-offline label="EPG" wire:model="epgId" :options="$channelsEpgs" searchable single />
                     <div>
                         @error('form.epgId')
                             <span class="error">{{ $message }}</span>
@@ -111,8 +112,10 @@
                         wire:click='closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700  hover:shadow-sky-700/50 border-none text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                    <x-button label="Přidat"
+                        class="bg-sky-800 hover:bg-sky-700  hover:shadow-sky-700/50 border-none text-white font-semibold w-full sm:w-28"
+                        type="submit" spinner="store">
+                    </x-button>
                 </div>
             </div>
         </x-form>

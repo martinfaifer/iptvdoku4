@@ -15,7 +15,10 @@ class ChannelsService
         }
 
         return (new ConnectService('iptv'))->connect(
-            ['getChannelDetail' => ['channelKey' => $nangu_channel_code, 'ispCode' => config('services.api.nanguTv.isp_code')]],
+            ['getChannelDetail' => [
+                'channelKey' => $nangu_channel_code,
+                'ispCode' => config('services.api.nanguTv.isp_code')
+            ]],
             'getChannelDetail'
         );
     }

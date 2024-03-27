@@ -52,12 +52,12 @@ class UpdateChannel extends Component
         }
 
         $this->closeDialog();
-        $this->dispatch('update_channels_sidebar');
+        // $this->dispatch('update_channels_sidebar');
         // $this->dispatch('update_iptv_channel.' . $this->channel->id);
         // $this->dispatch('update_iptv_channel_multicast.' . $this->channel->id, channelId: $this->channel->id);
-        $this->success_alert('Upraveno');
 
-        return $this->redirect('/channels/'.$this->channel->id.'/multicast', true);
+        $this->redirect('/channels/'.$this->channel->id.'/multicast', true);
+        return $this->success_alert('Upraveno');
     }
 
     public function closeDialog()

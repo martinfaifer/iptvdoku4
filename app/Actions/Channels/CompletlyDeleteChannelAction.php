@@ -6,6 +6,7 @@ use App\Actions\Devices\RemoveChannelFromDeviceAction;
 use App\Models\Channel;
 use App\Models\ChannelMulticast;
 use App\Models\ChannelQualityWithIp;
+use App\Models\Note;
 
 class CompletlyDeleteChannelAction
 {
@@ -16,7 +17,7 @@ class CompletlyDeleteChannelAction
 
     public function __invoke(): bool
     {
-        try {
+        // try {
             // delete h264 & h265
             if (! is_null($this->channel->h264)) {
                 ChannelQualityWithIp::where('h264_id', $this->channel->h264->id)->delete();
@@ -65,11 +66,13 @@ class CompletlyDeleteChannelAction
                 ))();
             }
 
+            Note::where('channel_id', $this->channel->id)->delete();
+
             $this->channel->delete();
 
             return true;
-        } catch (\Throwable $th) {
-            return false;
-        }
+        // } catch (\Throwable $th) {
+        //     return false;
+        // }
     }
 }

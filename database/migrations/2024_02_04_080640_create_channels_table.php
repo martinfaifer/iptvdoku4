@@ -18,7 +18,7 @@ return new class extends Migration
             $table->boolean('is_radio')->default(false);
             $table->boolean('is_multiscreen')->default(true);
             $table->string('quality');
-            $table->string('category');
+            $table->string('category')->nullable();
             $table->longText('description')->nullable();
             $table->string('nangu_chunk_store_id')->nullable();
             $table->string('nangu_channel_code')->nullable()->unique();

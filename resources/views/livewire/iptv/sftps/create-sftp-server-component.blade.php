@@ -8,7 +8,7 @@
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 md:col-span-6 mb-4">
+                <div class="col-span-12 md:col-span-4 mb-4">
                     <x-input label="Popis serveru" wire:model="storeForm.name" />
                     <div>
                         @error('name')
@@ -16,7 +16,15 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-12 md:col-span-6 mb-4">
+                <div class="col-span-12 md:col-span-4 mb-4">
+                    <x-choices label="Typ připojení" :options="$connectionTypes" wire:model="storeForm.connection_type" single />
+                    <div>
+                        @error('connection_type')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-span-12 md:col-span-4 mb-4">
                     <x-input label="Url" wire:model="storeForm.url" />
                     <div>
                         @error('url')

@@ -21,11 +21,25 @@ class Navbar extends Component
 
     public array $weather;
 
+    public bool $alertDrawer = false;
+
+    public bool $calendarEventsDrawer = false;
+
     public function mount()
     {
         $this->runningEvents = $this->running_events();
         $this->user = Auth::user();
         $this->weather = $this->get_weather();
+    }
+
+    public function openAlertDrawer()
+    {
+        return $this->alertDrawer = true;
+    }
+
+    public function openCalendarEventsDrawer()
+    {
+        return $this->calendarEventsDrawer = true;
     }
 
     #[On('echo:iptvAlerts,BroadcastIptvDohledAlertsEvent')]
