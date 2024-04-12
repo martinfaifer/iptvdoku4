@@ -1,18 +1,19 @@
 <div>
     <x-share.cards.base-card title="">
-        <div class="flex justify-between">
-            <div class="w-96">
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12 sm:col-span-9 ">
                 <x-input placeholder="Vyhledejte ..." wire:model.live="query"
                     class="!bg-[#0F151F] input-md placeholder:text-gray-600" icon="o-magnifying-glass" autofocus />
             </div>
-            <div class="w-64">
+            <div class="col-span-12 sm:col-span-3">
                 <x-button
-                    class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm"
+                    class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm mt-2 absolute right-10"
                     wire:click="openCreateModal">
                     + Nový poplatek za balíček
                 </x-button>
             </div>
         </div>
+
         <div>
             <x-table :headers="$headers" :rows="$channelPackagesTaxes" with-pagination>
                 @scope('cell_channels_id', $channelPackagesTax)
@@ -26,6 +27,28 @@
                             {{ $channel->name }} ,
                         @endif
                     @endforeach
+                @endscope
+                @scope('cell_exception', $channelPackagesTax)
+                    @if (!is_null($channelPackagesTax->exception))
+                        @foreach (json_decode($channelPackagesTax->exception) as $exception_id)
+                            @php
+                                $exception = null;
+
+                                $exception = App\Models\Channel::find($exception_id);
+                            @endphp
+                            @if (!is_null($exception))
+                                {{ $exception->name }} ,
+                            @endif
+                        @endforeach
+                    @endif
+
+                @endscope
+                @scope('cell_must_contains_all', $channelPackagesTax)
+                    @if ($channelPackagesTax->must_contains_all == true)
+                        <x-heroicon-o-check class="text-green-500 size-4" />
+                    @else
+                        <x-heroicon-o-x-mark class="text-red-500 size-4" />
+                    @endif
                 @endscope
                 @scope('cell_actions', $channelPackagesTax)
                     <div class="flex mx-auto gap-4">
@@ -94,10 +117,18 @@
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Kanály" wire:model="updateForm.channels_id"
-                        :options="$channels" searchable />
+                    <x-choices-offline label="Kanály" wire:model="updateForm.channels_id" :options="$channels"
+                        searchable />
                     <div>
                         @error('name')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-span-12 mb-4">
+                    <x-choices-offline label="Výjimky" wire:model="updateForm.exception" :options="$channels" searchable />
+                    <div>
+                        @error('exception')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
@@ -118,6 +149,10 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
+                </div>
+                <div class="col-span-12 mb-4">
+                    <x-checkbox label="Musí obsahovat všechny kanály služba"
+                        wire:model="updateForm.must_contains_all" />
                 </div>
             </div>
             {{-- action section --}}

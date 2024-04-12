@@ -20,10 +20,11 @@
                     @enderror
                 </div>
 
-                <x-slot:actions>
-                    <x-button label="Přihlásit se" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full md:w-28"
-                        type="submit" />
-                </x-slot:actions>
+                <div>
+                    <x-button label="Přihlásit se"
+                        class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full" type="submit" />
+                </div>
+
             </x-form>
         </div>
     </div>

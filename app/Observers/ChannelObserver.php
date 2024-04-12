@@ -7,6 +7,7 @@ use App\Models\Loger;
 use App\Models\Channel;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Artisan;
 use App\Jobs\GetChannelDetailFromNanguApiJob;
 use App\Services\Api\NanguTv\ChannelsService;
@@ -38,6 +39,8 @@ class ChannelObserver
             GetChannelDetailFromNanguApiJob::dispatch($channel, 3600);
             // Artisan::call('channels:get-detail-from-nangu-api');
         }
+
+        Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
     }
 
     public function updated(Channel $channel)
@@ -62,7 +65,7 @@ class ChannelObserver
         );
 
         GetChannelDetailFromNanguApiJob::dispatch($channel, 3600);
-        // Artisan::call('channels:get-detail-from-nangu-api');
+        Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
     }
 
     public function deleted(Channel $channel)
@@ -78,5 +81,6 @@ class ChannelObserver
         );
         // delete channel contacts
         Contact::where('type', 'channel')->where('item_id', $channel->id)->delete();
+        Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
     }
 }

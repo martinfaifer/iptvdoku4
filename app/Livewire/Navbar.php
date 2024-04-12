@@ -45,7 +45,11 @@ class Navbar extends Component
     #[On('echo:iptvAlerts,BroadcastIptvDohledAlertsEvent')]
     public function refreshAlerts()
     {
-        $this->iptv_dohled_alerts = Cache::get('iptv_dohled_alerts');
+        if (Cache::has('iptv_dohled_alerts')) {
+            $this->iptv_dohled_alerts = Cache::get('iptv_dohled_alerts');
+        } else {
+            $this->iptv_dohled_alerts = [];
+        }
     }
 
     public function render()

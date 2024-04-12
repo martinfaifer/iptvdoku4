@@ -4,7 +4,14 @@ namespace App\Console\Commands;
 
 use App\Models\NanguSubscriber;
 use Illuminate\Console\Command;
-use App\Services\Api\NanguTv\NanguSubscriberService;
+use App\Models\NanguSubscription;
+use App\Models\NanguStbAccountCode;
+use Illuminate\Support\Facades\Artisan;
+use App\Services\Api\NanguTv\NanguOffersService;
+use App\Services\Api\NanguTv\NanguChannelsService;
+use App\Services\Invoices\CreateNanguInvoicePerIsp;
+use App\Services\Api\NanguTv\NanguSubscribersService;
+use App\Services\Api\NanguTv\NanguSubscriptionsService;
 
 class GetNanguMonthlyReportDataCommand extends Command
 {
@@ -27,17 +34,31 @@ class GetNanguMonthlyReportDataCommand extends Command
      */
     public function handle()
     {
+        Artisan::call('course:get-current');
         // delete all records
-        NanguSubscriber::get()->each(function($subscriber) {
-            $subscriber->delete();
-        });
-        // dd();
+        NanguStbAccountCode::query()->delete();
+        NanguSubscription::query()->delete();
+        NanguSubscriber::query()->delete();
         // get subscribers
-        (new NanguSubscriberService())->get();
+        (new NanguSubscribersService())->get();
         // get subscriptions belongs to subscribers
+        (new NanguSubscriptionsService())->get();
+        (new NanguSubscriptionsService())->getInfo();
+        //
+        (new NanguOffersService())->getInfo();
+
+        // get channels
+        (new NanguChannelsService())->get_channels_by_channels_packages_code();
 
         // get stb account codes belongs to subscriptions
 
         // get stbs belongs to stb account codes
+
+        // calculate invoices
+        (new CreateNanguInvoicePerIsp())->create();
+
+        // create channels usage per NanguISP
+        (new NanguChannelsService())->count_channels_usage_per_isp();
+        (new NanguChannelsService())->count_channels_usage_total();
     }
 }

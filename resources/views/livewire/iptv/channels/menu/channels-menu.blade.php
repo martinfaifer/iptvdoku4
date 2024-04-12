@@ -1,5 +1,5 @@
 <div>
-    <ul class="menu w-60" wire:scroll>
+    <ul class="menu w-60">
         @foreach ($channels as $channel)
             <li id="channel_{{ $channel->id }}" wire:key='channel_{{ $channel->id }}' @class([
                 'ml-1',

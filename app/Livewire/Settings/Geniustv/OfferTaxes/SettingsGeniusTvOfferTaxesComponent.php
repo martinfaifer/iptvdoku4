@@ -17,6 +17,8 @@ class SettingsGeniusTvOfferTaxesComponent extends Component
 {
     use NotificationTrait, WithPagination;
 
+    public string $query = "";
+
     public CreateSettingsGeniusTvOfferTaxesForm $form;
 
     public UpdateSettingsGeniusTvOfferTaxesForm $updateForm;
@@ -91,7 +93,7 @@ class SettingsGeniusTvOfferTaxesComponent extends Component
         return view('livewire.settings.geniustv.offer-taxes.settings-genius-tv-offer-taxes-component', [
             'offerTaxes' => GeniusTVChannelsOffersTax
                 ::with('currency_name')
-                // ->search($this->query)
+                ->search($this->query)
                 ->paginate(5),
             'headers' => [
                 ['key' => 'offer', 'label' => 'Offer', 'class' => 'text-white/80'],

@@ -1,32 +1,33 @@
 <div>
     <x-share.cards.base-card title="">
-        <div class="flex justify-between">
-            <div class="w-96">
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12 sm:col-span-9 ">
                 <x-input placeholder="Vyhledejte ..." wire:model.live="query"
                     class="!bg-[#0F151F] input-md placeholder:text-gray-600" icon="o-magnifying-glass" autofocus />
             </div>
-            <div class="w-64">
+            <div class="col-span-12 sm:col-span-3">
                 <x-button
-                    class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm"
+                    class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm mt-2 absolute right-10"
                     wire:click="openCreateModal">
                     + Nový poplatek za kanál
                 </x-button>
             </div>
         </div>
+
         <div>
             <x-table :headers="$headers" :rows="$channelsTaxes" with-pagination>
                 @scope('cell_actions', $channelsTax)
-                <div class="flex mx-auto gap-4">
-                    <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
-                        wire:click="edit({{ $channelsTax->id }})">
-                        <x-heroicon-o-pencil class="w-4 h-4 text-green-500" />
-                    </button>
-                    <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
-                        wire:click="destroy({{ $channelsTax->id }})" wire:confirm="Opravdu odebrat poplatek?">
-                        <x-heroicon-o-trash class="w-4 h-4 text-red-500" />
-                    </button>
-                </div>
-            @endscope
+                    <div class="flex mx-auto gap-4">
+                        <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
+                            wire:click="edit({{ $channelsTax->id }})">
+                            <x-heroicon-o-pencil class="w-4 h-4 text-green-500" />
+                        </button>
+                        <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
+                            wire:click="destroy({{ $channelsTax->id }})" wire:confirm="Opravdu odebrat poplatek?">
+                            <x-heroicon-o-trash class="w-4 h-4 text-red-500" />
+                        </button>
+                    </div>
+                @endscope
             </x-table>
         </div>
     </x-share.cards.base-card>
@@ -37,7 +38,8 @@
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Kanál" wire:model="form.channel_id" :options="$channels" searchable single />
+                    <x-choices-offline label="Kanál" wire:model="form.channel_id" :options="$channels" searchable
+                        single />
                     <div>
                         @error('name')
                             <span class="error">{{ $message }}</span>
@@ -82,7 +84,8 @@
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline disabled readonly label="Kanál" wire:model="updateForm.channel_id" :options="$channels" searchable single />
+                    <x-choices-offline disabled readonly label="Kanál" wire:model="updateForm.channel_id"
+                        :options="$channels" searchable single />
                     <div>
                         @error('name')
                             <span class="error">{{ $message }}</span>
@@ -98,7 +101,8 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Měna" wire:model="updateForm.currency" :options="$currencies" searchable single />
+                    <x-choices-offline label="Měna" wire:model="updateForm.currency" :options="$currencies" searchable
+                        single />
                     <div>
                         @error('currency')
                             <span class="error">{{ $message }}</span>

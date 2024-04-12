@@ -31,7 +31,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gradient-to-b from-[#020313] min-h-screen">
+{{-- bg-gradient-to-b from-[#020313] --}}
+
+<body class="bg-gradient-to-r from-slate-900 to-sky-950 min-h-screen">
     <x-toast />
     @auth
         <x-spotlight search-text="Vyhledejte ... " no-results-text="Ops! Nenalezeno." class="justify-center"
@@ -134,8 +136,6 @@
                         </div>
                     </x-menu>
                 </x-slot:sidebar>
-
-
             @endauth
             <x-slot:content class="mt-14">
                 @auth

@@ -1,13 +1,13 @@
 <div>
     <x-share.cards.base-card title="">
-        <div class="flex justify-between">
-            <div class="w-96">
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12 sm:col-span-9 ">
                 <x-input placeholder="Vyhledejte ..." wire:model.live="query"
                     class="!bg-[#0F151F] input-md placeholder:text-gray-600" icon="o-magnifying-glass" autofocus />
             </div>
-            <div class="w-64">
+            <div class="col-span-12 sm:col-span-3">
                 <x-button
-                    class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm"
+                    class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm mt-2 absolute right-10"
                     wire:click="openCreateModal">
                     + Nový poplatek
                 </x-button>
@@ -99,7 +99,8 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Měna" wire:model="updateForm.currency" :options="$currencies" searchable single />
+                    <x-choices-offline label="Měna" wire:model="updateForm.currency" :options="$currencies" searchable
+                        single />
                     <div>
                         @error('currency')
                             <span class="error">{{ $message }}</span>

@@ -11,16 +11,18 @@ class H265Observer
 {
     public function created(H265 $h265)
     {
-        LogJob::dispatch(
-            user: Auth::user()->email,
-            type: Loger::CREATED_TYPE,
-            item: "h265:$h265->channel_id",
-            payload: json_encode([
-                'id' => $h265->id,
-                'devices_id' => $h265->device_id,
-                'status' => $h265->status,
-            ])
-        );
+        if (Auth::user()) {
+            LogJob::dispatch(
+                user: Auth::user()->email,
+                type: Loger::CREATED_TYPE,
+                item: "h265:$h265->channel_id",
+                payload: json_encode([
+                    'id' => $h265->id,
+                    'devices_id' => $h265->device_id,
+                    'status' => $h265->status,
+                ])
+            );
+        }
     }
 
     public function updated(H265 $h265)

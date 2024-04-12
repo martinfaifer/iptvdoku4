@@ -37,6 +37,20 @@ class LogComponent extends Component
         return $this->detailModal = false;
     }
 
+    public function placeholder()
+    {
+        return <<<'HTML'
+        <div>
+            <div class="flex flex-col gap-4 w-52">
+                <div class="skeleton h-32 w-full"></div>
+                <div class="skeleton h-4 w-28"></div>
+                <div class="skeleton h-4 w-full"></div>
+                <div class="skeleton h-4 w-full"></div>
+            </div>
+        </div>
+        HTML;
+    }
+
     #[On('echo:refresh_logs_{column}_{columnValue},BroadcastLogEvent')]
     public function refreshLogs()
     {

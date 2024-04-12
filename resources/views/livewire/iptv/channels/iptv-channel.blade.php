@@ -11,19 +11,19 @@
 
                         <li href="/channels/{{ $channel->id }}/multicast" wire:navigate @class([
                             'rounded-lg',
-                            'bg-[#282C39]' => request()->is('channels/' . $channel->id . '/multicast'),
+                            'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/multicast'),
                         ])><a>
                                 multicast</a></li>
 
                         <li href="/channels/{{ $channel->id }}/h264" wire:navigate @class([
                             'rounded-lg',
-                            'bg-[#282C39]' => request()->is('channels/' . $channel->id . '/h264'),
+                            'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/h264'),
                         ])><a>
                                 H264</a></li>
 
                         <li href="/channels/{{ $channel->id }}/h265" wire:navigate @class([
                             'rounded-lg',
-                            'bg-[#282C39]' => request()->is('channels/' . $channel->id . '/h265'),
+                            'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/h265'),
                         ])><a>
                                 H265</a></li>
 
@@ -39,13 +39,13 @@
         @else
             {{-- tags --}}
             <div>
-                <livewire:tag-component type="channel" itemId="{{ $channel->id }}"></livewire:tag-component>
+                <livewire:tag-component type="channel" itemId="{{ $channel->id }}"></livewire:tag-component lazy>
             </div>
             <div class="grid grid-cols-12">
                 <div class="col-span-1 mt-4">
                     @if (!is_null($channel->logo))
-                        <img class="object-contain w-16 h-12" src="/storage/{{ str_replace('public/', '', $channel->logo) }}"
-                            alt="" />
+                        <img class="object-contain w-16 h-12"
+                            src="/storage/{{ str_replace('public/', '', $channel->logo) }}" alt="" />
                     @endif
                 </div>
                 <div class="col-span-11 flex">
@@ -63,30 +63,27 @@
                     <livewire:iptv.channels.update-channel :channel="$channel"></livewire:iptv.channels.update-channel>
                     <livewire:iptv.channels.delete-channel :channel="$channel"></livewire:iptv.channels.delete-channel>
                     {{-- end of actions --}}
-
-                    {{-- info section --}}
-                    <livewire:iptv.channels.channel-detail :channel="$channel"></livewire:iptv.channels.channel-detail>
-                    {{-- end of info section --}}
-                    {{-- end of update modal --}}
+                    <livewire:iptv.channels.channel-detail :channel="$channel"></livewire:iptv.channels.channel-detail
+                        lazy>
                 </div>
             </div>
             <hr
                 class="w-full h-1 mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-none rounded">
-            <div ">
+            <div>
                 {{-- split to multicast , h264, h265 --}}
                 {{-- multicast --}}
-                  @if (request()->is('channels/' . $channel->id . '/multicast'))
-                <livewire:iptv.channels.multicast.multicast-channel :channel="$channel">
-        @endif
-        {{-- h264 --}}
-        @if (request()->is('channels/' . $channel->id . '/h264'))
-            <livewire:iptv.channels.h264.h264-channel :channel="$channel">
-        @endif
-        {{-- h265 --}}
-        @if (request()->is('channels/' . $channel->id . '/h265'))
-            <livewire:iptv.channels.h265.h265-channel :channel="$channel">
+                @if (request()->is('channels/' . $channel->id . '/multicast'))
+                    <livewire:iptv.channels.multicast.multicast-channel :channel="$channel" lazy>
+                @endif
+                {{-- h264 --}}
+                @if (request()->is('channels/' . $channel->id . '/h264'))
+                    <livewire:iptv.channels.h264.h264-channel :channel="$channel" lazy>
+                @endif
+                {{-- h265 --}}
+                @if (request()->is('channels/' . $channel->id . '/h265'))
+                    <livewire:iptv.channels.h265.h265-channel :channel="$channel" lazy>
+                @endif
+            </div>
         @endif
     </div>
-    @endif
-</div>
 </div>

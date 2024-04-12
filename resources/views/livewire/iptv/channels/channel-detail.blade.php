@@ -6,7 +6,7 @@
         </label>
     </div>
     {{-- info drawer --}}
-    <x-drawer wire:model='channelDetailDrawer' separator right class="lg:w-1/4 !bg-[#0c111b]">
+    <x-drawer wire:model='channelDetailDrawer' separator right class="lg:w-1/4 !bg-[#0E1E33]">
         {{-- informations about channel quality, category, description --}}
         <div>
             <div class="col-span-12 mb-2">

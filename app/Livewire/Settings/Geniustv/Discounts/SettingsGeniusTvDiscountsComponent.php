@@ -16,6 +16,8 @@ class SettingsGeniusTvDiscountsComponent extends Component
 {
     use NotificationTrait, WithPagination;
 
+    public string $query = "";
+
     public CreateSettingsGeniusTvDiscountsForm $form;
 
     public UpdateSettingsGeniusTvDiscountsForm $updateForm;
@@ -82,13 +84,12 @@ class SettingsGeniusTvDiscountsComponent extends Component
     }
 
     #[On('refresh_settings_genius_tv_discoints')]
-
     public function render()
     {
         return view('livewire.settings.geniustv.discounts.settings-genius-tv-discounts-component', [
             'discounts' => GeniusTvDiscount
                 ::with('nanguIsp')
-                // ->search($this->query)
+                ->search($this->query)
                 ->paginate(5),
             'headers' => [
                 ['key' => 'nanguIsp.name', 'label' => 'Poskytoval', 'class' => 'text-white/80'],

@@ -15,7 +15,7 @@ use Livewire\Component;
 
 class MulticastChannel extends Component
 {
-    use CheckIfChannelIsInIptvDohledTrait , NotificationTrait;
+    use CheckIfChannelIsInIptvDohledTrait, NotificationTrait;
 
     public UpdateMulticastChannelForm $form;
 
@@ -37,13 +37,13 @@ class MulticastChannel extends Component
 
         $this->devices = $temporaryDevices->filter(function ($device) {
             if (is_array($device->has_channels)) {
-                return in_array('multicast:'.$this->channel->id, $device->has_channels);
+                return in_array('multicast:' . $this->channel->id, $device->has_channels);
             }
         });
 
         $this->backupDevices = $temporaryDevices->filter(function ($device) {
             if (is_array($device->has_channels)) {
-                return in_array('multicast:'.$this->channel->id.':backup', $device->has_channels);
+                return in_array('multicast:' . $this->channel->id . ':backup', $device->has_channels);
             }
         });
     }
@@ -58,7 +58,7 @@ class MulticastChannel extends Component
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_multicasts.'.$this->channel->id);
+        $this->dispatch('update_multicasts.' . $this->channel->id);
 
         return $this->success_alert('Změněno');
     }
@@ -71,9 +71,20 @@ class MulticastChannel extends Component
     public function destroy(ChannelMulticast $multicast)
     {
         $multicast->delete();
-        $this->dispatch('update_multicasts.'.$this->channel->id);
+        $this->dispatch('update_multicasts.' . $this->channel->id);
 
         return $this->success_alert('Odebráno');
+    }
+
+    public function placeholder()
+    {
+        return <<<'HTML'
+        <div class="flex items-center justify-center">
+            <div>
+                <span class="loading loading-dots loading-lg mt-16"></span>
+            </div>
+        </div>
+        HTML;
     }
 
     #[On('update_multicasts.{channel.id}')]

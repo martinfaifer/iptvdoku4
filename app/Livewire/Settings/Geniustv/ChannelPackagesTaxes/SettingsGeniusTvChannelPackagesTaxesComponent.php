@@ -18,6 +18,8 @@ class SettingsGeniusTvChannelPackagesTaxesComponent extends Component
 {
     use NotificationTrait, WithPagination;
 
+    public string $query = "";
+
     public CreateSettingsGeniusTvChannelPackagesTaxesForm $form;
 
     public UpdateSettingsGeniusTvChannelPackagesTaxesForm $updateForm;
@@ -92,12 +94,14 @@ class SettingsGeniusTvChannelPackagesTaxesComponent extends Component
         return view('livewire.settings.geniustv.channel-packages-taxes.settings-genius-tv-channel-packages-taxes-component', [
             'channelPackagesTaxes' => GeniusTVchannelPackagesTax
                 ::with('currency_name')
-                // ->search($this->query)
+                ->search($this->query)
                 ->paginate(5),
             'headers' => [
-                ['key' => 'channels_id', 'label' => 'Kanál', 'class' => 'text-white/80'],
+                ['key' => 'channels_id', 'label' => 'Kanály', 'class' => 'text-white/80'],
+                ['key' => 'exception', 'label' => 'Výjimky', 'class' => 'text-white/80'],
                 ['key' => 'price', 'label' => 'Cena', 'class' => 'text-white/80'],
                 ['key' => 'currency_name.name', 'label' => 'Měna', 'class' => 'text-white/80'],
+                ['key' => 'must_contains_all', 'label' => 'Musí být všechny kanály', 'class' => 'text-white/80'],
                 ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
             ],
         ]);

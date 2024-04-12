@@ -14,7 +14,7 @@ class GetChannelsInformaetionsFromIptvDohled extends Command
      *
      * @var string
      */
-    protected $signature = 'channels:get-informartions-from-dohled';
+    protected $signature = 'channels:get-informations-from-dohled';
 
     /**
      * The console command description.
@@ -30,7 +30,9 @@ class GetChannelsInformaetionsFromIptvDohled extends Command
     {
         // multicasts
         ChannelMulticast::get()->each(function ($multicast) {
-            GetChannelsInformaetionsFromIptvDohledJob::dispatch($multicast->stb_ip);
+            if (!is_null($multicast->stb_ip)) {
+                GetChannelsInformaetionsFromIptvDohledJob::dispatch($multicast->stb_ip);
+            }
         });
 
         // h264s && h265s

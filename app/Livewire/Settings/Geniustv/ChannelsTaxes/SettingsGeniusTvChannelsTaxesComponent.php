@@ -93,7 +93,7 @@ class SettingsGeniusTvChannelsTaxesComponent extends Component
         return view('livewire.settings.geniustv.channels-taxes.settings-genius-tv-channels-taxes-component', [
             'channelsTaxes' => GeniusTVchannelsTax
                 ::with('currency_name', 'channel')
-                // ->search($this->query)
+                ->search($this->query)
                 ->paginate(5),
             'headers' => [
                 ['key' => 'channel.name', 'label' => 'Kanál', 'class' => 'text-white/80'],

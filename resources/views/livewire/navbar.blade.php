@@ -1,5 +1,6 @@
 <div>
-    <div class="navbar fixed bg-[#06090e] bg-opacity-20 mb-1 top-0 right-0 z-10 min-h-8 backdrop-blur-md">
+    <div
+        class="navbar fixed bg-gradient-to-r from-slate-900/20 to-sky-950/20 mb-1 top-0 right-0 z-10 min-h-8 backdrop-blur-xl">
         <div class="flex-1">
 
         </div>
@@ -53,8 +54,9 @@
                                 @endif
                                 @if (str_contains($weather['description'], 'clouds'))
                                     <img class="object-cover size-6" src="/storage/svgs/clouds.svg" alt="" />
-                                @else
-                                    <img class="object-cover size-6" src="/storage/svgs/sunny.svg" alt="" />
+                                @endif
+                                @if (str_contains($weather['description'], 'sunny'))
+                                    <img class="object-cover size-6" src="/storage/svgs/sunny" alt="" />
                                 @endif
                             </div>
                         @else
@@ -77,7 +79,7 @@
                                                     {{ $weather['location'] }}
                                                 </p>
                                             </div>
-                                            <div class="col-span-4 inline-flex">
+                                            <div class="col-span-4 inline-flex -ml-3">
                                                 <div>
                                                     @if (str_contains($weather['description'], 'rain'))
                                                         <div class="avatar">
@@ -145,7 +147,7 @@
                                                     @endif
                                                 </div>
                                                 <div>
-                                                    <p class="text-2xl font-bold">
+                                                    <p class="text-2xl font-bold -ml-3">
                                                         {{ $weather['temp'] }}°C
                                                     </p>
                                                 </div>
@@ -181,7 +183,6 @@
                             {{ $user->first_name[0] }}
                             {{ $user->last_name[0] }}
                         </span>
-
                     </div>
                     <ul tabindex="0"
                         class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-[#0e151f] bg-clip-padding backdrop-filter
@@ -213,23 +214,24 @@
         </div>
     </div>
     {{-- alert drawer --}}
-    <x-drawer wire:model="alertDrawer" id="alert-drawer" right class="lg:w-1/4 !bg-[#0c111b]">
+    <x-drawer wire:model="alertDrawer" id="alert-drawer" right class="lg:w-1/4 !bg-[#0E1E33]">
         {{-- alerts --}}
-        @if (!empty($iptv_dohled_alerts))
-            @foreach ($iptv_dohled_alerts as $iptv_dohled_alert)
-                <div role="alert" class="alert alert-error mb-3 text-gray-100 font-semibold">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{{ $iptv_dohled_alert['nazev'] }}</span>
-                </div>
-            @endforeach
-        @endif
+        {{-- @if (!empty($iptv_dohled_alerts)) --}}
+        {{-- @foreach ($iptv_dohled_alerts as $iptv_dohled_alert) --}}
+        <div role="alert" class="alert alert-error mb-1 text-gray-100 font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 size-4" fill="none"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {{-- <span>{{ $iptv_dohled_alert['nazev'] }}</span> --}}
+            <span>test</span>
+        </div>
+        {{-- @endforeach
+        @endif --}}
     </x-drawer>
     {{-- calendar events drawer --}}
-    <x-drawer wire:model='calendarEventsDrawer' class="lg:w-1/4 !bg-[#0c111b]" right>
+    <x-drawer wire:model='calendarEventsDrawer' class="lg:w-1/4 !bg-[#0E1E33]" right>
         @if (!empty($runningEvents))
             <div class="col-span-12 mb-6">
                 <p class="font-semibold text-lg">Probíhající události</p>

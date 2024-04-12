@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('subscriptionState');
             $table->string('tariffCode')->nullable();
             $table->string('localityCode')->nullable();
-            $table->string('channelPackagesCodes')->nullable();
-            $table->string('offers')->nullable();
+            $table->longText('channelPackagesCodes')->nullable();
+            $table->longText('offers')->nullable();
             $table->longText('channels')->nullable();
             $table->timestamps();
 
@@ -27,7 +27,6 @@ return new class extends Migration
             $table->index('subscriptionState');
             $table->index('tariffCode');
             $table->index('localityCode');
-            $table->index('offers');
         });
     }
 

@@ -1,6 +1,7 @@
 <div>
-    <x-button label="Přidat událost" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full" type="submit"
-        spinner="save2" wire:click='openModal()' />
+    <x-button label="Přidat událost"
+        class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 shadow-cyan-50/10 hover:shadow-cyan-500/50 text-white/80 btn-md w-full"
+        type="submit" spinner="save2" wire:click='openModal()' />
 
     {{-- create modal --}}
     <x-modal wire:model="storeModal" title="Nová událost" persistent class="modal-bottom sm:modal-middle fixed">
@@ -48,8 +49,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-choices-offline label="Vyberte kanál/y" wire:model="form.channels"
-                        :options="$channels" searchable>
+                    <x-choices-offline label="Vyberte kanál/y" wire:model="form.channels" :options="$channels" searchable>
                     </x-choices-offline>
                     <div>
                         @error('users')
@@ -58,8 +58,8 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-choices-offline label="Štítek s akcí" wire:model="form.tag_id"
-                        :options="$tags" searchable single>
+                    <x-choices-offline label="Štítek s akcí" wire:model="form.tag_id" :options="$tags" searchable
+                        single>
                     </x-choices-offline>
                     <div>
                         @error('users')

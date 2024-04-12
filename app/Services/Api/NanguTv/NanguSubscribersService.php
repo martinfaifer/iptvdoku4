@@ -6,7 +6,7 @@ use App\Models\NanguIsp;
 use App\Models\NanguSubscriber;
 use App\Services\Api\NanguTv\ConnectService;
 
-class NanguSubscriberService
+class NanguSubscribersService
 {
     public function get()
     {

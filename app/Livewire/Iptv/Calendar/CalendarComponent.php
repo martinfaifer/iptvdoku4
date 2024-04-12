@@ -43,14 +43,14 @@ class CalendarComponent extends Component
                 $this->events[] = [
                     'label' => $singleEvent->label,
                     'description' => $singleEvent->description,
-                    'css' => $singleEvent->background_color->color,
+                    'css' => "blue",
                     'date' => now()->createFromFormat("Y-m-d", $singleEvent->start_date),
                 ];
             } else {
                 $this->events[] = [
                     'label' => $singleEvent->label,
                     'description' => $singleEvent->description,
-                    'css' => $singleEvent->background_color->color,
+                    'css' => "blue",
                     'range' => [now()->createFromFormat("Y-m-d", $singleEvent->start_date), now()->createFromFormat("Y-m-d", $singleEvent->end_date)],
                 ];
             }

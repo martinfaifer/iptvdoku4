@@ -269,15 +269,15 @@
                 <div class="grid grid-cols-12 gap-4">
                     {{-- logs --}}
                     <div class="col-span-12 md:col-span-4 mb-4">
-                        <livewire:log-component columnValue="device:{{ $device->id }}" column="item" />
+                        <livewire:log-component columnValue="device:{{ $device->id }}" column="item" lazy/>
                     </div>
                     {{-- contacts --}}
                     <div class="col-span-12 md:col-span-4">
-                        <livewire:contact-component type="device" :item_id="$device->id" />
+                        <livewire:contact-component type="device" :item_id="$device->id" lazy/>
                     </div>
                     {{-- poznámky --}}
                     <div class="col-span-12 md:col-span-4 mb-4">
-                        <livewire:notes.note-component column="device_id" :id="$device->id" />
+                        <livewire:notes.note-component column="device_id" :id="$device->id" lazy/>
                     </div>
 
                     {{-- vazba na kanály --}}
@@ -285,7 +285,7 @@
                         <x-share.cards.base-card title="Kanály na zařízení">
                             <div class="grid grid-cols-12">
                                 <div class="col-span-12 sm:col-span-12 mb-4 ">
-                                    <livewire:iptv.devices.device-channels-component :device="$device">
+                                    <livewire:iptv.devices.device-channels-component :device="$device" lazy>
                                 </div>
                             </div>
                         </x-share.cards.base-card>

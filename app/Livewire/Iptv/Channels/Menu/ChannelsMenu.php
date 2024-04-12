@@ -6,21 +6,24 @@ use App\Models\Channel;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class ChannelsMenu extends Component
 {
-
     public Collection $channels;
 
     public function mount()
     {
-        $this->channels = Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']);
+        if (!Cache::has('channels_menu')) {
+            Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
+        }
+        $this->channels = Cache::get('channels_menu');
     }
 
     #[On('update_channels_sidebar')]
     public function refreshChannelsSidebar()
     {
-        return $this->channels = Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']);
+        return $this->channels = Cache::get('channels_menu');
     }
 
     public function render()

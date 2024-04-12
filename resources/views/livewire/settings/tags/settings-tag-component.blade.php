@@ -1,16 +1,19 @@
 <div>
     <x-share.cards.base-card title="">
-        <div class="flex justify-between">
-            <div class="w-96">
-                <x-input placeholder="Vyhledejte ..." wire:model.live="query" class="!bg-[#0F151F] input-md placeholder:text-gray-600"
-                    icon="o-magnifying-glass" autofocus />
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12 sm:col-span-9 ">
+                <x-input placeholder="Vyhledejte ..." wire:model.live="query"
+                    class="input-md placeholder:text-gray-600" icon="o-magnifying-glass" autofocus />
             </div>
-            <div class="w-64">
-                <x-button class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm" wire:click="openCreateModal">
+            <div class="col-span-12 sm:col-span-3">
+                <x-button
+                    class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm mt-2 absolute right-10"
+                    wire:click="openCreateModal">
                     + Nový štítek
                 </x-button>
             </div>
         </div>
+
         <div>
             <x-table :headers="$headers" :rows="$tags" with-pagination>
                 @scope('cell_color', $tag)
@@ -66,7 +69,8 @@
                         wire:click='closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
+                    <x-button label="Přidat"
+                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
                         type="submit" spinner="save2" />
                 </div>
             </div>

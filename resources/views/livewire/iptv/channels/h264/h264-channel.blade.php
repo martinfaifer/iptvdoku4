@@ -90,10 +90,10 @@
                 {{--  --}}
             </div>
             <div class="col-span-12 md:col-span-6 mb-4">
-                <livewire:notes.note-component column="h264_id" id="{{ $channel->h264->id }}">
+                <livewire:notes.note-component column="h264_id" id="{{ $channel->h264->id }}" lazy>
             </div>
             <div class="col-span-12 md:col-span-6 mb-4">
-                <livewire:log-component columnValue="h264:{{ $channel->id }}" column="item">
+                <livewire:log-component columnValue="h264:{{ $channel->id }}" column="item" lazy>
             </div>
             @if (!$devices->isEmpty())
                 <div class="col-span-12 mb-4">
@@ -108,7 +108,7 @@
                 <div class="col-span-12 mb-4">
                     <div class="grid grid-cols-12 gap-4">
                         @foreach ($devices as $device)
-                            <div class="col-span-12 md:col-span-6 mb-4">
+                            <div wire:key="source-{{ $device->id }}" class="col-span-12 md:col-span-6 mb-4">
                                 <livewire:iptv.channels.device-has-channel-component :device="$device" :channel="$channel"
                                     channelType="h264">
                             </div>
@@ -129,7 +129,7 @@
                 <div class="col-span-12 mb-4">
                     <div class="grid grid-cols-12 gap-4">
                         @foreach ($backupDevices as $backupDevice)
-                            <div class="col-span-6 mb-4">
+                            <div wire:key="backup-{{ $backupDevice->id }}" class="col-span-6 mb-4">
                                 <livewire:iptv.channels.device-has-channel-component :device="$backupDevice" :channel="$channel"
                                     isBackup="true" channelType="h264">
                             </div>
@@ -139,7 +139,7 @@
             @endif
 
             @foreach ($h264 as $unicast)
-                <div class="col-span-12 mb-4 gap-4">
+                <div wire:key="unicast-{{ $unicast['ip']}}" class="col-span-12 mb-4 gap-4">
                     <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component ip="{{ $unicast['ip'] }}">
                 </div>
             @endforeach

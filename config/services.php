@@ -78,6 +78,19 @@ return [
                 'user' => env('OLD_IPTV_DOKU_USER'),
                 'password' => env('OLD_IPTV_DOKU_PASSWORD')
             ]
+        ],
+        [
+            'hbo_go' => [
+                'url' => env('DB_HBO_GO_URL'),
+                'username' => env('DB_HBO_GO_USERNAME'),
+                'password' => env('DB_HBO_GO_PASSWORD'),
+                'database' => env('DB_HBO_GO_DATABASE')
+            ]
+        ],
+        [
+            'exchange_rate' => [
+                'api_key' => env('EXCHANGE_RATE_API_KEY')
+            ]
         ]
     ],
 

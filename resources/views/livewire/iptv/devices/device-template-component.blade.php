@@ -386,7 +386,7 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-drawer wire:model="updateDrawer" right class="lg:w-2/3 !bg-[#0c111b]">
+    <x-drawer wire:model="updateDrawer" right class="lg:w-2/3 !bg-[#0E1E33]">
         <x-form wire:submit="update">
             <div class="grid grid-cols-12 mt-12 rounded-sm">
                 <div class="col-span-12 mb-4">

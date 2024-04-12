@@ -26,7 +26,7 @@
 
 .vanilla-calendar {
     /* @apply !bg-[#0c111b]; */
-    @apply bg-gradient-to-b from-slate-950/80 to-black/40 backdrop-blur-xl border-[1px] border-solid border-[#64748b] border-opacity-10 rounded-lg;
+    @apply bg-[#0f172a]/50 backdrop-blur-xl shadow-md shadow-[#0D243C]/50 rounded-lg;
 }
 
 .EasyMDEContainer .CodeMirror {
@@ -38,11 +38,11 @@
 }
 
 .CodeMirror {
-    @apply !bg-[#0c111b] !text-white/80;
+    @apply !bg-transparent !text-white/80;
 }
 
 .CodeMirror-cursor {
-    @apply !border-white
+    @apply !border-white;
 }
 
 .modal {
@@ -60,7 +60,7 @@
 }
 
 .modal-box {
-    @apply bg-[#0c111b] !max-w-6xl;
+    @apply bg-gradient-to-r from-slate-900 to-sky-950 shadow-md shadow-[#0D243C]/50 !max-w-6xl;
     /* @apply bg-gradient-to-r from-[#162131] to-[#0e151f] backdrop-blur-lg !max-w-6xl; */
 }
 
@@ -69,42 +69,50 @@
 }
 
 .input-primary {
-    @apply bg-[#0F151F] border-none;
+    @apply bg-transparent border-slate-700/30;
 }
 
 .input:focus-within {
     box-shadow: none;
-    border-color: #162131;
+    border-color: #334155;
     outline-style: solid;
     outline-width: 0px;
     outline-offset: 1px;
-    outline-color: #162131;
+    outline-color: #334155;
 }
 
 .select-primary {
-    @apply bg-[#0F151F] border-none;
+    @apply bg-transparent border-slate-700/30;
 }
 
 .select:focus-within {
     box-shadow: none;
-    border-color: #162131;
+    border-color: #334155;
     outline-style: solid;
     outline-width: 0px;
     outline-offset: 1px;
-    outline-color: #162131;
+    outline-color: #334155;
 }
 
 .textarea-primary {
-    @apply bg-[#0F151F] border-none;
+    @apply bg-transparent border-slate-700/30;
 }
 
 .textarea:focus-within {
     box-shadow: none;
-    border-color: #162131;
+    border-color: #334155;
     outline-style: solid;
     outline-width: 0px;
     outline-offset: 1px;
-    outline-color: #162131;
+    outline-color: #334155;
+}
+
+.skeleton {
+    @apply bg-[#10172A];
+}
+
+.loading {
+    @apply bg-sky-900;
 }
 
 /* colors for dynamic import */

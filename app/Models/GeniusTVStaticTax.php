@@ -21,6 +21,38 @@ class GeniusTVStaticTax extends Model
         return $this->belongsTo(Currency::class, 'currency', 'id');
     }
 
+    public function scopeSubscriptionTaxes(Builder $query, bool $isAkcionar)
+    {
+        if ($isAkcionar == true) {
+            return $query
+                ->whereIn('name', [
+                    "osa",
+                    "dilia",
+                    "integram",
+                    "oaza",
+                    "OOA-S",
+                    "NanguUser",
+                    "akcionarHls",
+                    "aplikacePocasi",
+                    "aplikacePocasi",
+                    "EPG",
+                ]);
+        }
+        return $query
+            ->whereIn('name', [
+                "osa",
+                "dilia",
+                "integram",
+                "oaza",
+                "OOA-S",
+                "NanguUser",
+                "Genius",
+                "aplikacePocasi",
+                "aplikacePocasi",
+                "EPG",
+            ]);
+    }
+
     public function scopeSearch(Builder $query, string $search)
     {
         return $query->where('name', "like", "%" . $search . "%");

@@ -25,11 +25,13 @@ class Kernel extends ConsoleKernel
         $schedule->command('tag:execute-actions')->everyFiveMinutes()->runInBackground();
 
         $schedule->command('channels:get-detail-from-nangu-api')->everyFifteenMinutes();
-        $schedule->command('channels:get-informartions-from-dohled')->everyMinute();
+        $schedule->command('channels:get-informations-from-dohled')->everyMinute();
 
         $schedule->command('epg:get-channels-ids')->everyThirtyMinutes()->runInBackground();
 
         $schedule->command('weather:get')->everyThirtyMinutes();
+
+        $schedule->command('nangu:get-monthly-report')->monthly();
     }
 
     /**
