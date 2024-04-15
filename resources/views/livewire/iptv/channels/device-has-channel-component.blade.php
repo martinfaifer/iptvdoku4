@@ -107,7 +107,8 @@
                     </div>
                     <div>
                         <div class="tooltip tooltip-bottom" data-tip="Restart kanálu">
-                            <button wire:click='reboot_channel' wire:confirm='Opravdu si přejete restartovat?' class="btn btn-sm btm-circle border-none bg-transparent">
+                            <button wire:click='reboot_channel' wire:confirm='Opravdu si přejete restartovat?'
+                                class="btn btn-sm btm-circle border-none bg-transparent">
                                 <x-heroicon-o-arrow-path class="h-4 w-4 text-orange-500" />
                             </button>
                         </div>
@@ -170,6 +171,43 @@
                                 @if ($interfaceType == 'outputs')
                                     <p class="font-semibold text-center mb-4">
                                         Výstupy
+                                    </p>
+                                    <div class="grid grid-cols-12 gap-4 ">
+                                        @foreach ($interfacesData as $interfaceKey => $interface)
+                                            <div class="col-span-3 mb-4">
+                                                <div @class([
+                                                    'rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm shadow-md shadow-slate-900/50',
+                                                    'bg-[#082F49]' => $selectedOutput != $interfaceKey,
+                                                    'bg-sky-800' => $selectedOutput == $interfaceKey,
+                                                ])>
+                                                    <div class="card-body text-gray-200 text-sm cursor-pointer"
+                                                        wire:click='bindOutput("{{ $interfaceKey }}")'>
+                                                        <div class="grid grid-cols-12 mb-4">
+                                                            @foreach ($interface as $interfaceValueName => $interfaceValue)
+                                                                @if (is_string($interfaceValue))
+                                                                    @if ($interfaceValueName == 'Název')
+                                                                        <div
+                                                                            class="col-span-12 my-4 flex justify-between">
+                                                                            <div class="font-semibold">
+                                                                                {{ $interfaceValueName }} :
+                                                                            </div>
+                                                                            <div class="font-semibold">
+                                                                                {{ $interfaceValue }}
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+                                @if ($interfaceType == 'modules')
+                                    <p class="font-semibold text-center mb-4">
+                                        Moduly
                                     </p>
                                     <div class="grid grid-cols-12 gap-4 ">
                                         @foreach ($interfacesData as $interfaceKey => $interface)

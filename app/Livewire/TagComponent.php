@@ -32,7 +32,7 @@ class TagComponent extends Component
         $this->tags = Tag::get();
         $this->type = $type;
         $this->itemId = $itemId;
-        $this->tagsOnItem = TagOnItem::where('type', $type)->where('item_id', $itemId)->with('tag')->get();
+        $this->tagsOnItem = TagOnItem::with('tag')->where('type', $type)->where('item_id', $itemId)->with('tag')->get();
     }
 
     public function openModal()

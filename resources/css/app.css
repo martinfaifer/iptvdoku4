@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-    background-color: #000000;
+    background-color:  #0E223A;
 }
 
 .mary-table-pagination span[aria-current="page"] > span {
@@ -66,6 +66,10 @@
 
 .drawer-side {
     z-index: 20 !important;
+}
+
+.mary-spotlight-element {
+    @apply hover:bg-red-600;
 }
 
 .input-primary {

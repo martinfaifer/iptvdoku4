@@ -8,6 +8,7 @@
         @if (!is_null($channel->h265))
             <div class="flex-none">
                 <livewire:iptv.channels.h265.store-h265-channel :channel="$channel">
+                    <livewire:iptv.channels.store-device-to-channel-component :channel="$channel" channelType="h265">
             </div>
         @endif
     </div>

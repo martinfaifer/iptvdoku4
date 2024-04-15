@@ -318,6 +318,7 @@
                 </div>
                 <div class="col-span-12 mb-4">
                     <x-textarea wire:model="form.description" rows="5" inline />
+                    {{-- <x-editor wire:model="form.description" /> --}}
                     {{-- <x-markdown wire:model="form.description" label="Popis události" /> --}}
                 </div>
             </div>

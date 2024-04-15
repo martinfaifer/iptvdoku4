@@ -90,7 +90,7 @@ class SettingsGeniusTvStaticTaxesComponent extends Component
     public function render()
     {
         return view('livewire.settings.geniustv.static-taxes.settings-genius-tv-static-taxes-component', [
-            'staticTaxes' => GeniusTVStaticTax::with('currency_name')->search($this->query)->paginate(5),
+            'staticTaxes' => GeniusTVStaticTax::orderBy('name')->with('currency_name')->search($this->query)->paginate(5),
             'headers' => [
                 ['key' => 'name', 'label' => 'Poplatek', 'class' => 'text-white/80'],
                 ['key' => 'price', 'label' => 'Cena', 'class' => 'text-white/80'],

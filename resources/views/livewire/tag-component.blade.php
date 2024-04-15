@@ -14,7 +14,7 @@
                         </div>
                         <div>
                             <x-heroicon-s-trash wire:click='destroy({{ $tag->id }})'
-                                wire:confirm='Opravdu odebrat štítek?' class="cursor-pointer w-4 h-4 ml-3" />
+                                wire:confirm='Opravdu odebrat štítek?' class="cursor-pointer size-4 ml-3" />
                         </div>
                     </div>
                 </div>
