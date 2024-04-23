@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Model::shouldBeStrict();
+        // Model::shouldBeStrict();
         JsonResource::withoutWrapping();
         // Fortify::loginView(function() {
         //     return view('livewire.auth.login');

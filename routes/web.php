@@ -13,14 +13,17 @@ use App\Livewire\Settings\Tags\SettingsTagComponent;
 use App\Livewire\Settings\Users\SettingsUsersComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
+use App\Livewire\Settings\Channels\Banners\SettingsChannelsBannersComponent;
+use App\Livewire\Settings\Channels\Restart\SettingsChannelsRestartComponent;
+use App\Livewire\Settings\GeniusTv\Invoices\SettingsGeniusTvInvoicesComponent;
 use App\Livewire\Settings\Geniustv\Discounts\SettingsGeniusTvDiscountsComponent;
+use App\Livewire\Settings\Notifications\Slack\SettingsSlackNotificationComponent;
 use App\Livewire\Settings\Geniustv\OfferTaxes\SettingsGeniusTvOfferTaxesComponent;
 use App\Livewire\Settings\Geniustv\StaticTaxes\SettingsGeniusTvStaticTaxesComponent;
 use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsHboComponent;
 use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
 use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
 use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
-use App\Livewire\Settings\GeniusTv\Invoices\SettingsGeniusTvInvoicesComponent;
 
 Route::get('test', function () {
     return view('pdfs.invoice');
@@ -63,6 +66,15 @@ Route::middleware('auth')->group(function () {
             Route::get('offer-taxes', SettingsGeniusTvOfferTaxesComponent::class);
             Route::get('discounts', SettingsGeniusTvDiscountsComponent::class);
             Route::get('invoices', SettingsGeniusTvInvoicesComponent::class);
+        });
+
+        Route::prefix('channels')->group(function () {
+            Route::get('restart', SettingsChannelsRestartComponent::class);
+            Route::get('banners', SettingsChannelsBannersComponent::class);
+        });
+
+        Route::prefix('notifications')->group(function() {
+            Route::get('slack', SettingsSlackNotificationComponent::class);
         });
     });
 });

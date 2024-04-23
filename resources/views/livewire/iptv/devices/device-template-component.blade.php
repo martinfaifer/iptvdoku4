@@ -72,7 +72,10 @@
         }
     }
 
-    $satelits = App\Models\Device::where('device_category_id', App\Models\DeviceCategory::where('name', 'Satelity')->first()->id)->get();
+    $satelits = App\Models\Device::where(
+        'device_category_id',
+        App\Models\DeviceCategory::where('name', 'Satelity')->first()->id,
+    )->get();
 
     $satelitCards = App\Models\SatelitCard::get();
 @endphp
@@ -115,8 +118,13 @@
                                                 @if ($deviceSnmpData['human_description'] == 'Uptime')
                                                     @php
                                                         $days = '';
-                                                        if ($deviceSnmpData['value'] != '' && !str_contains($deviceSnmpData['value'], 'n/a')) {
-                                                            $days = \Carbon\CarbonInterval::days($deviceSnmpData['value'] / 8640000)
+                                                        if (
+                                                            $deviceSnmpData['value'] != '' &&
+                                                            !str_contains($deviceSnmpData['value'], 'n/a')
+                                                        ) {
+                                                            $days = \Carbon\CarbonInterval::days(
+                                                                $deviceSnmpData['value'] / 8640000,
+                                                            )
                                                                 ->cascade()
                                                                 ->forHumans();
                                                         }
@@ -229,8 +237,8 @@
                                 <div @class([
                                     'mb-4 overflow-scroll',
                                     'col-span-2' => count($interfacesData) > 4,
-                                    'col-span-3' => count($interfacesData) <= 4
-                                    ]) class="col-span-3 mb-4 overflow-scroll">
+                                    'col-span-3' => count($interfacesData) <= 4,
+                                ]) class="col-span-3 mb-4 overflow-scroll">
                                     <div
                                         class=" bg-[#082F49]
                              rounded-lg
@@ -297,7 +305,9 @@
                                                                 @if ($interfaceValueName == 'Vazba na satelit')
                                                                     @php
                                                                         if (is_int($interfaceValue)) {
-                                                                            $device = App\Models\Device::find($interfaceValue);
+                                                                            $device = App\Models\Device::find(
+                                                                                $interfaceValue,
+                                                                            );
                                                                             if ($device) {
                                                                                 $interfaceValue = $device->name;
                                                                             }
@@ -308,7 +318,9 @@
                                                                 @if ($interfaceValueName == 'Satelitní karta')
                                                                     @php
                                                                         if (is_int($interfaceValue)) {
-                                                                            $card = App\Models\SatelitCard::find($interfaceValue);
+                                                                            $card = App\Models\SatelitCard::find(
+                                                                                $interfaceValue,
+                                                                            );
                                                                             if ($card) {
                                                                                 $interfaceValue = $card->name;
                                                                             }
@@ -463,12 +475,12 @@
 
                                 @if ($name == 'Vazba na satelit')
                                     <x-choices-offline label="{{ $name }}" :options="$satelits"
-                                        wire:model="updatedInterface.{{ $name }}" single searchable/>
+                                        wire:model="updatedInterface.{{ $name }}" single searchable />
                                 @endif
 
                                 @if ($name == 'Satelitní karta')
                                     <x-choices-offline label="{{ $name }}" :options="$satelitCards"
-                                        wire:model="updatedInterface.{{ $name }}" single searchable/>
+                                        wire:model="updatedInterface.{{ $name }}" single searchable />
                                 @endif
                             </div>
                         @endforeach
@@ -490,12 +502,12 @@
                         {{-- action section --}}
                         <div class="flex justify-between">
                             <div>
-                                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4 border-none"
                                     wire:click='closeDrawer' />
                             </div>
                             <div>
                                 <x-button label="Upravit"
-                                    class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
+                                    class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28 border-none"
                                     type="submit" spinner="save2" />
                             </div>
                         </div>
@@ -507,40 +519,38 @@
 
     {{-- modal log --}}
     <x-modal wire:model="logModal" title="Log ze zařízení" persistent class="modal-bottom sm:modal-middle fixed">
-        <x-form wire:submit="store">
-            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                wire:click='closeDialog'>✕</x-button>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 mb-4">
-                    <ul x-auto-animate>
-                        @if (!in_array('n/a', $logs))
-                            @foreach ($logs as $log)
-                                <li @class([
-                                    'font-semibold',
-                                    'text-red-500' => str_contains($log, 'down'),
-                                    'text-green-500' => str_contains($log, 'up'),
-                                ])>
-                                    {{ $log }}
-                                </li>
-                            @endforeach
-                        @else
-                            <x-share.alerts.info title="Nepodařilo se načíst logy"></x-share.alerts.info>
-                        @endif
-                    </ul>
-                </div>
-            </div>
 
-            {{-- action section --}}
-            <div class="flex justify-between">
-                <div>
-
-                </div>
-                <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                        wire:click='closeDialog' />
-                </div>
+        <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12 mb-4 overflow-y-auto h-96">
+                <ul x-auto-animate>
+                    @if (!in_array('n/a', $logs))
+                        @foreach ($logs as $log)
+                            <li @class([
+                                'font-semibold',
+                                'text-red-500' => str_contains($log, 'down'),
+                                'text-green-500' => str_contains($log, 'up'),
+                            ])>
+                                {{ $log }}
+                            </li>
+                        @endforeach
+                    @else
+                        <x-share.alerts.info title="Nepodařilo se načíst logy"></x-share.alerts.info>
+                    @endif
+                </ul>
             </div>
-        </x-form>
+        </div>
+
+        {{-- action section --}}
+        <div class="flex justify-between">
+            <div>
+            </div>
+            <div>
+                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4 border-none"
+                    wire:click='closeDialog' />
+            </div>
+        </div>
+
     </x-modal>
 
     {{-- modal charts --}}
@@ -565,7 +575,7 @@
 
             </div>
             <div>
-                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4 border-none"
                     wire:click='closeDialog' />
             </div>
         </div>

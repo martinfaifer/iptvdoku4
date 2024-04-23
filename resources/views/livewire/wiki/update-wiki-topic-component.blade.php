@@ -16,7 +16,9 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-textarea wire:model="form.text" rows="5" inline />
+                    <template x-if="$wire.updateModal">
+                        <x-markdown wire:model="form.text" label="Obsah" />
+                    </template>
                 </div>
                 <div class="col-span-12 mb-4">
                     <x-choices-offline label="Vyberte kategorii" wire:model="form.wiki_category_id" :options="$categories"

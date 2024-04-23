@@ -9,8 +9,18 @@ trait RunningEventsTrait
     public function running_events(): array
     {
         return Event
-            ::where('start_date', "<=", now()->format('Y-m-d'))
-            ->where('end_date', ">=", now()->format('Y-m-d'))
+            ::runningEvents()
+            ->orderBy('start_date', "ASC")
+            ->with(['user', 'sftp_server'])
+            ->get()
+            ->toArray();
+    }
+
+    public function running_events_with_frontendNotification()
+    {
+        return Event
+            ::runningEvents()
+            ->hasFeNotification()
             ->orderBy('start_date', "ASC")
             ->with(['user'])
             ->get()

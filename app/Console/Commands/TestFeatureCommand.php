@@ -2,11 +2,14 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Event;
 use App\Models\NanguIsp;
 use App\Models\NanguSubscriber;
 use Illuminate\Console\Command;
 use App\Models\NanguSubscription;
 use Spatie\LaravelPdf\Facades\Pdf;
+use Illuminate\Support\Facades\Storage;
+use phpseclib3\Net\SFTP;
 
 class TestFeatureCommand extends Command
 {
@@ -29,6 +32,6 @@ class TestFeatureCommand extends Command
      */
     public function handle()
     {
-        Pdf::view('pdfs.invoice')->save(public_path('storage/invoices/test.pdf'));
+        echo "No features this time ...";
     }
 }

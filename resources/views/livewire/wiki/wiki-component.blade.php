@@ -33,7 +33,7 @@
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-12">
                         <article>
-                            {!! Illuminate\Support\Str::of($topic->text)->markdown() !!}
+                            {!! Str::markdown($topic->text) !!}
                         </article>
                     </div>
                 </div>

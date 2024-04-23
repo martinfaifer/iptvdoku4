@@ -1,5 +1,6 @@
 <div>
     @if (!is_null($channelDataOnIptvDohled))
+        {{-- @dd($channelDataOnIptvDohled) --}}
         <div class="flex mb-4">
             <hr
                 class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
@@ -8,7 +9,7 @@
                 class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
         </div>
         <x-share.cards.base-card title="Informace z dohledu o {{ $ip }}">
-            <div class="grid grid-cols-12 gap-4 text-[#A3ABB8]" >
+            <div class="grid grid-cols-12 gap-4 text-[#A3ABB8]">
                 <div class="col-span-12 sm:col-span-3">
                     <img src="{{ $channelDataOnIptvDohled['data']['img'] }}" alt="dohled_img"
                         class="object-cover h-48 w-96 rounded-md" />
@@ -40,6 +41,11 @@
                                                     Výpadek
                                                 </span>
                                             @endif
+                                            @if ($channelDataOnIptvDohled['data']['streamStatus'] == 'stopped')
+                                                <span class="text-red-500 font-semibold">
+                                                    Dohledování pozastaveno
+                                                </span>
+                                            @endif
                                         </div>
                                         <div>
                                             <span>
@@ -58,35 +64,37 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-span-12 sm:col-span-4 gap-4">
-                            <p class="text-center font-semibold">
-                                Informace o servisách ve streamu
-                            </p>
-                            <div class="grid grid-cols-12 gap-4">
-                                <div class="col-span-1">
-                                    <x-share.lines.vertical-small-hr></x-share.lines.vertical-small-hr>
-                                </div>
-                                <div class="col-span-11">
-                                    <div class="grid grid-rows-5 gap-4 mt-4 text-sm font-semibold" >
-                                        <div>
-                                            TSID: {{ $channelDataOnIptvDohled['data']['streamTS']['tsid'] }}
-                                        </div>
-                                        <div>
-                                            PMT Pid: {{ $channelDataOnIptvDohled['data']['streamTS']['pmtpid'] }}
-                                        </div>
-                                        <div>
-                                            PCR Pid: {{ $channelDataOnIptvDohled['data']['streamTS']['pcrpid'] }}
-                                        </div>
-                                        <div>
-                                            Provider: {{ $channelDataOnIptvDohled['data']['streamTS']['provider'] }}
-                                        </div>
-                                        <div>
-                                            Name: {{ $channelDataOnIptvDohled['data']['streamTS']['name'] }}
+                        @if ($channelDataOnIptvDohled['data']['streamStatus'] != 'stopped')
+                            <div class="col-span-12 sm:col-span-4 gap-4">
+                                <p class="text-center font-semibold">
+                                    Informace o servisách ve streamu
+                                </p>
+                                <div class="grid grid-cols-12 gap-4">
+                                    <div class="col-span-1">
+                                        <x-share.lines.vertical-small-hr></x-share.lines.vertical-small-hr>
+                                    </div>
+                                    <div class="col-span-11">
+                                        <div class="grid grid-rows-5 gap-4 mt-4 text-sm font-semibold">
+                                            <div>
+                                                TSID: {{ $channelDataOnIptvDohled['data']['streamTS']['tsid'] }}
+                                            </div>
+                                            <div>
+                                                PMT Pid: {{ $channelDataOnIptvDohled['data']['streamTS']['pmtpid'] }}
+                                            </div>
+                                            <div>
+                                                PCR Pid: {{ $channelDataOnIptvDohled['data']['streamTS']['pcrpid'] }}
+                                            </div>
+                                            <div>
+                                                Provider: {{ $channelDataOnIptvDohled['data']['streamTS']['provider'] }}
+                                            </div>
+                                            <div>
+                                                Name: {{ $channelDataOnIptvDohled['data']['streamTS']['name'] }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                         {{-- history of stream --}}
                         <div class="col-span-12 sm:col-span-4">
                             <p class="text-center font-semibold">
@@ -118,6 +126,11 @@
                                                             @if ($history['status'] == 'can_not_start')
                                                                 <span class="text-red-500">
                                                                     Výpadek
+                                                                </span>
+                                                            @endif
+                                                            @if ($history['status'] == 'stopped')
+                                                                <span class="text-red-500">
+                                                                    Nedohleduje se
                                                                 </span>
                                                             @endif
                                                         </th>

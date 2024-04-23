@@ -1,3 +1,37 @@
+@php
+    function get_weather_icon($weather)
+    {
+        switch ($weather) {
+            case str_contains($weather['description'], 'clouds'):
+                return '/storage/svgs/clouds.svg';
+                break;
+            case str_contains($weather['description'], 'rain'):
+                return '/storage/svgs/rain.svg';
+                break;
+            case str_contains($weather['description'], 'thunderstorm'):
+                return '/storage/svgs/thunderstorm.svg';
+                break;
+            case str_contains($weather['description'], 'drizzle'):
+                return '/storage/svgs/rain.svg';
+                break;
+            case str_contains($weather['description'], 'snow'):
+                return '/storage/svgs/snow.svg';
+                break;
+            case str_contains($weather['description'], 'mist'):
+                return '/storage/svgs/smoke.svg';
+                break;
+            case str_contains($weather['description'], 'smoke'):
+                return '/storage/svgs/smoke.svg';
+                break;
+            case str_contains($weather['description'], 'tornado'):
+                return '/storage/svgs/tornado.svg';
+                break;
+            default:
+                return '/storage/svgs/sunny.svg';
+                break;
+        }
+    }
+@endphp
 <div>
     <div
         class="navbar fixed bg-gradient-to-r from-slate-900/20 to-sky-950/20 mb-1 top-0 right-0 z-10 min-h-8 backdrop-blur-xl">
@@ -20,49 +54,14 @@
             </div>
             {{-- weather --}}
             <div>
-                {{-- <button class="btn btn-sm btn-circle border-none bg-transparent" wire:click='openWeatherModal()'>
-                    <img class="object-cover size-6" src="/storage/svgs/sunny.svg" alt="" />
-                </button> --}}
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-circle btn-ghost btn-sm text-info">
                         @if (!empty($weather))
                             <div>
-                                @if (str_contains($weather['description'], 'rain'))
-                                    <img class="object-cover size-6" src="/storage/svgs/rain.svg" alt="" />
-                                @endif
-                                @if (str_contains($weather['description'], 'thunderstorm'))
-                                    <img class="object-cover size-6" src="/storage/svgs/thunderstorm.svg"
-                                        alt="" />
-                                @endif
-                                @if (str_contains($weather['description'], 'drizzle'))
-                                    <img class="object-cover size-6" src="/storage/svgs/rain.svg" alt="" />
-                                @endif
-                                @if (str_contains($weather['description'], 'snow'))
-                                    <img class="object-cover size-6" src="/storage/svgs/snow.svg" alt="" />
-                                @endif
-                                @if (str_contains($weather['description'], 'mist'))
-                                    <img class="object-cover size-6" src="/storage/svgs/smoke.svg" alt="" />
-                                @endif
-                                @if (str_contains($weather['description'], 'smoke'))
-                                    <img class="object-cover size-6" src="/storage/svgs/smoke.svg" alt="" />
-                                @endif
-                                @if (str_contains($weather['description'], 'tornado'))
-                                    <img class="object-cover size-6" src="/storage/svgs/tornado.svg" alt="" />
-                                @endif
-                                @if (str_contains($weather['description'], 'clear sky'))
-                                    <img class="object-cover size-6" src="/storage/svgs/sunny.svg" alt="" />
-                                @endif
-                                @if (str_contains($weather['description'], 'clouds'))
-                                    <img class="object-cover size-6" src="/storage/svgs/clouds.svg" alt="" />
-                                @endif
-                                @if (str_contains($weather['description'], 'sunny'))
-                                    <img class="object-cover size-6" src="/storage/svgs/sunny" alt="" />
-                                @endif
+                                <img class="object-cover size-6" src="{{ get_weather_icon($weather) }}"
+                                    alt="" />
                             </div>
-                        @else
-                            <img class="object-cover size-6" src="/storage/svgs/sunny.svg" alt="" />
                         @endif
-
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
@@ -74,80 +73,19 @@
                                 <div class="grid grid-cols-12 gap-4">
                                     <div class="col-span-12">
                                         <div class="grid grid-cols-12 gap-4">
-                                            <div class="col-span-8">
+                                            <div class="col-span-7">
                                                 <p class="text-2xl font-bold">
                                                     {{ $weather['location'] }}
                                                 </p>
                                             </div>
-                                            <div class="col-span-4 inline-flex -ml-3">
-                                                <div>
-                                                    @if (str_contains($weather['description'], 'rain'))
-                                                        <div class="avatar">
-                                                            <div class="w-8 rounded-full">
-                                                                <img src="/storage/svgs/rain.svg" alt="" />
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if (str_contains($weather['description'], 'thunderstorm'))
-                                                        <div class="avatar">
-                                                            <div class="w-8 rounded-full">
-                                                                <img src="/storage/svgs/thunderstorm.svg"
-                                                                    alt="" />
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if (str_contains($weather['description'], 'drizzle'))
-                                                        <div class="avatar">
-                                                            <div class="w-8 rounded-full">
-                                                                <img src="/storage/svgs/rain.svg" alt="" />
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if (str_contains($weather['description'], 'snow'))
-                                                        <div class="avatar">
-                                                            <div class="w-8 rounded-full">
-                                                                <img src="/storage/svgs/snow.svg" alt="" />
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if (str_contains($weather['description'], 'mist'))
-                                                        <div class="avatar">
-                                                            <div class="w-8 rounded-full">
-                                                                <img src="/storage/svgs/smoke.svg" alt="" />
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if (str_contains($weather['description'], 'smoke'))
-                                                        <div class="avatar">
-                                                            <div class="w-8 rounded-full">
-                                                                <img src="/storage/svgs/smoke.svg" alt="" />
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if (str_contains($weather['description'], 'tornado'))
-                                                        <div class="avatar">
-                                                            <div class="w-8 rounded-full">
-                                                                <img src="/storage/svgs/tornado.svg" alt="" />
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if (str_contains($weather['description'], 'clear sky'))
-                                                        <div class="avatar">
-                                                            <div class="w-8 rounded-full">
-                                                                <img src="/storage/svgs/sunny.svg" alt="" />
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                    @if (str_contains($weather['description'], 'clouds'))
-                                                        <div class="avatar">
-                                                            <div class="w-8 rounded-full">
-                                                                <img src="/storage/svgs/clouds.svg" alt="" />
-                                                            </div>
-                                                        </div>
-                                                    @endif
+                                            <div class="col-span-5 inline-flex -ml-3">
+                                                <div class="avatar">
+                                                    <div class="w-8 rounded-full">
+                                                        <img src="{{ get_weather_icon($weather) }}" alt="" />
+                                                    </div>
                                                 </div>
                                                 <div>
-                                                    <p class="text-2xl font-bold -ml-3">
+                                                    <p class="text-2xl font-bold ml-2">
                                                         {{ $weather['temp'] }}°C
                                                     </p>
                                                 </div>
@@ -218,13 +156,8 @@
         {{-- alerts --}}
         @if (!empty($iptv_dohled_alerts))
             @foreach ($iptv_dohled_alerts as $iptv_dohled_alert)
-                <div role="alert" class="alert alert-error mb-1 text-gray-100 font-semibold">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 size-4" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{{ $iptv_dohled_alert['nazev'] }}</span>
+                <div wire:key="alert-{{ $iptv_dohled_alert['id'] }}" class="mt-3">
+                    <x-share.alerts.error title="{{ $iptv_dohled_alert['nazev'] }}"></x-share.alerts.error>
                 </div>
             @endforeach
         @endif
@@ -256,7 +189,7 @@
                                     <div class="grid grid-cols-12 gap-4">
                                         <div class="col-span-7">
                                             <article>
-                                                {!! $event['description'] !!}
+                                                {!! Str::markdown($event['description']) !!}
                                             </article>
                                         </div>
                                         <div class="col-span-5 text-white/50">
@@ -343,4 +276,87 @@
             </div>
         @endif
     </x-drawer>
+
+    @if (count($iptv_dohled_alerts) >= 6)
+        <div class="toast toast-top toast-center mt-2 z-50">
+            <div class="alert alert-error font-semibold text-white/80">
+                <span class="hover:underline">
+                    <a href="{{ config('services.api.iptvDohled.url') }}" target="_blank">
+                        Nefunguje velké množství streamů!
+                    </a>
+                </span>
+            </div>
+        </div>
+    @endif
+
+    <x-modal wire:model="calendarNotificationDialog" persistent class="modal-bottom sm:modal-middle fixed">
+        <x-button class="btn btn-sm btn-circle btn-ghost fixed right-2 top-2"
+            wire:click='closeCalendarNotificationDialog'>✕</x-button>
+        <div class="overflow-y-auto h-96">
+            <div class="grid grid-cols-12 gap-4 text-sm">
+                @foreach ($notifyFromCurrentEvents as $currentEvent)
+                    <div class="col-span-12">
+                        <div class="grid grid-cols-12 gap-4">
+                            <div class="col-span-12">
+                                <p class="text-lg font-bold">Událost: {{ $currentEvent['label'] }}</p>
+                            </div>
+                            <div class="col-span-12 mt-4">
+                                <div class="grid grid-cols-12 gap-4">
+                                    <div class="col-span-6">
+                                        <p class="text-sm">
+                                            Start události: <span
+                                                class="font-semibold">{{ $currentEvent['start_date'] }}
+                                                {{ $currentEvent['start_time'] }}</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-span-6">
+                                        <p class="text-sm">
+                                            Konec události: <span
+                                                class="font-semibold">{{ $currentEvent['end_date'] }}
+                                                {{ $currentEvent['end_time'] }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-span-12 sm:col-span-6 md:mt-4">
+                                <p>Událost vytvořil: <span class="font-semibold">{{ $currentEvent['creator'] }}</span>
+                                </p>
+                            </div>
+                            <div class="col-span-12 sm:col-span-6 md:mt-4">
+                                @if (!is_null($event['users']) && !empty(json_decode($event['users'])))
+                                    <span class="font-semibold">
+                                        Uživatelé co jsou upozornění:
+                                    </span>
+                                    @foreach (json_decode($event['users']) as $userId)
+                                        @php
+                                            $user = App\Models\User::find($userId);
+
+                                            if ($user) {
+                                                $inicials = $user->first_name[0] . $user->last_name[0];
+                                            }
+                                        @endphp
+                                        <div class="avatar placeholder">
+                                            <div class="bg-neutral text-neutral-content rounded-full w-8">
+                                                <span class="text-md">
+                                                    {{ $inicials }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div class="col-span-12 mt-4">
+                                <div class="rounded-lg border border-[#082F48]">
+                                    <article class="text-sm mx-2 my-2">
+                                        {!! Str::markdown($currentEvent['description']) !!}
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </x-modal>
 </div>

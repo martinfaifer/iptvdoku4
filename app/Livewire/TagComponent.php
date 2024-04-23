@@ -32,7 +32,7 @@ class TagComponent extends Component
         $this->tags = Tag::get();
         $this->type = $type;
         $this->itemId = $itemId;
-        $this->tagsOnItem = TagOnItem::with('tag')->where('type', $type)->where('item_id', $itemId)->with('tag')->get();
+        $this->tagsOnItem = TagOnItem::where('type', $type)->where('item_id', $itemId)->with('tag')->get();
     }
 
     public function openModal()
@@ -58,9 +58,9 @@ class TagComponent extends Component
             ]);
         }
 
-        $this->dispatch('tag-component.'.$this->type.'.'.$this->itemId);
+        $this->dispatch('tag-component.' . $this->type . '.' . $this->itemId);
         if ($this->type == 'device') {
-            $this->dispatch('check_if_need_ssh.'.$this->itemId);
+            $this->dispatch('check_if_need_ssh.' . $this->itemId);
         }
         $this->closeDialog();
 
@@ -71,7 +71,7 @@ class TagComponent extends Component
     {
         $tag = $tagOnItem->tag;
         $tagOnItem->delete();
-        $this->dispatch('tag-component.'.$this->type.'.'.$this->itemId);
+        $this->dispatch('tag-component.' . $this->type . '.' . $this->itemId);
 
         return $this->success_alert('Upraveno');
     }

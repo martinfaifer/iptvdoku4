@@ -3,6 +3,7 @@
 namespace App\Livewire\Iptv\Devices;
 
 use App\Models\Device;
+use App\Models\RestartChannel;
 use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
 
@@ -14,8 +15,9 @@ class DeleteDeviceComponent extends Component
 
     public function destroy(Device $device)
     {
-        // delete ssh and delete alerts
+        // delete ssh ,alerts ,channel if can be restarted
         $device->ssh->delete();
+        RestartChannel::where('device_id', $device->id)->delete();
         $device->delete();
 
         return $this->redirect('/devices', true);

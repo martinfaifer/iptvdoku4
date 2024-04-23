@@ -15,7 +15,60 @@
         ]) href="/settings/users" wire:navigate><a>
                 <x-heroicon-o-user-group class="w-4 h-4" />
                 Uživatelé
-            </a></li>
+            </a>
+        </li>
+        <li>
+            <details open>
+                <summary class="font-semibold ml-1">
+                    <x-heroicon-o-bell class="size-4" />
+                    Upozornění
+                </summary>
+                <ul>
+                    <li @class([
+                        'ml-1',
+                        'rounded-lg',
+                        'bg-sky-950' => request()->is('settings/notifications/slack'),
+                    ]) href="/settings/notifications/slack" wire:navigate><a>
+                            <x-heroicon-o-bell-alert class="size-4"/>
+                            Slack
+                        </a></li>
+                    <li @class([
+                        'ml-1',
+                        'rounded-lg',
+                        'bg-sky-950' => request()->is('settings/notification/weather'),
+                    ]) href="/settings/notification/weather" wire:navigate><a>
+                            <x-heroicon-o-sun class="size-4" />
+                            Počasí
+                        </a></li>
+                </ul>
+            </details>
+        </li>
+        <li>
+            <details open>
+                <summary class="font-semibold ml-1">
+                    <x-heroicon-o-tv class="size-4" />
+                    Kanály
+                </summary>
+                <ul>
+                    <li @class([
+                        'ml-1',
+                        'rounded-lg',
+                        'bg-sky-950' => request()->is('settings/channels/restart'),
+                    ]) href="/settings/channels/restart" wire:navigate><a>
+                            <x-heroicon-o-arrow-path class="size-4" />
+                            Automatický restart
+                        </a></li>
+                    <li @class([
+                        'ml-1',
+                        'rounded-lg',
+                        'bg-sky-950' => request()->is('settings/channels/banners'),
+                    ]) href="/settings/channels/banners" wire:navigate><a>
+                            <x-heroicon-o-photo class="size-4" />
+                            Nahrané bannery
+                        </a></li>
+                </ul>
+            </details>
+        </li>
         <li>
             <details open>
                 <summary class="font-semibold ml-1">
@@ -110,7 +163,8 @@
                                     'ml-1',
                                     'rounded-lg',
                                     'bg-sky-950' => request()->is('settings/geniustv/channels-taxes'),
-                                ]) href="/settings/geniustv/channels-taxes" wire:navigate>
+                                ]) href="/settings/geniustv/channels-taxes"
+                                    wire:navigate>
                                     <a>
                                         <x-heroicon-o-currency-dollar class="size-4" />
                                         Poplatky za kanály

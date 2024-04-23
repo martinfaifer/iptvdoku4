@@ -7,6 +7,7 @@ use App\Models\Channel;
 use App\Models\ChannelMulticast;
 use App\Models\ChannelQualityWithIp;
 use App\Models\Note;
+use App\Models\RestartChannel;
 
 class CompletlyDeleteChannelAction
 {
@@ -17,6 +18,8 @@ class CompletlyDeleteChannelAction
 
     public function __invoke(): bool
     {
+        // delete form restart channel table
+        RestartChannel::where('channel_id', $this->channel->id)->delete();
         // try {
             // delete h264 & h265
             if (! is_null($this->channel->h264)) {
@@ -49,6 +52,7 @@ class CompletlyDeleteChannelAction
                     $this->channel->id,
                     true
                 ))();
+
             }
 
             if (! $this->channel->multicasts->isEmpty()) {

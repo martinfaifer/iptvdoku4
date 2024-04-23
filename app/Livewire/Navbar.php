@@ -13,7 +13,7 @@ class Navbar extends Component
 {
     use RunningEventsTrait, GetCachedWeatherTrait;
 
-    public array $iptv_dohled_alerts;
+    public array $iptv_dohled_alerts = [];
 
     public array $runningEvents;
 
@@ -23,6 +23,10 @@ class Navbar extends Component
 
     public bool $alertDrawer = false;
 
+    public array $notifyFromCurrentEvents = [];
+
+    public bool $calendarNotificationDialog = false;
+
     public bool $calendarEventsDrawer = false;
 
     public function mount()
@@ -30,6 +34,15 @@ class Navbar extends Component
         $this->runningEvents = $this->running_events();
         $this->user = Auth::user();
         $this->weather = $this->get_weather();
+        $this->refreshAlerts();
+
+        // check if is running some events to notify in frontEnd
+        $this->notifyFromCurrentEvents = $this->running_events_with_frontendNotification();
+        if ($this->notifyFromCurrentEvents) {
+            if (!session()->has('calendarNotificationDialog')) {
+                $this->calendarNotificationDialog = true;
+            }
+        }
     }
 
     public function openAlertDrawer()
@@ -52,10 +65,14 @@ class Navbar extends Component
         }
     }
 
+    public function closeCalendarNotificationDialog()
+    {
+        session(['calendarNotificationDialog' => 'seen']);
+        return $this->calendarNotificationDialog = false;
+    }
+
     public function render()
     {
-        return view('livewire.navbar', [
-            'iptv_dohled_alerts' => Cache::get('iptv_dohled_alerts'),
-        ]);
+        return view('livewire.navbar');
     }
 }

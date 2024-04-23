@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Observers\EventObserver;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
@@ -13,17 +14,22 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 #[ObservedBy(EventObserver::class)]
 class Event extends Model
 {
-    protected $fillable = [
-        'label', 'description', 'color', 'start_date', 'start_time',
-        'end_date', 'end_time', 'creator', 'users', 'channels', 'tag_id'
+    const BANNER_NAMES = [
+        'stb_1113_grape.png', 'stb_1113_grape_ostatni.png'
     ];
 
-    public function description(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => Str::of($value)->markdown(),
-        );
-    }
+    protected $fillable = [
+        'label', 'description', 'color', 'start_date', 'start_time',
+        'end_date', 'end_time', 'creator', 'users', 'channels', 'tag_id',
+        'fe_notification', 'banner_path', 'sftp_server_id'
+    ];
+
+    // public function description(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn ($value) => Str::of($value)->markdown(),
+    //     );
+    // }
 
     public function user(): BelongsTo
     {
@@ -38,5 +44,21 @@ class Event extends Model
     public function tag(): HasOne
     {
         return $this->hasOne(Tag::class, 'id', 'tag_id');
+    }
+
+    public function sftp_server(): HasOne
+    {
+        return $this->hasOne(SftpServer::class, 'id', 'sftp_server_id');
+    }
+
+    public function scopeRunningEvents(Builder $query)
+    {
+        return $query->where('start_date', "<=", now()->format('Y-m-d'))
+            ->where('end_date', ">=", now()->format('Y-m-d'));
+    }
+
+    public function scopeHasFeNotification(Builder $query)
+    {
+        return $query->where('fe_notification', true);
     }
 }

@@ -5,15 +5,15 @@
             {{--  --}}
         </div>
         <div class="flex flex-none gap-2">
-            @foreach ($tagsOnItem as $tag)
+            @foreach ($tagsOnItem as $tagOnItem)
                 <div
-                    class="text-xs inline-flex items-center font-semibold leading-sm px-3 py-1 {{ $tag->tag->color }} text-neutral-200 rounded-md w-18 h-6">
+                    class="text-xs inline-flex items-center font-semibold leading-sm px-3 py-1 {{ $tagOnItem->tag->color }} text-neutral-200 rounded-md w-18 h-6">
                     <div class="inline-flex">
                         <div>
-                            {{ $tag->tag->name }}
+                            {{ $tagOnItem->tag->name }}
                         </div>
                         <div>
-                            <x-heroicon-s-trash wire:click='destroy({{ $tag->id }})'
+                            <x-heroicon-s-trash wire:click='destroy({{ $tagOnItem->id }})'
                                 wire:confirm='Opravdu odebrat štítek?' class="cursor-pointer size-4 ml-3" />
                         </div>
                     </div>
@@ -33,7 +33,8 @@
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Štítky" wire:model="selectedTags" :options="$tags" searchable autofocus/>
+                    <x-choices-offline label="Štítky" wire:model="selectedTags" :options="$tags" searchable
+                        autofocus />
                     <div>
                         @error('form.selectedTags')
                             <span class="error">{{ $message }}</span>

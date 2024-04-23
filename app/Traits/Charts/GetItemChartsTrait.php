@@ -30,7 +30,7 @@ trait GetItemChartsTrait
         $labels = [];
         $data = [];
 
-        foreach ($chartsData as $chartData) {
+        foreach ($chartsData->reverse() as $chartData) {
             array_push($labels, $chartData->created_at->format('H:i , d.m. Y'));
             array_push($data, (int) $chartData->value);
         }

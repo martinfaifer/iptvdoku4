@@ -15,10 +15,10 @@ class ConnectService
     public function connect()
     {
         $httpResponse = Http::get(
-            config('services.api.3.open_weather_map.url')
+            config('services.api.4.open_weather_map.url')
              . '?q=' . $this->city . ',' . $this->state
              .'&units=metric'
-             .'&APPID=' . config('services.api.3.open_weather_map.api_key'));
+             .'&APPID=' . config('services.api.4.open_weather_map.api_key'));
         if ($httpResponse->ok()) {
             return $httpResponse->json();
             // $this->storeData($httpResponse->json());

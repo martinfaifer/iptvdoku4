@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-    background-color:  #0E223A;
+    background-color: #0e223a;
 }
 
 .mary-table-pagination span[aria-current="page"] > span {
@@ -90,6 +90,18 @@
 }
 
 .select:focus-within {
+    box-shadow: none;
+    border-color: #334155;
+    outline-style: solid;
+    outline-width: 0px;
+    outline-offset: 1px;
+    outline-color: #334155;
+}
+
+.file-input {
+    @apply h-[2.7rem] bg-transparent border-slate-700/30;
+}
+.file-input:focus-within {
     box-shadow: none;
     border-color: #334155;
     outline-style: solid;

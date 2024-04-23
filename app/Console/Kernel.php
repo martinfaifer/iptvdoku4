@@ -12,6 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('channel:restart')->dailyAt('03:00');
+
         $schedule->command('calendar:start-daily-event')->daily();
         $schedule->command('calendar:end-daily-event')->daily();
         $schedule->command('calendar:start-event')->everyMinute();
@@ -32,6 +34,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('weather:get')->everyThirtyMinutes();
 
         $schedule->command('nangu:get-monthly-report')->monthly();
+
+        $schedule->command('grape_transcoders:get_transcoders')->everyFifteenMinutes();
     }
 
     /**

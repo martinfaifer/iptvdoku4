@@ -2,20 +2,23 @@
 
 namespace App\Livewire\Iptv\Calendar;
 
+use App\Models\Tag;
 use App\Models\User;
+use App\Models\Channel;
 use Livewire\Component;
 use App\Models\CssColor;
+use App\Models\NanguIsp;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Collection;
 use App\Traits\Livewire\NotificationTrait;
-use App\Livewire\Forms\CreateCalendarEventForm;
-use App\Models\Channel;
-use App\Models\NanguIsp;
 use App\Models\NanguIspTagToChannelPackage;
-use App\Models\Tag;
+use App\Livewire\Forms\CreateCalendarEventForm;
+use App\Models\SftpServer;
 
 class CreateCalendarEventComponent extends Component
 {
-    use NotificationTrait;
+    use NotificationTrait, WithFileUploads;
+
     public CreateCalendarEventForm $form;
 
     public bool $storeModal = false;
@@ -26,6 +29,8 @@ class CreateCalendarEventComponent extends Component
 
     public Collection $channels;
 
+    public Collection $sftpServers;
+
     public array $tags;
 
     public function mount()
@@ -33,6 +38,7 @@ class CreateCalendarEventComponent extends Component
         $this->cssColors = CssColor::get();
         $this->users = User::get();
         $this->channels = Channel::orderBy('name', "ASC")->get(['id', 'name']);
+        $this->sftpServers = SftpServer::get(['id', 'name']);
         if (NanguIspTagToChannelPackage::first()) {
             foreach (NanguIspTagToChannelPackage::distinct()->get('tag_id') as $nanguIspTagToChannelPackage) {
 
@@ -42,8 +48,6 @@ class CreateCalendarEventComponent extends Component
                 ];
             }
         }
-        // $this->tags =
-
     }
 
     public function create()

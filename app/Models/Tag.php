@@ -25,6 +25,18 @@ class Tag extends Model
             'id' => 4,
             'name' => 'ssh_login',
         ],
+        [
+            'id' => 5,
+            'name' => 'grape_transcoder_api',
+        ],
+        [
+            'id' => 6,
+            'name' => 'can_channel_restart',
+        ],
+        [
+            'id' => 7,
+            'name' => 'channel_restart',
+        ],
     ];
 
     protected $fillable = [
@@ -47,5 +59,10 @@ class Tag extends Model
     {
         $query
             ->where('name', 'like', '%' . $search . '%');
+    }
+
+    public function scopeHasActionChannelRestart(Builder $query)
+    {
+        return $query->where('action', 6);
     }
 }

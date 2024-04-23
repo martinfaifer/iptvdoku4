@@ -215,7 +215,7 @@
                     @if (!is_null($nmsCahedData) && !empty($nmsCahedData))
                         <div class="col-span-12 md:col-span-4 mb-4">
                             <x-share.cards.base-card title="Informace o zařízení z NMS">
-                                <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold text-[#A3ABB8]">
+                                <div class="grid grid-cols-12 gap-4 font-semibold text-[#A3ABB8]">
                                     <div class="col-span-12">
                                         <span class="font-normal">
                                             Název v NMS:
@@ -266,18 +266,27 @@
                     </div>
                 @endif
 
+                @if (!is_null($grapeTranscoderData))
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 md:col-span-12 mb-4">
+                            <livewire:iptv.devices.grape-transcoders-api-component
+                                :device="$device"></livewire:iptv.devices.grape-transcoders-api-component>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="grid grid-cols-12 gap-4">
                     {{-- logs --}}
                     <div class="col-span-12 md:col-span-4 mb-4">
-                        <livewire:log-component columnValue="device:{{ $device->id }}" column="item" lazy/>
+                        <livewire:log-component columnValue="device:{{ $device->id }}" column="item" lazy />
                     </div>
                     {{-- contacts --}}
                     <div class="col-span-12 md:col-span-4">
-                        <livewire:contact-component type="device" :item_id="$device->id" lazy/>
+                        <livewire:contact-component type="device" :item_id="$device->id" lazy />
                     </div>
                     {{-- poznámky --}}
                     <div class="col-span-12 md:col-span-4 mb-4">
-                        <livewire:notes.note-component column="device_id" :id="$device->id" lazy/>
+                        <livewire:notes.note-component column="device_id" :id="$device->id" lazy />
                     </div>
 
                     {{-- vazba na kanály --}}

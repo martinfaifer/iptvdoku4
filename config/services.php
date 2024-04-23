@@ -67,6 +67,11 @@ return [
             ],
         ],
         [
+            'grape_transcoders' => [
+                'url' => env('GRAPE_TRANSCODERS_API_URL')
+            ]
+        ],
+        [
             'open_weather_map' => [
                 'url' => env('OPEN_WEATHER_MAP_URL'),
                 'api_key' => env('OPEN_WEATHER_MAP_API_KEY')

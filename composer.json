@@ -21,6 +21,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
         "league/flysystem-ftp": "^3.0",
+        "league/flysystem-sftp-v3": "^3.0",
         "livewire/livewire": "^3.4",
         "maatwebsite/excel": "^3.1",
         "php-http/guzzle7-adapter": "^1.0",
@@ -30,7 +31,6 @@
         "spatie/laravel-pdf": "^1.4"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.12",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.14",
         "laravel/sail": "^1.18",
