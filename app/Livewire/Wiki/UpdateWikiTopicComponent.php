@@ -35,7 +35,7 @@ class UpdateWikiTopicComponent extends Component
     {
         $this->form->update();
 
-        $this->redirect("/wiki/" . $this->topic->id, true);
+        $this->redirect(url()->previous(), true);
         return $this->success_alert("Upraveno");
     }
 

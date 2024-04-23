@@ -24,6 +24,7 @@ use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsHboCompo
 use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
 use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
 use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
+use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationComponent;
 
 Route::get('test', function () {
     return view('pdfs.invoice');
@@ -75,6 +76,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('notifications')->group(function() {
             Route::get('slack', SettingsSlackNotificationComponent::class);
+            Route::get('weather', SettingsWeatherNotificationComponent::class);
         });
     });
 });

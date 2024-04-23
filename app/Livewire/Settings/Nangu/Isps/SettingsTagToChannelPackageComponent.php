@@ -62,7 +62,7 @@ class SettingsTagToChannelPackageComponent extends Component
     {
         $this->updateForm->update();
 
-        $this->redirect('/settings/nangu/isps-channel-packages-to-tags', true);
+        $this->redirect(url()->previous(), true);
 
         return $this->success_alert("Upraveno");
     }
@@ -71,7 +71,7 @@ class SettingsTagToChannelPackageComponent extends Component
     {
         $this->createForm->create();
 
-        $this->redirect('/settings/nangu/isps-channel-packages-to-tags', true);
+        $this->redirect(url()->previous(), true);
 
         return $this->success_alert("Vazba přidána");
     }
@@ -80,7 +80,7 @@ class SettingsTagToChannelPackageComponent extends Component
     {
         $nanguIspTagToChannelPackage->delete();
 
-        $this->redirect('/settings/nangu/isps-channel-packages-to-tags', true);
+        $this->redirect(url()->previous(), true);
 
         return $this->success_alert("Odebráno");
     }

@@ -16,7 +16,7 @@ class DeleteWikiTopicComponent extends Component
     {
         $this->topic->delete();
 
-        $this->redirect("/wiki", true);
+        $this->redirect(url()->previous(), true);
 
         return $this->success_alert("Odebrán článek");
     }

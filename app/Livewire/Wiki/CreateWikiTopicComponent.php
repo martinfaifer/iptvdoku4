@@ -26,7 +26,7 @@ class CreateWikiTopicComponent extends Component
     {
         $topic = $this->form->create();
 
-        $this->redirect('/wiki/'. $topic->id, true);
+        $this->redirect(url()->previous(), true);
 
         return $this->success_alert("Článek vytvořen");
     }

@@ -34,7 +34,7 @@ class SettingsUsersComponent extends Component
         $this->form->create();
         $this->closeModal();
 
-        $this->redirect('/settings/users', true);
+        $this->redirect(url()->previous(), true);
 
         return $this->success_alert("Uživatel vytvořen");
     }

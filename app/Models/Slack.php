@@ -35,6 +35,6 @@ class Slack extends Model
 
     public function scopeSearch(Builder $query, string $search = "")
     {
-        return $query->where('description', "%" . $search . "%")->orWhere('url', "like", "%" . $search . "%");
+        return $query->where('description', 'like', "%" . $search . "%")->orWhere('url', "like", "%" . $search . "%");
     }
 }

@@ -46,7 +46,7 @@ class SettingsIspComponent extends Component
     {
         $this->createForm->create();
 
-        $this->redirect("/settings/nangu/isps", true);
+        $this->redirect(url()->previous(), true);
 
         return $this->success_alert("Poskytovatel vytvořen");
     }
@@ -61,7 +61,7 @@ class SettingsIspComponent extends Component
     {
         $this->updateForm->update();
 
-        $this->redirect("/settings/nangu/isps", true);
+        $this->redirect(url()->previous(), true);
 
         return $this->success_alert("Poskytovatel upraven");
     }
@@ -70,7 +70,7 @@ class SettingsIspComponent extends Component
     {
         $nanguIsp->delete();
 
-        $this->redirect("/settings/nangu/isps", true);
+        $this->redirect(url()->previous(), true);
 
         return $this->success_alert("Poskytovatel odebrán");
     }
