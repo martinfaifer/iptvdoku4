@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\Slack\TranslateActionsTrait;
 use App\Livewire\Forms\CreateSettingsSlackNotificationForm;
+use App\Livewire\Forms\UpdateSettingsSlackNotificationForm;
 
 class SettingsSlackNotificationComponent extends Component
 {
@@ -16,8 +17,10 @@ class SettingsSlackNotificationComponent extends Component
     public string $query = "";
 
     public bool $createModal = false;
+    public bool $editModal = false;
 
     public CreateSettingsSlackNotificationForm $createForm;
+    public UpdateSettingsSlackNotificationForm $updateForm;
 
     public array $slackActions = [];
 
@@ -34,7 +37,9 @@ class SettingsSlackNotificationComponent extends Component
     public function closeDialog()
     {
         $this->createForm->reset();
+        $this->updateForm->reset();
 
+        $this->editModal = false;
         $this->createModal = false;
     }
 
@@ -43,8 +48,30 @@ class SettingsSlackNotificationComponent extends Component
     {
         $this->createForm->create();
 
-        $this->redirect("/settings/notifications/slack", true);
+        $this->redirect(url()->previous(), true);
         return $this->success_alert("Přidáno");
+    }
+
+    public function edit(Slack $slack)
+    {
+        $this->updateForm->setChannel($slack);
+        return $this->editModal = true;
+    }
+
+    public function update()
+    {
+        $this->updateForm->update();
+
+        $this->redirect(url()->previous(), true);
+        return $this->success_alert("Upraveno");
+    }
+
+    public function destroy(Slack $slack)
+    {
+        $slack->delete();
+
+        $this->redirect(url()->previous(), true);
+        return $this->success_alert("Odebráno");
     }
 
     public function render()

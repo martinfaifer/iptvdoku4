@@ -65,7 +65,38 @@
                 <div>
                     <x-button label="Přidat"
                         class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                        type="submit" spinner="create" />
+                </div>
+            </div>
+        </x-form>
+    </x-modal>
+
+    <x-modal wire:model="editModal" persistent class="modal-bottom sm:modal-middle fixed">
+        <x-form wire:submit="update">
+            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                wire:click='closeDialog'>✕</x-button>
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 md:col-span-6">
+                    <x-input label="Url" wire:model="updateForm.url" disabled/>
+                </div>
+                <div class="col-span-12 md:col-span-6">
+                    <x-input label="Popis" wire:model="updateForm.description" />
+                </div>
+                <div class="col-span-12">
+                    <x-choices-offline label="Akce" wire:model="updateForm.action" :options="$slackActions" single
+                        searchable />
+                </div>
+            </div>
+            {{-- action section --}}
+            <div class="flex justify-between">
+                <div>
+                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                        wire:click='closeDialog' />
+                </div>
+                <div>
+                    <x-button label="Upravit"
+                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
+                        type="submit" spinner="update" />
                 </div>
             </div>
         </x-form>
