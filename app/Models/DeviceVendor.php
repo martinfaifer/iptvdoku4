@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DeviceVendor extends Model
@@ -19,5 +20,10 @@ class DeviceVendor extends Model
     public function hasSnmp(): HasMany
     {
         return $this->hasMany(DeviceVendorSnmp::class, 'device_vendor_id');
+    }
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        return $query->where('name', 'like', "%" . $search . "%");
     }
 }

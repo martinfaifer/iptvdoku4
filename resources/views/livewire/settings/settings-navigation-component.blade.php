@@ -20,6 +20,32 @@
         <li>
             <details open>
                 <summary class="font-semibold ml-1">
+                    <x-heroicon-o-device-tablet class="size-4" />
+                    Zařízení
+                </summary>
+                <ul>
+                    <li @class([
+                        'ml-1',
+                        'rounded-lg',
+                        'bg-sky-950' => request()->is('settings/devices/vendors'),
+                    ]) href="/settings/devices/vendors" wire:navigate><a>
+                            <x-heroicon-o-device-tablet class="size-4"/>
+                            Výrobci zařízení
+                        </a></li>
+                    <li @class([
+                        'ml-1',
+                        'rounded-lg',
+                        'bg-sky-950' => request()->is('settings/devices/distributors'),
+                    ]) href="/settings/devices/distributors" wire:navigate><a>
+                            <x-heroicon-o-credit-card class="size-4"/>
+                            Distributoři sat. caret
+                        </a></li>
+                </ul>
+            </details>
+        </li>
+        <li>
+            <details open>
+                <summary class="font-semibold ml-1">
                     <x-heroicon-o-bell class="size-4" />
                     Upozornění
                 </summary>

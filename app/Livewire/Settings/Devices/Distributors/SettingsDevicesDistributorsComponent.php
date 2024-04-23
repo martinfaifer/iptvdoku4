@@ -1,0 +1,84 @@
+<?php
+
+namespace App\Livewire\Settings\Devices\Distributors;
+
+use Livewire\Component;
+use Livewire\WithPagination;
+use App\Models\SatelitCardVendor;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\CreateSettingsDevicesDistributorsForm;
+use App\Livewire\Forms\UpdateSettingsDevicesDistributorsForm;
+
+class SettingsDevicesDistributorsComponent extends Component
+{
+    use WithPagination, NotificationTrait;
+
+    public CreateSettingsDevicesDistributorsForm $createForm;
+    public UpdateSettingsDevicesDistributorsForm $updateForm;
+
+    public string $query = "";
+
+    public bool $createModal = false;
+    public bool $editModal = false;
+
+    public function openCreateModal()
+    {
+        $this->createModal = true;
+    }
+
+    public function closeDialog()
+    {
+        $this->createForm->reset();
+        $this->updateForm->reset();
+        $this->createModal = false;
+        $this->editModal = false;
+    }
+
+    public function create()
+    {
+        $this->createForm->create();
+        $this->redirect(url()->previous(), true);
+
+        return $this->success_alert("Přidáno");
+    }
+
+    public function edit(SatelitCardVendor $satelitCardVendor)
+    {
+        $this->updateForm->setDistributor($satelitCardVendor);
+        return $this->editModal = true;
+    }
+
+    public function update()
+    {
+        $this->updateForm->update();
+
+        $this->redirect(url()->previous(), true);
+
+        return $this->success_alert("Upraveno");
+    }
+
+    public function destroy(SatelitCardVendor $satelitCardVendor)
+    {
+        try {
+            $satelitCardVendor->delete();
+
+            $this->redirect(url()->previous(), true);
+
+            return $this->success_alert("Odebráno");
+        } catch (\Throwable $th) {
+            $this->redirect(url()->previous(), true);
+            return $this->error_alert("Existuje vazba na satelitní kartu");
+        }
+    }
+
+    public function render()
+    {
+        return view('livewire.settings.devices.distributors.settings-devices-distributors-component', [
+            'headers' => [
+                ['key' => 'name', 'label' => 'Distributor', 'class' => 'text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+            ],
+            'distributors' => SatelitCardVendor::search($this->query)->paginate(5)
+        ]);
+    }
+}
