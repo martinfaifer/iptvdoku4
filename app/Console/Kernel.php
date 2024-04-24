@@ -36,6 +36,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('nangu:get-monthly-report')->monthly();
 
         $schedule->command('grape_transcoders:get_transcoders')->everyFifteenMinutes();
+
+        $schedule->command('floweye:get-active-tickets')->everyFiveMinutes();
     }
 
     /**

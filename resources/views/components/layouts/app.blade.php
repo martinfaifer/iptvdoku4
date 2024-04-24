@@ -114,6 +114,7 @@
                                     </a>
                                 </li>
                             </div>
+                            <livewire:iptv.flow-eye.menu.flow-eye-menu-icon-with-alert-component>
                         </ul>
                     </x-menu>
                     {{-- main dynamic navigation --}}
@@ -133,6 +134,9 @@
                             @endif
                             @if (request()->is('wiki') || request()->is('wiki/*'))
                                 <livewire:wiki.menu.wiki-menu-component class="fixed" />
+                            @endif
+                            @if (request()->is('floweye') || request()->is('floweye/*'))
+                                <livewire:iptv.flow-eye.menu.flow-eye-menu-component class="fixed" />
                             @endif
                             @if (request()->is('settings') || request()->is('settings/*'))
                                 <livewire:settings.settings-navigation-component class="fixed" />

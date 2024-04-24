@@ -96,6 +96,14 @@ return [
             'exchange_rate' => [
                 'api_key' => env('EXCHANGE_RATE_API_KEY')
             ]
+        ],
+        [
+            'floweye' => [
+                'url' => env('FLOWEYE_URL'),
+                'api_token' => env('FLOWEYE_API_TOKEN'),
+                'template_id' => env('FLOWEYE_TEMPLATE_ID'),
+                'department' => env('FLOWEYE_DEPARTMENT')
+            ]
         ]
     ],
 

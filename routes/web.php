@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Iptv\Sftps\SftpComponent;
 use App\Livewire\Iptv\Channels\IptvChannel;
 use App\Livewire\Iptv\Devices\DeviceComponent;
+use App\Livewire\Iptv\FlowEye\FlowEyeComponent;
 use App\Livewire\Iptv\Calendar\CalendarComponent;
 use App\Livewire\Iptv\Cards\SatelitCardComponent;
 use App\Livewire\Settings\Tags\SettingsTagComponent;
@@ -16,11 +17,11 @@ use App\Livewire\Settings\Devices\Vendors\SettingsDevicesVendorsComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
 use App\Livewire\Settings\Channels\Banners\SettingsChannelsBannersComponent;
 use App\Livewire\Settings\Channels\Restart\SettingsChannelsRestartComponent;
-use App\Livewire\Settings\Devices\Distributors\SettingsDevicesDistributorsComponent;
 use App\Livewire\Settings\GeniusTv\Invoices\SettingsGeniusTvInvoicesComponent;
 use App\Livewire\Settings\Geniustv\Discounts\SettingsGeniusTvDiscountsComponent;
 use App\Livewire\Settings\Notifications\Slack\SettingsSlackNotificationComponent;
 use App\Livewire\Settings\Geniustv\OfferTaxes\SettingsGeniusTvOfferTaxesComponent;
+use App\Livewire\Settings\Devices\Distributors\SettingsDevicesDistributorsComponent;
 use App\Livewire\Settings\Geniustv\StaticTaxes\SettingsGeniusTvStaticTaxesComponent;
 use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsHboComponent;
 use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationComponent;
@@ -49,6 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::get('sftps/{sftpServer?}', SftpComponent::class);
 
     Route::get('wiki/{topic?}', WikiComponent::class);
+
+    Route::get('floweye/{issue?}', FlowEyeComponent::class);
 
     Route::prefix('settings')->group(function () {
         Route::get('', SettingsTagComponent::class);

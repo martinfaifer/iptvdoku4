@@ -2,12 +2,15 @@
 
 namespace App\Services\Api\IptvDohled;
 
-use App\Events\BroadcastIptvDohledAlertsEvent;
-use Illuminate\Support\Facades\Cache;
+use App\Traits\Api\RequestTypeTrait;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
+use App\Events\BroadcastIptvDohledAlertsEvent;
 
 class ConnectService
 {
+    use RequestTypeTrait;
+
     public $connection;
 
     public $endPoints = [
@@ -44,11 +47,7 @@ class ConnectService
                 $this->endPoints[$endpointType]['endpoint'] = str_replace('%params%', $params, $this->endPoints[$endpointType]['endpoint']);
             }
 
-            $requestType = match ($this->endPoints[$endpointType]['method']) {
-                'get' => 'get',
-                'post' => 'post',
-                'delete' => 'delete'
-            };
+            $requestType = $this->get_request_type($this->endPoints[$endpointType]['method']);
 
             $this->connection = Http::withBasicAuth(
                 config('services.api.iptvDohled.username'),

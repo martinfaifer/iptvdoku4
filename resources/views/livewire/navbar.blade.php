@@ -1,6 +1,9 @@
 @php
     function get_weather_icon($weather)
     {
+        if (!array_key_exists('description', $weather)) {
+            return '/storage/svgs/sunny.svg';
+        }
         switch ($weather) {
             case str_contains($weather['description'], 'clouds'):
                 return '/storage/svgs/clouds.svg';
@@ -56,12 +59,11 @@
             <div>
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-circle btn-ghost btn-sm text-info">
-                        @if (!empty($weather))
-                            <div>
-                                <img class="object-cover size-6" src="{{ get_weather_icon($weather) }}"
-                                    alt="" />
-                            </div>
-                        @endif
+
+                        <div>
+                            <img class="object-cover size-6" src="{{ get_weather_icon($weather) }}" alt="" />
+                        </div>
+
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
