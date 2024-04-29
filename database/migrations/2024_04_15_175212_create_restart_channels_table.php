@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('device_id')->constrained('devices');
             $table->timestamps();
 
-            $table->index('ip');
+            $table->index('ip_id');
         });
     }
 
