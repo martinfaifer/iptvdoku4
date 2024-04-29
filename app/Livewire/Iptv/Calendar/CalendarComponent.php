@@ -2,25 +2,25 @@
 
 namespace App\Livewire\Iptv\Calendar;
 
+use App\Livewire\Forms\UpdateCalendarEventForm;
+use App\Models\Channel;
+use App\Models\CssColor;
+use App\Models\Event;
+use App\Models\NanguIspTagToChannelPackage;
+use App\Models\SftpServer;
 use App\Models\Tag;
 use App\Models\User;
-use App\Models\Event;
-use App\Models\Channel;
-use Livewire\Component;
-use App\Models\CssColor;
-use App\Models\SftpServer;
-use Illuminate\Support\Str;
-use Livewire\WithFileUploads;
-use App\Traits\Livewire\NotificationTrait;
-use App\Models\NanguIspTagToChannelPackage;
 use App\Traits\Calendar\RunningEventsTrait;
 use App\Traits\Calendar\UpcomingEventsTrait;
+use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
-use App\Livewire\Forms\UpdateCalendarEventForm;
+use Illuminate\Support\Str;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CalendarComponent extends Component
 {
-    use NotificationTrait, UpcomingEventsTrait, RunningEventsTrait, WithFileUploads;
+    use NotificationTrait, RunningEventsTrait, UpcomingEventsTrait, WithFileUploads;
 
     public UpdateCalendarEventForm $form;
 
@@ -50,14 +50,14 @@ class CalendarComponent extends Component
         $this->cssColors = CssColor::get();
         $this->upcomingEvents = $this->upcoming_events();
         $this->runningEvents = $this->running_events();
-        $this->channels = Channel::orderBy('name', "ASC")->get(['id', 'name']);
+        $this->channels = Channel::orderBy('name', 'ASC')->get(['id', 'name']);
         $this->users = User::get();
         if (NanguIspTagToChannelPackage::first()) {
             foreach (NanguIspTagToChannelPackage::distinct()->get('tag_id') as $nanguIspTagToChannelPackage) {
 
                 $this->tags[] = [
                     'id' => $nanguIspTagToChannelPackage->tag_id,
-                    'name' => Tag::find($nanguIspTagToChannelPackage->tag_id)->name
+                    'name' => Tag::find($nanguIspTagToChannelPackage->tag_id)->name,
                 ];
             }
         }
@@ -73,15 +73,15 @@ class CalendarComponent extends Component
                 $this->events[] = [
                     'label' => $singleEvent->label,
                     'description' => Str::markdown($singleEvent->description),
-                    'css' => is_null($singleEvent->background_color) ? "!bg-red-500/20" : "!".$singleEvent->background_color->color."/20",
-                    'date' => now()->createFromFormat("Y-m-d", $singleEvent->start_date),
+                    'css' => is_null($singleEvent->background_color) ? '!bg-red-500/20' : '!'.$singleEvent->background_color->color.'/20',
+                    'date' => now()->createFromFormat('Y-m-d', $singleEvent->start_date),
                 ];
             } else {
                 $this->events[] = [
                     'label' => $singleEvent->label,
                     'description' => Str::markdown($singleEvent->description),
-                    'css' => is_null($singleEvent->background_color) ? "!bg-red-500/20" : "!".$singleEvent->background_color->color."/20",
-                    'range' => [now()->createFromFormat("Y-m-d", $singleEvent->start_date), now()->createFromFormat("Y-m-d", $singleEvent->end_date)],
+                    'css' => is_null($singleEvent->background_color) ? '!bg-red-500/20' : '!'.$singleEvent->background_color->color.'/20',
+                    'range' => [now()->createFromFormat('Y-m-d', $singleEvent->start_date), now()->createFromFormat('Y-m-d', $singleEvent->end_date)],
                 ];
             }
         }
@@ -91,6 +91,7 @@ class CalendarComponent extends Component
     public function edit(Event $event)
     {
         $this->form->setEvent($event);
+
         return $this->updateModal = true;
     }
 
@@ -99,15 +100,16 @@ class CalendarComponent extends Component
         $this->form->update();
         $this->closeModal();
         $this->redirect('/calendar', true);
-        return $this->success_alert("Upraveno");
-    }
 
+        return $this->success_alert('Upraveno');
+    }
 
     public function closeModal()
     {
         $this->resetErrorBag();
         $this->form->reset();
         $this->redirect('/calendar', true);
+
         return $this->updateModal = false;
     }
 
@@ -116,9 +118,9 @@ class CalendarComponent extends Component
         $event->delete();
 
         $this->redirect('/calendar', true);
-        return $this->success_alert("Odebrána událost");
-    }
 
+        return $this->success_alert('Odebrána událost');
+    }
 
     public function render()
     {

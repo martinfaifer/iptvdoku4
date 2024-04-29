@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class CssColor extends Model
 {
     protected $fillable = [
-        'color', 'hex'
+        'color', 'hex',
     ];
 }

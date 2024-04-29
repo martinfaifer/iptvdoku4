@@ -8,14 +8,12 @@ use Livewire\Form;
 
 class UpdateSettingsDevicesDistributorsForm extends Form
 {
-
     public ?SatelitCardVendor $satelitCardVendor;
 
-    #[Validate('required', message: "Vyplňte distributora")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    public string $name = "";
-
+    #[Validate('required', message: 'Vyplňte distributora')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    public string $name = '';
 
     public function setDistributor(SatelitCardVendor $satelitCardVendor)
     {
@@ -28,7 +26,7 @@ class UpdateSettingsDevicesDistributorsForm extends Form
         $this->validate();
         if ($this->name != $this->satelitCardVendor->name) {
             $this->satelitCardVendor->update([
-                'name' => $this->name
+                'name' => $this->name,
             ]);
         }
 

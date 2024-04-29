@@ -13,7 +13,7 @@ trait GrapeTranscoderChannelTrait
             formData: [
                 'transcoderIp' => $device->ip,
                 'streamPid' => $pid,
-                'cmd' => "KILL"
+                'cmd' => 'KILL',
             ]
         ))->connect();
 
@@ -27,7 +27,7 @@ trait GrapeTranscoderChannelTrait
             formData: [
                 'transcoderIp' => $device->ip,
                 'streamId' => $streamId,
-                'cmd' => "START"
+                'cmd' => 'START',
             ]
         ))->connect();
 
@@ -39,7 +39,7 @@ trait GrapeTranscoderChannelTrait
         $response = (new ConnectService(
             endpointType: 'streams_on_transcoders',
             formData: [
-                'transcoderIp' => $device->ip
+                'transcoderIp' => $device->ip,
             ]
         ))->connect();
 

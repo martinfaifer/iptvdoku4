@@ -29,7 +29,7 @@ class DeleteStreamFromIptvDohledJob implements ShouldQueue
     {
         (new ConnectService(
             endpointType: 'delete-stream',
-            params: str_contains($this->ip, ':1234') ? $this->ip : $this->ip . ':1234'
+            params: str_contains($this->ip, ':1234') ? $this->ip : $this->ip.':1234'
         ))->connect();
 
         // remove stream from table

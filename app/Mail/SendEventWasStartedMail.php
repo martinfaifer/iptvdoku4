@@ -6,9 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\SerializesModels;
 
 class SendEventWasStartedMail extends Mailable
 {
@@ -32,7 +31,7 @@ class SendEventWasStartedMail extends Mailable
             replyTo: [
                 new Address('iptv-dokumentace@grapesc.cz', 'IPTV dokumentace Grapesc'),
             ],
-            subject: 'Událost ' . $this->event->label . ' z kalendáře začala',
+            subject: 'Událost '.$this->event->label.' z kalendáře začala',
         );
     }
 

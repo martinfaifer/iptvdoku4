@@ -8,18 +8,18 @@ use Livewire\Form;
 
 class CreateSettingsDevicesVendorsForm extends Form
 {
-    #[Validate('required', message: "Vyplňte výrobce")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', "Maximální počet znaků je :max")]
-    #[Validate('unique:device_vendors,name', message: "tento výrobce již existuje")]
-    public string $name = "";
+    #[Validate('required', message: 'Vyplňte výrobce')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', 'Maximální počet znaků je :max')]
+    #[Validate('unique:device_vendors,name', message: 'tento výrobce již existuje')]
+    public string $name = '';
 
     public function create()
     {
         $this->validate();
 
         DeviceVendor::create([
-            'name' => $this->name
+            'name' => $this->name,
         ]);
 
         $this->reset();

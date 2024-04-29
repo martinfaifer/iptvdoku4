@@ -2,28 +2,28 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
-use App\Models\Event;
-use Livewire\WithFileUploads;
-use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\Auth;
 use App\Jobs\SendCreateEventNotificationJob;
+use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
+use Livewire\Form;
+use Livewire\WithFileUploads;
 
 class CreateCalendarEventForm extends Form
 {
     use WithFileUploads;
 
-    #[Validate('required', message: " Vyplňte popis")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    public string $label = "";
+    #[Validate('required', message: ' Vyplňte popis')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    public string $label = '';
 
-    #[Validate('required', message: " Vyplňte popis")]
-    #[Validate('string', message: "Neplatný formát")]
-    public string $description = "";
+    #[Validate('required', message: ' Vyplňte popis')]
+    #[Validate('string', message: 'Neplatný formát')]
+    public string $description = '';
 
-    #[Validate('required', message: "Vyberte začátek události")]
-    public string $start_date = "";
+    #[Validate('required', message: 'Vyberte začátek události')]
+    public string $start_date = '';
 
     #[Validate('nullable')]
     public $start_time = null;
@@ -42,13 +42,13 @@ class CreateCalendarEventForm extends Form
     public array $channels = [];
 
     #[Validate('nullable')]
-    public null|string $color = null;
+    public ?string $color = null;
 
     #[Validate('nullable')]
-    public null|string $tag_id = null;
+    public ?string $tag_id = null;
 
-    #[Validate('required', message: "Zobrazit upozornění?")]
-    #[Validate('boolean', message: "Nepatný formát")]
+    #[Validate('required', message: 'Zobrazit upozornění?')]
+    #[Validate('boolean', message: 'Nepatný formát')]
     public bool $fe_notification = false;
 
     #[Validate('max:1024', message: 'Maximální velikost banneru je 1Mb')]
@@ -56,8 +56,8 @@ class CreateCalendarEventForm extends Form
     public $banner = null;
 
     #[Validate('nullable')]
-    #[Validate('exists:sftp_servers,id', message: "Neznámý server")]
-    public null|string $sftp_server_id = null;
+    #[Validate('exists:sftp_servers,id', message: 'Neznámý server')]
+    public ?string $sftp_server_id = null;
 
     public function create()
     {
@@ -65,7 +65,7 @@ class CreateCalendarEventForm extends Form
 
         $bannerPath = null;
 
-        if (!is_null($this->banner)) {
+        if (! is_null($this->banner)) {
             $bannerPath = $this->banner->store(path: 'public/NanguBanners');
         }
 
@@ -83,11 +83,10 @@ class CreateCalendarEventForm extends Form
             'tag_id' => $this->tag_id,
             'fe_notification' => $this->fe_notification,
             'banner_path' => $bannerPath,
-            'sftp_server_id' => $this->sftp_server_id
+            'sftp_server_id' => $this->sftp_server_id,
         ]);
 
-
-        if (!is_null($this->users)) {
+        if (! is_null($this->users)) {
             SendCreateEventNotificationJob::dispatch($this->users, $event);
         }
 

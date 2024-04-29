@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class WeatherCity extends Model
 {
     protected $fillable = [
-        'city', 'state'
+        'city', 'state',
     ];
 
-    public function scopeSearch(Builder $query, string $search = "")
+    public function scopeSearch(Builder $query, string $search = '')
     {
-        return $query->where('city', "like", "%" . $search . "%");
+        return $query->where('city', 'like', '%'.$search.'%');
     }
 }

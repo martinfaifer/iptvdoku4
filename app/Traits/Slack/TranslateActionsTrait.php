@@ -10,38 +10,38 @@ trait TranslateActionsTrait
     {
         $slackActions = [];
         foreach (Slack::ACTIONS as $action) {
-            if ($action == "weather_notification") {
+            if ($action == 'weather_notification') {
                 $actionWithTranslation = [
                     'id' => $action,
-                    'name' => "Upozornění na počasí"
+                    'name' => 'Upozornění na počasí',
                 ];
             }
 
-            if ($action == "gpu_problem_notification") {
+            if ($action == 'gpu_problem_notification') {
                 $actionWithTranslation = [
                     'id' => $action,
-                    'name' => "Upozornění na nefunkční GPU"
+                    'name' => 'Upozornění na nefunkční GPU',
                 ];
             }
 
-            if ($action == "crashed_channel") {
+            if ($action == 'crashed_channel') {
                 $actionWithTranslation = [
                     'id' => $action,
-                    'name' => "Upozornění na nefunkční kanál"
+                    'name' => 'Upozornění na nefunkční kanál',
                 ];
             }
 
-            if ($action == "calendar_notification") {
+            if ($action == 'calendar_notification') {
                 $actionWithTranslation = [
                     'id' => $action,
-                    'name' => "Upozornění na hromadnou událost v kalendáři"
+                    'name' => 'Upozornění na hromadnou událost v kalendáři',
                 ];
             }
 
-            if ($action == "restart_channel") {
+            if ($action == 'restart_channel') {
                 $actionWithTranslation = [
                     'id' => $action,
-                    'name' => "Upozornění na restart kanálu"
+                    'name' => 'Upozornění na restart kanálu',
                 ];
             }
 

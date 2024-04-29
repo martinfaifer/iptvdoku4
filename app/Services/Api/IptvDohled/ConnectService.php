@@ -2,10 +2,10 @@
 
 namespace App\Services\Api\IptvDohled;
 
-use App\Traits\Api\RequestTypeTrait;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
 use App\Events\BroadcastIptvDohledAlertsEvent;
+use App\Traits\Api\RequestTypeTrait;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class ConnectService
 {
@@ -43,7 +43,7 @@ class ConnectService
                 $this->endPoints[$endpointType]['formData'] = $formData;
             }
 
-            if (!is_null($params)) {
+            if (! is_null($params)) {
                 $this->endPoints[$endpointType]['endpoint'] = str_replace('%params%', $params, $this->endPoints[$endpointType]['endpoint']);
             }
 
@@ -53,7 +53,7 @@ class ConnectService
                 config('services.api.iptvDohled.username'),
                 config('services.api.iptvDohled.password')
             )->$requestType(
-                config('services.api.iptvDohled.url') . $this->endPoints[$endpointType]['endpoint'],
+                config('services.api.iptvDohled.url').$this->endPoints[$endpointType]['endpoint'],
                 $this->endPoints[$endpointType]['formData']
             );
         } catch (\Throwable $th) {
@@ -65,16 +65,17 @@ class ConnectService
     {
         $response = $this->connection;
         if (is_null($response)) {
-            if (!is_null($cacheKey)) {
+            if (! is_null($cacheKey)) {
                 Cache::put($cacheKey, [], 3600);
             } else {
                 return [];
             }
         } else {
             if ($response->ok()) {
-                if (!is_null($cacheKey)) {
+                if (! is_null($cacheKey)) {
                     Cache::put($cacheKey, $response->json(), 3600);
                 }
+
                 return $response->json();
             }
         }

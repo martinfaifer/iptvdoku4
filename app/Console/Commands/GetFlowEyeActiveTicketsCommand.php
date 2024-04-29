@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Broadcast;
 use App\Events\BroadcastFlowEyeTicketsEvent;
 use App\Services\Api\FlowEye\ConnectService;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Broadcast;
+use Illuminate\Support\Facades\Cache;
 
 class GetFlowEyeActiveTicketsCommand extends Command
 {
@@ -35,22 +35,22 @@ class GetFlowEyeActiveTicketsCommand extends Command
             endpointType: 'procesess',
             formData: [
                 'templateId' => config('services.api.8.floweye.template_id'),
-                'state' => is_null($status) ? "active" : "complete",
-                'include' => "template,currentStep,discussion,variables(detail,ticket,resolver,attached_files)",
+                'state' => is_null($status) ? 'active' : 'complete',
+                'include' => 'template,currentStep,discussion,variables(detail,ticket,resolver,attached_files)',
                 'limit' => 100,
                 'variables' => json_encode([
-                    'department_choosed' => config('services.api.8.floweye.department')
-                ])
+                    'department_choosed' => config('services.api.8.floweye.department'),
+                ]),
             ]
         ));
 
         // cacheKey: 'floweye_active_tickets'
         $response = $connectService->connect();
 
-        if ($response['status'] != "error") {
+        if ($response['status'] != 'error') {
             foreach ($response['data'] as $ticket) {
                 if ($ticket['current_step']['sid'] != 'assignment') {
-                    if ($ticket['current_step']['sid'] != "closed") {
+                    if ($ticket['current_step']['sid'] != 'closed') {
                         // find user which resolving task
                         if ($ticket['current_step']['resolver'] != null) {
                             $ticket['resitel'] = (new ConnectService(

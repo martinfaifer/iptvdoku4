@@ -2,15 +2,15 @@
 
 namespace App\Jobs;
 
+use App\Actions\Slack\SendSlackNotificationAction;
 use App\Models\Slack;
+use App\Services\Api\IptvDohled\ConnectService;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Services\Api\IptvDohled\ConnectService;
-use App\Actions\Slack\SendSlackNotificationAction;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Cache;
 
 class GetAlertsFromIptvDohledJob implements ShouldQueue
 {
@@ -33,11 +33,11 @@ class GetAlertsFromIptvDohledJob implements ShouldQueue
         // check how many streams are down and send notification to slack
         if (count($errorStreams) >= 10) {
             // need too slow down process for spaming in slack channel
-            if (!Cache::has('sended_error_notification_about_high_channels_down')) {
+            if (! Cache::has('sended_error_notification_about_high_channels_down')) {
                 $slack = Slack::where('action', 'crashed_channel')->first();
                 if ($slack) {
                     (new SendSlackNotificationAction(
-                        text: "Nefunguje " . count($errorStreams) . " streamů",
+                        text: 'Nefunguje '.count($errorStreams).' streamů',
                         url: $slack->url
                     ))();
 

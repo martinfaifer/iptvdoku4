@@ -3,25 +3,26 @@
 namespace App\Livewire\Iptv\Devices;
 
 use App\Models\Device;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use Illuminate\Support\Facades\Cache;
-use App\Traits\Livewire\NotificationTrait;
-use App\Services\Api\GrapeTranscoders\ConnectService;
 use App\Traits\Devices\GrapeTranscoders\GrapeTranscoderChannelTrait;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class GrapeTranscodersApiComponent extends Component
 {
-    use NotificationTrait, GrapeTranscoderChannelTrait;
+    use GrapeTranscoderChannelTrait, NotificationTrait;
 
     public ?Device $device;
+
     public ?array $grapeTranscoderData = null;
+
     public array $channelsOnDevice = [];
 
     public function mount(Device $device)
     {
         $this->device = $device;
-        $this->grapeTranscoderData = Cache::get(('grape_transcoder_' . $this->device->id));
+        $this->grapeTranscoderData = Cache::get(('grape_transcoder_'.$this->device->id));
         $this->load_channels_from_api();
     }
 
@@ -38,12 +39,13 @@ class GrapeTranscodersApiComponent extends Component
             device: $this->device
         );
 
-        $this->dispatch('reload_streams_on_transcoder.' . $this->device->id);
+        $this->dispatch('reload_streams_on_transcoder.'.$this->device->id);
         if (array_key_exists('alert', $response)) {
             if ($response['alert']['status'] == 'success') {
                 return $this->success_alert($response['alert']['msg']);
             }
         }
+
         return $this->error_alert('Stream se nepodařilo zastavit');
     }
 
@@ -54,12 +56,13 @@ class GrapeTranscodersApiComponent extends Component
             device: $this->device
         );
 
-        $this->dispatch('reload_streams_on_transcoder.' . $this->device->id);
+        $this->dispatch('reload_streams_on_transcoder.'.$this->device->id);
         if (array_key_exists('alert', $response)) {
             if ($response['alert']['status'] == 'success') {
                 return $this->success_alert($response['alert']['msg']);
             }
         }
+
         return $this->error_alert('Stream se nepodařilo spustit');
     }
 

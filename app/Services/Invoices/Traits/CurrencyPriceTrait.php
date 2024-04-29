@@ -6,10 +6,10 @@ trait CurrencyPriceTrait
 {
     public function calc_tax($tax, $model)
     {
-        if ($model->currency_name->name == "CZK") {
-            $tax = (float)$tax + (float)$model->price;
+        if ($model->currency_name->name == 'CZK') {
+            $tax = (float) $tax + (float) $model->price;
         } else {
-            $tax = (float)$tax + ((float)$model->price * (float)$model->currency_name->price);
+            $tax = (float) $tax + ((float) $model->price * (float) $model->currency_name->price);
         }
 
         return $tax;

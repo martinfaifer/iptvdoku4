@@ -1,17 +1,16 @@
 <?php
+
 namespace App\Livewire\Settings\GeniusTv\Statistics;
 
 use App\Exports\ChannelsUsageExport;
 use App\Models\Channel;
-use Livewire\Component;
 use App\Models\GeniusTvChart;
+use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Database\Eloquent\Collection;
 
 class SettingsGeniusTvStatisticsForAllChannelsComponent extends Component
 {
-
-    public string $query = "";
+    public string $query = '';
 
     public function get_channels_usage()
     {
@@ -20,7 +19,7 @@ class SettingsGeniusTvStatisticsForAllChannelsComponent extends Component
         foreach ($channels as $channel) {
             $statisticsForAllChannels[] = [
                 'name' => $channel->name,
-                'amount' => GeniusTvChart::withoutNanguIsp()->isChannel($channel->id)->take(2)->orderBy('id', "DESC")->get()
+                'amount' => GeniusTvChart::withoutNanguIsp()->isChannel($channel->id)->take(2)->orderBy('id', 'DESC')->get(),
             ];
         }
 
@@ -29,7 +28,8 @@ class SettingsGeniusTvStatisticsForAllChannelsComponent extends Component
 
     public function exportChannelsUsageToCsv()
     {
-        $fileName = "channels_usage.csv";
+        $fileName = 'channels_usage.csv';
+
         return Excel::download(new ChannelsUsageExport(), $fileName, \Maatwebsite\Excel\Excel::CSV);
     }
 

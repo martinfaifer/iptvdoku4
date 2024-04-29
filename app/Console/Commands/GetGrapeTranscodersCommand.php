@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Models\Device;
+use App\Services\Api\GrapeTranscoders\ConnectService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
-use App\Services\Api\GrapeTranscoders\ConnectService;
 
 class GetGrapeTranscodersCommand extends Command
 {
@@ -28,13 +28,13 @@ class GetGrapeTranscodersCommand extends Command
      */
     public function handle()
     {
-        $serverResponse = (new ConnectService(endpointType: "transcoders"))->connect();
+        $serverResponse = (new ConnectService(endpointType: 'transcoders'))->connect();
 
         foreach ($serverResponse as $responseData) {
             $device = Device::where('ip', $responseData['ip'])->first();
             if ($device) {
                 Cache::put(
-                    'grape_transcoder_' . $device->id,
+                    'grape_transcoder_'.$device->id,
                     $responseData,
                     3600
                 );

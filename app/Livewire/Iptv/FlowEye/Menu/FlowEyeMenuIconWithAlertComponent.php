@@ -2,13 +2,12 @@
 
 namespace App\Livewire\Iptv\FlowEye\Menu;
 
-use Livewire\Component;
-use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class FlowEyeMenuIconWithAlertComponent extends Component
 {
-
     public int $numberOfAlerts = 0;
 
     public function mount()

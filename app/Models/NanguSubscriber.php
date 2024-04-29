@@ -10,7 +10,7 @@ class NanguSubscriber extends Model
 {
     protected $fillable = [
         'subscriberCode',
-        'nangu_isp_id'
+        'nangu_isp_id',
     ];
 
     public function nanguIsp(): BelongsTo

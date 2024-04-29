@@ -2,16 +2,16 @@
 
 namespace App\Livewire\Iptv\FlowEye;
 
-use Livewire\Component;
 use Illuminate\Support\Facades\Cache;
+use Livewire\Component;
 
 class FlowEyeComponent extends Component
 {
-    public string|null $issue = null;
+    public ?string $issue = null;
 
-    public array|null $ticket = null;
+    public ?array $ticket = null;
 
-    public string $title = "IPTV dokumentace";
+    public string $title = 'IPTV dokumentace';
 
     public function mount()
     {
@@ -20,7 +20,7 @@ class FlowEyeComponent extends Component
 
     public function ticket_detail()
     {
-        if (!is_null($this->issue)) {
+        if (! is_null($this->issue)) {
             if (Cache::has('floweye_active_tickets')) {
                 $tickets = Cache::get('floweye_active_tickets');
 

@@ -10,17 +10,17 @@ class NanguStbAccountService
     {
         try {
 
-            if (!empty($stbAccounts)) {
+            if (! empty($stbAccounts)) {
                 if (array_key_exists('subscriptionStbAccountCode', $stbAccounts['subscriptionStbAccounts'])) {
                     NanguStbAccountCode::create([
                         'nangu_subscription_code_id' => $subscriptionId,
-                        'stbAccountCodes' => $stbAccounts['subscriptionStbAccounts']['subscriptionStbAccountCode']
+                        'stbAccountCodes' => $stbAccounts['subscriptionStbAccounts']['subscriptionStbAccountCode'],
                     ]);
                 } else {
                     foreach ($stbAccounts['subscriptionStbAccounts'] as $stbAccount) {
                         NanguStbAccountCode::create([
                             'nangu_subscription_code_id' => $subscriptionId,
-                            'stbAccountCodes' => $stbAccount['subscriptionStbAccountCode']
+                            'stbAccountCodes' => $stbAccount['subscriptionStbAccountCode'],
                         ]);
                     }
                 }

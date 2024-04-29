@@ -2,15 +2,15 @@
 
 namespace App\Livewire\Settings\Geniustv\StaticTaxes;
 
-use Livewire\Component;
+use App\Livewire\Forms\CreateSettingsGeniusTvStaticTaxesForm;
+use App\Livewire\Forms\UpdateSettingsGeniusTvStaticTaxesForm;
 use App\Models\Currency;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
 use App\Models\GeniusTVStaticTax;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
-use App\Livewire\Forms\CreateSettingsGeniusTvStaticTaxesForm;
-use App\Livewire\Forms\UpdateSettingsGeniusTvStaticTaxesForm;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsGeniusTvStaticTaxesComponent extends Component
 {
@@ -36,12 +36,14 @@ class SettingsGeniusTvStaticTaxesComponent extends Component
     public function openCreateModal()
     {
         $this->resetErrorBag();
+
         return $this->createModal = true;
     }
 
     public function closeDialog()
     {
         $this->updateModal = false;
+
         return $this->createModal = false;
     }
 
@@ -53,7 +55,7 @@ class SettingsGeniusTvStaticTaxesComponent extends Component
 
         $this->dispatch('refresh_settings_genius_tv_static_taxes');
 
-        return $this->success_alert("Přidáno");
+        return $this->success_alert('Přidáno');
     }
 
     public function edit(GeniusTVStaticTax $staticTax)

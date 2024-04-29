@@ -2,10 +2,10 @@
 
 namespace App\Observers;
 
+use App\Events\BroadcastLogEvent;
 use App\Jobs\LogJob;
 use App\Models\Loger;
 use App\Models\SatelitCard;
-use App\Events\BroadcastLogEvent;
 use Illuminate\Support\Facades\Auth;
 
 class SatelitCardObserver

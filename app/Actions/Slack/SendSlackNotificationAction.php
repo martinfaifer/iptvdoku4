@@ -3,7 +3,6 @@
 namespace App\Actions\Slack;
 
 use App\Jobs\SendSlackMesssageJob;
-use Illuminate\Support\Facades\Http;
 
 class SendSlackNotificationAction
 {

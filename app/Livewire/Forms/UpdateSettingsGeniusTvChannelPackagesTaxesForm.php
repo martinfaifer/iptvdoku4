@@ -2,29 +2,29 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
-use Livewire\Attributes\Validate;
 use App\Models\GeniusTVchannelPackagesTax;
+use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class UpdateSettingsGeniusTvChannelPackagesTaxesForm extends Form
 {
     public ?GeniusTVchannelPackagesTax $channelPackageTax;
 
-    #[Validate('required', message: "Vyberte kanály")]
+    #[Validate('required', message: 'Vyberte kanály')]
     public array $channels_id = [];
 
-    #[Validate('required', message: "Vyplňte cenu")]
-    #[Validate('string', message: "Neplatný formát")]
-    public string $price = "0";
+    #[Validate('required', message: 'Vyplňte cenu')]
+    #[Validate('string', message: 'Neplatný formát')]
+    public string $price = '0';
 
-    #[Validate('required', message: "Vyberte měnu")]
+    #[Validate('required', message: 'Vyberte měnu')]
     public $currency = null;
 
     #[Validate('nullable')]
     public array $exception = [];
 
-    #[Validate('required', message: "Rozhodněte se zda mají být obsaženy všechny kanály")]
-    #[Validate('boolean', message: "Neplatný formát")]
+    #[Validate('required', message: 'Rozhodněte se zda mají být obsaženy všechny kanály')]
+    #[Validate('boolean', message: 'Neplatný formát')]
     public bool $must_contains_all = false;
 
     public function setChannelPackageTax(GeniusTVchannelPackagesTax $channelPackageTax)
@@ -46,7 +46,7 @@ class UpdateSettingsGeniusTvChannelPackagesTaxesForm extends Form
             'price' => $this->price,
             'currency' => $this->currency,
             'exception' => empty($this->exception) ? null : json_encode($this->exception),
-            'must_contains_all' => $this->must_contains_all
+            'must_contains_all' => $this->must_contains_all,
         ]);
 
         $this->reset();

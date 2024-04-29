@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Settings\Users;
 
+use App\Livewire\Forms\CreateSettingsUserForm;
 use App\Models\User;
+use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Traits\Livewire\NotificationTrait;
-use App\Livewire\Forms\CreateSettingsUserForm;
 
 class SettingsUsersComponent extends Component
 {
@@ -21,6 +21,7 @@ class SettingsUsersComponent extends Component
     public function openCreateModal()
     {
         $this->resetErrorBag();
+
         return $this->createModal = true;
     }
 
@@ -36,7 +37,7 @@ class SettingsUsersComponent extends Component
 
         $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Uživatel vytvořen");
+        return $this->success_alert('Uživatel vytvořen');
     }
 
     public function render()

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class NanguIspTagToChannelPackage extends Model
 {
     protected $fillable = [
-        'nangu_isp_id', 'tag_id', 'nangu_channel_package_name'
+        'nangu_isp_id', 'tag_id', 'nangu_channel_package_name',
     ];
 
     public function nangu_isp(): BelongsTo

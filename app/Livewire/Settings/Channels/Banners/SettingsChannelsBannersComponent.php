@@ -2,12 +2,11 @@
 
 namespace App\Livewire\Settings\Channels\Banners;
 
-use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Component;
 
 class SettingsChannelsBannersComponent extends Component
 {
-
     public array $filesInFolder = [];
 
     public function mount()
@@ -15,7 +14,7 @@ class SettingsChannelsBannersComponent extends Component
         $files = Storage::allFiles('/public/NanguBanners/');
 
         foreach ($files as $file) {
-            array_push($this->filesInFolder, config('app.url') . "/" . str_replace('public', 'storage', $file));
+            array_push($this->filesInFolder, config('app.url').'/'.str_replace('public', 'storage', $file));
         }
     }
 

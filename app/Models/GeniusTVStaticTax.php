@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GeniusTVStaticTax extends Model
@@ -12,9 +11,8 @@ class GeniusTVStaticTax extends Model
     protected $fillable = [
         'name',
         'price',
-        'currency'
+        'currency',
     ];
-
 
     public function currency_name(): BelongsTo
     {
@@ -26,35 +24,36 @@ class GeniusTVStaticTax extends Model
         if ($isAkcionar == true) {
             return $query
                 ->whereIn('name', [
-                    "osa",
-                    "dilia",
-                    "integram",
-                    "oaza",
-                    "OOA-S",
-                    "NanguUser",
-                    "akcionarHls",
-                    "aplikacePocasi",
-                    "aplikacePocasi",
-                    "EPG",
+                    'osa',
+                    'dilia',
+                    'integram',
+                    'oaza',
+                    'OOA-S',
+                    'NanguUser',
+                    'akcionarHls',
+                    'aplikacePocasi',
+                    'aplikacePocasi',
+                    'EPG',
                 ]);
         }
+
         return $query
             ->whereIn('name', [
-                "osa",
-                "dilia",
-                "integram",
-                "oaza",
-                "OOA-S",
-                "NanguUser",
-                "Genius",
-                "aplikacePocasi",
-                "aplikacePocasi",
-                "EPG",
+                'osa',
+                'dilia',
+                'integram',
+                'oaza',
+                'OOA-S',
+                'NanguUser',
+                'Genius',
+                'aplikacePocasi',
+                'aplikacePocasi',
+                'EPG',
             ]);
     }
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $query->where('name', "like", "%" . $search . "%");
+        return $query->where('name', 'like', '%'.$search.'%');
     }
 }

@@ -4,10 +4,10 @@ namespace App\Console\Commands;
 
 use App\Events\BroadcastWeatherInformationEvent;
 use App\Models\WeatherCity;
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
 use App\Services\Api\OpenWeather\ConnectService;
 use App\Services\Api\OpenWeather\OpenWeatherService;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 
 class GetWeatherCommand extends Command
 {
@@ -40,7 +40,7 @@ class GetWeatherCommand extends Command
             $separatedWeather = $weatherService->separate_data($weatherResponse);
 
             // store to cache
-            Cache::put('weather_' . $cityWithState->city, $separatedWeather, 7200);
+            Cache::put('weather_'.$cityWithState->city, $separatedWeather, 7200);
 
             // send notification if need to be
             $weatherService->notify_if_necessary($separatedWeather['description']);

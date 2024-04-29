@@ -3,7 +3,6 @@
 namespace App\Services\Api\NanguTv;
 
 use App\Models\NanguSubscription;
-use App\Services\Api\NanguTv\ConnectService;
 
 class NanguOffersService
 {
@@ -14,13 +13,13 @@ class NanguOffersService
 
         foreach ($subscriptions as $subscription) {
 
-            if (!str_contains($subscription->offers, ",")) {
+            if (! str_contains($subscription->offers, ',')) {
                 $nanguResponse = $connection->connect(
                     [
                         'subscriptionCode' => [
                             'offerCode' => $subscription->offers,
-                            'ispCode' => $subscription->subscriber->nanguIsp->nangu_isp_id
-                        ]
+                            'ispCode' => $subscription->subscriber->nanguIsp->nangu_isp_id,
+                        ],
                     ],
                     'getOfferInfo'
                 );
@@ -28,25 +27,25 @@ class NanguOffersService
                 if (array_key_exists('offerChannelPackageCodes', $nanguResponse)) {
                     if (is_array($nanguResponse['offerChannelPackageCodes'])) {
                         $subscription->update([
-                            'channelPackagesCodes' => implode(",", $nanguResponse['offerChannelPackageCodes'])
+                            'channelPackagesCodes' => implode(',', $nanguResponse['offerChannelPackageCodes']),
                         ]);
                     } else {
                         $subscription->update([
-                            'channelPackagesCodes' => $nanguResponse['offerChannelPackageCodes']
+                            'channelPackagesCodes' => $nanguResponse['offerChannelPackageCodes'],
                         ]);
                     }
                 }
             }
 
-            if (str_contains($subscription->offers, ",")) {
+            if (str_contains($subscription->offers, ',')) {
                 $channelPackages = [];
-                foreach (explode(",", $subscription->offers) as $offer) {
+                foreach (explode(',', $subscription->offers) as $offer) {
                     $nanguResponse = $connection->connect(
                         [
                             'subscriptionCode' => [
                                 'offerCode' => $offer,
-                                'ispCode' => $subscription->subscriber->nanguIsp->nangu_isp_id
-                            ]
+                                'ispCode' => $subscription->subscriber->nanguIsp->nangu_isp_id,
+                            ],
                         ],
                         'getOfferInfo'
                     );
@@ -60,7 +59,7 @@ class NanguOffersService
                     }
                 }
                 $subscription->update([
-                    'channelPackagesCodes' => implode(",", array_unique($channelPackages))
+                    'channelPackagesCodes' => implode(',', array_unique($channelPackages)),
                 ]);
             }
         }

@@ -26,7 +26,7 @@ class ChannelPackagesService
             ['addChannelPackageChannel' => [
                 'channelPackageCode' => $channel_package_code,
                 'channelKey' => $nangu_channel_code,
-                'ispCode' => $nangu_isp_id
+                'ispCode' => $nangu_isp_id,
             ]],
             'addChannelPackageChannel'
         );
@@ -42,7 +42,7 @@ class ChannelPackagesService
             ['removeChannelPackageChannel' => [
                 'channelPackageCode' => $channel_package_code,
                 'channelKey' => $nangu_channel_code,
-                'ispCode' => $nangu_isp_id
+                'ispCode' => $nangu_isp_id,
             ]],
             'removeChannelPackageChannel'
         );

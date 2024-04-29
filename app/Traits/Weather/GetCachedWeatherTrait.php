@@ -13,9 +13,9 @@ trait GetCachedWeatherTrait
 
         $weatherCity = WeatherCity::first();
 
-        $weather = Cache::get('weather_' . $weatherCity->city);
+        $weather = Cache::get('weather_'.$weatherCity->city);
 
-        if(is_null($weather)) {
+        if (is_null($weather)) {
             return [];
         }
 

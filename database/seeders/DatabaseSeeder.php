@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             NanguIspSeeder::class,
             SftpServerSeeder::class,
             WeatherCitySeeder::class,
-            CurrencySeeder::class
+            CurrencySeeder::class,
         ]);
     }
 }

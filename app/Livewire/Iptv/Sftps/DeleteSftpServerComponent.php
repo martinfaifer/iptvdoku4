@@ -18,7 +18,7 @@ class DeleteSftpServerComponent extends Component
 
         $this->redirect('/sftps');
 
-        return $this->success_alert("Odebráno");
+        return $this->success_alert('Odebráno');
     }
 
     public function render()

@@ -9,7 +9,7 @@ class NanguStb extends Model
 {
     protected $fillable = [
         'nangu_stb_accountCode_id',
-        'stb'
+        'stb',
     ];
 
     public function stbAccountCode(): BelongsTo

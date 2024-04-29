@@ -10,7 +10,7 @@ class RestartChannel extends Model
     protected $fillable = [
         'channel_id',
         'ip_id',
-        'device_id'
+        'device_id',
     ];
 
     public function channel(): BelongsTo
@@ -23,7 +23,7 @@ class RestartChannel extends Model
         return $this->belongsTo(Device::class, 'device_id');
     }
 
-    public function stream_ip():BelongsTo
+    public function stream_ip(): BelongsTo
     {
         return $this->belongsTo(ChannelQualityWithIp::class, 'ip_id', 'id');
     }

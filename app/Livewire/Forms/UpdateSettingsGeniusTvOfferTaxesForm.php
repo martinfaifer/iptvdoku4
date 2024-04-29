@@ -2,26 +2,25 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
-use Livewire\Attributes\Validate;
 use App\Models\GeniusTVChannelsOffersTax;
+use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class UpdateSettingsGeniusTvOfferTaxesForm extends Form
 {
     public ?GeniusTVChannelsOffersTax $offerTax;
 
-    public string $offer = "";
+    public string $offer = '';
 
-    #[Validate('required', message: "Vyberte kanály")]
+    #[Validate('required', message: 'Vyberte kanály')]
     public array $channels_id = [];
 
-    #[Validate('required', message: "Vyplňte cenu")]
-    #[Validate('string', message: "Neplatný formát")]
-    public string $price = "0";
+    #[Validate('required', message: 'Vyplňte cenu')]
+    #[Validate('string', message: 'Neplatný formát')]
+    public string $price = '0';
 
-    #[Validate('required', message: "Vyberte měnu")]
+    #[Validate('required', message: 'Vyberte měnu')]
     public $currency = null;
-
 
     public function setOfferTax(GeniusTVChannelsOffersTax $offerTax)
     {
@@ -39,7 +38,7 @@ class UpdateSettingsGeniusTvOfferTaxesForm extends Form
         $this->offerTax->update([
             'channels_id' => json_encode($this->channels_id),
             'price' => $this->price,
-            'currency' => $this->currency
+            'currency' => $this->currency,
         ]);
 
         $this->reset();

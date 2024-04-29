@@ -4,11 +4,11 @@ namespace App\Services\Invoices\HBOGO;
 
 use PDO;
 use PDOException;
-use Illuminate\Support\Facades\DB;
 
 class ConnectService
 {
     public $connection;
+
     public function __construct()
     {
         $servername = config('services.api.5.hbo_go.url');
@@ -19,7 +19,7 @@ class ConnectService
             $this->connection = new PDO("mysql:host=$servername;dbname=$dbName", $username, $password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            echo 'Connection failed: '.$e->getMessage();
         }
     }
 

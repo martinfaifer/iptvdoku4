@@ -22,9 +22,9 @@ class DevicesMenu extends Component
     {
         $this->categoriesWithDevices = DeviceCategory::with('devices:id,name,device_category_id')->get();
         foreach ($this->categoriesWithDevices as $category) {
-            if (!$category->devices->isEmpty()) {
+            if (! $category->devices->isEmpty()) {
                 foreach ($category->devices as $device) {
-                    $nmsCachedData = Cache::get('nms_' . $device->id);
+                    $nmsCachedData = Cache::get('nms_'.$device->id);
 
                     try {
                         $device->nms_status = $nmsCachedData[0]['nms_device_status_id']['nms_device_status_type_id'];

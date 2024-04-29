@@ -2,21 +2,21 @@
 
 namespace App\Livewire\Settings\Geniustv\Discounts;
 
-use Livewire\Component;
-use App\Models\NanguIsp;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use App\Models\GeniusTvDiscount;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Forms\CreateSettingsGeniusTvDiscountsForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvDiscountsForm;
+use App\Models\GeniusTvDiscount;
+use App\Models\NanguIsp;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsGeniusTvDiscountsComponent extends Component
 {
     use NotificationTrait, WithPagination;
 
-    public string $query = "";
+    public string $query = '';
 
     public CreateSettingsGeniusTvDiscountsForm $form;
 
@@ -36,12 +36,14 @@ class SettingsGeniusTvDiscountsComponent extends Component
     public function openCreateModal()
     {
         $this->resetErrorBag();
+
         return $this->createModal = true;
     }
 
     public function closeDialog()
     {
         $this->updateModal = false;
+
         return $this->createModal = false;
     }
 
@@ -53,7 +55,7 @@ class SettingsGeniusTvDiscountsComponent extends Component
 
         $this->dispatch('refresh_settings_genius_tv_discoints');
 
-        $this->success_alert("Vytvořeno");
+        $this->success_alert('Vytvořeno');
     }
 
     public function edit(GeniusTvDiscount $geniusTvDiscount)
@@ -73,7 +75,7 @@ class SettingsGeniusTvDiscountsComponent extends Component
 
         $this->dispatch('refresh_settings_genius_tv_discoints');
 
-        return $this->success_alert("Upraveno");
+        return $this->success_alert('Upraveno');
     }
 
     public function destroy(GeniusTvDiscount $geniusTvDiscount)
@@ -87,8 +89,7 @@ class SettingsGeniusTvDiscountsComponent extends Component
     public function render()
     {
         return view('livewire.settings.geniustv.discounts.settings-genius-tv-discounts-component', [
-            'discounts' => GeniusTvDiscount
-                ::with('nanguIsp')
+            'discounts' => GeniusTvDiscount::with('nanguIsp')
                 ->search($this->query)
                 ->paginate(5),
             'headers' => [

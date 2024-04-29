@@ -1,23 +1,23 @@
 <?php
+
 namespace App\Livewire\Settings\GeniusTv\Statistics;
 
-use App\Models\Channel;
-use Livewire\Component;
-use App\Models\NanguIsp;
-use Livewire\WithPagination;
-use App\Models\GeniusTvChart;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ChannelsUsagePerIspExport;
+use App\Models\NanguIsp;
+use Livewire\Component;
+use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SettingsGeniusTvStatisticsForChannelsPerIspComponent extends Component
 {
     use WithPagination;
 
-    public string $query = "";
+    public string $query = '';
 
     public function downloadChannelsMonthlyUsageReport(NanguIsp $nanguIsp)
     {
-        $fileName = str_replace(" ", "_", $nanguIsp->name) . "_channels_usage.csv";
+        $fileName = str_replace(' ', '_', $nanguIsp->name).'_channels_usage.csv';
+
         return Excel::download(new ChannelsUsagePerIspExport($nanguIsp), $fileName, \Maatwebsite\Excel\Excel::CSV);
     }
 

@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use App\Observers\TagOnItemObserver;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[ObservedBy(TagOnItemObserver::class)]
 class TagOnItem extends Model

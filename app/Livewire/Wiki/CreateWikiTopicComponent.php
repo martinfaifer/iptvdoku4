@@ -28,12 +28,13 @@ class CreateWikiTopicComponent extends Component
 
         $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Článek vytvořen");
+        return $this->success_alert('Článek vytvořen');
     }
 
     public function openModal()
     {
         $this->resetErrorBag();
+
         return $this->storeModal = true;
     }
 

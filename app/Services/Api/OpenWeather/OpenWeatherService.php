@@ -2,9 +2,9 @@
 
 namespace App\Services\Api\OpenWeather;
 
-use Illuminate\Support\Facades\Cache;
 use App\Actions\Slack\SendSlackNotificationAction;
 use App\Models\Slack;
+use Illuminate\Support\Facades\Cache;
 
 class OpenWeatherService
 {
@@ -27,7 +27,7 @@ class OpenWeatherService
 
     public function notify_if_necessary(string $weatherDescription)
     {
-        Slack::where('action', "weather_notification")->get()->each(function ($channel) use ($weatherDescription) {
+        Slack::where('action', 'weather_notification')->get()->each(function ($channel) use ($weatherDescription) {
             if (str_contains($weatherDescription, 'thunderstorm')) {
                 (new SendSlackNotificationAction(
                     text: ':thunder_cloud_and_rain:    Na dnešní den je očekávána bouřka, může dojít k výpadkům kanálů ze satelitu.',

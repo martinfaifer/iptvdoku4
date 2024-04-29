@@ -8,20 +8,20 @@ use Livewire\Form;
 
 class CreateSettingsSlackNotificationForm extends Form
 {
-    #[Validate('required', message: "Vyplňte url")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    public string $url = "";
+    #[Validate('required', message: 'Vyplňte url')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    public string $url = '';
 
-    #[Validate('required', message: "Vyplňte popis")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    public string $description = "";
+    #[Validate('required', message: 'Vyplňte popis')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    public string $description = '';
 
-    #[Validate('required', message: "Vyberte akci")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    public string $action = "";
+    #[Validate('required', message: 'Vyberte akci')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    public string $action = '';
 
     public function create()
     {
@@ -30,7 +30,7 @@ class CreateSettingsSlackNotificationForm extends Form
         Slack::create([
             'url' => $this->url,
             'description' => $this->description,
-            'action' => $this->action
+            'action' => $this->action,
         ]);
 
         $this->reset();

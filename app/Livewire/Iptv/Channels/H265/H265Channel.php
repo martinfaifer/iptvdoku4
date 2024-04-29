@@ -36,13 +36,13 @@ class H265Channel extends Component
     {
         $this->devices = Device::get()->filter(function ($device) {
             if (is_array($device->has_channels)) {
-                return in_array('h265:' . $this->channel->id, $device->has_channels);
+                return in_array('h265:'.$this->channel->id, $device->has_channels);
             }
         });
 
         $this->backupDevices = Device::get()->filter(function ($device) {
             if (is_array($device->has_channels)) {
-                return in_array('h265:' . $this->channel->id . ':backup', $device->has_channels);
+                return in_array('h265:'.$this->channel->id.':backup', $device->has_channels);
             }
         });
     }
@@ -58,7 +58,7 @@ class H265Channel extends Component
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_h265.' . $this->channel->id);
+        $this->dispatch('update_h265.'.$this->channel->id);
 
         return $this->success_alert('Změněno');
     }
@@ -72,7 +72,7 @@ class H265Channel extends Component
     public function destroy(ChannelQualityWithIp $channelQualityWithIp)
     {
         $channelQualityWithIp->delete();
-        $this->dispatch('update_h265.' . $this->channel->id);
+        $this->dispatch('update_h265.'.$this->channel->id);
 
         return $this->success_alert('Odebráno');
     }
@@ -92,7 +92,7 @@ class H265Channel extends Component
     public function render()
     {
         $this->h265 = [];
-        if (!is_null($this->channel->h265)) {
+        if (! is_null($this->channel->h265)) {
             foreach ($this->channel->h265->ips->load('channelQuality') as $ip) {
                 $this->h265[] = [
                     'id' => $ip->id,

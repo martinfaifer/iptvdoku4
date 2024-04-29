@@ -3,9 +3,9 @@
 namespace App\Livewire\Iptv\Channels;
 
 use App\Models\Channel;
-use Livewire\Component;
-use Livewire\Attributes\On;
 use App\Traits\Livewire\NotificationTrait;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class IptvChannel extends Component
 {

@@ -9,7 +9,7 @@ trait FindSatelitCardOnDeviceTemplateTrait
 {
     public function find_card_in_device_template(SatelitCard $satelitCard): Device|false
     {
-        if ($device = Device::where('template', "like", "%karta\":$satelitCard->id,%")->first()) {
+        if ($device = Device::where('template', 'like', "%karta\":$satelitCard->id,%")->first()) {
             return $device;
         }
 

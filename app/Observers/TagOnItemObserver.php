@@ -2,13 +2,11 @@
 
 namespace App\Observers;
 
-use App\Models\Tag;
-use App\Models\Channel;
-use App\Models\TagOnItem;
 use App\Jobs\AddChannelToNanguPackageJob;
-use App\Models\NanguIspTagToChannelPackage;
 use App\Jobs\DeleteChannelToNanguPackageJob;
-use App\Services\Api\NanguTv\ChannelPackagesService;
+use App\Models\Channel;
+use App\Models\NanguIspTagToChannelPackage;
+use App\Models\TagOnItem;
 
 class TagOnItemObserver
 {

@@ -2,22 +2,22 @@
 
 namespace App\Livewire\Settings\Geniustv\OfferTaxes;
 
-use App\Models\Channel;
-use Livewire\Component;
-use App\Models\Currency;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use Illuminate\Support\Collection;
-use App\Models\GeniusTVChannelsOffersTax;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsGeniusTvOfferTaxesForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvOfferTaxesForm;
+use App\Models\Channel;
+use App\Models\Currency;
+use App\Models\GeniusTVChannelsOffersTax;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsGeniusTvOfferTaxesComponent extends Component
 {
     use NotificationTrait, WithPagination;
 
-    public string $query = "";
+    public string $query = '';
 
     public CreateSettingsGeniusTvOfferTaxesForm $form;
 
@@ -40,12 +40,14 @@ class SettingsGeniusTvOfferTaxesComponent extends Component
     public function openCreateModal()
     {
         $this->resetErrorBag();
+
         return $this->createModal = true;
     }
 
     public function closeDialog()
     {
         $this->updateModal = false;
+
         return $this->createModal = false;
     }
 
@@ -57,7 +59,7 @@ class SettingsGeniusTvOfferTaxesComponent extends Component
 
         $this->dispatch('refresh_settings_genius_tv_offers_taxes');
 
-        $this->success_alert("Vytvořeno");
+        $this->success_alert('Vytvořeno');
     }
 
     public function edit(GeniusTVChannelsOffersTax $offerTax)
@@ -77,7 +79,7 @@ class SettingsGeniusTvOfferTaxesComponent extends Component
 
         $this->dispatch('refresh_settings_genius_tv_offers_taxes');
 
-        return $this->success_alert("Upraveno");
+        return $this->success_alert('Upraveno');
     }
 
     public function destroy(GeniusTVChannelsOffersTax $offerTax)
@@ -91,8 +93,7 @@ class SettingsGeniusTvOfferTaxesComponent extends Component
     public function render()
     {
         return view('livewire.settings.geniustv.offer-taxes.settings-genius-tv-offer-taxes-component', [
-            'offerTaxes' => GeniusTVChannelsOffersTax
-                ::with('currency_name')
+            'offerTaxes' => GeniusTVChannelsOffersTax::with('currency_name')
                 ->search($this->query)
                 ->paginate(5),
             'headers' => [

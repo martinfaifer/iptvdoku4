@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire\Settings\GeniusTv\Statistics;
 
 use App\Models\NanguIsp;

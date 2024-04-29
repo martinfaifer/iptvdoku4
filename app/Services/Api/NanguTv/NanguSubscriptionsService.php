@@ -4,7 +4,6 @@ namespace App\Services\Api\NanguTv;
 
 use App\Models\NanguSubscriber;
 use App\Models\NanguSubscription;
-use App\Services\Api\NanguTv\NanguStbAccountService;
 
 class NanguSubscriptionsService
 {
@@ -17,21 +16,21 @@ class NanguSubscriptionsService
                 [
                     'subscriberCode' => [
                         'subscriberCode' => $subscriber->subscriberCode,
-                        'ispCode' => $subscriber->nanguIsp->nangu_isp_id
-                    ]
+                        'ispCode' => $subscriber->nanguIsp->nangu_isp_id,
+                    ],
                 ],
                 'getSubscriptions'
             );
 
             try {
-                if (!empty($nanguResponse)) {
+                if (! empty($nanguResponse)) {
 
                     if (array_key_exists('subscriptionCode', $nanguResponse['subscriptions'])) {
                         NanguSubscription::create([
                             'nangu_subscriber_id' => $subscriber->id,
                             'subscriptionCode' => $nanguResponse['subscriptions']['subscriptionCode'],
                             'subscriptionState' => $nanguResponse['subscriptions']['subscriptionState'],
-                            'nangu_isp_id' => $subscriber->nanguIsp->id
+                            'nangu_isp_id' => $subscriber->nanguIsp->id,
                         ]);
                     } else {
                         foreach ($nanguResponse['subscriptions'] as $subscription) {
@@ -39,7 +38,7 @@ class NanguSubscriptionsService
                                 'nangu_subscriber_id' => $subscriber->id,
                                 'subscriptionCode' => $subscription['subscriptionCode'],
                                 'subscriptionState' => $subscription['subscriptionState'],
-                                'nangu_isp_id' => $subscriber->nanguIsp->id
+                                'nangu_isp_id' => $subscriber->nanguIsp->id,
                             ]);
                         }
                     }
@@ -60,8 +59,8 @@ class NanguSubscriptionsService
                 [
                     'subscriptionCode' => [
                         'subscriptionCode' => $subscription->subscriptionCode,
-                        'ispCode' => $subscription->subscriber->nanguIsp->nangu_isp_id
-                    ]
+                        'ispCode' => $subscription->subscriber->nanguIsp->nangu_isp_id,
+                    ],
                 ],
                 'getInfo'
             );

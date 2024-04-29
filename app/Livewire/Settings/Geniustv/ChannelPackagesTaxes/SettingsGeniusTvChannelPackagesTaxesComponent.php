@@ -2,23 +2,22 @@
 
 namespace App\Livewire\Settings\Geniustv\ChannelPackagesTaxes;
 
-use App\Models\Channel;
-use Livewire\Component;
-use App\Models\Currency;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use Illuminate\Support\Collection;
-use App\Models\GeniusTvChannelPackage;
-use App\Models\GeniusTVchannelPackagesTax;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsGeniusTvChannelPackagesTaxesForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvChannelPackagesTaxesForm;
+use App\Models\Channel;
+use App\Models\Currency;
+use App\Models\GeniusTVchannelPackagesTax;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsGeniusTvChannelPackagesTaxesComponent extends Component
 {
     use NotificationTrait, WithPagination;
 
-    public string $query = "";
+    public string $query = '';
 
     public CreateSettingsGeniusTvChannelPackagesTaxesForm $form;
 
@@ -41,12 +40,14 @@ class SettingsGeniusTvChannelPackagesTaxesComponent extends Component
     public function openCreateModal()
     {
         $this->resetErrorBag();
+
         return $this->createModal = true;
     }
 
     public function closeDialog()
     {
         $this->updateModal = false;
+
         return $this->createModal = false;
     }
 
@@ -58,7 +59,7 @@ class SettingsGeniusTvChannelPackagesTaxesComponent extends Component
 
         $this->dispatch('refresh_settings_genius_tv_channel_packages_taxes');
 
-        $this->success_alert("Vytvořeno");
+        $this->success_alert('Vytvořeno');
     }
 
     public function edit(GeniusTVchannelPackagesTax $channelPackageTax)
@@ -78,7 +79,7 @@ class SettingsGeniusTvChannelPackagesTaxesComponent extends Component
 
         $this->dispatch('refresh_settings_genius_tv_channel_packages_taxes');
 
-        return $this->success_alert("Upraveno");
+        return $this->success_alert('Upraveno');
     }
 
     public function destroy(GeniusTVchannelPackagesTax $channelPackageTax)
@@ -92,8 +93,7 @@ class SettingsGeniusTvChannelPackagesTaxesComponent extends Component
     public function render()
     {
         return view('livewire.settings.geniustv.channel-packages-taxes.settings-genius-tv-channel-packages-taxes-component', [
-            'channelPackagesTaxes' => GeniusTVchannelPackagesTax
-                ::with('currency_name')
+            'channelPackagesTaxes' => GeniusTVchannelPackagesTax::with('currency_name')
                 ->search($this->query)
                 ->paginate(5),
             'headers' => [

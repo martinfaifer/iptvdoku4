@@ -2,17 +2,17 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Livewire\Attributes\On;
+use App\Traits\Calendar\RunningEventsTrait;
+use App\Traits\Weather\GetCachedWeatherTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use App\Traits\Calendar\RunningEventsTrait;
-use App\Traits\Weather\GetCachedWeatherTrait;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class Navbar extends Component
 {
-    use RunningEventsTrait, GetCachedWeatherTrait;
+    use GetCachedWeatherTrait, RunningEventsTrait;
 
     public array $iptv_dohled_alerts = [];
 
@@ -40,7 +40,7 @@ class Navbar extends Component
         // check if is running some events to notify in frontEnd
         $this->notifyFromCurrentEvents = $this->running_events_with_frontendNotification();
         if ($this->notifyFromCurrentEvents) {
-            if (!session()->has('calendarNotificationDialog')) {
+            if (! session()->has('calendarNotificationDialog')) {
                 $this->calendarNotificationDialog = true;
             }
         }
@@ -75,6 +75,7 @@ class Navbar extends Component
     public function closeCalendarNotificationDialog()
     {
         session(['calendarNotificationDialog' => 'seen']);
+
         return $this->calendarNotificationDialog = false;
     }
 

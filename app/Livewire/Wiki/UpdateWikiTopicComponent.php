@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Wiki;
 
-use Livewire\Component;
-use App\Models\WikiTopic;
-use App\Models\WikiCategory;
 use App\Livewire\Forms\UpdateWikiTopicForm;
+use App\Models\WikiCategory;
+use App\Models\WikiTopic;
 use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 class UpdateWikiTopicComponent extends Component
 {
@@ -28,6 +28,7 @@ class UpdateWikiTopicComponent extends Component
     public function edit()
     {
         $this->form->setTopic($this->topic);
+
         return $this->updateModal = true;
     }
 
@@ -36,7 +37,8 @@ class UpdateWikiTopicComponent extends Component
         $this->form->update();
 
         $this->redirect(url()->previous(), true);
-        return $this->success_alert("Upraveno");
+
+        return $this->success_alert('Upraveno');
     }
 
     public function closeDialog()

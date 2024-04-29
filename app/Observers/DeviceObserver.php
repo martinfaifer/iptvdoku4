@@ -3,13 +3,13 @@
 namespace App\Observers;
 
 use App\Jobs\LogJob;
+use App\Jobs\SearchIfSatCardIsUsedInDeviceJob;
 use App\Models\Alert;
 use App\Models\Chart;
-use App\Models\Loger;
-use App\Models\Device;
 use App\Models\Contact;
+use App\Models\Device;
+use App\Models\Loger;
 use Illuminate\Support\Facades\Auth;
-use App\Jobs\SearchIfSatCardIsUsedInDeviceJob;
 
 class DeviceObserver
 {

@@ -2,18 +2,17 @@
 
 namespace App\Livewire\Iptv\Calendar;
 
+use App\Livewire\Forms\CreateCalendarEventForm;
+use App\Models\Channel;
+use App\Models\CssColor;
+use App\Models\NanguIspTagToChannelPackage;
+use App\Models\SftpServer;
 use App\Models\Tag;
 use App\Models\User;
-use App\Models\Channel;
-use Livewire\Component;
-use App\Models\CssColor;
-use App\Models\NanguIsp;
-use Livewire\WithFileUploads;
-use Illuminate\Support\Collection;
 use App\Traits\Livewire\NotificationTrait;
-use App\Models\NanguIspTagToChannelPackage;
-use App\Livewire\Forms\CreateCalendarEventForm;
-use App\Models\SftpServer;
+use Illuminate\Support\Collection;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateCalendarEventComponent extends Component
 {
@@ -37,14 +36,14 @@ class CreateCalendarEventComponent extends Component
     {
         $this->cssColors = CssColor::get();
         $this->users = User::get();
-        $this->channels = Channel::orderBy('name', "ASC")->get(['id', 'name']);
+        $this->channels = Channel::orderBy('name', 'ASC')->get(['id', 'name']);
         $this->sftpServers = SftpServer::get(['id', 'name']);
         if (NanguIspTagToChannelPackage::first()) {
             foreach (NanguIspTagToChannelPackage::distinct()->get('tag_id') as $nanguIspTagToChannelPackage) {
 
                 $this->tags[] = [
                     'id' => $nanguIspTagToChannelPackage->tag_id,
-                    'name' => Tag::find($nanguIspTagToChannelPackage->tag_id)->name
+                    'name' => Tag::find($nanguIspTagToChannelPackage->tag_id)->name,
                 ];
             }
         }
@@ -55,7 +54,8 @@ class CreateCalendarEventComponent extends Component
         $this->form->create();
         $this->redirect('/calendar', true);
         $this->closeModal();
-        return $this->success_alert("Přidáno");
+
+        return $this->success_alert('Přidáno');
     }
 
     public function openModal()
@@ -66,6 +66,7 @@ class CreateCalendarEventComponent extends Component
     public function closeModal()
     {
         $this->form->reset();
+
         return $this->storeModal = false;
     }
 

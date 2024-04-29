@@ -2,17 +2,17 @@
 
 namespace App\Livewire\Iptv\Cards;
 
-use App\Models\Device;
-use Livewire\Component;
 use App\Models\SatelitCard;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\SatelitCards\FindSatelitCardOnDeviceTemplateTrait;
+use Livewire\Component;
 
 class SatelitCardComponent extends Component
 {
-    use NotificationTrait, FindSatelitCardOnDeviceTemplateTrait;
+    use FindSatelitCardOnDeviceTemplateTrait, NotificationTrait;
 
     public ?SatelitCard $satelitCard;
+
     public $device;
 
     public bool $deviceInfoModal = false;

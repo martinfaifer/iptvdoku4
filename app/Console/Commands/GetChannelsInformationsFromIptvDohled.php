@@ -30,7 +30,7 @@ class GetChannelsInformationsFromIptvDohled extends Command
     {
         // multicasts
         ChannelMulticast::get()->each(function ($multicast) {
-            if (!is_null($multicast->stb_ip)) {
+            if (! is_null($multicast->stb_ip)) {
                 GetChannelsInformationsFromIptvDohledJob::dispatch($multicast->stb_ip);
             }
         });

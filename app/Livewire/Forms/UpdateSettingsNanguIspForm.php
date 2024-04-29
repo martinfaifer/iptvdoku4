@@ -10,38 +10,37 @@ class UpdateSettingsNanguIspForm extends Form
 {
     public ?NanguIsp $nanguIsp;
 
-    public string $name = "";
+    public string $name = '';
 
-    public string $nangu_isp_id = "";
+    public string $nangu_isp_id = '';
 
-    #[Validate('required', message: "Je nebo není akcionář isp alliance?")]
-    #[Validate('boolean', message: "Neplatný formát")]
+    #[Validate('required', message: 'Je nebo není akcionář isp alliance?')]
+    #[Validate('boolean', message: 'Neplatný formát')]
     public bool $is_akcionar = false;
 
     #[Validate('nullable')]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:100', message: "Maximální počet znaků je :max")]
-    #[Validate('unique:nangu_isps,ic', message: "Toto ič již existuje")]
-    public string|null $ic = null;
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:100', message: 'Maximální počet znaků je :max')]
+    #[Validate('unique:nangu_isps,ic', message: 'Toto ič již existuje')]
+    public ?string $ic = null;
 
     #[Validate('nullable')]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:100', message: "Maximální počet znaků je :max")]
-    #[Validate('unique:nangu_isps,dic', message: "Toto dič již existuje")]
-    public string|null $dic = null;
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:100', message: 'Maximální počet znaků je :max')]
+    #[Validate('unique:nangu_isps,dic', message: 'Toto dič již existuje')]
+    public ?string $dic = null;
 
     #[Validate('nullable')]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:100', message: "Maximální počet znaků je :max")]
-    #[Validate('unique:nangu_isps,hbo_key', message: "Tento klíč již existuje")]
-    public string|null $hbo_key = null;
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:100', message: 'Maximální počet znaků je :max')]
+    #[Validate('unique:nangu_isps,hbo_key', message: 'Tento klíč již existuje')]
+    public ?string $hbo_key = null;
 
     #[Validate('nullable')]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    #[Validate('unique:nangu_isps,crm_contract_id', message: "Tento contract id již existuje")]
-    public string|null $crm_contract_id = null;
-
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    #[Validate('unique:nangu_isps,crm_contract_id', message: 'Tento contract id již existuje')]
+    public ?string $crm_contract_id = null;
 
     public function setNanguIsp($nanguIsp)
     {
@@ -62,7 +61,7 @@ class UpdateSettingsNanguIspForm extends Form
             'ic' => $this->ic,
             'dic' => $this->dic,
             'hbo_key' => $this->hbo_key,
-            'crm_contract_id' => $this->crm_contract_id
+            'crm_contract_id' => $this->crm_contract_id,
         ]);
 
         return $this->reset();

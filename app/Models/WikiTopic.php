@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class WikiTopic extends Model
 {
@@ -13,9 +13,8 @@ class WikiTopic extends Model
         'title',
         'text',
         'creator',
-        'wiki_category_id'
+        'wiki_category_id',
     ];
-
 
     // public function text(): Attribute
     // {

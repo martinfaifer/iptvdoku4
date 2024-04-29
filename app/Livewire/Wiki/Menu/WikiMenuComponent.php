@@ -3,13 +3,12 @@
 namespace App\Livewire\Wiki\Menu;
 
 use App\Models\WikiCategory;
-use Livewire\Component;
-use Livewire\Attributes\On;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class WikiMenuComponent extends Component
 {
-
     public Collection $categoriesWithTopicsNames;
 
     public function mount()

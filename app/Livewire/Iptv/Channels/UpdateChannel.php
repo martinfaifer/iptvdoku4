@@ -57,6 +57,7 @@ class UpdateChannel extends Component
         // $this->dispatch('update_iptv_channel_multicast.' . $this->channel->id, channelId: $this->channel->id);
 
         $this->redirect('/channels/'.$this->channel->id.'/multicast', true);
+
         return $this->success_alert('Upraveno');
     }
 

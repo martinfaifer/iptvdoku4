@@ -10,7 +10,7 @@ class NanguIspMontlyInvoicesData extends Model
     protected $fillable = [
         'nangu_isp_id',
         'invoice_data',
-        'price'
+        'price',
     ];
 
     public function nanguIsp(): BelongsTo

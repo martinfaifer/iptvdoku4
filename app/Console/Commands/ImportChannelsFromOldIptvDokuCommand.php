@@ -34,26 +34,26 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
     public function handle()
     {
         $responseJson = Http::withBasicAuth(config('services.api.4.old_iptv_doku.user'), config('services.api.4.old_iptv_doku.password'))
-            ->get(config('services.api.4.old_iptv_doku.url') . "/api/v1/channels")->json();
+            ->get(config('services.api.4.old_iptv_doku.url').'/api/v1/channels')->json();
 
         foreach ($responseJson['data'] as $channel) {
             $path = null;
-            if (!is_null($channel['logo'])) {
-                $logo = str_replace("//", "/", $channel['logo']);
-                $explodedLogo = explode("/", $logo);
+            if (! is_null($channel['logo'])) {
+                $logo = str_replace('//', '/', $channel['logo']);
+                $explodedLogo = explode('/', $logo);
                 if (array_key_exists(4, $explodedLogo)) {
-                    $path = "public/Logos/" . $explodedLogo[4];
+                    $path = 'public/Logos/'.$explodedLogo[4];
                 }
             }
 
             $storedChannel = Channel::where('name', $channel['name'])->first();
-            if (!$storedChannel) {
+            if (! $storedChannel) {
                 $storedChannel = Channel::create([
                     'name' => $channel['name'],
                     'logo' => $path,
                     'is_radio' => $channel['is_radio'] == true ? true : false,
                     'is_multiscreen' => $channel['is_multiscreen'] == true ? true : false,
-                    'quality' => is_null($channel['quality']) ? "SD" : $channel['quality'],
+                    'quality' => is_null($channel['quality']) ? 'SD' : $channel['quality'],
                     'category' => is_null($channel['category']) ? null : ChannelCategory::where('name', $channel['category'])->first()->id,
                     'description' => $channel['description'],
                 ]);
@@ -61,11 +61,11 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
 
             // create multicasts
             $storedMulticast = ChannelMulticast::where('channel_id', $storedChannel->id)->first();
-            if (!$storedMulticast) {
+            if (! $storedMulticast) {
                 foreach ($channel['multicasts'] as $multicast) {
                     // dd($multicast['multicast_source']['zdroj']);
                     $isBackup = false;
-                    if ($multicast['isBackup'] == "yes") {
+                    if ($multicast['isBackup'] == 'yes') {
                         $isBackup = true;
                     }
 
@@ -74,7 +74,7 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
                             'channel_id' => $storedChannel->id,
                             'source_ip' => $multicast['multicast_ip'],
                             'channel_source_id' => ChannelSource::where('name', $multicast['multicast_source']['zdroj'])->first()->id,
-                            'is_backup' => $isBackup
+                            'is_backup' => $isBackup,
                         ]);
                     } else {
                         $storedMulticast = ChannelMulticast::create([
@@ -82,7 +82,7 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
                             'stb_ip' => $multicast['stb_ip'],
                             'source_ip' => $multicast['multicast_ip'],
                             'channel_source_id' => ChannelSource::where('name', $multicast['multicast_source']['zdroj'])->first()->id,
-                            'is_backup' => $isBackup
+                            'is_backup' => $isBackup,
                         ]);
                     }
                 }
@@ -90,10 +90,10 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
 
             // create h264 and h265
             // need $storedChannel
-            if (!is_null($channel['h264'])) {
-                if (!H264::where('channel_id', $storedChannel->id)->first()) {
+            if (! is_null($channel['h264'])) {
+                if (! H264::where('channel_id', $storedChannel->id)->first()) {
                     $h264 = H264::create([
-                        'channel_id' => $storedChannel->id
+                        'channel_id' => $storedChannel->id,
                     ]);
 
                     // add h264 data
@@ -101,8 +101,8 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
                         try {
                             ChannelQualityWithIp::create([
                                 'h264_id' => $h264->id,
-                                'channel_quality_id' =>  $this->findQuality($output['kvalitaId']),
-                                'ip' => $output['output']
+                                'channel_quality_id' => $this->findQuality($output['kvalitaId']),
+                                'ip' => $output['output'],
                             ]);
                         } catch (\Throwable $th) {
                             //throw $th;
@@ -111,10 +111,10 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
                 }
             }
 
-            if (!is_null($channel['h265'])) {
-                if (!H265::where('channel_id', $storedChannel->id)->first()) {
+            if (! is_null($channel['h265'])) {
+                if (! H265::where('channel_id', $storedChannel->id)->first()) {
                     $h265 = H265::create([
-                        'channel_id' => $storedChannel->id
+                        'channel_id' => $storedChannel->id,
                     ]);
 
                     // add h265 data
@@ -122,8 +122,8 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
                         try {
                             ChannelQualityWithIp::create([
                                 'h265_id' => $h265->id,
-                                'channel_quality_id' =>  $this->findQuality($output['kvalitaId']),
-                                'ip' => $output['output']
+                                'channel_quality_id' => $this->findQuality($output['kvalitaId']),
+                                'ip' => $output['output'],
                             ]);
                         } catch (\Throwable $th) {
                             //throw $th;

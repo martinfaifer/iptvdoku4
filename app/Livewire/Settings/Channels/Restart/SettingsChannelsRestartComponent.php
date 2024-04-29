@@ -2,19 +2,15 @@
 
 namespace App\Livewire\Settings\Channels\Restart;
 
-use App\Models\Tag;
-use App\Models\Device;
-use Livewire\Component;
-use App\Models\TagOnItem;
-use Livewire\WithPagination;
+use App\Livewire\Forms\CreateSettingsChannelsRestartForm;
 use App\Models\RestartChannel;
 use App\Traits\Livewire\NotificationTrait;
-use App\Livewire\Forms\CreateSettingsChannelsRestartForm;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsChannelsRestartComponent extends Component
 {
-
-    use WithPagination, NotificationTrait;
+    use NotificationTrait, WithPagination;
 
     public CreateSettingsChannelsRestartForm $createForm;
 
@@ -34,6 +30,7 @@ class SettingsChannelsRestartComponent extends Component
     {
         $this->resetErrorBag();
         $this->createForm->reset();
+
         return $this->createModal = false;
     }
 
@@ -43,14 +40,14 @@ class SettingsChannelsRestartComponent extends Component
 
         $this->closeDialog();
 
-        return $this->success_alert("vytvořeno");
+        return $this->success_alert('vytvořeno');
     }
 
     public function destroy(RestartChannel $restartChannel)
     {
         $restartChannel->delete();
 
-        return $this->success_alert("Odebráno");
+        return $this->success_alert('Odebráno');
     }
 
     public function render()

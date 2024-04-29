@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
+use App\Services\Api\NanguTv\ChannelsService;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Services\Api\NanguTv\ChannelsService;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Cache;
 
 class GetChannelDetailFromNanguApiJob implements ShouldQueue
 {
@@ -33,16 +33,16 @@ class GetChannelDetailFromNanguApiJob implements ShouldQueue
             // separate all informations about it and store to cache.
 
             // app order
-            Cache::put('nangu_channel_' . $this->channel->id . '_app_order', [
-                "order" => $nanguResponse['weight']
+            Cache::put('nangu_channel_'.$this->channel->id.'_app_order', [
+                'order' => $nanguResponse['weight'],
             ], $this->ttl);
 
-            Cache::put('nangu_channel_' . $this->channel->id . '_timeshift', [
-                "timeshift" => $nanguResponse['storedMediaDuration']
+            Cache::put('nangu_channel_'.$this->channel->id.'_timeshift', [
+                'timeshift' => $nanguResponse['storedMediaDuration'],
             ], $this->ttl);
 
             // store all result for future manipulation
-            Cache::put('nangu_channel_' . $this->channel->id, $nanguResponse, $this->ttl);
+            Cache::put('nangu_channel_'.$this->channel->id, $nanguResponse, $this->ttl);
         } catch (\Throwable $th) {
             //throw $th;
         }

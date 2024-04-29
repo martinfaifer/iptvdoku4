@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Currency;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CurrencySeeder extends Seeder
@@ -13,17 +12,17 @@ class CurrencySeeder extends Seeder
      */
     public function run(): void
     {
-        if(!Currency::first()) {
+        if (! Currency::first()) {
             Currency::create([
-                'name' => 'usd'
+                'name' => 'usd',
             ]);
 
             Currency::create([
-                'name' => 'eu'
+                'name' => 'eu',
             ]);
 
             Currency::create([
-                'name' => 'czk'
+                'name' => 'czk',
             ]);
         }
     }

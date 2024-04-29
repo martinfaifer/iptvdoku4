@@ -2,26 +2,25 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
 use App\Models\Slack;
 use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class UpdateSettingsSlackNotificationForm extends Form
 {
-
     public ?Slack $slack;
 
-    public string $url = "";
+    public string $url = '';
 
-    #[Validate('required', message: "Vyplňte popis")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    public string $description = "";
+    #[Validate('required', message: 'Vyplňte popis')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    public string $description = '';
 
-    #[Validate('required', message: "Vyberte akci")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    public string $action = "";
+    #[Validate('required', message: 'Vyberte akci')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    public string $action = '';
 
     public function setChannel(Slack $slack)
     {
@@ -37,7 +36,7 @@ class UpdateSettingsSlackNotificationForm extends Form
 
         $this->slack->update([
             'description' => $this->description,
-            'action' => $this->action
+            'action' => $this->action,
         ]);
 
         $this->reset();

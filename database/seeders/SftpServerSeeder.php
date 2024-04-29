@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\SftpServer;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SftpServerSeeder extends Seeder
@@ -13,13 +12,13 @@ class SftpServerSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!SftpServer::first()) {
+        if (! SftpServer::first()) {
             SftpServer::create([
-                'name' => "Nangu Bannery",
-                'url' => "banner.cho01.iptv.grapesc.cz",
-                'username' => "root",
-                'password' => "tica386PP",
-                'path_to_folder' => "/var/www/html/"
+                'name' => 'Nangu Bannery',
+                'url' => 'banner.cho01.iptv.grapesc.cz',
+                'username' => 'root',
+                'password' => 'tica386PP',
+                'path_to_folder' => '/var/www/html/',
             ]);
         }
     }

@@ -9,7 +9,8 @@ use Livewire\Form;
 class UpdateSatelitCardForm extends Form
 {
     public ?SatelitCard $satelitCard;
-    public string $name = "";
+
+    public string $name = '';
 
     #[Validate('required', message: 'Vyberte distributra')]
     public $satelit_card_vendor_id;
@@ -26,7 +27,7 @@ class UpdateSatelitCardForm extends Form
         $this->validate();
 
         $this->satelitCard->update([
-            'satelit_card_vendor_id' => $this->satelit_card_vendor_id
+            'satelit_card_vendor_id' => $this->satelit_card_vendor_id,
         ]);
 
         $this->reset();

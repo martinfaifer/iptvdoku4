@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sftp_servers', function (Blueprint $table) {
             $table->id();
-            $table->string('name',100)->unique();
+            $table->string('name', 100)->unique();
             $table->string('url')->unique();
             $table->string('username');
             $table->string('password');

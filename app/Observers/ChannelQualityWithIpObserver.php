@@ -2,23 +2,23 @@
 
 namespace App\Observers;
 
+use App\Jobs\DeleteStreamFromIptvDohledJob;
 use App\Jobs\LogJob;
+use App\Models\ChannelQualityWithIp;
 use App\Models\H264;
 use App\Models\Loger;
-use App\Models\ChannelQualityWithIp;
 use Illuminate\Support\Facades\Auth;
-use App\Jobs\DeleteStreamFromIptvDohledJob;
 
 class ChannelQualityWithIpObserver
 {
     public function cerated(ChannelQualityWithIp $channelQualityWithIp)
     {
-        if (!is_null($channelQualityWithIp->h264_id)) {
-            $item = 'h264:' . H264::find($channelQualityWithIp->h264_id)->channel_id;
+        if (! is_null($channelQualityWithIp->h264_id)) {
+            $item = 'h264:'.H264::find($channelQualityWithIp->h264_id)->channel_id;
         }
 
-        if (!is_null($channelQualityWithIp->h265_id)) {
-            $item = 'h265:' . H264::find($channelQualityWithIp->h265_id)->channel_id;
+        if (! is_null($channelQualityWithIp->h265_id)) {
+            $item = 'h265:'.H264::find($channelQualityWithIp->h265_id)->channel_id;
         }
 
         if (Auth::user()) {
@@ -37,12 +37,12 @@ class ChannelQualityWithIpObserver
 
     public function updated(ChannelQualityWithIp $channelQualityWithIp)
     {
-        if (!is_null($channelQualityWithIp->h264_id)) {
-            $item = 'h264:' . H264::find($channelQualityWithIp->h264_id)->channel_id;
+        if (! is_null($channelQualityWithIp->h264_id)) {
+            $item = 'h264:'.H264::find($channelQualityWithIp->h264_id)->channel_id;
         }
 
-        if (!is_null($channelQualityWithIp->h265_id)) {
-            $item = 'h265:' . H264::find($channelQualityWithIp->h265_id)->channel_id;
+        if (! is_null($channelQualityWithIp->h265_id)) {
+            $item = 'h265:'.H264::find($channelQualityWithIp->h265_id)->channel_id;
         }
 
         LogJob::dispatch(
@@ -59,12 +59,12 @@ class ChannelQualityWithIpObserver
 
     public function deleted(ChannelQualityWithIp $channelQualityWithIp)
     {
-        if (!is_null($channelQualityWithIp->h264_id)) {
-            $item = 'h264:' . H264::find($channelQualityWithIp->h264_id)->channel_id;
+        if (! is_null($channelQualityWithIp->h264_id)) {
+            $item = 'h264:'.H264::find($channelQualityWithIp->h264_id)->channel_id;
         }
 
-        if (!is_null($channelQualityWithIp->h265_id)) {
-            $item = 'h265:' . H264::find($channelQualityWithIp->h265_id)->channel_id;
+        if (! is_null($channelQualityWithIp->h265_id)) {
+            $item = 'h265:'.H264::find($channelQualityWithIp->h265_id)->channel_id;
         }
 
         DeleteStreamFromIptvDohledJob::dispatch($channelQualityWithIp->ip);

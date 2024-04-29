@@ -2,19 +2,19 @@
 
 namespace App\Livewire\Settings\Nangu\Isps;
 
-use App\Models\Tag;
-use Livewire\Component;
-use App\Models\NanguIsp;
-use Livewire\WithPagination;
-use Illuminate\Support\Collection;
-use App\Traits\Livewire\NotificationTrait;
-use App\Models\NanguIspTagToChannelPackage;
 use App\Livewire\Forms\CreateSettingsTagToChannelPackageForm;
 use App\Livewire\Forms\UpdateSettingsTagToChannelPackageForm;
+use App\Models\NanguIsp;
+use App\Models\NanguIspTagToChannelPackage;
+use App\Models\Tag;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Support\Collection;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsTagToChannelPackageComponent extends Component
 {
-    use WithPagination, NotificationTrait;
+    use NotificationTrait, WithPagination;
 
     public CreateSettingsTagToChannelPackageForm $createForm;
 
@@ -37,24 +37,28 @@ class SettingsTagToChannelPackageComponent extends Component
     public function openCreateModal()
     {
         $this->resetErrorBag();
+
         return $this->createModal = true;
     }
 
     public function openEditModal()
     {
         $this->resetErrorBag();
+
         return $this->editModal = true;
     }
 
     public function closeDialog()
     {
         $this->editModal = false;
+
         return $this->createModal = false;
     }
 
     public function edit(NanguIspTagToChannelPackage $nanguIspTagToChannelPackage)
     {
         $this->updateForm->setNanguIspTagToChannelPackage($nanguIspTagToChannelPackage);
+
         return $this->openEditModal();
     }
 
@@ -64,7 +68,7 @@ class SettingsTagToChannelPackageComponent extends Component
 
         $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Upraveno");
+        return $this->success_alert('Upraveno');
     }
 
     public function create()
@@ -73,7 +77,7 @@ class SettingsTagToChannelPackageComponent extends Component
 
         $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Vazba přidána");
+        return $this->success_alert('Vazba přidána');
     }
 
     public function destroy(NanguIspTagToChannelPackage $nanguIspTagToChannelPackage)
@@ -82,13 +86,13 @@ class SettingsTagToChannelPackageComponent extends Component
 
         $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Odebráno");
+        return $this->success_alert('Odebráno');
     }
 
     public function render()
     {
         return view('livewire.settings.nangu.isps.settings-tag-to-channel-package-component', [
-            'nanguIspTagToChannelPackages' => NanguIspTagToChannelPackage::with(['nangu_isp', 'tag'])->orderBy('nangu_isp_id', "ASC")->paginate(5),
+            'nanguIspTagToChannelPackages' => NanguIspTagToChannelPackage::with(['nangu_isp', 'tag'])->orderBy('nangu_isp_id', 'ASC')->paginate(5),
             'headers' => [
                 ['key' => 'nangu_isp.name', 'label' => 'Poskytovatel', 'class' => 'text-white/80'],
                 ['key' => 'tag.name', 'label' => 'Štítek', 'class' => 'text-white/80'],

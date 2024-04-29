@@ -8,13 +8,12 @@ use Livewire\Form;
 
 class UpdateSettingsDevicesVendorsForm extends Form
 {
-
     public ?DeviceVendor $deviceVendor;
 
-    #[Validate('required', message: "Vyplňte výrobce")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:255', "Maximální počet znaků je :max")]
-    public string $name = "";
+    #[Validate('required', message: 'Vyplňte výrobce')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:255', 'Maximální počet znaků je :max')]
+    public string $name = '';
 
     public function setVendor(DeviceVendor $deviceVendor)
     {
@@ -29,7 +28,7 @@ class UpdateSettingsDevicesVendorsForm extends Form
 
         if ($this->name != $this->deviceVendor->name) {
             $this->deviceVendor->update([
-                'name' => $this->name
+                'name' => $this->name,
             ]);
         }
 

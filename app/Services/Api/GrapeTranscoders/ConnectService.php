@@ -2,13 +2,11 @@
 
 namespace App\Services\Api\GrapeTranscoders;
 
-use App\Models\Device;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class ConnectService
 {
-
     public $connection;
 
     public $endPoints = [
@@ -21,14 +19,14 @@ class ConnectService
             'method' => 'post',
             'endpoint' => '/transcoder/status',
             'formData' => [
-                'ip' => "%transcoderIp%"
+                'ip' => '%transcoderIp%',
             ],
         ],
         'streams_on_transcoders' => [
             'method' => 'post',
             'endpoint' => '/transcoder/streams',
             'formData' => [
-                'transcoderIp' => "%transcoderIp%"
+                'transcoderIp' => '%transcoderIp%',
             ],
         ],
         'stop_transcoding_stream' => [
@@ -40,13 +38,13 @@ class ConnectService
             'method' => 'post',
             'endpoint' => '/transcoder/stream/start',
             'formData' => null,
-        ]
+        ],
     ];
 
     public function __construct($endpointType, ?array $formData = null, ?string $params = null)
     {
         try {
-            if (!is_null($formData)) {
+            if (! is_null($formData)) {
                 $this->endPoints[$endpointType]['formData'] = $formData;
             }
 
@@ -57,7 +55,7 @@ class ConnectService
             };
 
             $this->connection = Http::$requestType(
-                config('services.api.3.grape_transcoders.url') . $this->endPoints[$endpointType]['endpoint'],
+                config('services.api.3.grape_transcoders.url').$this->endPoints[$endpointType]['endpoint'],
                 $this->endPoints[$endpointType]['formData']
             );
         } catch (\Throwable $th) {
@@ -75,7 +73,7 @@ class ConnectService
             dd('je null', $this->connection);
         }
 
-        if (!$this->connection->ok()) {
+        if (! $this->connection->ok()) {
             dd('neni ok', $this->connection);
         }
 

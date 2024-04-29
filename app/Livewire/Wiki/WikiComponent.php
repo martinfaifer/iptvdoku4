@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class WikiComponent extends Component
 {
-
     public ?WikiTopic $topic;
 
     public function render()

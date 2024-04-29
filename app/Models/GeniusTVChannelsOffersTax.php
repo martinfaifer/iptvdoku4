@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GeniusTVChannelsOffersTax extends Model
@@ -12,7 +12,7 @@ class GeniusTVChannelsOffersTax extends Model
         'offer',
         'channels_id',
         'price',
-        'currency'
+        'currency',
     ];
 
     public function currency_name(): BelongsTo
@@ -20,12 +20,12 @@ class GeniusTVChannelsOffersTax extends Model
         return $this->belongsTo(Currency::class, 'currency', 'id');
     }
 
-    public function scopeSearch(Builder $query, string $search = "")
+    public function scopeSearch(Builder $query, string $search = '')
     {
         $channel = Channel::search($search)->first();
         if ($channel) {
-            return $query->where('price', "like", "%" . $search . "%")
-                ->orWhere('channels_id', "like", "%" . $channel->id . "%");
+            return $query->where('price', 'like', '%'.$search.'%')
+                ->orWhere('channels_id', 'like', '%'.$channel->id.'%');
         }
     }
 }

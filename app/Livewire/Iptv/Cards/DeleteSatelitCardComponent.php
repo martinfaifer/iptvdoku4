@@ -12,12 +12,12 @@ class DeleteSatelitCardComponent extends Component
 
     public ?SatelitCard $satelitCard;
 
-
     public function destroy()
     {
         $this->satelitCard->delete();
-        $this->redirect("/sat-cards", true);
-        return $this->success_alert("Odebráno");
+        $this->redirect('/sat-cards', true);
+
+        return $this->success_alert('Odebráno');
     }
 
     public function render()

@@ -11,8 +11,7 @@ use Livewire\WithPagination;
 
 class SettingsIspComponent extends Component
 {
-
-    use WithPagination, NotificationTrait;
+    use NotificationTrait, WithPagination;
 
     public CreateSettingsNanguIspForm $createForm;
 
@@ -27,18 +26,21 @@ class SettingsIspComponent extends Component
     public function openCreateModal()
     {
         $this->resetErrorBag();
+
         return $this->createModal = true;
     }
 
     public function openEditModal()
     {
         $this->resetErrorBag();
+
         return $this->editModal = true;
     }
 
     public function closeDialog()
     {
         $this->editModal = false;
+
         return $this->createModal = false;
     }
 
@@ -48,12 +50,13 @@ class SettingsIspComponent extends Component
 
         $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Poskytovatel vytvořen");
+        return $this->success_alert('Poskytovatel vytvořen');
     }
 
     public function edit(NanguIsp $nanguIsp)
     {
         $this->updateForm->setNanguIsp($nanguIsp);
+
         return $this->openEditModal();
     }
 
@@ -63,7 +66,7 @@ class SettingsIspComponent extends Component
 
         $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Poskytovatel upraven");
+        return $this->success_alert('Poskytovatel upraven');
     }
 
     public function destroy(NanguIsp $nanguIsp)
@@ -72,7 +75,7 @@ class SettingsIspComponent extends Component
 
         $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Poskytovatel odebrán");
+        return $this->success_alert('Poskytovatel odebrán');
     }
 
     public function render()

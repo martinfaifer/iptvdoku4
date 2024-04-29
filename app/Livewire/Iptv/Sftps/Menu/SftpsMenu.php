@@ -2,14 +2,13 @@
 
 namespace App\Livewire\Iptv\Sftps\Menu;
 
-use Livewire\Component;
 use App\Models\SftpServer;
-use Livewire\Attributes\On;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class SftpsMenu extends Component
 {
-
     public Collection $sftpServers;
 
     public function mount()

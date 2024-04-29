@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GeniusTvDiscount extends Model
@@ -22,7 +22,7 @@ class GeniusTvDiscount extends Model
     {
         $nanguIsp = NanguIsp::search($search)->first();
         if ($nanguIsp) {
-            return $query->where('nangu_isp_id', "like", "%" . $nanguIsp->id);
+            return $query->where('nangu_isp_id', 'like', '%'.$nanguIsp->id);
         }
     }
 }

@@ -2,22 +2,21 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
 use App\Models\GeniusTVStaticTax;
 use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class UpdateSettingsGeniusTvStaticTaxesForm extends Form
 {
-
     public ?GeniusTVStaticTax $staticTax;
 
-    public string $name = "";
+    public string $name = '';
 
-    #[Validate('required', message: "Vyplňte cenu")]
-    #[Validate('string', message: "Neplatný formát")]
-    public string $price = "0";
+    #[Validate('required', message: 'Vyplňte cenu')]
+    #[Validate('string', message: 'Neplatný formát')]
+    public string $price = '0';
 
-    #[Validate('required', message: "Vyberte měnu")]
+    #[Validate('required', message: 'Vyberte měnu')]
     public $currency = null;
 
     public function setStaticTax(GeniusTVStaticTax $staticTax)
@@ -35,7 +34,7 @@ class UpdateSettingsGeniusTvStaticTaxesForm extends Form
         $this->staticTax->update([
             // 'name' => $this->name,
             'price' => $this->price,
-            'currency' => $this->currency
+            'currency' => $this->currency,
         ]);
 
         $this->reset();

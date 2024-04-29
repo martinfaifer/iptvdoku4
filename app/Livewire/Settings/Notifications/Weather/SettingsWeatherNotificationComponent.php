@@ -2,27 +2,29 @@
 
 namespace App\Livewire\Settings\Notifications\Weather;
 
-use Livewire\Component;
-use App\Models\WeatherCity;
-use Livewire\WithPagination;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsWeatherNotificationForm;
 use App\Livewire\Forms\UpdateSettingsWeatherNotificationForm;
+use App\Models\WeatherCity;
+use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsWeatherNotificationComponent extends Component
 {
     use NotificationTrait, WithPagination;
 
     public CreateSettingsWeatherNotificationForm $createForm;
+
     public UpdateSettingsWeatherNotificationForm $updateForm;
 
-    public string $query = "";
+    public string $query = '';
 
     public bool $createModal = false;
 
     public function openCreateModal()
     {
         $this->createForm->reset();
+
         return $this->createModal = true;
     }
 
@@ -32,7 +34,7 @@ class SettingsWeatherNotificationComponent extends Component
 
         $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Přidáno");
+        return $this->success_alert('Přidáno');
     }
 
     public function destroy(WeatherCity $weather)
@@ -41,7 +43,7 @@ class SettingsWeatherNotificationComponent extends Component
 
         $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Odebráno");
+        return $this->success_alert('Odebráno');
     }
 
     public function render()
@@ -52,7 +54,7 @@ class SettingsWeatherNotificationComponent extends Component
                 ['key' => 'state', 'label' => 'Stát', 'class' => 'text-white/80'],
                 ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
             ],
-            'weathers' => WeatherCity::search($this->query)->paginate(5)
+            'weathers' => WeatherCity::search($this->query)->paginate(5),
         ]);
     }
 }

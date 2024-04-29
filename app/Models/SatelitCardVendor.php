@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SatelitCardVendor extends Model
@@ -17,8 +17,8 @@ class SatelitCardVendor extends Model
         return $this->hasMany(SatelitCard::class, 'satelit_card_vendor_id', 'id');
     }
 
-    public function scopeSearch(Builder $query, string $search = "")
+    public function scopeSearch(Builder $query, string $search = '')
     {
-        return $query->where('name', "like", "%" . $search . "%");
+        return $query->where('name', 'like', '%'.$search.'%');
     }
 }

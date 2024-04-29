@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\WeatherCity;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class WeatherCitySeeder extends Seeder
@@ -13,10 +12,10 @@ class WeatherCitySeeder extends Seeder
      */
     public function run(): void
     {
-        if(!WeatherCity::first()) {
+        if (! WeatherCity::first()) {
             WeatherCity::create([
-                'city' => "Chomutov",
-                'state' => "cz"
+                'city' => 'Chomutov',
+                'state' => 'cz',
             ]);
         }
     }

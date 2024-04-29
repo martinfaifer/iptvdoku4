@@ -8,7 +8,7 @@ class NanguHelper
     {
         try {
             if (is_null($offers)) {
-                return "";
+                return '';
             }
 
             if (is_string($offers['offerCodes'])) {
@@ -21,7 +21,7 @@ class NanguHelper
                 array_push($result, $offer);
             }
 
-            return implode(",", $result);
+            return implode(',', $result);
         } catch (\Throwable $th) {
             dd($offers);
         }

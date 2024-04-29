@@ -2,22 +2,20 @@
 
 namespace App\Observers;
 
+use App\Jobs\GetChannelDetailFromNanguApiJob;
 use App\Jobs\LogJob;
-use App\Models\Loger;
 use App\Models\Channel;
 use App\Models\Contact;
+use App\Models\Loger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Artisan;
-use App\Jobs\GetChannelDetailFromNanguApiJob;
-use App\Services\Api\NanguTv\ChannelsService;
 
 class ChannelObserver
 {
     public function created(Channel $channel)
     {
-        if (!Auth::user()) {
-            $email = "system@";
+        if (! Auth::user()) {
+            $email = 'system@';
         }
 
         LogJob::dispatch(

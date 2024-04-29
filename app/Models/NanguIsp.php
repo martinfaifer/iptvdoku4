@@ -13,12 +13,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class NanguIsp extends Model
 {
     protected $fillable = [
-        'name', 'nangu_isp_id', 'is_akcionar', 'ic', 'dic', 'hbo_key', 'crm_contract_id'
+        'name', 'nangu_isp_id', 'is_akcionar', 'ic', 'dic', 'hbo_key', 'crm_contract_id',
     ];
 
     public function subscribers(): HasMany
     {
-        return $this->hasMany(NanguSubscriber::class, 'nangu_isp_id', "id");
+        return $this->hasMany(NanguSubscriber::class, 'nangu_isp_id', 'id');
     }
 
     public function subscriptions(): HasMany
@@ -48,10 +48,10 @@ class NanguIsp extends Model
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $query->where('name', "like", "%" . $search . "%")
-            ->orWhere('ic', 'like', "%" . $search . "%")
-            ->orWhere('dic', 'like', "%" . $search . "%")
-            ->orWhere('hbo_key', 'like', "%" . $search . "%")
-            ->orWhere('crm_contract_id', 'like', "%" . $search . "%");
+        return $query->where('name', 'like', '%'.$search.'%')
+            ->orWhere('ic', 'like', '%'.$search.'%')
+            ->orWhere('dic', 'like', '%'.$search.'%')
+            ->orWhere('hbo_key', 'like', '%'.$search.'%')
+            ->orWhere('crm_contract_id', 'like', '%'.$search.'%');
     }
 }

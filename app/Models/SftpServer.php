@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SftpServer extends Model
 {
-
     const CONNECTION_TYPES = [
         [
             'id' => 'sftp',
@@ -14,8 +13,8 @@ class SftpServer extends Model
         ],
         [
             'id' => 'ftp',
-            'name' => 'ftp'
-        ]
+            'name' => 'ftp',
+        ],
     ];
 
     protected $fillable = [
@@ -24,6 +23,6 @@ class SftpServer extends Model
         'username',
         'password',
         'path_to_folder',
-        'connection_type'
+        'connection_type',
     ];
 }

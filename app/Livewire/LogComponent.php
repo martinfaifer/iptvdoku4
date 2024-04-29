@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Livewire\Attributes\On;
 use App\Services\Logger\LoggerService;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class LogComponent extends Component
 {

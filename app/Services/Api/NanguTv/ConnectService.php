@@ -28,8 +28,8 @@ class ConnectService
             ],
         ]);
 
-        $this->soap = (!is_null(config('services.api.nanguTv.ssl_url')))
-            ? new SoapClient(config('services.api.nanguTv.ssl_url') . $this->endPoints[$wsdl], [
+        $this->soap = (! is_null(config('services.api.nanguTv.ssl_url')))
+            ? new SoapClient(config('services.api.nanguTv.ssl_url').$this->endPoints[$wsdl], [
                 'stream_context' => $context,
             ])
             : [];

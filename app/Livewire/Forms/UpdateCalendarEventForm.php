@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
 use App\Models\Event;
-use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
+use Livewire\Form;
+use Livewire\WithFileUploads;
 
 class UpdateCalendarEventForm extends Form
 {
@@ -13,20 +13,20 @@ class UpdateCalendarEventForm extends Form
 
     public ?Event $event;
 
-    #[Validate('required', message: "Vyplňte popis")]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:100', message: "Maximální počet znaků je 100")]
-    public string $label = "";
+    #[Validate('required', message: 'Vyplňte popis')]
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:100', message: 'Maximální počet znaků je 100')]
+    public string $label = '';
 
     #[Validate('nullable')]
-    #[Validate('string', message: "Neplatný formát")]
-    public $description = "";
+    #[Validate('string', message: 'Neplatný formát')]
+    public $description = '';
 
     #[Validate('nullable')]
-    public string $color = "";
+    public string $color = '';
 
-    #[Validate('required', message: "Vyplňte začátek události")]
-    public string $start_date = "";
+    #[Validate('required', message: 'Vyplňte začátek události')]
+    public string $start_date = '';
 
     #[Validate('nullable')]
     public $start_time = null;
@@ -45,10 +45,10 @@ class UpdateCalendarEventForm extends Form
     public array $channels = [];
 
     #[Validate('nullable')]
-    public null|string $tag_id = null;
+    public ?string $tag_id = null;
 
-    #[Validate('required', message: "Zobrazit upozornění?")]
-    #[Validate('boolean', message: "Nepatný formát")]
+    #[Validate('required', message: 'Zobrazit upozornění?')]
+    #[Validate('boolean', message: 'Nepatný formát')]
     public bool $fe_notification = false;
 
     #[Validate('max:1024', message: 'Maximální velikost banneru je 1Mb')]
@@ -56,8 +56,8 @@ class UpdateCalendarEventForm extends Form
     public $banner;
 
     #[Validate('nullable')]
-    #[Validate('exists:sftp_servers,id', message: "Neznámý server")]
-    public null|string $sftp_server_id = null;
+    #[Validate('exists:sftp_servers,id', message: 'Neznámý server')]
+    public ?string $sftp_server_id = null;
 
     public function setEvent($event)
     {
@@ -83,7 +83,7 @@ class UpdateCalendarEventForm extends Form
 
         $bannerPath = $this->event->banner_path;
 
-        if (!is_string($this->banner)) {
+        if (! is_string($this->banner)) {
             $bannerPath = $this->banner->store(path: 'public/NanguBanners');
         }
 
@@ -94,13 +94,13 @@ class UpdateCalendarEventForm extends Form
             'start_time' => $this->start_time,
             'end_date' => $this->end_date,
             'end_time' => $this->end_time,
-            'color' => "cs-rose-950",
+            'color' => 'cs-rose-950',
             'fe_notification' => $this->fe_notification,
             'channels' => json_encode($this->channels),
             'tag_id' => $this->tag_id,
             'users' => json_encode($this->users),
             'banner_path' => $bannerPath,
-            'sftp_server_id' => $this->sftp_server_id
+            'sftp_server_id' => $this->sftp_server_id,
         ]);
 
         $this->reset();

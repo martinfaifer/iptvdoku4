@@ -17,7 +17,7 @@ class NanguSubscription extends Model
         'channelPackagesCodes',
         'offers',
         'channels',
-        'nangu_isp_id'
+        'nangu_isp_id',
     ];
 
     public function nanguIsp(): BelongsTo
@@ -32,7 +32,7 @@ class NanguSubscription extends Model
 
     public function scopeIsBilling(Builder $query)
     {
-        return $query->where('subscriptionState', "BILLING");
+        return $query->where('subscriptionState', 'BILLING');
     }
 
     public function scopeForIsp(Builder $query, string|int $nanguIspId)
@@ -42,7 +42,7 @@ class NanguSubscription extends Model
 
     public function scopeHasChannel(Builder $query, string $channel)
     {
-        return $query->where('channels', "like", "%" . $channel . "%");
+        return $query->where('channels', 'like', '%'.$channel.'%');
     }
 
     public function scopeUniqueTariffCodes(Builder $query)
@@ -57,6 +57,6 @@ class NanguSubscription extends Model
 
     public function scopeOfferCode(Builder $query, string $offerCode)
     {
-        return $query->where('offers', "like", "%" . $offerCode . "%");
+        return $query->where('offers', 'like', '%'.$offerCode.'%');
     }
 }

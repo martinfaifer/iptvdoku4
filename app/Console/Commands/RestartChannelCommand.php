@@ -2,16 +2,17 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Slack;
+use App\Actions\Slack\SendSlackNotificationAction;
 use App\Models\RestartChannel;
+use App\Models\Slack;
+use App\Traits\Devices\GrapeTranscoders\GrapeTranscoderChannelTrait;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
-use App\Actions\Slack\SendSlackNotificationAction;
-use App\Traits\Devices\GrapeTranscoders\GrapeTranscoderChannelTrait;
 
 class RestartChannelCommand extends Command
 {
     use GrapeTranscoderChannelTrait;
+
     /**
      * The name and signature of the console command.
      *
@@ -40,18 +41,18 @@ class RestartChannelCommand extends Command
         }
 
         foreach ($channelsCanBeRestarted as $channelToRestart) {
-            if (Cache::has('grape_transcoder_' . $channelToRestart->device_id)) {
-                $cachedDataAboutTranscoder = Cache::get(('grape_transcoder_' . $channelToRestart->device_id));
+            if (Cache::has('grape_transcoder_'.$channelToRestart->device_id)) {
+                $cachedDataAboutTranscoder = Cache::get(('grape_transcoder_'.$channelToRestart->device_id));
                 $listOfStreamsOnTranscoder = ($this->streams_on_transcoder($channelToRestart->device));
 
-                if (!empty($listOfStreamsOnTranscoder)) {
+                if (! empty($listOfStreamsOnTranscoder)) {
                     foreach ($listOfStreamsOnTranscoder as $singleStream) {
                         $searcheableIp = $channelToRestart->stream_ip->ip;
-                        if (!str_contains($searcheableIp, "udp://")) {
-                            $searcheableIp = "udp://" . $searcheableIp;
+                        if (! str_contains($searcheableIp, 'udp://')) {
+                            $searcheableIp = 'udp://'.$searcheableIp;
                         }
-                        if (!str_contains($searcheableIp, ":1234")) {
-                            $searcheableIp = $searcheableIp . ":1234";
+                        if (! str_contains($searcheableIp, ':1234')) {
+                            $searcheableIp = $searcheableIp.':1234';
                         }
 
                         if (
@@ -68,7 +69,7 @@ class RestartChannelCommand extends Command
                             // send notification to slack
                             if ($slackChannel) {
                                 (new SendSlackNotificationAction(
-                                    text: "Kanál " . $channelToRestart->channel->name . " s IP $searcheableIp byl pozastaven na základě plánované akce",
+                                    text: 'Kanál '.$channelToRestart->channel->name." s IP $searcheableIp byl pozastaven na základě plánované akce",
                                     url: $slackChannel->url
                                 ))();
                             }
@@ -81,7 +82,7 @@ class RestartChannelCommand extends Command
                             );
                             // send notification to slack
                             (new SendSlackNotificationAction(
-                                text: "Kanál " . $channelToRestart->channel->name . " s IP $searcheableIp byl spuštěn na základě plánované akce",
+                                text: 'Kanál '.$channelToRestart->channel->name." s IP $searcheableIp byl spuštěn na základě plánované akce",
                                 url: $slackChannel->url
                             ))();
                         }

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class Slack extends Model
 {
@@ -14,8 +14,9 @@ class Slack extends Model
         'calendar_notification',
         'restart_channel',
     ];
+
     protected $fillable = [
-        'url', 'description', 'action'
+        'url', 'description', 'action',
     ];
 
     public function scopeRestartChannelAction(Builder $query)
@@ -33,8 +34,8 @@ class Slack extends Model
         return $query->where('action', 'weather_notification');
     }
 
-    public function scopeSearch(Builder $query, string $search = "")
+    public function scopeSearch(Builder $query, string $search = '')
     {
-        return $query->where('description', 'like', "%" . $search . "%")->orWhere('url', "like", "%" . $search . "%");
+        return $query->where('description', 'like', '%'.$search.'%')->orWhere('url', 'like', '%'.$search.'%');
     }
 }

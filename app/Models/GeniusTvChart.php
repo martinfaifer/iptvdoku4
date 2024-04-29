@@ -11,7 +11,7 @@ class GeniusTvChart extends Model
     protected $fillable = [
         'item',
         'value',
-        'nangu_isp_id'
+        'nangu_isp_id',
     ];
 
     public function nanguIsp(): BelongsTo
@@ -31,7 +31,7 @@ class GeniusTvChart extends Model
 
     public function scopeLastMonthAndNew(Builder $query)
     {
-        return $query->where('created_at', ">=", now()->subMonth());
+        return $query->where('created_at', '>=', now()->subMonth());
     }
 
     public function scopeForNanguIsp(Builder $query, string|int $nanguIspId)

@@ -64,6 +64,7 @@ class DeviceTemplateComponent extends Component
         );
 
         $this->redirect('/devices/'.$this->device->id, true);
+
         return $this->success('Upraveno');
     }
 
@@ -72,6 +73,7 @@ class DeviceTemplateComponent extends Component
         $this->updatedInterface = [];
         $this->updatedInterfaceKey = '';
         $this->interfaceType = '';
+
         return $this->updateDrawer = false;
     }
 

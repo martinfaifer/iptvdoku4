@@ -2,11 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\GetChannelDetailFromNanguApiJob;
 use App\Models\Channel;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
-use App\Jobs\GetChannelDetailFromNanguApiJob;
-use App\Services\Api\NanguTv\ChannelsService;
 
 class GetChannelDetailFromNanguApiCommand extends Command
 {

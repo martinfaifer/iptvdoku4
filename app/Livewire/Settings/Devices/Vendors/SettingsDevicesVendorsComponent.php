@@ -2,23 +2,25 @@
 
 namespace App\Livewire\Settings\Devices\Vendors;
 
-use Livewire\Component;
-use App\Models\DeviceVendor;
-use Livewire\WithPagination;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsDevicesVendorsForm;
 use App\Livewire\Forms\UpdateSettingsDevicesVendorsForm;
+use App\Models\DeviceVendor;
+use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsDevicesVendorsComponent extends Component
 {
-    use WithPagination, NotificationTrait;
+    use NotificationTrait, WithPagination;
 
     public CreateSettingsDevicesVendorsForm $createForm;
+
     public UpdateSettingsDevicesVendorsForm $updateForm;
 
-    public string $query = "";
+    public string $query = '';
 
     public bool $createModal = false;
+
     public bool $editModal = false;
 
     public function openCreateModal()
@@ -32,12 +34,13 @@ class SettingsDevicesVendorsComponent extends Component
 
         $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Přidáno");
+        return $this->success_alert('Přidáno');
     }
 
     public function edit(DeviceVendor $deviceVendor)
     {
         $this->updateForm->setVendor($deviceVendor);
+
         return $this->editModal = true;
     }
 
@@ -47,7 +50,7 @@ class SettingsDevicesVendorsComponent extends Component
 
         $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Upraveno");
+        return $this->success_alert('Upraveno');
     }
 
     public function destroy(DeviceVendor $deviceVendor)
@@ -55,9 +58,9 @@ class SettingsDevicesVendorsComponent extends Component
         try {
             $deviceVendor->delete();
 
-            return $this->success_alert("Odebráno");
+            return $this->success_alert('Odebráno');
         } catch (\Throwable $th) {
-            return $this->error_alert("Existují vazby na výrobce");
+            return $this->error_alert('Existují vazby na výrobce');
         }
     }
 
@@ -76,7 +79,7 @@ class SettingsDevicesVendorsComponent extends Component
                 ['key' => 'name', 'label' => 'Výrobce', 'class' => 'text-white/80'],
                 ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
             ],
-            'vendors' => DeviceVendor::search($this->query)->paginate(5)
+            'vendors' => DeviceVendor::search($this->query)->paginate(5),
         ]);
     }
 }

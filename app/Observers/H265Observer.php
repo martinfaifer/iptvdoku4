@@ -11,8 +11,8 @@ class H265Observer
 {
     public function created(H265 $h265)
     {
-        if (!Auth::user()) {
-            $email = "system@";
+        if (! Auth::user()) {
+            $email = 'system@';
         }
         LogJob::dispatch(
             user: isset($email) ? $email : Auth::user()->email,

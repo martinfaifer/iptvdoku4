@@ -38,7 +38,7 @@ return [
             'ssl_key' => env('NANGU_SSL_KEY'),
             'isp_code' => env('NANGU_ISP_CODE'),
             'cert' => env('NANGU_CERT'),
-            'pk' => env('NANGU_PK')
+            'pk' => env('NANGU_PK'),
         ],
         'iptvDohled' => [
             'url' => env('IPTVDOHLED_URL'),
@@ -68,43 +68,43 @@ return [
         ],
         [
             'grape_transcoders' => [
-                'url' => env('GRAPE_TRANSCODERS_API_URL')
-            ]
+                'url' => env('GRAPE_TRANSCODERS_API_URL'),
+            ],
         ],
         [
             'open_weather_map' => [
                 'url' => env('OPEN_WEATHER_MAP_URL'),
-                'api_key' => env('OPEN_WEATHER_MAP_API_KEY')
-            ]
+                'api_key' => env('OPEN_WEATHER_MAP_API_KEY'),
+            ],
         ],
         [
             'old_iptv_doku' => [
                 'url' => env('OLD_IPTV_DOKU_URL'),
                 'user' => env('OLD_IPTV_DOKU_USER'),
-                'password' => env('OLD_IPTV_DOKU_PASSWORD')
-            ]
+                'password' => env('OLD_IPTV_DOKU_PASSWORD'),
+            ],
         ],
         [
             'hbo_go' => [
                 'url' => env('DB_HBO_GO_URL'),
                 'username' => env('DB_HBO_GO_USERNAME'),
                 'password' => env('DB_HBO_GO_PASSWORD'),
-                'database' => env('DB_HBO_GO_DATABASE')
-            ]
+                'database' => env('DB_HBO_GO_DATABASE'),
+            ],
         ],
         [
             'exchange_rate' => [
-                'api_key' => env('EXCHANGE_RATE_API_KEY')
-            ]
+                'api_key' => env('EXCHANGE_RATE_API_KEY'),
+            ],
         ],
         [
             'floweye' => [
                 'url' => env('FLOWEYE_URL'),
                 'api_token' => env('FLOWEYE_API_TOKEN'),
                 'template_id' => env('FLOWEYE_TEMPLATE_ID'),
-                'department' => env('FLOWEYE_DEPARTMENT')
-            ]
-        ]
+                'department' => env('FLOWEYE_DEPARTMENT'),
+            ],
+        ],
     ],
 
 ];

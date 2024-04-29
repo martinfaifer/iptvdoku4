@@ -2,13 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\SendEventWasStartedMail;
 use App\Models\Event;
-use phpseclib3\Net\SFTP;
 use App\Models\TagOnItem;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendEventWasStartedMail;
 use Illuminate\Support\Facades\Storage;
+use phpseclib3\Net\SFTP;
 
 class StartCalendarDailyEventCommand extends Command
 {
@@ -31,28 +31,26 @@ class StartCalendarDailyEventCommand extends Command
      */
     public function handle()
     {
-        if (Event
-            ::where('start_date', now()->format("Y-m-d"))
+        if (Event::where('start_date', now()->format('Y-m-d'))
             ->where('start_time', null)
             ->first()
         ) {
-            foreach (Event
-                ::where('start_date', now()->format("Y-m-d"))
+            foreach (Event::where('start_date', now()->format('Y-m-d'))
                 ->where('start_time', null)
                 ->get() as $event) {
 
-                if (!is_null($event->tag_id) && !empty($event->channels)) {
+                if (! is_null($event->tag_id) && ! empty($event->channels)) {
 
                     foreach (json_decode($event->channels) as $channelId) {
                         TagOnItem::create([
                             'item_id' => $channelId,
-                            'type' => "channel",
+                            'type' => 'channel',
                             'tag_id' => $event->tag_id,
                         ]);
                     }
                 }
 
-                if (!is_null($event->sftp_server_id) && !is_null($event->banner_path)) {
+                if (! is_null($event->sftp_server_id) && ! is_null($event->banner_path)) {
                     $availableBannersNames = Event::BANNER_NAMES;
                     // upload banner to sftp server
                     // check if file exists
@@ -61,16 +59,16 @@ class StartCalendarDailyEventCommand extends Command
 
                         $sftp = new SFTP($event->sftp_server->url);
 
-                        if (!$sftp->login($event->sftp_server->username, $event->sftp_server->password)) {
+                        if (! $sftp->login($event->sftp_server->username, $event->sftp_server->password)) {
                             return false;
                         }
 
-                        if (!$sftp->chdir($event->sftp_server->path_to_folder)) {
+                        if (! $sftp->chdir($event->sftp_server->path_to_folder)) {
                             return false;
                         }
 
                         foreach ($availableBannersNames as $bannerName) {
-                            if (!$sftp->put($bannerName, $file)) {
+                            if (! $sftp->put($bannerName, $file)) {
                                 return false;
                             }
                         }

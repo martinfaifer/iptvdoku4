@@ -108,6 +108,7 @@ class StoreChannel extends Component
         // $this->closeDialog();
 
         $this->redirect('/channels/'.$channel->id.'/multicast', true);
+
         return $this->success_alert('Kanál přidán');
     }
 

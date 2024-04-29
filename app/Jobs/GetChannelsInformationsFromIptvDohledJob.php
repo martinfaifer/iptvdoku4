@@ -27,19 +27,18 @@ class GetChannelsInformationsFromIptvDohledJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $response  = (new ConnectService(
+        $response = (new ConnectService(
             endpointType: 'get-stream-by-ip',
-            params: str_contains($this->ip, ':1234') ? $this->ip : $this->ip . ':1234'
+            params: str_contains($this->ip, ':1234') ? $this->ip : $this->ip.':1234'
         ))->connect(cacheKey: $this->ip);
 
-        if ($response['status'] == "success") {
-            if (!IptvDohledUrl
-                ::where('iptv_dohled_id', $response['data']['streamId'])
+        if ($response['status'] == 'success') {
+            if (! IptvDohledUrl::where('iptv_dohled_id', $response['data']['streamId'])
                 ->where('stream_url', $this->ip)
                 ->first()) {
                 IptvDohledUrl::create([
                     'iptv_dohled_id' => $response['data']['streamId'],
-                    'stream_url' => $this->ip
+                    'stream_url' => $this->ip,
                 ]);
             }
         }

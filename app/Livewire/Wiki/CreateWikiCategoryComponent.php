@@ -18,16 +18,17 @@ class CreateWikiCategoryComponent extends Component
     {
         $this->form->create();
 
-        $this->dispatch("refresh_wiki_menu");
+        $this->dispatch('refresh_wiki_menu');
 
         $this->closeDialog();
 
-        return $this->success_alert("Kategorie přidána");
+        return $this->success_alert('Kategorie přidána');
     }
 
     public function openModal()
     {
         $this->resetErrorBag();
+
         return $this->storeModal = true;
     }
 

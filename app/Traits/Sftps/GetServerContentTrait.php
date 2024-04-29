@@ -2,8 +2,8 @@
 
 namespace App\Traits\Sftps;
 
-use phpseclib3\Net\SFTP;
 use Illuminate\Support\Facades\Storage;
+use phpseclib3\Net\SFTP;
 
 trait GetServerContentTrait
 {
@@ -22,12 +22,12 @@ trait GetServerContentTrait
     {
         $sftp = new SFTP($sftpServer->url);
 
-        if (!$sftp->login($sftpServer->username, $sftpServer->password)) {
+        if (! $sftp->login($sftpServer->username, $sftpServer->password)) {
             return [];
         }
 
-        if (!$sftp->chdir($sftpServer->path_to_folder)) {
-            $sftp->chdir("/");
+        if (! $sftp->chdir($sftpServer->path_to_folder)) {
+            $sftp->chdir('/');
         }
 
         $contents = $sftp->rawlist();

@@ -2,16 +2,16 @@
 
 namespace App\Livewire\Settings\Geniustv\ChannelsTaxes;
 
-use App\Models\Channel;
-use Livewire\Component;
-use App\Models\Currency;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use Illuminate\Support\Collection;
-use App\Models\GeniusTVchannelsTax;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsGeniusTvChannelsTaxesForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvChannelsTaxesForm;
+use App\Models\Channel;
+use App\Models\Currency;
+use App\Models\GeniusTVchannelsTax;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsGeniusTvChannelsTaxesComponent extends Component
 {
@@ -40,12 +40,14 @@ class SettingsGeniusTvChannelsTaxesComponent extends Component
     public function openCreateModal()
     {
         $this->resetErrorBag();
+
         return $this->createModal = true;
     }
 
     public function closeDialog()
     {
         $this->updateModal = false;
+
         return $this->createModal = false;
     }
 
@@ -57,7 +59,7 @@ class SettingsGeniusTvChannelsTaxesComponent extends Component
 
         $this->dispatch('refresh_settings_genius_tv_channels_taxes');
 
-        $this->success_alert("Vytvořeno");
+        $this->success_alert('Vytvořeno');
     }
 
     public function edit(GeniusTVchannelsTax $channelTax)
@@ -77,7 +79,7 @@ class SettingsGeniusTvChannelsTaxesComponent extends Component
 
         $this->dispatch('refresh_settings_genius_tv_channels_taxes');
 
-        return $this->success_alert("Upraveno");
+        return $this->success_alert('Upraveno');
     }
 
     public function destroy(GeniusTVchannelsTax $channelTax)
@@ -91,8 +93,7 @@ class SettingsGeniusTvChannelsTaxesComponent extends Component
     public function render()
     {
         return view('livewire.settings.geniustv.channels-taxes.settings-genius-tv-channels-taxes-component', [
-            'channelsTaxes' => GeniusTVchannelsTax
-                ::with('currency_name', 'channel')
+            'channelsTaxes' => GeniusTVchannelsTax::with('currency_name', 'channel')
                 ->search($this->query)
                 ->paginate(5),
             'headers' => [

@@ -37,13 +37,13 @@ class MulticastChannel extends Component
 
         $this->devices = $temporaryDevices->filter(function ($device) {
             if (is_array($device->has_channels)) {
-                return in_array('multicast:' . $this->channel->id, $device->has_channels);
+                return in_array('multicast:'.$this->channel->id, $device->has_channels);
             }
         });
 
         $this->backupDevices = $temporaryDevices->filter(function ($device) {
             if (is_array($device->has_channels)) {
-                return in_array('multicast:' . $this->channel->id . ':backup', $device->has_channels);
+                return in_array('multicast:'.$this->channel->id.':backup', $device->has_channels);
             }
         });
     }
@@ -58,7 +58,7 @@ class MulticastChannel extends Component
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_multicasts.' . $this->channel->id);
+        $this->dispatch('update_multicasts.'.$this->channel->id);
 
         return $this->success_alert('Změněno');
     }
@@ -71,7 +71,7 @@ class MulticastChannel extends Component
     public function destroy(ChannelMulticast $multicast)
     {
         $multicast->delete();
-        $this->dispatch('update_multicasts.' . $this->channel->id);
+        $this->dispatch('update_multicasts.'.$this->channel->id);
 
         return $this->success_alert('Odebráno');
     }
@@ -92,7 +92,7 @@ class MulticastChannel extends Component
     {
         return view('livewire.iptv.channels.multicast.multicast-channel', [
             // 'multicasts' => ChannelMulticast::where('channel_id', $this->channel->id)->with('channel_source')->get(),
-            'multicasts' => $this->channel->multicasts->load('channel_source')
+            'multicasts' => $this->channel->multicasts->load('channel_source'),
         ]);
     }
 }

@@ -5,7 +5,6 @@ namespace App\Exports;
 use App\Models\Channel;
 use App\Models\GeniusTvChart;
 use Maatwebsite\Excel\Concerns\FromArray;
-use Maatwebsite\Excel\Concerns\FromCollection;
 
 class ChannelsUsagePerIspExport implements FromArray
 {
@@ -36,7 +35,7 @@ class ChannelsUsagePerIspExport implements FromArray
                 'name' => $channel->name,
                 'last_month' => $lastMonthUsage,
                 'this_month' => $thisMonthUsage,
-                'avg' => ($thisMonthUsage + $lastMonthUsage) / 2
+                'avg' => ($thisMonthUsage + $lastMonthUsage) / 2,
             ];
         }
 
