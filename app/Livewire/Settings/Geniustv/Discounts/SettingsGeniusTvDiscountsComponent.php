@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Settings\GeniusTv\Discounts;
+namespace App\Livewire\Settings\Geniustv\Discounts;
 
 use App\Livewire\Forms\CreateSettingsGeniusTvDiscountsForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvDiscountsForm;

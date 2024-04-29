@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Settings\GeniusTv\OfferTaxes;
+namespace App\Livewire\Settings\Geniustv\OfferTaxes;
 
 use App\Livewire\Forms\CreateSettingsGeniusTvOfferTaxesForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvOfferTaxesForm;

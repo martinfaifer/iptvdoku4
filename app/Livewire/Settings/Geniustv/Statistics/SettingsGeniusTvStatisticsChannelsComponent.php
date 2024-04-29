@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Settings\GeniusTv\Statistics;
+namespace App\Livewire\Settings\Geniustv\Statistics;
 
 use Livewire\Component;
 

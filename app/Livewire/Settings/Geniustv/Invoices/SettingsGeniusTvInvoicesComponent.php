@@ -1,5 +1,5 @@
 <?php
-namespace App\Livewire\Settings\GeniusTv\Invoices;
+namespace App\Livewire\Settings\Geniustv\Invoices;
 
 use App\Models\NanguIspInvoice;
 use Livewire\Component;

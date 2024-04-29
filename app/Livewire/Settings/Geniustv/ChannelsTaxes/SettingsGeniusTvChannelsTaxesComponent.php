@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Settings\GeniusTv\ChannelsTaxes;
+namespace App\Livewire\Settings\Geniustv\ChannelsTaxes;
 
 use App\Livewire\Forms\CreateSettingsGeniusTvChannelsTaxesForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvChannelsTaxesForm;
