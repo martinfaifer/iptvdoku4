@@ -60,18 +60,18 @@ Route::middleware('auth')->group(function () {
             Route::get('isps', SettingsIspComponent::class);
             Route::get('isps-channel-packages-to-tags', SettingsTagToChannelPackageComponent::class);
         });
-        Route::prefix('geniustv')->group(function () {
-            Route::prefix('statistics')->group(function () {
-                Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class);
-                Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class);
-            });
-            Route::get('static-taxes', SettingsGeniusTvStaticTaxesComponent::class);
-            Route::get('channels-taxes', SettingsGeniusTvChannelsTaxesComponent::class);
-            Route::get('channel-packages', SettingsGeniusTvChannelPackagesTaxesComponent::class);
-            Route::get('offer-taxes', SettingsGeniusTvOfferTaxesComponent::class);
-            Route::get('discounts', SettingsGeniusTvDiscountsComponent::class);
-            Route::get('invoices', SettingsGeniusTvInvoicesComponent::class);
-        });
+        // Route::prefix('geniustv')->group(function () {
+        //     Route::prefix('statistics')->group(function () {
+        //         Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class);
+        //         Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class);
+        //     });
+        //     Route::get('static-taxes', SettingsGeniusTvStaticTaxesComponent::class);
+        //     Route::get('channels-taxes', SettingsGeniusTvChannelsTaxesComponent::class);
+        //     Route::get('channel-packages', SettingsGeniusTvChannelPackagesTaxesComponent::class);
+        //     Route::get('offer-taxes', SettingsGeniusTvOfferTaxesComponent::class);
+        //     Route::get('discounts', SettingsGeniusTvDiscountsComponent::class);
+        //     Route::get('invoices', SettingsGeniusTvInvoicesComponent::class);
+        // });
 
         Route::prefix('channels')->group(function () {
             Route::get('restart', SettingsChannelsRestartComponent::class);
