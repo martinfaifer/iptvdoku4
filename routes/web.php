@@ -23,7 +23,6 @@ use App\Livewire\Settings\Notifications\Slack\SettingsSlackNotificationComponent
 use App\Livewire\Settings\Geniustv\OfferTaxes\SettingsGeniusTvOfferTaxesComponent;
 use App\Livewire\Settings\Devices\Distributors\SettingsDevicesDistributorsComponent;
 use App\Livewire\Settings\Geniustv\StaticTaxes\SettingsGeniusTvStaticTaxesComponent;
-use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsHboComponent;
 use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationComponent;
 use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
 use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
