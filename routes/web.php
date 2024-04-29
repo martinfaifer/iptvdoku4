@@ -61,10 +61,10 @@ Route::middleware('auth')->group(function () {
             Route::get('isps-channel-packages-to-tags', SettingsTagToChannelPackageComponent::class);
         });
         Route::prefix('geniustv')->group(function () {
-            Route::prefix('statistics')->group(function () {
-                Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class);
-                Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class);
-            });
+            // Route::prefix('statistics')->group(function () {
+            //     Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class);
+            //     Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class);
+            // });
             Route::get('static-taxes', SettingsGeniusTvStaticTaxesComponent::class);
             Route::get('channels-taxes', SettingsGeniusTvChannelsTaxesComponent::class);
             Route::get('channel-packages', SettingsGeniusTvChannelPackagesTaxesComponent::class);
