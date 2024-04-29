@@ -10,7 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class DeleteStreamFromIptvDohledJob implements ShouldQueue
+class GetChannelsInformationsFromIptvDohledJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -27,12 +27,21 @@ class DeleteStreamFromIptvDohledJob implements ShouldQueue
      */
     public function handle(): void
     {
-        (new ConnectService(
-            endpointType: 'delete-stream',
+        $response  = (new ConnectService(
+            endpointType: 'get-stream-by-ip',
             params: str_contains($this->ip, ':1234') ? $this->ip : $this->ip . ':1234'
-        ))->connect();
+        ))->connect(cacheKey: $this->ip);
 
-        // remove stream from table
-        IptvDohledUrl::where('stream_url', $this->ip)->delete();
+        if ($response['status'] == "success") {
+            if (!IptvDohledUrl
+                ::where('iptv_dohled_id', $response['data']['streamId'])
+                ->where('stream_url', $this->ip)
+                ->first()) {
+                IptvDohledUrl::create([
+                    'iptv_dohled_id' => $response['data']['streamId'],
+                    'stream_url' => $this->ip
+                ]);
+            }
+        }
     }
 }

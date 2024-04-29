@@ -20,24 +20,21 @@
                     {{-- list of multicast datas --}}
                     @foreach ($multicasts as $multicast)
                         <div wire:key='multicast_{{ $multicast->id }}'
-                            class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold text-[#A3ABB8]">
+                            class="grid grid-cols-12 font-semibold text-[#A3ABB8]">
                             <div class="col-span-12 md:col-span-3">
-                                <div class="lg:flex">
-                                    <p>
-                                        <span class="font-normal">
-                                            Zdrojová IP:
-                                        </span>
-                                        <span class="ml-3">
-                                            {{ $multicast->source_ip }}
-                                        </span>
-                                        @if ($this->isInIptvDohledDohled($multicast->source_ip))
-                                            <x-badge class="bg-green-800 rounded-md text-white text-xs italic"
-                                                value="Dohleduje se" />
-                                        @endif
-                                    </p>
-                                </div>
+                                <p>
+                                    <span class="font-normal">
+                                        Zdrojová IP:
+                                    </span>
+                                    <span @class([
+                                        'ml-3',
+                                        'text-green-500' => $this->isInIptvDohledDohled($multicast->source_ip),
+                                    ])>
+                                        {{ $multicast->source_ip }}
+                                    </span>
+                                </p>
                             </div>
-                            <div class="col-span-12 md:col-span-3 sm:inline-flex">
+                            <div class="col-span-12 md:col-span-3">
                                 <p>
                                     <span class="font-normal">
                                         Zdroj:
@@ -48,20 +45,17 @@
                                 </p>
                             </div>
                             <div class="md:col-span-3 col-span-12">
-                                <div class="lg:flex">
-                                    <p>
-                                        <span class="font-normal">
-                                            STB IP:
-                                        </span>
-                                        <span class="ml-3">
-                                            {{ $multicast->stb_ip }}
-                                        </span>
-                                        @if ($this->isInIptvDohledDohled($multicast->stb_ip))
-                                            <x-badge class="bg-green-800 rounded-md text-white text-xs italic"
-                                                value="Dohleduje se" />
-                                        @endif
-                                    </p>
-                                </div>
+                                <p>
+                                    <span class="font-normal">
+                                        STB IP:
+                                    </span>
+                                    <span @class([
+                                        'ml-3',
+                                        'text-green-500' => $this->isInIptvDohledDohled($multicast->stb_ip),
+                                    ])">
+                                        {{ $multicast->stb_ip }}
+                                    </span>
+                                </p>
                             </div>
                             <div class="col-span-12 md:col-span-2">
                                 <p>
@@ -169,12 +163,13 @@
                             <div>
                                 <x-button label="Změnit"
                                     class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                                    type="submit" spinner="save2" />
+                                    type="submit" spinner="update" />
                             </div>
                         </div>
                     </x-form>
-
                 </x-modal>
+
+
             </div>
             <div class="col-span-12 md:col-span-4">
                 <livewire:notes.note-component column="channel_id" :id="$channel->id" lazy />

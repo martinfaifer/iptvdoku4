@@ -16,7 +16,7 @@ class FlowEyeMenuIconWithAlertComponent extends Component
         $this->is_alert();
     }
 
-    #[On('echo:floweye_active_tickets,FlowEyeActiveTicketsEvent')]
+    #[On('echo:floweye_active_tickets,BroadcastFlowEyeTicketsEvent')]
     public function is_alert()
     {
         if (Cache::has('floweye_active_tickets_count')) {

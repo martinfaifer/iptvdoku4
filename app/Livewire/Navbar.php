@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use App\Traits\Calendar\RunningEventsTrait;
@@ -33,7 +34,7 @@ class Navbar extends Component
     {
         $this->runningEvents = $this->running_events();
         $this->user = Auth::user();
-        $this->weather = $this->get_weather();
+        $this->load_weather();
         $this->refreshAlerts();
 
         // check if is running some events to notify in frontEnd
@@ -43,6 +44,12 @@ class Navbar extends Component
                 $this->calendarNotificationDialog = true;
             }
         }
+    }
+
+    #[On('echo:refresh_weather,BroadcastWeatherInformationEvent')]
+    public function load_weather()
+    {
+        $this->weather = $this->get_weather();
     }
 
     public function openAlertDrawer()
@@ -69,6 +76,16 @@ class Navbar extends Component
     {
         session(['calendarNotificationDialog' => 'seen']);
         return $this->calendarNotificationDialog = false;
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return $this->redirect('/', true);
     }
 
     public function render()

@@ -1,3 +1,13 @@
+@php
+    function stringTimeParseToDayMonthYear(string $stringTime)
+    {
+        $explodedString = explode('T', $stringTime);
+        $explodedDate = explode('-', $explodedString[0]);
+        $explodedTime = explode('+', $explodedString[1]);
+
+        return $explodedTime[0] . ' ' . $explodedDate[2] . '.' . $explodedDate[1] . ' ' . $explodedDate[0];
+    }
+@endphp
 <div class="overflow-hidden">
     <div class="flex flex-col">
         @if (is_null($ticket))
@@ -5,11 +15,29 @@
                 <x-share.alerts.info title="Vyberte ticket z menu vlevo"></x-share.alerts.info>
             </div>
         @else
+            {{-- {{ dd($ticket) }} --}}
             <div class="grid grid-cols-12">
                 <div class="col-span-12">
                     <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
                         <a href="{{ $ticket['url'] }}" target="_blank" class="hover:underline">
                             {{ strip_tags($ticket['current_step']['inbox']) }}</a>
+                        <div class="absolute right-10 -mt-8">
+                            @if (!array_key_exists('resitel', $ticket))
+                                <div class="tooltip tooltip-bottom" data-tip="Volný úkol">
+                                    <div
+                                        class="text-xs inline-flex items-center font-semibold leading-sm px-3 py-1 bg-red-600 text-neutral-200 rounded-md w-18 h-5">
+                                        Bez řešitele
+                                    </div>
+                                </div>
+                            @else
+                                <div class="tooltip tooltip-bottom" data-tip="řešitel">
+                                    <div
+                                        class="text-xs inline-flex items-center font-semibold leading-sm px-3 py-1 bg-green-600 text-neutral-200 rounded-md w-18 h-5">
+                                        {{ $ticket['resitel']['data']['email'] }}
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
                     </h1>
                 </div>
             </div>
@@ -63,7 +91,7 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="text-xs text-end font-thin px-2 pb-2">
-                                                    {{ $discussion['created_at'] }}
+                                                    {{ stringTimeParseToDayMonthYear($discussion['created_at']) }}
                                                 </div>
                                             </div>
                                         </div>
@@ -88,7 +116,7 @@
                                                     {{ $discussion['message'] }}
                                                 </div>
                                                 <div class="text-xs text-end font-thin px-2 pb-2">
-                                                    {{ $discussion['created_at'] }}
+                                                    {{ stringTimeParseToDayMonthYear($discussion['created_at']) }}
                                                 </div>
                                             </div>
                                         </div>

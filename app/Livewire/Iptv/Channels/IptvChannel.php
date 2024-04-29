@@ -26,6 +26,6 @@ class IptvChannel extends Component
 
     public function render()
     {
-        return view('livewire.iptv.channels.iptv-channel');
+        return view('livewire.iptv.channels.iptv-channel')->title($this->channel?->name);
     }
 }

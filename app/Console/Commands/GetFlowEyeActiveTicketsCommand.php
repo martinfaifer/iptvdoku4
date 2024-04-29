@@ -4,8 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
-use App\Services\Api\FlowEye\ConnectService;
 use Illuminate\Support\Facades\Broadcast;
+use App\Events\BroadcastFlowEyeTicketsEvent;
+use App\Services\Api\FlowEye\ConnectService;
 
 class GetFlowEyeActiveTicketsCommand extends Command
 {
@@ -35,7 +36,7 @@ class GetFlowEyeActiveTicketsCommand extends Command
             formData: [
                 'templateId' => config('services.api.8.floweye.template_id'),
                 'state' => is_null($status) ? "active" : "complete",
-                'include' => "template,currentStep,discussion,variables(detail,ticket,resolver)",
+                'include' => "template,currentStep,discussion,variables(detail,ticket,resolver,attached_files)",
                 'limit' => 100,
                 'variables' => json_encode([
                     'department_choosed' => config('services.api.8.floweye.department')
@@ -52,7 +53,11 @@ class GetFlowEyeActiveTicketsCommand extends Command
                     if ($ticket['current_step']['sid'] != "closed") {
                         // find user which resolving task
                         if ($ticket['current_step']['resolver'] != null) {
-                            $ticket['resitel'] = $ticket['current_step']['resolver']['id'];
+                            $ticket['resitel'] = (new ConnectService(
+                                endpointType: 'user',
+                                formData: null,
+                                params: $ticket['current_step']['resolver']['id']
+                            ))->connect();
                         }
                         $tickets['data'][] = $ticket;
                     }
@@ -63,9 +68,10 @@ class GetFlowEyeActiveTicketsCommand extends Command
             // store how many tickets left
             Cache::put('floweye_active_tickets_count', count($tickets['data']), 3600);
 
-            Broadcast::on('floweye_active_tickets')
-                ->as('FlowEyeActiveTicketsEvent')
-                ->send();
+            BroadcastFlowEyeTicketsEvent::dispatch();
+            // Broadcast::on('floweye_active_tickets')
+            //     ->as('FlowEyeActiveTicketsEvent')
+            //     ->send();
         }
     }
 }

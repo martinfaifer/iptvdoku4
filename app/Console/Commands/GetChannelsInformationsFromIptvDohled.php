@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\GetChannelsInformaetionsFromIptvDohledJob;
+use App\Jobs\GetChannelsInformationsFromIptvDohledJob;
 use App\Models\ChannelMulticast;
 use App\Models\ChannelQualityWithIp;
 use Illuminate\Console\Command;
 
-class GetChannelsInformaetionsFromIptvDohled extends Command
+class GetChannelsInformationsFromIptvDohled extends Command
 {
     /**
      * The name and signature of the console command.
@@ -31,13 +31,13 @@ class GetChannelsInformaetionsFromIptvDohled extends Command
         // multicasts
         ChannelMulticast::get()->each(function ($multicast) {
             if (!is_null($multicast->stb_ip)) {
-                GetChannelsInformaetionsFromIptvDohledJob::dispatch($multicast->stb_ip);
+                GetChannelsInformationsFromIptvDohledJob::dispatch($multicast->stb_ip);
             }
         });
 
         // h264s && h265s
         ChannelQualityWithIp::get()->each(function ($unicast) {
-            GetChannelsInformaetionsFromIptvDohledJob::dispatch($unicast->ip);
+            GetChannelsInformationsFromIptvDohledJob::dispatch($unicast->ip);
         });
     }
 }

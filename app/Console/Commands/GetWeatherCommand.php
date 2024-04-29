@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\BroadcastWeatherInformationEvent;
 use App\Models\WeatherCity;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
@@ -43,6 +44,9 @@ class GetWeatherCommand extends Command
 
             // send notification if need to be
             $weatherService->notify_if_necessary($separatedWeather['description']);
+
+            // broadcast information to frontend
+            BroadcastWeatherInformationEvent::dispatch();
         });
     }
 }

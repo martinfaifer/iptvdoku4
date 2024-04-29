@@ -3,9 +3,10 @@
 namespace App\Observers;
 
 use App\Jobs\LogJob;
-use App\Models\ChannelMulticast;
 use App\Models\Loger;
+use App\Models\ChannelMulticast;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\DeleteStreamFromIptvDohledJob;
 
 class MulticastChannelObserver
 {
@@ -51,6 +52,9 @@ class MulticastChannelObserver
 
     public function deleted(ChannelMulticast $multicast)
     {
+        DeleteStreamFromIptvDohledJob::dispatch($multicast->stb_ip);
+        DeleteStreamFromIptvDohledJob::dispatch($multicast->source_ip);
+
         LogJob::dispatch(
             user: Auth::user()->email,
             type: Loger::DELETED_TYPE,

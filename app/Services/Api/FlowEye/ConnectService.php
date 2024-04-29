@@ -22,6 +22,11 @@ class ConnectService
             'method' => "get",
             'endpoint' => "v1/template-processes",
             'formData' => null
+        ],
+        'user' => [
+            'method' => "get",
+            'endpoint' => "v1/users/%params%",
+            'formData' => null
         ]
     ];
 
@@ -63,5 +68,10 @@ class ConnectService
         }
 
         return [];
+    }
+
+    public function get_user()
+    {
+
     }
 }

@@ -3,9 +3,17 @@
         <li @class([
             'ml-1',
             'rounded-lg',
+            'bg-sky-950' => request()->is('settings/dashboard'),
+        ]) href="/settings/dashboard" wire:navigate><a>
+                <x-heroicon-o-square-3-stack-3d class="size-4" />
+                Přehled
+            </a></li>
+        <li @class([
+            'ml-1',
+            'rounded-lg',
             'bg-sky-950' => request()->is('settings/tags'),
         ]) href="/settings/tags" wire:navigate><a>
-                <x-heroicon-s-tag class="w-4 h-4" />
+                <x-heroicon-o-tag class="w-4 h-4" />
                 Štítky
             </a></li>
         <li @class([
@@ -29,7 +37,7 @@
                         'rounded-lg',
                         'bg-sky-950' => request()->is('settings/devices/vendors'),
                     ]) href="/settings/devices/vendors" wire:navigate><a>
-                            <x-heroicon-o-device-tablet class="size-4"/>
+                            <x-heroicon-o-device-tablet class="size-4" />
                             Výrobci zařízení
                         </a></li>
                     <li @class([
@@ -37,7 +45,7 @@
                         'rounded-lg',
                         'bg-sky-950' => request()->is('settings/devices/distributors'),
                     ]) href="/settings/devices/distributors" wire:navigate><a>
-                            <x-heroicon-o-credit-card class="size-4"/>
+                            <x-heroicon-o-credit-card class="size-4" />
                             Distributoři sat. caret
                         </a></li>
                 </ul>
@@ -55,7 +63,7 @@
                         'rounded-lg',
                         'bg-sky-950' => request()->is('settings/notifications/slack'),
                     ]) href="/settings/notifications/slack" wire:navigate><a>
-                            <x-heroicon-o-bell-alert class="size-4"/>
+                            <x-heroicon-o-bell-alert class="size-4" />
                             Slack
                         </a></li>
                     <li @class([
@@ -107,7 +115,7 @@
                         'rounded-lg',
                         'bg-sky-950' => request()->is('settings/nangu/isps'),
                     ]) href="/settings/nangu/isps" wire:navigate><a>
-                            <x-heroicon-s-tv class="w-4 h-4" />
+                            <x-heroicon-o-tv class="w-4 h-4" />
                             ISP
                         </a></li>
 
@@ -116,9 +124,10 @@
                         'rounded-lg',
                         'bg-sky-950' => request()->is(
                             'settings/nangu/isps-channel-packages-to-tags'),
-                    ]) href="/settings/nangu/isps-channel-packages-to-tags" wire:navigate>
+                    ]) href="/settings/nangu/isps-channel-packages-to-tags"
+                        wire:navigate>
                         <a>
-                            <x-heroicon-s-user-group class="size-4" />
+                            <x-heroicon-o-user-group class="size-4" />
                             Správa balíčků
                         </a>
                     </li>
@@ -144,7 +153,8 @@
                                     'ml-1',
                                     'rounded-lg',
                                     'bg-sky-950' => request()->is('settings/geniustv/statistics/hbo'),
-                                ]) href="/settings/geniustv/statistics/hbo" wire:navigate>
+                                ]) href="/settings/geniustv/statistics/hbo"
+                                    wire:navigate>
                                     <a>
                                         <x-heroicon-o-chart-pie class="size-4" />
                                         HBO

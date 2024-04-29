@@ -3,10 +3,11 @@
 namespace App\Observers;
 
 use App\Jobs\LogJob;
-use App\Models\ChannelQualityWithIp;
 use App\Models\H264;
 use App\Models\Loger;
+use App\Models\ChannelQualityWithIp;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\DeleteStreamFromIptvDohledJob;
 
 class ChannelQualityWithIpObserver
 {
@@ -65,6 +66,8 @@ class ChannelQualityWithIpObserver
         if (!is_null($channelQualityWithIp->h265_id)) {
             $item = 'h265:' . H264::find($channelQualityWithIp->h265_id)->channel_id;
         }
+
+        DeleteStreamFromIptvDohledJob::dispatch($channelQualityWithIp->ip);
 
         LogJob::dispatch(
             user: Auth::user()->email,

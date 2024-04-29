@@ -18,34 +18,35 @@
                 <x-share.cards.base-card title="Informace o unicastu">
                     {{-- list of multicast datas --}}
                     @foreach ($h264 as $unicast)
-                        <div class="flex flex-col gap-4 sm:grid sm:grid-cols-12 text-white/80 font-semibold text-[#A3ABB8]">
-                            <div class="flex justify-between md:col-span-12">
-                                <p>
-                                    <span class="font-normal">
-                                        {{ $unicast['quality']['name'] }}p:
-                                    </span>
-                                    <span class="ml-3">
-                                        {{ $unicast['ip'] }}
-                                    </span>
-                                    <span class="ml-3 font-thin text-xs italic">
-                                        {{ $unicast['quality']['bitrate'] }}kbps
-                                    </span>
-                                    @if ($this->isInIptvDohledDohled($unicast['ip']))
-                                        <span>
-                                            <x-badge class="bg-green-800 rounded-md text-white/80 text-xs italic"
-                                                value="Dohleduje se" />
-                                        </span>
-                                    @endif
-                                </p>
-                                <div class="sm:col-span-1 -mt-2">
-                                    <button class="btn btn-sm btn-circle bg-transparent border-none"
-                                        wire:click='edit({{ $unicast['id'] }})'>
-                                        <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />
-                                    </button>
-                                    <button class="btn btn-sm btn-circle bg-transparent border-none"
-                                        wire:click='destroy({{ $unicast['id'] }})' wire:confirm="Opravdu odebrat?">
-                                        <x-heroicon-m-trash class="w-4 h-4 text-red-500" />
-                                    </button>
+                        <div class="grid grid-cols-12 gap-4 text-white/80 font-semibold text-[#A3ABB8]">
+                            <div class="col-span-12">
+                                <div class="grid grid-cols-12 gap-4">
+                                    <div class="col-span-10">
+                                        <p>
+                                            <span class="font-normal">
+                                                {{ $unicast['quality']['name'] }}p:
+                                            </span>
+                                            <span @class([
+                                                'ml-3',
+                                                'text-green-500' => $this->isInIptvDohledDohled($unicast['ip']),
+                                            ])>
+                                                {{ $unicast['ip'] }}
+                                            </span>
+                                            <span class="ml-3 font-thin text-xs italic">
+                                                {{ $unicast['quality']['bitrate'] }}kbps
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="col-span-2 -mt-2">
+                                        <button class="btn btn-sm btn-circle bg-transparent border-none"
+                                            wire:click='edit({{ $unicast['id'] }})'>
+                                            <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />
+                                        </button>
+                                        <button class="btn btn-sm btn-circle bg-transparent border-none"
+                                            wire:click='destroy({{ $unicast['id'] }})' wire:confirm="Opravdu odebrat?">
+                                            <x-heroicon-m-trash class="w-4 h-4 text-red-500" />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -139,8 +140,9 @@
             @endif
 
             @foreach ($h264 as $unicast)
-                <div wire:key="unicast-{{ $unicast['ip']}}" class="col-span-12 mb-4 gap-4">
-                    <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component ip="{{ $unicast['ip'] }}">
+                <div wire:key="unicast-{{ $unicast['ip'] }}" class="col-span-12 mb-4 gap-4">
+                    <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
+                        ip="{{ $unicast['ip'] }}">
                 </div>
             @endforeach
         </div>

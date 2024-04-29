@@ -11,6 +11,8 @@ class FlowEyeComponent extends Component
 
     public array|null $ticket = null;
 
+    public string $title = "IPTV dokumentace";
+
     public function mount()
     {
         $this->ticket_detail();
@@ -24,16 +26,19 @@ class FlowEyeComponent extends Component
 
                 foreach ($tickets['data'] as $ticket) {
                     if ($ticket['id'] == $this->issue) {
-                        return $this->ticket = $ticket;
+                        $this->ticket = $ticket;
                         break;
                     }
                 }
+
+                $this->title = strip_tags($this->ticket['current_step']['inbox']);
             }
         }
     }
 
     public function render()
     {
-        return view('livewire.iptv.flow-eye.flow-eye-component');
+        return view('livewire.iptv.flow-eye.flow-eye-component')
+            ->title($this->title);
     }
 }
