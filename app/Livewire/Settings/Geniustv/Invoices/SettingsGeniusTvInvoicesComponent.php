@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Livewire\Settings\GeniusTv\Invoices;
 
 use Livewire\Component;
