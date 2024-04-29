@@ -11,12 +11,12 @@ use App\Livewire\Settings\Channels\Banners\SettingsChannelsBannersComponent;
 use App\Livewire\Settings\Channels\Restart\SettingsChannelsRestartComponent;
 use App\Livewire\Settings\Devices\Distributors\SettingsDevicesDistributorsComponent;
 use App\Livewire\Settings\Devices\Vendors\SettingsDevicesVendorsComponent;
-use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
-use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
-use App\Livewire\Settings\Geniustv\Discounts\SettingsGeniusTvDiscountsComponent;
+use App\Livewire\Settings\GeniusTv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
+use App\Livewire\Settings\GeniusTv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
+use App\Livewire\Settings\GeniusTv\Discounts\SettingsGeniusTvDiscountsComponent;
 use App\Livewire\Settings\GeniusTv\Invoices\SettingsGeniusTvInvoicesComponent;
-use App\Livewire\Settings\Geniustv\OfferTaxes\SettingsGeniusTvOfferTaxesComponent;
-use App\Livewire\Settings\Geniustv\StaticTaxes\SettingsGeniusTvStaticTaxesComponent;
+use App\Livewire\Settings\GeniusTv\OfferTaxes\SettingsGeniusTvOfferTaxesComponent;
+use App\Livewire\Settings\GeniusTv\StaticTaxes\SettingsGeniusTvStaticTaxesComponent;
 use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
 use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsHboComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
@@ -60,18 +60,18 @@ Route::middleware('auth')->group(function () {
             Route::get('isps', SettingsIspComponent::class);
             Route::get('isps-channel-packages-to-tags', SettingsTagToChannelPackageComponent::class);
         });
-        // Route::prefix('geniustv')->group(function () {
-        //     Route::prefix('statistics')->group(function () {
-        //         Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class);
-        //         Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class);
-        //     });
-        //     Route::get('static-taxes', SettingsGeniusTvStaticTaxesComponent::class);
-        //     Route::get('channels-taxes', SettingsGeniusTvChannelsTaxesComponent::class);
-        //     Route::get('channel-packages', SettingsGeniusTvChannelPackagesTaxesComponent::class);
-        //     Route::get('offer-taxes', SettingsGeniusTvOfferTaxesComponent::class);
-        //     Route::get('discounts', SettingsGeniusTvDiscountsComponent::class);
-        //     Route::get('invoices', SettingsGeniusTvInvoicesComponent::class);
-        // });
+        Route::prefix('geniustv')->group(function () {
+            Route::prefix('statistics')->group(function () {
+                Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class);
+                Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class);
+            });
+            Route::get('static-taxes', SettingsGeniusTvStaticTaxesComponent::class);
+            Route::get('channels-taxes', SettingsGeniusTvChannelsTaxesComponent::class);
+            Route::get('channel-packages', SettingsGeniusTvChannelPackagesTaxesComponent::class);
+            Route::get('offer-taxes', SettingsGeniusTvOfferTaxesComponent::class);
+            Route::get('discounts', SettingsGeniusTvDiscountsComponent::class);
+            Route::get('invoices', SettingsGeniusTvInvoicesComponent::class);
+        });
 
         Route::prefix('channels')->group(function () {
             Route::get('restart', SettingsChannelsRestartComponent::class);
