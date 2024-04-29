@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
         });
         Route::prefix('geniustv')->group(function () {
             Route::prefix('statistics')->group(function () {
-                Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class);
+                // Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class);
                 Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class);
             });
             Route::get('static-taxes', SettingsGeniusTvStaticTaxesComponent::class);
