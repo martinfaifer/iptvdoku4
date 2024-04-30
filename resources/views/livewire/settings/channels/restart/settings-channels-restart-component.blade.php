@@ -16,7 +16,7 @@
     }
 
     $devicesWithBoundOnTagAction = App\Models\TagOnItem::onlyDevicesWithTag(
-        App\Models\Tag::hasActionChannelRestart()->first()->id,
+        App\Models\Tag::hasActionChannelRestart()->first()?->id,
     )->get();
     foreach ($devicesWithBoundOnTagAction as $deviceIdWithBoundOnTagAction) {
         array_push(
