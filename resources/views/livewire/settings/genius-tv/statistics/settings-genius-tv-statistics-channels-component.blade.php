@@ -6,7 +6,7 @@
         </div>
         {{-- channels per isp with dropdown menu? --}}
         <div class="col-span-12 md:col-span-6">
-            {{-- <livewire:settings.genius-tv.statistics.settings-genius-tv-statistics-for-channels-per-isp-component lazy></livewire:settings.genius-tv.statistics.settings-genius-tv-statistics-for-channels-per-isp-component> --}}
+            <livewire:settings.geniustv.statistics.settings-genius-tv-statistics-for-channels-per-isp-component lazy></livewire:settings.geniustv.statistics.settings-genius-tv-statistics-for-channels-per-isp-component>
         </div>
     </div>
 </div>
