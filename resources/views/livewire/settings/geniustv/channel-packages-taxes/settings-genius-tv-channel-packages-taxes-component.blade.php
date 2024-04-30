@@ -29,7 +29,7 @@
                     @endforeach
                 @endscope
                 @scope('cell_exception', $channelPackagesTax)
-                    @if (!is_null($channelPackagesTax->exception))
+                    @if (!is_null($channelPackagesTax->exception) || empty($channelPackagesTax->exception))
                         @foreach (json_decode($channelPackagesTax->exception) as $exception_id)
                             @php
                                 $exception = null;
