@@ -29,11 +29,10 @@
                     @endforeach
                 @endscope
                 @scope('cell_exception', $channelPackagesTax)
-                    @if (!is_null($channelPackagesTax->exception) || $channelPackagesTax->exception != "")
+                    @if ($channelPackagesTax->exception != '')
                         @foreach (json_decode($channelPackagesTax->exception) as $exception_id)
                             @php
                                 $exception = null;
-
                                 $exception = App\Models\Channel::find($exception_id);
                             @endphp
                             @if (!is_null($exception))
