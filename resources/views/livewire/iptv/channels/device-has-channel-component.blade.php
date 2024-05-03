@@ -36,8 +36,7 @@
                 </div>
             @endif
 
-            @if (!is_null($nmsCahedData))
-                @dd($nmsCahedData)
+            @if (!is_null($nmsCahedData) || !empty($nmsCahedData))
                 <div class="flex justify-between md:col-span-6">
                     <div>
                         <span>
