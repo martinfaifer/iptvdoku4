@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class NanguSubscription extends Model
 {
@@ -28,6 +29,11 @@ class NanguSubscription extends Model
     public function subscriber(): BelongsTo
     {
         return $this->belongsTo(NanguSubscriber::class, 'nangu_subscriber_id', 'id');
+    }
+
+    public function accountCodes(): HasMany
+    {
+        return $this->hasMany(NanguStbAccountCode::class, 'nangu_subscription_code_id', 'id');
     }
 
     public function scopeIsBilling(Builder $query)

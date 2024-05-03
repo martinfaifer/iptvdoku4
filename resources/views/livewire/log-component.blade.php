@@ -40,7 +40,7 @@
     </x-share.cards.base-card>
 
     <x-modal wire:model="detailModal" title="Provedené změny">
-        <div class="my-4">
+        <div class="my-4 overflow-y-auto h-96">
             <div>
                 <pre>
                     <code>

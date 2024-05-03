@@ -9,6 +9,7 @@ use App\Livewire\Iptv\FlowEye\FlowEyeComponent;
 use App\Livewire\Iptv\Sftps\SftpComponent;
 use App\Livewire\Settings\Channels\Banners\SettingsChannelsBannersComponent;
 use App\Livewire\Settings\Channels\Restart\SettingsChannelsRestartComponent;
+use App\Livewire\Settings\Dashboard\SettingsDashboardComponent;
 use App\Livewire\Settings\Devices\Distributors\SettingsDevicesDistributorsComponent;
 use App\Livewire\Settings\Devices\Vendors\SettingsDevicesVendorsComponent;
 use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
@@ -54,6 +55,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('settings')->group(function () {
         Route::get('', SettingsTagComponent::class);
+        Route::get('dashboard', SettingsDashboardComponent::class);
         Route::get('tags', SettingsTagComponent::class);
         Route::get('users', SettingsUsersComponent::class);
         Route::prefix('nangu')->group(function () {
