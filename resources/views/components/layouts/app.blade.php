@@ -119,7 +119,7 @@
                     </x-menu>
                     {{-- main dynamic navigation --}}
                     <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 fixed !h-full">
-                        <div class="overflow-y-scroll hover:overflow-scroll">
+                        <div>
                             @if (request()->is('/') || request()->is('channels') || request()->is('channels/*'))
                                 <livewire:iptv.channels.menu.channels-menu />
                             @endif
