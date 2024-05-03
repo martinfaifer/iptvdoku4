@@ -36,30 +36,32 @@
                 </div>
             @endif
 
-            @if (!is_null($nmsCahedData) || !empty($nmsCahedData))
-                <div class="flex justify-between md:col-span-6">
-                    <div>
-                        <span>
-                            Status:
-                        </span>
-                        <span class="ml-4 inline-block">
-                            @if ($nmsCahedData[0]['nms_device_status_id']['nms_device_status_type_id'] == 1)
-                                <div class="bg-[#1EB15B] text-white text-sm font-semibold rounded-md">
-                                    <span class="mx-3">
-                                        Online
-                                    </span>
-                                </div>
-                            @endif
-                            @if ($nmsCahedData[0]['nms_device_status_id']['nms_device_status_type_id'] == 3)
-                                <div class="bg-red-500 text-white text-sm font-semibold rounded-md">
-                                    <span class="mx-3">
-                                        Offline
-                                    </span>
-                                </div>
-                            @endif
-                        </span>
+            @if (!is_null($nmsCahedData))
+                @if (!empty($nmsCahedData))
+                    <div class="flex justify-between md:col-span-6">
+                        <div>
+                            <span>
+                                Status:
+                            </span>
+                            <span class="ml-4 inline-block">
+                                @if ($nmsCahedData[0]['nms_device_status_id']['nms_device_status_type_id'] == 1)
+                                    <div class="bg-[#1EB15B] text-white text-sm font-semibold rounded-md">
+                                        <span class="mx-3">
+                                            Online
+                                        </span>
+                                    </div>
+                                @endif
+                                @if ($nmsCahedData[0]['nms_device_status_id']['nms_device_status_type_id'] == 3)
+                                    <div class="bg-red-500 text-white text-sm font-semibold rounded-md">
+                                        <span class="mx-3">
+                                            Offline
+                                        </span>
+                                    </div>
+                                @endif
+                            </span>
+                        </div>
                     </div>
-                </div>
+                @endif
             @endif
 
             @if (!is_null($device->username) || !is_null($device->password))
