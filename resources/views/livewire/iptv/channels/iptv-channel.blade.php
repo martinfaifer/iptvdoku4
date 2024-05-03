@@ -1,4 +1,4 @@
-<div class="overflow-hidden">
+<div class=" overflow-hidden">
     <div class="flex flex-col">
         {{-- create new channel --}}
         <div class="relative">
