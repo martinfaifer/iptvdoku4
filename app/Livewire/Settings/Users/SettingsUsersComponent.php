@@ -25,7 +25,7 @@ class SettingsUsersComponent extends Component
         return $this->createModal = true;
     }
 
-    public function closeModal()
+    public function closeDialog()
     {
         return $this->createModal = false;
     }
