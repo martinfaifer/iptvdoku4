@@ -37,7 +37,7 @@
 
 {{-- bg-gradient-to-b from-[#020313] --}}
 
-<body class="bg-gradient-to-r from-slate-900 to-sky-950 min-h-screen">
+<body class="bg-gradient-to-r from-slate-900 to-sky-950 ">
     <x-toast />
     @auth
         <x-spotlight search-text="Vyhledejte ... " no-results-text="Ops! Nenalezeno." class="justify-center"

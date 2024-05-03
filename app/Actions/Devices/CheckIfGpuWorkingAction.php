@@ -15,7 +15,6 @@ class CheckIfGpuWorkingAction
 
     public function __invoke()
     {
-        echo $this->device->name.PHP_EOL;
         try {
             $commandResponse = (new ConnectService(
                 ip: $this->device->ip,
