@@ -114,7 +114,7 @@ class UpdateDeviceForm extends Form
         $this->username = $device->username;
         $this->password = $device->password;
         $this->is_snmp = $device->is_snmp;
-        $this->snmp_version = ! is_null($device->snmp_version) ? DeviceSnmp::where('name', $device->snmp_version)->first()->id : null;
+        $this->snmp_version = ! is_null($device->snmp_version) ? DeviceSnmp::where('name', $device->snmp_version)->first()?->id : null;
         $this->snmp_private_comunity = $device->snmp_private_comunity;
         $this->snmp_public_comunity = $device->snmp_public_comunity;
     }
