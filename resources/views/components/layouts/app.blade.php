@@ -62,16 +62,7 @@
                                     </a>
                                 </li>
                             </div>
-                            <div class="tooltip tooltip-bottom" data-tip="Zařízení">
-                                <li href="/devices" wire:navigate @class([
-                                    'rounded-lg',
-                                    'bg-[#1A1E2A]' => request()->is('devices') || request()->is('devices/*'),
-                                ])>
-                                    <a>
-                                        <x-sui-flip-view class="size-6 text-white" fill="none" />
-                                    </a>
-                                </li>
-                            </div>
+                          <livewire:iptv.devices.menu.device-menu-icon-with-alert-component />
                             <div class="tooltip tooltip-bottom" data-tip="Satelitní karty">
                                 <li href="/sat-cards" wire:navigate @class([
                                     'rounded-lg',

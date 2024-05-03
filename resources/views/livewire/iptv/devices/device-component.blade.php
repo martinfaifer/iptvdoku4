@@ -249,10 +249,14 @@
                     @endif
                 </div>
 
-                {{-- device ssh --}}
                 <div class="grid grid-cols-12 gap-4">
+                    {{-- device ssh --}}
                     <div class="col-span-12 md:col-span-6 mb-4">
                         <livewire:iptv.devices.device-ssh-component :device="$device" />
+                    </div>
+                    {{-- device alerts component --}}
+                    <div class="col-span-12 md:col-span-6 mb-4">
+                        <livewire:iptv.devices.device-alert-component :device="$device" />
                     </div>
                 </div>
 
