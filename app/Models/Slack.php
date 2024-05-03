@@ -34,6 +34,11 @@ class Slack extends Model
         return $query->where('action', 'weather_notification');
     }
 
+    public function scopeGpuProblemNotificationAction(Builder $query)
+    {
+        return $query->where('action', 'gpu_problem_notification');
+    }
+
     public function scopeSearch(Builder $query, string $search = '')
     {
         return $query->where('description', 'like', '%'.$search.'%')->orWhere('url', 'like', '%'.$search.'%');

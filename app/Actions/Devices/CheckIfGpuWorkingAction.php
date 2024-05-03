@@ -3,8 +3,10 @@
 namespace App\Actions\Devices;
 
 use App\Models\Alert;
+use App\Models\Slack;
 use App\Models\Device;
 use App\Services\Api\Ssh\ConnectService;
+use App\Actions\Slack\SendSlackNotificationAction;
 
 class CheckIfGpuWorkingAction
 {
@@ -25,22 +27,38 @@ class CheckIfGpuWorkingAction
             if (str_contains($commandResponse, 'CUDA')) {
                 Alert::where('type', 'gpu_problem')->where('item_id', $this->device->id)->delete();
             } else {
-                if (! Alert::where('type', 'gpu_problem')->where('item_id', $this->device->id)->first()) {
+                if (!Alert::where('type', 'gpu_problem')->where('item_id', $this->device->id)->first()) {
                     Alert::create([
                         'type' => 'gpu_problem',
                         'item_id' => $this->device->id,
-                        'message' => 'Zařízení '.$this->device->name.' nefunguje GPU',
+                        'message' => 'Zařízení ' . $this->device->name . ' nefunguje GPU',
                     ]);
+                }
+                if (Slack::gpuProblemNotificationAction()->first()) {
+                    foreach (Slack::gpuProblemNotificationAction()->get() as $slack) {
+                        (new SendSlackNotificationAction(
+                            text: 'Zařízení ' . $this->device->name . ' nefunguje GPU',
+                            url: $slack->url
+                        ))();
+                    }
                 }
             }
         } catch (\Throwable $th) {
             // not logged in
-            echo $this->device->name.' not logged in'.PHP_EOL;
             Alert::create([
                 'type' => 'gpu_check_failed',
                 'item_id' => $this->device->id,
-                'message' => 'Nepodařilo se přihlásit do '.$this->device->name,
+                'message' => 'Nepodařilo se přihlásit do ' . $this->device->name,
             ]);
+            // send alert to slack
+            if (Slack::gpuProblemNotificationAction()->first()) {
+                foreach (Slack::gpuProblemNotificationAction()->get() as $slack) {
+                    (new SendSlackNotificationAction(
+                        text: 'Nepodařilo se přihlásit do ' . $this->device->name,
+                        url: $slack->url
+                    ))();
+                }
+            }
         }
     }
 }
