@@ -12,26 +12,143 @@
 <div>
     <div class="grid grid-cols-12 gap-2">
         <div class="col-span-12 md:col-span-2">
-            <x-stat class="!bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50" title="Kanály"
-                value="{{ $channels }}" icon="o-tv" color="text-[#A6ADBB]" tooltip="Celkové množství kanálů" />
+            <div
+                class="rounded-lg px-5 py-4  w-full lg:tooltip lg:tooltip-top !bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50">
+                <div class="flex items-center gap-4">
+                    <div class="  text-[#A6ADBB]">
+                        <x-heroicon-o-tv class="size-9 inline" />
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xs text-gray-500 whitespace-nowrap">Kanály</div>
+                        <div class="font-black text-xl text-[#A6ADBB]">{{ $channels }}</div>
+                    </div>
+                    <div class="right-2 fixed">
+                        <x-button class="bg-transparent hover:bg-[#0A2941] text-white w-full md:w-auto"
+                            wire:click="export_channels">
+                            <x-heroicon-o-arrow-down-tray class="size-4 inline" />
+                            <div wire:loading wire:target="export_channels">
+                                <span class="loading loading-spinner loading-md"></span>
+                            </div>
+                        </x-button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-span-12 md:col-span-2">
-            <x-stat class="!bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50" title="H264"
-                value="{{ $h264s }}" icon="o-tv" color="text-[#A6ADBB]" tooltip="Celkové množství H264" />
+            <div
+                class="rounded-lg px-5 py-4  w-full lg:tooltip lg:tooltip-top !bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50">
+
+                <div class="flex items-center gap-4">
+                    <div class="  text-[#A6ADBB]">
+                        <x-heroicon-o-tv class="size-9 inline" />
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xs text-gray-500 whitespace-nowrap">Multicasty</div>
+                        <div class="font-black text-xl text-[#A6ADBB]">{{ $multicasts }}</div>
+                    </div>
+                    <div class="right-2 fixed">
+                        <x-button class="bg-transparent hover:bg-[#0A2941] text-white w-full md:w-auto"
+                            wire:click="export_multicasts">
+                            <x-heroicon-o-arrow-down-tray class="size-4 inline" />
+                            <div wire:loading wire:target="export_multicasts">
+                                <span class="loading loading-spinner loading-md"></span>
+                            </div>
+                        </x-button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-span-12 md:col-span-2">
-            <x-stat class="!bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50" title="H265"
-                value="{{ $h265s }}" icon="o-tv" color="text-[#A6ADBB]" tooltip="Celkové množství H265" />
+            <div
+                class="rounded-lg px-5 py-4  w-full lg:tooltip lg:tooltip-top !bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50">
+                <div class="flex items-center gap-4">
+                    <div class="  text-[#A6ADBB]">
+                        <x-heroicon-o-tv class="size-9 inline" />
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xs text-gray-500 whitespace-nowrap">H264</div>
+                        <div class="font-black text-xl text-[#A6ADBB]">{{ $h264s }}</div>
+                    </div>
+                    <div class="right-2 fixed">
+                        <x-button class="bg-transparent hover:bg-[#0A2941] text-white w-full md:w-auto"
+                            wire:click="export_h264s">
+                            <x-heroicon-o-arrow-down-tray class="size-4 inline" />
+                            <div wire:loading wire:target="export_h264s">
+                                <span class="loading loading-spinner loading-md"></span>
+                            </div>
+                        </x-button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-span-12 md:col-span-2">
-            <x-stat class="!bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50" title="Zařízení"
-                value="{{ $devices }}" icon="o-device-tablet" color="text-[#A6ADBB]"
-                tooltip="Celkové množství zařízeních" />
+            <div
+                class="rounded-lg px-5 py-4  w-full lg:tooltip lg:tooltip-top !bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50">
+                <div class="flex items-center gap-4">
+                    <div class="  text-[#A6ADBB]">
+                        <x-heroicon-o-tv class="size-9 inline" />
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xs text-gray-500 whitespace-nowrap">H265</div>
+                        <div class="font-black text-xl text-[#A6ADBB]">{{ $h265s }}</div>
+                    </div>
+                    <div class="right-2 fixed">
+                        <x-button class="bg-transparent hover:bg-[#0A2941] text-white w-full md:w-auto"
+                            wire:click="export_h265s">
+                            <x-heroicon-o-arrow-down-tray class="size-4 inline" />
+                            <div wire:loading wire:target="export_h265s">
+                                <span class="loading loading-spinner loading-md"></span>
+                            </div>
+                        </x-button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-span-12 md:col-span-2">
-            <x-stat class="!bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50" title="Karty"
-                value="{{ $satCards }}" icon="o-credit-card" color="text-[#A6ADBB]"
-                tooltip="Celkové množství satelitních karet" />
+            <div
+                class="rounded-lg px-5 py-4  w-full lg:tooltip lg:tooltip-top !bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50">
+                <div class="flex items-center gap-4">
+                    <div class="  text-[#A6ADBB]">
+                        <x-heroicon-o-tv class="size-9 inline" />
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xs text-gray-500 whitespace-nowrap">Zařízení</div>
+                        <div class="font-black text-xl text-[#A6ADBB]">{{ $devices }}</div>
+                    </div>
+                    <div class="right-2 fixed">
+                        <x-button class="bg-transparent hover:bg-[#0A2941] text-white w-full md:w-auto"
+                            wire:click="export_devices">
+                            <x-heroicon-o-arrow-down-tray class="size-4 inline" />
+                            <div wire:loading wire:target="export_devices">
+                                <span class="loading loading-spinner loading-md"></span>
+                            </div>
+                        </x-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 md:col-span-2">
+            <div
+                class="rounded-lg px-5 py-4  w-full lg:tooltip lg:tooltip-top !bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50">
+                <div class="flex items-center gap-4">
+                    <div class="  text-[#A6ADBB]">
+                        <x-heroicon-o-tv class="size-9 inline" />
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xs text-gray-500 whitespace-nowrap">Karty</div>
+                        <div class="font-black text-xl text-[#A6ADBB]">{{ $satCards }}</div>
+                    </div>
+                    <div class="right-2 fixed">
+                        <x-button class="bg-transparent hover:bg-[#0A2941] text-white w-full md:w-auto"
+                            wire:click="export_sat_cards">
+                            <x-heroicon-o-arrow-down-tray class="size-4 inline" />
+                            <div wire:loading wire:target="export_sat_cards">
+                                <span class="loading loading-spinner loading-md"></span>
+                            </div>
+                        </x-button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

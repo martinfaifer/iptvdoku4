@@ -8,9 +8,16 @@ use Livewire\Component;
 use App\Models\NanguIsp;
 use App\Models\WikiTopic;
 use Livewire\Attributes\On;
+use App\Exports\H264sExport;
+use App\Exports\H265sExport;
 use Livewire\Attributes\Url;
 use App\Models\GeniusTvChart;
+use App\Exports\ChannelsExport;
+use App\Exports\DevicesExport;
+use App\Exports\MulticastsExport;
+use App\Exports\SatelitCardsExport;
 use Livewire\Attributes\Computed;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Traits\Devices\CountDevicesTrait;
 use App\Traits\Channels\CountChannelsTrait;
 use Illuminate\Database\Eloquent\Collection;
@@ -20,6 +27,7 @@ class SettingsDashboardComponent extends Component
     use CountChannelsTrait, CountDevicesTrait;
 
     public int $channels = 0;
+    public int $multicasts = 0;
     public int $h264s = 0;
     public int $h265s = 0;
     public int $devices = 0;
@@ -39,7 +47,8 @@ class SettingsDashboardComponent extends Component
 
     public function mount()
     {
-        $this->channels = $this->count_multicasts();
+        $this->channels = $this->count_channels();
+        $this->multicasts = $this->count_multicasts();
         $this->h264s = $this->count_h264s();
         $this->h265s = $this->count_h265s();
         $this->devices = $this->count_devices();
@@ -75,6 +84,36 @@ class SettingsDashboardComponent extends Component
             'labels' => $chartLables,
             'data' => $data
         ];
+    }
+
+    public function export_channels()
+    {
+        return Excel::download(new ChannelsExport, 'channels.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function export_multicasts()
+    {
+        return Excel::download(new MulticastsExport, 'multicasts.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function export_h264s()
+    {
+        return Excel::download(new H264sExport, 'h264s.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function export_h265s()
+    {
+        return Excel::download(new H265sExport, 'h265s.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function export_devices()
+    {
+        return Excel::download(new DevicesExport, 'devices.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function export_sat_cards()
+    {
+        return Excel::download(new SatelitCardsExport, 'satelit_cards.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
     public function render()

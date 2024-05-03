@@ -2,12 +2,18 @@
 
 namespace App\Traits\Channels;
 
+use App\Models\Channel;
 use App\Models\ChannelMulticast;
 use App\Models\H264;
 use App\Models\H265;
 
 trait CountChannelsTrait
 {
+    public function count_channels(): int
+    {
+        return Channel::count();
+    }
+
     public function count_multicasts(): int
     {
         return ChannelMulticast::count();
