@@ -132,7 +132,7 @@
                                 Profil
                             </a>
                         </li>
-                        <li><a href="/settings" wire:navigate>Nastavení</a></li>
+                        <li><a href="/settings/dashboard" wire:navigate>Nastavení</a></li>
                         <li wire:click='logout()'><a>Odhlásit se</a></li>
                     </ul>
                 </div>
