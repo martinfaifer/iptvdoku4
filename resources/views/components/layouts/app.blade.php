@@ -46,7 +46,7 @@
         <livewire:alert-component>
         @endauth
 
-        <x-main full-width>
+        <x-main full-width class="no-scrollbar">
             @auth
                 <x-slot:sidebar
                     class="bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] border-opacity-10 !w-[320px]">
@@ -145,7 +145,7 @@
                     </x-menu>
                 </x-slot:sidebar>
             @endauth
-            <x-slot:content class="mt-14 overflow-hidden">
+            <x-slot:content class="mt-14 no-scrollbar">
                 @auth
                     @persist('navbar')
                         <livewire:navbar></livewire:navbar>
