@@ -92,8 +92,22 @@
                                     <hr
                                         class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 @endif
+                                @if (!is_null($device->ipmi_ip) && !empty($device->ipmi_ip))
+                                <div class="flex justify-between sm:col-span-4">
+                                    <p>
+                                        <span class="font-normal">
+                                            IPMI:
+                                        </span>
+                                        <span class="ml-3">
+                                            {{ $device->ipmi_ip }}
+                                        </span>
+                                    </p>
+                                </div>
+                                <hr
+                                    class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                            @endif
                                 @if (!is_null($device->controller_ip))
-                                    <div class="flex justify-between sm:col-span-12 sm:inline-flex">
+                                    <div class="flex justify-between md:col-span-12 sm:inline-flex">
                                         <p>
                                             <span class="font-normal">
                                                 URL kontroleru:
@@ -104,10 +118,10 @@
                                         </p>
                                     </div>
                                     <hr
-                                        class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                                        class="md:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 @endif
                                 @if (!is_null($device->username) || !is_null($device->password))
-                                    <div class="flex justify-between sm:col-span-4 sm:inline-flex">
+                                    <div class="flex justify-between md:col-span-4 sm:inline-flex">
                                         <p>
                                             <span class="font-normal">
                                                 Přístupy:

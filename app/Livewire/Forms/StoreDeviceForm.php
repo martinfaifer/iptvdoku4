@@ -16,6 +16,8 @@ class StoreDeviceForm extends Form
 
     public $ip;
 
+    public $ipmi_ip;
+
     public $controller_ip;
 
     public $username;
@@ -44,6 +46,9 @@ class StoreDeviceForm extends Form
             ],
             'ip' => [
                 'nullable', 'string', 'max:255', 'unique:devices,ip',
+            ],
+            'ipmi_ip' => [
+                'nullable', 'string', 'max:255', 'unique:devices,ipmi_ip',
             ],
             'controller_ip' => [
                 'nullable', 'string', 'max:255',
@@ -87,6 +92,10 @@ class StoreDeviceForm extends Form
             'ip.max' => 'Maxmální počet znaků je :max',
             'ip.unique' => 'IP již existuje u jiného zařízení',
 
+            'ipmi_ip.string' => 'Neplatný formát',
+            'ipmi_ip.max' => 'Maxmální počet znaků je :max',
+            'ipmi_ip.unique' => 'IP již existuje u jiného zařízení',
+
             'controller_ip.string' => 'Neplatný formát',
             'controller_ip.max' => 'Maximální počet znaků je :max',
 
@@ -110,6 +119,7 @@ class StoreDeviceForm extends Form
             'device_category_id' => $this->device_category_id,
             'device_vendor_id' => $this->device_vendor_id,
             'ip' => $this->ip,
+            'ipmi_ip' => $this->ipmi_ip,
             'controller_ip' => $this->controller_ip,
             'username' => $this->username,
             'password' => $this->password,

@@ -33,7 +33,7 @@ class SettingsUsersComponent extends Component
     public function create()
     {
         $this->form->create();
-        $this->closeModal();
+        $this->closeDialog();
 
         $this->redirect(url()->previous(), true);
 

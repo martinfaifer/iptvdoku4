@@ -31,6 +31,7 @@ class Device extends Model
         'template',
         'showed_create_template',
         'has_channels',
+        'ipmi_ip'
     ];
 
     protected $casts = [

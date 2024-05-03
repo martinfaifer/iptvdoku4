@@ -32,7 +32,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-6 mb-4">
+                <div class="col-span-4 mb-4">
                     <x-input label="IP" wire:model="form.ip" />
                     <div>
                         @error('ip')
@@ -41,7 +41,16 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 mb-4">
+                <div class="col-span-4 mb-4">
+                    <x-input label="IPMI" wire:model="form.ipmi_ip" />
+                    <div>
+                        @error('ipmi_ip')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-span-4 mb-4">
                     <x-input label="Url kontroleru" wire:model="form.controller_ip" />
                     <div>
                         @error('controller_ip')
