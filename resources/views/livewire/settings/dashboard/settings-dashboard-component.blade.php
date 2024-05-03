@@ -3,7 +3,10 @@
         ['key' => 'title', 'label' => 'Titulek', 'class' => 'text-white/80'],
         ['key' => 'creator', 'label' => 'Autor', 'class' => 'text-white/80'],
     ];
-    $newestUsersHeader = [['key' => 'email', 'label' => 'Email', 'class' => 'text-white/80']];
+    $newestUsersHeader = [
+        ['key' => 'email', 'label' => 'Email', 'class' => 'text-white/80'],
+        ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+    ];
     $passedEventsHeader = [
         ['key' => 'label', 'label' => 'Titulek', 'class' => 'text-white/80'],
         ['key' => 'creator', 'label' => 'Autor', 'class' => 'text-white/80'],
@@ -157,7 +160,12 @@
         <div class="col-span-12 md:col-span-4">
             <x-share.cards.base-card title="Nejnovější články wiki">
                 <div class=" h-48 overflow-auto">
-                    <x-table :headers="$newestWikiTopicsHeader" :rows="$newestTopics" />
+                    <x-table :headers="$newestWikiTopicsHeader" :rows="$newestTopics">
+                        @scope('cell_title', $topic)
+                            <a class="text-[#226393] hover:underline" href="/wiki/{{ $topic->id }}"
+                                wire:navigate>{{ $topic->title }}</a>
+                        @endscope
+                    </x-table>
                 </div>
             </x-share.cards.base-card>
         </div>
@@ -165,7 +173,8 @@
         <div class="col-span-12 md:col-span-4">
             <x-share.cards.base-card title="Nejnovější uživatelé">
                 <div class=" h-48 overflow-auto">
-                    <x-table :headers="$newestUsersHeader" :rows="$newestUsers" />
+                    <x-table :headers="$newestUsersHeader" :rows="$newestUsers">
+                    </x-table>
                 </div>
             </x-share.cards.base-card>
         </div>
@@ -178,6 +187,8 @@
             </x-share.cards.base-card>
         </div>
     </div>
+
+
     <div class="grid grid-cols-12 gap-4 mt-8">
         {{-- dropdown for nanguIsps --}}
         <div class="col-span-12 ">
