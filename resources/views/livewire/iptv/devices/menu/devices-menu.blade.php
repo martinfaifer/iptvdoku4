@@ -57,9 +57,13 @@
             let url = window.location.href;
             let parsedUrl = url.split("/");
 
-            document
-                .getElementById('device_' + parsedUrl.slice(-1))
-                .scrollIntoView({});
+            try {
+                document
+                    .getElementById('device_' + parsedUrl.slice(-1))
+                    .scrollIntoView({});
+            } catch (error) {
+
+            }
         </script>
     @endscript
 </div>

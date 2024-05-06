@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Prunable;
 
 class Loger extends Model
 {
+    use Prunable;
+
     const CREATED_TYPE = 'created';
 
     const UPDATED_TYPE = 'updated';
@@ -18,4 +22,9 @@ class Loger extends Model
         'item', // device:id , multicast:id ...
         'payload', // content
     ];
+
+    public function prunable(): Builder
+    {
+        return static::where('created_at', '<=', now()->submonths(2));
+    }
 }

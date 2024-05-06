@@ -34,10 +34,13 @@
         <script>
             let url = window.location.href;
             let parsedUrl = url.split("/");
+            try {
+                document
+                    .getElementById('topic_' + parsedUrl.slice(-1))
+                    .scrollIntoView({});
+            } catch (error) {
 
-            document
-                .getElementById('topic_' + parsedUrl.slice(-1))
-                .scrollIntoView({});
+            }
         </script>
     @endscript
 </div>

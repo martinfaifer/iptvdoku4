@@ -37,8 +37,12 @@
         let parsedUrl = url.split("/");
         let lastTwo = parsedUrl.slice(-2)
 
-        document
-            .getElementById('channel_' + lastTwo.slice(-2, 1))
-            .scrollIntoView({});
+        try {
+            document
+                .getElementById('channel_' + lastTwo.slice(-2, 1))
+                .scrollIntoView({});
+        } catch (error) {
+
+        }
     </script>
 @endscript

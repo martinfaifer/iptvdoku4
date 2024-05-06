@@ -12,6 +12,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('model:prune')->daily();
+        $schedule->command('horizon:clear')->daily();
+        $schedule->command('php artisan queue:flush')->daily();
+
         $schedule->command('channel:restart')->dailyAt('03:00');
 
         $schedule->command('calendar:start-daily-event')->daily();
@@ -45,7 +49,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

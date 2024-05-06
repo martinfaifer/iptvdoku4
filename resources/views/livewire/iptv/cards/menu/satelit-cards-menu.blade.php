@@ -49,9 +49,13 @@
             let url = window.location.href;
             let parsedUrl = url.split("/");
 
-            document
-                .getElementById('satcard_' + parsedUrl.slice(-1))
-                .scrollIntoView({});
+            try {
+                document
+                    .getElementById('satcard_' + parsedUrl.slice(-1))
+                    .scrollIntoView({});
+            } catch (error) {
+
+            }
         </script>
     @endscript
 </div>
