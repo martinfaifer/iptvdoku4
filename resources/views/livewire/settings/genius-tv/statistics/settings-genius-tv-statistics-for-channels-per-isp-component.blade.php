@@ -1,11 +1,11 @@
 <div>
     <x-share.cards.base-card title="Využití kanálů per poskytovatel">
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12 sm:col-span-9 ">
+            <div class="col-span-6 md:col-span-9 ">
                 <x-input placeholder="Vyhledejte ..." wire:model.live="query"
                     class="!bg-[#0F151F] input-md placeholder:text-gray-600" icon="o-magnifying-glass" autofocus />
             </div>
-            <div class="col-span-12 sm:col-span-3">
+            <div class="col-span-6 md:col-span-3">
                 {{--  --}}
             </div>
         </div>

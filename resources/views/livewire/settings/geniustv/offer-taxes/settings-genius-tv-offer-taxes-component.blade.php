@@ -1,13 +1,13 @@
 <div>
     <x-share.cards.base-card title="">
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-7 md:col-span-9 ">
+            <div class="col-span-6 md:col-span-9 ">
                 <x-input placeholder="Vyhledejte ..." wire:model.live="query"
                     class="!bg-[#0F151F] input-md placeholder:text-gray-600" icon="o-magnifying-glass" autofocus />
             </div>
-            <div class="col-span-5 sm:col-span-3">
+            <div class="col-span-6 sm:col-span-3">
                 <x-button
-                    class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm mt-2 absolute right-10"
+                    class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm mt-2 absolute right-5 md:right-10"
                     wire:click="openCreateModal">
                     + Nový poplatek za offer
                 </x-button>

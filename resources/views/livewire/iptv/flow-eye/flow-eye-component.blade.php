@@ -15,13 +15,12 @@
                 <x-share.alerts.info title="Vyberte ticket z menu vlevo"></x-share.alerts.info>
             </div>
         @else
-            {{-- {{ dd($ticket) }} --}}
             <div class="grid grid-cols-12">
                 <div class="col-span-12">
                     <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
                         <a href="{{ $ticket['url'] }}" target="_blank" class="hover:underline">
                             {{ strip_tags($ticket['current_step']['inbox']) }}</a>
-                        <div class="absolute right-10 -mt-8">
+                        <div class="absolute right-10 -mt-16 md:-mt-8">
                             @if (!array_key_exists('resitel', $ticket))
                                 <div class="tooltip tooltip-bottom" data-tip="Volný úkol">
                                     <div

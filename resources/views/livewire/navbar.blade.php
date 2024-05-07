@@ -42,13 +42,10 @@
             <label for="main-drawer" class="lg:hidden mr-3">
                 <x-icon name="o-bars-3" class="cursor-pointer" />
             </label>
-
-            {{-- <x-heroicon-o-bars-3 wire:click='openSidebar()' class="lg:hidden size-6" /> --}}
         </div>
         <div class="flex-none gap-4">
             <div class="form-control">
-                <input @click.stop="$dispatch('mary-search-open')" type="text"
-                    placeholder="Vyhledejte ... ctrl+space"
+                <input @click.stop="$dispatch('mary-search-open')" type="text" placeholder="Vyhledejte ... ctrl+space"
                     class="input input-bordered input-sm bg-opacity-20 text-white placeholder:text-xs w-24 md:w-auto" />
             </div>
             <div>
@@ -75,7 +72,7 @@
                     </div>
                     @if (!empty($weather))
                         <div tabindex="0"
-                            class="card compact dropdown-content z-[1] shadow bg-[#0c111b] rounded-box w-96">
+                            class="hidden md:block card compact dropdown-content z-[1] shadow bg-[#0c111b] rounded-box w-96">
                             <div tabindex="0" class="card-body">
                                 <div class="grid grid-cols-12 gap-4">
                                     <div class="col-span-12">

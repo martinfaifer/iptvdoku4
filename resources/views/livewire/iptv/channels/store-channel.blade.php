@@ -1,5 +1,5 @@
 <div>
-    <button class="btn bg-[#082f49] btn-sm border-none" wire:click="$toggle('storeModal')">
+    <button class="btn bg-[#082f49] btn-xs md:btn-sm border-none" wire:click="$toggle('storeModal')">
         <x-heroicon-o-plus-circle class="w-5 h-5" />
         Přidat kanál
     </button>

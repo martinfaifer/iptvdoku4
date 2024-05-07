@@ -84,7 +84,7 @@
         <div>
             <button class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-1 text-red-500"
                 wire:click='delete' wire:confirm='Opravdu odebrat šablonu?'>
-                <x-heroicon-s-trash class="w-4 h-4" />
+                <x-heroicon-s-trash class="size-4" />
             </button>
         </div>
         @if ($hasCharts)
@@ -93,7 +93,7 @@
                 </div>
                 <div class="flex-none">
                     <button class="btn btn-sm text-slate-200 bg-[#1E293B]" wire:click='loadCharts()'>
-                        <x-heroicon-s-chart-bar class="h-4 w-4" />
+                        <x-heroicon-s-chart-bar class="size-4" />
                         Zobrazit grafy</button>
                 </div>
             </div>
@@ -179,7 +179,7 @@
                         <div class="grid grid-cols-12 gap-4 min-h-20 ">
                             @foreach ($interfacesData as $interfaceKey => $interface)
                                 {{-- clickable --}}
-                                <div class="col-span-6 md:col-span-3 mb-4 overflow-scroll h-96">
+                                <div class="col-span-12 md:col-span-3 mb-4 overflow-scroll h-96">
                                     <div
                                         class=" bg-[#082F49] rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm hadow-md shadow-slate-900/50">
                                         <div class="card-body text-gray-200 text-sm cursor-pointer"
@@ -235,7 +235,7 @@
                         <div class="grid grid-cols-12 gap-4 min-h-20">
                             @foreach ($interfacesData as $interfaceKey => $interface)
                                 <div @class([
-                                    'mb-4 overflow-scroll col-span-6',
+                                    'mb-4 overflow-scroll col-span-12',
                                     'md:col-span-2' => count($interfacesData) > 4,
                                     'md:col-span-3' => count($interfacesData) <= 4,
                                 ])>

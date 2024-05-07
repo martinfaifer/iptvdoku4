@@ -1,6 +1,5 @@
 <div>
     @if (!is_null($channelDataOnIptvDohled))
-        {{-- @dd($channelDataOnIptvDohled) --}}
         <div class="flex mb-4">
             <hr
                 class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
@@ -17,10 +16,11 @@
                                 class="object-cover h-48 w-96 rounded-md" />
                         @endif
                     </div>
-                    <div class="col-span-12 sm:col-span-9">
+                    {{-- hide on mobile --}}
+                    <div class="hidden md:block col-span-12 sm:col-span-9">
                         <div class="grid grid-cols-12 gap-4">
                             {{-- common informartion about stream from dohled --}}
-                            <div class="col-span-12 sm:col-span-4">
+                            <div class="col-span-12 md:col-span-4">
                                 <p class="text-center font-semibold">
                                     Obecné informace
                                 </p>
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                             @if ($channelDataOnIptvDohled['data']['streamStatus'] != 'stopped')
-                                <div class="col-span-12 sm:col-span-4 gap-4">
+                                <div class="col-span-12 md:col-span-4 gap-4">
                                     <p class="text-center font-semibold">
                                         Informace o servisách ve streamu
                                     </p>
@@ -102,7 +102,7 @@
                                 </div>
                             @endif
                             {{-- history of stream --}}
-                            <div class="col-span-12 sm:col-span-4">
+                            <div class="col-span-12 md:col-span-4">
                                 <p class="text-center font-semibold">
                                     Historie
                                 </p>
@@ -151,15 +151,19 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="grid grid-cols-12 gap-4 text-[#A3ABB8]">
                     <div class="col-span-12">
                         <x-share.lines.visible-small-hr></x-share.lines.visible-small-hr>
+                    </div>
+                    <div class="col-span-12">
                         <div class="mt-2">
                             <p class="text-center font-semibold">
                                 Informace o audiu
                             </p>
                             <div class="grid grid-cols-12 gap-4 mt-2">
                                 @foreach ($channelDataOnIptvDohled['data']['audioPids'] as $audioPid)
-                                    <div class="col-span-2">
+                                    <div class="col-span-12 md:col-span-2">
                                         <span>
                                             Pid:
                                         </span>
@@ -167,7 +171,7 @@
                                             {{ $audioPid['pid'] }}
                                         </span>
                                     </div>
-                                    <div class="col-span-2">
+                                    <div class="col-span-12 md:col-span-2">
                                         <span>
                                             Datový tok:
                                         </span>
@@ -175,7 +179,7 @@
                                             {{ $audioPid['bitrate'] }}
                                         </span>
                                     </div>
-                                    <div class="col-span-2">
+                                    <div class="col-span-12 md:col-span-2">
                                         <span>
                                             Scrambled:
                                         </span>
@@ -183,7 +187,7 @@
                                             {{ $audioPid['scrambled'] }}
                                         </span>
                                     </div>
-                                    <div class="col-span-2">
+                                    <div class="col-span-12 md:col-span-2">
                                         <span>
                                             Discontinuity:
                                         </span>
@@ -191,7 +195,7 @@
                                             {{ $audioPid['discontinuities'] }}
                                         </span>
                                     </div>
-                                    <div class="col-span-4">
+                                    <div class="col-span-12 md:col-span-4">
                                         <span class="">
                                             Popis:
                                         </span>
@@ -204,7 +208,7 @@
                             </div>
                             <div class="grid grid-cols-12 gap-4 mt-2">
                                 @foreach ($channelDataOnIptvDohled['data']['audioCharts'] as $audioChart)
-                                    <div class="col-span-4">
+                                    <div class="col-span-12 md:col-span-4">
                                         <livewire:charts.line-chart-component :xaxis="$audioChart['xaxis']" :yaxis="$audioChart['seriesData']"
                                             label="Datový tok v Mbps">
                                     </div>
@@ -220,7 +224,7 @@
                             </p>
                             <div class="grid grid-cols-12 gap-4 mt-2">
                                 @foreach ($channelDataOnIptvDohled['data']['videoPids'] as $videoPid)
-                                    <div class="col-span-2">
+                                    <div class="col-span-12 md:col-span-2">
                                         <span>
                                             Pid:
                                         </span>
@@ -228,7 +232,7 @@
                                             {{ $videoPid['pid'] }}
                                         </span>
                                     </div>
-                                    <div class="col-span-2">
+                                    <div class="col-span-12 md:col-span-2">
                                         <span>
                                             Datový tok:
                                         </span>
@@ -236,7 +240,7 @@
                                             {{ $videoPid['bitrate'] }}
                                         </span>
                                     </div>
-                                    <div class="col-span-2">
+                                    <div class="col-span-12 md:col-span-2">
                                         <span>
                                             Scrambled:
                                         </span>
@@ -244,7 +248,7 @@
                                             {{ $videoPid['is-scrambled'] }}
                                         </span>
                                     </div>
-                                    <div class="col-span-2">
+                                    <div class="col-span-12 md:col-span-2">
                                         <span>
                                             Discontinuity:
                                         </span>
@@ -252,7 +256,7 @@
                                             {{ $videoPid['discontinuities'] }}
                                         </span>
                                     </div>
-                                    <div class="col-span-4">
+                                    <div class="col-span-12 md:col-span-4">
                                         <span class="">
                                             Popis:
                                         </span>
@@ -267,7 +271,7 @@
                             </div>
                             <div class="grid grid-cols-12 gap-4 mt-2">
                                 @foreach ($channelDataOnIptvDohled['data']['videoCharts'] as $videoChart)
-                                    <div class="col-span-4">
+                                    <div class="col-span-12 md:col-span-4">
                                         <livewire:charts.line-chart-component :xaxis="$videoChart['xaxis']" :yaxis="$videoChart['seriesData']"
                                             label="Datový tok v Mbps" wire:poll.30s>
                                     </div>

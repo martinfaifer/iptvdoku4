@@ -1,5 +1,5 @@
 <div>
-    <table class="table table-sm text-white w-full text-[#A3ABB8]">
+    <table class="table table-xs md:table-sm w-full text-[#A3ABB8]">
         <!-- head -->
         <thead>
             <tr>

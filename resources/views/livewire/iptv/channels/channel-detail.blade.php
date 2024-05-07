@@ -1,5 +1,5 @@
 <div wire.poll.5s>
-    <div class="tooltip tooltip-left absolute mt-6 right-8" data-tip="informace o kanálu">
+    <div class="tooltip tooltip-left absolute mt-7 md:mt-6 md:right-10" data-tip="informace o kanálu">
         <label wire:click='openChannelDetailDrawer' class="btn btn-sm bg-transparent border-none" label="Bottom"
             tooltip-bottom="Detail o kanálu">
             <x-heroicon-o-information-circle class="w-6 h-6 text-sky-500" />

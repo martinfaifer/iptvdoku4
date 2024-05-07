@@ -2,7 +2,7 @@
     <x-share.cards.base-card title="Historie">
         <div class="h-44">
             <div class="overflow-x-auto">
-                <table class="table table-sm w-full text-[#A3ABB8]">
+                <table class="table table-xs md:table-sm w-full text-[#A3ABB8]">
                     <thead>
                         <tr>
                             <th></th>
