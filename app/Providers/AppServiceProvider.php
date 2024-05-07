@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\ServiceProvider;
+use App\Models\User;
 use Laravel\Fortify\Fortify;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
     {
         // Model::shouldBeStrict();
         JsonResource::withoutWrapping();
+        Gate::define('viewPulse', function (User $user) {
+            return $user->email == 'martinfaifer@gmail.com';
+        });
         // Fortify::loginView(function() {
         //     return view('livewire.auth.login');
         // });
