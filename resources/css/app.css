@@ -7,7 +7,8 @@
 }
 
 :root {
-    background-color: #0e223a;
+    /* background-color: #0e223a; */
+    @apply bg-gradient-to-r from-slate-900 to-sky-950;
 }
 
 .mary-table-pagination span[aria-current="page"] > span {

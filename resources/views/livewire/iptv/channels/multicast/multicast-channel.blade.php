@@ -34,7 +34,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="col-span-12 md:col-span-3">
+                            <div class="col-span-12 md:col-span-3 mt-4 md:mt-0">
                                 <p>
                                     <span class="font-normal">
                                         Zdroj:
@@ -44,7 +44,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="md:col-span-3 col-span-12">
+                            <div class="md:col-span-3 col-span-12 mt-4 md:mt-0">
                                 <p>
                                     <span class="font-normal">
                                         STB IP:
@@ -57,7 +57,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="col-span-12 md:col-span-2">
+                            <div class="col-span-12 md:col-span-2 mt-4 md:mt-0">
                                 <p>
                                     <span class="font-normal">
                                         Typ:
@@ -75,7 +75,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="col-span-12 md:col-span-1 -mt-2">
+                            <div class="col-span-12 md:col-span-1 mt-4 md:-mt-2">
                                 <button class="btn btn-sm btn-circle bg-transparent border-none"
                                     wire:click='edit({{ $multicast->id }})'>
                                     <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />

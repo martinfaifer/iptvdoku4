@@ -39,11 +39,16 @@
     <div
         class="navbar fixed bg-gradient-to-r from-slate-900/20 to-sky-950/20 mb-1 top-0 right-0 z-10 min-h-8 backdrop-blur-xl">
         <div class="flex-1">
+            <label for="main-drawer" class="lg:hidden mr-3">
+                <x-icon name="o-bars-3" class="cursor-pointer" />
+            </label>
 
+            {{-- <x-heroicon-o-bars-3 wire:click='openSidebar()' class="lg:hidden size-6" /> --}}
         </div>
         <div class="flex-none gap-4">
             <div class="form-control">
-                <input @click.stop="$dispatch('mary-search-open')" type="text" placeholder="Vyhledejte ... ctrl+space"
+                <input @click.stop="$dispatch('mary-search-open')" type="text"
+                    placeholder="Vyhledejte ... ctrl+space"
                     class="input input-bordered input-sm bg-opacity-20 text-white placeholder:text-xs w-24 md:w-auto" />
             </div>
             <div>

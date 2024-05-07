@@ -1,12 +1,15 @@
 <div wire.poll.5s>
     <div class="tooltip tooltip-left absolute mt-6 right-8" data-tip="informace o kanálu">
-        <label  wire:click='openChannelDetailDrawer' class="btn btn-sm bg-transparent border-none" label="Bottom"
+        <label wire:click='openChannelDetailDrawer' class="btn btn-sm bg-transparent border-none" label="Bottom"
             tooltip-bottom="Detail o kanálu">
             <x-heroicon-o-information-circle class="w-6 h-6 text-sky-500" />
         </label>
     </div>
     {{-- info drawer --}}
     <x-drawer wire:model='channelDetailDrawer' separator right class="lg:w-1/4 !bg-[#0E1E33]">
+        <div class="lg:hidden">
+            <x-button class="btn btn-sm btn-circle btn-ghost bg-[#0E1E33] absolute right-2 top-2" wire:click='channelDetailDrawer = false'>✕</x-button>
+        </div>
         {{-- informations about channel quality, category, description --}}
         <div>
             <div class="col-span-12 mb-2">

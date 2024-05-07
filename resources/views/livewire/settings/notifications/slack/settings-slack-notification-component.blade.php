@@ -1,15 +1,15 @@
 <div>
     <x-share.cards.base-card title="">
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12 sm:col-span-9 ">
+            <div class="col-span-7 md:col-span-9 ">
                 <x-input placeholder="Vyhledejte ..." wire:model.live="query" class="input-md placeholder:text-gray-600"
                     icon="o-magnifying-glass" autofocus />
             </div>
-            <div class="col-span-12 sm:col-span-3">
+            <div class="col-span-5 sm:col-span-3">
                 <x-button
                     class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm mt-2 absolute right-10"
                     wire:click="openCreateModal">
-                    + Nový slack channel
+                    + Nový kanál
                 </x-button>
             </div>
         </div>
@@ -40,7 +40,7 @@
     </x-share.cards.base-card>
 
     {{-- create modal --}}
-    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
@@ -77,7 +77,7 @@
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-6">
-                    <x-input label="Url" wire:model="updateForm.url" disabled/>
+                    <x-input label="Url" wire:model="updateForm.url" disabled />
                 </div>
                 <div class="col-span-12 md:col-span-6">
                     <x-input label="Popis" wire:model="updateForm.description" />

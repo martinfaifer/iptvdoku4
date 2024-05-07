@@ -48,7 +48,7 @@
 
         <x-main full-width class="no-scrollbar">
             @auth
-                <x-slot:sidebar
+                <x-slot:sidebar drawer="main-drawer"
                     class="bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] border-opacity-10 !w-[320px]">
                     <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
                         <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
@@ -62,7 +62,7 @@
                                     </a>
                                 </li>
                             </div>
-                          <livewire:iptv.devices.menu.device-menu-icon-with-alert-component />
+                            <livewire:iptv.devices.menu.device-menu-icon-with-alert-component />
                             <div class="tooltip tooltip-bottom" data-tip="Satelitní karty">
                                 <li href="/sat-cards" wire:navigate @class([
                                     'rounded-lg',

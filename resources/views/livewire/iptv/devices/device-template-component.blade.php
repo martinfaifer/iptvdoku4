@@ -110,7 +110,7 @@
                             <div class="grid grid-cols-12 gap-4 ml-8">
                                 @foreach ($template['snmp'] as $deviceSnmpData)
                                     @if ($deviceSnmpData['type'] == 'read')
-                                        <div class="col-span-3 my-4 flex font-semibold">
+                                        <div class="col-span-12 md:col-span-3 my-4 flex font-semibold">
                                             <span class="font-normal">
                                                 {{ $deviceSnmpData['human_description'] }} :
                                             </span>
@@ -179,7 +179,7 @@
                         <div class="grid grid-cols-12 gap-4 min-h-20 ">
                             @foreach ($interfacesData as $interfaceKey => $interface)
                                 {{-- clickable --}}
-                                <div class="col-span-3 mb-4 overflow-scroll h-96">
+                                <div class="col-span-6 md:col-span-3 mb-4 overflow-scroll h-96">
                                     <div
                                         class=" bg-[#082F49] rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm hadow-md shadow-slate-900/50">
                                         <div class="card-body text-gray-200 text-sm cursor-pointer"
@@ -235,10 +235,10 @@
                         <div class="grid grid-cols-12 gap-4 min-h-20">
                             @foreach ($interfacesData as $interfaceKey => $interface)
                                 <div @class([
-                                    'mb-4 overflow-scroll',
-                                    'col-span-2' => count($interfacesData) > 4,
-                                    'col-span-3' => count($interfacesData) <= 4,
-                                ]) class="col-span-3 mb-4 overflow-scroll">
+                                    'mb-4 overflow-scroll col-span-6',
+                                    'md:col-span-2' => count($interfacesData) > 4,
+                                    'md:col-span-3' => count($interfacesData) <= 4,
+                                ])>
                                     <div
                                         class=" bg-[#082F49]
                              rounded-lg
@@ -502,7 +502,8 @@
                         {{-- action section --}}
                         <div class="flex justify-between">
                             <div>
-                                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4 border-none"
+                                <x-button label="Zavřít"
+                                    class="bg-[#334155] font-semibold w-full sm:w-28 mb-4 border-none"
                                     wire:click='closeDrawer' />
                             </div>
                             <div>
@@ -558,15 +559,17 @@
 
         <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
         <div class="grid grid-cols-12 gap-4">
-            @foreach ($charts as $chartKey => $chart)
-                <div class="col-span-6 mb-4">
-                    @php
-                        $exploded = explode(':', $chartKey);
-                        $label = $exploded[2];
-                    @endphp
-                    <livewire:charts.line-chart-component :xaxis="$chart[0]['xaxis']" :yaxis="$chart[0]['yaxis']" :label="$label">
-                </div>
-            @endforeach
+            <div class="col-span-12 mb-4 overflow-y-auto h-96">
+                @foreach ($charts as $chartKey => $chart)
+                    <div class="col-span-12 md:col-span-6 mb-4">
+                        @php
+                            $exploded = explode(':', $chartKey);
+                            $label = $exploded[2];
+                        @endphp
+                        <livewire:charts.line-chart-component :xaxis="$chart[0]['xaxis']" :yaxis="$chart[0]['yaxis']" :label="$label">
+                    </div>
+                @endforeach
+            </div>
         </div>
 
         {{-- action section --}}

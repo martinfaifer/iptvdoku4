@@ -77,9 +77,10 @@
                         'md:col-span-8' => !empty($nmsCahedData),
                     ])>
                         <x-share.cards.base-card title="Informace o zařízení">
-                            <div class="flex flex-col gap-4 md:grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
+                            {{-- ip and login block --}}
+                            <div class="grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
                                 @if (!is_null($device->ip))
-                                    <div class="flex justify-between sm:col-span-4">
+                                    <div class="col-span-12 md:col-span-4">
                                         <p>
                                             <span class="font-normal">
                                                 IP:
@@ -88,26 +89,26 @@
                                                 {{ $device->ip }}
                                             </span>
                                         </p>
+                                        <hr
+                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
-                                    <hr
-                                        class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 @endif
                                 @if (!is_null($device->ipmi_ip) && !empty($device->ipmi_ip))
-                                <div class="flex justify-between sm:col-span-4">
-                                    <p>
-                                        <span class="font-normal">
-                                            IPMI:
-                                        </span>
-                                        <span class="ml-3">
-                                            {{ $device->ipmi_ip }}
-                                        </span>
-                                    </p>
-                                </div>
-                                <hr
-                                    class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                            @endif
+                                    <div class="col-span-12 md:col-span-4">
+                                        <p>
+                                            <span class="font-normal">
+                                                IPMI:
+                                            </span>
+                                            <span class="ml-3">
+                                                {{ $device->ipmi_ip }}
+                                            </span>
+                                        </p>
+                                        <hr
+                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                                    </div>
+                                @endif
                                 @if (!is_null($device->controller_ip))
-                                    <div class="flex justify-between md:col-span-12 sm:inline-flex">
+                                    <div class="col-span-12 md:col-span-4">
                                         <p>
                                             <span class="font-normal">
                                                 URL kontroleru:
@@ -116,12 +117,12 @@
                                                 {{ $device->controller_ip }}
                                             </span>
                                         </p>
+                                        <hr
+                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
-                                    <hr
-                                        class="md:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 @endif
                                 @if (!is_null($device->username) || !is_null($device->password))
-                                    <div class="flex justify-between md:col-span-4 sm:inline-flex">
+                                    <div class="col-span-12 md:col-span-4">
                                         <p>
                                             <span class="font-normal">
                                                 Přístupy:
@@ -130,13 +131,15 @@
                                                 {{ $device->username }} / {{ $device->password }}
                                             </span>
                                         </p>
+                                        <hr
+                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
-                                    <hr
-                                        class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 @endif
+                            </div>
 
-
-                                <div class="flex justify-between sm:col-span-4 sm:inline-flex">
+                            {{-- informations about device --}}
+                            <div class="grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
+                                <div class="col-span-12 md:col-span-4">
                                     <p>
                                         <span class="font-normal">
                                             Kategorie:
@@ -145,10 +148,10 @@
                                             {{ $device->category->name }}
                                         </span>
                                     </p>
+                                    <hr
+                                        class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 </div>
-                                <hr
-                                    class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                                <div class="flex justify-between sm:col-span-4 sm:inline-flex">
+                                <div class="col-span-12 md:col-span-4 ">
                                     <p>
                                         <span class="font-normal">
                                             Výrobce:
@@ -157,14 +160,16 @@
                                             {{ $device->vendor->name }}
                                         </span>
                                     </p>
+                                    <hr
+                                        class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 </div>
-                                <hr
-                                    class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-
+                            </div>
+                            {{-- snmp block --}}
+                            <div class="grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
                                 @if ($device->is_snmp == true)
-                                    <div class="flex justify-between sm:col-span-12 sm:inline-flex">
+                                    <div class="col-span-12 md:col-span-12">
                                     </div>
-                                    <div class="flex justify-between sm:col-span-3 sm:inline-flex">
+                                    <div class="col-span-12 md:col-span-3">
                                         <p>
                                             <span class="font-normal">
                                                 SNMP:
@@ -177,12 +182,12 @@
                                                 @endif
                                             </span>
                                         </p>
+                                        <hr
+                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
-                                    <hr
-                                        class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 @endif
                                 @if (!is_null($device->snmp_version))
-                                    <div class="flex justify-between sm:col-span-3 sm:inline-flex">
+                                    <div class="col-span-12 md:col-span-3">
                                         <p>
                                             <span class="font-normal">
                                                 SNMP verze:
@@ -191,12 +196,12 @@
                                                 {{ $device->snmp_version }}
                                             </span>
                                         </p>
+                                        <hr
+                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
-                                    <hr
-                                        class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 @endif
                                 @if (!is_null($device->snmp_private_comunity))
-                                    <div class="flex justify-between sm:col-span-3 sm:inline-flex">
+                                    <div class="col-span-12 md:col-span-3">
                                         <p>
                                             <span class="font-normal">
                                                 SNMP private komunita:
@@ -205,12 +210,12 @@
                                                 {{ $device->snmp_private_comunity }}
                                             </span>
                                         </p>
+                                        <hr
+                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
-                                    <hr
-                                        class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 @endif
                                 @if (!is_null($device->snmp_public_comunity))
-                                    <div class="flex justify-between sm:col-span-3 sm:inline-flex">
+                                    <div class="col-span-12 md:col-span-3">
                                         <p>
                                             <span class="font-normal">
                                                 SNMP public komunita:
@@ -219,9 +224,9 @@
                                                 {{ $device->snmp_public_comunity }}
                                             </span>
                                         </p>
+                                        <hr
+                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
-                                    <hr
-                                        class="sm:hidden w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 @endif
                             </div>
                         </x-share.cards.base-card>

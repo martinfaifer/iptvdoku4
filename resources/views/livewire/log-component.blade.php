@@ -39,7 +39,7 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-modal wire:model="detailModal" title="Provedené změny">
+    <x-modal wire:model="detailModal" class="modal-bottom sm:modal-middle fixed" title="Provedené změny">
         <div class="my-4 overflow-y-auto h-96">
             <div>
                 <pre>
@@ -53,7 +53,7 @@
             <div>
             </div>
             <div>
-                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                <x-button label="Zavřít" class="bg-sky-800 hover:bg-sky-700 border-none text-white font-semibold w-full sm:w-28"
                     wire:click='closeModal' />
             </div>
         </div>
