@@ -27,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
         // Model::shouldBeStrict();
         JsonResource::withoutWrapping();
         Gate::define('viewPulse', function (User $user) {
-            return $user->email == 'martinfaifer@gmail.com';
+            return in_array($user->email, [
+                'martinfaifer@gmail.com', 'faifer@grapesc.cz',
+            ]);
         });
         // Fortify::loginView(function() {
         //     return view('livewire.auth.login');
