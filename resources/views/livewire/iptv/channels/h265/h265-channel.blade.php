@@ -69,6 +69,26 @@
                                     @enderror
                                 </div>
                             </div>
+                            @if ($form->isInDohled)
+                                <div class="col-span-6 mb-4">
+                                    <x-toggle label="Odebrat z dohledu" wire:model="form.delete_from_dohled" />
+                                    <div>
+                                        @error('delete_from_dohled')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endif
+                            @if (!$form->isInDohled)
+                                <div class="col-span-6 mb-4">
+                                    <x-toggle label="Přidat do dohledu" wire:model="form.to_dohled" />
+                                    <div>
+                                        @error('to_dohled')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                         {{-- action section --}}
                         <div class="flex justify-between">

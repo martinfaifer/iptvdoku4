@@ -2,19 +2,22 @@
 
 namespace App\Livewire\Settings\Users;
 
-use App\Livewire\Forms\CreateSettingsUserForm;
 use App\Models\User;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\CreateSettingsUserForm;
+use App\Livewire\Forms\UpdateSettingsUserForm;
 
 class SettingsUsersComponent extends Component
 {
     use NotificationTrait, WithPagination;
 
     public CreateSettingsUserForm $form;
+    public UpdateSettingsUserForm $editForm;
 
     public bool $createModal = false;
+    public bool $editModal = false;
 
     public $query = '';
 
@@ -27,6 +30,7 @@ class SettingsUsersComponent extends Component
 
     public function closeDialog()
     {
+        return $this->editModal = false;
         return $this->createModal = false;
     }
 
@@ -38,6 +42,29 @@ class SettingsUsersComponent extends Component
         $this->redirect(url()->previous(), true);
 
         return $this->success_alert('Uživatel vytvořen');
+    }
+
+    public function edit(User $user)
+    {
+        $this->editForm->setUser($user);
+        return $this->editModal = true;
+    }
+
+    public function update()
+    {
+        $this->editForm->update();
+
+        $this->redirect(url()->previous(), true);
+
+        return $this->success_alert('Uživatel upraven');
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        $this->redirect(url()->previous(), true);
+
+        return $this->success_alert('Uživatel odebrán');
     }
 
     public function render()

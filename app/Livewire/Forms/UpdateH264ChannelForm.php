@@ -2,20 +2,30 @@
 
 namespace App\Livewire\Forms;
 
-use App\Models\ChannelQualityWithIp;
 use Livewire\Form;
+use App\Models\ChannelQualityWithIp;
+use App\Jobs\StoreStreamToIptvDohledJob;
+use App\Jobs\DeleteStreamFromIptvDohledJob;
+use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
 
 class UpdateH264ChannelForm extends Form
 {
+    use CheckIfChannelIsInIptvDohledTrait;
+
     public ?ChannelQualityWithIp $channelQualityWithIp;
 
     public $ip = '';
+    public bool $isInDohled = false;
+
+    public bool $to_dohled = false;
+
+    public bool $delete_from_dohled = false;
 
     public function rules()
     {
         return [
             'ip' => [
-                'required', 'unique:channel_quality_with_ips,ip,'.$this->channelQualityWithIp->id,
+                'required', 'unique:channel_quality_with_ips,ip,' . $this->channelQualityWithIp->id,
             ],
         ];
     }
@@ -32,6 +42,7 @@ class UpdateH264ChannelForm extends Form
     {
         $this->channelQualityWithIp = $channelQualityWithIp;
         $this->ip = $channelQualityWithIp->ip;
+        $this->isInDohled = $this->isInIptvDohledDohled($channelQualityWithIp->ip);
     }
 
     public function update()
@@ -40,6 +51,19 @@ class UpdateH264ChannelForm extends Form
         $this->channelQualityWithIp->update([
             'ip' => $this->ip,
         ]);
+
+        if ($this->to_dohled == true) {
+            StoreStreamToIptvDohledJob::dispatch(
+                $this->channelQualityWithIp->h264->channel->name . '_h264',
+                $this->ip
+            );
+        }
+
+        if ($this->delete_from_dohled == true) {
+            DeleteStreamFromIptvDohledJob::dispatch(
+                $this->ip
+            );
+        }
         $this->reset();
     }
 }

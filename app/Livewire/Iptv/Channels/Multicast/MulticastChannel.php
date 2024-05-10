@@ -87,6 +87,7 @@ class MulticastChannel extends Component
         HTML;
     }
 
+    #[On('echo:update_multicasts.{channel.id},BroadcastUpdateMulticastEvent')]
     #[On('update_multicasts.{channel.id}')]
     public function render()
     {

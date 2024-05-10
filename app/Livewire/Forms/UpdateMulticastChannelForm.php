@@ -2,16 +2,18 @@
 
 namespace App\Livewire\Forms;
 
-use App\Jobs\DeleteStreamFromIptvDohledJob;
-use App\Jobs\StoreStreamToIptvDohledJob;
-use App\Jobs\UpdateStreamUrlInDohledIfIsItJob;
+use Livewire\Form;
 use App\Models\Channel;
 use App\Models\ChannelMulticast;
 use Illuminate\Support\Facades\Cache;
-use Livewire\Form;
+use App\Jobs\StoreStreamToIptvDohledJob;
+use App\Jobs\DeleteStreamFromIptvDohledJob;
+use App\Jobs\UpdateStreamUrlInDohledIfIsItJob;
+use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
 
 class UpdateMulticastChannelForm extends Form
 {
+    use CheckIfChannelIsInIptvDohledTrait;
     public ?ChannelMulticast $multicast;
 
     public $stb_ip;
@@ -33,7 +35,7 @@ class UpdateMulticastChannelForm extends Form
         return [
             'stb_ip' => [
                 'nullable', 'string', 'max:250',
-                'unique:channel_multicasts,stb_ip,'.$this->multicast->id,
+                'unique:channel_multicasts,stb_ip,' . $this->multicast->id,
             ],
             'source_ip' => [
                 'nullable', 'string', 'max:250',
@@ -69,12 +71,7 @@ class UpdateMulticastChannelForm extends Form
         $this->source_ip = $multicast->source_ip;
         $this->channel_source_id = $multicast->channel_source_id;
         $this->is_backup = $multicast->is_backup;
-
-        if (Cache::has($multicast->stb_ip)) {
-            $this->isInDohled = true;
-        } else {
-            $this->isInDohled = false;
-        }
+        $this->isInDohled = $this->isInIptvDohledDohled($multicast->stb_ip);
     }
 
     public function update()
@@ -86,7 +83,7 @@ class UpdateMulticastChannelForm extends Form
             UpdateStreamUrlInDohledIfIsItJob::dispatch(
                 $this->stb_ip,
                 $this->multicast->stb_ip,
-                Channel::find($this->multicast->channel_id)->name.'_multicast'
+                Channel::find($this->multicast->channel_id)->name . '_multicast'
             );
         }
 
@@ -95,7 +92,7 @@ class UpdateMulticastChannelForm extends Form
             UpdateStreamUrlInDohledIfIsItJob::dispatch(
                 $this->source_ip,
                 $this->multicast->source_ip,
-                Channel::find($this->multicast->channel_id)->name.'_multicast'
+                Channel::find($this->multicast->channel_id)->name . '_multicast'
             );
         }
 
@@ -103,14 +100,12 @@ class UpdateMulticastChannelForm extends Form
             'stb_ip' => $this->stb_ip,
             'source_ip' => $this->source_ip,
             'channel_source_id' => $this->channel_source_id,
-            'is_backup' => ChannelMulticast::where('channel_id', $this->multicast->channel_id)
-                ->where('is_backup', false)
-                ->first() ? true : $this->is_backup,
+            'is_backup' => $this->is_backup,
         ]);
 
         if ($this->to_dohled == true) {
             StoreStreamToIptvDohledJob::dispatch(
-                Channel::find($this->multicast->channel_id)->name.'_multicast',
+                Channel::find($this->multicast->channel_id)->name . '_multicast',
                 $this->stb_ip
             );
         }

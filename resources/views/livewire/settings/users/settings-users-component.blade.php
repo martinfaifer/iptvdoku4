@@ -2,8 +2,8 @@
     <x-share.cards.base-card title="">
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-6 md:col-span-9 ">
-                <x-input placeholder="Vyhledejte ..." wire:model.live="query"
-                    class="input-md placeholder:text-gray-600" icon="o-magnifying-glass" autofocus />
+                <x-input placeholder="Vyhledejte ..." wire:model.live="query" class="input-md placeholder:text-gray-600"
+                    icon="o-magnifying-glass" autofocus />
             </div>
             <div class="col-span-6 md:col-span-3">
                 <x-button
@@ -16,7 +16,20 @@
 
         <div>
             <x-table :headers="$headers" :rows="$users">
-
+                @scope('cell_actions', $user)
+                    <div class="flex mx-auto gap-4">
+                        <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
+                            wire:click="edit({{ $user->id }})">
+                            <x-heroicon-o-pencil class="size-4 text-green-500" />
+                        </button>
+                        @if (Auth::user()->id != $user->id)
+                            <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
+                                wire:click="destroy({{ $user->id }})" wire:confirm="Opravdu odebrat uživatele?">
+                                <x-heroicon-o-trash class="w-4 h-4 text-red-500" />
+                            </button>
+                        @endif
+                    </div>
+                @endscope
             </x-table>
         </div>
     </x-share.cards.base-card>
@@ -62,6 +75,43 @@
                     <x-button label="Přidat"
                         class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
                         type="submit" spinner="save2" />
+                </div>
+            </div>
+        </x-form>
+    </x-modal>
+    {{-- edit modal --}}
+    <x-modal wire:model="editModal" persistent class="modal-bottom sm:modal-middle fixed">
+        <x-form wire:submit="update">
+            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                wire:click='closeDialog'>✕</x-button>
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-input label="Jméno" wire:model="editForm.first_name" />
+                    <div>
+                        @error('first_name')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-input label="Příjmení" wire:model="editForm.last_name" />
+                    <div>
+                        @error('last_name')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            {{-- action section --}}
+            <div class="flex justify-between">
+                <div>
+                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                        wire:click='closeDialog' />
+                </div>
+                <div>
+                    <x-button label="Upravit"
+                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
+                        type="submit" spinner="update" />
                 </div>
             </div>
         </x-form>
