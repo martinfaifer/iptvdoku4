@@ -49,10 +49,11 @@
                 class="w-full h-1 mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
             <div class="mt-4">
                 <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-12">
+                    {{-- information about card --}}
+                    <div class="col-span-12 md:col-span-6">
                         <x-share.cards.base-card title="Informace o kartě">
-                            <div class="flex flex-col gap-4 md:grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
-                                <div class="flex justify-between md:col-span-4 md:inline-flex">
+                            <div class="grid grid-cols-12 gap-4 font-semibold text-[#A3ABB8]">
+                                <div class="col-span-12 md:col-span-4 ">
                                     <p>
                                         <span class="font-normal">
                                             Distributor:
@@ -63,7 +64,7 @@
                                     </p>
                                 </div>
                                 @if ($device != false)
-                                    <div class="col-span-12 md:col-span-4 flex">
+                                    <div class="col-span-12 md:col-span-4">
                                         <div>
                                             <p>
                                                 <span class="font-normal">
@@ -78,6 +79,11 @@
                                 @endif
                             </div>
                         </x-share.cards.base-card>
+                    </div>
+                    {{-- expirations --}}
+                    <div class="col-span-12 md:col-span-6">
+                        <livewire:iptv.cards.expiration-component
+                            :satelitCard="$satelitCard"></livewire:iptv.cards.expiration-component>
                     </div>
                 </div>
 

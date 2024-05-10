@@ -13,6 +13,7 @@ class Slack extends Model
         'crashed_channel',
         'calendar_notification',
         'restart_channel',
+        'satelit_cards_expiration'
     ];
 
     protected $fillable = [
@@ -37,6 +38,11 @@ class Slack extends Model
     public function scopeGpuProblemNotificationAction(Builder $query)
     {
         return $query->where('action', 'gpu_problem_notification');
+    }
+
+    public function scopeSatelitcardExpiration(Builder $query)
+    {
+        return $query->where('action', 'satelit_cards_expiration');
     }
 
     public function scopeSearch(Builder $query, string $search = '')

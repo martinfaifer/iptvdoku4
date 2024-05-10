@@ -45,6 +45,13 @@ trait TranslateActionsTrait
                 ];
             }
 
+            if ($action == 'satelit_cards_expiration') {
+                $actionWithTranslation = [
+                    'id' => $action,
+                    'name' => 'Upozornění na expiraci satelitních karet',
+                ];
+            }
+
             $slackActions[] = $actionWithTranslation;
         }
 

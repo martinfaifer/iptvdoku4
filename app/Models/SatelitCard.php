@@ -15,6 +15,7 @@ class SatelitCard extends Model
         'name',
         'satelit_card_vendor_id',
         'status',
+        'expiration'
     ];
 
     public function vendor(): BelongsTo

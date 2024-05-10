@@ -16,6 +16,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('horizon:clear')->daily();
         $schedule->command('php artisan queue:flush')->daily();
 
+        $schedule->command('satelitcards:expiration-notification')->dailyAt("08:00");
+
         $schedule->command('channel:restart')->dailyAt('03:00');
 
         $schedule->command('calendar:start-daily-event')->daily();
