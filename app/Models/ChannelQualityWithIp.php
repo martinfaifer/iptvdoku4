@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Observers\ChannelQualityWithIpObserver;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\ChannelQualityWithIpObserver;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 #[ObservedBy(ChannelQualityWithIpObserver::class)]
 class ChannelQualityWithIp extends Model
@@ -27,5 +28,10 @@ class ChannelQualityWithIp extends Model
     public function channelQuality(): BelongsTo
     {
         return $this->belongsTo(ChannelQuality::class, 'channel_quality_id');
+    }
+
+    public function scopeSearch(Builder $query, string $search = "")
+    {
+        return $query->where('ip', "like", "%" . $search . "%");
     }
 }

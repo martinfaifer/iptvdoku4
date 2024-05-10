@@ -36,6 +36,7 @@ class SatelitCardComponent extends Component
 
     public function render()
     {
+
         return view('livewire.iptv.cards.satelit-card-component');
     }
 }

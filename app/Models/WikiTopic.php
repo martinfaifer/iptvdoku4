@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WikiTopic extends Model
 {
@@ -26,5 +27,10 @@ class WikiTopic extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(WikiCategory::class, 'wiki_category_id', 'id');
+    }
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        return $query->where('title', "like", "%" . $search)->orWhere('text', "like", "%" . $search . "%");
     }
 }

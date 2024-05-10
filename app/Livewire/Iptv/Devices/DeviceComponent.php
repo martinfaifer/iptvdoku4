@@ -30,6 +30,8 @@ class DeviceComponent extends Component
             $this->nmsCahedData = Cache::get('nms_'.$this->device->id);
             $this->nimbleCachedData = Cache::get('nimble_'.$this->device->id.'_incoming_streams');
             $this->grapeTranscoderData = Cache::get(('grape_transcoder_'.$this->device->id));
+
+            return view('livewire.iptv.devices.device-component')->title($this->device?->name);
         }
 
         return view('livewire.iptv.devices.device-component');

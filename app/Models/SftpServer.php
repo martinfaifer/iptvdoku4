@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Database\Query\Builder;
 
 class SftpServer extends Model
 {
@@ -25,4 +26,9 @@ class SftpServer extends Model
         'path_to_folder',
         'connection_type',
     ];
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        return $query->where('name', "like", "%" . $search . "%")->orWhere('url', "like", "%" . $search . "%");
+    }
 }
