@@ -2,7 +2,9 @@
     <div class="flex flex-col">
         <div class="relative">
             <div class="absolute left">
-                <livewire:iptv.sftps.create-sftp-server-component>
+                @can('create', App\Models\SftpServer::class)
+                    <livewire:iptv.sftps.create-sftp-server-component />
+                @endcan
             </div>
         </div>
         {{-- show alert about no sat card found --}}
@@ -23,11 +25,13 @@
                         {{ $sftpServer->name }}
                     </h1>
                     {{-- actions --}}
-                    <livewire:iptv.sftps.update-sftp-server-component
-                        :sftpServer="$sftpServer"></livewire:iptv.sftps.update-sftp-server-component>
+                    @can('update', $sftpServer)
+                        <livewire:iptv.sftps.update-sftp-server-component :sftpServer="$sftpServer" />
+                    @endcan
 
-                    <livewire:iptv.sftps.delete-sftp-server-component
-                        :sftpServer="$sftpServer"></livewire:iptv.sftps.delete-sftp-server-component>
+                    @can('delete', $sftpServer)
+                        <livewire:iptv.sftps.delete-sftp-server-component :sftpServer="$sftpServer" />
+                    @endcan
                     {{-- end of actions --}}
                 </div>
             </div>
@@ -76,11 +80,13 @@
                         <div class="col-span-12">
                             <x-share.cards.base-card title="Obsah">
                                 <div>
-                                    <button
-                                        class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-1 text-green-500"
-                                        wire:click='openUploadDialog()'>
-                                        <x-heroicon-o-arrow-up-tray class="size-4" />
-                                    </button>
+                                    @can('upload', App\Models\SftpServer::class)
+                                        <button
+                                            class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-1 text-green-500"
+                                            wire:click='openUploadDialog()'>
+                                            <x-heroicon-o-arrow-up-tray class="size-4" />
+                                        </button>
+                                    @endcan
                                 </div>
                                 <div class=" h-96 overflow-auto">
                                     <div class="grid grid-cols-12 font-semibold text-[#A3ABB8]">

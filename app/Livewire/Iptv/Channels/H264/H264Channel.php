@@ -7,6 +7,7 @@ use App\Models\Channel;
 use App\Models\ChannelQualityWithIp;
 use App\Models\Device;
 use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
+use App\Traits\Devices\DeviceHasChannelsTrait;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\On;
@@ -14,7 +15,7 @@ use Livewire\Component;
 
 class H264Channel extends Component
 {
-    use CheckIfChannelIsInIptvDohledTrait, NotificationTrait;
+    use CheckIfChannelIsInIptvDohledTrait, NotificationTrait, DeviceHasChannelsTrait;
 
     public UpdateH264ChannelForm $form;
 
@@ -34,17 +35,13 @@ class H264Channel extends Component
 
     public function mount()
     {
-        $this->devices = Device::get()->filter(function ($device) {
-            if (is_array($device->has_channels)) {
-                return in_array('h264:'.$this->channel->id, $device->has_channels);
-            }
-        });
+        $this->devices = $this->devices_belongs_to_channel_type(
+            channelWithType: 'h264:' . $this->channel->id
+        );
 
-        $this->backupDevices = Device::get()->filter(function ($device) {
-            if (is_array($device->has_channels)) {
-                return in_array('h264:'.$this->channel->id.':backup', $device->has_channels);
-            }
-        });
+        $this->backupDevices = $this->devices_belongs_to_channel_type(
+            channelWithType: 'h264:' . $this->channel->id . ':backup'
+        );
     }
 
     public function edit(ChannelQualityWithIp $channelQualityWithIp)
@@ -58,7 +55,7 @@ class H264Channel extends Component
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_h264.'.$this->channel->id);
+        $this->dispatch('update_h264.' . $this->channel->id);
 
         return $this->success_alert('Změněno');
     }
@@ -72,7 +69,7 @@ class H264Channel extends Component
     public function destroy(ChannelQualityWithIp $channelQualityWithIp)
     {
         $channelQualityWithIp->delete();
-        $this->dispatch('update_h264.'.$this->channel->id);
+        $this->dispatch('update_h264.' . $this->channel->id);
 
         return $this->success_alert('Odebráno');
     }
@@ -92,7 +89,7 @@ class H264Channel extends Component
     public function render()
     {
         $this->h264 = [];
-        if (! is_null($this->channel->h264)) {
+        if (!is_null($this->channel->h264)) {
             foreach ($this->channel->h264->ips->load('channelQuality') as $ip) {
                 $this->h264[] = [
                     'id' => $ip->id,

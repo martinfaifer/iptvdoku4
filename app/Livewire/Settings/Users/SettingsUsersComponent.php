@@ -8,6 +8,8 @@ use Livewire\WithPagination;
 use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsUserForm;
 use App\Livewire\Forms\UpdateSettingsUserForm;
+use App\Models\UserRole;
+use Illuminate\Database\Eloquent\Collection;
 
 class SettingsUsersComponent extends Component
 {
@@ -21,6 +23,13 @@ class SettingsUsersComponent extends Component
 
     public $query = '';
 
+    public Collection $userRoles;
+
+    public function mount()
+    {
+        $this->userRoles = UserRole::get(['id', 'name']);
+    }
+
     public function openCreateModal()
     {
         $this->resetErrorBag();
@@ -30,8 +39,8 @@ class SettingsUsersComponent extends Component
 
     public function closeDialog()
     {
-        return $this->editModal = false;
-        return $this->createModal = false;
+        $this->editModal = false;
+        $this->createModal = false;
     }
 
     public function create()
@@ -70,11 +79,12 @@ class SettingsUsersComponent extends Component
     public function render()
     {
         return view('livewire.settings.users.settings-users-component', [
-            'users' => User::search($this->query)->paginate(),
+            'users' => User::search($this->query)->with('userRole')->paginate(),
             'headers' => [
                 ['key' => 'first_name', 'label' => 'Jméno', 'class' => 'text-white/80'],
                 ['key' => 'last_name', 'label' => 'Příjmení', 'class' => 'text-white/80'],
                 ['key' => 'email', 'label' => 'Email', 'class' => 'text-white/80'],
+                ['key' => 'userRole.name', 'label' => 'Role', 'class' => 'text-white/80'],
                 ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
             ],
         ]);

@@ -12,6 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('telescope:prune')->daily();
         $schedule->command('model:prune')->daily();
         $schedule->command('horizon:clear')->daily();
         $schedule->command('php artisan queue:flush')->daily();

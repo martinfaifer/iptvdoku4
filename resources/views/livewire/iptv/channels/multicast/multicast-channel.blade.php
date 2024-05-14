@@ -3,13 +3,19 @@
     <div class="navbar bg-transparent">
         <div class="flex-1">
             @if ($multicasts->isEmpty())
-                <livewire:iptv.channels.multicast.store-multicast-channel :channel="$channel">
+                @can('create', $channel)
+                    <livewire:iptv.channels.multicast.store-multicast-channel :channel="$channel" />
+                @endcan
             @endif
         </div>
         @if (!$multicasts->isEmpty())
             <div class="md:flex-none gap-2 md:overflow-x-auto">
-                <livewire:iptv.channels.multicast.store-multicast-channel :channel="$channel">
-                    <livewire:iptv.channels.store-device-to-channel-component :channel="$channel" channelType="multicast">
+                @can('operate_with_childs', App\Models\Channel::class)
+                    <livewire:iptv.channels.multicast.store-multicast-channel :channel="$channel" />
+                @endcan
+                @can('operate_with_childs', App\Models\Channel::class)
+                    <livewire:iptv.channels.store-device-to-channel-component :channel="$channel" channelType="multicast" />
+                @endcan
             </div>
         @endif
     </div>
@@ -76,14 +82,18 @@
                                 </p>
                             </div>
                             <div class="col-span-12 md:col-span-1 mt-4 md:-mt-2">
-                                <button class="btn btn-sm btn-circle bg-transparent border-none"
-                                    wire:click='edit({{ $multicast->id }})'>
-                                    <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />
-                                </button>
-                                <button class="btn btn-sm btn-circle bg-transparent border-none"
-                                    wire:click='destroy({{ $multicast->id }})' wire:confirm="Opravdu odebrat?">
-                                    <x-heroicon-m-trash class="w-4 h-4 text-red-500" />
-                                </button>
+                                @can('operate_with_childs', App\Models\Channel::class)
+                                    <button class="btn btn-sm btn-circle bg-transparent border-none"
+                                        wire:click='edit({{ $multicast->id }})'>
+                                        <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />
+                                    </button>
+                                @endcan
+                                @can('operate_with_childs', App\Models\Channel::class)
+                                    <button class="btn btn-sm btn-circle bg-transparent border-none"
+                                        wire:click='destroy({{ $multicast->id }})' wire:confirm="Opravdu odebrat?">
+                                        <x-heroicon-m-trash class="w-4 h-4 text-red-500" />
+                                    </button>
+                                @endcan
                             </div>
                         </div>
                         <x-share.lines.small-hr></x-share.lines.small-hr>
@@ -177,66 +187,71 @@
             <div class="col-span-12 md:col-span-4">
                 <livewire:contact-component type="channel" :item_id="$channel->id" lazy />
             </div>
-            <div class="col-span-12 md:col-span-4 mb-4">
-                <livewire:log-component columnValue="multicast:{{ $channel->id }}" column="item" lazy />
-            </div>
-            @if (!$devices->isEmpty())
-                <div class="col-span-12 mb-4">
-                    <div class="flex">
-                        <hr
-                            class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                        <span class="text-xs italic">Primár</span>
-                        <hr
-                            class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                    </div>
+            @can('operate_with_childs', App\Models\Channel::class)
+                <div class="col-span-12 md:col-span-4 mb-4">
+                    <livewire:log-component columnValue="multicast:{{ $channel->id }}" column="item" lazy />
                 </div>
-                <div class="col-span-12 mb-4">
-                    <div class="grid grid-cols-12 gap-4">
-                        @foreach ($devices as $device)
-                            <div class="col-span-12 md:col-span-6 mb-4">
-                                <livewire:iptv.channels.device-has-channel-component
-                                    wire:key="device_{{ $device->id }}" :device="$device" :channel="$channel"
-                                    channelType="multicast" lazy>
-                            </div>
-                        @endforeach
+            @endcan
+            @can('operate_with_childs', App\Models\Channel::class)
+                @if (!$devices->isEmpty())
+                    <div class="col-span-12 mb-4">
+                        <div class="flex">
+                            <hr
+                                class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                            <span class="text-xs italic">Primár</span>
+                            <hr
+                                class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                        </div>
                     </div>
-                </div>
-            @endif
-            @if (!$backupDevices->isEmpty())
-                <div class="col-span-12 mb-4">
-                    <div class="flex">
-                        <hr
-                            class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                        <span class="text-xs italic">Backup</span>
-                        <hr
-                            class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                    <div class="col-span-12 mb-4">
+                        <div class="grid grid-cols-12 gap-4">
+                            @foreach ($devices as $device)
+                                <div class="col-span-12 md:col-span-6 mb-4">
+                                    <livewire:iptv.channels.device-has-channel-component
+                                        wire:key="device_{{ $device->id }}" :device="$device" :channel="$channel"
+                                        channelType="multicast" lazy>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-                <div class="col-span-12 mb-4">
-                    <div class="grid grid-cols-12 gap-4">
-                        @foreach ($backupDevices as $backupDevice)
-                            <div class="col-span-12 md:col-span-6 mb-4">
-                                <livewire:iptv.channels.device-has-channel-component
-                                    wire:key="backupDevice_{{ $device->id }}" :device="$backupDevice" :channel="$channel"
-                                    isBackup="true" channelType="multicast" lazy>
-                            </div>
-                        @endforeach
+                @endif
+                @if (!$backupDevices->isEmpty())
+                    <div class="col-span-12 mb-4">
+                        <div class="flex">
+                            <hr
+                                class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                            <span class="text-xs italic">Backup</span>
+                            <hr
+                                class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                        </div>
                     </div>
-                </div>
-            @endif
+                    <div class="col-span-12 mb-4">
+                        <div class="grid grid-cols-12 gap-4">
+                            @foreach ($backupDevices as $backupDevice)
+                                <div class="col-span-12 md:col-span-6 mb-4">
+                                    <livewire:iptv.channels.device-has-channel-component
+                                        wire:key="backupDevice_{{ $device->id }}" :device="$backupDevice" :channel="$channel"
+                                        isBackup="true" channelType="multicast" lazy>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            @endcan
 
             {{-- iptvdohled section --}}
-            @foreach ($multicasts as $multicast)
-                <div class="col-span-12 mb-4 gap-4">
-                    <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
-                        wire:key='iptvDohled_{{ $multicast->source_ip }}' ip="{{ $multicast->source_ip }}" lazy>
-                </div>
-                <div class="col-span-12 mb-4 gap-4">
-                    <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
-                        wire:key='iptvDohled_{{ $multicast->stb_ip }}' ip="{{ $multicast->stb_ip }}" lazy>
-                </div>
-            @endforeach
-
+            @can('operate_with_childs', App\Models\Channel::class)
+                @foreach ($multicasts as $multicast)
+                    <div class="col-span-12 mb-4 gap-4">
+                        <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
+                            wire:key='iptvDohled_{{ $multicast->source_ip }}' ip="{{ $multicast->source_ip }}" lazy>
+                    </div>
+                    <div class="col-span-12 mb-4 gap-4">
+                        <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
+                            wire:key='iptvDohled_{{ $multicast->stb_ip }}' ip="{{ $multicast->stb_ip }}" lazy>
+                    </div>
+                @endforeach
+            @endcan
         </div>
     @endif
 </div>

@@ -46,7 +46,7 @@
         <div class="flex-none gap-4">
             <div class="form-control">
                 <input @click.stop="$dispatch('mary-search-open')" type="text" placeholder="Vyhledejte ... ctrl+space"
-                    class="input input-bordered input-sm bg-opacity-20 text-white placeholder:text-xs w-24 md:w-auto" />
+                    class="input input-bordered input-sm bg-opacity-20 text-white placeholder:text-xs w-full md:w-auto" />
             </div>
             <div>
                 <label wire:click='openCalendarEventsDrawer' class="btn btn-sm btn-circle bg-transparent border-none">

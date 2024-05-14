@@ -46,6 +46,7 @@ class CalendarComponent extends Component
 
     public function mount()
     {
+
         $this->sftpServers = SftpServer::get(['id', 'name']);
         $this->cssColors = CssColor::get();
         $this->upcomingEvents = $this->upcoming_events();
@@ -73,14 +74,14 @@ class CalendarComponent extends Component
                 $this->events[] = [
                     'label' => $singleEvent->label,
                     'description' => Str::markdown($singleEvent->description),
-                    'css' => is_null($singleEvent->background_color) ? '!bg-red-500/20' : '!'.$singleEvent->background_color->color.'/20',
+                    'css' => is_null($singleEvent->background_color) ? '!bg-red-500/20' : '!' . $singleEvent->background_color->color . '/20',
                     'date' => now()->createFromFormat('Y-m-d', $singleEvent->start_date),
                 ];
             } else {
                 $this->events[] = [
                     'label' => $singleEvent->label,
                     'description' => Str::markdown($singleEvent->description),
-                    'css' => is_null($singleEvent->background_color) ? '!bg-red-500/20' : '!'.$singleEvent->background_color->color.'/20',
+                    'css' => is_null($singleEvent->background_color) ? '!bg-red-500/20' : '!' . $singleEvent->background_color->color . '/20',
                     'range' => [now()->createFromFormat('Y-m-d', $singleEvent->start_date), now()->createFromFormat('Y-m-d', $singleEvent->end_date)],
                 ];
             }

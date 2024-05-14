@@ -56,13 +56,17 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-12 mb-4">
+                <div class="col-span-12 md:col-span-6 mb-4">
                     <x-input label="Email" wire:model="form.email" />
                     <div>
                         @error('email')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
+                </div>
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-choices-offline class=" z-50" label="Uživatelská role" :options="$userRoles"
+                        wire:model="form.userRoleId" single searchable />
                 </div>
             </div>
             {{-- action section --}}

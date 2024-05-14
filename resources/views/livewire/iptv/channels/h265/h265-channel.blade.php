@@ -1,16 +1,18 @@
 <div>
     <div class="navbar bg-transparent">
-        <div class="flex-1">
-            @if (is_null($channel->h265))
-                <livewire:iptv.channels.h265.store-h265-channel :channel="$channel">
-            @endif
-        </div>
-        @if (!is_null($channel->h265))
-            <div class="flex-none">
-                <livewire:iptv.channels.h265.store-h265-channel :channel="$channel">
-                    <livewire:iptv.channels.store-device-to-channel-component :channel="$channel" channelType="h265">
+        @can('operate_with_childs', App\Models\Channel::class)
+            <div class="flex-1">
+                @if (is_null($channel->h265))
+                    <livewire:iptv.channels.h265.store-h265-channel :channel="$channel">
+                @endif
             </div>
-        @endif
+            @if (!is_null($channel->h265))
+                <div class="flex-none">
+                    <livewire:iptv.channels.h265.store-h265-channel :channel="$channel">
+                        <livewire:iptv.channels.store-device-to-channel-component :channel="$channel" channelType="h265">
+                </div>
+            @endif
+        @endcan
     </div>
     @if (!empty($h265))
         <div class="grid grid-cols-12 gap-4">
@@ -37,14 +39,16 @@
                                         </p>
                                     </div>
                                     <div class="col-span-2 -mt-2">
-                                        <button class="btn btn-sm btn-circle bg-transparent border-none"
-                                            wire:click='edit({{ $unicast['id'] }})'>
-                                            <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />
-                                        </button>
-                                        <button class="btn btn-sm btn-circle bg-transparent border-none"
-                                            wire:click='destroy({{ $unicast['id'] }})' wire:confirm="Opravdu odebrat?">
-                                            <x-heroicon-m-trash class="w-4 h-4 text-red-500" />
-                                        </button>
+                                        @can('operate_with_childs', App\Models\Channel::class)
+                                            <button class="btn btn-sm btn-circle bg-transparent border-none"
+                                                wire:click='edit({{ $unicast['id'] }})'>
+                                                <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />
+                                            </button>
+                                            <button class="btn btn-sm btn-circle bg-transparent border-none"
+                                                wire:click='destroy({{ $unicast['id'] }})' wire:confirm="Opravdu odebrat?">
+                                                <x-heroicon-m-trash class="w-4 h-4 text-red-500" />
+                                            </button>
+                                        @endcan
                                     </div>
                                 </div>
                             </div>
@@ -106,64 +110,71 @@
 
                 </x-modal>
             </div>
-            <div class="col-span-12 md:col-span-6 mb-4">
-                {{--  --}}
-            </div>
+            @can('operate_with_childs', App\Models\Channel::class)
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    {{--  --}}
+                </div>
+            @endcan
             <div class="col-span-12 md:col-span-6 mb-4">
                 <livewire:notes.note-component column="h265_id" id="{{ $channel->h265->id }}" lazy>
             </div>
-            <div class="col-span-12 md:col-span-6 mb-4">
-                <livewire:log-component columnValue="h265:{{ $channel->id }}" column="item" lazy>
-            </div>
-            @if (!$devices->isEmpty())
-                <div class="col-span-12 mb-4">
-                    <div class="flex">
-                        <hr
-                            class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                        <span class="text-xs italic">Primár</span>
-                        <hr
-                            class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+            @can('operate_with_childs', App\Models\Channel::class)
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <livewire:log-component columnValue="h265:{{ $channel->id }}" column="item" lazy>
+                </div>
+            @endcan
+            @can('operate_with_childs', App\Models\Channel::class)
+                @if (!$devices->isEmpty())
+                    <div class="col-span-12 mb-4">
+                        <div class="flex">
+                            <hr
+                                class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                            <span class="text-xs italic">Primár</span>
+                            <hr
+                                class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                        </div>
                     </div>
-                </div>
-                <div class="col-span-12 mb-4">
-                    <div class="grid grid-cols-12 gap-4">
-                        @foreach ($devices as $device)
-                            <div wire:key="source-{{ $device->id }}" class="col-span-12 md:col-span-6 mb-4">
-                                <livewire:iptv.channels.device-has-channel-component :device="$device" :channel="$channel"
-                                    channelType="h265">
-                            </div>
-                        @endforeach
+                    <div class="col-span-12 mb-4">
+                        <div class="grid grid-cols-12 gap-4">
+                            @foreach ($devices as $device)
+                                <div wire:key="source-{{ $device->id }}" class="col-span-12 md:col-span-6 mb-4">
+                                    <livewire:iptv.channels.device-has-channel-component :device="$device" :channel="$channel"
+                                        channelType="h265">
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-            @endif
-            @if (!$backupDevices->isEmpty())
-                <div class="col-span-12 mb-4">
-                    <div class="flex">
-                        <hr
-                            class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                        <span class="text-xs italic">Backup</span>
-                        <hr
-                            class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                @endif
+                @if (!$backupDevices->isEmpty())
+                    <div class="col-span-12 mb-4">
+                        <div class="flex">
+                            <hr
+                                class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                            <span class="text-xs italic">Backup</span>
+                            <hr
+                                class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                        </div>
                     </div>
-                </div>
-                <div class="col-span-12 mb-4">
-                    <div class="grid grid-cols-12 gap-4">
-                        @foreach ($backupDevices as $backupDevice)
-                            <div wire:key="backup-{{ $backupDevice->id }}" class="col-span-6 mb-4">
-                                <livewire:iptv.channels.device-has-channel-component :device="$backupDevice" :channel="$channel"
-                                    isBackup="true" channelType="h265">
-                            </div>
-                        @endforeach
+                    <div class="col-span-12 mb-4">
+                        <div class="grid grid-cols-12 gap-4">
+                            @foreach ($backupDevices as $backupDevice)
+                                <div wire:key="backup-{{ $backupDevice->id }}" class="col-span-6 mb-4">
+                                    <livewire:iptv.channels.device-has-channel-component :device="$backupDevice" :channel="$channel"
+                                        isBackup="true" channelType="h265">
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-            @endif
-
-            @foreach ($h265 as $unicast)
-                <div wire:key="unicast-{{ $unicast['ip'] }}" class="col-span-12 mb-4 gap-4">
-                    <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
-                        ip="{{ $unicast['ip'] }}">
-                </div>
-            @endforeach
+                @endif
+            @endcan
+            @can('operate_with_childs', App\Models\Channel::class)
+                @foreach ($h265 as $unicast)
+                    <div wire:key="unicast-{{ $unicast['ip'] }}" class="col-span-12 mb-4 gap-4">
+                        <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
+                            ip="{{ $unicast['ip'] }}">
+                    </div>
+                @endforeach
+            @endcan
         </div>
     @endif
 </div>

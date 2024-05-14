@@ -3,6 +3,8 @@
 namespace App\Livewire\Iptv\Devices\Menu;
 
 use App\Models\Alert;
+use App\Models\Device;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class DeviceMenuIconWithAlertComponent extends Component

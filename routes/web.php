@@ -37,19 +37,15 @@ Route::get('login', Login::class)->name('login');
 
 Route::middleware('auth')->group(function () {
     Route::get('/', IptvChannel::class);
-    Route::prefix('channels/{channel?}/{channelType?}')->group(function () {
+    Route::prefix('channels/{channel?}/{channelType?}')->middleware(['can:view,App\Models\Channel'])->group(function () {
         Route::get('', IptvChannel::class);
     });
 
-    Route::get('devices/{device?}/{component?}', DeviceComponent::class);
-
-    Route::get('sat-cards/{satelitCard?}', SatelitCardComponent::class);
-
-    Route::get('calendar', CalendarComponent::class);
-
-    Route::get('sftps/{sftpServer?}', SftpComponent::class);
-
-    Route::get('wiki/{topic?}', WikiComponent::class);
+    Route::get('devices/{device?}/{component?}', DeviceComponent::class)->middleware('can:view_devices,App\Models\Device');
+    Route::get('sat-cards/{satelitCard?}', SatelitCardComponent::class)->middleware('can:view_cards,App\Models\SatelitCard');
+    Route::get('calendar', CalendarComponent::class)->middleware('can:show_events,App\Models\Event');
+    Route::get('sftps/{sftpServer?}', SftpComponent::class)->middleware('can:show_servers,App\Models\SftpServer');
+    Route::get('wiki/{topic?}', WikiComponent::class)->middleware('can:show_topics, App\Models\WikiTopic');
 
     Route::get('floweye/{issue?}', FlowEyeComponent::class);
 

@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             SftpServerSeeder::class,
             WeatherCitySeeder::class,
             CurrencySeeder::class,
+            UserRoleSeeder::class
         ]);
     }
 }

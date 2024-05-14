@@ -2,20 +2,21 @@
 
 namespace App\Livewire\Iptv\Channels\Multicast;
 
-use App\Livewire\Forms\UpdateMulticastChannelForm;
-use App\Models\Channel;
-use App\Models\ChannelMulticast;
-use App\Models\ChannelSource;
 use App\Models\Device;
-use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Support\Collection;
-use Livewire\Attributes\On;
+use App\Models\Channel;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use App\Models\ChannelSource;
+use App\Models\ChannelMulticast;
+use Illuminate\Support\Collection;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Devices\DeviceHasChannelsTrait;
+use App\Livewire\Forms\UpdateMulticastChannelForm;
+use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
 
 class MulticastChannel extends Component
 {
-    use CheckIfChannelIsInIptvDohledTrait, NotificationTrait;
+    use CheckIfChannelIsInIptvDohledTrait, NotificationTrait, DeviceHasChannelsTrait;
 
     public UpdateMulticastChannelForm $form;
 
@@ -35,17 +36,13 @@ class MulticastChannel extends Component
 
         $temporaryDevices = Device::with('category')->get();
 
-        $this->devices = $temporaryDevices->filter(function ($device) {
-            if (is_array($device->has_channels)) {
-                return in_array('multicast:'.$this->channel->id, $device->has_channels);
-            }
-        });
+        $this->devices = $this->devices_belongs_to_channel_type(
+            channelWithType: 'multicast:' . $this->channel->id
+        );
 
-        $this->backupDevices = $temporaryDevices->filter(function ($device) {
-            if (is_array($device->has_channels)) {
-                return in_array('multicast:'.$this->channel->id.':backup', $device->has_channels);
-            }
-        });
+        $this->backupDevices = $this->devices_belongs_to_channel_type(
+            channelWithType: 'multicast:' . $this->channel->id . ':backup'
+        );
     }
 
     public function edit(ChannelMulticast $multicast)
@@ -58,7 +55,7 @@ class MulticastChannel extends Component
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_multicasts.'.$this->channel->id);
+        $this->dispatch('update_multicasts.' . $this->channel->id);
 
         return $this->success_alert('Změněno');
     }
@@ -71,7 +68,7 @@ class MulticastChannel extends Component
     public function destroy(ChannelMulticast $multicast)
     {
         $multicast->delete();
-        $this->dispatch('update_multicasts.'.$this->channel->id);
+        $this->dispatch('update_multicasts.' . $this->channel->id);
 
         return $this->success_alert('Odebráno');
     }

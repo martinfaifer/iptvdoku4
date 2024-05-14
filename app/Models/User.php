@@ -7,6 +7,7 @@ namespace App\Models;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -25,6 +26,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'user_role_id'
     ];
 
     /**
@@ -54,11 +56,44 @@ class User extends Authenticatable
         );
     }
 
+
+    public function userRole(): BelongsTo
+    {
+        return $this->belongsTo(UserRole::class, 'user_role_id', 'id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->user_role_id == UserRole::admin()->first()->id;
+    }
+
+    public function isTechnik()
+    {
+        return $this->user_role_id == UserRole::technik()->first()->id;
+    }
+
+    public function isAdministrativa()
+    {
+        return $this->user_role_id == UserRole::administrativa()->first()->id;
+    }
+
+    public function isApi()
+    {
+        return $this->user_role_id == UserRole::api()->first()->id;
+    }
+
+    public function isReader()
+    {
+        return $this->user_role_id == UserRole::reader()->first()->id;
+    }
+
+
+
     public function scopeSearch(Builder $query, string $search)
     {
         return $query
-            ->where('first_name', 'like', '%'.$search.'%')
-            ->orWhere('last_name', '%'.$search.'%')
-            ->orWhere('email', '%'.$search.'%');
+            ->where('first_name', 'like', '%' . $search . '%')
+            ->orWhere('last_name', '%' . $search . '%')
+            ->orWhere('email', '%' . $search . '%');
     }
 }

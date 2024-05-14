@@ -62,28 +62,34 @@
                                     </a>
                                 </li>
                             </div>
-                            <livewire:iptv.devices.menu.device-menu-icon-with-alert-component />
-                            <div class="tooltip tooltip-bottom" data-tip="Satelitní karty">
-                                <li href="/sat-cards" wire:navigate @class([
-                                    'rounded-lg',
-                                    'bg-[#1A1E2A]' =>
-                                        request()->is('sat-cards') || request()->is('sat-cards/*'),
-                                ])>
-                                    <a>
-                                        <x-heroicon-o-credit-card class="size-6 text-white/80" fill="none" />
-                                    </a>
-                                </li>
-                            </div>
-                            <div class="tooltip tooltip-bottom" data-tip="Kalendář">
-                                <li href="/calendar" wire:navigate @class([
-                                    'rounded-lg',
-                                    'bg-[#1A1E2A]' => request()->is('calendar') || request()->is('calendar/*'),
-                                ])>
-                                    <a>
-                                        <x-heroicon-o-calendar-days class="size-6 text-white/80" fill="none" />
-                                    </a>
-                                </li>
-                            </div>
+                            @can('show_blade_functions', App\Model\Device::class)
+                                <livewire:iptv.devices.menu.device-menu-icon-with-alert-component />
+                            @endcan
+                            @can('show_blade_functions', App\Model\SatelitCard::class)
+                                <div class="tooltip tooltip-bottom" data-tip="Satelitní karty">
+                                    <li href="/sat-cards" wire:navigate @class([
+                                        'rounded-lg',
+                                        'bg-[#1A1E2A]' =>
+                                            request()->is('sat-cards') || request()->is('sat-cards/*'),
+                                    ])>
+                                        <a>
+                                            <x-heroicon-o-credit-card class="size-6 text-white/80" fill="none" />
+                                        </a>
+                                    </li>
+                                </div>
+                            @endcan
+                            @can('show_blade_functions', App\Models\Event::class)
+                                <div class="tooltip tooltip-bottom" data-tip="Kalendář">
+                                    <li href="/calendar" wire:navigate @class([
+                                        'rounded-lg',
+                                        'bg-[#1A1E2A]' => request()->is('calendar') || request()->is('calendar/*'),
+                                    ])>
+                                        <a>
+                                            <x-heroicon-o-calendar-days class="size-6 text-white/80" fill="none" />
+                                        </a>
+                                    </li>
+                                </div>
+                            @endcan
                             <div class="tooltip tooltip-bottom" data-tip="Sftp servery">
                                 <li href="/sftps" wire:navigate @class([
                                     'rounded-lg',

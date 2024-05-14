@@ -2,8 +2,12 @@
     <div class="flex flex-col">
         <div class="relative">
             <div class="absolute left inline-flex gap-4">
-                <livewire:wiki.create-wiki-category-component>
-                    <livewire:wiki.create-wiki-topic-component>
+                @can('create', App\Models\WikiCategory::class)
+                    <livewire:wiki.create-wiki-category-component />
+                @endcan
+                @can('create', App\Models\WikiTopic::class)
+                    <livewire:wiki.create-wiki-topic-component />
+                @endcan
             </div>
         </div>
         {{-- show alert about no sat card found --}}
@@ -19,11 +23,13 @@
                     </h1>
 
                     {{-- actions --}}
-                    <livewire:wiki.update-wiki-topic-component
-                        :topic="$topic"></livewire:wiki.update-wiki-topic-component>
+                    @can('update', $topic)
+                        <livewire:wiki.update-wiki-topic-component :topic="$topic" />
+                    @endcan
 
-                    <livewire:wiki.delete-wiki-topic-component
-                        :topic="$topic"></livewire:wiki.delete-wiki-topic-component>
+                    @can('delete', $topic)
+                        <livewire:wiki.delete-wiki-topic-component :topic="$topic" />
+                    @endcan
                     {{-- end of actions --}}
                 </div>
             </div>

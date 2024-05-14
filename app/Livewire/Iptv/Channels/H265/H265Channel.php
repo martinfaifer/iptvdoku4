@@ -2,19 +2,20 @@
 
 namespace App\Livewire\Iptv\Channels\H265;
 
-use App\Livewire\Forms\UpdateH265ChannelForm;
-use App\Models\Channel;
-use App\Models\ChannelQualityWithIp;
 use App\Models\Device;
-use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Support\Collection;
-use Livewire\Attributes\On;
+use App\Models\Channel;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use Illuminate\Support\Collection;
+use App\Models\ChannelQualityWithIp;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\UpdateH265ChannelForm;
+use App\Traits\Devices\DeviceHasChannelsTrait;
+use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
 
 class H265Channel extends Component
 {
-    use CheckIfChannelIsInIptvDohledTrait, NotificationTrait;
+    use CheckIfChannelIsInIptvDohledTrait, NotificationTrait, DeviceHasChannelsTrait;
 
     public UpdateH265ChannelForm $form;
 
@@ -34,17 +35,13 @@ class H265Channel extends Component
 
     public function mount()
     {
-        $this->devices = Device::get()->filter(function ($device) {
-            if (is_array($device->has_channels)) {
-                return in_array('h265:'.$this->channel->id, $device->has_channels);
-            }
-        });
+        $this->devices = $this->devices_belongs_to_channel_type(
+            channelWithType: 'h265:' . $this->channel->id
+        );
 
-        $this->backupDevices = Device::get()->filter(function ($device) {
-            if (is_array($device->has_channels)) {
-                return in_array('h265:'.$this->channel->id.':backup', $device->has_channels);
-            }
-        });
+        $this->backupDevices = $this->devices_belongs_to_channel_type(
+            channelWithType: 'h265:' . $this->channel->id . ':backup'
+        );
     }
 
     public function edit(ChannelQualityWithIp $channelQualityWithIp)
@@ -58,7 +55,7 @@ class H265Channel extends Component
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_h265.'.$this->channel->id);
+        $this->dispatch('update_h265.' . $this->channel->id);
 
         return $this->success_alert('Změněno');
     }
@@ -72,7 +69,7 @@ class H265Channel extends Component
     public function destroy(ChannelQualityWithIp $channelQualityWithIp)
     {
         $channelQualityWithIp->delete();
-        $this->dispatch('update_h265.'.$this->channel->id);
+        $this->dispatch('update_h265.' . $this->channel->id);
 
         return $this->success_alert('Odebráno');
     }
@@ -92,7 +89,7 @@ class H265Channel extends Component
     public function render()
     {
         $this->h265 = [];
-        if (! is_null($this->channel->h265)) {
+        if (!is_null($this->channel->h265)) {
             foreach ($this->channel->h265->ips->load('channelQuality') as $ip) {
                 $this->h265[] = [
                     'id' => $ip->id,

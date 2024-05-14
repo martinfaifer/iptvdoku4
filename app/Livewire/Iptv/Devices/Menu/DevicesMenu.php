@@ -2,10 +2,11 @@
 
 namespace App\Livewire\Iptv\Devices\Menu;
 
+use App\Models\Device;
+use Livewire\Component;
+use Livewire\Attributes\On;
 use App\Models\DeviceCategory;
 use Illuminate\Support\Facades\Cache;
-use Livewire\Attributes\On;
-use Livewire\Component;
 
 class DevicesMenu extends Component
 {

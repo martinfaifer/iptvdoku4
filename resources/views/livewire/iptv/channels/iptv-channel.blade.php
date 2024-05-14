@@ -3,7 +3,9 @@
         {{-- create new channel --}}
         <div class="relative">
             <div class="absolute left">
-                <livewire:iptv.channels.store-channel />
+                @can('create', $channel)
+                    <livewire:iptv.channels.store-channel />
+                @endcan
             </div>
             <div class="flex justify-center">
                 @if (!is_null($channel) && !is_null($channel->name))
@@ -60,8 +62,12 @@
                     @endif
 
                     {{-- actions --}}
-                    <livewire:iptv.channels.update-channel :channel="$channel"></livewire:iptv.channels.update-channel>
-                    <livewire:iptv.channels.delete-channel :channel="$channel"></livewire:iptv.channels.delete-channel>
+                    @can('update', $channel)
+                        <livewire:iptv.channels.update-channel :channel="$channel"></livewire:iptv.channels.update-channel>
+                    @endcan
+                    @can('delete', $channel)
+                        <livewire:iptv.channels.delete-channel :channel="$channel"></livewire:iptv.channels.delete-channel>
+                    @endcan
                     {{-- end of actions --}}
                     <livewire:iptv.channels.channel-detail :channel="$channel"></livewire:iptv.channels.channel-detail
                         lazy>
