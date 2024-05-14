@@ -90,17 +90,19 @@
                                     </li>
                                 </div>
                             @endcan
-                            <div class="tooltip tooltip-bottom" data-tip="Sftp servery">
-                                <li href="/sftps" wire:navigate @class([
-                                    'rounded-lg',
-                                    'bg-[#1A1E2A]' => request()->is('sftps') || request()->is('sftps/*'),
-                                ])>
-                                    <a>
-                                        <x-heroicon-o-arrow-up-on-square-stack class="size-6 text-white/80"
-                                            fill="none" />
-                                    </a>
-                                </li>
-                            </div>
+                            @can('show_servers', App\Models\SftpServer::class)
+                                <div class="tooltip tooltip-bottom" data-tip="Sftp servery">
+                                    <li href="/sftps" wire:navigate @class([
+                                        'rounded-lg',
+                                        'bg-[#1A1E2A]' => request()->is('sftps') || request()->is('sftps/*'),
+                                    ])>
+                                        <a>
+                                            <x-heroicon-o-arrow-up-on-square-stack class="size-6 text-white/80"
+                                                fill="none" />
+                                        </a>
+                                    </li>
+                                </div>
+                            @endcan
                             <div class="tooltip tooltip-bottom" data-tip="Wiki">
                                 <li href="/wiki" wire:navigate @class([
                                     'rounded-lg',
@@ -111,7 +113,9 @@
                                     </a>
                                 </li>
                             </div>
-                            <livewire:iptv.flow-eye.menu.flow-eye-menu-icon-with-alert-component>
+                            @can('show_tickets', App\Models\User::class)
+                                <livewire:iptv.flow-eye.menu.flow-eye-menu-icon-with-alert-component />
+                            @endcan
                         </ul>
                     </x-menu>
                     {{-- main dynamic navigation --}}

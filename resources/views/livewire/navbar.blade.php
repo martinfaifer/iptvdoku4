@@ -134,7 +134,9 @@
                                 Profil
                             </a>
                         </li>
-                        <li><a href="/settings/dashboard" wire:navigate>Nastavení</a></li>
+                        @can('show_settings_link', App\Models\User::class)
+                            <li><a href="/settings/dashboard" wire:navigate>Nastavení</a></li>
+                        @endcan
                         <li wire:click='logout()'><a>Odhlásit se</a></li>
                     </ul>
                 </div>

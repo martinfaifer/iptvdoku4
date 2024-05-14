@@ -20,6 +20,7 @@ use App\Policies\EventPolicy;
 use App\Policies\DevicePolicy;
 use App\Policies\MulticastPolicy;
 use App\Policies\SatelitCardPolicy;
+use App\Policies\UserPolicy;
 use App\Policies\WikiCategoryPolicy;
 use App\Policies\WikiTopicPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -59,5 +60,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(SatelitCard::class, SatelitCardPolicy::class);
         Gate::policy(WikiTopic::class, WikiTopicPolicy::class);
         Gate::policy(WikiCategory::class, WikiCategoryPolicy::class);
+        Gate::policy(User::class, UserPolicy::class);
     }
 }

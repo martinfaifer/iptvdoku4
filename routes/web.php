@@ -47,16 +47,15 @@ Route::middleware('auth')->group(function () {
     Route::get('sftps/{sftpServer?}', SftpComponent::class)->middleware('can:show_servers,App\Models\SftpServer');
     Route::get('wiki/{topic?}', WikiComponent::class)->middleware('can:show_topics, App\Models\WikiTopic');
 
-    Route::get('floweye/{issue?}', FlowEyeComponent::class);
+    Route::get('floweye/{issue?}', FlowEyeComponent::class)->middleware('can:show_tickets, App\Models\User');
 
     Route::prefix('settings')->group(function () {
-        Route::get('', SettingsTagComponent::class);
-        Route::get('dashboard', SettingsDashboardComponent::class);
-        Route::get('tags', SettingsTagComponent::class);
-        Route::get('users', SettingsUsersComponent::class);
+        Route::get('dashboard', SettingsDashboardComponent::class)->middleware('can:show_settings_dashboard,App\Models\User');
+        Route::get('tags', SettingsTagComponent::class)->middleware('can:show_settings_tags,App\Models\User');
+        Route::get('users', SettingsUsersComponent::class)->middleware('can:show_settings_users,App\Models\User');
         Route::prefix('nangu')->group(function () {
-            Route::get('isps', SettingsIspComponent::class);
-            Route::get('isps-channel-packages-to-tags', SettingsTagToChannelPackageComponent::class);
+            Route::get('isps', SettingsIspComponent::class)->middleware('can:show_settings_nangu,App\Models\User');
+            Route::get('isps-channel-packages-to-tags', SettingsTagToChannelPackageComponent::class)->middleware('can:show_settings_nangu,App\Models\User');
         });
         Route::prefix('geniustv')->group(function () {
             Route::prefix('statistics')->group(function () {
@@ -72,18 +71,18 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('channels')->group(function () {
-            Route::get('restart', SettingsChannelsRestartComponent::class);
-            Route::get('banners', SettingsChannelsBannersComponent::class);
+            Route::get('restart', SettingsChannelsRestartComponent::class)->middleware('can:show_settings_channels_restart,App\Models\User');
+            Route::get('banners', SettingsChannelsBannersComponent::class)->middleware('can:show_settings_channels_banners,App\Models\User');
         });
 
         Route::prefix('notifications')->group(function () {
-            Route::get('slack', SettingsSlackNotificationComponent::class);
-            Route::get('weather', SettingsWeatherNotificationComponent::class);
+            Route::get('slack', SettingsSlackNotificationComponent::class)->middleware('can:show_settings_notifications,App\Models\User');
+            Route::get('weather', SettingsWeatherNotificationComponent::class)->middleware('can:show_settings_notifications,App\Models\User');
         });
 
         Route::prefix('devices')->group(function () {
-            Route::get('vendors', SettingsDevicesVendorsComponent::class);
-            Route::get('distributors', SettingsDevicesDistributorsComponent::class);
+            Route::get('vendors', SettingsDevicesVendorsComponent::class)->middleware('can:show_settings_devices,App\Models\User');
+            Route::get('distributors', SettingsDevicesDistributorsComponent::class)->middleware('can:show_settings_devices,App\Models\User');
         });
     });
 });
