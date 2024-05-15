@@ -33,21 +33,21 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
      */
     public function handle()
     {
-        $responseJson = Http::withBasicAuth(config('services.api.4.old_iptv_doku.user'), config('services.api.4.old_iptv_doku.password'))
-            ->get(config('services.api.4.old_iptv_doku.url').'/api/v1/channels')->json();
+        $responseJson = Http::withBasicAuth(config('services.api.5.old_iptv_doku.user'), config('services.api.5.old_iptv_doku.password'))
+            ->get(config('services.api.5.old_iptv_doku.url') . '/api/v1/channels')->json();
 
         foreach ($responseJson['data'] as $channel) {
             $path = null;
-            if (! is_null($channel['logo'])) {
+            if (!is_null($channel['logo'])) {
                 $logo = str_replace('//', '/', $channel['logo']);
                 $explodedLogo = explode('/', $logo);
                 if (array_key_exists(4, $explodedLogo)) {
-                    $path = 'public/Logos/'.$explodedLogo[4];
+                    $path = 'public/Logos/' . $explodedLogo[4];
                 }
             }
 
             $storedChannel = Channel::where('name', $channel['name'])->first();
-            if (! $storedChannel) {
+            if (!$storedChannel) {
                 $storedChannel = Channel::create([
                     'name' => $channel['name'],
                     'logo' => $path,
@@ -61,7 +61,7 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
 
             // create multicasts
             $storedMulticast = ChannelMulticast::where('channel_id', $storedChannel->id)->first();
-            if (! $storedMulticast) {
+            if (!$storedMulticast) {
                 foreach ($channel['multicasts'] as $multicast) {
                     // dd($multicast['multicast_source']['zdroj']);
                     $isBackup = false;
@@ -90,8 +90,8 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
 
             // create h264 and h265
             // need $storedChannel
-            if (! is_null($channel['h264'])) {
-                if (! H264::where('channel_id', $storedChannel->id)->first()) {
+            if (!is_null($channel['h264'])) {
+                if (!H264::where('channel_id', $storedChannel->id)->first()) {
                     $h264 = H264::create([
                         'channel_id' => $storedChannel->id,
                     ]);
@@ -111,8 +111,8 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
                 }
             }
 
-            if (! is_null($channel['h265'])) {
-                if (! H265::where('channel_id', $storedChannel->id)->first()) {
+            if (!is_null($channel['h265'])) {
+                if (!H265::where('channel_id', $storedChannel->id)->first()) {
                     $h265 = H265::create([
                         'channel_id' => $storedChannel->id,
                     ]);
