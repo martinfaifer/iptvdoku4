@@ -16,7 +16,7 @@
     </div>
     @if (!empty($h265))
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12 md:col-span-6 mb-4">
+            <div class="col-span-12 xl:col-span-6 mb-4">
                 <x-share.cards.base-card title="Informace o unicastu">
                     @foreach ($h265 as $unicast)
                         <div class="grid grid-cols-12 gap-4 text-white/80 font-semibold text-[#A3ABB8]">
@@ -111,15 +111,15 @@
                 </x-modal>
             </div>
             @can('operate_with_childs', App\Models\Channel::class)
-                <div class="col-span-12 md:col-span-6 mb-4">
+                <div class="col-span-12 xl:col-span-6 mb-4">
                     {{--  --}}
                 </div>
             @endcan
-            <div class="col-span-12 md:col-span-6 mb-4">
+            <div class="col-span-12 xl:col-span-6 mb-4">
                 <livewire:notes.note-component column="h265_id" id="{{ $channel->h265->id }}" lazy>
             </div>
             @can('operate_with_childs', App\Models\Channel::class)
-                <div class="col-span-12 md:col-span-6 mb-4">
+                <div class="col-span-12 xl:col-span-6 mb-4">
                     <livewire:log-component columnValue="h265:{{ $channel->id }}" column="item" lazy>
                 </div>
             @endcan

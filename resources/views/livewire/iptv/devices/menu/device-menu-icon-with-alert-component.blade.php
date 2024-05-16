@@ -6,11 +6,11 @@
         <a>
             <x-sui-flip-view class="size-6 text-white" fill="none" />
             @if ($isAlert)
-                <div class="text-white text-xs bg-red-500 rounded-full absolute size-4 ml-4 mt-3">
-                    <span class="ml-[6px]">
-                        !
-                    </span>
-                </div>
+                <span @class([
+                    'mt-1 text-lg font-bold fixed text-red-500 z-auto ml-6 hover:bg-[#171D2B]',
+                ])>
+                    !
+                </span>
             @endif
         </a>
     </li>

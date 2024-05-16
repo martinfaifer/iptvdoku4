@@ -27,7 +27,7 @@
                     @foreach ($multicasts as $multicast)
                         <div wire:key='multicast_{{ $multicast->id }}'
                             class="grid grid-cols-12 font-semibold text-[#A3ABB8]">
-                            <div class="col-span-12 md:col-span-3">
+                            <div class="col-span-12 xl:col-span-3">
                                 <p>
                                     <span class="font-normal">
                                         Zdrojová IP:
@@ -40,7 +40,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="col-span-12 md:col-span-3 mt-4 md:mt-0">
+                            <div class="col-span-12 xl:col-span-3 mt-4 xl:mt-0">
                                 <p>
                                     <span class="font-normal">
                                         Zdroj:
@@ -50,7 +50,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="md:col-span-3 col-span-12 mt-4 md:mt-0">
+                            <div class="xl:col-span-3 col-span-12 mt-4 xl:mt-0">
                                 <p>
                                     <span class="font-normal">
                                         STB IP:
@@ -63,7 +63,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="col-span-12 md:col-span-2 mt-4 md:mt-0">
+                            <div class="col-span-12 xl:col-span-2 mt-4 xl:mt-0">
                                 <p>
                                     <span class="font-normal">
                                         Typ:
@@ -81,7 +81,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="col-span-12 md:col-span-1 mt-4 md:-mt-2">
+                            <div class="col-span-12 xl:col-span-1 mt-4 xl:-mt-2">
                                 @can('operate_with_childs', App\Models\Channel::class)
                                     <button class="btn btn-sm btn-circle bg-transparent border-none"
                                         wire:click='edit({{ $multicast->id }})'>
@@ -181,14 +181,14 @@
 
 
             </div>
-            <div class="col-span-12 md:col-span-4">
+            <div class="col-span-12 xl:col-span-4">
                 <livewire:notes.note-component column="channel_id" :id="$channel->id" lazy />
             </div>
-            <div class="col-span-12 md:col-span-4">
+            <div class="col-span-12 xl:col-span-4">
                 <livewire:contact-component type="channel" :item_id="$channel->id" lazy />
             </div>
             @can('operate_with_childs', App\Models\Channel::class)
-                <div class="col-span-12 md:col-span-4 mb-4">
+                <div class="col-span-12 xl:col-span-4 mb-4">
                     <livewire:log-component columnValue="multicast:{{ $channel->id }}" column="item" lazy />
                 </div>
             @endcan

@@ -1,6 +1,6 @@
 <div>
     <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-12 md:col-span-8">
+        <div class="col-span-12 xl:col-span-8">
             <div class="grid grid-cols-12 gap-4">
                 @if (!empty($runningEvents))
                     <div class="col-span-12 mb-6">
@@ -108,18 +108,14 @@
                                             </div>
                                         </x-slot:sub-value>
                                         <x-slot:actions>
-                                            <x-dropdown>
-                                                <x-slot:trigger>
-                                                    <x-button label="..."
-                                                        class="btn btn-outline border-none text-white" />
-                                                </x-slot:trigger>
-
-                                                <x-menu-item wire:click="edit({{ $event['id'] }})" icon="o-pencil"
-                                                    class="text-green-500" title="Upravit" />
-                                                <x-menu-item wire:click="destroy({{ $event['id'] }})"
-                                                    wire:confirm='Opravdu odebrat událost?' icon="o-trash"
-                                                    class="text-red-500" title="Odebrat" />
-                                            </x-dropdown>
+                                            <x-slot:actions>
+                                                <x-button wire:click="edit({{ $event['id'] }})"
+                                                    class="btn-sm bg-transparent border-none text-green-500"
+                                                    icon="o-pencil"></x-button>
+                                                <x-button wire:click="destroy({{ $event['id'] }})"
+                                                    class="btn-sm bg-transparent border-none text-red-500"
+                                                    icon="o-trash"></x-button>
+                                            </x-slot:actions>
                                         </x-slot:actions>
                                     </x-list-item>
                                 @endforeach
@@ -181,7 +177,7 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div class="col-span-5  text-white/50">
+                                                <div class="col-span-5 text-white/50">
                                                     <div class="grid grid-rows-1 gap-1 text-xs">
                                                         {{-- channels --}}
                                                         <div>
@@ -258,18 +254,12 @@
                                             </div>
                                         </x-slot:sub-value>
                                         <x-slot:actions>
-                                            <x-dropdown>
-                                                <x-slot:trigger>
-                                                    <x-button label="..."
-                                                        class="btn btn-outline border-none text-white" />
-                                                </x-slot:trigger>
-
-                                                <x-menu-item wire:click="edit({{ $event['id'] }})" icon="o-pencil"
-                                                    class="text-green-500" title="Upravit" />
-                                                <x-menu-item wire:click="destroy({{ $event['id'] }})"
-                                                    wire:confirm='Opravdu odebrat událost?' icon="o-trash"
-                                                    class="text-red-500" title="Odebrat" />
-                                            </x-dropdown>
+                                            <x-button wire:click="edit({{ $event['id'] }})"
+                                                class="btn-sm bg-transparent border-none text-green-500"
+                                                icon="o-pencil"></x-button>
+                                            <x-button wire:click="destroy({{ $event['id'] }})"
+                                                class="btn-sm bg-transparent border-none text-red-500"
+                                                icon="o-trash"></x-button>
                                         </x-slot:actions>
                                     </x-list-item>
                                 @endforeach
@@ -283,7 +273,7 @@
         </div>
 
         {{-- calendar --}}
-        <div class="col-span-12 md:col-span-4 relative overflow-hidden">
+        <div class="col-span-12 xl:col-span-4 relative overflow-hidden">
             <div class="grid grid-cols-12 gap-4 md:mt-9">
                 <div class="col-span-12">
                     <x-calendar locale="cs" :events="$events" />

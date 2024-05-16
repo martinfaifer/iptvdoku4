@@ -7,11 +7,15 @@
             <a>
                 <x-heroicon-o-viewfinder-circle class="size-6 text-white/80" fill="none" />
                 @if ($numberOfAlerts != 0)
-                    <div class="text-white text-xs bg-red-500 rounded-full absolute size-4 ml-4 mt-3">
-                        <span class="ml-1 font-semibold">
+                    {{-- <div class="text-white text-xs bg-red-500 rounded-full absolute size-5 ml-4 mt-3"> --}}
+                    <span class="mt-1 fixed text-red-500 font-bold bg-black/10 rounded-full z-auto ml-6">
+                        @if ($numberOfAlerts > 9)
+                            9+
+                        @else
                             {{ $numberOfAlerts }}
-                        </span>
-                    </div>
+                        @endif
+                    </span>
+                    {{-- </div> --}}
                 @endif
             </a>
         </li>

@@ -78,9 +78,9 @@
                     ])>
                         <x-share.cards.base-card title="Informace o zařízení">
                             {{-- ip and login block --}}
-                            <div class="grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
+                            <div class="grid xl:grid-cols-12 font-semibold text-[#A3ABB8]">
                                 @if (!is_null($device->ip))
-                                    <div class="col-span-12 md:col-span-4">
+                                    <div class="col-span-12 xl:col-span-4">
                                         <p>
                                             <span class="font-normal">
                                                 IP:
@@ -90,11 +90,11 @@
                                             </span>
                                         </p>
                                         <hr
-                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                                            class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
                                 @if (!is_null($device->ipmi_ip) && !empty($device->ipmi_ip))
-                                    <div class="col-span-12 md:col-span-4">
+                                    <div class="col-span-12 xl:col-span-4">
                                         <p>
                                             <span class="font-normal">
                                                 IPMI:
@@ -104,11 +104,11 @@
                                             </span>
                                         </p>
                                         <hr
-                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                                            class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
                                 @if (!is_null($device->controller_ip))
-                                    <div class="col-span-12 md:col-span-4">
+                                    <div class="col-span-12 xl:col-span-4">
                                         <p>
                                             <span class="font-normal">
                                                 URL kontroleru:
@@ -118,11 +118,11 @@
                                             </span>
                                         </p>
                                         <hr
-                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                                            class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
                                 @if (!is_null($device->username) || !is_null($device->password))
-                                    <div class="col-span-12 md:col-span-4">
+                                    <div class="col-span-12 xl:col-span-4">
                                         <p>
                                             <span class="font-normal">
                                                 Přístupy:
@@ -132,14 +132,14 @@
                                             </span>
                                         </p>
                                         <hr
-                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                                            class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
                             </div>
 
                             {{-- informations about device --}}
                             <div class="grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
-                                <div class="col-span-12 md:col-span-4">
+                                <div class="col-span-12 xl:col-span-4">
                                     <p>
                                         <span class="font-normal">
                                             Kategorie:
@@ -149,9 +149,9 @@
                                         </span>
                                     </p>
                                     <hr
-                                        class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                                        class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 </div>
-                                <div class="col-span-12 md:col-span-4 ">
+                                <div class="col-span-12 xl:col-span-4 ">
                                     <p>
                                         <span class="font-normal">
                                             Výrobce:
@@ -161,15 +161,15 @@
                                         </span>
                                     </p>
                                     <hr
-                                        class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                                        class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                 </div>
                             </div>
                             {{-- snmp block --}}
                             <div class="grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
                                 @if ($device->is_snmp == true)
-                                    <div class="col-span-12 md:col-span-12">
+                                    <div class="col-span-12 xl:col-span-12">
                                     </div>
-                                    <div class="col-span-12 md:col-span-3">
+                                    <div class="col-span-12 xl:col-span-3">
                                         <p>
                                             <span class="font-normal">
                                                 SNMP:
@@ -183,11 +183,11 @@
                                             </span>
                                         </p>
                                         <hr
-                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                                            class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
                                 @if (!is_null($device->snmp_version))
-                                    <div class="col-span-12 md:col-span-3">
+                                    <div class="col-span-12 xl:col-span-3">
                                         <p>
                                             <span class="font-normal">
                                                 SNMP verze:
@@ -197,11 +197,11 @@
                                             </span>
                                         </p>
                                         <hr
-                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                                            class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
                                 @if (!is_null($device->snmp_private_comunity))
-                                    <div class="col-span-12 md:col-span-3">
+                                    <div class="col-span-12 xl:col-span-3">
                                         <p>
                                             <span class="font-normal">
                                                 SNMP private komunita:
@@ -211,11 +211,11 @@
                                             </span>
                                         </p>
                                         <hr
-                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                                            class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
                                 @if (!is_null($device->snmp_public_comunity))
-                                    <div class="col-span-12 md:col-span-3">
+                                    <div class="col-span-12 xl:col-span-3">
                                         <p>
                                             <span class="font-normal">
                                                 SNMP public komunita:
@@ -225,14 +225,14 @@
                                             </span>
                                         </p>
                                         <hr
-                                            class="md:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                                            class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
                             </div>
                         </x-share.cards.base-card>
                     </div>
                     @if (!is_null($nmsCahedData) && !empty($nmsCahedData))
-                        <div class="col-span-12 md:col-span-4 mb-4">
+                        <div class="col-span-12 xl:col-span-4 mb-4">
                             <x-share.cards.base-card title="Informace o zařízení z NMS">
                                 <div class="grid grid-cols-12 gap-4 font-semibold text-[#A3ABB8]">
                                     <div class="col-span-12">
@@ -270,11 +270,11 @@
 
                 <div class="grid grid-cols-12 gap-4">
                     {{-- device ssh --}}
-                    <div class="col-span-12 md:col-span-6 mb-4">
+                    <div class="col-span-12 xl:col-span-6 mb-4">
                         <livewire:iptv.devices.device-ssh-component :device="$device" />
                     </div>
                     {{-- device alerts component --}}
-                    <div class="col-span-12 md:col-span-6 mb-4">
+                    <div class="col-span-12 xl:col-span-6 mb-4">
                         <livewire:iptv.devices.device-alert-component :device="$device" />
                     </div>
                 </div>
@@ -282,7 +282,7 @@
                 {{-- nimble api cached result --}}
                 @if (!is_null($nimbleCachedData))
                     <div class="grid grid-cols-12 gap-4">
-                        <div class="col-span-12 md:col-span-12 mb-4">
+                        <div class="col-span-12 xl:col-span-12 mb-4">
                             <livewire:iptv.devices.nimble-api-component
                                 :device="$device"></livewire:iptv.devices.nimble-api-component>
                         </div>
@@ -291,7 +291,7 @@
 
                 @if (!is_null($grapeTranscoderData))
                     <div class="grid grid-cols-12 gap-4">
-                        <div class="col-span-12 md:col-span-12 mb-4">
+                        <div class="col-span-12 xl:col-span-12 mb-4">
                             <livewire:iptv.devices.grape-transcoders-api-component
                                 :device="$device"></livewire:iptv.devices.grape-transcoders-api-component>
                         </div>
@@ -300,23 +300,23 @@
 
                 <div class="grid grid-cols-12 gap-4">
                     {{-- logs --}}
-                    <div class="col-span-12 md:col-span-4 mb-4">
+                    <div class="col-span-12 xl:col-span-4 mb-4">
                         <livewire:log-component columnValue="device:{{ $device->id }}" column="item" lazy />
                     </div>
                     {{-- contacts --}}
-                    <div class="col-span-12 md:col-span-4">
+                    <div class="col-span-12 xl:col-span-4">
                         <livewire:contact-component type="device" :item_id="$device->id" lazy />
                     </div>
                     {{-- poznámky --}}
-                    <div class="col-span-12 md:col-span-4 mb-4">
+                    <div class="col-span-12 xl:col-span-4 mb-4">
                         <livewire:notes.note-component column="device_id" :id="$device->id" lazy />
                     </div>
 
                     {{-- vazba na kanály --}}
-                    <div class="col-span-12 md:col-span-12 mb-4 ">
+                    <div class="col-span-12 xl:col-span-12 mb-4 ">
                         <x-share.cards.base-card title="Kanály na zařízení">
                             <div class="grid grid-cols-12">
-                                <div class="col-span-12 sm:col-span-12 mb-4 ">
+                                <div class="col-span-12 mb-4 ">
                                     <livewire:iptv.devices.device-channels-component :device="$device" lazy>
                                 </div>
                             </div>

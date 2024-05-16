@@ -16,7 +16,7 @@
     </div>
     @if (!empty($h264))
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12 md:col-span-6 mb-4">
+            <div class="col-span-12 xl:col-span-6 mb-4">
                 <x-share.cards.base-card title="Informace o unicastu">
                     {{-- list of multicast datas --}}
                     @foreach ($h264 as $unicast)
@@ -112,15 +112,15 @@
                 </x-modal>
             </div>
             @can('operate_with_childs', App\Models\Channel::class)
-                <div class="col-span-12 md:col-span-6 mb-4">
+                <div class="col-span-12 xl:col-span-6 mb-4">
                     {{--  --}}
                 </div>
             @endcan
-            <div class="col-span-12 md:col-span-6 mb-4">
+            <div class="col-span-12 xl:col-span-6 mb-4">
                 <livewire:notes.note-component column="h264_id" id="{{ $channel->h264->id }}" lazy>
             </div>
             @can('operate_with_childs', App\Models\Channel::class)
-                <div class="col-span-12 md:col-span-6 mb-4">
+                <div class="col-span-12 xl:col-span-6 mb-4">
                     <livewire:log-component columnValue="h264:{{ $channel->id }}" column="item" lazy>
                 </div>
             @endcan
@@ -138,7 +138,7 @@
                     <div class="col-span-12 mb-4">
                         <div class="grid grid-cols-12 gap-4">
                             @foreach ($devices as $device)
-                                <div wire:key="source-{{ $device->id }}" class="col-span-12 md:col-span-6 mb-4">
+                                <div wire:key="source-{{ $device->id }}" class="col-span-12 xl:col-span-6 mb-4">
                                     <livewire:iptv.channels.device-has-channel-component :device="$device" :channel="$channel"
                                         channelType="h264">
                                 </div>

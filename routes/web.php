@@ -59,15 +59,15 @@ Route::middleware('auth')->group(function () {
         });
         Route::prefix('geniustv')->group(function () {
             Route::prefix('statistics')->group(function () {
-                Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class);
-                Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class);
+                Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
+                Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
             });
-            Route::get('static-taxes', SettingsGeniusTvStaticTaxesComponent::class);
-            Route::get('channels-taxes', SettingsGeniusTvChannelsTaxesComponent::class);
-            Route::get('channel-packages', SettingsGeniusTvChannelPackagesTaxesComponent::class);
-            Route::get('offer-taxes', SettingsGeniusTvOfferTaxesComponent::class);
-            Route::get('discounts', SettingsGeniusTvDiscountsComponent::class);
-            Route::get('invoices', SettingsGeniusTvInvoicesComponent::class);
+            Route::get('static-taxes', SettingsGeniusTvStaticTaxesComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
+            Route::get('channels-taxes', SettingsGeniusTvChannelsTaxesComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
+            Route::get('channel-packages', SettingsGeniusTvChannelPackagesTaxesComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
+            Route::get('offer-taxes', SettingsGeniusTvOfferTaxesComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
+            Route::get('discounts', SettingsGeniusTvDiscountsComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
+            Route::get('invoices', SettingsGeniusTvInvoicesComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
         });
 
         Route::prefix('channels')->group(function () {

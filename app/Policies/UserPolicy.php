@@ -157,6 +157,15 @@ class UserPolicy
         return false;
     }
 
+    public function show_settings_geniustv(User $user)
+    {
+        if ($user->isAdministrativa()) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function show_tickets(User $user)
     {
         if ($user->isReader() || $user->isApi()) {

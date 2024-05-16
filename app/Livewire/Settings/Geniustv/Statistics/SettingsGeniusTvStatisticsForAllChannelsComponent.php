@@ -13,6 +13,7 @@ class SettingsGeniusTvStatisticsForAllChannelsComponent extends Component
 
     public function get_channels_usage()
     {
+        $statisticsForAllChannels = [];
         $channels = Channel::search($this->query)->withNanguChannelCode()->get(['id', 'name', 'nangu_channel_code']);
 
         foreach ($channels as $channel) {
