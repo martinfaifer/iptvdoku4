@@ -121,10 +121,14 @@
             <div>
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-sm btn-ghost btn-circle avatar border">
-                        <span class="text-sm">
-                            {{ $user->first_name[0] }}
-                            {{ $user->last_name[0] }}
-                        </span>
+                        @if (is_null($user->avatar_url))
+                            <span class="text-sm">
+                                {{ $user->first_name[0] }}
+                                {{ $user->last_name[0] }}
+                            </span>
+                        @else
+                            <img class="object-contain rounded-full" src="{{ $user->avatar_url }}" alt="" />
+                        @endif
                     </div>
                     <ul tabindex="0"
                         class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-[#0e151f] bg-clip-padding backdrop-filter

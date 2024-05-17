@@ -8,6 +8,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -26,7 +27,8 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        'user_role_id'
+        'user_role_id',
+        'avatar_url'
     ];
 
     /**
@@ -60,6 +62,11 @@ class User extends Authenticatable
     public function userRole(): BelongsTo
     {
         return $this->belongsTo(UserRole::class, 'user_role_id', 'id');
+    }
+
+    public function sessions(): HasMany
+    {
+        return $this->hasMany(Session::class, 'user_id', 'id');
     }
 
     public function isAdmin()

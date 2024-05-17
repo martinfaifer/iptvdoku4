@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Note extends Model
@@ -40,5 +41,10 @@ class Note extends Model
     public function satelit_card(): BelongsTo
     {
         return $this->belongsTo(SatelitCard::class, 'satelit_card_id', 'id');
+    }
+
+    public function scopeForUser(Builder $query, string $userEmail)
+    {
+        return $query->where('user', $userEmail);
     }
 }

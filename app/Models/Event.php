@@ -61,4 +61,9 @@ class Event extends Model
     {
         return $query->where('fe_notification', true);
     }
+
+    public function scopeForUser(Builder $query, string $userEmail)
+    {
+        return $query->where('creator', $userEmail);
+    }
 }

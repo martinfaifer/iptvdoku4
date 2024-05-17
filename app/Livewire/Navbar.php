@@ -33,7 +33,7 @@ class Navbar extends Component
     public function mount()
     {
         $this->runningEvents = $this->running_events();
-        $this->user = Auth::user();
+        $this->user = $this->load_user();
         $this->load_weather();
         $this->refreshAlerts();
 
@@ -44,6 +44,12 @@ class Navbar extends Component
                 $this->calendarNotificationDialog = true;
             }
         }
+    }
+
+    #[On('echo:refresh_user_data,BroadcastRefreshUserEvent')]
+    public function load_user()
+    {
+        return Auth::user();
     }
 
     #[On('echo:refresh_weather,BroadcastWeatherInformationEvent')]

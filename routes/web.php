@@ -1,33 +1,36 @@
 <?php
 
 use App\Livewire\Auth\Login;
-use App\Livewire\Iptv\Calendar\CalendarComponent;
-use App\Livewire\Iptv\Cards\SatelitCardComponent;
-use App\Livewire\Iptv\Channels\IptvChannel;
-use App\Livewire\Iptv\Devices\DeviceComponent;
-use App\Livewire\Iptv\FlowEye\FlowEyeComponent;
-use App\Livewire\Iptv\Sftps\SftpComponent;
-use App\Livewire\Settings\Channels\Banners\SettingsChannelsBannersComponent;
-use App\Livewire\Settings\Channels\Restart\SettingsChannelsRestartComponent;
-use App\Livewire\Settings\Dashboard\SettingsDashboardComponent;
-use App\Livewire\Settings\Devices\Distributors\SettingsDevicesDistributorsComponent;
-use App\Livewire\Settings\Devices\Vendors\SettingsDevicesVendorsComponent;
-use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
-use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
-use App\Livewire\Settings\Geniustv\Discounts\SettingsGeniusTvDiscountsComponent;
-use App\Livewire\Settings\Geniustv\Invoices\SettingsGeniusTvInvoicesComponent;
-use App\Livewire\Settings\Geniustv\OfferTaxes\SettingsGeniusTvOfferTaxesComponent;
-use App\Livewire\Settings\Geniustv\StaticTaxes\SettingsGeniusTvStaticTaxesComponent;
-use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
-use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsHboComponent;
-use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
-use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
-use App\Livewire\Settings\Notifications\Slack\SettingsSlackNotificationComponent;
-use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationComponent;
-use App\Livewire\Settings\Tags\SettingsTagComponent;
-use App\Livewire\Settings\Users\SettingsUsersComponent;
+use App\Livewire\User\UserComponent;
 use App\Livewire\Wiki\WikiComponent;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Iptv\Sftps\SftpComponent;
+use App\Livewire\Iptv\Channels\IptvChannel;
+use App\Livewire\User\UserActionsComponent;
+use App\Livewire\Iptv\Devices\DeviceComponent;
+use App\Livewire\Iptv\FlowEye\FlowEyeComponent;
+use App\Livewire\User\UserNotificationComponent;
+use App\Livewire\Iptv\Calendar\CalendarComponent;
+use App\Livewire\Iptv\Cards\SatelitCardComponent;
+use App\Livewire\Settings\Tags\SettingsTagComponent;
+use App\Livewire\Settings\Users\SettingsUsersComponent;
+use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
+use App\Livewire\Settings\Dashboard\SettingsDashboardComponent;
+use App\Livewire\Settings\Devices\Vendors\SettingsDevicesVendorsComponent;
+use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
+use App\Livewire\Settings\Channels\Banners\SettingsChannelsBannersComponent;
+use App\Livewire\Settings\Channels\Restart\SettingsChannelsRestartComponent;
+use App\Livewire\Settings\Geniustv\Invoices\SettingsGeniusTvInvoicesComponent;
+use App\Livewire\Settings\Geniustv\Discounts\SettingsGeniusTvDiscountsComponent;
+use App\Livewire\Settings\Notifications\Slack\SettingsSlackNotificationComponent;
+use App\Livewire\Settings\Geniustv\OfferTaxes\SettingsGeniusTvOfferTaxesComponent;
+use App\Livewire\Settings\Devices\Distributors\SettingsDevicesDistributorsComponent;
+use App\Livewire\Settings\Geniustv\StaticTaxes\SettingsGeniusTvStaticTaxesComponent;
+use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsHboComponent;
+use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationComponent;
+use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
+use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
+use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
 
 Route::get('test', function () {
     return view('pdfs.invoice');
@@ -48,6 +51,12 @@ Route::middleware('auth')->group(function () {
     Route::get('wiki/{topic?}', WikiComponent::class)->middleware('can:show_topics, App\Models\WikiTopic');
 
     Route::get('floweye/{issue?}', FlowEyeComponent::class)->middleware('can:show_tickets, App\Models\User');
+
+    Route::prefix('profile')->group(function () {
+        Route::get('', UserComponent::class);
+        Route::get('notifications', UserNotificationComponent::class);
+        Route::get('actions', UserActionsComponent::class);
+    });
 
     Route::prefix('settings')->group(function () {
         Route::get('dashboard', SettingsDashboardComponent::class)->middleware('can:show_settings_dashboard,App\Models\User');
