@@ -55,7 +55,7 @@ class SettingsDashboardComponent extends Component
         $this->satCards = $this->count_sat_cards();
         $this->nanguIsps = NanguIsp::get(['id', 'name']);
         $this->newestTopics = WikiTopic::orderBy('id', 'DESC')->take(5)->get(['id', 'title', 'creator']);
-        $this->newestUsers = User::orderBy('id', 'DESC')->take(5)->get(['id', 'email']);
+        $this->newestUsers = User::orderBy('id', 'DESC')->take(5)->get(['id', 'first_name', 'last_name', 'email', 'user_role_id', 'avatar_url']);
         $this->passedEvents = Event::where('start_date', '<=', now()->format('Y-m-d'))->orderBy('id', "DESC")->take(5)->get();
     }
 

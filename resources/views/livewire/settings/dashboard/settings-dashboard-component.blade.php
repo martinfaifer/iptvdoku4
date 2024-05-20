@@ -4,8 +4,9 @@
         ['key' => 'creator', 'label' => 'Autor', 'class' => 'text-white/80'],
     ];
     $newestUsersHeader = [
+        ['key' => 'avatar', 'label' => ''],
         ['key' => 'email', 'label' => 'Email', 'class' => 'text-white/80'],
-        ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+        ['key' => 'userRole.name', 'label' => 'Role', 'class' => 'text-white/80'],
     ];
     $passedEventsHeader = [
         ['key' => 'label', 'label' => 'Titulek', 'class' => 'text-white/80'],
@@ -172,8 +173,21 @@
         {{-- nejnovější uživatelé --}}
         <div class="col-span-12 md:col-span-4">
             <x-share.cards.base-card title="Nejnovější uživatelé">
-                <div class=" h-48 overflow-auto">
+                <div class="h-48 overflow-auto">
                     <x-table :headers="$newestUsersHeader" :rows="$newestUsers">
+                        @scope('cell_avatar', $newestUser)
+                            <div class="rounded-full size-8 bg-black flex items-center justify-center cursor-pointer">
+                                @if (is_null($newestUser->avatar_url))
+                                    <div class="font-semibold">
+                                        {{ $newestUser->first_name[0] }}
+                                        {{ $newestUser->last_name[0] }}
+                                    </div>
+                                @else
+                                    <img class="object-contain rounded-full" src="{{ config('app.url')."/". $newestUser->avatar_url }}"
+                                        alt="" />
+                                @endif
+                            </div>
+                        @endscope
                     </x-table>
                 </div>
             </x-share.cards.base-card>

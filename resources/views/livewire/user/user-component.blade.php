@@ -14,10 +14,12 @@
                     class="mt-6 rounded-full size-32 bg-black flex items-center justify-center cursor-pointer">
                     @if (is_null($user->avatar_url))
                         <div class="text-4xl font-semibold">
-                            MF
+                            {{ $user->first_name[0] }}
+                            {{ $user->last_name[0] }}
                         </div>
                     @else
-                        <img class="object-contain rounded-full" src="{{ $user->avatar_url }}" alt="" />
+                        <img class="object-contain rounded-full" src="{{ config('app.url') . '/' . $user->avatar_url }}""
+                            alt="" />
                     @endif
                 </div>
             </div>

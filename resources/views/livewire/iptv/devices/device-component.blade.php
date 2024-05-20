@@ -71,10 +71,10 @@
                     @endif
                     <div @class([
                         'col-span-12 mb-4',
-                        'md:col-span-12' => is_null($nmsCahedData),
-                        'md:col-span-12' => empty($nmsCahedData),
-                        'md:col-span-8' => !is_null($nmsCahedData),
-                        'md:col-span-8' => !empty($nmsCahedData),
+                        'xl:col-span-12' => is_null($nmsCahedData),
+                        'xl:col-span-12' => empty($nmsCahedData),
+                        'xl:col-span-8' => !is_null($nmsCahedData),
+                        'xl:col-span-8' => !empty($nmsCahedData),
                     ])>
                         <x-share.cards.base-card title="Informace o zařízení">
                             {{-- ip and login block --}}

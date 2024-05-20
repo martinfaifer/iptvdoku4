@@ -127,7 +127,7 @@
                                 {{ $user->last_name[0] }}
                             </span>
                         @else
-                            <img class="object-contain rounded-full" src="{{ $user->avatar_url }}" alt="" />
+                            <img class="object-contain rounded-full" src="{{ config('app.url')."/". $user->avatar_url }}" alt="" />
                         @endif
                     </div>
                     <ul tabindex="0"
