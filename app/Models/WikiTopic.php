@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Support\Str;
+use App\Observers\WikiTopicObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
+#[ObservedBy(WikiTopicObserver::class)]
 class WikiTopic extends Model
 {
     protected $fillable = [

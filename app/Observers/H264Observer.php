@@ -6,13 +6,21 @@ use App\Jobs\LogJob;
 use App\Models\H264;
 use App\Models\Loger;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendEmailNotificationJob;
 
 class H264Observer
 {
     public function created(H264 $h264)
     {
-        if (! Auth::user()) {
+        if (!Auth::user()) {
             $email = 'system@';
+
+            SendEmailNotificationJob::dispatch(
+                "Byl přidán H264 k " . $h264->channel->name,
+                "Uživatel " . Auth::user()->email . " přidal H264 k " . $h264->channel->name,
+                Auth::user()->email,
+                'notify_if_channel_change'
+            );
         }
         LogJob::dispatch(
             user: isset($email) ? $email : Auth::user()->email,
@@ -38,6 +46,13 @@ class H264Observer
                 'status' => $h264->status,
             ])
         );
+
+        SendEmailNotificationJob::dispatch(
+            "Byl upravil H264 u " . $h264->channel->name,
+            "Uživatel " . Auth::user()->email . " upravil H264 u " . $h264->channel->name,
+            Auth::user()->email,
+            'notify_if_channel_change'
+        );
     }
 
     public function deleted(H264 $h264)
@@ -51,6 +66,13 @@ class H264Observer
                 'devices_id' => $h264->device_id,
                 'status' => $h264->status,
             ])
+        );
+
+        SendEmailNotificationJob::dispatch(
+            "Byl odebral H264 u " . $h264->channel->name,
+            "Uživatel " . Auth::user()->email . " odebral u " . $h264->channel->name,
+            Auth::user()->email,
+            'notify_if_channel_change'
         );
     }
 }

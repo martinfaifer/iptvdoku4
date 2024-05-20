@@ -2,19 +2,20 @@
 
 namespace App\Observers;
 
-use App\Jobs\GetChannelDetailFromNanguApiJob;
 use App\Jobs\LogJob;
+use App\Models\Loger;
 use App\Models\Channel;
 use App\Models\Contact;
-use App\Models\Loger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use App\Jobs\SendEmailNotificationJob;
+use App\Jobs\GetChannelDetailFromNanguApiJob;
 
 class ChannelObserver
 {
     public function created(Channel $channel)
     {
-        if (! Auth::user()) {
+        if (!Auth::user()) {
             $email = 'system@';
         }
 
@@ -38,7 +39,14 @@ class ChannelObserver
         );
 
         GetChannelDetailFromNanguApiJob::dispatch($channel, 3600);
-
+        if ($email != "system@") {
+            SendEmailNotificationJob::dispatch(
+                "Vytvořen nový kanál $channel->name",
+                "Uživatel " . Auth::user()->email . " vytvořil kanál $channel->name",
+                Auth::user()->email,
+                'notify_if_channel_change'
+            );
+        }
         Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
     }
 
@@ -64,6 +72,14 @@ class ChannelObserver
         );
 
         GetChannelDetailFromNanguApiJob::dispatch($channel, 3600);
+
+        SendEmailNotificationJob::dispatch(
+            "Upraven kanál $channel->name",
+            "Uživatel " . Auth::user()->email . " upravil kanál $channel->name",
+            Auth::user()->email,
+            'notify_if_channel_change'
+        );
+
         Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
     }
 
@@ -81,5 +97,12 @@ class ChannelObserver
         // delete channel contacts
         Contact::where('type', 'channel')->where('item_id', $channel->id)->delete();
         Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
+
+        SendEmailNotificationJob::dispatch(
+            "Odebrán kanál $channel->name",
+            "Uživatel ".Auth::user()->email." odebral kanál $channel->name",
+            Auth::user()->email,
+            'notify_if_channel_change'
+        );
     }
 }

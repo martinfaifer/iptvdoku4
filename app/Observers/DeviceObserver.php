@@ -3,13 +3,14 @@
 namespace App\Observers;
 
 use App\Jobs\LogJob;
-use App\Jobs\SearchIfSatCardIsUsedInDeviceJob;
 use App\Models\Alert;
 use App\Models\Chart;
-use App\Models\Contact;
-use App\Models\Device;
 use App\Models\Loger;
+use App\Models\Device;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendEmailNotificationJob;
+use App\Jobs\SearchIfSatCardIsUsedInDeviceJob;
 
 class DeviceObserver
 {
@@ -36,6 +37,13 @@ class DeviceObserver
                 'showed_create_template' => $device->showed_create_template,
                 'has_channels' => $device->has_channels,
             ])
+        );
+
+        SendEmailNotificationJob::dispatch(
+            "Bylo přidáno zařízení " . $device->name,
+            "Uživatel " . Auth::user()->email . " přidal zařízení " . $device->name,
+            Auth::user()->email,
+            'notify_if_channel_change'
         );
     }
 
@@ -64,6 +72,13 @@ class DeviceObserver
                     'has_channels' => $device->has_channels,
                 ])
             );
+
+            SendEmailNotificationJob::dispatch(
+                "Bylo upraveno zařízení " . $device->name,
+                "Uživatel " . Auth::user()->email . " upravil zařízení " . $device->name,
+                Auth::user()->email,
+                'notify_if_channel_change'
+            );
         }
 
         // search for sat card
@@ -81,5 +96,12 @@ class DeviceObserver
         Contact::where('type', 'device')->where('item_id', $device->id)->delete();
 
         SearchIfSatCardIsUsedInDeviceJob::dispatch();
+
+        SendEmailNotificationJob::dispatch(
+            "Bylo odebráno zařízení " . $device->name,
+            "Uživatel " . Auth::user()->email . " oderbal zařízení " . $device->name,
+            Auth::user()->email,
+            'notify_if_channel_change'
+        );
     }
 }

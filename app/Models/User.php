@@ -28,7 +28,15 @@ class User extends Authenticatable
         'email',
         'password',
         'user_role_id',
-        'avatar_url'
+        'avatar_url',
+        'notify_if_channel_change',
+        'notify_if_added_new_wiki_content',
+        'notify_if_weather_problem',
+        'notify_if_too_many_channels_down',
+        'notify_if_satelit_card_has_expiration',
+        'notify_if_added_new_event',
+        'notify_if_upload_new_banner',
+        'notify_if_channel_was_added_to_promo'
     ];
 
     /**
@@ -49,6 +57,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'notify_if_channel_change' => 'boolean',
+        'notify_if_added_new_wiki_content' => 'boolean',
+        'notify_if_weather_problem' => 'boolean',
+        'notify_if_too_many_channels_down' => 'boolean',
+        'notify_if_satelit_card_has_expiration' => 'boolean',
+        'notify_if_added_new_event' => 'boolean',
+        'notify_if_upload_new_banner' => 'boolean',
+        'notify_if_channel_was_added_to_promo' => 'boolean',
     ];
 
     protected function password(): Attribute

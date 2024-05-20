@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Contracts\Database\Query\Builder;
 
 class Loger extends Model
 {
@@ -26,5 +26,10 @@ class Loger extends Model
     public function prunable(): Builder
     {
         return static::where('created_at', '<=', now()->submonths(2));
+    }
+
+    public function scopeForUser(Builder $query, string $user)
+    {
+        return $query->where('user', $user);
     }
 }

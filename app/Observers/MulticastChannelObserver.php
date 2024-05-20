@@ -2,11 +2,12 @@
 
 namespace App\Observers;
 
-use App\Jobs\DeleteStreamFromIptvDohledJob;
 use App\Jobs\LogJob;
-use App\Models\ChannelMulticast;
 use App\Models\Loger;
+use App\Models\ChannelMulticast;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendEmailNotificationJob;
+use App\Jobs\DeleteStreamFromIptvDohledJob;
 
 class MulticastChannelObserver
 {
@@ -28,6 +29,13 @@ class MulticastChannelObserver
                     'status' => $multicast->status,
                 ])
             );
+
+            SendEmailNotificationJob::dispatch(
+                "Byl přidán multicast k " . $multicast->channel->name,
+                "Uživatel " . Auth::user()->email . " přidal multicast k " . $multicast->channel->name,
+                Auth::user()->email,
+                'notify_if_channel_change'
+            );
         }
     }
 
@@ -48,6 +56,13 @@ class MulticastChannelObserver
                 'status' => $multicast->status,
             ])
         );
+
+        SendEmailNotificationJob::dispatch(
+            "Byl upraven multicast u  " . $multicast->channel->name,
+            "Uživatel " . Auth::user()->email . " upravil multicast u " . $multicast->channel->name,
+            Auth::user()->email,
+            'notify_if_channel_change'
+        );
     }
 
     public function deleted(ChannelMulticast $multicast)
@@ -64,6 +79,13 @@ class MulticastChannelObserver
                 'channel_id' => $multicast->channel_id,
                 'stb_ip' => $multicast->stb_ip,
             ])
+        );
+
+        SendEmailNotificationJob::dispatch(
+            "Byl odebrán multicast u " . $multicast->channel->name,
+            "Uživatel " . Auth::user()->email . " odebral multicast u " . $multicast->channel->name,
+            Auth::user()->email,
+            'notify_if_channel_change'
         );
     }
 }

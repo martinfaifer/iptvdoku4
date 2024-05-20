@@ -2,9 +2,10 @@
 
 namespace App\Services\Api\OpenWeather;
 
-use App\Actions\Slack\SendSlackNotificationAction;
 use App\Models\Slack;
 use Illuminate\Support\Facades\Cache;
+use App\Jobs\SendEmailNotificationJob;
+use App\Actions\Slack\SendSlackNotificationAction;
 
 class OpenWeatherService
 {
@@ -33,6 +34,8 @@ class OpenWeatherService
                     text: ':thunder_cloud_and_rain:    Na dnešní den je očekávána bouřka, může dojít k výpadkům kanálů ze satelitu.',
                     url: $channel->url
                 ))();
+
+                $this->send_email_notification('Na dnešní den je očekávána bouřka, může dojít k výpadkům kanálů ze satelitu.');
             }
 
             if (str_contains($weatherDescription, 'heavy intensity rain')) {
@@ -40,6 +43,8 @@ class OpenWeatherService
                     text: ':rain_cloud:    Je očekáván velmi silný déšť, může dojít k výpadkům kanálů ze satelitu.',
                     url: $channel->url
                 ))();
+
+                $this->send_email_notification('Je očekáván velmi silný déšť, může dojít k výpadkům kanálů ze satelitu.');
             }
 
             if (str_contains($weatherDescription, 'very heavy rain')) {
@@ -47,6 +52,8 @@ class OpenWeatherService
                     text: ':rain_cloud:    Je očekáván velmi silný déšť, může dojít k výpadkům kanálů ze satelitu.',
                     url: $channel->url
                 ))();
+
+                $this->send_email_notification('Je očekáván velmi silný déšť, může dojít k výpadkům kanálů ze satelitu.');
             }
 
             if (str_contains($weatherDescription, 'extreme rain')) {
@@ -54,6 +61,8 @@ class OpenWeatherService
                     text: ':rain_cloud:    Je očekáván velmi silný déšť, může dojít k výpadkům kanálů ze satelitu.',
                     url: $channel->url
                 ))();
+
+                $this->send_email_notification('Je očekáván velmi silný déšť, může dojít k výpadkům kanálů ze satelitu.');
             }
 
             if (str_contains($weatherDescription, 'Heavy snow')) {
@@ -61,7 +70,19 @@ class OpenWeatherService
                     text: ':snowflake:    Je očekáváno silné sněžení, může dojít k výpadkům kanálů ze satelitu.',
                     url: $channel->url
                 ))();
+
+                $this->send_email_notification('Je očekáváno silné sněžení, může dojít k výpadkům kanálů ze satelitu.');
             }
         });
+    }
+
+    public function send_email_notification(string $description)
+    {
+        SendEmailNotificationJob::dispatch(
+            "Varování před počasím!",
+            $description,
+            null,
+            'notify_if_weather_problem'
+        );
     }
 }
