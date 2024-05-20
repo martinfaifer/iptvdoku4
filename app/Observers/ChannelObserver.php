@@ -39,7 +39,7 @@ class ChannelObserver
         );
 
         GetChannelDetailFromNanguApiJob::dispatch($channel, 3600);
-        if ($email != "system@") {
+        if (Auth::user()) {
             SendEmailNotificationJob::dispatch(
                 "Vytvořen nový kanál $channel->name",
                 "Uživatel " . Auth::user()->email . " vytvořil kanál $channel->name",

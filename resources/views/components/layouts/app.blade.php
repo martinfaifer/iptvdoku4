@@ -48,7 +48,7 @@
 
         <x-main full-width class="no-scrollbar">
             @auth
-                <x-slot:sidebar drawer="main-drawer"
+                <x-slot:sidebar drawer="main-drawer fixed"
                     class="bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] border-opacity-10 !w-[320px]">
                     <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
                         <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
@@ -119,7 +119,7 @@
                         </ul>
                     </x-menu>
                     {{-- main dynamic navigation --}}
-                    <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 fixed !h-full">
+                    <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 fixed !h-[99%]">
                         <div class="overflow-y-scroll hover:overflow-scroll">
                             @if (request()->is('/') || request()->is('channels') || request()->is('channels/*'))
                                 <livewire:iptv.channels.menu.channels-menu />

@@ -16,6 +16,19 @@
 
         <div>
             <x-table :headers="$headers" :rows="$users">
+                @scope('cell_avatar', $user)
+                <div class="rounded-full size-8 bg-black flex items-center justify-center cursor-pointer">
+                    @if (is_null($user->avatar_url))
+                        <div class="font-semibold">
+                            {{ $user->first_name[0] }}
+                            {{ $user->last_name[0] }}
+                        </div>
+                    @else
+                        <img class="object-contain rounded-full" src="{{ config('app.url')."/". $user->avatar_url }}"
+                            alt="" />
+                    @endif
+                </div>
+            @endscope
                 @scope('cell_actions', $user)
                     <div class="flex mx-auto gap-4">
                         <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
