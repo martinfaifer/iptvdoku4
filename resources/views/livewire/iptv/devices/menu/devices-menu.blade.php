@@ -2,7 +2,7 @@
     {{-- @can('view_devices', App\Models\Device::class) --}}
     <ul class="menu w-60" wire:scroll>
         @foreach ($categoriesWithDevices as $category)
-            <li wire:key=='category_{{ $category->id }}'>
+            <li wire:key='category_{{ $category->id }}'>
                 <details open>
                     <summary class="font-semibold">
                         @if (!is_null($category->icon))
