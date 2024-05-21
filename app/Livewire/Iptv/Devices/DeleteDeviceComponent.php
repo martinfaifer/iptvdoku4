@@ -16,7 +16,11 @@ class DeleteDeviceComponent extends Component
     public function destroy(Device $device)
     {
         // delete ssh ,alerts ,channel if can be restarted
-        $device->ssh->delete();
+        try {
+            $device->ssh->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         RestartChannel::where('device_id', $device->id)->delete();
         $device->delete();
 

@@ -7,9 +7,11 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Models\DeviceCategory;
 use Illuminate\Support\Facades\Cache;
+use App\Traits\Devices\CacheDevicesTrait;
 
 class DevicesMenu extends Component
 {
+    use CacheDevicesTrait;
     public $categoriesWithDevices;
 
     public function mount()
@@ -21,20 +23,10 @@ class DevicesMenu extends Component
     #[On('update_devices_menu')]
     public function loadDevices()
     {
-        $this->categoriesWithDevices = DeviceCategory::with('devices:id,name,device_category_id')->get();
-        foreach ($this->categoriesWithDevices as $category) {
-            if (! $category->devices->isEmpty()) {
-                foreach ($category->devices as $device) {
-                    $nmsCachedData = Cache::get('nms_'.$device->id);
-
-                    try {
-                        $device->nms_status = $nmsCachedData[0]['nms_device_status_id']['nms_device_status_type_id'];
-                    } catch (\Throwable $th) {
-                        //throw $th;
-                    }
-                }
-            }
+        if (!Cache::has('devices_menu')) {
+            $this->cache_devices_for_menu();
         }
+        return $this->categoriesWithDevices = Cache::get('devices_menu');
     }
 
     public function render()

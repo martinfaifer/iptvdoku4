@@ -2,13 +2,15 @@
 
 namespace App\Console\Commands;
 
-use App\Events\BroadcastDevicesMenuEvent;
 use App\Models\Device;
-use App\Services\Api\NMS\ConnectService;
 use Illuminate\Console\Command;
+use App\Services\Api\NMS\ConnectService;
+use App\Events\BroadcastDevicesMenuEvent;
+use App\Traits\Devices\CacheDevicesTrait;
 
 class GetDevicesDataFromNmsCommand extends Command
 {
+    use CacheDevicesTrait;
     /**
      * The name and signature of the console command.
      *
@@ -32,6 +34,9 @@ class GetDevicesDataFromNmsCommand extends Command
             (new ConnectService($device, 'search'))->connect();
         });
 
+        // reset devices menu
+        $this->cache_devices_for_menu();
+        // bradcast new menu
         BroadcastDevicesMenuEvent::dispatch();
     }
 }

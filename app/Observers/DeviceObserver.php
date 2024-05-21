@@ -9,11 +9,14 @@ use App\Models\Loger;
 use App\Models\Device;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use App\Jobs\SendEmailNotificationJob;
+use App\Traits\Devices\CacheDevicesTrait;
 use App\Jobs\SearchIfSatCardIsUsedInDeviceJob;
 
 class DeviceObserver
 {
+    use CacheDevicesTrait;
     public function created(Device $device)
     {
         LogJob::dispatch(
@@ -45,6 +48,9 @@ class DeviceObserver
             Auth::user()->email,
             'notify_if_channel_change'
         );
+
+        // cache devices menu
+        $this->cache_devices_for_menu();
     }
 
     public function updated(Device $device)
@@ -83,12 +89,15 @@ class DeviceObserver
 
         // search for sat card
         SearchIfSatCardIsUsedInDeviceJob::dispatch();
+
+        // cache devices menu
+        $this->cache_devices_for_menu();
     }
 
     public function deleted(Device $device)
     {
         // delete charts
-        Chart::where('item', 'like', '%device:'.$device->id.':%')->delete();
+        Chart::where('item', 'like', '%device:' . $device->id . ':%')->delete();
         // delete alerts
         Alert::where('type', 'gpu_check_failed')->where('item_id', $device->id)->delete();
         Alert::where('type', 'gpu_problem')->where('item_id', $device->id)->delete();
@@ -96,6 +105,9 @@ class DeviceObserver
         Contact::where('type', 'device')->where('item_id', $device->id)->delete();
 
         SearchIfSatCardIsUsedInDeviceJob::dispatch();
+
+        // cache devices menu
+        $this->cache_devices_for_menu();
 
         SendEmailNotificationJob::dispatch(
             "Bylo odebráno zařízení " . $device->name,

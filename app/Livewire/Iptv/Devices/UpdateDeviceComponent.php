@@ -54,7 +54,7 @@ class UpdateDeviceComponent extends Component
 
         $this->dispatch('update_devices_menu');
 
-        $this->redirect('/devices/'.$this->device->id, true);
+        $this->redirect('/devices/' . $this->device->id, true);
 
         return $this->success_alert('Zařízení upraveno');
     }
