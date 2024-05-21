@@ -46,7 +46,7 @@
         <livewire:alert-component>
         @endauth
 
-        <x-main full-width >
+        <x-main full-width>
             @auth
                 @persist('sidebar')
                     <x-slot:sidebar drawer="sidebar-drawer"
@@ -118,6 +118,9 @@
                                     <livewire:iptv.flow-eye.menu.flow-eye-menu-icon-with-alert-component />
                                 @endcan
                             </ul>
+                            <div class="static">
+                                <x-button @click="toggle" icon="o-bars-3-bottom-left" class="bg-transparent border-none absolute bottom-0 left-2" />
+                            </div>
                         </x-menu>
                         {{-- main dynamic navigation --}}
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 fixed !h-[99%]">
@@ -153,6 +156,7 @@
                             </div>
                             {{-- @endpersist --}}
                         </x-menu>
+
                     </x-slot:sidebar>
                 @endpersist
             @endauth
