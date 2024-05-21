@@ -1,6 +1,6 @@
 <div>
     <div class="tooltip tooltip-bottom" data-tip="FlowEye">
-        <li href="/floweye" wire:navigate @class([
+        <li href="/floweye" wire:navigate.hover @class([
             'rounded-lg',
             'bg-[#1A1E2A]' => request()->is('floweye') || request()->is('floweye/*'),
         ])>

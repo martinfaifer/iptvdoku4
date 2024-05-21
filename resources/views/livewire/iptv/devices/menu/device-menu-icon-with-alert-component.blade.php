@@ -1,5 +1,5 @@
 <div class="tooltip tooltip-bottom" data-tip="{{ $dataType }}">
-    <li href="/devices" wire:navigate @class([
+    <li href="/devices" wire:navigate.hover @class([
         'rounded-lg',
         'bg-[#1A1E2A]' => request()->is('devices') || request()->is('devices/*'),
     ])>

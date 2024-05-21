@@ -54,7 +54,7 @@
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
                             <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
                                 <div class="tooltip tooltip-bottom" data-tip="Kanály">
-                                    <li href="/channels" wire:navigate @class([
+                                    <li href="/channels" wire:navigate.hover @class([
                                         'rounded-lg',
                                         'bg-[#1A1E2A]' => request()->is('channels') || request()->is('channels/*'),
                                     ])>
@@ -68,7 +68,7 @@
                                 @endcan
                                 @can('show_blade_functions', App\Model\SatelitCard::class)
                                     <div class="tooltip tooltip-bottom" data-tip="Satelitní karty">
-                                        <li href="/sat-cards" wire:navigate @class([
+                                        <li href="/sat-cards" wire:navigate.hover @class([
                                             'rounded-lg',
                                             'bg-[#1A1E2A]' =>
                                                 request()->is('sat-cards') || request()->is('sat-cards/*'),
@@ -81,7 +81,7 @@
                                 @endcan
                                 @can('show_blade_functions', App\Models\Event::class)
                                     <div class="tooltip tooltip-bottom" data-tip="Kalendář">
-                                        <li href="/calendar" wire:navigate @class([
+                                        <li href="/calendar" wire:navigate.hover @class([
                                             'rounded-lg',
                                             'bg-[#1A1E2A]' => request()->is('calendar') || request()->is('calendar/*'),
                                         ])>
@@ -93,7 +93,7 @@
                                 @endcan
                                 @can('show_servers', App\Models\SftpServer::class)
                                     <div class="tooltip tooltip-bottom" data-tip="Sftp servery">
-                                        <li href="/sftps" wire:navigate @class([
+                                        <li href="/sftps" wire:navigate.hover @class([
                                             'rounded-lg',
                                             'bg-[#1A1E2A]' => request()->is('sftps') || request()->is('sftps/*'),
                                         ])>
@@ -105,7 +105,7 @@
                                     </div>
                                 @endcan
                                 <div class="tooltip tooltip-bottom" data-tip="Wiki">
-                                    <li href="/wiki" wire:navigate @class([
+                                    <li href="/wiki" wire:navigate.hover @class([
                                         'rounded-lg',
                                         'bg-[#1A1E2A]' => request()->is('wiki') || request()->is('wiki/*'),
                                     ])>
