@@ -53,7 +53,7 @@
                 </li>
             @endforeach
         </ul>
-        @script
+        {{-- @script
             <script>
                 let url = window.location.href;
                 let parsedUrl = url.split("/");
@@ -66,6 +66,6 @@
 
                 }
             </script>
-        @endscript
+        @endscript --}}
     {{-- @endcan --}}
 </div>
