@@ -37,7 +37,7 @@
 
 {{-- bg-gradient-to-b from-[#020313] --}}
 
-<body class="bg-gradient-to-r from-slate-900 to-sky-950 overflow-x-hidden no-scrollbar">
+<body class="min-h-screen bg-gradient-to-r from-slate-900 to-sky-950 overflow-x-hidden no-scrollbar">
     <x-toast />
     @auth
         <x-spotlight search-text="Vyhledejte ... " no-results-text="Ops! Nenalezeno." class="justify-center"
@@ -46,10 +46,10 @@
         <livewire:alert-component>
         @endauth
 
-        <x-main full-width class="no-scrollbar">
+        <x-main full-width >
             @auth
                 @persist('sidebar')
-                    <x-slot:sidebar drawer="main-drawer fixed h-screen"
+                    <x-slot:sidebar drawer="sidebar-drawer"
                         class="bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] border-opacity-10 !w-[320px]">
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
                             <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
@@ -120,7 +120,6 @@
                             </ul>
                         </x-menu>
                         {{-- main dynamic navigation --}}
-
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 fixed !h-[99%]">
                             {{-- @persist('dynamic-sidebar-navigation') --}}
                             <div class="overflow-y-scroll hover:overflow-scroll">
