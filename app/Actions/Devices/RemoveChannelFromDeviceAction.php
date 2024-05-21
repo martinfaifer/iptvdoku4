@@ -16,16 +16,18 @@ class RemoveChannelFromDeviceAction
         Device::where('template', '!=', null)->each(function ($device) {
             $template = $device->template;
 
-            if (array_key_exists('inputs', $template)) {
-                $template['inputs'] = $this->remove_channel_from_template($template['inputs']);
-            }
-            if (array_key_exists('outputs', $template)) {
-                $template['outputs'] = $this->remove_channel_from_template($template['outputs']);
-            }
+            if (!is_null($template)) {
+                if (array_key_exists('inputs', $template)) {
+                    $template['inputs'] = $this->remove_channel_from_template($template['inputs']);
+                }
+                if (array_key_exists('outputs', $template)) {
+                    $template['outputs'] = $this->remove_channel_from_template($template['outputs']);
+                }
 
-            $device->update([
-                'template' => $template,
-            ]);
+                $device->update([
+                    'template' => $template,
+                ]);
+            }
         });
     }
 
@@ -47,9 +49,9 @@ class RemoveChannelFromDeviceAction
     public function getChannelNameByType()
     {
         if ($this->isBackup == true) {
-            return $this->channelType.':'.$this->channelId.':backup';
+            return $this->channelType . ':' . $this->channelId . ':backup';
         }
 
-        return $this->channelType.':'.$this->channelId;
+        return $this->channelType . ':' . $this->channelId;
     }
 }
