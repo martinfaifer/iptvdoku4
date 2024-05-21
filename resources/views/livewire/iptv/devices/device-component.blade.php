@@ -1,4 +1,4 @@
-<div>
+<div class=" overflow-hidden">
     <div class="flex flex-col">
         {{-- create new channel --}}
         <div class="relative">
@@ -53,8 +53,8 @@
                 <div class="grid grid-cols-12 gap-4">
                     @if (!is_null($device->template))
                         <div class="col-span-12 mb-4">
-                            <livewire:iptv.devices.device-template-component :device="$device"
-                                :template="$device->template"></livewire:iptv.devices.device-template-component>
+                            <livewire:iptv.devices.device-template-component :device="$device" :template="$device->template"
+                                lazy></livewire:iptv.devices.device-template-component>
                         </div>
                     @else
                         {{-- device has not template but if has oids can we show dialog for create one --}}
@@ -62,7 +62,7 @@
                             <div class="navbar bg-transparent">
                                 <div class="flex-1">
                                     <livewire:iptv.devices.create-device-template-component class="my-4"
-                                        :device="$device"></livewire:iptv.devices.create-device-template-component>
+                                        :device="$device" lazy></livewire:iptv.devices.create-device-template-component>
                                 </div>
                                 <div class="flex-none">
                                 </div>
@@ -271,11 +271,11 @@
                 <div class="grid grid-cols-12 gap-4">
                     {{-- device ssh --}}
                     <div class="col-span-12 xl:col-span-6 mb-4">
-                        <livewire:iptv.devices.device-ssh-component :device="$device" />
+                        <livewire:iptv.devices.device-ssh-component :device="$device" lazy />
                     </div>
                     {{-- device alerts component --}}
                     <div class="col-span-12 xl:col-span-6 mb-4">
-                        <livewire:iptv.devices.device-alert-component :device="$device" />
+                        <livewire:iptv.devices.device-alert-component :device="$device" lazy />
                     </div>
                 </div>
 
@@ -283,8 +283,8 @@
                 @if (!is_null($nimbleCachedData))
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 xl:col-span-12 mb-4">
-                            <livewire:iptv.devices.nimble-api-component
-                                :device="$device"></livewire:iptv.devices.nimble-api-component>
+                            <livewire:iptv.devices.nimble-api-component :device="$device"
+                                lazy></livewire:iptv.devices.nimble-api-component>
                         </div>
                     </div>
                 @endif
@@ -292,8 +292,8 @@
                 @if (!is_null($grapeTranscoderData))
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 xl:col-span-12 mb-4">
-                            <livewire:iptv.devices.grape-transcoders-api-component
-                                :device="$device"></livewire:iptv.devices.grape-transcoders-api-component>
+                            <livewire:iptv.devices.grape-transcoders-api-component :device="$device"
+                                lazy></livewire:iptv.devices.grape-transcoders-api-component>
                         </div>
                     </div>
                 @endif
@@ -326,4 +326,16 @@
             </div>
         @endif
     </div>
+    @script
+        <script>
+            document.addEventListener('livewire:navigated', () => {
+                globalThis.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth"
+                });
+
+            });
+        </script>
+    @endscript
 </div>

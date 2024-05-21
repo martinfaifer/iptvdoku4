@@ -48,9 +48,9 @@
 
         <x-main full-width>
             @auth
-                @persist('sidebar')
+                @persist('sidebar-menu')
                     <x-slot:sidebar drawer="sidebar-drawer"
-                        class="bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] border-opacity-10 !w-[320px]">
+                        class="bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] !h-full sticky border-opacity-10 !w-[320px]">
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
                             <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
                                 <div class="tooltip tooltip-bottom" data-tip="Kanály">
@@ -125,7 +125,7 @@
                         {{-- main dynamic navigation --}}
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 fixed !h-[99%]">
                             {{-- @persist('dynamic-sidebar-navigation') --}}
-                            <div class="overflow-y-scroll hover:overflow-scroll">
+                            <div class="overflow-y-scroll hover:overflow-y-scroll">
                                 {{-- @persist('device-sidebar') --}}
                                 @if (request()->is('/') || request()->is('channels') || request()->is('channels/*'))
                                     <livewire:iptv.channels.menu.channels-menu />
