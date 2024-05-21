@@ -20,7 +20,7 @@
                                     'bg-sky-950' =>
                                         request()->is('devices/' . $device->id) ||
                                         request()->is('devices/' . $device->id . '/*'),
-                                ]) href="/devices/{{ $device->id }}" wire:navigate><a>
+                                ]) href="/devices/{{ $device->id }}" wire:navigate.hover><a>
 
                                     <div class="grid grid-cols-12 gap-1">
                                         <div class="col-span-1 mt-2">
