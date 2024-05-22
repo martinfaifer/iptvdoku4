@@ -5,13 +5,16 @@
         $nanguIsp = App\Models\NanguIsp::find($this->createForm->nangu_isp_id);
 
         // getting channel packages belongs to isp from wsl nangu
-        $nanguResponse = (new App\Services\Api\NanguTv\ChannelPackagesService())->get_channel_packages($nanguIsp->nangu_isp_id);
-        dd($nanguResponse);
-        foreach ($nanguResponse['channelPackageCodes'] as $package) {
-            $channelPackages[] = [
-                'id' => $package,
-                'name' => $package,
-            ];
+        $nanguResponse = (new App\Services\Api\NanguTv\ChannelPackagesService())->get_channel_packages(
+            $nanguIsp->nangu_isp_id,
+        );
+        if (array_key_exists('channelPackageCodes', $nanguResponse)) {
+            foreach ($nanguResponse['channelPackageCodes'] as $package) {
+                $channelPackages[] = [
+                    'id' => $package,
+                    'name' => $package,
+                ];
+            }
         }
     }
 
@@ -19,7 +22,9 @@
         $nanguIsp = App\Models\NanguIsp::find($this->updateForm->nangu_isp_id);
 
         // getting channel packages belongs to isp from wsl nangu
-        $nanguResponse = (new App\Services\Api\NanguTv\ChannelPackagesService())->get_channel_packages($nanguIsp->nangu_isp_id);
+        $nanguResponse = (new App\Services\Api\NanguTv\ChannelPackagesService())->get_channel_packages(
+            $nanguIsp->nangu_isp_id,
+        );
         foreach ($nanguResponse['channelPackageCodes'] as $package) {
             $channelPackages[] = [
                 'id' => $package,
