@@ -44,13 +44,13 @@ class ConnectService
 
     public function connect(array $params, string $soap_call_parameter): mixed
     {
-        // try {
-        $soap_data = $this->soap->__soapCall($soap_call_parameter, $params);
-        $response = json_decode(json_encode($soap_data), true);
+        try {
+            $soap_data = $this->soap->__soapCall($soap_call_parameter, $params);
+            $response = json_decode(json_encode($soap_data), true);
 
-        return $response;
-        // } catch (\Throwable $th) {
-        //     return [];
-        // }
+            return $response;
+        } catch (\Throwable $th) {
+            return [];
+        }
     }
 }
