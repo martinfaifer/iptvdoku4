@@ -27,6 +27,7 @@ use App\Policies\WikiCategoryPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Opcodes\LogViewer\Facades\LogViewer;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AppServiceProvider extends ServiceProvider
@@ -46,13 +47,17 @@ class AppServiceProvider extends ServiceProvider
     {
         Pulse::user(fn ($user) => [
             'name' => $user->email,
-            'extra' => "user role ".$user->userRole->name,
+            'extra' => "user role " . $user->userRole->name,
             'avatar' => $user->avatar_url,
         ]);
 
         // Model::shouldBeStrict();
         JsonResource::withoutWrapping();
         Gate::define('viewPulse', function (User $user) {
+            return $user->isAdmin();
+        });
+
+        LogViewer::auth(function (User $user) {
             return $user->isAdmin();
         });
 
