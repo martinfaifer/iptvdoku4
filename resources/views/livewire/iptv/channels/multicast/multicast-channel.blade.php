@@ -230,7 +230,7 @@
                             @foreach ($backupDevices as $backupDevice)
                                 <div class="col-span-12 md:col-span-6 mb-4">
                                     <livewire:iptv.channels.device-has-channel-component
-                                        wire:key="backupDevice_{{ $device->id }}" :device="$backupDevice" :channel="$channel"
+                                        wire:key="backupDevice_{{ $backupDevice->id }}" :device="$backupDevice" :channel="$channel"
                                         isBackup="true" channelType="multicast" lazy>
                                 </div>
                             @endforeach
