@@ -9,10 +9,12 @@ use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use App\Jobs\SendEmailNotificationJob;
+use App\Traits\Channels\CacheChannelsForApi;
 use App\Jobs\GetChannelDetailFromNanguApiJob;
 
 class ChannelObserver
 {
+    use CacheChannelsForApi;
     public function created(Channel $channel)
     {
         if (!Auth::user()) {
@@ -48,6 +50,7 @@ class ChannelObserver
             );
         }
         Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
+        $this->cache_channels_with_detail();
     }
 
     public function updated(Channel $channel)
@@ -81,6 +84,7 @@ class ChannelObserver
         );
 
         Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
+        $this->cache_channels_with_detail();
     }
 
     public function deleted(Channel $channel)
@@ -97,10 +101,11 @@ class ChannelObserver
         // delete channel contacts
         Contact::where('type', 'channel')->where('item_id', $channel->id)->delete();
         Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
+        $this->cache_channels_with_detail();
 
         SendEmailNotificationJob::dispatch(
             "Odebrán kanál $channel->name",
-            "Uživatel ".Auth::user()->email." odebral kanál $channel->name",
+            "Uživatel " . Auth::user()->email . " odebral kanál $channel->name",
             Auth::user()->email,
             'notify_if_channel_change'
         );

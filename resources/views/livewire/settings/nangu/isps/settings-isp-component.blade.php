@@ -15,6 +15,13 @@
         </div>
         <div>
             <x-table :headers="$headers" :rows="$nanguIsps" with-pagination>
+                @scope('cell_is_akcionar', $nanguIsp)
+                    @if ($nanguIsp->is_akcionar == true)
+                        <x-heroicon-o-check class="size-4 text-green-500"/>
+                    @else
+                    <x-heroicon-o-x-mark class="size-4 text-red-500"/>
+                    @endif
+                @endscope
                 @scope('cell_actions', $nanguIsp)
                     <div class="flex mx-auto gap-4">
                         <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
@@ -87,7 +94,8 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-checkbox class="border-[#085885] active:bg-[#085885]" label="Akcionář ISP alliance" wire:model="createForm.is_akcionar" hint="Bude uplatněna sleva" />
+                    <x-checkbox class="border-[#085885] active:bg-[#085885]" label="Akcionář ISP alliance"
+                        wire:model="createForm.is_akcionar" hint="Bude uplatněna sleva" />
                 </div>
             </div>
             {{-- action section --}}
@@ -120,7 +128,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Nangu isp id" wire:model="updateForm.nangu_isp_id"  disabled readonly/>
+                    <x-input label="Nangu isp id" wire:model="updateForm.nangu_isp_id" disabled readonly />
                     <div>
                         @error('nangu_isp_id')
                             <span class="error">{{ $message }}</span>
@@ -161,7 +169,8 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-checkbox class="border-[#085885] active:bg-[#085885]" label="Akcionář ISP alliance" wire:model="createForm.is_akcionar" hint="Bude uplatněna sleva" />
+                    <x-checkbox class="border-[#085885] active:bg-[#085885]" label="Akcionář ISP alliance"
+                        wire:model="updateForm.is_akcionar" hint="Bude uplatněna sleva" />
                 </div>
             </div>
             {{-- action section --}}
