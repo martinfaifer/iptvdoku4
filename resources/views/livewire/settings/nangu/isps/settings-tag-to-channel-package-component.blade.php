@@ -6,6 +6,7 @@
 
         // getting channel packages belongs to isp from wsl nangu
         $nanguResponse = (new App\Services\Api\NanguTv\ChannelPackagesService())->get_channel_packages($nanguIsp->nangu_isp_id);
+        dd($nanguResponse);
         foreach ($nanguResponse['channelPackageCodes'] as $package) {
             $channelPackages[] = [
                 'id' => $package,

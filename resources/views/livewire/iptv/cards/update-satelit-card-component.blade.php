@@ -7,7 +7,7 @@
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 md:col-span-6 mb-4">
                     <x-input label="Číslo karty" wire:model="updateForm.name" disabled readonly/>
                     <div>
                         @error('name')
@@ -15,7 +15,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 md:col-span-6 mb-4">
                     <x-choices-offline label="Distributor" wire:model="updateForm.satelit_card_vendor_id"
                         :options="$satelitCardsVendors" single searchable />
                     <div>
