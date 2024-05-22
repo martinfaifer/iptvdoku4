@@ -10,6 +10,7 @@ use App\Livewire\User\UserActionsComponent;
 use App\Livewire\Iptv\Devices\DeviceComponent;
 use App\Livewire\Iptv\FlowEye\FlowEyeComponent;
 use App\Livewire\User\UserNotificationComponent;
+use App\Livewire\Auth\ForgottenPasswordComponent;
 use App\Livewire\Iptv\Calendar\CalendarComponent;
 use App\Livewire\Iptv\Cards\SatelitCardComponent;
 use App\Livewire\Settings\Tags\SettingsTagComponent;
@@ -37,6 +38,7 @@ Route::get('test', function () {
 });
 
 Route::get('login', Login::class)->name('login');
+Route::get('forgotten-password', ForgottenPasswordComponent::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/', IptvChannel::class);

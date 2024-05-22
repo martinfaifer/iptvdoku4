@@ -4,31 +4,21 @@
         <div class="card-body">
             <h2 class="text-3xl font-bold text-center">
                 {{-- <x-heroicon-m-tv class="h-8 w-8 absolute lg:ml-20 xl:ml-20 2xl:ml-20 md:h-12 md:w-12 text-red-500" /> --}}
-                IPTV Dokumentace
+                Zapomenuté heslo
             </h2>
-            <x-form wire:submit="login" class="mt-6">
-                <x-input label="Email" wire:model="email" />
+            <x-form wire:submit="sendNewPassword" class="mt-6">
+                <x-input label="Email" wire:model="email" placeholder="vas_email@"/>
                 <div>
                     @error('form.email')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </div>
-                <x-input label="Heslo" wire:model="password" type="password" />
                 <div>
-                    @error('form.password')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                <div>
-                    <x-button label="Přihlásit se" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full"
+                    <x-button label="Odeslat nové heslo" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full"
                         type="submit" />
                 </div>
 
             </x-form>
-            <div>
-                <a class="text-sm text-blue-500 hover:text-blue-700 hover:underline" href="/forgotten-password" wire:navigate>Zapomněli jste heslo?</a>
-            </div>
         </div>
     </div>
 </div>

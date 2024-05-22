@@ -77,8 +77,8 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-12 mb-4">
-                    <x-select class=" z-50" label="Uživatelská role" :options="$userRoles"
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-choices-offline label="Uživatelská role" :options="$userRoles"
                         wire:model="form.userRoleId" single searchable />
                 </div>
             </div>

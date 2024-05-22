@@ -49,8 +49,9 @@
         <x-main full-width>
             @auth
                 @persist('sidebar-menu')
-                    <x-slot:sidebar drawer="sidebar-drawer"
-                        class="bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] !h-full sticky border-opacity-10 !w-[320px]">
+                    <x-slot:sidebar drawer="sidebar-drawer" @class([
+                        'bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] !h-full sticky border-opacity-10 !w-[320px]',
+                    ])>
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
                             <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
                                 <div class="tooltip tooltip-bottom" data-tip="Kanály">
@@ -118,9 +119,10 @@
                                     <livewire:iptv.flow-eye.menu.flow-eye-menu-icon-with-alert-component />
                                 @endcan
                             </ul>
-                            <div class="static">
-                                <x-button @click="toggle" icon="o-bars-3-bottom-left" class="bg-transparent border-none absolute bottom-0 left-2" />
-                            </div>
+                            {{-- <div class="static">
+                                <x-button @click="toggle" icon="o-bars-3-bottom-left"
+                                    class="bg-transparent border-none absolute bottom-0 left-2" />
+                            </div> --}}
                         </x-menu>
                         {{-- main dynamic navigation --}}
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 fixed !h-[99%]">
