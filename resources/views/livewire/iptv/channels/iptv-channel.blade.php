@@ -69,7 +69,7 @@
                         <livewire:iptv.channels.delete-channel :channel="$channel"></livewire:iptv.channels.delete-channel>
                     @endcan
                     {{-- end of actions --}}
-                    <div class="hidden md:block absolute mt-10 md:mt-6 md:right-32" data-tip="informace o kanálu">
+                    <div class="hidden md:block absolute md:mt-7 md:right-32" data-tip="informace o kanálu">
                         <div
                             class="text-xs inline-flex items-center font-semibold leading-sm px-3 py-1 bg-cyan-500 text-neutral-200 rounded-md w-18 h-6">
                             <div class="inline-flex">
