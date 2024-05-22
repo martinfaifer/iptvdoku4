@@ -17,18 +17,18 @@
         <div>
             <x-table :headers="$headers" :rows="$users">
                 @scope('cell_avatar', $user)
-                <div class="rounded-full size-8 bg-black flex items-center justify-center cursor-pointer">
-                    @if (is_null($user->avatar_url))
-                        <div class="font-semibold">
-                            {{ $user->first_name[0] }}
-                            {{ $user->last_name[0] }}
-                        </div>
-                    @else
-                        <img class="object-contain rounded-full" src="{{ config('app.url')."/". $user->avatar_url }}"
-                            alt="" />
-                    @endif
-                </div>
-            @endscope
+                    <div class="rounded-full size-8 bg-black flex items-center justify-center cursor-pointer">
+                        @if (is_null($user->avatar_url))
+                            <div class="font-semibold">
+                                {{ $user->first_name[0] }}
+                                {{ $user->last_name[0] }}
+                            </div>
+                        @else
+                            <img class="object-contain rounded-full" src="{{ config('app.url') . '/' . $user->avatar_url }}"
+                                alt="" />
+                        @endif
+                    </div>
+                @endscope
                 @scope('cell_actions', $user)
                     <div class="flex mx-auto gap-4">
                         <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
@@ -50,36 +50,38 @@
     {{-- create modal --}}
     <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
-            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                wire:click='closeDialog'>✕</x-button>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Jméno" wire:model="form.first_name" />
-                    <div>
-                        @error('first_name')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
+            <div class="my-4 overflow-y-auto h-96">
+                <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                    wire:click='closeDialog'>✕</x-button>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12 md:col-span-6 mb-4">
+                        <x-input label="Jméno" wire:model="form.first_name" />
+                        <div>
+                            @error('first_name')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
-                </div>
-                <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Příjmení" wire:model="form.last_name" />
-                    <div>
-                        @error('last_name')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
+                    <div class="col-span-12 md:col-span-6 mb-4">
+                        <x-input label="Příjmení" wire:model="form.last_name" />
+                        <div>
+                            @error('last_name')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
-                </div>
-                <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Email" wire:model="form.email" />
-                    <div>
-                        @error('email')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
+                    <div class="col-span-12 md:col-span-6 mb-4">
+                        <x-input label="Email" wire:model="form.email" />
+                        <div>
+                            @error('email')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
-                </div>
-                <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-choices-offline label="Uživatelská role" :options="$userRoles"
-                        wire:model="form.userRoleId" single searchable />
+                    <div class="col-span-12 md:col-span-6 mb-4">
+                        <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model="form.userRoleId"
+                            single searchable />
+                    </div>
                 </div>
             </div>
             {{-- action section --}}
@@ -99,28 +101,30 @@
     {{-- edit modal --}}
     <x-modal wire:model="editModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
-            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                wire:click='closeDialog'>✕</x-button>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Jméno" wire:model="editForm.first_name" />
-                    <div>
-                        @error('first_name')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
+            <div class="my-4 overflow-y-auto h-96">
+                <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                    wire:click='closeDialog'>✕</x-button>
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12 md:col-span-6 mb-4">
+                        <x-input label="Jméno" wire:model="editForm.first_name" />
+                        <div>
+                            @error('first_name')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
-                </div>
-                <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Příjmení" wire:model="editForm.last_name" />
-                    <div>
-                        @error('last_name')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
+                    <div class="col-span-12 md:col-span-6 mb-4">
+                        <x-input label="Příjmení" wire:model="editForm.last_name" />
+                        <div>
+                            @error('last_name')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
-                </div>
-                <div class="col-span-12 md:col-span-6 mb-4 z-auto">
-                    <x-select label="Uživatelská role" :options="$userRoles"
-                        wire:model="editForm.userRoleId" single searchable />
+                    <div class="col-span-12  mb-4">
+                        <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model="editForm.userRoleId" single
+                            searchable />
+                    </div>
                 </div>
             </div>
             {{-- action section --}}
