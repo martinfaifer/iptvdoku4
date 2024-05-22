@@ -47,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Pulse::user(fn ($user) => [
             'name' => $user->email,
-            'extra' => "user role " . $user->userRole->name,
+            'extra' => "user role ".$user->userRole->name,
             'avatar' => $user->avatar_url,
         ]);
 
@@ -57,8 +57,8 @@ class AppServiceProvider extends ServiceProvider
             return $user->isAdmin();
         });
 
-        LogViewer::auth(function (User $user) {
-            return $user->isAdmin();
+        LogViewer::auth(function ($request) {
+            return $request->user()->isAdmin();
         });
 
         Gate::policy(SftpServer::class, SftpPolicy::class);
