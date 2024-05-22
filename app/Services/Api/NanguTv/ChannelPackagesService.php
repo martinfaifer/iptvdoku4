@@ -6,9 +6,9 @@ class ChannelPackagesService
 {
     public function get_channel_packages(string $nangu_isp_id)
     {
-        if (is_null(config('services.api.nanguTv.url'))) {
-            return [];
-        }
+        // if (is_null(config('services.api.nanguTv.url'))) {
+        //     return [];
+        // }
 
         return (new ConnectService('billing'))->connect(
             ['getChannelPackages' => ['ispCode' => $nangu_isp_id]],
