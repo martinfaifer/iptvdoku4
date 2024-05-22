@@ -561,15 +561,14 @@
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12 mb-4 overflow-y-auto h-96">
                 @foreach ($charts as $chartKey => $chart)
-                <div wire:key='chart_{{ $chartKey }}' class="grid grid-cols-12 gap-4">
-                    <div class="col-span-12 md:col-span-6 mb-4">
-                        @php
-                            $exploded = explode(':', $chartKey);
-                            $label = $exploded[2];
-                        @endphp
-                        <livewire:charts.line-chart-component :xaxis="$chart[0]['xaxis']" :yaxis="$chart[0]['yaxis']" :label="$label">
-                    </div>
-                </div>
+                        <div class="col-span-12 md:col-span-6 mb-4"  wire:key='chart_{{ $chartKey }}'>
+                            @php
+                                $exploded = explode(':', $chartKey);
+                                $label = $exploded[2];
+                            @endphp
+                            <livewire:charts.line-chart-component :xaxis="$chart[0]['xaxis']" :yaxis="$chart[0]['yaxis']"
+                                :label="$label">
+                        </div>
                 @endforeach
             </div>
         </div>
