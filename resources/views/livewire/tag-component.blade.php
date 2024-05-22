@@ -6,7 +6,7 @@
         </div>
         <div class="flex flex-none gap-2">
             @foreach ($tagsOnItem as $tagOnItem)
-                <div
+                <div wire:key='tag_{{ $tagOnItem->id }}'
                     class="text-xs inline-flex items-center font-semibold leading-sm px-3 py-1 {{ $tagOnItem->tag->color }} text-neutral-200 rounded-md w-18 h-6">
                     <div class="inline-flex">
                         <div>

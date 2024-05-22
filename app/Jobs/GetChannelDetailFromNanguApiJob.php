@@ -27,11 +27,10 @@ class GetChannelDetailFromNanguApiJob implements ShouldQueue
      */
     public function handle(): void
     {
-        try {
+        // try {
             // get information from nangu
             $nanguResponse = (new ChannelsService())->detail($this->channel->nangu_channel_code);
             // separate all informations about it and store to cache.
-
             // app order
             Cache::put('nangu_channel_'.$this->channel->id.'_app_order', [
                 'order' => $nanguResponse['weight'],
@@ -43,8 +42,8 @@ class GetChannelDetailFromNanguApiJob implements ShouldQueue
 
             // store all result for future manipulation
             Cache::put('nangu_channel_'.$this->channel->id, $nanguResponse, $this->ttl);
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        // }
     }
 }

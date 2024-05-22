@@ -3,9 +3,10 @@
 namespace App\Livewire\Iptv\Channels;
 
 use App\Models\Channel;
-use App\Traits\Livewire\NotificationTrait;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Cache;
+use App\Traits\Livewire\NotificationTrait;
 
 class IptvChannel extends Component
 {
@@ -13,9 +14,22 @@ class IptvChannel extends Component
 
     public ?Channel $channel;
 
+    public string|int $availableTimeShiftTime = 0;
+
     public function mount(Channel $channel)
     {
         $this->channel = $channel->load(['multicasts', 'multicasts.channel_source']);
+    }
+
+    public function getTimeShiftTime()
+    {
+        $cachedNanguApiResult = Cache::get('nangu_channel_' . $this->channel->id . '_timeshift');
+
+        if (!is_null($cachedNanguApiResult)) {
+            return $this->availableTimeShiftTime = $cachedNanguApiResult['timeshift'] / 1440;
+        }
+
+        return $this->availableTimeShiftTime;
     }
 
     // #[On('update_iptv_channel.{channel.id}')]
