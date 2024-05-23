@@ -31,11 +31,11 @@
                 @endscope
                 @scope('cell_actions', $user)
                     <div class="flex mx-auto gap-4">
-                        <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
-                            wire:click="edit({{ $user->id }})">
-                            <x-heroicon-o-pencil class="size-4 text-green-500" />
-                        </button>
                         @if (Auth::user()->id != $user->id)
+                            <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
+                                wire:click="edit({{ $user->id }})">
+                                <x-heroicon-o-pencil class="size-4 text-green-500" />
+                            </button>
                             <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
                                 wire:click="destroy({{ $user->id }})" wire:confirm="Opravdu odebrat uživatele?">
                                 <x-heroicon-o-trash class="w-4 h-4 text-red-500" />
@@ -122,8 +122,8 @@
                         </div>
                     </div>
                     <div class="col-span-12  mb-4">
-                        <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model="editForm.userRoleId" single
-                            searchable />
+                        <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model="editForm.userRoleId"
+                            single searchable />
                     </div>
                 </div>
             </div>
