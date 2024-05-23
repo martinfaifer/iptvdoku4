@@ -19,9 +19,11 @@ class SatelitCardComponent extends Component
 
     public function mount()
     {
-        rescue(function () {
+        try {
             $this->device = $this->find_card_in_device_template($this->satelitCard);
-        });
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     public function openModal()
@@ -36,7 +38,6 @@ class SatelitCardComponent extends Component
 
     public function render()
     {
-
         return view('livewire.iptv.cards.satelit-card-component');
     }
 }
