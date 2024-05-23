@@ -65,7 +65,7 @@ class DeviceTemplateComponent extends Component
 
         $this->redirect('/devices/'.$this->device->id, true);
 
-        return $this->success('Upraveno');
+        return $this->success_alert('Upraveno');
     }
 
     public function closeDrawer()

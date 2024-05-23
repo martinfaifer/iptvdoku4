@@ -81,8 +81,13 @@ class Device extends Model
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $this->where('name', 'like', '%'.$search.'%')
-            ->orWhere('ip', 'like', '%'.$search.'%');
+        return $this->where('name', 'like', '%' . $search . '%')
+            ->orWhere('ip', 'like', '%' . $search . '%');
+    }
+
+    public function scopeInTemplate(Builder $query, string $searcheableString)
+    {
+        return $query->where('template', "like", "%" . $searcheableString . "%");
     }
 
     // public function scopeGetChannels(Builder $query, string $channel)

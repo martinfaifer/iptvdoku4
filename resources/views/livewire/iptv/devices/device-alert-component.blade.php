@@ -6,8 +6,8 @@
 @endphp
 <div>
     <x-share.cards.base-card title="Problémy na zařízení">
-        @if (!$deviceAlerts->isEmpty())
-            <div class="h-32 overflow-y-auto">
+        <div class="h-32 overflow-y-auto">
+            @if (!$deviceAlerts->isEmpty())
                 <x-table :headers="$headers" :rows="$deviceAlerts">
                     @scope('cell_message', $deviceAlert)
                         <span class="text-red-500 font-semibold">
@@ -15,9 +15,9 @@
                         </span>
                     @endscope
                 </x-table>
-            </div>
             @else
-            <x-share.alerts.info title="Nenalezeny žádné problémy"></x-share.alerts.info>
-        @endif
+                <x-share.alerts.info title="Nenalezeny žádné problémy"></x-share.alerts.info>
+            @endif
+        </div>
     </x-share.cards.base-card>
 </div>

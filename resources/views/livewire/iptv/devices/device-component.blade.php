@@ -270,13 +270,21 @@
 
                 <div class="grid grid-cols-12 gap-4">
                     {{-- device ssh --}}
-                    <div class="col-span-12 xl:col-span-6 mb-4">
+                    <div class="col-span-12 xl:col-span-4 mb-4">
                         <livewire:iptv.devices.device-ssh-component :device="$device" lazy />
                     </div>
+
                     {{-- device alerts component --}}
-                    <div class="col-span-12 xl:col-span-6 mb-4">
+                    <div class="col-span-12 xl:col-span-4 mb-4">
                         <livewire:iptv.devices.device-alert-component :device="$device" lazy />
                     </div>
+
+                    @if ($device->category->name == 'Satelity')
+                        <div class="col-span-12  xl:col-span-4 mb-4">
+                            <livewire:iptv.devices.setelit-has-devices-component
+                                :device="$device"></livewire:iptv.devices.setelit-has-devices-component>
+                        </div>
+                    @endif
                 </div>
 
                 {{-- nimble api cached result --}}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Device;
 use App\Livewire\Auth\Login;
 use App\Livewire\User\UserComponent;
 use App\Livewire\Wiki\WikiComponent;
@@ -96,4 +97,8 @@ Route::middleware('auth')->group(function () {
             Route::get('distributors', SettingsDevicesDistributorsComponent::class)->middleware('can:show_settings_devices,App\Models\User');
         });
     });
+});
+
+Route::get('test', function() {
+    return Device::inTemplate('"Satelit":60')->get(['id', 'name']);
 });

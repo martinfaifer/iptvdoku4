@@ -1,7 +1,7 @@
 <div>
     @if (!is_null($deviceSsh))
         <x-share.cards.base-card title="SSH">
-            <div class="h-22 text-[#A3ABB8]">
+            <div class="h-32 text-[#A3ABB8]">
                 <div>
                     <button
                         class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-8 text-sky-500"
