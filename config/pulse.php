@@ -135,6 +135,22 @@ return [
     */
 
     'recorders' => [
+        \Maantje\Pulse\PhpFpm\Recorders\PhpFpmRecorder::class => [
+            // Optionally set a server name gethostname() is the default
+            'server_name' => env('PULSE_SERVER_NAME', gethostname()),
+            // Optionally set a status path the current value is the default
+            'status_path' => 'localhost:9000/status', // with unix socket unix:/var/run/php-fpm/web.sock/status
+            // Optionally give datasets, these are the default values.
+            // Omitting a dataset or setting the value to false will remove the line from the chart
+            // You can also set a color as value that will be used in the chart
+            'datasets' => [
+                'active processes' => '#9333ea',
+                'total processes' => 'rgba(147,51,234,0.5)',
+                'idle processes' => '#eab308',
+                'listen queue' => '#e11d48',
+            ],
+        ],
+
         TiMacDonald\Pulse\Recorders\ValidationErrors::class => [
             'enabled' => env('PULSE_VALIDATION_ERRORS_ENABLED', true),
             'sample_rate' => env('PULSE_VALIDATION_ERRORS_SAMPLE_RATE', 1),
