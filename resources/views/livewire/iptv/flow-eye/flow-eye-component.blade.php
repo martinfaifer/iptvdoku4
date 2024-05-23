@@ -1,13 +1,3 @@
-@php
-    function stringTimeParseToDayMonthYear(string $stringTime)
-    {
-        $explodedString = explode('T', $stringTime);
-        $explodedDate = explode('-', $explodedString[0]);
-        $explodedTime = explode('+', $explodedString[1]);
-
-        return $explodedTime[0] . ' ' . $explodedDate[2] . '.' . $explodedDate[1] . ' ' . $explodedDate[0];
-    }
-@endphp
 <div class="overflow-hidden">
     <div class="flex flex-col">
         @if (is_null($ticket))
@@ -90,7 +80,7 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="text-xs text-end font-thin px-2 pb-2">
-                                                    {{ stringTimeParseToDayMonthYear($discussion['created_at']) }}
+                                                    {{ $this->stringTimeParseToDayMonthYear($discussion['created_at']) }}
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +105,7 @@
                                                     {{ $discussion['message'] }}
                                                 </div>
                                                 <div class="text-xs text-end font-thin px-2 pb-2">
-                                                    {{ stringTimeParseToDayMonthYear($discussion['created_at']) }}
+                                                    {{ $this->stringTimeParseToDayMonthYear($discussion['created_at']) }}
                                                 </div>
                                             </div>
                                         </div>

@@ -2,11 +2,14 @@
 
 namespace App\Livewire\Iptv\FlowEye;
 
-use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
+use App\Traits\Dates\DateParserTrait;
+use Illuminate\Support\Facades\Cache;
 
 class FlowEyeComponent extends Component
 {
+    use DateParserTrait;
+
     public ?string $issue = null;
 
     public ?array $ticket = null;

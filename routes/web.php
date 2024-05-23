@@ -98,7 +98,3 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
-
-Route::get('test', function() {
-    return Device::inTemplate('"Satelit":60')->get(['id', 'name']);
-});

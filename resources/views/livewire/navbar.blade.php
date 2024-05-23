@@ -1,40 +1,3 @@
-@php
-    function get_weather_icon($weather)
-    {
-        if (!array_key_exists('description', $weather)) {
-            return '/storage/svgs/sunny.svg';
-        }
-        switch ($weather) {
-            case str_contains($weather['description'], 'clouds'):
-                return '/storage/svgs/clouds.svg';
-                break;
-            case str_contains($weather['description'], 'rain'):
-                return '/storage/svgs/rain.svg';
-                break;
-            case str_contains($weather['description'], 'thunderstorm'):
-                return '/storage/svgs/thunderstorm.svg';
-                break;
-            case str_contains($weather['description'], 'drizzle'):
-                return '/storage/svgs/rain.svg';
-                break;
-            case str_contains($weather['description'], 'snow'):
-                return '/storage/svgs/snow.svg';
-                break;
-            case str_contains($weather['description'], 'mist'):
-                return '/storage/svgs/smoke.svg';
-                break;
-            case str_contains($weather['description'], 'smoke'):
-                return '/storage/svgs/smoke.svg';
-                break;
-            case str_contains($weather['description'], 'tornado'):
-                return '/storage/svgs/tornado.svg';
-                break;
-            default:
-                return '/storage/svgs/sunny.svg';
-                break;
-        }
-    }
-@endphp
 <div>
     <div
         class="navbar fixed bg-gradient-to-r from-slate-900/20 to-sky-950/20 mb-1 top-0 right-0 z-10 min-h-8 backdrop-blur-xl">
@@ -63,7 +26,7 @@
                     <div tabindex="0" role="button" class="btn btn-circle btn-ghost btn-sm text-info">
 
                         <div>
-                            <img class="object-cover size-6" src="{{ get_weather_icon($weather) }}" alt="" />
+                            <img class="object-cover size-6" src="{{ $this->get_icon($weather) }}" alt="" />
                         </div>
 
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -85,7 +48,7 @@
                                             <div class="col-span-5 inline-flex -ml-3">
                                                 <div class="avatar">
                                                     <div class="w-8 rounded-full">
-                                                        <img src="{{ get_weather_icon($weather) }}" alt="" />
+                                                        <img src="{{ $this->get_icon($weather) }}" alt="" />
                                                     </div>
                                                 </div>
                                                 <div>
@@ -127,7 +90,8 @@
                                 {{ $user->last_name[0] }}
                             </span>
                         @else
-                            <img class="object-contain rounded-full" src="{{ config('app.url')."/". $user->avatar_url }}" alt="" />
+                            <img class="object-contain rounded-full"
+                                src="{{ config('app.url') . '/' . $user->avatar_url }}" alt="" />
                         @endif
                     </div>
                     <ul tabindex="0"
