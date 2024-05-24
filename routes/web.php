@@ -15,6 +15,7 @@ use App\Livewire\Auth\ForgottenPasswordComponent;
 use App\Livewire\Iptv\Calendar\CalendarComponent;
 use App\Livewire\Iptv\Cards\SatelitCardComponent;
 use App\Livewire\Settings\Tags\SettingsTagComponent;
+use App\Livewire\Iptv\Channels\Epg\EpgChannelComponent;
 use App\Livewire\Settings\Users\SettingsUsersComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
 use App\Livewire\Settings\Dashboard\SettingsDashboardComponent;
@@ -98,3 +99,6 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
+
+// only for tests
+// Route::get('epg-test', EpgChannelComponent::class);

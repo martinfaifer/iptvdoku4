@@ -29,6 +29,14 @@
                         ])><a>
                                 H265</a></li>
 
+                        @if (!is_null($channel->epg_id))
+                            <li href="/channels/{{ $channel->id }}/epg" wire:navigate @class([
+                                'rounded-lg',
+                                'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/epg'),
+                            ])><a>
+                                    EPG</a></li>
+                        @endif
+
                     </ul>
                 @endif
             </div>
@@ -97,6 +105,10 @@
                 @if (request()->is('channels/' . $channel->id . '/h265'))
                     <livewire:iptv.channels.h265.h265-channel :channel="$channel" lazy>
                 @endif
+
+                @if (request()->is('channels/' . $channel->id . '/epg'))
+                <livewire:iptv.channels.epg.epg-channel-component :channel="$channel" lazy>
+            @endif
             </div>
         @endif
     </div>
