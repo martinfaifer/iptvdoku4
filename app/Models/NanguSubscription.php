@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Traits\Models\NanguIspTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class NanguSubscription extends Model
 {
+    use NanguIspTrait;
+
     protected $fillable = [
         'nangu_subscriber_id',
         'subscriptionCode',
@@ -20,11 +23,6 @@ class NanguSubscription extends Model
         'channels',
         'nangu_isp_id',
     ];
-
-    public function nanguIsp(): BelongsTo
-    {
-        return $this->belongsTo(NanguIsp::class, 'nangu_isp_id', 'id');
-    }
 
     public function subscriber(): BelongsTo
     {

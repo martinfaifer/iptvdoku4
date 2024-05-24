@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
+use App\Traits\Models\ChannelTrait;
+use Illuminate\Database\Eloquent\Model;
 use App\Observers\MulticastChannelObserver;
 use Illuminate\Contracts\Database\Query\Builder;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 #[ObservedBy(MulticastChannelObserver::class)]
 class ChannelMulticast extends Model
 {
+    use ChannelTrait;
+
     protected $fillable = [
         'channel_id',
         'stb_ip',
@@ -22,11 +25,6 @@ class ChannelMulticast extends Model
         'devices_id',
         'status',
     ];
-
-    public function channel(): BelongsTo
-    {
-        return $this->belongsTo(Channel::class, 'channel_id', 'id');
-    }
 
     public function multicasts(): HasMany
     {

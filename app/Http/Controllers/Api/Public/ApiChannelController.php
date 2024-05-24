@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class ApiChannelController extends Controller
 {
+    /**
+     * This function handles the retrieval of channels for the API.
+     *
+     * @param Request $request The incoming request object containing parameters and data.
+     * @return ApiChannelsResource A resource object containing the requested channels.
+     */
     public function index(Request $request)
     {
         return new ApiChannelsResource($request);

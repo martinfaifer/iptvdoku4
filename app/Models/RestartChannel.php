@@ -2,21 +2,19 @@
 
 namespace App\Models;
 
+use App\Traits\Models\ChannelTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RestartChannel extends Model
 {
+    use ChannelTrait;
+
     protected $fillable = [
         'channel_id',
         'ip_id',
         'device_id',
     ];
-
-    public function channel(): BelongsTo
-    {
-        return $this->belongsTo(Channel::class, 'channel_id');
-    }
 
     public function device(): BelongsTo
     {

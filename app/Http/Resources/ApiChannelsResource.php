@@ -17,6 +17,11 @@ class ApiChannelsResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
+     * This method is responsible for converting the Channel resource into an array that can be returned as a response.
+     * It first checks if the 'channels_in_api' cache exists. If it doesn't, it calls the 'cache_channels_with_detail' method to populate the cache.
+     * Then, it retrieves the 'api/v1/public/channels' cache and returns it.
+     *
+     * @param  \Illuminate\Http\Request  $request
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array

@@ -3,24 +3,22 @@
 namespace App\Models;
 
 use App\Observers\H265Observer;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use App\Traits\Models\ChannelTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 #[ObservedBy(H265Observer::class)]
 class H265 extends Model
 {
+    use ChannelTrait;
+
     protected $fillable = [
         'channel_id',
         'devices_id',
         'status',
     ];
-
-    public function channel(): BelongsTo
-    {
-        return $this->belongsTo(Channel::class, 'channel_id');
-    }
 
     public function ips(): HasMany
     {

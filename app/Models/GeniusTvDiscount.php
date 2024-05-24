@@ -2,21 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Database\Query\Builder;
+use App\Traits\Models\NanguIspTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GeniusTvDiscount extends Model
 {
+    use NanguIspTrait;
+
     protected $fillable = [
         'nangu_isp_id',
         'discount',
     ];
-
-    public function nanguIsp(): BelongsTo
-    {
-        return $this->belongsTo(NanguIsp::class, 'nangu_isp_id', 'id');
-    }
 
     public function scopeSearch(Builder $query, string $search)
     {

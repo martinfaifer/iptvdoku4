@@ -13,9 +13,11 @@ class Login extends Component
     use NotificationTrait;
 
     #[Validate('required', message: 'Vyplňte email')]
+    #[Validate('max:255', message: 'Maximální délka je 255')]
     public string $email = '';
 
     #[Validate('required', message: 'Vyplňte heslo')]
+    #[Validate('max:255', message: 'Maximální délka je 255')]
     public string $password = '';
 
     public function login()
