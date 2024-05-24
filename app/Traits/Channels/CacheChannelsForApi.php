@@ -35,4 +35,13 @@ trait CacheChannelsForApi
 
         Cache::forever('channels_in_api', $result);
     }
+
+    protected function get_value_from_array(?array $array, string $key)
+    {
+        if (is_null($array)) {
+            return null;
+        }
+
+        return $array[$key];
+    }
 }
