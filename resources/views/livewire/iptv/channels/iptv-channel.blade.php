@@ -9,7 +9,7 @@
             </div>
             <div class="flex justify-center">
                 @if (!is_null($channel) && !is_null($channel->name))
-                    <ul class="menu menu-vertical lg:menu-horizontal bg-transparent rounded-box">
+                    <ul class="menu menu-vertical lg:menu-horizontal bg-transparent rounded-box -mt-2 menu-sm xl:menu-md">
 
                         <li href="/channels/{{ $channel->id }}/multicast" wire:navigate @class([
                             'rounded-lg',

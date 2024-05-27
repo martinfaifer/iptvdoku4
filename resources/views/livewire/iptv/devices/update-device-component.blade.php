@@ -15,7 +15,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 xl:col-span-6 mb-4">
                     <x-choices label="Typ" wire:model="form.device_category_id" :options="$deviceCategories" single />
                     <div>
                         @error('device_category_id')
@@ -23,7 +23,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 xl:col-span-6 mb-4">
                     <x-choices label="Výrobce" wire:model="form.device_vendor_id" :options="$devicesVendors" single />
                     <div>
                         @error('device_vendor_id')
@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-4 mb-4">
+                <div class="col-span-12 xl:col-span-4 mb-4">
                     <x-input label="IP" wire:model="form.ip" />
                     <div>
                         @error('ip')
@@ -39,7 +39,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-4 mb-4">
+                <div class="col-span-12 xl:col-span-4 mb-4">
                     <x-input label="IPMI" wire:model="form.ipmi_ip" />
                     <div>
                         @error('ipmi_ip')
@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-4 mb-4">
+                <div class="col-span-12 xl:col-span-4 mb-4">
                     <x-input label="Url kontroleru" wire:model="form.controller_ip" />
                     <div>
                         @error('controller_ip')
@@ -57,7 +57,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 xl:col-span-6 mb-4">
                     <x-input label="Uživatelské jméno" wire:model="form.username" />
                     <div>
                         @error('username')
@@ -66,7 +66,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 xl:col-span-6 mb-4">
                     <x-input label="Heslo" wire:model="form.password" />
                     <div>
                         @error('password')
@@ -74,7 +74,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-span-4 mb-0">
+                <div class="col-span-12 xl:col-span-4 mb-0">
                     <x-checkbox label="SNMP?" wire:model="form.is_snmp" hint="Pouze pokud zařízení má podporu SNMP"/>
                     <div>
                         @error('is_snmp')
@@ -83,7 +83,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-8 mb-4">
+                <div class="col-span-12 xl:col-span-8 mb-4">
                     <x-choices label="SNMP verze" wire:model="form.snmp_version" :options="$deviceSnmps" single />
                     <div>
                         @error('snmp_version')
@@ -92,7 +92,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 xl:col-span-6 mb-4">
                     <x-input label="SNMP public komunita" wire:model="form.snmp_public_comunity" />
                     <div>
                         @error('snmp_public_comunity')
@@ -101,7 +101,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 mb-4">
+                <div class="col-span-12 xl:col-span-6 mb-4">
                     <x-input label="SNMP private komunita" wire:model="form.snmp_private_comunity" />
                     <div>
                         @error('snmp_private_comunity')

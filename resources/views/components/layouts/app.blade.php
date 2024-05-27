@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Martin Faifer">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.svg') }}">
+    <link rel="shortcut icon" type="image/x-icon" class="text-red-500" href="{{ asset('favicon.svg') }}">
     <link rel="manifest" href="/site.webmanifest">
     <title>{{ $title ?? 'IPTV dokumentace' }}</title>
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/github.min.css" /> --}}
