@@ -183,7 +183,7 @@
                                         {{ $newestUser->last_name[0] }}
                                     </div>
                                 @else
-                                    <img class="object-contain rounded-full" src="{{ config('app.url')."/". $newestUser->avatar_url }}"
+                                    <img class="object-contain rounded-full size-8" src="{{ config('app.url')."/". $newestUser->avatar_url }}"
                                         alt="" />
                                 @endif
                             </div>
