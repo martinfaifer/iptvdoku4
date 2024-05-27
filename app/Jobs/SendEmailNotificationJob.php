@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use App\Mail\SendNotificationEmail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -28,9 +29,13 @@ class SendEmailNotificationJob implements ShouldQueue
      */
     public function handle(): void
     {
-        User::where($this->eventType, true)->each(function ($user) {
+        $thirtyMinutesInSecondsTtl = 1800; // prevention of spamming
+        User::where($this->eventType, true)->each(function ($user) use ($thirtyMinutesInSecondsTtl) {
             // send email to specific user
-            Mail::to($user->email)->queue(new SendNotificationEmail(emailSubject: $this->emailSubject, emailContent: $this->text));
+            if (!Cache::has($user->id . "_" . $this->eventType, $thirtyMinutesInSecondsTtl)) {
+                Cache::put($user->id . "_" . $this->eventType, "is_send");
+                Mail::to($user->email)->queue(new SendNotificationEmail(emailSubject: $this->emailSubject, emailContent: $this->text));
+            }
         });
     }
 }
