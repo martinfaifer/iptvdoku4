@@ -46,6 +46,13 @@ class SettingsWeatherNotificationComponent extends Component
         return $this->success_alert('Odebráno');
     }
 
+    public function closeDialog()
+    {
+        $this->createForm->reset();
+
+        return $this->createModal = false;
+    }
+
     public function render()
     {
         return view('livewire.settings.notifications.weather.settings-weather-notification-component', [

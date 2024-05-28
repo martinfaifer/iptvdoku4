@@ -48,42 +48,43 @@
     </x-share.cards.base-card>
 
     {{-- create modal --}}
-    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="createModal" persistent class="modal-bottom xl:modal-middle fixed"
+        box-class="overflow-visible">
         <x-form wire:submit="create">
-            <div class="my-4 overflow-y-auto h-96">
-                <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                    wire:click='closeDialog'>✕</x-button>
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-12 md:col-span-6 mb-4">
-                        <x-input label="Jméno" wire:model="form.first_name" />
-                        <div>
-                            @error('first_name')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-span-12 md:col-span-6 mb-4">
-                        <x-input label="Příjmení" wire:model="form.last_name" />
-                        <div>
-                            @error('last_name')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-span-12 md:col-span-6 mb-4">
-                        <x-input label="Email" wire:model="form.email" />
-                        <div>
-                            @error('email')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-span-12 md:col-span-6 mb-4">
-                        <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model="form.userRoleId"
-                            single searchable />
+
+            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                wire:click='closeDialog'>✕</x-button>
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-input label="Jméno" wire:model="form.first_name" />
+                    <div>
+                        @error('first_name')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-input label="Příjmení" wire:model="form.last_name" />
+                    <div>
+                        @error('last_name')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-input label="Email" wire:model="form.email" />
+                    <div>
+                        @error('email')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model="form.userRoleId" single
+                        searchable />
+                </div>
             </div>
+
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
@@ -99,46 +100,45 @@
         </x-form>
     </x-modal>
     {{-- edit modal --}}
-    <x-modal wire:model="editModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="editModal" persistent class="modal-bottom xl:modal-middle fixed" box-class="overflow-visible">
         <x-form wire:submit="update">
-            <div class="my-4 overflow-y-auto h-96">
-                <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                    wire:click='closeDialog'>✕</x-button>
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-12 md:col-span-6 mb-4">
-                        <x-input label="Jméno" wire:model="editForm.first_name" />
-                        <div>
-                            @error('first_name')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
+
+            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                wire:click='closeDialog'>✕</x-button>
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-input label="Jméno" wire:model="editForm.first_name" />
+                    <div>
+                        @error('first_name')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
                     </div>
-                    <div class="col-span-12 md:col-span-6 mb-4">
-                        <x-input label="Příjmení" wire:model="editForm.last_name" />
-                        <div>
-                            @error('last_name')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
+                </div>
+                <div class="col-span-12 md:col-span-6 mb-4">
+                    <x-input label="Příjmení" wire:model="editForm.last_name" />
+                    <div>
+                        @error('last_name')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
                     </div>
-                    <div class="col-span-12  mb-4">
-                        <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model="editForm.userRoleId"
-                            single searchable />
-                    </div>
+                </div>
+                <div class="col-span-12  mb-4">
+                    <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model="editForm.userRoleId"
+                        single searchable />
                 </div>
             </div>
-            {{-- action section --}}
-            <div class="flex justify-between">
-                <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                        wire:click='closeDialog' />
-                </div>
-                <div>
-                    <x-button label="Upravit"
-                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="update" />
-                </div>
-            </div>
-        </x-form>
+</div>
+{{-- action section --}}
+<div class="flex justify-between">
+    <div>
+        <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4" wire:click='closeDialog' />
+    </div>
+    <div>
+        <x-button label="Upravit"
+            class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
+            type="submit" spinner="update" />
+    </div>
+
+    </x-form>
     </x-modal>
 </div>

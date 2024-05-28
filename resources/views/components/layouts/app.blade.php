@@ -10,10 +10,9 @@
     <link rel="shortcut icon" type="image/x-icon" class="text-red-500" href="{{ asset('favicon.svg') }}">
     <link rel="manifest" href="/site.webmanifest">
     <title>{{ $title ?? 'IPTV dokumentace' }}</title>
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/github.min.css" /> --}}
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
+    {{-- <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" /> --}}
+    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     {{-- <script src="https://cdn.tiny.cloud/1/a6yh9ynf4jozp4fh5ifm4ge2jyxhqtpzbisgvawi52igqueb/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script> --}}
@@ -35,8 +34,6 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-
-{{-- bg-gradient-to-b from-[#020313] --}}
 
 <body class="min-h-screen bg-gradient-to-r from-slate-900 to-sky-950 overflow-x-hidden no-scrollbar">
     <x-toast />

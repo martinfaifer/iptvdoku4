@@ -13,6 +13,7 @@ use App\Livewire\Iptv\FlowEye\FlowEyeComponent;
 use App\Livewire\User\UserNotificationComponent;
 use App\Livewire\Auth\ForgottenPasswordComponent;
 use App\Livewire\Iptv\Calendar\CalendarComponent;
+use App\Livewire\Iptv\Canvas\NetworkMapComponent;
 use App\Livewire\Iptv\Cards\SatelitCardComponent;
 use App\Livewire\Settings\Tags\SettingsTagComponent;
 use App\Livewire\Iptv\Channels\Epg\EpgChannelComponent;
@@ -101,4 +102,4 @@ Route::middleware('auth')->group(function () {
 });
 
 // only for tests
-// Route::get('epg-test', EpgChannelComponent::class);
+Route::get('canvas-test', NetworkMapComponent::class);

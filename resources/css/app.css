@@ -91,7 +91,7 @@
 }
 
 .select-primary {
-    @apply bg-transparent border-slate-700/30;
+    @apply bg-transparent border-slate-700/30 ;
 }
 
 .select:focus-within {

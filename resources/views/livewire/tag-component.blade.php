@@ -1,6 +1,6 @@
 <div>
     {{-- {{ $tags }} --}}
-    <div class="navbar bg-transparent min-h-8">
+    <div class="navbar bg-transparent min-h-8 overflow-x-auto">
         <div class="flex-1">
             {{--  --}}
         </div>
@@ -27,7 +27,7 @@
     </div>
 
     <x-modal wire:model="storeModal" title="Přídat štítek" persistent
-        class="modal-bottom sm:modal-middle backdrop-blur-sm">
+        class="modal-bottom sm:modal-middle backdrop-blur-sm " box-class="overflow-visible">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
@@ -56,6 +56,5 @@
                 </div>
             </div>
         </x-form>
-
     </x-modal>
 </div>

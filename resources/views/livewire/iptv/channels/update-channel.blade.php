@@ -44,16 +44,17 @@
                     </div>
                 </div>
                 <div class="col-span-6 mb-4">
-                    <x-choices label="GeniusTV balíčky" wire:model="form.geniustvChannelPackage" :options="$geniusTVChannelPackages" multiple/>
+                    <x-choices label="GeniusTV balíčky" wire:model="form.geniustvChannelPackage" :options="$geniusTVChannelPackages"
+                        multiple />
                     <div>
                         @error('geniustvChannelPackage')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
-                   {{-- epgs --}}
-                   <div class="col-span-6 mb-4">
-                    <x-choices-offline label="EPG" wire:model="form.epgId" :options="$channelsEpgs" searchable single/>
+                {{-- epgs --}}
+                <div class="col-span-6 mb-4">
+                    <x-choices-offline label="EPG" wire:model="form.epgId" :options="$channelsEpgs" searchable single />
                     <div>
                         @error('epgId')
                             <span class="error">{{ $message }}</span>
@@ -115,8 +116,8 @@
                 </div>
                 <div>
                     <x-button label="Upravit"
-                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-sky-700/50 border-none text-white font-semibold w-full sm:w-28" type="submit"
-                        spinner="update" />
+                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-sky-700/50 border-none text-white font-semibold w-full sm:w-28"
+                        type="submit" spinner="update" />
                 </div>
             </div>
         </x-form>

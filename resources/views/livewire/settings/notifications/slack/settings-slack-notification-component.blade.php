@@ -40,22 +40,22 @@
     </x-share.cards.base-card>
 
     {{-- create modal --}}
-    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle">
+    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle" box-class="overflow-visible">
         <x-form wire:submit="create">
-            <div class="my-4 overflow-y-auto h-96">
-                <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                    wire:click='closeDialog'>✕</x-button>
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-12 md:col-span-6">
-                        <x-input label="Url" wire:model="createForm.url" />
-                    </div>
-                    <div class="col-span-12 md:col-span-6">
-                        <x-input label="Popis" wire:model="createForm.description" />
-                    </div>
-                    <div class="col-span-12">
-                        <x-choices-offline label="Akce" wire:model="createForm.action" :options="$slackActions" single
-                            searchable />
-                    </div>
+
+            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                wire:click='closeDialog'>✕</x-button>
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 md:col-span-6">
+                    <x-input label="Url" wire:model="createForm.url" />
+                </div>
+                <div class="col-span-12 md:col-span-6">
+                    <x-input label="Popis" wire:model="createForm.description" />
+                </div>
+                <div class="col-span-12">
+                    <x-choices-offline label="Akce" wire:model="createForm.action" :options="$slackActions" single
+                        searchable />
+
                 </div>
             </div>
             {{-- action section --}}

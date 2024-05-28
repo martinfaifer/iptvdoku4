@@ -77,7 +77,7 @@
                         <li @class([
                             'ml-1',
                             'rounded-lg',
-                            'bg-sky-950' => request()->is('settings/notification/weather'),
+                            'bg-sky-950' => request()->is('settings/notifications/weather'),
                         ]) href="/settings/notifications/weather" wire:navigate><a>
                                 <x-heroicon-o-sun class="size-4" />
                                 Počasí
