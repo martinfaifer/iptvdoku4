@@ -204,15 +204,8 @@
                         </div>
                     </div>
                     <div class="col-span-12 mb-4">
-                        <div class="grid grid-cols-12 gap-4">
-                            @foreach ($devices as $device)
-                                <div class="col-span-12 md:col-span-6 mb-4">
-                                    <livewire:iptv.channels.device-has-channel-component
-                                        wire:key="device_{{ $device->id }}" :device="$device" :channel="$channel"
-                                        channelType="multicast" lazy>
-                                </div>
-                            @endforeach
-                        </div>
+                        <livewire:iptv.channels.device.device-has-channel-and-connection-map-component :devices="$devices"
+                            :channel="$channel" channelType="multicast">
                     </div>
                 @endif
                 @if (!$backupDevices->isEmpty())
@@ -227,13 +220,17 @@
                     </div>
                     <div class="col-span-12 mb-4">
                         <div class="grid grid-cols-12 gap-4">
-                            @foreach ($backupDevices as $backupDevice)
+                            <div class="col-span-12 mb-4">
+                                <livewire:iptv.channels.device.device-has-channel-and-connection-map-component
+                                    :devices="$backupDevices" :channel="$channel" isBackup="true" channelType="multicast">
+                            </div>
+                            {{-- @foreach ($backupDevices as $backupDevice)
                                 <div class="col-span-12 md:col-span-6 mb-4">
                                     <livewire:iptv.channels.device-has-channel-component
-                                        wire:key="backupDevice_{{ $backupDevice->id }}" :device="$backupDevice" :channel="$channel"
-                                        isBackup="true" channelType="multicast" lazy>
+                                        wire:key="backupDevice_{{ $backupDevice->id }}" :device="$backupDevice"
+                                        :channel="$channel" isBackup="true" channelType="multicast" lazy>
                                 </div>
-                            @endforeach
+                            @endforeach --}}
                         </div>
                     </div>
                 @endif

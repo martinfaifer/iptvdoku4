@@ -5,7 +5,7 @@
     </button>
 
     <x-modal wire:model="storeModal" title="Nová vazba na zařízení" persistent
-        class="modal-bottom sm:modal-middle fixed">
+        class="modal-bottom sm:modal-middle fixed" box-class="overflow-visible">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>

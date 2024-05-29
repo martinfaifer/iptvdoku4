@@ -11,6 +11,13 @@
     /* @apply bg-gradient-to-r from-slate-900 to-sky-950; */
 }
 
+.arrow-left {
+    @apply w-0 h-0 border-t-4 border-b-4 border-transparent border-r-8 border-r-black;
+  }
+  .arrow-tail {
+    @apply bg-black h-1 w-16;
+  }
+
 .mary-table-pagination span[aria-current="page"] > span {
     @apply bg-[#082F49] border-[#082F49] text-white/60;
 }
@@ -91,7 +98,7 @@
 }
 
 .select-primary {
-    @apply bg-transparent border-slate-700/30 ;
+    @apply bg-transparent border-slate-700/30;
 }
 
 .select:focus-within {

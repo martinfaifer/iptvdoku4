@@ -136,12 +136,10 @@
                     </div>
                     <div class="col-span-12 mb-4">
                         <div class="grid grid-cols-12 gap-4">
-                            @foreach ($devices as $device)
-                                <div wire:key="source-{{ $device->id }}" class="col-span-12 md:col-span-6 mb-4">
-                                    <livewire:iptv.channels.device-has-channel-component :device="$device" :channel="$channel"
-                                        channelType="h265">
-                                </div>
-                            @endforeach
+                            <div class="col-span-12 mb-4">
+                                <livewire:iptv.channels.device.device-has-channel-and-connection-map-component
+                                    :devices="$devices" :channel="$channel" :isBackup="false" channelType="h265">
+                            </div>
                         </div>
                     </div>
                 @endif
@@ -157,12 +155,10 @@
                     </div>
                     <div class="col-span-12 mb-4">
                         <div class="grid grid-cols-12 gap-4">
-                            @foreach ($backupDevices as $backupDevice)
-                                <div wire:key="backup-{{ $backupDevice->id }}" class="col-span-6 mb-4">
-                                    <livewire:iptv.channels.device-has-channel-component :device="$backupDevice" :channel="$channel"
-                                        isBackup="true" channelType="h265">
-                                </div>
-                            @endforeach
+                            <div class="col-span-12 mb-4">
+                                <livewire:iptv.channels.device.device-has-channel-and-connection-map-component
+                                    :devices="$backupDevices" :channel="$channel" :isBackup="true" channelType="h265">
+                            </div>
                         </div>
                     </div>
                 @endif
