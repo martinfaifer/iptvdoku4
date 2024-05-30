@@ -7,6 +7,7 @@ use App\Models\Channel;
 use Illuminate\Http\Request;
 use App\Models\ChannelMulticast;
 use App\Models\ChannelQualityWithIp;
+use App\Models\Ip;
 use App\Models\SatelitCard;
 use App\Models\SftpServer;
 use App\Models\WikiTopic;
@@ -27,7 +28,8 @@ class Spotlight
             ->merge($this->unicasts($request->search))
             ->merge($this->satelitCards($request->search))
             ->merge($this->ftpServers($request->search))
-            ->merge($this->wiki($request->search));
+            ->merge($this->wiki($request->search))
+            ->merge($this->ip($request->search));
     }
 
     public function devices(string $search)
@@ -130,6 +132,19 @@ class Spotlight
                 'description' => 'WIKI',
                 // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
                 'link' => "/wiki/{$topic->id}",
+            ];
+        });
+    }
+
+    public function ip(string $search)
+    {
+        return Ip::search($search)->get()->map(function (Ip $ip) {
+            return [
+                'id' => 'ip_' . $ip->id,
+                'name' => $ip->ip_address . "/" . $ip->cidr,
+                'description' => 'IP',
+                // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
+                'link' => "/prefixes/{$ip->id}",
             ];
         });
     }

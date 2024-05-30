@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Observers\IpObserver;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,5 +18,10 @@ class Ip extends Model
     public function nangu_isp(): BelongsTo
     {
         return $this->belongsTo(NanguIsp::class, 'nangu_isp_id');
+    }
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        return $query->where('ip_address', "like", "%" . $search . "%");
     }
 }
