@@ -100,6 +100,3 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
-
-// only for tests
-Route::get('canvas-test', NetworkMapComponent::class);
