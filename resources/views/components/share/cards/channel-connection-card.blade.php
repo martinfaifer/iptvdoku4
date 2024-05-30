@@ -14,7 +14,7 @@
                     <div class="xl:hidden flex items-center justify-center">
                         <x-heroicon-o-arrow-up class=" size-4 text-[#0D486C]" />
                     </div>
-                    <div class="sm:hidden xl:block">
+                    <div class="hidden xl:block">
                         <x-share.arrows.left-arrow></x-share.arrows.left-arrow>
                     </div>
                     <div class="">
@@ -29,7 +29,7 @@
                     <div class="xl:hidden flex items-center justify-center">
                         <x-heroicon-o-arrow-up class=" size-4 text-[#0D486C]" />
                     </div>
-                    <div class="sm:hidden xl:block">
+                    <div class="hidden xl:block">
                         <x-share.arrows.left-arrow></x-share.arrows.left-arrow>
                     </div>
                     <div class="">
@@ -45,7 +45,7 @@
                     <div class="xl:hidden flex items-center justify-center">
                         <x-heroicon-o-arrow-up class=" size-4 text-[#0D486C]" />
                     </div>
-                    <div class="sm:hidden xl:block">
+                    <div class="hidden xl:block">
                         <x-share.arrows.left-arrow></x-share.arrows.left-arrow>
                     </div>
                     <div class="">
@@ -70,7 +70,7 @@
                     <div class="xl:hidden flex items-center justify-center">
                         <x-heroicon-o-arrow-up class=" size-4 text-[#0D486C]" />
                     </div>
-                    <div class="sm:hidden xl:block">
+                    <div class="hidden xl:block">
                         <x-share.arrows.left-arrow></x-share.arrows.left-arrow>
                     </div>
                     <div class="">
@@ -85,7 +85,7 @@
                     <div class="xl:hidden flex items-center justify-center">
                         <x-heroicon-o-arrow-up class=" size-4 text-[#0D486C]" />
                     </div>
-                    <div class="sm:hidden xl:block">
+                    <div class="hidden xl:block">
                         <x-share.arrows.left-arrow></x-share.arrows.left-arrow>
                     </div>
                     <div class="">
