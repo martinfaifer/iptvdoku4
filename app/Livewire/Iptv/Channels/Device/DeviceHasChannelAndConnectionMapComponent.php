@@ -21,7 +21,7 @@ class DeviceHasChannelAndConnectionMapComponent extends Component
 
     public bool $isBackup = false;
 
-    public bool $isHiddenChannelConnectionMap = false;
+    public bool $isHiddenChannelConnectionMap = true;
 
     public bool $isHiddenBackupChannelConnectionMap = true;
 

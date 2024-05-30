@@ -1,2 +1,2 @@
-<div class="text-[#0E2C46] mt-3">
+<div class="text-[#0D486C] mt-3">
     <-------— </div>
