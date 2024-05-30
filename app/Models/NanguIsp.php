@@ -46,12 +46,17 @@ class NanguIsp extends Model
         return $this->hasOne(GeniusTvDiscount::class, 'nangu_isp_id', 'id');
     }
 
+    public function ipprefixes(): HasMany
+    {
+        return $this->hasMany(Ip::class, 'nangu_isp_id', 'id');
+    }
+
     public function scopeSearch(Builder $query, string $search)
     {
-        return $query->where('name', 'like', '%'.$search.'%')
-            ->orWhere('ic', 'like', '%'.$search.'%')
-            ->orWhere('dic', 'like', '%'.$search.'%')
-            ->orWhere('hbo_key', 'like', '%'.$search.'%')
-            ->orWhere('crm_contract_id', 'like', '%'.$search.'%');
+        return $query->where('name', 'like', '%' . $search . '%')
+            ->orWhere('ic', 'like', '%' . $search . '%')
+            ->orWhere('dic', 'like', '%' . $search . '%')
+            ->orWhere('hbo_key', 'like', '%' . $search . '%')
+            ->orWhere('crm_contract_id', 'like', '%' . $search . '%');
     }
 }

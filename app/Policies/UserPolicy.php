@@ -139,6 +139,15 @@ class UserPolicy
         return false;
     }
 
+    public function show_ip_prefixes(User $user)
+    {
+        if ($user->isTechnik()) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function show_settings_channels_banners(User $user)
     {
         if ($user->isTechnik() || $user->isAdministrativa()) {

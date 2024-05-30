@@ -16,6 +16,7 @@ class Note extends Model
         'satelit_card_id',
         'note',
         'user',
+        'ip_id'
     ];
 
     public function channel(): BelongsTo
@@ -41,6 +42,11 @@ class Note extends Model
     public function satelit_card(): BelongsTo
     {
         return $this->belongsTo(SatelitCard::class, 'satelit_card_id', 'id');
+    }
+
+    public function ip(): BelongsTo
+    {
+        return $this->belongsTo(Ip::class, 'ip_id');
     }
 
     public function scopeForUser(Builder $query, string $userEmail)

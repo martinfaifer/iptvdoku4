@@ -19,6 +19,7 @@ use App\Livewire\Settings\Tags\SettingsTagComponent;
 use App\Livewire\Iptv\Channels\Epg\EpgChannelComponent;
 use App\Livewire\Settings\Users\SettingsUsersComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
+use App\Livewire\Nangu\IpPrefixes\NanguIpPrefixesComponent;
 use App\Livewire\Settings\Dashboard\SettingsDashboardComponent;
 use App\Livewire\Settings\Devices\Vendors\SettingsDevicesVendorsComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
@@ -54,8 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::get('calendar', CalendarComponent::class)->middleware('can:show_events,App\Models\Event');
     Route::get('sftps/{sftpServer?}', SftpComponent::class)->middleware('can:show_servers,App\Models\SftpServer');
     Route::get('wiki/{topic?}', WikiComponent::class)->middleware('can:show_topics, App\Models\WikiTopic');
-
     Route::get('floweye/{issue?}', FlowEyeComponent::class)->middleware('can:show_tickets, App\Models\User');
+    Route::get('prefixes/{ipPrefix?}', NanguIpPrefixesComponent::class);
 
     Route::prefix('profile')->group(function () {
         Route::get('', UserComponent::class);

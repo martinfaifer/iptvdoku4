@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Jobs\LogJob;
+use App\Models\Note;
 use App\Models\Loger;
 use App\Models\Channel;
 use App\Models\Contact;
@@ -102,6 +103,12 @@ class ChannelObserver
         Contact::where('type', 'channel')->where('item_id', $channel->id)->delete();
         Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
         $this->cache_channels_with_detail();
+
+        try {
+            Note::where('channel_id', $channel->id)->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
 
         SendEmailNotificationJob::dispatch(
             "Odebrán kanál $channel->name",

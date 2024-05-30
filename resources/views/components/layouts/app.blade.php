@@ -116,6 +116,18 @@
                                 @can('show_tickets', App\Models\User::class)
                                     <livewire:iptv.flow-eye.menu.flow-eye-menu-icon-with-alert-component />
                                 @endcan
+                                @can('show_ip_prefixes', App\Models\User::class)
+                                <div class="tooltip tooltip-bottom" data-tip="Ip prefixy">
+                                    <li href="/prefixes" wire:navigate.hover @class([
+                                        'rounded-lg',
+                                        'bg-[#1A1E2A]' => request()->is('prefixes') || request()->is('prefixes/*'),
+                                    ])>
+                                        <a>
+                                            <x-heroicon-o-rectangle-stack class="size-6 text-white/80" fill="none"/>
+                                        </a>
+                                    </li>
+                                </div>
+                                @endcan
                             </ul>
                             {{-- <div class="static">
                                 <x-button @click="toggle" icon="o-bars-3-bottom-left"
@@ -148,6 +160,9 @@
                                 @endif
                                 @if (request()->is('profile') || request()->is('profile/*'))
                                     <livewire:user.menu.user-menu-component class="fixed" />
+                                @endif
+                                @if (request()->is('prefixes') || request()->is('prefixes/*'))
+                                    <livewire:nangu.ip-prefixes.menu.menu-nangu-ip-prefixes-component class="fixed" />
                                 @endif
                                 @if (request()->is('settings') || request()->is('settings/*'))
                                     <livewire:settings.settings-navigation-component class="fixed" />
