@@ -1,3 +1,10 @@
+@php
+    $config = [
+        'toolbar' => 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify |link image | media',
+        'quickbars_selection_toolbar' => 'bold italic link',
+        'plugins' => 'media',
+    ];
+@endphp
 <div>
     <button class='btn bg-[#082f49] btn-sm border-none' wire:click="openModal()" wire:keydown.ctrl.a="openModal()">
         <x-heroicon-o-plus-circle class="w-5 h-5" />
@@ -17,7 +24,9 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-markdown wire:model="form.text" label="Obsah" />
+                    <x-editor wire:model="form.text" label="Obsah" :config="$config"/>
+
+                    {{-- <x-markdown wire:model="form.text" label="Obsah" /> --}}
                     <div>
                         @error('text')
                             <span class="error">{{ $message }}</span>

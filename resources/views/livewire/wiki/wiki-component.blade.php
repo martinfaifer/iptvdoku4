@@ -38,9 +38,10 @@
             <div class="mt-4">
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-12">
-                        <article>
-                            {!! Str::markdown($topic->text) !!}
-                        </article>
+                        {{-- <article> --}}
+                            {!! $topic->text !!}
+                            {{-- {!! Str::markdown($topic->text) !!} --}}
+                        {{-- </article> --}}
                     </div>
                 </div>
             </div>

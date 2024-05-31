@@ -1,3 +1,10 @@
+@php
+   $config = [
+        'toolbar' => 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify |link image | media | preview',
+        'quickbars_selection_toolbar' => 'bold italic link',
+        'plugins' => 'media, preview',
+    ];
+@endphp
 <div>
     <button class="btn btn-circle btn-sm mt-7 ml-3 bg-transparent border-none" wire:click="edit">
         <x-icon name="s-pencil" class="w-4 h-4 text-green-500" />
@@ -17,7 +24,8 @@
                 </div>
                 <div class="col-span-12 mb-4">
                     <template x-if="$wire.updateModal">
-                        <x-markdown wire:model="form.text" label="Obsah" />
+                        <x-editor wire:model="form.text" label="Obsah" :config="$config" />
+                        {{-- <x-markdown wire:model="form.text" label="Obsah" /> --}}
                     </template>
                 </div>
                 <div class="col-span-12 mb-4">

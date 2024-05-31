@@ -34,7 +34,7 @@
             <div class="mt-4">
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-12">
-                        <livewire:notes.note-component column="ip_id" :id="$prefix->id" lazy />
+                        <livewire:notes.note-component cardWeight="h-96" chatBubleWeight="h-96" column="ip_id" :id="$prefix->id" lazy />
                     </div>
                 </div>
             </div>

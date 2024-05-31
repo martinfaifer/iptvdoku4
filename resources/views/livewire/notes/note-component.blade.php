@@ -1,6 +1,11 @@
+@props([
+    'cardWeight' => 'h-44',
+    'chatBubleWeight' => 'h-36',
+])
+
 <div>
     <x-share.cards.base-card title="Poznámky">
-        <div class="h-44">
+        <div {{ $attributes->merge(['class' => $cardWeight]) }}>
             <div>
                 <button
                     class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-1 text-green-500"
@@ -15,7 +20,7 @@
             @else
                 <div class="grid grid-cols-12">
                     <div class="col-span-12">
-                        <div class="overflow-y-auto h-36">
+                        <div {{ $attributes->merge(['class' => 'overflow-y-auto ' . $chatBubleWeight]) }}>
                             @foreach ($notes as $note)
                                 <div class="chat chat-start">
                                     <div class="chat-image avatar">
@@ -39,7 +44,10 @@
                                         </button>
                                     </div>
                                     <div class="chat-bubble w-full">
-                                        {{ $note->note }}
+                                        <article>
+                                            {!! Str::markdown($note->note) !!}
+                                        </article>
+                                        {{-- {{ $note->note }} --}}
                                     </div>
                                     <div class="chat-footer opacity-50">
                                         <time class="text-xs opacity-50">{{ $note->created_at }}</time>
@@ -58,7 +66,8 @@
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-textarea wire:model="storeNoteForm.note" rows="5" inline />
+                    {{-- <x-textarea wire:model="storeNoteForm.note" rows="5" inline /> --}}
+                    <x-markdown wire:model="storeNoteForm.note" />
                 </div>
             </div>
             {{-- action section --}}
