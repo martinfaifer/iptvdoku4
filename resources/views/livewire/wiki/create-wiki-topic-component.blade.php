@@ -1,9 +1,9 @@
 @php
     $config = [
         'toolbar' =>
-            'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent|link image | media | preview',
+            'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent|link image | media | fullscreen | preview',
         'quickbars_selection_toolbar' => 'bold italic link',
-        'plugins' => 'media, preview',
+        'plugins' => 'media, preview, fullscreen',
     ];
 @endphp
 <div>
