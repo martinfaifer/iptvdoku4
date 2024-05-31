@@ -4,6 +4,7 @@ namespace App\Livewire\Settings\Nangu\Isps;
 
 use App\Livewire\Forms\CreateSettingsNanguIspForm;
 use App\Livewire\Forms\UpdateSettingsNanguIspForm;
+use App\Models\Ip;
 use App\Models\NanguIsp;
 use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
@@ -71,6 +72,11 @@ class SettingsIspComponent extends Component
 
     public function destroy(NanguIsp $nanguIsp)
     {
+        try {
+            Ip::where('nangu_isp_id', $nanguIsp->id)->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         $nanguIsp->delete();
 
         $this->redirect(url()->previous(), true);
