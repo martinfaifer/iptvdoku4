@@ -20,6 +20,7 @@ use App\Livewire\Iptv\Channels\Epg\EpgChannelComponent;
 use App\Livewire\Settings\Users\SettingsUsersComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
 use App\Livewire\Nangu\IpPrefixes\NanguIpPrefixesComponent;
+use App\Livewire\Settings\Geniustv\TvChannelPackagesComponent;
 use App\Livewire\Settings\Dashboard\SettingsDashboardComponent;
 use App\Livewire\Settings\Devices\Vendors\SettingsDevicesVendorsComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
@@ -73,6 +74,7 @@ Route::middleware('auth')->group(function () {
             Route::get('isps-channel-packages-to-tags', SettingsTagToChannelPackageComponent::class)->middleware('can:show_settings_nangu,App\Models\User');
         });
         Route::prefix('geniustv')->group(function () {
+            Route::get('tv-channel-packages', TvChannelPackagesComponent::class);
             Route::prefix('statistics')->group(function () {
                 Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
                 Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');

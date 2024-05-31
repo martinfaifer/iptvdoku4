@@ -161,6 +161,16 @@
                         GeniusTV
                     </summary>
                     <ul>
+                        <li @class([
+                            'ml-1',
+                            'rounded-lg',
+                            'bg-sky-950' => request()->is('settings/geniustv/tv-channel-packages'),
+                        ]) href="/settings/geniustv/tv-channel-packages" wire:navigate>
+                            <a>
+                                <x-heroicon-o-tv class="size-4" />
+                                TV balíčky
+                            </a>
+                        </li>
                         <li>
                             <details open>
                                 <summary class="font-semibold ml-1">

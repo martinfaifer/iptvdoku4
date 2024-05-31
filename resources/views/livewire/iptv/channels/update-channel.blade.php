@@ -27,7 +27,7 @@
                 </div>
                 {{-- qualities --}}
                 <div class="col-span-6 mb-4">
-                    <x-choices label="Kvalita" wire:model="form.quality" :options="$qualities" single />
+                    <x-choices-offline label="Kvalita" wire:model="form.quality" :options="$qualities" single searchable/>
                     <div>
                         @error('quality')
                             <span class="error">{{ $message }}</span>
@@ -36,7 +36,7 @@
                 </div>
                 {{-- channel category --}}
                 <div class="col-span-6 mb-4">
-                    <x-choices label="Žánr" wire:model="form.category" :options="$channelCategories" single />
+                    <x-choices-offline label="Žánr" wire:model="form.category" :options="$channelCategories" single searchable/>
                     <div>
                         @error('category')
                             <span class="error">{{ $message }}</span>
@@ -44,8 +44,8 @@
                     </div>
                 </div>
                 <div class="col-span-6 mb-4">
-                    <x-choices label="GeniusTV balíčky" wire:model="form.geniustvChannelPackage" :options="$geniusTVChannelPackages"
-                        multiple />
+                    <x-choices-offline label="GeniusTV balíčky" wire:model="form.geniustvChannelPackage" :options="$geniusTVChannelPackages"
+                        multiple searchable/>
                     <div>
                         @error('geniustvChannelPackage')
                             <span class="error">{{ $message }}</span>
