@@ -113,20 +113,20 @@
                                         </a>
                                     </li>
                                 </div>
+                                @can('show_ip_prefixes', App\Models\User::class)
+                                    <div class="tooltip tooltip-bottom" data-tip="Ip prefixy">
+                                        <li href="/prefixes" wire:navigate.hover @class([
+                                            'rounded-lg',
+                                            'bg-[#1A1E2A]' => request()->is('prefixes') || request()->is('prefixes/*'),
+                                        ])>
+                                            <a>
+                                                <x-heroicon-o-rectangle-stack class="size-6 text-white/80" fill="none" />
+                                            </a>
+                                        </li>
+                                    </div>
+                                @endcan
                                 @can('show_tickets', App\Models\User::class)
                                     <livewire:iptv.flow-eye.menu.flow-eye-menu-icon-with-alert-component />
-                                @endcan
-                                @can('show_ip_prefixes', App\Models\User::class)
-                                <div class="tooltip tooltip-bottom" data-tip="Ip prefixy">
-                                    <li href="/prefixes" wire:navigate.hover @class([
-                                        'rounded-lg',
-                                        'bg-[#1A1E2A]' => request()->is('prefixes') || request()->is('prefixes/*'),
-                                    ])>
-                                        <a>
-                                            <x-heroicon-o-rectangle-stack class="size-6 text-white/80" fill="none"/>
-                                        </a>
-                                    </li>
-                                </div>
                                 @endcan
                             </ul>
                             {{-- <div class="static">

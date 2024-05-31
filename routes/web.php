@@ -55,8 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::get('calendar', CalendarComponent::class)->middleware('can:show_events,App\Models\Event');
     Route::get('sftps/{sftpServer?}', SftpComponent::class)->middleware('can:show_servers,App\Models\SftpServer');
     Route::get('wiki/{topic?}', WikiComponent::class)->middleware('can:show_topics, App\Models\WikiTopic');
-    Route::get('floweye/{issue?}', FlowEyeComponent::class)->middleware('can:show_tickets, App\Models\User');
     Route::get('prefixes/{ipPrefix?}', NanguIpPrefixesComponent::class);
+    Route::get('floweye/{issue?}', FlowEyeComponent::class)->middleware('can:show_tickets, App\Models\User');
 
     Route::prefix('profile')->group(function () {
         Route::get('', UserComponent::class);

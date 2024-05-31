@@ -11,6 +11,9 @@
                 <x-share.alerts.info title="Vyberte prefix z menu vlevo"></x-share.alerts.info>
             </div>
         @else
+        <div>
+            <livewire:tag-component type="ip" itemId="{{ $prefix->id }}"></livewire:tag-component>
+        </div>
             <div class="grid grid-cols-12 mt-8">
                 <div class="col-span-12 flex">
                     <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
