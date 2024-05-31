@@ -1,8 +1,9 @@
 @php
     $config = [
-        'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify |bullist numlist outdent indent|link image | media | preview',
+        'toolbar' =>
+            'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent|link image | media | preview',
         'quickbars_selection_toolbar' => 'bold italic link',
-        'plugins' => 'media',
+        'plugins' => 'media, preview',
     ];
 @endphp
 <div>
@@ -24,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-editor wire:model="form.text" label="Obsah" :config="$config"/>
+                    <x-editor wire:model="form.text" label="Obsah" :config="$config" />
 
                     {{-- <x-markdown wire:model="form.text" label="Obsah" /> --}}
                     <div>
