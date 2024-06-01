@@ -15,7 +15,8 @@ use App\Models\NanguSubscription;
 use App\Services\Invoices\HBOGO\ConnectService;
 use App\Services\Invoices\Traits\CurrencyPriceTrait;
 use Illuminate\Support\Str;
-use Spatie\LaravelPdf\Facades\Pdf;
+// use Spatie\LaravelPdf\Facades\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CreateNanguInvoicePerIsp
 {
@@ -90,7 +91,7 @@ class CreateNanguInvoicePerIsp
             }
             // create pdf and store them in to the file storage and create link to db for download
             $invoiceName = str_replace(' ', '', $isp->name) . '_' . time() . '.pdf';
-            Pdf::view('pdfs.invoice', [
+            Pdf::loadView('pdfs.invoice', [
                 'allActiveSubscriptionCount' => $allActiveSubscriptionCount,
                 'tarrifs' => $taxesForTarrifs,
                 'sum' => $sumPrice,
