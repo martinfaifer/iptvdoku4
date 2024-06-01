@@ -95,7 +95,7 @@ class CreateNanguInvoicePerIsp
                 'allActiveSubscriptionCount' => $allActiveSubscriptionCount,
                 'tarrifs' => $taxesForTarrifs,
                 'sum' => $sumPrice,
-            ])->save('storage/invoices/' . $invoiceName);
+            ])->save('storage/app/public/invoices/' . $invoiceName);
 
             NanguIspInvoice::create([
                 'nangu_isp_id' => $isp->id,
