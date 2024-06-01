@@ -31,14 +31,14 @@
                 </div>
             </div>
             {{-- Hlavicka ISP , kteremu se fakturuje --}}
-            <div style="background-color: #F3F4F6; display: inline-block; margin-left: 7rem; border-radius: 15px; width:50%;"
+            {{-- <div style="background-color: #F3F4F6; display: inline-block; margin-left: 7rem; border-radius: 15px; width:50%;"
                 class="">
                 <div class="mt-1 ml-10">
                     <p class="text-xl">{{ $ispName }}</p>
                     <p class="text-sm ml-1">IC: {{ $ispIc }} </p>
                     <p class="text-sm ml-1 mb-2">DIC: {{ $ispDic }}</p>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
 
