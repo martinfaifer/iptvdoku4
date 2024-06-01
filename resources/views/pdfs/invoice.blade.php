@@ -79,31 +79,30 @@
         </table>
 
         {{-- hbogo --}}
-        @if ($hbo_go != 0)
-            <table class="table-fixed border w-full mt-6">
-                <thead style="background-color: #F3F4F6">
-                    <tr>
-                        <th class="border"><small>Počet HBO GO služeb</small></th>
-                        <th class="border"><small>Cena za jednu službu</small></th>
-                        <th class="border"><small>Cena celkem</small></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($tarrifs as $tarrifName => $tarrifData)
-                        @if ($tarrifName == 'hbogo')
-                            <tr>
-                                <td class="border text-center"><small>{{ $hbo_go_pocet['count'] }}</small></td>
-                                <td class="border text-center">
-                                    <small>{{ round($tarrifData['pricePerSubscription'], 2) }}</small>
-                                </td>
-                                <td class="border text-center"><small>{{ round($tarrifData['cost'], 2) }} Kč</small>
-                                </td>
-                            </tr>
-                        @endif
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
+        <table class="table-fixed border w-full mt-6">
+            <thead style="background-color: #F3F4F6">
+                <tr>
+                    <th class="border"><small>Počet HBO GO služeb</small></th>
+                    <th class="border"><small>Cena za jednu službu</small></th>
+                    <th class="border"><small>Cena celkem</small></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($tarrifs as $tarrifName => $tarrifData)
+                    @if ($tarrifName == 'hbogo')
+                        <tr>
+                            <td class="border text-center"><small>{{ $hbo_go_pocet['count'] }}</small></td>
+                            <td class="border text-center">
+                                <small>{{ round($tarrifData['pricePerSubscription'], 2) }}</small>
+                            </td>
+                            <td class="border text-center"><small>{{ round($tarrifData['cost'], 2) }} Kč</small>
+                            </td>
+                        </tr>
+                    @endif
+                @endforeach
+            </tbody>
+        </table>
+
 
         {{-- Cena celkem --}}
         <p class="text-right mt-6 text-base">
