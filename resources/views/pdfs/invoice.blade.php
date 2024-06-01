@@ -1,7 +1,11 @@
+<!doctype html>
 <html lang="en">
 
 <head>
-    <title>Invoice</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" <title>Invoice</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -18,7 +22,8 @@
                         alt="grape_logo">
                 </div>
                 <div class="col-span-2">
-                    <img class="h-12" src="{{ config('app.url') }}
+                    <img class="h-12"
+                        src="{{ config('app.url') }}
                     /companyLogos/logo_geniustv.png"
                         alt="Geniustv_logo">
                 </div>
@@ -70,7 +75,7 @@
                         </thead>
                         <tbody>
                             @foreach ($tarrifs as $tarrifName => $tarrifData)
-                                @if ($tarrifName != 'osaData' && $tarrifName != "hbogo")
+                                @if ($tarrifName != 'osaData' && $tarrifName != 'hbogo')
                                     <tr class="bg-white border-b dark:bg-gray-800">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -111,7 +116,7 @@
                         </thead>
                         <tbody>
                             @foreach ($tarrifs as $tarrifName => $tarrifData)
-                                @if ( $tarrifName == "hbogo")
+                                @if ($tarrifName == 'hbogo')
                                     <tr class="bg-white border-b dark:bg-gray-800">
                                         <td class="px-6 py-4">
                                             {{ $tarrifData['count'] }}

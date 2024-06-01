@@ -100,7 +100,7 @@ class CreateNanguInvoicePerIsp
             NanguIspInvoice::create([
                 'nangu_isp_id' => $isp->id,
                 'invoice' => $invoiceName,
-                'path' => public_path('storage/invoices/' . $invoiceName),
+                'path' => '/storage/invoices/' . $invoiceName,
             ]);
 
             GeniusTvChart::create([
