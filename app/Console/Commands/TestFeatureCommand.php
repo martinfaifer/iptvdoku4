@@ -25,6 +25,6 @@ class TestFeatureCommand extends Command
      */
     public function handle()
     {
-        echo 'no features ... ';
+        (new CreateNanguInvoicePerIsp())->create();
     }
 }
