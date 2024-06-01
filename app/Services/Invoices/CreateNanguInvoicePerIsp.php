@@ -165,7 +165,7 @@ class CreateNanguInvoicePerIsp
             $channelsInPackage = Channel::find(json_decode($channelPackage->channels_id));
 
             // exception dont exists
-            if (is_null($channelPackage->exception)) {
+            if (is_null($channelPackage->exception) || empty($channelPackage->exception)) {
                 // count tax for all channels must be in channel package
                 if ($channelPackage->must_contains_all == true) {
                     $tax = (float) $tax + (float) $this->count_channel_package_tax_for_all_channels_without_exception($channelsInPackage, $ispId, $tarrifCode, $channelPackage);

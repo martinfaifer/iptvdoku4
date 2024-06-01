@@ -34,6 +34,7 @@ class GetEcchangeRateCourseCommand extends Command
             ->add('central_bank_of_czech_republic')
             ->build();
 
+            // dd($swap->latest('EUR/CZK')->getValue());
         $currencies = Currency::where('name', '!=', 'CZK')->get();
         foreach ($currencies as $currency) {
             $currency->update([
