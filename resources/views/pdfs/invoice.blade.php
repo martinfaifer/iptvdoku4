@@ -1,150 +1,113 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" <title>Invoice</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
 </head>
 
-<body>
+<body class='container mx-auto mt-6' style="font-family: DejaVu Sans, sans-serif;">
+    {{-- logo spolecnosti GRAPE --}}
+
     <div>
-        <div class="container mx-auto px-12 py-12">
-            {{-- logo --}}
-            <div class="mt-6 grid grid-cols-12">
-                {{-- img s logem --}}
-                <div class="col-span-2">
-                    <img class="h-12"
-                        src="{{ config('app.url') }}
-                    /storage/companyLogos/logo_grapesc.svg"
-                        alt="grape_logo">
-                </div>
-                <div class="col-span-2">
-                    <img class="h-12"
-                        src="{{ config('app.url') }}
-                    /companyLogos/logo_geniustv.png"
-                        alt="Geniustv_logo">
-                </div>
-                <div class="col-span-8"></div>
-            </div>
-            {{-- grid s informaci o poskytovately a zakazníkovi --}}
-            <div class="grid grid-cols-12 gap-4 mt-12">
-                <div class="col-span-6 bg-gray-50 rounded-lg">
-                    <div class="mx-2 my-2">
-                        <p class="font-semibold text-lg">
-                            GRAPE SC, a.s.
-                        </p>
-                        <p class="text-md">
-                            IC: 25708783
-                        </p>
-                        <p class="text-md">
-                            DIC: CZ25708783
-                        </p>
-                    </div>
-                </div>
-                <div class="col-span-6"></div>
-            </div>
+        <img src="http://10.255.255.50/storage/Logo_Grape_pruhledne.png" width="150" height="38">
+    </div>
 
-            {{-- content --}}
-            <div class="mt-24">
-                <p class="font-semibold">
-                    Celkový počet aktivních služeb: <span class="font-bold">{{ $allActiveSubscriptionCount }}</span>
-                </p>
-            </div>
-
-            <div class="mt-12">
-                <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Tarif
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Počet služeb
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Cena za klienta
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Cena
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($tarrifs as $tarrifName => $tarrifData)
-                                @if ($tarrifName != 'osaData' && $tarrifName != 'hbogo')
-                                    <tr class="bg-white border-b dark:bg-gray-800">
-                                        <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $tarrifName }}
-                                        </th>
-                                        <td class="px-6 py-4">
-                                            {{ $tarrifData['count'] }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ round($tarrifData['pricePerSubscription'], 2) }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ round($tarrifData['cost'], 2) }}
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
+    <div class="container mx-auto mt-6">
+        {{-- Hlavicka ISP který fakturuje --}}
+        <div>
+            <div style="display: inline-block" class="">
+                <div class="mt-1 ml-1">
+                    <p class="text-xl"> GRAPE SC, a.s.</p>
+                    <p class="text-sm ml-1">IC: 25708783 </p>
+                    <p class="text-sm ml-1 mb-2">DIC: CZ25708783 </p>
                 </div>
             </div>
-
-            <div class="mt-12">
-                <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Počet lužeb HBO GO
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Cena za službu
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Cena
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($tarrifs as $tarrifName => $tarrifData)
-                                @if ($tarrifName == 'hbogo')
-                                    <tr class="bg-white border-b dark:bg-gray-800">
-                                        <td class="px-6 py-4">
-                                            {{ $tarrifData['count'] }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ round($tarrifData['pricePerSubscription'], 2) }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ round($tarrifData['cost'], 2) }}
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
+            {{-- Hlavicka ISP , kteremu se fakturuje --}}
+            <div style="background-color: #F3F4F6; display: inline-block; margin-left: 7rem; border-radius: 15px; width:50%;"
+                class="">
+                <div class="mt-1 ml-10">
+                    <p class="text-xl">{{ $ispName }}</p>
+                    <p class="text-sm ml-1">IC: {{ $ispIc }} </p>
+                    <p class="text-sm ml-1 mb-2">DIC: {{ $ispDic }}</p>
                 </div>
-            </div>
-
-            <div class=" mt-28">
-                <span>
-                    Cena celkem:
-                    <span class="font-bold">
-                        {{ round($sum, 2) }} Kč
-                    </span>
-                </span>
             </div>
         </div>
-    </div>
-</body>
 
-</html>
+
+        <div class="mt-2">
+            <p class="text-feft text-sm mt-2">
+                <strong>
+                    Celkem aktivních služeb:
+                </strong>
+                {{ $allActiveSubscriptionCount }}
+            </p>
+        </div>
+
+        {{-- tarify --}}
+        <table class="table-fixed border w-full mt-6">
+            <thead style="background-color: #F3F4F6">
+                <tr>
+                    <th class="border"><small>Tarif</small></th>
+                    <th class="border"><small>Počet</small></th>
+                    <th class="border"><small>Cena za klienta</small></th>
+                    <th class="border"><small>Cena</small></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($tarrifs as $tarrifName => $tarrifData)
+                    @if ($tarrifName != 'osaData' && $tarrifName != 'hbogo')
+                        <tr>
+                            <td class="border text-left"><small>{{ $tarrifName }}</small></td>
+                            <td class="border text-center"><small>{{ $tarrifData['count'] }}</small></td>
+                            <td class="border text-center">
+                                <small>{{ round($tarrifData['pricePerSubscription'], 2) }}</small>
+                            </td>
+                            <td class="border text-center"><small>{{ round($tarrifData['cost'], 2) }} Kč</small></td>
+                        </tr>
+                    @endif
+                @endforeach
+
+            </tbody>
+        </table>
+
+        {{-- hbogo --}}
+        @if ($hbo_go != 0)
+            <table class="table-fixed border w-full mt-6">
+                <thead style="background-color: #F3F4F6">
+                    <tr>
+                        <th class="border"><small>Počet HBO GO služeb</small></th>
+                        <th class="border"><small>Cena za jednu službu</small></th>
+                        <th class="border"><small>Cena celkem</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($tarrifs as $tarrifName => $tarrifData)
+                        @if ($tarrifName == 'hbogo')
+                            <tr>
+                                <td class="border text-center"><small>{{ $hbo_go_pocet['count'] }}</small></td>
+                                <td class="border text-center">
+                                    <small>{{ round($tarrifData['pricePerSubscription'], 2) }}</small>
+                                </td>
+                                <td class="border text-center"><small>{{ round($tarrifData['cost'], 2) }} Kč</small>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+
+        {{-- Cena celkem --}}
+        <p class="text-right mt-6 text-base">
+            <strong>Celková cena:</strong> {{ round($sum, 2) }} Kč
+        </p>
+
+</body>
