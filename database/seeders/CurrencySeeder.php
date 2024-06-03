@@ -14,15 +14,15 @@ class CurrencySeeder extends Seeder
     {
         if (! Currency::first()) {
             Currency::create([
-                'name' => 'usd',
+                'name' => 'USD',
             ]);
 
             Currency::create([
-                'name' => 'eu',
+                'name' => 'EUR',
             ]);
 
             Currency::create([
-                'name' => 'czk',
+                'name' => 'CZK',
             ]);
         }
     }

@@ -17,7 +17,7 @@
     <div>
         {{-- logo spolecnosti GRAPE --}}
         <div class="company_logo">
-            <img src="/storage/companyLogos/grapesc.png" width="150" height="38" alt="logo">
+            <img src="http://93.91.154.53/storage/companyLogos/grapesc.png" width="150" height="38" alt="logo">
         </div>
 
         {{-- Hlavicka ISP který fakturuje --}}
