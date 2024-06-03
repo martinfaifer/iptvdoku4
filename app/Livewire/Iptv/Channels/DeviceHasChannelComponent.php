@@ -167,7 +167,7 @@ class DeviceHasChannelComponent extends Component
         $this->selectedInput = '';
         $this->selectedOutput = '';
 
-        return $this->storeLinuxPathModal = false;
+        $this->storeLinuxPathModal = false;
 
         return $this->updateModal = false;
     }
