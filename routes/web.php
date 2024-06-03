@@ -103,3 +103,7 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
+
+Route::get('test', function() {
+    return view('pdfs.invoice');
+});
