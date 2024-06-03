@@ -12,12 +12,21 @@ body {
     margin-top: 1rem;
 }
 
+.isp_card_main {
+    background-color: #f3f4f6;
+    padding: 20px;
+    display: inline-block;
+    border-radius: 15px;
+    width: 25%;
+}
+
+
 .isp_card {
     background-color: #f3f4f6;
     padding: 20px;
     display: inline-block;
     border-radius: 15px;
-    width: 30%;
+    width: 40%;
 }
 
 .isp_card_body {

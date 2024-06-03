@@ -22,7 +22,7 @@
 
         {{-- Hlavicka ISP který fakturuje --}}
         <div class="isp_card_container">
-            <div class="isp_card">
+            <div class="isp_card_main">
                 <div class="isp_card_body">
                     <p><strong> GRAPE SC, a.s.</strong></p>
                     <p><small>IC: 25708783 </small></p>
