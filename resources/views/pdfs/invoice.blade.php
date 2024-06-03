@@ -14,34 +14,34 @@
 </head>
 
 <body>
-    {{-- logo spolecnosti GRAPE --}}
     <div>
-        <img src="/storage/companyLogos/grapesc.png" width="150" height="38">
-    </div>
+        {{-- logo spolecnosti GRAPE --}}
+        <div class="company_logo">
+            <img src="/storage/companyLogos/grapesc.png" width="150" height="38" alt="logo">
+        </div>
 
-    <div>
         {{-- Hlavicka ISP který fakturuje --}}
         <div class="isp_card_container">
             <div class="isp_card">
                 <div class="isp_card_body">
-                    <h4> GRAPE SC, a.s.</h4>
-                    <p>IC: 25708783 </p>
-                    <p>DIC: CZ25708783 </p>
+                    <p><strong> GRAPE SC, a.s.</strong></p>
+                    <p><small>IC: 25708783 </small></p>
+                    <p><small>DIC: CZ25708783 </small></p>
                 </div>
             </div>
             {{-- Hlavicka ISP , kteremu se fakturuje --}}
             <div style="margin-left: 7rem;" class="isp_card">
                 <div class="isp_card_body">
-                    <h4>{{ $isp->name }}</h4>
+                    <p><strong>{{ $isp->name }}</strong></p>
                     @if (!is_null($isp->ic))
-                        <p>IC: {{ $isp->ic }} </p>
+                        <p><small>IC: {{ $isp->ic }} </small></p>
                     @else
-                        <p>IC:</p>
+                        <p><small>IC:</small></p>
                     @endif
                     @if (!is_null($isp->dic))
-                        <p>DIC: {{ isp->dic }}</p>
+                        <p><small>DIC: {{ isp->dic }}</small></p>
                     @else
-                        <p>DIC:</p>
+                        <p><small>DIC:</small></p>
                     @endif
                 </div>
             </div>
