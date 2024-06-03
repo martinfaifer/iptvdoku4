@@ -31,7 +31,7 @@
         @endif
 
         @foreach ($devices as $device)
-            <div wire:key="device_{{ $device->id }}" class="col-span-12 md:col-span-6 mb-4">
+            <div wire:key="device_{{ $device->id }}" class="col-span-12 xl:col-span-6 mb-4">
                 <livewire:iptv.channels.device-has-channel-component wire:key="device_component_{{ $device->id }}"
                     :device="$device" :channel="$channel" :isBackup="$isBackup" :channelType="$channelType" lazy>
             </div>
