@@ -66,7 +66,6 @@ class DeviceHasChannelAndConnectionMapComponent extends Component
         return $this->isHiddenBackupChannelConnectionMap = !$this->isHiddenBackupChannelConnectionMap;
     }
 
-    #[On('refresh_channel_has_devices_{channelType}_{channel.id}')]
     public function render()
     {
         return view('livewire.iptv.channels.device.device-has-channel-and-connection-map-component');
