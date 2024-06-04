@@ -39,16 +39,15 @@ class DeviceHasChannelAndConnectionMapComponent extends Component
             $this->devices =  $this->devices_belongs_to_channel_type(
                 channelWithType: $this->channelType . ':' . $this->channel->id . ":backup"
             );
-        } else {
-            $this->devices =  $this->devices_belongs_to_channel_type(
-                channelWithType: $this->channelType . ':' . $this->channel->id
-            );
-        }
-        if ($this->isBackup == true) {
+
             $this->schemaDevices = $this->devices_belongs_to_channel_type(
                 channelWithType: 'multicast:' . $this->channel->id . ":backup"
             );
         } else {
+            $this->devices =  $this->devices_belongs_to_channel_type(
+                channelWithType: $this->channelType . ':' . $this->channel->id
+            );
+
             $this->schemaDevices = $this->devices_belongs_to_channel_type(
                 channelWithType: 'multicast:' . $this->channel->id
             );
@@ -67,6 +66,7 @@ class DeviceHasChannelAndConnectionMapComponent extends Component
         return $this->isHiddenBackupChannelConnectionMap = !$this->isHiddenBackupChannelConnectionMap;
     }
 
+    #[On('refresh_channel_has_devices_{channelType}_{channel.id}')]
     public function render()
     {
         return view('livewire.iptv.channels.device.device-has-channel-and-connection-map-component');
