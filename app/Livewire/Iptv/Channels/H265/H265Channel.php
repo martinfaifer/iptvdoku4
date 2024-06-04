@@ -25,24 +25,9 @@ class H265Channel extends Component
 
     public array $h265 = [];
 
-    public Collection $devices;
-
-    public Collection $backupDevices;
-
     public bool $updateModal = false;
 
     public $quality;
-
-    public function mount()
-    {
-        $this->devices = $this->devices_belongs_to_channel_type(
-            channelWithType: 'h265:' . $this->channel->id
-        );
-
-        $this->backupDevices = $this->devices_belongs_to_channel_type(
-            channelWithType: 'h265:' . $this->channel->id . ':backup'
-        );
-    }
 
     public function edit(ChannelQualityWithIp $channelQualityWithIp)
     {

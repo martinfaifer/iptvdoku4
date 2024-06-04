@@ -26,27 +26,11 @@ class MulticastChannel extends Component
 
     public $channelSources;
 
-    public Collection $devices;
-
-    public Collection $backupDevices;
-
     public function mount()
     {
         $this->channelSources = ChannelSource::get();
 
         $temporaryDevices = Device::with('category')->get();
-        $this->load_devices();
-    }
-
-    public function load_devices()
-    {
-        $this->devices = $this->devices_belongs_to_channel_type(
-            channelWithType: 'multicast:' . $this->channel->id
-        );
-
-        $this->backupDevices = $this->devices_belongs_to_channel_type(
-            channelWithType: 'multicast:' . $this->channel->id . ':backup'
-        );
     }
 
     public function edit(ChannelMulticast $multicast)
