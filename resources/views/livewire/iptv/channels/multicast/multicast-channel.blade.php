@@ -225,9 +225,8 @@
                                     :devices="$backupDevices" :channel="$channel" isBackup="true" channelType="multicast">
                             </div>
                             {{-- @foreach ($backupDevices as $backupDevice)
-                                <div class="col-span-12 md:col-span-6 mb-4">
-                                    <livewire:iptv.channels.device-has-channel-component
-                                        wire:key="backupDevice_{{ $backupDevice->id }}" :device="$backupDevice"
+                                <div wire:key="backupDevice_{{ $backupDevice->id }}" class="col-span-12 md:col-span-6 mb-4">
+                                    <livewire:iptv.channels.device-has-channel-component :device="$backupDevice"
                                         :channel="$channel" isBackup="true" channelType="multicast" lazy>
                                 </div>
                             @endforeach --}}
@@ -239,13 +238,13 @@
             {{-- iptvdohled section --}}
             @can('operate_with_childs', App\Models\Channel::class)
                 @foreach ($multicasts as $multicast)
-                    <div class="col-span-12 mb-4 gap-4">
+                    <div wire:key='iptvDohled_{{ $multicast->source_ip }}' class="col-span-12 mb-4 gap-4">
                         <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
-                            wire:key='iptvDohled_{{ $multicast->source_ip }}' ip="{{ $multicast->source_ip }}" lazy>
+                            ip="{{ $multicast->source_ip }}" lazy>
                     </div>
-                    <div class="col-span-12 mb-4 gap-4">
+                    <div wire:key='iptvDohled_{{ $multicast->stb_ip }}' class="col-span-12 mb-4 gap-4">
                         <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
-                            wire:key='iptvDohled_{{ $multicast->stb_ip }}' ip="{{ $multicast->stb_ip }}" lazy>
+                            ip="{{ $multicast->stb_ip }}" lazy>
                     </div>
                 @endforeach
             @endcan

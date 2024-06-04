@@ -75,6 +75,10 @@ class ChannelObserver
             ])
         );
 
+        if (Cache::has('channel_with_multicast_' . $channel->id)) {
+            Cache::forget('channel_with_multicast_' . $channel->id);
+        }
+
         GetChannelDetailFromNanguApiJob::dispatch($channel, 3600);
 
         SendEmailNotificationJob::dispatch(
@@ -108,6 +112,10 @@ class ChannelObserver
             Note::where('channel_id', $channel->id)->delete();
         } catch (\Throwable $th) {
             //throw $th;
+        }
+
+        if (Cache::has('channel_with_multicast_' . $channel->id)) {
+            Cache::forget('channel_with_multicast_' . $channel->id);
         }
 
         SendEmailNotificationJob::dispatch(

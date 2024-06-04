@@ -6,8 +6,10 @@ use App\Jobs\LogJob;
 use App\Models\Loger;
 use App\Models\ChannelMulticast;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use App\Jobs\SendEmailNotificationJob;
 use App\Jobs\DeleteStreamFromIptvDohledJob;
+use App\Models\Channel;
 
 class MulticastChannelObserver
 {
@@ -37,6 +39,8 @@ class MulticastChannelObserver
                 'notify_if_channel_change'
             );
         }
+
+        Cache::forever('channel_with_multicast_' . $multicast->channel_id, Channel::find($multicast->channel_id)->load(['multicasts', 'multicasts.channel_source']));
     }
 
     public function updated(ChannelMulticast $multicast)
@@ -63,6 +67,15 @@ class MulticastChannelObserver
             Auth::user()->email,
             'notify_if_channel_change'
         );
+
+        if (Cache::has('channel_with_multicast_' . $multicast->channel_id)) {
+            Cache::forget('channel_with_multicast_' . $multicast->channel_id);
+        }
+        Cache::forever(
+            'channel_with_multicast_' . $multicast->channel_id,
+            Channel::find($multicast->channel_id)
+                ->load(['multicasts', 'multicasts.channel_source'])
+        );
     }
 
     public function deleted(ChannelMulticast $multicast)
@@ -72,6 +85,10 @@ class MulticastChannelObserver
         }
         if (!is_null($multicast->source_ip)) {
             DeleteStreamFromIptvDohledJob::dispatch($multicast->source_ip);
+        }
+
+        if (Cache::has('channel_with_multicast_' . $multicast->channel_id)) {
+            Cache::forget('channel_with_multicast_' . $multicast->channel_id);
         }
 
         LogJob::dispatch(
