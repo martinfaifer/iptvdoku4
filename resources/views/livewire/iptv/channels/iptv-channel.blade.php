@@ -11,19 +11,19 @@
                 @if (!is_null($channel) && !is_null($channel->name))
                     <ul class="menu menu-horizontal bg-transparent rounded-box -mt-2 menu-sm xl:menu-md">
 
-                        <li href="/channels/{{ $channel->id }}/multicast" wire:navigate @class([
+                        <li href="/channels/{{ $channel->id }}/multicast" wire:navigate.hover @class([
                             'rounded-lg',
                             'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/multicast'),
                         ])><a>
                                 multicast</a></li>
 
-                        <li href="/channels/{{ $channel->id }}/h264" wire:navigate @class([
+                        <li href="/channels/{{ $channel->id }}/h264" wire:navigate.hover @class([
                             'rounded-lg',
                             'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/h264'),
                         ])><a>
                                 H264</a></li>
 
-                        <li href="/channels/{{ $channel->id }}/h265" wire:navigate @class([
+                        <li href="/channels/{{ $channel->id }}/h265" wire:navigate.hover @class([
                             'rounded-lg',
                             'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/h265'),
                         ])><a>

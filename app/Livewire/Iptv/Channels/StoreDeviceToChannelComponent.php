@@ -43,13 +43,13 @@ class StoreDeviceToChannelComponent extends Component
     {
         $this->resetErrorBag();
         $this->form->setChannel($this->channel, $this->channelType);
-        $this->storeModal = true;
+        return $this->storeModal = true;
     }
 
     public function closeDialog()
     {
         $this->form->reset();
-        $this->storeModal = false;
+        return $this->storeModal = false;
         // $this->deviceId = null;
     }
 
