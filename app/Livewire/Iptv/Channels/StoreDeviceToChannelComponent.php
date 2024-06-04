@@ -34,6 +34,7 @@ class StoreDeviceToChannelComponent extends Component
     {
 
         $this->form->create();
+        $this->storeModal = false;
         $this->redirect(url()->previous(), true);
 
         return $this->success_alert('Upraveno');
