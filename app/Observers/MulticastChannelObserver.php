@@ -67,8 +67,12 @@ class MulticastChannelObserver
 
     public function deleted(ChannelMulticast $multicast)
     {
-        DeleteStreamFromIptvDohledJob::dispatch($multicast->stb_ip);
-        DeleteStreamFromIptvDohledJob::dispatch($multicast->source_ip);
+        if (!is_null($multicast->stb_ip)) {
+            DeleteStreamFromIptvDohledJob::dispatch($multicast->stb_ip);
+        }
+        if (!is_null($multicast->source_ip)) {
+            DeleteStreamFromIptvDohledJob::dispatch($multicast->source_ip);
+        }
 
         LogJob::dispatch(
             user: Auth::user()->email,
