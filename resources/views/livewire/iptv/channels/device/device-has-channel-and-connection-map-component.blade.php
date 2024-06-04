@@ -16,20 +16,20 @@
             </div>
         </div>
 
-        @if (count($devices) > 1 || $channelType != 'multicast')
-            <div class="navbar">
-                {{-- create new channel --}}
-                <div class="flex-1">
 
-                </div>
-                <div class="flex-none">
-                    <div class="tooltip tooltip-left" data-tip="Zobrazit / skrýt mapu">
-                        <x-button class="btn-sm bg-transparent border-none" icon="o-cube-transparent"
-                            wire:click='showOrHideDeviceConnectionMap()'></x-button>
-                    </div>
+        <div class="navbar">
+            {{-- create new channel --}}
+            <div class="flex-1">
+
+            </div>
+            <div class="flex-none">
+                <div class="tooltip tooltip-left" data-tip="Zobrazit / skrýt mapu">
+                    <x-button class="btn-sm bg-transparent border-none" icon="o-cube-transparent"
+                        wire:click='showOrHideDeviceConnectionMap()'></x-button>
                 </div>
             </div>
-        @endif
+        </div>
+
 
         <div class="grid grid-cols-12 gap-4">
             @if (count($devices) > 1 || $channelType != 'multicast')
