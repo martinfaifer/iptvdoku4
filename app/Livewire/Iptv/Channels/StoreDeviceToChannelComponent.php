@@ -32,16 +32,16 @@ class StoreDeviceToChannelComponent extends Component
 
     public function create()
     {
-
         $this->form->create();
         $this->storeModal = false;
-        $this->redirect(url()->previous(), true);
-
+        // $this->redirect(url()->previous(), true);
+        $this->dispatch('refresh_channel_has_devices_' . $this->channelType . '_' . $this->channel->id);
         return $this->success_alert('Upraveno');
     }
 
     public function openModal()
     {
+        $this->resetErrorBag();
         $this->form->setChannel($this->channel, $this->channelType);
         $this->storeModal = true;
     }

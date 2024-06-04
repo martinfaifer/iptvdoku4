@@ -156,7 +156,8 @@ class DeviceHasChannelComponent extends Component
             'template' => $template,
         ]);
 
-        $this->redirect(url()->previous(), true);
+        // $this->redirect(url()->previous(), true);
+        $this->dispatch('refresh_channel_has_devices_' . $this->channelType . '_' . $this->channel->id);
         $this->success_alert('Upraveno');
 
         return $this->closeDialog();
@@ -201,7 +202,8 @@ class DeviceHasChannelComponent extends Component
             'has_channels' => $hasChannels,
         ]);
 
-        $this->redirect(url()->previous(), true);
+        // $this->redirect(url()->previous(), true);
+        $this->dispatch('refresh_channel_has_devices_' . $this->channelType . '_' . $this->channel->id);
         return $this->success_alert('Odebráno');
     }
 

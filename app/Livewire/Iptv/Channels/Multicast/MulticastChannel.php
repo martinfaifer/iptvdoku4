@@ -35,7 +35,11 @@ class MulticastChannel extends Component
         $this->channelSources = ChannelSource::get();
 
         $temporaryDevices = Device::with('category')->get();
+        $this->load_devices();
+    }
 
+    public function load_devices()
+    {
         $this->devices = $this->devices_belongs_to_channel_type(
             channelWithType: 'multicast:' . $this->channel->id
         );

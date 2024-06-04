@@ -193,46 +193,19 @@
                 </div>
             @endcan
             @can('operate_with_childs', App\Models\Channel::class)
-                @if (!$devices->isEmpty())
-                    <div class="col-span-12 mb-4">
-                        <div class="flex">
-                            <hr
-                                class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                            <span class="text-xs italic">Primár</span>
-                            <hr
-                                class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                <div class="col-span-12 mb-4">
+                    <livewire:iptv.channels.device.device-has-channel-and-connection-map-component :channel="$channel"
+                        channelType="multicast">
+                </div>
+
+                <div class="col-span-12 mb-4">
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 mb-4">
+                            <livewire:iptv.channels.device.device-has-channel-and-connection-map-component :channel="$channel"
+                                isBackup="true" channelType="multicast">
                         </div>
                     </div>
-                    <div class="col-span-12 mb-4">
-                        <livewire:iptv.channels.device.device-has-channel-and-connection-map-component :devices="$devices"
-                            :channel="$channel" channelType="multicast">
-                    </div>
-                @endif
-                @if (!$backupDevices->isEmpty())
-                    <div class="col-span-12 mb-4">
-                        <div class="flex">
-                            <hr
-                                class="w-1/2 h-[1px] mt-2 mr-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                            <span class="text-xs italic">Backup</span>
-                            <hr
-                                class="w-1/2 h-[1px] mt-2 ml-12 my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                        </div>
-                    </div>
-                    <div class="col-span-12 mb-4">
-                        <div class="grid grid-cols-12 gap-4">
-                            <div class="col-span-12 mb-4">
-                                <livewire:iptv.channels.device.device-has-channel-and-connection-map-component
-                                    :devices="$backupDevices" :channel="$channel" isBackup="true" channelType="multicast">
-                            </div>
-                            {{-- @foreach ($backupDevices as $backupDevice)
-                                <div wire:key="backupDevice_{{ $backupDevice->id }}" class="col-span-12 md:col-span-6 mb-4">
-                                    <livewire:iptv.channels.device-has-channel-component :device="$backupDevice"
-                                        :channel="$channel" isBackup="true" channelType="multicast" lazy>
-                                </div>
-                            @endforeach --}}
-                        </div>
-                    </div>
-                @endif
+                </div>
             @endcan
 
             {{-- iptvdohled section --}}

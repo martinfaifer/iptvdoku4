@@ -4,6 +4,7 @@ namespace App\Livewire\Iptv\Channels\Device;
 
 use App\Models\Channel;
 use Livewire\Component;
+use Livewire\Attributes\On;
 use Illuminate\Support\Collection;
 use App\Traits\Devices\DeviceHasChannelsTrait;
 
@@ -25,13 +26,33 @@ class DeviceHasChannelAndConnectionMapComponent extends Component
 
     public bool $isHiddenBackupChannelConnectionMap = true;
 
-    public function mount($devices)
+    public function mount()
     {
-        $this->devices = $devices;
+        // $this->devices = $devices;
+        $this->load_devices_data();
+    }
 
-        $this->schemaDevices = $this->devices_belongs_to_channel_type(
-            channelWithType: 'multicast:' . $this->channel->id
-        );
+    #[On('refresh_channel_has_devices_{channelType}_{channel.id}')]
+    public function load_devices_data()
+    {
+        if ($this->isBackup == true) {
+            $this->devices =  $this->devices_belongs_to_channel_type(
+                channelWithType: $this->channelType . ':' . $this->channel->id . ":backup"
+            );
+        } else {
+            $this->devices =  $this->devices_belongs_to_channel_type(
+                channelWithType: $this->channelType . ':' . $this->channel->id
+            );
+        }
+        if ($this->isBackup == true) {
+            $this->schemaDevices = $this->devices_belongs_to_channel_type(
+                channelWithType: 'multicast:' . $this->channel->id . ":backup"
+            );
+        } else {
+            $this->schemaDevices = $this->devices_belongs_to_channel_type(
+                channelWithType: 'multicast:' . $this->channel->id
+            );
+        }
 
         $this->schemaDevices = $this->devices->merge($this->schemaDevices);
     }
