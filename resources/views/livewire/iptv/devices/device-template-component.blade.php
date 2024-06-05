@@ -254,7 +254,7 @@
                                                     @if (is_array($interfaceValue) && !empty($interfaceValue))
                                                         {{-- snmp --}}
                                                         @foreach ($interfaceValue as $snmp)
-                                                            @if (array_key_exists('type', $snmp))
+                                                            @if (is_array($snmp) && array_key_exists('type', $snmp))
                                                                 @if ($snmp['type'] == 'write')
                                                                     @if (str_contains($snmp['human_description'], 'reset'))
                                                                         <x-button
