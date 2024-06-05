@@ -78,8 +78,8 @@
                     ])>
                         <x-share.cards.base-card title="Informace o zařízení">
                             {{-- ip and login block --}}
-                            <div class="grid xl:grid-cols-12 font-semibold text-[#A3ABB8]">
-                                @if (!is_null($device->ip))
+                            <div class="grid grid-cols-12 font-semibold text-[#A3ABB8]">
+                                @if (!blank($device->ip))
                                     <div class="col-span-12 xl:col-span-4">
                                         <p>
                                             <span class="font-normal">
@@ -93,7 +93,7 @@
                                             class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
-                                @if (!is_null($device->ipmi_ip) && !empty($device->ipmi_ip))
+                                @if (!blank($device->ipmi_ip) && !blank($device->ipmi_ip))
                                     <div class="col-span-12 xl:col-span-4">
                                         <p>
                                             <span class="font-normal">
@@ -107,7 +107,7 @@
                                             class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
-                                @if (!is_null($device->controller_ip))
+                                @if (!blank($device->controller_ip))
                                     <div class="col-span-12 xl:col-span-4">
                                         <p>
                                             <span class="font-normal">
@@ -121,7 +121,7 @@
                                             class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
-                                @if (!is_null($device->username) || !is_null($device->password))
+                                @if (!blank($device->username) || !blank($device->password))
                                     <div class="col-span-12 xl:col-span-4">
                                         <p>
                                             <span class="font-normal">
@@ -138,7 +138,7 @@
                             </div>
 
                             {{-- informations about device --}}
-                            <div class="grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
+                            <div class="grid md:grid-cols-12 font-semibold text-[#A3ABB8] mt-1">
                                 <div class="col-span-12 xl:col-span-4">
                                     <p>
                                         <span class="font-normal">
@@ -165,7 +165,7 @@
                                 </div>
                             </div>
                             {{-- snmp block --}}
-                            <div class="grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
+                            <div class="grid md:grid-cols-12 font-semibold text-[#A3ABB8] mt-1">
                                 @if ($device->is_snmp == true)
                                     <div class="col-span-12 xl:col-span-12">
                                     </div>
@@ -186,8 +186,8 @@
                                             class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
-                                @if (!is_null($device->snmp_version))
-                                    <div class="col-span-12 xl:col-span-3">
+                                @if (!blank($device->snmp_version))
+                                    <div class="col-span-12 xl:col-span-4">
                                         <p>
                                             <span class="font-normal">
                                                 SNMP verze:
@@ -200,8 +200,8 @@
                                             class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
-                                @if (!is_null($device->snmp_private_comunity))
-                                    <div class="col-span-12 xl:col-span-3">
+                                @if (!blank($device->snmp_private_comunity))
+                                    <div class="col-span-12 xl:col-span-4">
                                         <p>
                                             <span class="font-normal">
                                                 SNMP private komunita:
@@ -214,8 +214,8 @@
                                             class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
-                                @if (!is_null($device->snmp_public_comunity))
-                                    <div class="col-span-12 xl:col-span-3">
+                                @if (!blank($device->snmp_public_comunity))
+                                    <div class="col-span-12 xl:col-span-4">
                                         <p>
                                             <span class="font-normal">
                                                 SNMP public komunita:
@@ -231,7 +231,7 @@
                             </div>
                         </x-share.cards.base-card>
                     </div>
-                    @if (!is_null($nmsCahedData) && !empty($nmsCahedData))
+                    @if (!blank($nmsCahedData) && !blank($nmsCahedData))
                         <div class="col-span-12 xl:col-span-4 mb-4">
                             <x-share.cards.base-card title="Informace o zařízení z NMS">
                                 <div class="grid grid-cols-12 gap-4 font-semibold text-[#A3ABB8]">
@@ -288,7 +288,7 @@
                 </div>
 
                 {{-- nimble api cached result --}}
-                @if (!is_null($nimbleCachedData))
+                @if (!blank($nimbleCachedData))
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 xl:col-span-12 mb-4">
                             <livewire:iptv.devices.nimble-api-component :device="$device"
@@ -297,7 +297,7 @@
                     </div>
                 @endif
 
-                @if (!is_null($grapeTranscoderData))
+                @if (!blank($grapeTranscoderData))
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 xl:col-span-12 mb-4">
                             <livewire:iptv.devices.grape-transcoders-api-component :device="$device"
