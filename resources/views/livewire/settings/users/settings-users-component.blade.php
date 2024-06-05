@@ -127,18 +127,17 @@
                         single searchable />
                 </div>
             </div>
-</div>
-{{-- action section --}}
-<div class="flex justify-between">
-    <div>
-        <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4" wire:click='closeDialog' />
-    </div>
-    <div>
-        <x-button label="Upravit"
-            class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
-            type="submit" spinner="update" />
-    </div>
-
-    </x-form>
+            <div class="flex justify-between">
+                <div>
+                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                        wire:click='closeDialog' />
+                </div>
+                <div>
+                    <x-button label="Upravit"
+                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
+                        type="submit" spinner="update" />
+                </div>
+            </div>
+        </x-form>
     </x-modal>
 </div>
