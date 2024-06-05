@@ -49,12 +49,13 @@ class UpdateDeviceComponent extends Component
 
     public function update()
     {
-        $device = $this->form->update();
+        $this->form->update();
         $this->closeDialog();
 
         $this->dispatch('update_devices_menu');
+        $this->dispatch('refresh_device.' . $this->device->id);
 
-        $this->redirect('/devices/' . $this->device->id, true);
+        // $this->redirect('/devices/' . $this->device->id, true);
 
         return $this->success_alert('Zařízení upraveno');
     }

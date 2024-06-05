@@ -3,9 +3,10 @@
 namespace App\Livewire\Iptv\Devices;
 
 use App\Models\Device;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Cache;
+use App\Traits\Livewire\NotificationTrait;
 
 class DeviceComponent extends Component
 {
@@ -24,6 +25,7 @@ class DeviceComponent extends Component
         //
     }
 
+    #[On('refresh_device.{device.id}')]
     public function render()
     {
         if (isset($this->device)) {
