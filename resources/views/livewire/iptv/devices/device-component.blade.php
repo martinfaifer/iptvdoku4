@@ -322,13 +322,7 @@
 
                     {{-- vazba na kanály --}}
                     <div class="col-span-12 xl:col-span-12 mb-4 ">
-                        <x-share.cards.base-card title="Kanály na zařízení">
-                            <div class="grid grid-cols-12">
-                                <div class="col-span-12 mb-4 ">
-                                    <livewire:iptv.devices.device-channels-component :device="$device" lazy>
-                                </div>
-                            </div>
-                        </x-share.cards.base-card>
+                        <livewire:iptv.devices.device-channels-component :device="$device" lazy>
                     </div>
                 </div>
             </div>
