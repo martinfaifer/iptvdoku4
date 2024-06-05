@@ -38,14 +38,14 @@ class StoreChannel extends Component
     #[Validate('boolean', message: 'Neplatný formát')]
     public bool $is_multiscreen = true;
 
-    #[Validate('nullable')]
+    #[Validate('required', message: "Vyplňte chunkStoreId")]
     #[Validate('string', message: 'Neplatný formát')]
-    #[Validate('unique:channels,nangu_chunk_store_id', message: 'Toto chuntkStoreId již existuje')]
+    #[Validate('unique:channels,nangu_chunk_store_id', message: 'Tento chunkStoreId již existuje')]
     public ?string $nangu_chunk_store_id = null;
 
     #[Validate('nullable')]
     #[Validate('string', message: 'Neplatný formát')]
-    #[Validate('unique:channels,nangu_channel_code', message: 'Toto nanguChannelCode již existuje')]
+    #[Validate('unique:channels,nangu_channel_code', message: 'Tento nanguChannelCode již existuje')]
     public ?string $nangu_channel_code = null;
 
     #[Validate('string', message: 'Neplatný formát')]
