@@ -274,7 +274,7 @@
                                                                     @endif
                                                                 @endif
                                                             @endif
-                                                            @if (array_key_exists('value', $snmp))
+                                                            @if (is_array($snmp) && array_key_exists('value', $snmp))
                                                                 @if ($snmp['value'] != '' && $snmp['value'] != 'n/a')
                                                                     <div class="col-span-12 my-4 flex justify-between">
                                                                         <div>
