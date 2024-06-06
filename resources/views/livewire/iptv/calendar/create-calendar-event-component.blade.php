@@ -1,7 +1,7 @@
 <div>
     <x-button label="Přidat událost"
         class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 shadow-cyan-50/10 hover:shadow-cyan-500/50 text-white/80 btn-md w-full"
-        type="submit" spinner="save2" wire:click='openModal()' />
+        type="submit" spinner="openModal" wire:click='openModal()' />
 
     {{-- create modal --}}
     <x-drawer wire:model="storeModal"  right class="lg:w-2/3 !bg-[#0E1E33]">
