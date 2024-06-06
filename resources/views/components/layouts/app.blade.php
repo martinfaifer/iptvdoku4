@@ -35,7 +35,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen bg-gradient-to-r from-slate-900 to-sky-950 overflow-x-hidden no-scrollbar">
+<body class="min-h-dvh bg-gradient-to-r from-slate-900 to-sky-950 overflow-x-hidden no-scrollbar">
     <x-toast />
     @auth
         <x-spotlight search-text="Vyhledejte ... " no-results-text="Ops! Nenalezeno." class="justify-center"

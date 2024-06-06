@@ -11,6 +11,14 @@
     /* @apply bg-gradient-to-r from-slate-900 to-sky-950; */
 }
 
+.alert-warning {
+    @apply bg-gradient-to-r from-slate-900 to-sky-950 border-2 border-b-red-900 rounded-md;
+}
+
+.alert-success {
+    @apply bg-gradient-to-r from-slate-900 to-sky-950 border-2 border-b-green-600 rounded-md;
+}
+
 .arrow-left {
     @apply w-0 h-0 border-t-4 border-b-4 border-transparent border-r-8 border-r-black;
 }
