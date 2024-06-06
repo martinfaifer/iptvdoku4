@@ -206,7 +206,8 @@
         <script>
             function isSafari() {
                 var userAgent = navigator.userAgent;
-                return /Safari/.test(userAgent) && /Mac/.test(userAgent) && !/Chrome/.test(userAgent);
+                console.log(userAgent);
+                return /Safari/.test(userAgent) && !/Chrome/.test(userAgent) && !/iPhone/.test(userAgent);
             }
 
             if (isSafari()) {
