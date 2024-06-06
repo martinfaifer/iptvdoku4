@@ -36,7 +36,7 @@ class Login extends Component
     public function render()
     {
         if (Auth::user()) {
-            $this->redirect('/');
+            $this->redirect('/', true);
         }
 
         return view('livewire.auth.login');

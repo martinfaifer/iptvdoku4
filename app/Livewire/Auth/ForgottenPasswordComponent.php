@@ -29,7 +29,7 @@ class ForgottenPasswordComponent extends Component
             'password' => bcrypt($password)
         ]);
 
-        Mail::to($this->email)->send(new SendForgottenPasswordMail($password));
+        Mail::to($this->email)->queue(new SendForgottenPasswordMail($password));
 
         $this->redirect('login', true);
         return $this->success_alert("Odeslán email s novým heslem");
