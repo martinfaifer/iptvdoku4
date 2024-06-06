@@ -10,6 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class ApiIndexNanguIspsResource extends JsonResource
 {
     use ApiResponseTrait;
+
     /**
      * Transform the resource into an array.
      *

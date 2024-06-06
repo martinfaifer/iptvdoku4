@@ -2,18 +2,18 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Livewire\Attributes\On;
+use App\Traits\Calendar\RunningEventsTrait;
+use App\Traits\Weather\GetCachedWeatherTrait;
+use App\Traits\Weather\GetWeatherIconTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use App\Traits\Calendar\RunningEventsTrait;
-use App\Traits\Weather\GetWeatherIconTrait;
-use App\Traits\Weather\GetCachedWeatherTrait;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class Navbar extends Component
 {
-    use GetCachedWeatherTrait, RunningEventsTrait, GetWeatherIconTrait;
+    use GetCachedWeatherTrait, GetWeatherIconTrait, RunningEventsTrait;
 
     public array $iptv_dohled_alerts = [];
 

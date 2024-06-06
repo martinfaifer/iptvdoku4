@@ -3,15 +3,16 @@
 namespace App\Livewire\Iptv\Channels\Epg;
 
 use App\Models\Channel;
-use Livewire\Component;
+use App\Services\Api\Epg\EpgConnectService;
+use App\Traits\Dates\DateParserTrait;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
-use App\Traits\Dates\DateParserTrait;
-use App\Services\Api\Epg\EpgConnectService;
+use Livewire\Component;
 
 class EpgChannelComponent extends Component
 {
     use DateParserTrait;
+
     public ?Channel $channel;
 
     public $epg;

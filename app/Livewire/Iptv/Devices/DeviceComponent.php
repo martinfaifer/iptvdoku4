@@ -3,10 +3,10 @@
 namespace App\Livewire\Iptv\Devices;
 
 use App\Models\Device;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use Illuminate\Support\Facades\Cache;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class DeviceComponent extends Component
 {

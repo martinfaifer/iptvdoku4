@@ -10,10 +10,10 @@ class UpdateSatelitCardExpirationForm extends Form
 {
     public ?SatelitCard $satelitCard;
 
-    #[Validate('required', message: "Vyplňte expiraci")]
-    #[Validate('string', message: "neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet zanků je :max")]
-    public string $expiration = "";
+    #[Validate('required', message: 'Vyplňte expiraci')]
+    #[Validate('string', message: 'neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet zanků je :max')]
+    public string $expiration = '';
 
     public function setSatelitCard(SatelitCard $satelitCard)
     {
@@ -26,7 +26,7 @@ class UpdateSatelitCardExpirationForm extends Form
         $this->validate();
 
         $this->satelitCard->update([
-            'expiration' => $this->expiration
+            'expiration' => $this->expiration,
         ]);
 
         $this->reset();

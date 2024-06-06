@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Note extends Model
@@ -16,7 +16,7 @@ class Note extends Model
         'satelit_card_id',
         'note',
         'user',
-        'ip_id'
+        'ip_id',
     ];
 
     public function channel(): BelongsTo

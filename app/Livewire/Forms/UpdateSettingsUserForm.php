@@ -2,13 +2,12 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
 use App\Models\User;
 use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class UpdateSettingsUserForm extends Form
 {
-
     public ?User $user;
 
     #[Validate('required', message: 'Vyplňte jméno')]
@@ -21,9 +20,9 @@ class UpdateSettingsUserForm extends Form
     #[Validate('max:255', message: 'Maximální počet znaků je :max')]
     public string $last_name = '';
 
-    #[Validate('required', message: "Vyberte roli")]
-    #[Validate('exists:user_roles,id', message: "Neexistující role")]
-    public string|null $userRoleId = "";
+    #[Validate('required', message: 'Vyberte roli')]
+    #[Validate('exists:user_roles,id', message: 'Neexistující role')]
+    public ?string $userRoleId = '';
 
     public function setUser(User $user)
     {
@@ -40,7 +39,7 @@ class UpdateSettingsUserForm extends Form
         $this->user->update([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
-            'user_role_id' => $this->userRoleId
+            'user_role_id' => $this->userRoleId,
         ]);
 
         $this->reset();

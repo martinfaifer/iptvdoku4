@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class NanguIpPrefixesComponent extends Component
 {
-
     public ?Ip $prefix;
 
     public function mount(Ip $ipPrefix)

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\Public;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ApiIndexNanguIspsResource;
+use Illuminate\Http\Request;
 
 class ApiNanguIspController extends Controller
 {

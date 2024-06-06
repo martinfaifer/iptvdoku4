@@ -3,11 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
-    public function before(User $user): bool|null
+    public function before(User $user): ?bool
     {
         if ($user->isAdmin()) {
             return true;
@@ -80,6 +79,7 @@ class UserPolicy
 
         return true;
     }
+
     public function show_settings_dashboard(User $user)
     {
         if ($user->isReader() || $user->isApi()) {

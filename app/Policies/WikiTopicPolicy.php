@@ -4,11 +4,10 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\WikiTopic;
-use Illuminate\Auth\Access\Response;
 
 class WikiTopicPolicy
 {
-    public function before(User $user): bool|null
+    public function before(User $user): ?bool
     {
         if ($user->isAdmin()) {
             return true;

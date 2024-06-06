@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire\Settings\Geniustv\Statistics;
 
 use App\Exports\ChannelsUsageExport;

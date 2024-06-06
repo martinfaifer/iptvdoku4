@@ -2,15 +2,15 @@
 
 namespace App\Jobs;
 
+use App\Mail\SendNotificationEmail;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use App\Mail\SendNotificationEmail;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 
 class SendEmailNotificationJob implements ShouldQueue
 {
@@ -19,7 +19,7 @@ class SendEmailNotificationJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public string $emailSubject, public string $text, public string|null $userWhoMakeChange, public string $eventType)
+    public function __construct(public string $emailSubject, public string $text, public ?string $userWhoMakeChange, public string $eventType)
     {
         //
     }
@@ -32,8 +32,8 @@ class SendEmailNotificationJob implements ShouldQueue
         $thirtyMinutesInSecondsTtl = 1800; // prevention of spamming
         User::where($this->eventType, true)->each(function ($user) use ($thirtyMinutesInSecondsTtl) {
             // send email to specific user
-            if (!Cache::has($user->id . "_" . $this->eventType, $thirtyMinutesInSecondsTtl)) {
-                Cache::put($user->id . "_" . $this->eventType, "is_send");
+            if (! Cache::has($user->id.'_'.$this->eventType, $thirtyMinutesInSecondsTtl)) {
+                Cache::put($user->id.'_'.$this->eventType, 'is_send');
                 Mail::to($user->email)->queue(new SendNotificationEmail(emailSubject: $this->emailSubject, emailContent: $this->text));
             }
         });

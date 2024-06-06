@@ -12,7 +12,7 @@ trait DateParserTrait
         $explodedDate = explode('-', $explodedString[0]);
         $explodedTime = explode('+', $explodedString[1]);
 
-        return $explodedTime[0] . ' ' . $explodedDate[2] . '.' . $explodedDate[1] . ' ' . $explodedDate[0];
+        return $explodedTime[0].' '.$explodedDate[2].'.'.$explodedDate[1].' '.$explodedDate[0];
     }
 
     public function stringTimeParseToTime(string $stringTime)
@@ -26,15 +26,15 @@ trait DateParserTrait
 
     public function isTimeBetween(string $start, string $stop): string
     {
-        $current_time = now()->format("H:i:s");
+        $current_time = now()->format('H:i:s');
         $current = DateTime::createFromFormat('H:i:s', $current_time);
         $startTime = DateTime::createFromFormat('H:i:s', $this->stringTimeParseToTime($start));
         $endTime = DateTime::createFromFormat('H:i:s', $this->stringTimeParseToTime($stop));
         // dd($current, $startTime, $endTime);
         if ($current > $startTime && $current < $endTime) {
-            return "running-channel";
+            return 'running-channel';
         }
 
-        return "not-running";
+        return 'not-running';
     }
 }

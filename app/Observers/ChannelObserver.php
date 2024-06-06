@@ -2,23 +2,24 @@
 
 namespace App\Observers;
 
+use App\Jobs\GetChannelDetailFromNanguApiJob;
 use App\Jobs\LogJob;
-use App\Models\Note;
-use App\Models\Loger;
+use App\Jobs\SendEmailNotificationJob;
 use App\Models\Channel;
 use App\Models\Contact;
+use App\Models\Loger;
+use App\Models\Note;
+use App\Traits\Channels\CacheChannelsForApi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use App\Jobs\SendEmailNotificationJob;
-use App\Traits\Channels\CacheChannelsForApi;
-use App\Jobs\GetChannelDetailFromNanguApiJob;
 
 class ChannelObserver
 {
     use CacheChannelsForApi;
+
     public function created(Channel $channel)
     {
-        if (!Auth::user()) {
+        if (! Auth::user()) {
             $email = 'system@';
         }
 
@@ -45,7 +46,7 @@ class ChannelObserver
         if (Auth::user()) {
             SendEmailNotificationJob::dispatch(
                 "Vytvořen nový kanál $channel->name",
-                "Uživatel " . Auth::user()->email . " vytvořil kanál $channel->name",
+                'Uživatel '.Auth::user()->email." vytvořil kanál $channel->name",
                 Auth::user()->email,
                 'notify_if_channel_change'
             );
@@ -75,15 +76,15 @@ class ChannelObserver
             ])
         );
 
-        if (Cache::has('channel_with_multicast_' . $channel->id)) {
-            Cache::forget('channel_with_multicast_' . $channel->id);
+        if (Cache::has('channel_with_multicast_'.$channel->id)) {
+            Cache::forget('channel_with_multicast_'.$channel->id);
         }
 
         GetChannelDetailFromNanguApiJob::dispatch($channel, 3600);
 
         SendEmailNotificationJob::dispatch(
             "Upraven kanál $channel->name",
-            "Uživatel " . Auth::user()->email . " upravil kanál $channel->name",
+            'Uživatel '.Auth::user()->email." upravil kanál $channel->name",
             Auth::user()->email,
             'notify_if_channel_change'
         );
@@ -114,13 +115,13 @@ class ChannelObserver
             //throw $th;
         }
 
-        if (Cache::has('channel_with_multicast_' . $channel->id)) {
-            Cache::forget('channel_with_multicast_' . $channel->id);
+        if (Cache::has('channel_with_multicast_'.$channel->id)) {
+            Cache::forget('channel_with_multicast_'.$channel->id);
         }
 
         SendEmailNotificationJob::dispatch(
             "Odebrán kanál $channel->name",
-            "Uživatel " . Auth::user()->email . " odebral kanál $channel->name",
+            'Uživatel '.Auth::user()->email." odebral kanál $channel->name",
             Auth::user()->email,
             'notify_if_channel_change'
         );

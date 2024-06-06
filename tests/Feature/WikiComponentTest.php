@@ -16,6 +16,6 @@ it('return wiki topic route', function () {
     if (is_null($topic)) {
         $this->actingAs($user)->get('wiki/null')->assertStatus(404);
     } else {
-        $this->actingAs($user)->get('wiki/' . $topic->id)->assertSeeLivewire(WikiComponent::class);
+        $this->actingAs($user)->get('wiki/'.$topic->id)->assertSeeLivewire(WikiComponent::class);
     }
 });

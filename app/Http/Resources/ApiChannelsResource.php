@@ -3,16 +3,16 @@
 namespace App\Http\Resources;
 
 use App\Models\Channel;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use App\Traits\Channels\CacheChannelsForApi;
-use Illuminate\Http\Resources\Json\JsonResource;
 use App\Traits\Channels\CheckIfChannelInInPromoTrait;
 use App\Traits\Channels\GetGeniusTvChannelPaclagesTrait;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Cache;
 
 class ApiChannelsResource extends JsonResource
 {
-    use CheckIfChannelInInPromoTrait, GetGeniusTvChannelPaclagesTrait, CacheChannelsForApi;
+    use CacheChannelsForApi, CheckIfChannelInInPromoTrait, GetGeniusTvChannelPaclagesTrait;
 
     /**
      * Transform the resource into an array.
@@ -21,12 +21,11 @@ class ApiChannelsResource extends JsonResource
      * It first checks if the 'channels_in_api' cache exists. If it doesn't, it calls the 'cache_channels_with_detail' method to populate the cache.
      * Then, it retrieves the 'api/v1/public/channels' cache and returns it.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
     {
-        if (!Cache::has('channels_in_api')) {
+        if (! Cache::has('channels_in_api')) {
             $this->cache_channels_with_detail();
         }
 

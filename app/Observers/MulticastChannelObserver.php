@@ -2,14 +2,14 @@
 
 namespace App\Observers;
 
+use App\Jobs\DeleteStreamFromIptvDohledJob;
 use App\Jobs\LogJob;
-use App\Models\Loger;
+use App\Jobs\SendEmailNotificationJob;
+use App\Models\Channel;
 use App\Models\ChannelMulticast;
+use App\Models\Loger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use App\Jobs\SendEmailNotificationJob;
-use App\Jobs\DeleteStreamFromIptvDohledJob;
-use App\Models\Channel;
 
 class MulticastChannelObserver
 {
@@ -33,14 +33,14 @@ class MulticastChannelObserver
             );
 
             SendEmailNotificationJob::dispatch(
-                "Byl přidán multicast k " . $multicast->channel->name,
-                "Uživatel " . Auth::user()->email . " přidal multicast k " . $multicast->channel->name,
+                'Byl přidán multicast k '.$multicast->channel->name,
+                'Uživatel '.Auth::user()->email.' přidal multicast k '.$multicast->channel->name,
                 Auth::user()->email,
                 'notify_if_channel_change'
             );
         }
 
-        Cache::forever('channel_with_multicast_' . $multicast->channel_id, Channel::find($multicast->channel_id)->load(['multicasts', 'multicasts.channel_source']));
+        Cache::forever('channel_with_multicast_'.$multicast->channel_id, Channel::find($multicast->channel_id)->load(['multicasts', 'multicasts.channel_source']));
     }
 
     public function updated(ChannelMulticast $multicast)
@@ -62,17 +62,17 @@ class MulticastChannelObserver
         );
 
         SendEmailNotificationJob::dispatch(
-            "Byl upraven multicast u  " . $multicast->channel->name,
-            "Uživatel " . Auth::user()->email . " upravil multicast u " . $multicast->channel->name,
+            'Byl upraven multicast u  '.$multicast->channel->name,
+            'Uživatel '.Auth::user()->email.' upravil multicast u '.$multicast->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );
 
-        if (Cache::has('channel_with_multicast_' . $multicast->channel_id)) {
-            Cache::forget('channel_with_multicast_' . $multicast->channel_id);
+        if (Cache::has('channel_with_multicast_'.$multicast->channel_id)) {
+            Cache::forget('channel_with_multicast_'.$multicast->channel_id);
         }
         Cache::forever(
-            'channel_with_multicast_' . $multicast->channel_id,
+            'channel_with_multicast_'.$multicast->channel_id,
             Channel::find($multicast->channel_id)
                 ->load(['multicasts', 'multicasts.channel_source'])
         );
@@ -80,15 +80,15 @@ class MulticastChannelObserver
 
     public function deleted(ChannelMulticast $multicast)
     {
-        if (!is_null($multicast->stb_ip)) {
+        if (! is_null($multicast->stb_ip)) {
             DeleteStreamFromIptvDohledJob::dispatch($multicast->stb_ip);
         }
-        if (!is_null($multicast->source_ip)) {
+        if (! is_null($multicast->source_ip)) {
             DeleteStreamFromIptvDohledJob::dispatch($multicast->source_ip);
         }
 
-        if (Cache::has('channel_with_multicast_' . $multicast->channel_id)) {
-            Cache::forget('channel_with_multicast_' . $multicast->channel_id);
+        if (Cache::has('channel_with_multicast_'.$multicast->channel_id)) {
+            Cache::forget('channel_with_multicast_'.$multicast->channel_id);
         }
 
         LogJob::dispatch(
@@ -103,8 +103,8 @@ class MulticastChannelObserver
         );
 
         SendEmailNotificationJob::dispatch(
-            "Byl odebrán multicast u " . $multicast->channel->name,
-            "Uživatel " . Auth::user()->email . " odebral multicast u " . $multicast->channel->name,
+            'Byl odebrán multicast u '.$multicast->channel->name,
+            'Uživatel '.Auth::user()->email.' odebral multicast u '.$multicast->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );

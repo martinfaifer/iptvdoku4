@@ -14,7 +14,7 @@ class GetCssColorsFromCacheAction
 
     public function __invoke()
     {
-        if (!Cache::has('css_colors')) {
+        if (! Cache::has('css_colors')) {
             Cache::forever('css_colors', CssColor::get());
         }
 

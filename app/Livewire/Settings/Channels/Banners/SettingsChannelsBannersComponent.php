@@ -17,10 +17,9 @@ class SettingsChannelsBannersComponent extends Component
         $files = Storage::allFiles('/public/NanguBanners/');
 
         foreach ($files as $file) {
-            array_push($this->filesInFolder, config('app.url') . '/' . str_replace('public', 'storage', $file));
+            array_push($this->filesInFolder, config('app.url').'/'.str_replace('public', 'storage', $file));
         }
     }
-
 
     public function render()
     {

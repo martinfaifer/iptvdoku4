@@ -2,8 +2,8 @@
 
 namespace App\Services\Api\NanguTv;
 
-use App\Models\NanguIsp;
 use App\Models\GeniusTvChart;
+use App\Models\NanguIsp;
 use App\Models\NanguSubscriber;
 use App\Models\NanguSubscription;
 
@@ -25,7 +25,7 @@ class NanguSubscriptionsService
             );
 
             try {
-                if (!empty($nanguResponse)) {
+                if (! empty($nanguResponse)) {
 
                     if (array_key_exists('subscriptionCode', $nanguResponse['subscriptions'])) {
                         NanguSubscription::create([
@@ -90,10 +90,10 @@ class NanguSubscriptionsService
     {
         foreach (NanguIsp::get() as $nanguIsp) {
             GeniusTvChart::create([
-                'item' => "subscriptions",
+                'item' => 'subscriptions',
                 'value' => NanguSubscription::forIsp($nanguIsp->id)->count(),
-                'nangu_isp_id' => $nanguIsp->id
+                'nangu_isp_id' => $nanguIsp->id,
             ]);
-        };
+        }
     }
 }

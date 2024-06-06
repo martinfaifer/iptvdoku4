@@ -2,10 +2,9 @@
 
 namespace App\Livewire\Iptv\Cards\Menu;
 
-use Livewire\Component;
-use App\Models\SatelitCard;
-use Livewire\Attributes\On;
 use App\Models\SatelitCardVendor;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class SatelitCardsMenu extends Component
 {

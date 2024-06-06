@@ -18,6 +18,6 @@ class StoreUsersToCacheAction
             Cache::forget('users');
         }
 
-        Cache::forever('users', User::orderBy('first_name', "ASC")->get());
+        Cache::forever('users', User::orderBy('first_name', 'ASC')->get());
     }
 }

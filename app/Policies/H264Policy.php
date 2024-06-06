@@ -4,11 +4,10 @@ namespace App\Policies;
 
 use App\Models\H264;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class H264Policy
 {
-    public function before(User $user): bool|null
+    public function before(User $user): ?bool
     {
         if ($user->isAdmin()) {
             return true;

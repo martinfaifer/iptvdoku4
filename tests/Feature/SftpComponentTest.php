@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\User;
-use App\Models\UserRole;
 use App\Livewire\Iptv\Sftps\SftpComponent;
 use App\Models\SftpServer;
+use App\Models\User;
+use App\Models\UserRole;
 
 it('return sftps route', function () {
     $user = User::where('user_role_id', UserRole::where('name', 'admin')->first()->id)->first();
@@ -16,5 +16,5 @@ it('return sftp route', function () {
     if (is_null($sftp)) {
         $this->actingAs($user)->get('sftps/null')->assertStatus(404);
     }
-    $this->actingAs($user)->get('sftps/' . $sftp->id)->assertSeeLivewire(SftpComponent::class);
+    $this->actingAs($user)->get('sftps/'.$sftp->id)->assertSeeLivewire(SftpComponent::class);
 });

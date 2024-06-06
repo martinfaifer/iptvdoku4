@@ -2,16 +2,15 @@
 
 namespace App\Livewire\Iptv\Devices\Menu;
 
-use App\Models\Device;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use App\Models\DeviceCategory;
-use Illuminate\Support\Facades\Cache;
 use App\Traits\Devices\CacheDevicesTrait;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class DevicesMenu extends Component
 {
     use CacheDevicesTrait;
+
     public $categoriesWithDevices;
 
     public function mount()
@@ -23,9 +22,10 @@ class DevicesMenu extends Component
     #[On('update_devices_menu')]
     public function loadDevices()
     {
-        if (!Cache::has('devices_menu')) {
+        if (! Cache::has('devices_menu')) {
             $this->cache_devices_for_menu();
         }
+
         return $this->categoriesWithDevices = Cache::get('devices_menu');
     }
 

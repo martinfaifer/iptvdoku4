@@ -31,7 +31,7 @@ class SendForgottenPasswordMail extends Mailable
             replyTo: [
                 new Address('iptv-dokumentace@grapesc.cz', 'IPTV dokumentace Grapesc'),
             ],
-            subject: "Nové heslo",
+            subject: 'Nové heslo',
         );
     }
 

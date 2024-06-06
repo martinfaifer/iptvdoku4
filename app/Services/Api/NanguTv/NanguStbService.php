@@ -29,7 +29,7 @@ class NanguStbService
             if (array_key_exists('stb', $nanguResponse)) {
                 NanguStb::create([
                     'nangu_stb_accountCode_id' => $stbAccountCode->id,
-                    'stb' => $nanguResponse['stb']['modelCode']
+                    'stb' => $nanguResponse['stb']['modelCode'],
                 ]);
             }
         }
@@ -38,12 +38,11 @@ class NanguStbService
     public function count_stbs_model_per_isp()
     {
         foreach (NanguIsp::get() as $nanguIsp) {
-            $subscriptionsWithStbs = NanguSubscription
-                ::forIsp($nanguIsp->id)
+            $subscriptionsWithStbs = NanguSubscription::forIsp($nanguIsp->id)
                 ->with('accountCodes.stbs')
                 ->get();
 
-            if (!$subscriptionsWithStbs->isEmpty()) {
+            if (! $subscriptionsWithStbs->isEmpty()) {
                 foreach ($subscriptionsWithStbs as $subscriptionWithStbs) {
                     foreach ($subscriptionWithStbs->accountCodes as $accountCode) {
                         //

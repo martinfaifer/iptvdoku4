@@ -3,10 +3,10 @@
 namespace App\Livewire\Iptv\Channels;
 
 use App\Models\Channel;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use Illuminate\Support\Facades\Cache;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class IptvChannel extends Component
 {
@@ -18,20 +18,20 @@ class IptvChannel extends Component
 
     public function mount(Channel $channel)
     {
-        if (!Cache::has('channel_with_multicast_' . $channel->id)) {
+        if (! Cache::has('channel_with_multicast_'.$channel->id)) {
             Cache::forever(
-                'channel_with_multicast_' . $channel->id,
+                'channel_with_multicast_'.$channel->id,
                 $channel->load(['multicasts', 'multicasts.channel_source'])
             );
         }
-        $this->channel = Cache::get('channel_with_multicast_' . $channel->id);
+        $this->channel = Cache::get('channel_with_multicast_'.$channel->id);
     }
 
     public function getTimeShiftTime()
     {
-        $cachedNanguApiResult = Cache::get('nangu_channel_' . $this->channel->id . '_timeshift');
+        $cachedNanguApiResult = Cache::get('nangu_channel_'.$this->channel->id.'_timeshift');
 
-        if (!is_null($cachedNanguApiResult)) {
+        if (! is_null($cachedNanguApiResult)) {
             return $this->availableTimeShiftTime = $cachedNanguApiResult['timeshift'] / 1440;
         }
 

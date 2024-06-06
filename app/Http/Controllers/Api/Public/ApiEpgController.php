@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\Public;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ApiEpgResource;
+use Illuminate\Http\Request;
 
 class ApiEpgController extends Controller
 {

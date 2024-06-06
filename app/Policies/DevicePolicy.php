@@ -4,11 +4,10 @@ namespace App\Policies;
 
 use App\Models\Device;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class DevicePolicy
 {
-    public function before(User $user): bool|null
+    public function before(User $user): ?bool
     {
         if ($user->isAdmin()) {
             return true;
@@ -70,6 +69,7 @@ class DevicePolicy
         if ($user->isTechnik()) {
             return true;
         }
+
         return false;
     }
 

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\UserRole;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserRoleSeeder extends Seeder
@@ -13,33 +12,33 @@ class UserRoleSeeder extends Seeder
      */
     public function run(): void
     {
-        if(!UserRole::where('name', 'admin')->first()) {
+        if (! UserRole::where('name', 'admin')->first()) {
             UserRole::create([
-                'name' => "admin"
+                'name' => 'admin',
             ]);
         }
 
-        if(!UserRole::where('name', 'technik')->first()) {
+        if (! UserRole::where('name', 'technik')->first()) {
             UserRole::create([
-                'name' => "technik"
+                'name' => 'technik',
             ]);
         }
 
-        if(!UserRole::where('name', 'administrativa')->first()) {
+        if (! UserRole::where('name', 'administrativa')->first()) {
             UserRole::create([
-                'name' => "administrativa"
+                'name' => 'administrativa',
             ]);
         }
 
-        if(!UserRole::where('name', 'API')->first()) {
+        if (! UserRole::where('name', 'API')->first()) {
             UserRole::create([
-                'name' => "API"
+                'name' => 'API',
             ]);
         }
 
-        if(!UserRole::where('name', 'reader')->first()) {
+        if (! UserRole::where('name', 'reader')->first()) {
             UserRole::create([
-                'name' => "reader"
+                'name' => 'reader',
             ]);
         }
     }

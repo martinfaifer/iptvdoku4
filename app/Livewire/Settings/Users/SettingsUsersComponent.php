@@ -2,26 +2,28 @@
 
 namespace App\Livewire\Settings\Users;
 
-use App\Models\User;
-use Livewire\Component;
-use App\Models\UserRole;
-use Livewire\WithPagination;
-use Illuminate\Support\Facades\Mail;
+use App\Livewire\Forms\CreateSettingsUserForm;
+use App\Livewire\Forms\UpdateSettingsUserForm;
 use App\Mail\SendForgottenPasswordMail;
+use App\Models\User;
+use App\Models\UserRole;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\Users\GeneratePasswordTrait;
 use Illuminate\Database\Eloquent\Collection;
-use App\Livewire\Forms\CreateSettingsUserForm;
-use App\Livewire\Forms\UpdateSettingsUserForm;
+use Illuminate\Support\Facades\Mail;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsUsersComponent extends Component
 {
-    use NotificationTrait, WithPagination, GeneratePasswordTrait;
+    use GeneratePasswordTrait, NotificationTrait, WithPagination;
 
     public CreateSettingsUserForm $form;
+
     public UpdateSettingsUserForm $editForm;
 
     public bool $createModal = false;
+
     public bool $editModal = false;
 
     public $query = '';
@@ -59,6 +61,7 @@ class SettingsUsersComponent extends Component
     public function edit(User $user)
     {
         $this->editForm->setUser($user);
+
         return $this->editModal = true;
     }
 
@@ -75,11 +78,12 @@ class SettingsUsersComponent extends Component
     {
         $password = $this->generate_password();
         $user->update([
-            'password' =>  bcrypt($password)
+            'password' => bcrypt($password),
         ]);
 
         Mail::to($user->email)->queue(new SendForgottenPasswordMail($password));
-        return $this->success_alert("Odeslán email s novým heslem");
+
+        return $this->success_alert('Odeslán email s novým heslem');
     }
 
     public function destroy(User $user)

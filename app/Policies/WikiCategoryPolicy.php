@@ -4,11 +4,10 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\WikiCategory;
-use Illuminate\Auth\Access\Response;
 
 class WikiCategoryPolicy
 {
-    public function before(User $user): bool|null
+    public function before(User $user): ?bool
     {
         if ($user->isAdmin()) {
             return true;

@@ -2,9 +2,9 @@
 
 namespace App\Observers;
 
+use App\Jobs\SendEmailNotificationJob;
 use App\Models\WikiTopic;
 use Illuminate\Support\Facades\Auth;
-use App\Jobs\SendEmailNotificationJob;
 
 class WikiTopicObserver
 {
@@ -14,8 +14,8 @@ class WikiTopicObserver
     public function created(WikiTopic $wikiTopic): void
     {
         SendEmailNotificationJob::dispatch(
-            "Byl přidán nový článek do wiki ",
-            "Uživatel " . Auth::user()->email . " vytvořil článek " . $wikiTopic->title,
+            'Byl přidán nový článek do wiki ',
+            'Uživatel '.Auth::user()->email.' vytvořil článek '.$wikiTopic->title,
             Auth::user()->email,
             'notify_if_added_new_wiki_content'
         );
@@ -27,8 +27,8 @@ class WikiTopicObserver
     public function updated(WikiTopic $wikiTopic): void
     {
         SendEmailNotificationJob::dispatch(
-            "Byl upraven článek na wiki ",
-            "Uživatel " . Auth::user()->email . " upravil článek " . $wikiTopic->title,
+            'Byl upraven článek na wiki ',
+            'Uživatel '.Auth::user()->email.' upravil článek '.$wikiTopic->title,
             Auth::user()->email,
             'notify_if_added_new_wiki_content'
         );
@@ -40,8 +40,8 @@ class WikiTopicObserver
     public function deleted(WikiTopic $wikiTopic): void
     {
         SendEmailNotificationJob::dispatch(
-            "Byl odebrán nový článek na wiki ",
-            "Uživatel " . Auth::user()->email . " odebral článek " . $wikiTopic->title,
+            'Byl odebrán nový článek na wiki ',
+            'Uživatel '.Auth::user()->email.' odebral článek '.$wikiTopic->title,
             Auth::user()->email,
             'notify_if_added_new_wiki_content'
         );

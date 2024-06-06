@@ -3,7 +3,6 @@
 namespace App\Livewire\Charts;
 
 use Livewire\Component;
-use Livewire\Attributes\On;
 
 class LineChartComponent extends Component
 {

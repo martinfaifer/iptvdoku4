@@ -43,12 +43,12 @@ class UpdateSatelitCardComponent extends Component
 
         $this->success_alert('Upraveno');
 
-        return $this->redirect('/sat-cards/'.$this->satelitCard->id);
+        return $this->redirect(url()->previous(), true);
     }
 
     public function closeDialog()
     {
-        $this->updateModal = false;
+        return $this->updateModal = false;
     }
 
     public function render()

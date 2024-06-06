@@ -3,7 +3,6 @@
 namespace App\Livewire\User;
 
 use App\Livewire\Forms\UserNotificationForm;
-use App\Models\User;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -27,9 +26,9 @@ class UserNotificationComponent extends Component
     public function update()
     {
         $this->form->update();
-        $this->redirect(url()->previous(),true);
+        $this->redirect(url()->previous(), true);
 
-        return $this->success_alert("Upraveno");
+        return $this->success_alert('Upraveno');
     }
 
     public function render()

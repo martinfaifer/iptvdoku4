@@ -4,8 +4,8 @@ namespace App\Livewire\Nangu\IpPrefixes;
 
 use App\Models\Ip;
 use App\Models\Note;
-use Livewire\Component;
 use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 class DeleteNanguIpPrefixesComponent extends Component
 {
@@ -27,8 +27,9 @@ class DeleteNanguIpPrefixesComponent extends Component
         }
         $this->prefix->delete();
 
-        $this->redirect("/prefixes", true);
-        return $this->success_alert("Odebráno");
+        $this->redirect('/prefixes', true);
+
+        return $this->success_alert('Odebráno');
     }
 
     public function render()

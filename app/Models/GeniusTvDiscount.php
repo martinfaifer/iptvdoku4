@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use App\Traits\Models\NanguIspTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Model;
 
 class GeniusTvDiscount extends Model
 {

@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
                 'last_name' => 'Faifer',
                 'email' => 'martinfaifer@gmail.com',
                 'password' => '1122334455',
-                'user_role_id' => 1
+                'user_role_id' => 1,
             ]);
         }
     }

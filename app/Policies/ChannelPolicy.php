@@ -4,11 +4,10 @@ namespace App\Policies;
 
 use App\Models\Channel;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class ChannelPolicy
 {
-    public function before(User $user): bool|null
+    public function before(User $user): ?bool
     {
         if ($user->isAdmin()) {
             return true;
@@ -60,7 +59,6 @@ class ChannelPolicy
 
         return false;
     }
-
 
     public function operate_with_childs(User $user): bool
     {

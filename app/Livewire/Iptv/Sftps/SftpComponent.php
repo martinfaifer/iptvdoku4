@@ -48,7 +48,7 @@ class SftpComponent extends Component
         $this->authorize('upload', SftpServer::class);
         if ($this->uploadForm->upload_file($this->sftpServer) == true) {
             $this->closeDialog();
-            $this->redirect('/sftps/' . $this->sftpServer->id, true);
+            $this->redirect('/sftps/'.$this->sftpServer->id, true);
 
             return $this->success_alert('Soubor nahrán');
         }
@@ -61,17 +61,17 @@ class SftpComponent extends Component
     {
         $sftp = new SFTP($this->sftpServer->url);
 
-        if (!$sftp->login($this->sftpServer->username, $this->sftpServer->password)) {
+        if (! $sftp->login($this->sftpServer->username, $this->sftpServer->password)) {
             return $this->error_alert('Nepodařilo se přihlásit do serveru');
         }
 
-        if (!$sftp->file_exists($this->sftpServer->path_to_folder . $item['filename'])) {
+        if (! $sftp->file_exists($this->sftpServer->path_to_folder.$item['filename'])) {
             return $this->error_alert('Nepodařilo se najít soubor');
         }
 
         return response()->streamDownload(
             function () use ($sftp, $item) {
-                echo $sftp->get($this->sftpServer->path_to_folder . $item['filename']);
+                echo $sftp->get($this->sftpServer->path_to_folder.$item['filename']);
             },
             $item['filename']
         );

@@ -3,17 +3,17 @@
 namespace App\Livewire\Iptv\Channels\Device;
 
 use App\Models\Channel;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use Illuminate\Support\Collection;
 use App\Traits\Devices\DeviceHasChannelsTrait;
-
+use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class DeviceHasChannelAndConnectionMapComponent extends Component
 {
     use DeviceHasChannelsTrait;
 
     public ?Collection $devices;
+
     public Collection $schemaDevices;
 
     public ?Channel $channel;
@@ -36,20 +36,20 @@ class DeviceHasChannelAndConnectionMapComponent extends Component
     public function load_devices_data()
     {
         if ($this->isBackup == true) {
-            $this->devices =  $this->devices_belongs_to_channel_type(
-                channelWithType: $this->channelType . ':' . $this->channel->id . ":backup"
+            $this->devices = $this->devices_belongs_to_channel_type(
+                channelWithType: $this->channelType.':'.$this->channel->id.':backup'
             );
 
             $this->schemaDevices = $this->devices_belongs_to_channel_type(
-                channelWithType: 'multicast:' . $this->channel->id . ":backup"
+                channelWithType: 'multicast:'.$this->channel->id.':backup'
             );
         } else {
-            $this->devices =  $this->devices_belongs_to_channel_type(
-                channelWithType: $this->channelType . ':' . $this->channel->id
+            $this->devices = $this->devices_belongs_to_channel_type(
+                channelWithType: $this->channelType.':'.$this->channel->id
             );
 
             $this->schemaDevices = $this->devices_belongs_to_channel_type(
-                channelWithType: 'multicast:' . $this->channel->id
+                channelWithType: 'multicast:'.$this->channel->id
             );
         }
 
@@ -58,12 +58,12 @@ class DeviceHasChannelAndConnectionMapComponent extends Component
 
     public function showOrHideDeviceConnectionMap()
     {
-        return $this->isHiddenChannelConnectionMap = !$this->isHiddenChannelConnectionMap;
+        return $this->isHiddenChannelConnectionMap = ! $this->isHiddenChannelConnectionMap;
     }
 
     public function showOrHideBackupDeviceConnectionMap()
     {
-        return $this->isHiddenBackupChannelConnectionMap = !$this->isHiddenBackupChannelConnectionMap;
+        return $this->isHiddenBackupChannelConnectionMap = ! $this->isHiddenBackupChannelConnectionMap;
     }
 
     public function render()

@@ -4,10 +4,9 @@ namespace App\Models;
 
 use App\Observers\H265Observer;
 use App\Traits\Models\ChannelTrait;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 #[ObservedBy(H265Observer::class)]
 class H265 extends Model

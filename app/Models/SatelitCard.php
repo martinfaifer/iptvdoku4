@@ -15,7 +15,7 @@ class SatelitCard extends Model
         'name',
         'satelit_card_vendor_id',
         'status',
-        'expiration'
+        'expiration',
     ];
 
     public function vendor(): BelongsTo
@@ -23,8 +23,8 @@ class SatelitCard extends Model
         return $this->belongsTo(SatelitCardVendor::class, 'satelit_card_vendor_id');
     }
 
-    public function scopeSearch(Builder $query, string $search = "")
+    public function scopeSearch(Builder $query, string $search = '')
     {
-        return $query->where('name', "like", "%" . $search . "%");
+        return $query->where('name', 'like', '%'.$search.'%');
     }
 }

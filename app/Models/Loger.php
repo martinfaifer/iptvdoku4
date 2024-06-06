@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
-use Illuminate\Contracts\Database\Query\Builder;
 
 class Loger extends Model
 {

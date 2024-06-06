@@ -2,21 +2,20 @@
 
 namespace App\Livewire\Iptv\Channels\Multicast;
 
-use App\Models\Device;
-use App\Models\Channel;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use App\Models\ChannelSource;
-use App\Models\ChannelMulticast;
-use Illuminate\Support\Collection;
-use App\Traits\Livewire\NotificationTrait;
-use App\Traits\Devices\DeviceHasChannelsTrait;
 use App\Livewire\Forms\UpdateMulticastChannelForm;
+use App\Models\Channel;
+use App\Models\ChannelMulticast;
+use App\Models\ChannelSource;
+use App\Models\Device;
 use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
+use App\Traits\Devices\DeviceHasChannelsTrait;
+use App\Traits\Livewire\NotificationTrait;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class MulticastChannel extends Component
 {
-    use CheckIfChannelIsInIptvDohledTrait, NotificationTrait, DeviceHasChannelsTrait;
+    use CheckIfChannelIsInIptvDohledTrait, DeviceHasChannelsTrait, NotificationTrait;
 
     public UpdateMulticastChannelForm $form;
 
@@ -43,7 +42,7 @@ class MulticastChannel extends Component
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_multicasts.' . $this->channel->id);
+        $this->dispatch('update_multicasts.'.$this->channel->id);
 
         return $this->success_alert('Změněno');
     }
@@ -56,7 +55,7 @@ class MulticastChannel extends Component
     public function destroy(ChannelMulticast $multicast)
     {
         $multicast->delete();
-        $this->dispatch('update_multicasts.' . $this->channel->id);
+        $this->dispatch('update_multicasts.'.$this->channel->id);
 
         return $this->success_alert('Odebráno');
     }

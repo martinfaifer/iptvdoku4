@@ -10,9 +10,10 @@ trait CidrTrait
         for ($i = 0; $i <= 32; $i++) {
             $cidrs[] = [
                 'id' => $i,
-                'name' => $i
+                'name' => $i,
             ];
         }
+
         return $cidrs;
     }
 }

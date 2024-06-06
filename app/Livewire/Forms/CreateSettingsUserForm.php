@@ -28,9 +28,9 @@ class CreateSettingsUserForm extends Form
     #[Validate('max:255', message: 'Maximální počet znaků je :max')]
     public string $email = '';
 
-    #[Validate('required', message: "Vyberte roli")]
-    #[Validate('exists:user_roles,id', message: "Neexistující role")]
-    public string $userRoleId = "";
+    #[Validate('required', message: 'Vyberte roli')]
+    #[Validate('exists:user_roles,id', message: 'Neexistující role')]
+    public string $userRoleId = '';
 
     public function create()
     {
@@ -43,7 +43,7 @@ class CreateSettingsUserForm extends Form
             'last_name' => $this->last_name,
             'email' => $this->email,
             'password' => $password,
-            'user_role_id' => $this->userRoleId
+            'user_role_id' => $this->userRoleId,
         ]);
 
         $this->reset();

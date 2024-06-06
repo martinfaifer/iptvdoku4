@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\User;
-use App\Models\UserRole;
 use App\Livewire\Iptv\Cards\SatelitCardComponent;
 use App\Models\SatelitCard;
+use App\Models\User;
+use App\Models\UserRole;
 
 it('return sat-cards index route', function () {
     $user = User::where('user_role_id', UserRole::where('name', 'admin')->first()->id)->first();
@@ -16,6 +16,6 @@ it('return sat-card route', function () {
     if (is_null($satCard)) {
         $this->actingAs($user)->get('sat-cards/null')->assertStatus(404);
     } else {
-        $this->actingAs($user)->get('sat-cards/' . $satCard->id)->assertSeeLivewire(SatelitCardComponent::class);
+        $this->actingAs($user)->get('sat-cards/'.$satCard->id)->assertSeeLivewire(SatelitCardComponent::class);
     }
 });

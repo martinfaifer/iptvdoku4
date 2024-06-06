@@ -2,15 +2,16 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Device;
-use Illuminate\Console\Command;
-use App\Services\Api\NMS\ConnectService;
 use App\Events\BroadcastDevicesMenuEvent;
+use App\Models\Device;
+use App\Services\Api\NMS\ConnectService;
 use App\Traits\Devices\CacheDevicesTrait;
+use Illuminate\Console\Command;
 
 class GetDevicesDataFromNmsCommand extends Command
 {
     use CacheDevicesTrait;
+
     /**
      * The name and signature of the console command.
      *

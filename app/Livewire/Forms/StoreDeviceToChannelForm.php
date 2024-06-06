@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
-use App\Models\Device;
 use App\Models\Channel;
+use App\Models\Device;
 use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class StoreDeviceToChannelForm extends Form
 {
@@ -21,7 +21,6 @@ class StoreDeviceToChannelForm extends Form
     #[Validate('boolean', message: 'Neplatný formát')]
     public bool $is_backup = false;
 
-
     public function setChannel(Channel $channel, string $channelType)
     {
         $this->channel = $channel;
@@ -33,9 +32,9 @@ class StoreDeviceToChannelForm extends Form
         $this->validate();
 
         if ($this->is_backup == true) {
-            $channelToDevice = $this->channelType . ':' . $this->channel->id . ':backup';
+            $channelToDevice = $this->channelType.':'.$this->channel->id.':backup';
         } else {
-            $channelToDevice = $this->channelType . ':' . $this->channel->id;
+            $channelToDevice = $this->channelType.':'.$this->channel->id;
         }
 
         $device = Device::find($this->deviceId);

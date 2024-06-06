@@ -2,18 +2,18 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
+use App\Jobs\DeleteStreamFromIptvDohledJob;
+use App\Jobs\StoreStreamToIptvDohledJob;
+use App\Jobs\UpdateStreamUrlInDohledIfIsItJob;
 use App\Models\Channel;
 use App\Models\ChannelMulticast;
-use Illuminate\Support\Facades\Cache;
-use App\Jobs\StoreStreamToIptvDohledJob;
-use App\Jobs\DeleteStreamFromIptvDohledJob;
-use App\Jobs\UpdateStreamUrlInDohledIfIsItJob;
 use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
+use Livewire\Form;
 
 class UpdateMulticastChannelForm extends Form
 {
     use CheckIfChannelIsInIptvDohledTrait;
+
     public ?ChannelMulticast $multicast;
 
     public $stb_ip;
@@ -35,7 +35,7 @@ class UpdateMulticastChannelForm extends Form
         return [
             'stb_ip' => [
                 'nullable', 'string', 'max:250',
-                'unique:channel_multicasts,stb_ip,' . $this->multicast->id,
+                'unique:channel_multicasts,stb_ip,'.$this->multicast->id,
             ],
             'source_ip' => [
                 'nullable', 'string', 'max:250',
@@ -83,7 +83,7 @@ class UpdateMulticastChannelForm extends Form
             UpdateStreamUrlInDohledIfIsItJob::dispatch(
                 $this->stb_ip,
                 $this->multicast->stb_ip,
-                Channel::find($this->multicast->channel_id)->name . '_multicast'
+                Channel::find($this->multicast->channel_id)->name.'_multicast'
             );
         }
 
@@ -92,7 +92,7 @@ class UpdateMulticastChannelForm extends Form
             UpdateStreamUrlInDohledIfIsItJob::dispatch(
                 $this->source_ip,
                 $this->multicast->source_ip,
-                Channel::find($this->multicast->channel_id)->name . '_multicast'
+                Channel::find($this->multicast->channel_id)->name.'_multicast'
             );
         }
 
@@ -105,7 +105,7 @@ class UpdateMulticastChannelForm extends Form
 
         if ($this->to_dohled == true) {
             StoreStreamToIptvDohledJob::dispatch(
-                Channel::find($this->multicast->channel_id)->name . '_multicast',
+                Channel::find($this->multicast->channel_id)->name.'_multicast',
                 $this->stb_ip
             );
         }

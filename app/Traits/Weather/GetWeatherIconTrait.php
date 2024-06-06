@@ -6,7 +6,7 @@ trait GetWeatherIconTrait
 {
     public function get_icon($weather)
     {
-        if (!array_key_exists('description', $weather)) {
+        if (! array_key_exists('description', $weather)) {
             return '/storage/svgs/sunny.svg';
         }
         switch ($weather) {

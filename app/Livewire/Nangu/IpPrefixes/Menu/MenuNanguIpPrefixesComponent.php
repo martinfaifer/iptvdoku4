@@ -2,15 +2,14 @@
 
 namespace App\Livewire\Nangu\IpPrefixes\Menu;
 
-use Livewire\Component;
 use App\Models\NanguIsp;
-use Livewire\Attributes\On;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class MenuNanguIpPrefixesComponent extends Component
 {
-
     public Collection $ispsWithIpPrefixes;
 
     public function mount()
@@ -21,7 +20,7 @@ class MenuNanguIpPrefixesComponent extends Component
     #[On('refresh_isps_with_ip_prefixes')]
     public function loadIspsWithIpPrefixes()
     {
-        if (!Cache::has('nangu_ip_prefixes_menu')) {
+        if (! Cache::has('nangu_ip_prefixes_menu')) {
             Cache::forever('nangu_ip_prefixes_menu', NanguIsp::with('ipprefixes')->get());
         }
         $this->ispsWithIpPrefixes = Cache::get('nangu_ip_prefixes_menu');

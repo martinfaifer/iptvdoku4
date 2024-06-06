@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Iptv\Cards;
 
-use Livewire\Component;
-use App\Models\SatelitCard;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSatelitCardExpirationForm;
 use App\Livewire\Forms\UpdateSatelitCardExpirationForm;
+use App\Models\SatelitCard;
+use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 class ExpirationComponent extends Component
 {
@@ -15,9 +15,11 @@ class ExpirationComponent extends Component
     public ?SatelitCard $satelitCard;
 
     public CreateSatelitCardExpirationForm $createForm;
+
     public UpdateSatelitCardExpirationForm $updateForm;
 
     public bool $storeModal = false;
+
     public bool $editModal = false;
 
     public function mount(SatelitCard $satelitCard)
@@ -33,6 +35,7 @@ class ExpirationComponent extends Component
     public function openEditModal()
     {
         $this->updateForm->setSatelitCard($this->satelitCard);
+
         return $this->editModal = true;
     }
 
@@ -41,6 +44,7 @@ class ExpirationComponent extends Component
         $this->createForm->reset();
         $this->updateForm->reset();
         $this->editModal = false;
+
         return $this->storeModal = false;
     }
 
@@ -49,7 +53,8 @@ class ExpirationComponent extends Component
         $this->createForm->create($this->satelitCard);
 
         $this->redirect(url()->previous(), true);
-        $this->success_alert("Expirace přidána");
+
+        return $this->success_alert('Expirace přidána');
     }
 
     public function update()
@@ -57,17 +62,19 @@ class ExpirationComponent extends Component
         $this->updateForm->update();
 
         $this->redirect(url()->previous(), true);
-        $this->success_alert("Expirace upravena");
+
+        return $this->success_alert('Expirace upravena');
     }
 
     public function destroy()
     {
         $this->satelitCard->update([
-            'expiration' => null
+            'expiration' => null,
         ]);
 
         $this->redirect(url()->previous(), true);
-        $this->success_alert("Expirace odebrána");
+
+        return $this->success_alert('Expirace odebrána');
     }
 
     public function render()

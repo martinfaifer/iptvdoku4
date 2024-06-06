@@ -2,10 +2,10 @@
 
 namespace App\Services\Api\OpenWeather;
 
+use App\Actions\Slack\SendSlackNotificationAction;
+use App\Jobs\SendEmailNotificationJob;
 use App\Models\Slack;
 use Illuminate\Support\Facades\Cache;
-use App\Jobs\SendEmailNotificationJob;
-use App\Actions\Slack\SendSlackNotificationAction;
 
 class OpenWeatherService
 {
@@ -79,7 +79,7 @@ class OpenWeatherService
     public function send_email_notification(string $description)
     {
         SendEmailNotificationJob::dispatch(
-            "Varování před počasím!",
+            'Varování před počasím!',
             $description,
             null,
             'notify_if_weather_problem'

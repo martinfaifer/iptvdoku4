@@ -1,10 +1,10 @@
 <?php
 
+use Laravel\Pulse\Http\Middleware\Authorize;
 use Laravel\Pulse\Pulse;
 use Laravel\Pulse\Recorders;
-use Laravel\Pulse\Http\Middleware\Authorize;
-use Laravel\Reverb\Pulse\Recorders\ReverbMessages;
 use Laravel\Reverb\Pulse\Recorders\ReverbConnections;
+use Laravel\Reverb\Pulse\Recorders\ReverbMessages;
 
 return [
 

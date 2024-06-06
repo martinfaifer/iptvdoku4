@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Observers\SftpServerObserver;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Model;
 
 #[ObservedBy(SftpServerObserver::class)]
 class SftpServer extends Model
@@ -32,6 +32,6 @@ class SftpServer extends Model
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $query->where('name', "like", "%" . $search . "%")->orWhere('url', "like", "%" . $search . "%");
+        return $query->where('name', 'like', '%'.$search.'%')->orWhere('url', 'like', '%'.$search.'%');
     }
 }

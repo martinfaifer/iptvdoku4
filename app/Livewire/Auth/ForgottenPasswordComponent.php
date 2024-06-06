@@ -2,22 +2,22 @@
 
 namespace App\Livewire\Auth;
 
-use App\Models\User;
-use Livewire\Component;
-use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\SendForgottenPasswordMail;
+use App\Models\User;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\Users\GeneratePasswordTrait;
+use Illuminate\Support\Facades\Mail;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class ForgottenPasswordComponent extends Component
 {
-    use NotificationTrait, GeneratePasswordTrait;
+    use GeneratePasswordTrait, NotificationTrait;
 
-    #[Validate('email', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je 255")]
-    #[Validate('exists:users,email', message: "Neexistující email")]
-    public string $email = "";
+    #[Validate('email', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je 255')]
+    #[Validate('exists:users,email', message: 'Neexistující email')]
+    public string $email = '';
 
     public function sendNewPassword()
     {
@@ -26,13 +26,14 @@ class ForgottenPasswordComponent extends Component
         $password = $this->generate_password();
 
         User::where('email', $this->email)->update([
-            'password' => bcrypt($password)
+            'password' => bcrypt($password),
         ]);
 
         Mail::to($this->email)->queue(new SendForgottenPasswordMail($password));
 
         $this->redirect('login', true);
-        return $this->success_alert("Odeslán email s novým heslem");
+
+        return $this->success_alert('Odeslán email s novým heslem');
     }
 
     public function render()

@@ -28,6 +28,7 @@ class UpdateWikiTopicComponent extends Component
     public function edit()
     {
         $this->form->setTopic($this->topic);
+
         return $this->updateModal = true;
     }
 
@@ -37,6 +38,7 @@ class UpdateWikiTopicComponent extends Component
 
         $this->redirect(url()->previous(), true);
         $this->dispatch('refresh_wiki_menu');
+
         return $this->success_alert('Upraveno');
     }
 

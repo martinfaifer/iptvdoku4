@@ -13,7 +13,7 @@ class Slack extends Model
         'crashed_channel',
         'calendar_notification',
         'restart_channel',
-        'satelit_cards_expiration'
+        'satelit_cards_expiration',
     ];
 
     protected $fillable = [

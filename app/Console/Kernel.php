@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('horizon:clear')->daily();
         $schedule->command('queue:flush')->daily();
 
-        $schedule->command('satelitcards:expiration-notification')->dailyAt("08:00");
+        $schedule->command('satelitcards:expiration-notification')->dailyAt('08:00');
 
         $schedule->command('channel:restart')->dailyAt('03:00');
 
@@ -52,7 +52,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__ . '/Commands');
+        $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
     }

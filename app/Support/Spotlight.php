@@ -2,22 +2,22 @@
 
 namespace App\Support;
 
-use App\Models\Device;
 use App\Models\Channel;
-use Illuminate\Http\Request;
 use App\Models\ChannelMulticast;
 use App\Models\ChannelQualityWithIp;
+use App\Models\Device;
 use App\Models\Ip;
 use App\Models\SatelitCard;
 use App\Models\SftpServer;
 use App\Models\WikiTopic;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class Spotlight
 {
     public function search(Request $request)
     {
-        if (!Auth::user()) {
+        if (! Auth::user()) {
             return [];
         }
 
@@ -36,7 +36,7 @@ class Spotlight
     {
         return Device::search($search)->get()->map(function (Device $device) {
             return [
-                'id' => 'device_' . $device->id,
+                'id' => 'device_'.$device->id,
                 'name' => $device->name,
                 'description' => 'Zařízení',
                 // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
@@ -49,7 +49,7 @@ class Spotlight
     {
         return Channel::search($search)->get()->map(function (Channel $channel) {
             return [
-                'id' => 'channel_' . $channel->id,
+                'id' => 'channel_'.$channel->id,
                 'name' => $channel->name,
                 'description' => 'Kanál',
                 // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
@@ -62,7 +62,7 @@ class Spotlight
     {
         return ChannelMulticast::search($search)->with('channel')->get()->map(function (ChannelMulticast $channelMulticast) {
             return [
-                'id' => 'multicast_' . $channelMulticast->id,
+                'id' => 'multicast_'.$channelMulticast->id,
                 'name' => $channelMulticast->channel->name,
                 'description' => 'Multicast',
                 // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
@@ -74,20 +74,20 @@ class Spotlight
     public function unicasts(string $search)
     {
         return ChannelQualityWithIp::search($search)->with('h264.channel', 'h265.channel')->get()->map(function (ChannelQualityWithIp $unicastChannel) {
-            if (!is_null($unicastChannel->h264)) {
+            if (! is_null($unicastChannel->h264)) {
                 $channelName = $unicastChannel->h264->channel->name;
                 $channelId = $unicastChannel->h264->channel_id;
-                $type = "h264";
+                $type = 'h264';
             }
-            if (!is_null($unicastChannel->h265)) {
+            if (! is_null($unicastChannel->h265)) {
                 $channelName = $unicastChannel->h265->channel->name;
                 $channelId = $unicastChannel->h265->channel_id;
-                $type = "h265";
+                $type = 'h265';
             }
 
             if (isset($channelName) && isset($channelId)) {
                 return [
-                    'id' => 'unicast_' . $unicastChannel->id,
+                    'id' => 'unicast_'.$unicastChannel->id,
                     'name' => $channelName,
                     'description' => $type,
                     // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
@@ -101,7 +101,7 @@ class Spotlight
     {
         return SatelitCard::search($search)->get()->map(function (SatelitCard $satCard) {
             return [
-                'id' => 'satCard_' . $satCard->id,
+                'id' => 'satCard_'.$satCard->id,
                 'name' => $satCard->name,
                 'description' => 'Satelitní karta',
                 // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
@@ -114,7 +114,7 @@ class Spotlight
     {
         return SftpServer::search($search)->get()->map(function (SftpServer $server) {
             return [
-                'id' => 'server_' . $server->id,
+                'id' => 'server_'.$server->id,
                 'name' => $server->name,
                 'description' => 'FTP server',
                 // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
@@ -127,7 +127,7 @@ class Spotlight
     {
         return WikiTopic::search($search)->get()->map(function (WikiTopic $topic) {
             return [
-                'id' => 'wiki_' . $topic->id,
+                'id' => 'wiki_'.$topic->id,
                 'name' => $topic->title,
                 'description' => 'WIKI',
                 // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
@@ -140,8 +140,8 @@ class Spotlight
     {
         return Ip::search($search)->get()->map(function (Ip $ip) {
             return [
-                'id' => 'ip_' . $ip->id,
-                'name' => $ip->ip_address . "/" . $ip->cidr,
+                'id' => 'ip_'.$ip->id,
+                'name' => $ip->ip_address.'/'.$ip->cidr,
                 'description' => 'IP',
                 // 'icon' => Blade::render("<x-si-satellite class='h-6 w-6 text-sky-500' />"),
                 'link' => "/prefixes/{$ip->id}",

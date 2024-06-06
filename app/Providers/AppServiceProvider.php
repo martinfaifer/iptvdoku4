@@ -2,33 +2,32 @@
 
 namespace App\Providers;
 
-use App\Models\H264;
-use App\Models\User;
-use App\Models\Event;
-use App\Models\Device;
 use App\Models\Channel;
-use App\Models\WikiTopic;
-use App\Models\SftpServer;
+use App\Models\ChannelMulticast;
+use App\Models\Device;
+use App\Models\Event;
+use App\Models\H264;
 use App\Models\SatelitCard;
+use App\Models\SftpServer;
+use App\Models\User;
 use App\Models\WikiCategory;
+use App\Models\WikiTopic;
+use App\Policies\ChannelPolicy;
+use App\Policies\DevicePolicy;
+use App\Policies\EventPolicy;
 use App\Policies\H264Policy;
+use App\Policies\MulticastPolicy;
+use App\Policies\SatelitCardPolicy;
 use App\Policies\SftpPolicy;
 use App\Policies\UserPolicy;
-use Laravel\Fortify\Fortify;
-use App\Policies\EventPolicy;
-use App\Policies\DevicePolicy;
-use App\Policies\ChannelPolicy;
-use App\Models\ChannelMulticast;
-use Laravel\Pulse\Facades\Pulse;
-use App\Policies\MulticastPolicy;
-use App\Policies\WikiTopicPolicy;
-use App\Policies\SatelitCardPolicy;
 use App\Policies\WikiCategoryPolicy;
-use Illuminate\Support\Facades\Gate;
+use App\Policies\WikiTopicPolicy;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\ServiceProvider;
-use Opcodes\LogViewer\Facades\LogViewer;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\ServiceProvider;
+use Laravel\Pulse\Facades\Pulse;
+use Opcodes\LogViewer\Facades\LogViewer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -47,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Pulse::user(fn ($user) => [
             'name' => $user->email,
-            'extra' => "user role ".$user->userRole->name,
+            'extra' => 'user role '.$user->userRole->name,
             'avatar' => $user->avatar_url,
         ]);
 

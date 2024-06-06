@@ -3,10 +3,10 @@
 namespace App\Observers;
 
 use App\Jobs\LogJob;
+use App\Jobs\SendEmailNotificationJob;
 use App\Models\H265;
 use App\Models\Loger;
 use Illuminate\Support\Facades\Auth;
-use App\Jobs\SendEmailNotificationJob;
 
 class H265Observer
 {
@@ -16,8 +16,8 @@ class H265Observer
             $email = 'system@';
 
             SendEmailNotificationJob::dispatch(
-                "Byl přidán H265 k " . $h265->channel->name,
-                "Uživatel " . Auth::user()->email . " přidal H265 k " . $h265->channel->name,
+                'Byl přidán H265 k '.$h265->channel->name,
+                'Uživatel '.Auth::user()->email.' přidal H265 k '.$h265->channel->name,
                 Auth::user()->email,
                 'notify_if_channel_change'
             );
@@ -48,8 +48,8 @@ class H265Observer
         );
 
         SendEmailNotificationJob::dispatch(
-            "Byl upraven H265 u " . $h265->channel->name,
-            "Uživatel " . Auth::user()->email . " upravil H265 u " . $h265->channel->name,
+            'Byl upraven H265 u '.$h265->channel->name,
+            'Uživatel '.Auth::user()->email.' upravil H265 u '.$h265->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );
@@ -69,8 +69,8 @@ class H265Observer
         );
 
         SendEmailNotificationJob::dispatch(
-            "Byl odebrán H265 u " . $h265->channel->name,
-            "Uživatel " . Auth::user()->email . " odebral H265 u " . $h265->channel->name,
+            'Byl odebrán H265 u '.$h265->channel->name,
+            'Uživatel '.Auth::user()->email.' odebral H265 u '.$h265->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );

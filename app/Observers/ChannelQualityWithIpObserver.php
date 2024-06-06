@@ -2,14 +2,14 @@
 
 namespace App\Observers;
 
+use App\Jobs\DeleteStreamFromIptvDohledJob;
 use App\Jobs\LogJob;
+use App\Jobs\SendEmailNotificationJob;
+use App\Models\ChannelQualityWithIp;
 use App\Models\H264;
 use App\Models\H265;
 use App\Models\Loger;
-use App\Models\ChannelQualityWithIp;
 use Illuminate\Support\Facades\Auth;
-use App\Jobs\SendEmailNotificationJob;
-use App\Jobs\DeleteStreamFromIptvDohledJob;
 
 class ChannelQualityWithIpObserver
 {
@@ -38,8 +38,8 @@ class ChannelQualityWithIpObserver
             );
 
             SendEmailNotificationJob::dispatch(
-                "Byl přidán nový unicastový výstup u " . $channel,
-                "Uživatel " . Auth::user()->email . " přidal nový unicastový výstup u  " . $channel,
+                'Byl přidán nový unicastový výstup u '.$channel,
+                'Uživatel '.Auth::user()->email.' přidal nový unicastový výstup u  '.$channel,
                 Auth::user()->email,
                 'notify_if_channel_change'
             );
@@ -69,8 +69,8 @@ class ChannelQualityWithIpObserver
             ])
         );
         SendEmailNotificationJob::dispatch(
-            "Byl upraven unicastový výstup u " . $channel,
-            "Uživatel " . Auth::user()->email . " upravil unicastový výstup u  " . $channel,
+            'Byl upraven unicastový výstup u '.$channel,
+            'Uživatel '.Auth::user()->email.' upravil unicastový výstup u  '.$channel,
             Auth::user()->email,
             'notify_if_channel_change'
         );
@@ -102,8 +102,8 @@ class ChannelQualityWithIpObserver
         );
 
         SendEmailNotificationJob::dispatch(
-            "Byl odebrán unicastový výstup u " . $channel,
-            "Uživatel " . Auth::user()->email . " odebral unicastový výstup u  " . $channel,
+            'Byl odebrán unicastový výstup u '.$channel,
+            'Uživatel '.Auth::user()->email.' odebral unicastový výstup u  '.$channel,
             Auth::user()->email,
             'notify_if_channel_change'
         );

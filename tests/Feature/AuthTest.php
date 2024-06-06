@@ -1,11 +1,9 @@
 <?php
 
+use App\Livewire\Auth\ForgottenPasswordComponent;
+use App\Livewire\Auth\Login;
 use App\Models\User;
 use Livewire\Livewire;
-use App\Livewire\Auth\Login;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SendForgottenPasswordMail;
-use App\Livewire\Auth\ForgottenPasswordComponent;
 
 it('return login page', function () {
     $this->get('login')->assertSeeLivewire(Login::class);
@@ -36,7 +34,7 @@ it('allows users to login with valid credentials', function () {
 
 it('does not allow users to login with excessively long email', function () {
     Livewire::test(Login::class)
-        ->set('email', str_repeat('a', 256) . '@example.com')
+        ->set('email', str_repeat('a', 256).'@example.com')
         ->set('password', 'password')
         ->call('login')
         ->assertHasErrors('email');

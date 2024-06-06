@@ -1,10 +1,10 @@
 <?php
 
+use App\Livewire\User\UserActionsComponent;
+use App\Livewire\User\UserComponent;
+use App\Livewire\User\UserNotificationComponent;
 use App\Models\User;
 use App\Models\UserRole;
-use App\Livewire\User\UserComponent;
-use App\Livewire\User\UserActionsComponent;
-use App\Livewire\User\UserNotificationComponent;
 
 it('return user profile route', function () {
     $user = User::where('user_role_id', UserRole::where('name', 'admin')->first()->id)->first();

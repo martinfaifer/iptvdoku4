@@ -33,11 +33,11 @@ class GetAlertsFromIptvDohledJob implements ShouldQueue
         // check how many streams are down and send notification to slack
         if (count($errorStreams) >= 10) {
             // need too slow down process for spaming in slack channel
-            if (!Cache::has('sended_error_notification_about_high_channels_down')) {
+            if (! Cache::has('sended_error_notification_about_high_channels_down')) {
                 $slack = Slack::where('action', 'crashed_channel')->first();
                 if ($slack) {
                     (new SendSlackNotificationAction(
-                        text: 'Nefunguje ' . count($errorStreams) . ' streamů',
+                        text: 'Nefunguje '.count($errorStreams).' streamů',
                         url: $slack->url
                     ))();
 
@@ -46,8 +46,8 @@ class GetAlertsFromIptvDohledJob implements ShouldQueue
             }
 
             SendEmailNotificationJob::dispatch(
-                "Vysoké množství nefunkčních kanálů",
-                "Nefunguje více jak 10 kanálů v IPTV dohledu",
+                'Vysoké množství nefunkčních kanálů',
+                'Nefunguje více jak 10 kanálů v IPTV dohledu',
                 null,
                 'notify_if_too_many_channels_down'
             );

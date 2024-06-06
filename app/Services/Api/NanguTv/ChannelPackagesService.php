@@ -12,7 +12,7 @@ class ChannelPackagesService
 
         return (new ConnectService('billing'))->connect(
             ['getChannelPackages' => [
-                'ispCode' => $nangu_isp_id
+                'ispCode' => $nangu_isp_id,
             ]],
             'getChannelPackages'
         );

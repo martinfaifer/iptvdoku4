@@ -39,7 +39,7 @@ class User extends Authenticatable
         'notify_if_satelit_card_has_expiration',
         'notify_if_added_new_event',
         'notify_if_upload_new_banner',
-        'notify_if_channel_was_added_to_promo'
+        'notify_if_channel_was_added_to_promo',
     ];
 
     /**
@@ -77,7 +77,6 @@ class User extends Authenticatable
         );
     }
 
-
     public function userRole(): BelongsTo
     {
         return $this->belongsTo(UserRole::class, 'user_role_id', 'id');
@@ -113,13 +112,11 @@ class User extends Authenticatable
         return $this->user_role_id == UserRole::reader()->first()->id;
     }
 
-
-
     public function scopeSearch(Builder $query, string $search)
     {
         return $query
-            ->where('first_name', 'like', '%' . $search . '%')
-            ->orWhere('last_name', 'like', '%' . $search . '%')
-            ->orWhere('email', 'like', '%' . $search . '%');
+            ->where('first_name', 'like', '%'.$search.'%')
+            ->orWhere('last_name', 'like', '%'.$search.'%')
+            ->orWhere('email', 'like', '%'.$search.'%');
     }
 }

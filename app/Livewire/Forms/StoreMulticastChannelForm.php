@@ -80,9 +80,9 @@ class StoreMulticastChannelForm extends Form
         ]);
 
         if ($this->to_dohled == true) {
-            if (!is_null($this->stb_ip)) {
+            if (! is_null($this->stb_ip)) {
                 StoreStreamToIptvDohledJob::dispatch(
-                    Channel::find($this->channel_id)->name . '_multicast',
+                    Channel::find($this->channel_id)->name.'_multicast',
                     $this->stb_ip
                 );
             }

@@ -31,7 +31,7 @@ class Device extends Model
         'template',
         'showed_create_template',
         'has_channels',
-        'ipmi_ip'
+        'ipmi_ip',
     ];
 
     protected $casts = [
@@ -81,13 +81,13 @@ class Device extends Model
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $this->where('name', 'like', '%' . $search . '%')
-            ->orWhere('ip', 'like', '%' . $search . '%');
+        return $this->where('name', 'like', '%'.$search.'%')
+            ->orWhere('ip', 'like', '%'.$search.'%');
     }
 
     public function scopeInTemplate(Builder $query, string $searcheableString)
     {
-        return $query->where('template', "like", "%" . $searcheableString . "%");
+        return $query->where('template', 'like', '%'.$searcheableString.'%');
     }
 
     // public function scopeGetChannels(Builder $query, string $channel)

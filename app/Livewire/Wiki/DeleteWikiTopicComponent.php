@@ -18,6 +18,7 @@ class DeleteWikiTopicComponent extends Component
 
         $this->redirect(url()->previous(), true);
         $this->dispatch('refresh_wiki_menu');
+
         return $this->success_alert('Odebrán článek');
     }
 

@@ -2,47 +2,56 @@
 
 namespace App\Livewire\Settings\Dashboard;
 
-use App\Models\User;
-use App\Models\Event;
-use Livewire\Component;
-use App\Models\NanguIsp;
-use App\Models\WikiTopic;
-use Livewire\Attributes\On;
-use App\Exports\H264sExport;
-use App\Exports\H265sExport;
-use Livewire\Attributes\Url;
-use App\Models\GeniusTvChart;
 use App\Exports\ChannelsExport;
 use App\Exports\DevicesExport;
+use App\Exports\H264sExport;
+use App\Exports\H265sExport;
 use App\Exports\MulticastsExport;
 use App\Exports\SatelitCardsExport;
-use Livewire\Attributes\Computed;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Traits\Devices\CountDevicesTrait;
+use App\Models\Event;
+use App\Models\GeniusTvChart;
+use App\Models\NanguIsp;
+use App\Models\User;
+use App\Models\WikiTopic;
 use App\Traits\Channels\CountChannelsTrait;
+use App\Traits\Devices\CountDevicesTrait;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
+use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SettingsDashboardComponent extends Component
 {
     use CountChannelsTrait, CountDevicesTrait;
 
     public int $channels = 0;
+
     public int $multicasts = 0;
+
     public int $h264s = 0;
+
     public int $h265s = 0;
+
     public int $devices = 0;
+
     public int $satCards = 0;
 
     public Collection $newestTopics;
+
     public Collection $newestUsers;
+
     public Collection $passedEvents;
 
     public array $chartData = [];
+
     public array $chartLables = [];
 
     #[Url]
-    public string $nanguIsp = "7";
+    public string $nanguIsp = '7';
+
     public Collection $nanguIsps;
+
     public array $subscriptionsChartData = [];
 
     public function mount()
@@ -56,7 +65,7 @@ class SettingsDashboardComponent extends Component
         $this->nanguIsps = NanguIsp::get(['id', 'name']);
         $this->newestTopics = WikiTopic::orderBy('id', 'DESC')->take(5)->get(['id', 'title', 'creator']);
         $this->newestUsers = User::orderBy('id', 'DESC')->take(5)->get(['id', 'first_name', 'last_name', 'email', 'user_role_id', 'avatar_url']);
-        $this->passedEvents = Event::where('start_date', '<=', now()->format('Y-m-d'))->orderBy('id', "DESC")->take(5)->get();
+        $this->passedEvents = Event::where('start_date', '<=', now()->format('Y-m-d'))->orderBy('id', 'DESC')->take(5)->get();
     }
 
     #[On('reload_new_nangu_isp_charts')]
@@ -69,9 +78,8 @@ class SettingsDashboardComponent extends Component
     {
         $chartLables = [];
         $data = [];
-        $subscriptions = GeniusTvChart
-            ::where('nangu_isp_id', $this->nanguIsp == "" ? "7" : $this->nanguIsp)
-            ->where('item', "subscriptions")
+        $subscriptions = GeniusTvChart::where('nangu_isp_id', $this->nanguIsp == '' ? '7' : $this->nanguIsp)
+            ->where('item', 'subscriptions')
             ->orderBy('created_at', 'DESC')
             ->get();
 
@@ -82,7 +90,7 @@ class SettingsDashboardComponent extends Component
 
         $this->subscriptionsChartData = [
             'labels' => $chartLables,
-            'data' => $data
+            'data' => $data,
         ];
     }
 
@@ -119,6 +127,7 @@ class SettingsDashboardComponent extends Component
     public function render()
     {
         $this->get_subscriptions_chart_data();
+
         return view('livewire.settings.dashboard.settings-dashboard-component');
     }
 }

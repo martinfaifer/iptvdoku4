@@ -3,8 +3,8 @@
 namespace App\Livewire\Iptv\Devices;
 
 use App\Models\Device;
-use Livewire\Component;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Component;
 
 class SetelitHasDevicesComponent extends Component
 {
@@ -12,7 +12,7 @@ class SetelitHasDevicesComponent extends Component
 
     public function mount(Device $device)
     {
-        $this->hasDevices = Device::inTemplate('"Satelit":' . $device->id)->get(['id', 'name']);
+        $this->hasDevices = Device::inTemplate('"Satelit":'.$device->id)->get(['id', 'name']);
     }
 
     public function render()

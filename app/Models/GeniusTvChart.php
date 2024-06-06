@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use App\Traits\Models\NanguIspTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Model;
 
 class GeniusTvChart extends Model
 {
@@ -16,7 +15,6 @@ class GeniusTvChart extends Model
         'value',
         'nangu_isp_id',
     ];
-
 
     public function scopeWithoutNanguIsp(Builder $query)
     {
