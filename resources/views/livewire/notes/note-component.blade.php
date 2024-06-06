@@ -20,7 +20,7 @@
             @else
                 <div class="grid grid-cols-12">
                     <div class="col-span-12">
-                        <div {{ $attributes->merge(['class' => 'overflow-y-auto ' . $chatBubleWeight]) }}>
+                        <div {{ $attributes->merge(['class' => ' overflow-y-auto ' . $chatBubleWeight]) }}>
                             @foreach ($notes as $note)
                                 <div class="chat chat-start">
                                     <div class="chat-image avatar">

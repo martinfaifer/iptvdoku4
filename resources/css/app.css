@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
 .drawer-side::-webkit-scrollbar {
     display: none;
 }

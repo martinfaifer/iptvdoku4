@@ -32,10 +32,28 @@
     <script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.3/dist/umd/photoswipe-lightbox.umd.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.3/dist/photoswipe.min.css" rel="stylesheet">
 
+    <style>
+        #unsupported-browser {
+            display: none;
+            background-color: red;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            z-index: 99999;
+            left: 0;
+            width: 100%;
+        }
+    </style>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="min-h-dvh bg-gradient-to-r from-slate-900 to-sky-950 overflow-x-hidden no-scrollbar">
+    <div id="unsupported-browser">
+        Tento prohlížeč není podporován. Prosím, použijte jiný prohlížeč.
+    </div>
     <x-toast />
     @auth
         <x-spotlight search-text="Vyhledejte ... " no-results-text="Ops! Nenalezeno." class="justify-center"
@@ -48,7 +66,7 @@
             @auth
                 @persist('sidebar-menu')
                     <x-slot:sidebar drawer="sidebar-drawer" @class([
-                        'bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] !h-full sticky border-opacity-10 !w-[320px]',
+                        'bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] !min-h-screen sticky border-opacity-10 !w-[320px]',
                     ])>
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
                             <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
@@ -184,6 +202,17 @@
                 {{ $slot }}
             </x-slot:content>
         </x-main>
+
+        <script>
+            function isSafari() {
+                var userAgent = navigator.userAgent;
+                return /Safari/.test(userAgent) && /Mac/.test(userAgent) && !/Chrome/.test(userAgent);
+            }
+
+            if (isSafari()) {
+                document.getElementById('unsupported-browser').style.display = 'block';
+            }
+        </script>
 </body>
 
 </html>
