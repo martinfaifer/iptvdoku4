@@ -25,7 +25,7 @@ class DeviceComponent extends Component
         //
     }
 
-    #[On('refresh_device.{device.id}')]
+    #[On('refresh_device')]
     public function render()
     {
         if (isset($this->device)) {

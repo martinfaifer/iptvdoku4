@@ -53,7 +53,7 @@ class UpdateDeviceComponent extends Component
         $this->closeDialog();
 
         $this->dispatch('update_devices_menu');
-        $this->dispatch('refresh_device.' . $this->device->id);
+        $this->dispatch('refresh_device');
 
         // $this->redirect('/devices/' . $this->device->id, true);
 
