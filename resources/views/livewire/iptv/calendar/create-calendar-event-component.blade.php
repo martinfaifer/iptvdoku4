@@ -4,10 +4,10 @@
         type="submit" spinner="save2" wire:click='openModal()' />
 
     {{-- create modal --}}
-    <x-modal wire:model="storeModal" title="Nová událost" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-drawer wire:model="storeModal"  right class="lg:w-2/3 !bg-[#0E1E33]">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeModal'>✕</x-button>
-            <div class="overflow-y-auto h-96">
+            <div class="overflow-y-auto">
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-12 mb-4">
                         <x-input label="Název události" wire:model="form.label" />
@@ -128,5 +128,5 @@
                 </div>
             </div>
         </x-form>
-    </x-modal>
+    </x-drawer>
 </div>

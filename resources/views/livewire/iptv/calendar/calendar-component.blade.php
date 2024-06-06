@@ -8,7 +8,7 @@
                         <div class="mt-4">
                             <div class="overflow-auto max-h-80">
                                 @foreach ($runningEvents as $event)
-                                    <x-list-item wire:key='running-events-{{ $event->id }}' :item="$event" class="bg-sky-600/20 hover:bg-sky-600/50">
+                                    <x-list-item wire:key='running-events-{{ $event["id"] }}' :item="$event" class="bg-sky-600/20 hover:bg-sky-600/50">
                                         <x-slot:avatar>
                                             <div class="avatar placeholder">
                                                 <div class="bg-neutral text-neutral-content rounded-full w-11">
@@ -132,7 +132,7 @@
                         @if (!empty($upcomingEvents))
                             <div class="overflow-auto max-h-[38rem]">
                                 @foreach ($upcomingEvents as $event)
-                                    <x-list-item wire:key='upcoming-event-{{ $event->id }}' :item="$event">
+                                    <x-list-item wire:key='upcoming-event-{{ $event["id"] }}' :item="$event">
                                         <x-slot:avatar>
                                             <div class="avatar placeholder">
                                                 <div class="bg-neutral text-neutral-content rounded-full w-11">
@@ -285,11 +285,11 @@
         </div>
     </div>
 
-    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-drawer wire:model="updateModal" right class="lg:w-2/3 !bg-[#0E1E33]">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeModal'>✕</x-button>
-            <div class="overflow-y-auto h-96">
+            <div class="overflow-y-auto">
                 <div class="grid grid-cols-12 gap-4 ">
                     <div class="col-span-12 mb-4">
                         <x-input label="Název události" wire:model="form.label" />
@@ -422,5 +422,5 @@
                 </div>
             </div>
         </x-form>
-    </x-modal>
+    </x-drawer>
 </div>
