@@ -50,7 +50,7 @@ class ChannelObserver
                 'notify_if_channel_change'
             );
         }
-        Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
+        Cache::forever('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
         $this->cache_channels_with_detail();
     }
 
@@ -88,7 +88,7 @@ class ChannelObserver
             'notify_if_channel_change'
         );
 
-        Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
+        Cache::forever('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
         $this->cache_channels_with_detail();
     }
 
@@ -105,7 +105,7 @@ class ChannelObserver
         );
         // delete channel contacts
         Contact::where('type', 'channel')->where('item_id', $channel->id)->delete();
-        Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
+        Cache::forever('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
         $this->cache_channels_with_detail();
 
         try {

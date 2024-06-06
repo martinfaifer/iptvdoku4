@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Observers\SftpServerObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
+#[ObservedBy(SftpServerObserver::class)]
 class SftpServer extends Model
 {
     const CONNECTION_TYPES = [

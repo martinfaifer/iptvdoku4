@@ -8,7 +8,7 @@
                         <div class="mt-4">
                             <div class="overflow-auto max-h-80">
                                 @foreach ($runningEvents as $event)
-                                    <x-list-item :item="$event" class="bg-sky-600/20 hover:bg-sky-600/50">
+                                    <x-list-item wire:key='running-events-{{ $event->id }}' :item="$event" class="bg-sky-600/20 hover:bg-sky-600/50">
                                         <x-slot:avatar>
                                             <div class="avatar placeholder">
                                                 <div class="bg-neutral text-neutral-content rounded-full w-11">
@@ -44,7 +44,7 @@
 
                                                                     @endphp
                                                                     @if (!is_null($channel))
-                                                                        <span class="text-sky-300 text-wrap">
+                                                                        <span wire:key='runnings-event-channel-{{ $channel->id }}' class="text-sky-300 text-wrap">
                                                                             <a target="_blank" class="hover:underline"
                                                                                 href="channels/{{ $channel->id }}/multicast">{{ $channel->name }}</a>
                                                                             ,
@@ -68,7 +68,7 @@
                                                                                 $user->last_name[0];
                                                                         }
                                                                     @endphp
-                                                                    <div class="avatar placeholder">
+                                                                    <div wire:key='running-event-user-{{ $user->id }}' class="avatar placeholder">
                                                                         <div
                                                                             class="bg-neutral text-neutral-content rounded-full w-8">
                                                                             <span class="text-md">
@@ -132,7 +132,7 @@
                         @if (!empty($upcomingEvents))
                             <div class="overflow-auto max-h-[38rem]">
                                 @foreach ($upcomingEvents as $event)
-                                    <x-list-item :item="$event">
+                                    <x-list-item wire:key='upcoming-event-{{ $event->id }}' :item="$event">
                                         <x-slot:avatar>
                                             <div class="avatar placeholder">
                                                 <div class="bg-neutral text-neutral-content rounded-full w-11">
@@ -191,7 +191,7 @@
                                                                         $channel = App\Models\Channel::find($channelId);
 
                                                                     @endphp
-                                                                    <span class="text-sky-300">
+                                                                    <span wire:key='upcoming-event-channel-{{ $channel->id }}' class="text-sky-300">
                                                                         <a target="_blank" class="hover:underline"
                                                                             href="channels/{{ $channel->id }}/multicast">{{ $channel->name }}</a>
                                                                         ,
@@ -214,7 +214,7 @@
                                                                                 $user->last_name[0];
                                                                         }
                                                                     @endphp
-                                                                    <div class="avatar placeholder">
+                                                                    <div wire:key='upcoming-event-user-{{ $user->id }}' class="avatar placeholder">
                                                                         <div
                                                                             class="bg-neutral text-neutral-content rounded-full w-8">
                                                                             <span class="text-md">
