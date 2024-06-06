@@ -78,7 +78,7 @@ class SettingsUsersComponent extends Component
     {
         $password = $this->generate_password();
         $user->update([
-            'password' => bcrypt($password),
+            'password' => $password,
         ]);
 
         Mail::to($user->email)->queue(new SendForgottenPasswordMail($password));
