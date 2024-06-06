@@ -4,16 +4,19 @@ namespace App\Livewire\Settings\Users;
 
 use App\Models\User;
 use Livewire\Component;
+use App\Models\UserRole;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendForgottenPasswordMail;
 use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Users\GeneratePasswordTrait;
+use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Forms\CreateSettingsUserForm;
 use App\Livewire\Forms\UpdateSettingsUserForm;
-use App\Models\UserRole;
-use Illuminate\Database\Eloquent\Collection;
 
 class SettingsUsersComponent extends Component
 {
-    use NotificationTrait, WithPagination;
+    use NotificationTrait, WithPagination, GeneratePasswordTrait;
 
     public CreateSettingsUserForm $form;
     public UpdateSettingsUserForm $editForm;
@@ -66,6 +69,17 @@ class SettingsUsersComponent extends Component
         $this->redirect(url()->previous(), true);
 
         return $this->success_alert('Uživatel upraven');
+    }
+
+    public function resetPassword(User $user)
+    {
+        $password = $this->generate_password();
+        $user->update([
+            'password' =>  bcrypt($password)
+        ]);
+
+        Mail::to($user->email)->queue(new SendForgottenPasswordMail($password));
+        return $this->success_alert("Odeslán email s novým heslem");
     }
 
     public function destroy(User $user)

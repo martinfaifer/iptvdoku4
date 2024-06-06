@@ -37,6 +37,10 @@
                                 <x-heroicon-o-pencil class="size-4 text-green-500" />
                             </button>
                             <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
+                            wire:click="resetPassword({{ $user->id }})" wire:confirm="Opravdu poslat nové heslo uživately?">
+                            <x-heroicon-o-lock-closed class="size-4 text-orange-500"/>
+                        </button>
+                            <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
                                 wire:click="destroy({{ $user->id }})" wire:confirm="Opravdu odebrat uživatele?">
                                 <x-heroicon-o-trash class="w-4 h-4 text-red-500" />
                             </button>
