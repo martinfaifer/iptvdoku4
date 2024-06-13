@@ -20,7 +20,7 @@ class EpgConnectService
             $this->url = $this->url.$query;
         }
 
-        $httpResponse = Http::get($this->url);
+        $httpResponse = Http::timeout(60)->get($this->url);
 
         if ($httpResponse->ok()) {
 

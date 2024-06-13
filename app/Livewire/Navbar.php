@@ -36,7 +36,7 @@ class Navbar extends Component
         $this->runningEvents = $this->running_events();
         $this->user = $this->load_user();
         $this->load_weather();
-        $this->refreshAlerts();
+        // $this->refreshAlerts();
 
         // check if is running some events to notify in frontEnd
         $this->notifyFromCurrentEvents = $this->running_events_with_frontendNotification();

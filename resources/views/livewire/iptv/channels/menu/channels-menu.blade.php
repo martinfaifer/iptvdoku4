@@ -1,7 +1,7 @@
 <div>
     <ul class="menu w-60">
         @foreach ($channels as $channel)
-            <li id="channel_{{ $channel->id }}" wire:key='channel_{{ $channel->id }}' @class([
+            <li id="channel_{{ $channel->id }}" wire:key='{{ $channel->id }}' @class([
                 'ml-1',
                 'rounded-lg',
                 'bg-sky-950' => request()->is('channels/' . $channel->id . '/*'),
