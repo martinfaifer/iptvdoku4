@@ -3,7 +3,7 @@
         <div>
             <button
                 class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-8 text-green-500"
-                wire:click='openUpdateModal()'>
+                @click='$wire.openUpdateModal()'>
                 <x-heroicon-o-pencil class="size-4" />
             </button>
             <button class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-1 text-red-500"

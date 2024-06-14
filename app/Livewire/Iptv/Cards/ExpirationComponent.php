@@ -39,7 +39,7 @@ class ExpirationComponent extends Component
         return $this->editModal = true;
     }
 
-    public function closeModal()
+    public function closeDialog()
     {
         $this->createForm->reset();
         $this->updateForm->reset();

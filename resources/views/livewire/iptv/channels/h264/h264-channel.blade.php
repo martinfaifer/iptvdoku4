@@ -42,7 +42,7 @@
                                     <div class="col-span-2 -mt-2">
                                         @can('operate_with_childs', App\Models\Channel::class)
                                             <button class="btn btn-sm btn-circle bg-transparent border-none"
-                                                wire:click='edit({{ $unicast['id'] }})'>
+                                                @click='$wire.edit({{ $unicast['id'] }})'>
                                                 <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />
                                             </button>
                                             <button class="btn btn-sm btn-circle bg-transparent border-none"
@@ -63,7 +63,7 @@
                     class="modal-bottom sm:modal-middle fixed">
                     <x-form wire:submit="update">
                         <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                            wire:click='closeModal'>✕</x-button>
+                            @click='$wire.closeModal'>✕</x-button>
                         <div class="grid grid-cols-12 gap-4">
                             {{-- name --}}
                             <div class="col-span-12 mb-4">

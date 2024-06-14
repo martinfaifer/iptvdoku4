@@ -6,7 +6,7 @@
 
     <x-modal wire:model="storeModal" title="Nový kanál" persistent class="modal-bottom sm:modal-middle backdrop-blur-sm">
         <x-form wire:submit="store">
-            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
+            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 {{-- name --}}
                 <div class="col-span-12 mb-4">
@@ -109,7 +109,7 @@
             <div class="flex justify-between">
                 <div>
                     <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                        wire:click='closeDialog' />
+                        @click='$wire.closeDialog' />
                 </div>
                 <div>
                     <x-button label="Přidat"

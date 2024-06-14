@@ -1,5 +1,5 @@
 <div>
-    <button class='btn bg-[#082f49] btn-sm border-none' wire:click="openModal()">
+    <button class='btn bg-[#082f49] btn-sm border-none' @click="$wire.openModal()">
         <x-heroicon-o-plus-circle class="w-5 h-5" />
         Přidat šablonu zařízení
     </button>
@@ -271,7 +271,7 @@
             <div class="col-span-12 mb-4">
                 <x-form wire:submit="store">
                     <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                        wire:click='closeDialog'>✕</x-button>
+                        @click='$wire.closeDialog'>✕</x-button>
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-4 mb-4">
                             {{-- inputs --}}
@@ -489,7 +489,7 @@
                     <div class="flex justify-between">
                         <div>
                             <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                                wire:click='closeDialog' />
+                                @click='$wire.closeDialog' />
                         </div>
                         <div>
                             <x-button label="Přidat"

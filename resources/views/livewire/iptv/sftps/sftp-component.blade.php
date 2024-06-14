@@ -83,7 +83,7 @@
                                     @can('upload', App\Models\SftpServer::class)
                                         <button
                                             class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-1 text-green-500"
-                                            wire:click='openUploadDialog()'>
+                                            @click='$wire.openUploadDialog()'>
                                             <x-heroicon-o-arrow-up-tray class="size-4" />
                                         </button>
                                     @endcan
@@ -154,7 +154,7 @@
                 class="modal-bottom sm:modal-middle fixed">
                 <x-form wire:submit="upload_file">
                     <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                        wire:click='closeDialog'>✕</x-button>
+                        @click='$wire.closeDialog'>✕</x-button>
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 mb-4">
                             <input type="file" wire:model="uploadForm.file">
@@ -169,7 +169,7 @@
                     <div class="flex justify-between">
                         <div>
                             <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                                wire:click='closeDialog' />
+                                @click='$wire.closeDialog' />
                         </div>
                         <div>
                             <x-button label="Nahrát"

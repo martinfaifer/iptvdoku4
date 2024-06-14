@@ -92,7 +92,7 @@
                 <div class="flex-1">
                 </div>
                 <div class="flex-none">
-                    <button class="btn btn-sm text-slate-200 bg-[#1E293B]" wire:click='loadCharts()'>
+                    <button class="btn btn-sm text-slate-200 bg-[#1E293B]" @click='$wire.loadCharts()'>
                         <x-heroicon-s-chart-bar class="size-4" />
                         Zobrazit grafy</button>
                 </div>
@@ -134,7 +134,7 @@
                                                 @elseif($deviceSnmpData['human_description'] == 'Log')
                                                     <x-button
                                                         class="btn-circle border-none btn-xs bg-transparent text-sky-500"
-                                                        wire:click="loadLog('{{ $deviceSnmpData['oid'] }}')">
+                                                        @click="$wire.loadLog('{{ $deviceSnmpData['oid'] }}')">
                                                         <div class="flex">
                                                             <x-icon name="o-newspaper"></x-icon>
 
@@ -152,7 +152,7 @@
                                     @else
                                         <div class="col-span-3 my-4 flex font-semibold">
                                             <x-button class="btn-sm bg-[#131B2F] text-red-500"
-                                                wire:click="restartInterface('{{ $deviceSnmpData['oid'] }}')">
+                                                @click="$wire.restartInterface('{{ $deviceSnmpData['oid'] }}')">
                                                 <div class="flex">
                                                     Restart zařízení
 
@@ -183,7 +183,7 @@
                                     <div
                                         class=" bg-[#082F49] rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm hadow-md shadow-slate-900/50">
                                         <div class="card-body text-gray-200 text-sm cursor-pointer"
-                                            wire:click="openUpdateDrawer('{{ $interfaceKey }}', 'inputs')">
+                                            @click="$wire.openUpdateDrawer('{{ $interfaceKey }}', 'inputs')">
                                             <div class="grid grid-cols-12 mb-4">
                                                 {{-- snmp data --}}
                                                 @foreach ($interface as $interfaceValueName => $interfaceValue)
@@ -248,7 +248,7 @@
                              shadow-md
                              shadow-slate-900/50">
                                         <div class="card-body text-gray-200 text-sm cursor-pointer"
-                                            wire:click="openUpdateDrawer('{{ $interfaceKey }}', 'outputs')">
+                                            @click="$wire.openUpdateDrawer('{{ $interfaceKey }}', 'outputs')">
                                             <div class="grid grid-cols-12 mb-4">
                                                 @foreach ($interface as $interfaceValueName => $interfaceValue)
                                                     @if (is_array($interfaceValue) && !empty($interfaceValue))
@@ -369,7 +369,7 @@
                          shadow-md
                          shadow-slate-900/50">
                                         <div class="card-body text-gray-200 text-sm cursor-pointer"
-                                            wire:click="openUpdateDrawer('{{ $interfaceKey }}', 'modules')">
+                                            @click="$wire.openUpdateDrawer('{{ $interfaceKey }}', 'modules')">
                                             <div class="grid grid-cols-12 mb-4">
                                                 @foreach ($interface as $interfaceValueName => $interfaceValue)
                                                     @if (is_string($interfaceValue))
@@ -398,7 +398,7 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-drawer wire:model="updateDrawer" right class="lg:w-2/3 !bg-[#0E1E33]">
+    <x-drawer wire:model="updateDrawer" right class="lg:w-1/3 !bg-[#0E1E33]">
         <x-form wire:submit="update">
             <div class="grid grid-cols-12 mt-12 rounded-sm">
                 <div class="col-span-12 mb-4">
@@ -521,7 +521,7 @@
     {{-- modal log --}}
     <x-modal wire:model="logModal" title="Log ze zařízení" persistent class="modal-bottom sm:modal-middle fixed">
 
-        <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
+        <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12 mb-4 overflow-y-auto h-96">
                 <ul x-auto-animate>
@@ -548,7 +548,7 @@
             </div>
             <div>
                 <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4 border-none"
-                    wire:click='closeDialog' />
+                    @click='$wire.closeDialog' />
             </div>
         </div>
 
@@ -557,7 +557,7 @@
     {{-- modal charts --}}
     <x-modal wire:model="chartModal" title="" persistent class="modal-bottom sm:modal-middle fixed">
 
-        <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
+        <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12 mb-4 overflow-y-auto h-96">
                 @foreach ($charts as $chartKey => $chart)
@@ -579,7 +579,7 @@
             </div>
             <div>
                 <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4 border-none"
-                    wire:click='closeDialog' />
+                    @click='$wire.closeDialog' />
             </div>
         </div>
 

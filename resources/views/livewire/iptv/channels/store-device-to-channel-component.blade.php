@@ -1,5 +1,5 @@
 <div>
-    <button class='btn bg-[#082f49] btn-xs md:btn-sm border-none' wire:click="openModal()">
+    <button class='btn bg-[#082f49] btn-xs md:btn-sm border-none' @click="$wire.openModal()">
         <x-heroicon-o-plus-circle class="hidden md:block size-5" />
         Přidat vazbu na zařízení
     </button>
@@ -22,7 +22,7 @@
             <div class="flex justify-between">
                 <div>
                     <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                        wire:click='closeDialog' />
+                        @click='$wire.closeDialog' />
                 </div>
                 <div>
                     <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
