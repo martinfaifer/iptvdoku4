@@ -6,6 +6,7 @@ use App\Observers\H265Observer;
 use App\Traits\Models\ChannelTrait;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[ObservedBy(H265Observer::class)]
@@ -18,6 +19,11 @@ class H265 extends Model
         'devices_id',
         'status',
     ];
+
+    public function channel():BelongsTo
+    {
+        return $this->belongsTo(Channel::class, 'channel_id');
+    }
 
     public function ips(): HasMany
     {
