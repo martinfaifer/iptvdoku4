@@ -33,7 +33,9 @@ return [
             'port' => env('REVERB_SERVER_PORT', 8080),
             'hostname' => env('REVERB_HOST'),
             'options' => [
-                'tls' => [],
+                'tls' => [
+                    'local_cert' => '/etc/letsencrypt/live/iptvdoku.grapesc.cz/privkey.pem'
+                ],
             ],
             'scaling' => [
                 'enabled' => env('REVERB_SCALING_ENABLED', false),
