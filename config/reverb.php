@@ -34,7 +34,7 @@ return [
             'hostname' => env('REVERB_HOST'),
             'options' => [
                 'tls' => [
-                    'local_cert' => '/etc/letsencrypt/live/iptvdoku.grapesc.cz/privkey.pem'
+                    'local_cert' => env('REVERB_SSL_LOCAL_CERT'),
                 ],
             ],
             'scaling' => [
