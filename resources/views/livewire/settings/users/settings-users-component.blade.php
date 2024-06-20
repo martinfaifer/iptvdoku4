@@ -15,7 +15,7 @@
         </div>
 
         <div>
-            <x-table :headers="$headers" :rows="$users">
+            <x-table :headers="$headers" :rows="$users" with-pagination>
                 @scope('cell_avatar', $user)
                     <div class="rounded-full size-8 bg-black flex items-center justify-center cursor-pointer">
                         @if (is_null($user->avatar_url))
