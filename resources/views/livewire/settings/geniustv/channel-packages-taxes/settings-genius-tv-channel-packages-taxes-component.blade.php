@@ -2,7 +2,7 @@
     <x-share.cards.base-card title="">
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-6 md:col-span-9 ">
-                <x-input placeholder="Vyhledejte ..." wire:model.live="query"
+                <x-input placeholder="Vyhledejte ..." wire:model.live.debounce.500ms="query"
                     class="!bg-[#0F151F] input-md placeholder:text-gray-600" icon="o-magnifying-glass" autofocus />
             </div>
             <div class="col-span-6 sm:col-span-3">
