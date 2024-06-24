@@ -8,7 +8,7 @@
             <div class="col-span-6 sm:col-span-3">
                 <x-button
                     class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm mt-2 absolute right-5 md:right-10"
-                    wire:click="openCreateModal">
+                    @click="$wire.openCreateModal">
                     + Nový poplatek za balíček
                 </x-button>
             </div>
@@ -52,7 +52,7 @@
                 @scope('cell_actions', $channelPackagesTax)
                     <div class="flex mx-auto gap-4">
                         <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
-                            wire:click="edit({{ $channelPackagesTax->id }})">
+                            @click="$wire.edit({{ $channelPackagesTax->id }})">
                             <x-heroicon-o-pencil class="w-4 h-4 text-green-500" />
                         </button>
                         <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
@@ -68,7 +68,7 @@
     <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                wire:click='closeDialog'>✕</x-button>
+                @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
                     <x-choices-offline label="Kanály" wire:model="form.channels_id" :options="$channels" searchable />
@@ -99,7 +99,7 @@
             <div class="flex justify-between">
                 <div>
                     <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                        wire:click='closeDialog' />
+                        @click='$wire.closeDialog' />
                 </div>
                 <div>
                     <x-button label="Přidat"
@@ -113,7 +113,7 @@
     <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                wire:click='closeDialog'>✕</x-button>
+                @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
                     <x-choices-offline label="Kanály" wire:model="updateForm.channels_id" :options="$channels"
@@ -158,7 +158,7 @@
             <div class="flex justify-between">
                 <div>
                     <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                        wire:click='closeDialog' />
+                        @click='$wire.closeDialog' />
                 </div>
                 <div>
                     <x-button label="Upravit"
