@@ -101,7 +101,9 @@
                             ip:
                         </span>
                         <span class="ml-4">
-                            {{ $sourceStream['ip'] }}:{{ $sourceStream['port'] }}
+                            @if (array_key_exists('ip', $sourceStream) && array_key_exists('port', $sourceStream))
+                                {{ $sourceStream['ip'] }}:{{ $sourceStream['port'] }}
+                            @endif
                         </span>
                     </div>
                     <div class="col-span-6">

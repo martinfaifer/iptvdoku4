@@ -86,7 +86,10 @@
                                                 IP:
                                             </span>
                                             <span class="ml-3">
-                                                {{ $device->ip }}
+                                                <a href="{{ $device->ip }}" target="_blank"
+                                                    class="text-blue-500 hover:underline">
+                                                    {{ $device->ip }}
+                                                </a>
                                             </span>
                                         </p>
                                         <hr
@@ -100,7 +103,10 @@
                                                 IPMI:
                                             </span>
                                             <span class="ml-3">
-                                                {{ $device->ipmi_ip }}
+                                                <a href="{{ $device->ipmi_ip }}" target="_blank"
+                                                    class="text-blue-500 hover:underline">
+                                                    {{ $device->ipmi_ip }}
+                                                </a>
                                             </span>
                                         </p>
                                         <hr
@@ -114,7 +120,10 @@
                                                 URL kontroleru:
                                             </span>
                                             <span class="ml-3">
-                                                {{ $device->controller_ip }}
+                                                <a href="{{ $device->controller_ip }}" target="_blank"
+                                                    class="text-blue-500 hover:underline">
+                                                    {{ $device->controller_ip }}
+                                                </a>
                                             </span>
                                         </p>
                                         <hr
