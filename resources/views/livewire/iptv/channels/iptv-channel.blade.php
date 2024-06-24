@@ -29,7 +29,7 @@
                         ])><a>
                                 H265</a></li>
 
-                        @if (!is_null($channel->epg_id))
+                        @if (!blank($channel->epg_id))
                             <li href="/channels/{{ $channel->id }}/epg" wire:navigate @class([
                                 'rounded-lg',
                                 'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/epg'),
