@@ -33,7 +33,7 @@ class UpdateSettingsGeniusTvChannelPackagesTaxesForm extends Form
         $this->channels_id = json_decode($channelPackageTax->channels_id);
         $this->price = $channelPackageTax->price;
         $this->currency = $channelPackageTax->currency;
-        $this->exception = is_null($channelPackageTax->exception) ? [] : json_decode($channelPackageTax->exception);
+        $this->exception = blank($channelPackageTax->exception) ? [] : json_decode($channelPackageTax->exception);
         $this->must_contains_all = $channelPackageTax->must_contains_all;
     }
 
