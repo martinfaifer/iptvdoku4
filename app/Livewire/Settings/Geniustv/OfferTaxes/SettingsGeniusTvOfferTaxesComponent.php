@@ -2,16 +2,17 @@
 
 namespace App\Livewire\Settings\Geniustv\OfferTaxes;
 
-use App\Livewire\Forms\CreateSettingsGeniusTvOfferTaxesForm;
-use App\Livewire\Forms\UpdateSettingsGeniusTvOfferTaxesForm;
 use App\Models\Channel;
+use Livewire\Component;
 use App\Models\Currency;
+use Livewire\Attributes\On;
+use Livewire\WithPagination;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use App\Models\GeniusTVChannelsOffersTax;
 use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Support\Collection;
-use Livewire\Attributes\On;
-use Livewire\Component;
-use Livewire\WithPagination;
+use App\Livewire\Forms\CreateSettingsGeniusTvOfferTaxesForm;
+use App\Livewire\Forms\UpdateSettingsGeniusTvOfferTaxesForm;
 
 class SettingsGeniusTvOfferTaxesComponent extends Component
 {
@@ -33,7 +34,7 @@ class SettingsGeniusTvOfferTaxesComponent extends Component
 
     public function mount()
     {
-        $this->channels = Channel::get(['id', 'name']);
+        $this->channels = Cache::get('channels_menu');
         $this->currencies = Currency::get();
     }
 
