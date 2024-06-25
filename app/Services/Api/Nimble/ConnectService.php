@@ -8,6 +8,10 @@ class ConnectService
 {
     public array $endpoints = [
         'get_server' => 'server/%server_id%?client_id=%client_id%&api_key=%api_key%',
+        'update_server' => [
+            'method' => 'PUT',
+            'path' => 'server/%server_id%?client_id=%client_id%&api_key=%api_key%'
+        ],
         'incoming_streams' => 'server/%server_id%/mpegts/incoming?client_id=%client_id%&api_key=%api_key%',
         'incoming_streams_pause' => 'server/%server_id%/mpegts/incoming/%stream_id%/pause?client_id=%client_id%&api_key=%api_key%',
         'incoming_streams_resume' => 'server/%server_id%/mpegts/incoming/%stream_id%/resume?client_id=%client_id%&api_key=%api_key%',
