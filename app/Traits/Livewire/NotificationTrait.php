@@ -15,7 +15,7 @@ trait NotificationTrait
             title: $text,
             position: 'toast-top toast-end',    // optional (daisyUI classes)
             icon: 'o-check',
-            css: 'alert-success text-white/80 w-96',     // Optional (daisyUI classes)
+            css: 'alert-success text-white/80 w-96 z-[99999]',     // Optional (daisyUI classes)
             timeout: 5000,                      // optional (ms)
         );
     }
