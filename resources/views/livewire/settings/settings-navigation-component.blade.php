@@ -30,6 +30,17 @@
                 </a>
             </li>
         @endcan
+        @can('show_settings_logs', App\Models\User::class)
+            <li @class([
+                'ml-1',
+                'rounded-lg',
+                'bg-sky-950' => request()->is('settings/logs'),
+            ]) href="/settings/logs" wire:navigate><a>
+                    <x-heroicon-o-document-magnifying-glass class="size-4" />
+                    Logy
+                </a>
+            </li>
+        @endcan
         @can('show_settings_devices', App\Models\User::class)
             <li>
                 <details open>

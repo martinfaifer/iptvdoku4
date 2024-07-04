@@ -175,6 +175,15 @@ class UserPolicy
         return false;
     }
 
+    public function show_settings_logs(User $user)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        return null;
+    }
+
     public function show_settings_geniustv(User $user)
     {
         if ($user->isAdministrativa()) {

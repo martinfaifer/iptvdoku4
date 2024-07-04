@@ -1,0 +1,60 @@
+<div>
+    <x-share.cards.base-card title="">
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-6 md:col-span-9 ">
+                <x-input placeholder="Vyhledejte ..." wire:model.live="query" class="input-md placeholder:text-gray-600"
+                    icon="o-magnifying-glass" autofocus />
+            </div>
+            <div class="col-span-6 md:col-span-3">
+                {{--  --}}
+            </div>
+        </div>
+
+        <div>
+            <x-table :headers="$headers" :rows="$logs" with-pagination :sort-by="$sortBy">
+                @scope('cell_type', $log)
+                    @if ($log->type == 'created')
+                        <span class="text-green-500 font-semibold italic">Vytvořeno</span>
+                    @endif
+                    @if ($log->type == 'updated')
+                        <span class="text-blue-500 font-semibold italic">Upraveno</span>
+                    @endif
+                    @if ($log->type == 'deleted')
+                        <span class="text-red-500 font-semibold italic">Odebráno</span>
+                    @endif
+                @endscope
+
+                @scope('cell_actions', $log)
+                    <div class="flex mx-auto gap-4">
+                        <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
+                            wire:click="show({{ $log->payload }})">
+                            <x-heroicon-o-magnifying-glass class="size-4 text-blue-500" />
+                        </button>
+                    </div>
+                @endscope
+            </x-table>
+        </div>
+    </x-share.cards.base-card>
+
+    <x-modal wire:model="detailModal" class="modal-bottom sm:modal-middle fixed">
+        <div class="my-4 overflow-y-auto h-96">
+            <div>
+                <pre>
+                    <code>
+                        {{ json_encode($selectedLogDetail, JSON_PRETTY_PRINT) }}
+                    </code>
+            </pre>
+            </div>
+        </div>
+        <div class="flex justify-between">
+            <div>
+            </div>
+            <div>
+                <x-button label="Zavřít"
+                    class="bg-sky-800 hover:bg-sky-700 border-none text-white font-semibold w-full sm:w-28"
+                    wire:click='closeModal' />
+            </div>
+        </div>
+    </x-modal>
+
+</div>

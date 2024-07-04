@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Settings\Channels\Banners\SettingsChannelsBannersComponent;
+use App\Livewire\Settings\Channels\Multicasts\MulticastsSourcesComponent;
 use App\Livewire\Settings\Channels\Restart\SettingsChannelsRestartComponent;
 use App\Livewire\Settings\Dashboard\SettingsDashboardComponent;
 use App\Livewire\Settings\Devices\Distributors\SettingsDevicesDistributorsComponent;
@@ -13,6 +14,7 @@ use App\Livewire\Settings\Geniustv\OfferTaxes\SettingsGeniusTvOfferTaxesComponen
 use App\Livewire\Settings\Geniustv\StaticTaxes\SettingsGeniusTvStaticTaxesComponent;
 use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
 use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsHboComponent;
+use App\Livewire\Settings\Logs\SettingsLogComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
 use App\Livewire\Settings\Notifications\Slack\SettingsSlackNotificationComponent;
@@ -99,7 +101,12 @@ it('return settings channels banners route', function () {
 
 it('return settings multicats sources route', function () {
     $user = User::where('user_role_id', UserRole::where('name', 'admin')->first()->id)->first();
-    $this->actingAs($user)->get('settings/channels/multicats/sources')->assertSeeLivewire(SettingsChannelsBannersComponent::class);
+    $this->actingAs($user)->get('settings/channels/multicats/sources')->assertSeeLivewire(MulticastsSourcesComponent::class);
+});
+
+it('return settings logs route', function () {
+    $user = User::where('user_role_id', UserRole::where('name', 'admin')->first()->id)->first();
+    $this->actingAs($user)->get('settings/logs')->assertSeeLivewire(SettingsLogComponent::class);
 });
 
 it('return settings notifications slack route', function () {

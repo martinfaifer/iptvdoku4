@@ -35,6 +35,7 @@ use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationCompo
 use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
 use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
 use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
+use App\Livewire\Settings\Logs\SettingsLogComponent;
 
 Route::get('test', function () {
     return view('pdfs.invoice');
@@ -67,6 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::get('dashboard', SettingsDashboardComponent::class)->middleware('can:show_settings_dashboard,App\Models\User');
         Route::get('tags', SettingsTagComponent::class)->middleware('can:show_settings_tags,App\Models\User');
         Route::get('users', SettingsUsersComponent::class)->middleware('can:show_settings_users,App\Models\User');
+        Route::get('logs', SettingsLogComponent::class)->middleware('can:show_settings_logs,App\Models\User');
         Route::prefix('nangu')->group(function () {
             Route::get('isps', SettingsIspComponent::class)->middleware('can:show_settings_nangu,App\Models\User');
             Route::get('isps-channel-packages-to-tags', SettingsTagToChannelPackageComponent::class)->middleware('can:show_settings_nangu,App\Models\User');
