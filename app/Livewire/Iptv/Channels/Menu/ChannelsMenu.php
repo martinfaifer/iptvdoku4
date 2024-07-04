@@ -20,14 +20,16 @@ class ChannelsMenu extends Component
         $this->channels = Cache::get('channels_menu');
     }
 
-    #[On('update_channels_sidebar')]
+
     public function refreshChannelsSidebar()
     {
         return $this->channels = Cache::get('channels_menu');
     }
 
+    // #[On('update_channels_sidebar')]
     public function render()
     {
+        $this->channels = Cache::get('channels_menu');
         return view('livewire.iptv.channels.menu.channels-menu');
     }
 }

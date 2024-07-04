@@ -17,48 +17,56 @@ class MulticastChannel extends Component
 {
     use CheckIfChannelIsInIptvDohledTrait, DeviceHasChannelsTrait, NotificationTrait;
 
-    public UpdateMulticastChannelForm $form;
+    // public UpdateMulticastChannelForm $form;
 
-    public ?Channel $channel;
+    public Channel $channel;
 
-    public bool $updateModal = false;
+    // public bool $updateModal = false;
 
-    public $channelSources;
+    // public $channelSources;
 
-    public function mount()
+    // public $multicasts;
+
+    public function mount(Channel $channel)
     {
-        $this->channelSources = ChannelSource::get();
+        $this->channel = $channel;
 
-        $temporaryDevices = Device::with('category')->get();
+        // $this->channelSources = ChannelSource::get();
+
+        // $temporaryDevices = Device::with('category')->get();
+
+        // $this->multicasts = $this->channel->multicasts->load('channel_source');
     }
 
-    public function edit(ChannelMulticast $multicast)
-    {
-        $this->form->setMulticast($multicast);
-        $this->updateModal = true;
-    }
+    // #[On('update_iptv_channel')]
+    // public function edit(ChannelMulticast $multicast)
+    // {
+    //     $this->form->setMulticast($multicast);
+    //     $this->updateModal = true;
+    // }
 
-    public function update()
-    {
-        $this->form->update();
-        $this->closeModal();
-        $this->dispatch('update_multicasts.'.$this->channel->id);
+    // public function update()
+    // {
+    //     $this->form->update();
+    //     $this->closeModal();
+    //     $this->dispatch('update_multicasts.' . $this->channel->id);
+    //     // $this->dispatch('update_iptv_channel');
+    //     // $this->redirect(url()->previous(), true);
+    //     return $this->success_alert('Změněno');
+    // }
 
-        return $this->success_alert('Změněno');
-    }
+    // public function closeModal()
+    // {
+    //     return $this->updateModal = false;
+    // }
 
-    public function closeModal()
-    {
-        return $this->updateModal = false;
-    }
-
-    public function destroy(ChannelMulticast $multicast)
-    {
-        $multicast->delete();
-        $this->dispatch('update_multicasts.'.$this->channel->id);
-
-        return $this->success_alert('Odebráno');
-    }
+    // public function destroy(ChannelMulticast $multicast)
+    // {
+    //     $multicast->delete();
+    //     // $this->dispatch('update_multicasts.' . $this->channel->id);
+    //     $this->redirect(url()->previous(), true);
+    //     return $this->success_alert('Odebráno');
+    // }
 
     public function placeholder()
     {
@@ -71,13 +79,13 @@ class MulticastChannel extends Component
         HTML;
     }
 
-    #[On('echo:update_multicasts.{channel.id},BroadcastUpdateMulticastEvent')]
-    #[On('update_multicasts.{channel.id}')]
+    // #[On('echo:update_multicasts.{channel.id},BroadcastUpdateMulticastEvent')]
+    // #[On('update_multicasts.{channel.id}')]
     public function render()
     {
         return view('livewire.iptv.channels.multicast.multicast-channel', [
-            // 'multicasts' => ChannelMulticast::where('channel_id', $this->channel->id)->with('channel_source')->get(),
             'multicasts' => $this->channel->multicasts->load('channel_source'),
+            // 'channelSources' => ChannelSource::get()
         ]);
     }
 }

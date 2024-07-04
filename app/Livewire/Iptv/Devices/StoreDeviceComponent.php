@@ -2,16 +2,17 @@
 
 namespace App\Livewire\Iptv\Devices;
 
-use App\Livewire\Forms\StoreDeviceForm;
-use App\Models\DeviceCategory;
+use Livewire\Component;
 use App\Models\DeviceSnmp;
 use App\Models\DeviceVendor;
+use App\Models\DeviceCategory;
+use App\Livewire\Forms\StoreDeviceForm;
 use App\Traits\Livewire\NotificationTrait;
-use Livewire\Component;
+use App\Traits\Devices\GetDeviceVendorsTrait;
 
 class StoreDeviceComponent extends Component
 {
-    use NotificationTrait;
+    use NotificationTrait, GetDeviceVendorsTrait;
 
     public StoreDeviceForm $form;
 
@@ -26,7 +27,7 @@ class StoreDeviceComponent extends Component
     public function mount()
     {
         $this->deviceCategories = DeviceCategory::get();
-        $this->devicesVendors = DeviceVendor::get();
+        $this->devicesVendors = $this->get_device_vendors();
         $this->deviceSnmps = DeviceSnmp::get();
     }
 

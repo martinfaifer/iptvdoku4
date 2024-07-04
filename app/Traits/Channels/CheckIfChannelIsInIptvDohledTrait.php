@@ -12,6 +12,6 @@ trait CheckIfChannelIsInIptvDohledTrait
         $isIn = IptvDohledUrl::where('stream_url', $ip)->first();
 
         // $isIn = Cache::get($ip);
-        return ! $isIn ? false : true;
+        return !$isIn ? false : true;
     }
 }

@@ -22,7 +22,8 @@ class NoteComponent extends Component
 
     public function openModal()
     {
-        $this->storeModal = true;
+        $this->storeNoteForm->note = "";
+        return $this->storeModal = true;
     }
 
     public function placeholder()
@@ -42,7 +43,7 @@ class NoteComponent extends Component
     public function store()
     {
         $this->storeNoteForm->store($this->column, $this->id);
-        $this->dispatch('update_notes.'.$this->column.$this->id);
+        $this->dispatch('update_notes.' . $this->column . $this->id);
         $this->closeDialog();
 
         return $this->success_alert('Přidáno');
@@ -57,7 +58,7 @@ class NoteComponent extends Component
     public function destroy(Note $note)
     {
         $note->delete();
-        $this->dispatch('update_notes.'.$this->column.$this->id);
+        $this->dispatch('update_notes.' . $this->column . $this->id);
 
         return $this->success_alert('Poznámka odebrána');
     }

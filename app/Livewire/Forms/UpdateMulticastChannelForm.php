@@ -87,14 +87,15 @@ class UpdateMulticastChannelForm extends Form
             );
         }
 
-        if ($this->source_ip != $this->multicast->source_ip) {
-            // fire check if in dohled and update record in dohled
-            UpdateStreamUrlInDohledIfIsItJob::dispatch(
-                $this->source_ip,
-                $this->multicast->source_ip,
-                Channel::find($this->multicast->channel_id)->name.'_multicast'
-            );
-        }
+        // un necessary to send to iptv dohled
+        // if ($this->source_ip != $this->multicast->source_ip) {
+        //     // fire check if in dohled and update record in dohled
+        //     UpdateStreamUrlInDohledIfIsItJob::dispatch(
+        //         $this->source_ip,
+        //         $this->multicast->source_ip,
+        //         Channel::find($this->multicast->channel_id)->name.'_multicast'
+        //     );
+        // }
 
         $this->multicast->update([
             'stb_ip' => $this->stb_ip,

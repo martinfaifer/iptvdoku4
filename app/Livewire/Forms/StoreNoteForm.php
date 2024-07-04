@@ -4,26 +4,14 @@ namespace App\Livewire\Forms;
 
 use App\Models\Note;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class StoreNoteForm extends Form
 {
-    public ?string $note = '';
-
-    public function rules()
-    {
-        return [
-            'note' => ['required', 'string'],
-        ];
-    }
-
-    public function messeges()
-    {
-        return [
-            'note.required' => 'Napište poznámku',
-            'note.string' => 'Neplatný formát',
-        ];
-    }
+    #[Validate('required', message: "Vyplňte poznámku")]
+    #[Validate('string', message: "Neplatný formát")]
+    public string $note = '';
 
     public function store($column, $id)
     {
@@ -34,6 +22,6 @@ class StoreNoteForm extends Form
             'user' => Auth::user()->email,
         ]);
 
-        $this->reset();
+        $this->note = "";
     }
 }

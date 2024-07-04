@@ -36,6 +36,7 @@
         "timacdonald/pulse-validation-errors": "^1.2"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.13",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.15",
         "laravel/sail": "^1.18",

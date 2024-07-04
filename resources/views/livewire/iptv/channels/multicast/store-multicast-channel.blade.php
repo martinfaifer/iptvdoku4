@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices label="Zdroj" wire:model="form.channel_source_id" :options="$channelSources" single />
+                    <x-choices-offline searchable label="Zdroj" wire:model="form.channel_source_id" :options="$channelSources" single />
                     <div>
                         @error('channel_source_id')
                             <span class="error">{{ $message }}</span>

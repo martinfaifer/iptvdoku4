@@ -10,24 +10,28 @@
             <div class="flex justify-center">
                 @if (!is_null($channel) && !is_null($channel->name))
                     <ul class="menu menu-horizontal bg-transparent rounded-box -mt-2 menu-sm xl:menu-md">
-
-                        <li href="/channels/{{ $channel->id }}/multicast" wire:navigate.hover @class([
-                            'rounded-lg',
-                            'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/multicast'),
-                        ])><a>
+                        <li href="/channels/{{ $channel->id }}/multicast" wire:navigate.hover
+                            @class([
+                                'rounded-lg',
+                                'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/multicast'),
+                            ])><a>
                                 multicast</a></li>
 
                         <li href="/channels/{{ $channel->id }}/h264" wire:navigate.hover @class([
                             'rounded-lg',
                             'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/h264'),
-                        ])><a>
-                                H264</a></li>
+                        ])>
+                            <a>
+                                H264</a>
+                        </li>
 
                         <li href="/channels/{{ $channel->id }}/h265" wire:navigate.hover @class([
                             'rounded-lg',
                             'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/h265'),
-                        ])><a>
-                                H265</a></li>
+                        ])>
+                            <a>
+                                H265</a>
+                        </li>
 
                         @if (!blank($channel->epg_id))
                             <li href="/channels/{{ $channel->id }}/epg" wire:navigate @class([
@@ -92,23 +96,21 @@
             <hr
                 class="w-full h-1 mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-none rounded">
             <div>
-                {{-- split to multicast , h264, h265 --}}
-                {{-- multicast --}}
                 @if (request()->is('channels/' . $channel->id . '/multicast'))
-                    <livewire:iptv.channels.multicast.multicast-channel :channel="$channel" lazy>
+                    <livewire:iptv.channels.multicast.multicast-channel :channel="$channel">
                 @endif
-                {{-- h264 --}}
+
                 @if (request()->is('channels/' . $channel->id . '/h264'))
-                    <livewire:iptv.channels.h264.h264-channel :channel="$channel" lazy>
+                    <livewire:iptv.channels.h264.h264-channel :channel="$channel">
                 @endif
-                {{-- h265 --}}
+
                 @if (request()->is('channels/' . $channel->id . '/h265'))
-                    <livewire:iptv.channels.h265.h265-channel :channel="$channel" lazy>
+                    <livewire:iptv.channels.h265.h265-channel :channel="$channel">
                 @endif
 
                 @if (request()->is('channels/' . $channel->id . '/epg'))
-                <livewire:iptv.channels.epg.epg-channel-component :channel="$channel" lazy>
-            @endif
+                    <livewire:iptv.channels.epg.epg-channel-component :channel="$channel">
+                @endif
             </div>
         @endif
     </div>

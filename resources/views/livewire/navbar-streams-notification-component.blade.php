@@ -24,7 +24,7 @@
     </x-drawer>
 
     @if (count($iptv_dohled_alerts) >= 6)
-        <div class="toast toast-top toast-center mt-2 z-50">
+        <div class="invisible md:visible toast toast-top toast-center mt-2 z-50">
             <div class="alert alert-error font-semibold text-white/80">
                 <span class="hover:underline">
                     <a href="{{ config('services.api.iptvDohled.url') }}" target="_blank">

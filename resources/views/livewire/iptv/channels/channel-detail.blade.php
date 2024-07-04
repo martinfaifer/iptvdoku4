@@ -8,7 +8,8 @@
     {{-- info drawer --}}
     <x-drawer wire:model='channelDetailDrawer' separator right class="lg:w-1/4 !bg-[#0E1E33]">
         <div class="lg:hidden">
-            <x-button class="btn btn-sm btn-circle btn-ghost bg-[#0E1E33] absolute right-2 top-2" wire:click='channelDetailDrawer = false'>✕</x-button>
+            <x-button class="btn btn-sm btn-circle btn-ghost bg-[#0E1E33] absolute right-2 top-2"
+                wire:click='channelDetailDrawer = false'>✕</x-button>
         </div>
         {{-- informations about channel quality, category, description --}}
         <div>
@@ -22,9 +23,11 @@
                 </div>
                 <div class="flex gap-4 mt-7">
                     @foreach ($channelPackages as $channelPackage)
-                        <div
-                            class="text-xs inline-flex items-center font-semibold leading-sm px-3 py-1 bg-sky-800 text-sky-200 rounded-lg w-18 h-6">
-                            {{ $channelPackage }}
+                        <div class="tooltip" data-tip="Balíček ve kterém je kanál">
+                            <div
+                                class="text-xs inline-flex items-center font-semibold leading-sm px-3 py-1 bg-sky-800 text-sky-200 rounded-lg w-18 h-6">
+                                {{ $channelPackage }}
+                            </div>
                         </div>
                     @endforeach
 

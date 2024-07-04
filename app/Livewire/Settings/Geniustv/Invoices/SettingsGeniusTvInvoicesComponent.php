@@ -36,8 +36,7 @@ class SettingsGeniusTvInvoicesComponent extends Component
         $dateArray = explode('-', $this->selectedDate);
 
         return view('livewire.settings.genius-tv.invoices.settings-genius-tv-invoices-component', [
-            'invoicesForSelectedDate' => NanguIspInvoice::search($this->query)
-                ->with('nanguIsp')
+            'invoicesForSelectedDate' => NanguIspInvoice::with('nanguIsp')
                 ->whereMonth('created_at', $dateArray[1])
                 ->whereYear('created_at', $dateArray[0])
                 ->paginate(10),

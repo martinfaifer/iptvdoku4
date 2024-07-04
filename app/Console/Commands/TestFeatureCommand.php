@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Services\Invoices\CreateNanguInvoicePerIsp;
 
 class TestFeatureCommand extends Command
 {
@@ -25,6 +26,6 @@ class TestFeatureCommand extends Command
      */
     public function handle()
     {
-        echo 'No feature yet';
+        (new CreateNanguInvoicePerIsp())->create();
     }
 }

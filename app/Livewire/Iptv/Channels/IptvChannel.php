@@ -18,34 +18,50 @@ class IptvChannel extends Component
 
     public function mount(Channel $channel)
     {
-        if (! Cache::has('channel_with_multicast_'.$channel->id)) {
-            Cache::forever(
-                'channel_with_multicast_'.$channel->id,
-                $channel->load(['multicasts', 'multicasts.channel_source'])
-            );
-        }
-        $this->channel = Cache::get('channel_with_multicast_'.$channel->id);
+        $this->channel = $channel;
+        // if (!blank($channel)) {
+        //     if (!Cache::has('channel_with_multicast_' . $channel->id)) {
+        //         Cache::forever(
+        //             'channel_with_multicast_' . $channel->id,
+        //             $channel->load(['multicasts', 'multicasts.channel_source'])
+        //         );
+        //     }
+        //     $this->channel = Cache::get('channel_with_multicast_' . $channel->id);
+        // }
     }
 
     public function getTimeShiftTime()
     {
-        $cachedNanguApiResult = Cache::get('nangu_channel_'.$this->channel->id.'_timeshift');
+        $cachedNanguApiResult = Cache::get('nangu_channel_' . $this->channel->id . '_timeshift');
 
-        if (! is_null($cachedNanguApiResult)) {
+        if (!is_null($cachedNanguApiResult)) {
             return $this->availableTimeShiftTime = $cachedNanguApiResult['timeshift'] / 1440;
         }
 
         return $this->availableTimeShiftTime;
     }
 
-    // #[On('update_iptv_channel.{channel.id}')]
+    // #[On('update_iptv_channel')]
     public function refresh_channel()
     {
+        // dd(Channel::find($this->channel->id)->load(['multicasts', 'multicasts.channel_source']));
         return $this->channel = Channel::find($this->channel->id)->load(['multicasts', 'multicasts.channel_source']);
     }
 
+    // #[On('update_iptv_channel')]
     public function render()
     {
+        // dd($this->channel);
+        if (!blank($this->channel)) {
+            if (!Cache::has('channel_with_multicast_' . $this->channel->id)) {
+                Cache::forever(
+                    'channel_with_multicast_' . $this->channel->id,
+                    $this->channel->load(['multicasts', 'multicasts.channel_source'])
+                );
+            }
+            $this->channel = Cache::get('channel_with_multicast_' . $this->channel->id);
+        }
+
         return view('livewire.iptv.channels.iptv-channel')->title($this->channel?->name);
     }
 }

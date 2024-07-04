@@ -44,7 +44,7 @@ class NanguSubscription extends Model
         return $query->where('nangu_isp_id', $nanguIspId);
     }
 
-    public function scopeHasChannel(Builder $query, string $channel)
+    public function scopeHasChannel(Builder $query, string $channel = "")
     {
         return $query->where('channels', 'like', '%'.$channel.'%');
     }

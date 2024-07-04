@@ -86,8 +86,8 @@
                                                 IP:
                                             </span>
                                             <span class="ml-3">
-                                                <a href="{{ $device->ip }}" target="_blank"
-                                                    class="text-blue-500 hover:underline">
+                                                <a href="{{ str_contains($device->ip, 'http') ? $device->ip : 'http://' . $device->ip }}"
+                                                    target="_blank" class="text-blue-500 hover:underline">
                                                     {{ $device->ip }}
                                                 </a>
                                             </span>
@@ -103,8 +103,8 @@
                                                 IPMI:
                                             </span>
                                             <span class="ml-3">
-                                                <a href="{{ $device->ipmi_ip }}" target="_blank"
-                                                    class="text-blue-500 hover:underline">
+                                                <a href="{{ str_contains($device->ipmi_ip, 'http') ? $device->ipmi_ip : 'http://' . $device->ipmi_ip }} "
+                                                    target="_blank" class="text-blue-500 hover:underline">
                                                     {{ $device->ipmi_ip }}
                                                 </a>
                                             </span>
@@ -120,8 +120,8 @@
                                                 URL kontroleru:
                                             </span>
                                             <span class="ml-3">
-                                                <a href="{{ $device->controller_ip }}" target="_blank"
-                                                    class="text-blue-500 hover:underline">
+                                                <a href="{{ str_contains($device->controller_ip, 'http') ? $device->controller_ip : 'http://' . $device->controller_ip }}"
+                                                    target="_blank" class="text-blue-500 hover:underline">
                                                     {{ $device->controller_ip }}
                                                 </a>
                                             </span>

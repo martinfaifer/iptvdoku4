@@ -2,17 +2,18 @@
 
 namespace App\Livewire\Iptv\Calendar;
 
-use App\Actions\CssColors\GetCssColorsFromCacheAction;
-use App\Livewire\Forms\CreateCalendarEventForm;
-use App\Models\NanguIspTagToChannelPackage;
 use App\Models\Tag;
-use App\Traits\Channels\GetChannelFromCacheTrait;
-use App\Traits\Livewire\NotificationTrait;
-use App\Traits\Sftps\GetSftpServersFromCache;
-use App\Traits\Users\GetUsersFromCacheTrait;
-use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Collection;
+use App\Traits\Livewire\NotificationTrait;
+use App\Models\NanguIspTagToChannelPackage;
+use App\Traits\Users\GetUsersFromCacheTrait;
+use App\Traits\Sftps\GetSftpServersFromCache;
+use App\Livewire\Forms\CreateCalendarEventForm;
+use App\Traits\Channels\GetChannelFromCacheTrait;
+use App\Actions\CssColors\GetCssColorsFromCacheAction;
+use App\Traits\Tags\GetNanguIspTagsToChannelPackagesTrait;
 
 class CreateCalendarEventComponent extends Component
 {
@@ -20,7 +21,8 @@ class CreateCalendarEventComponent extends Component
         GetSftpServersFromCache,
         GetUsersFromCacheTrait,
         NotificationTrait,
-        WithFileUploads;
+        WithFileUploads,
+        GetNanguIspTagsToChannelPackagesTrait;
 
     public CreateCalendarEventForm $form;
 
@@ -42,14 +44,7 @@ class CreateCalendarEventComponent extends Component
         $this->users = $this->get_users_from_cache();
         $this->channels = $this->get_channels_from_cache();
         $this->sftpServers = $this->get_sftp_servers_from_cache();
-        if (NanguIspTagToChannelPackage::first()) {
-            foreach (NanguIspTagToChannelPackage::distinct()->get('tag_id') as $nanguIspTagToChannelPackage) {
-                $this->tags[] = [
-                    'id' => $nanguIspTagToChannelPackage->tag_id,
-                    'name' => Tag::find($nanguIspTagToChannelPackage->tag_id)->name,
-                ];
-            }
-        }
+        $this->tags = $this->get_nangu_isp_tags_to_channels();
     }
 
     public function create()

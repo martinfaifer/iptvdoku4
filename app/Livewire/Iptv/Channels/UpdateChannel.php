@@ -2,18 +2,19 @@
 
 namespace App\Livewire\Iptv\Channels;
 
-use App\Livewire\Forms\UpdateIptvChannel;
 use App\Models\Channel;
-use App\Models\ChannelCategory;
-use App\Models\GeniusTvChannelPackage;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Models\ChannelCategory;
+use Illuminate\Support\Facades\Cache;
+use App\Models\GeniusTvChannelPackage;
+use App\Livewire\Forms\UpdateIptvChannel;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Channels\GetChannelsCategoriesFromCacheTrait;
 
 class UpdateChannel extends Component
 {
-    use NotificationTrait, WithFileUploads;
+    use NotificationTrait, WithFileUploads, GetChannelsCategoriesFromCacheTrait;
 
     public UpdateIptvChannel $form;
 
@@ -35,16 +36,16 @@ class UpdateChannel extends Component
 
     public function mount($channelType = null)
     {
-        $this->channelCategories = ChannelCategory::orderBy('name')->get(['id', 'name']);
+        $this->channelCategories = $this->get_channels_categories_from_cache();
         $this->geniusTVChannelPackages = GeniusTvChannelPackage::get();
-        $this->channelsEpgs = ! Cache::has('channelEpgIds') ? [] : Cache::get('channelEpgIds');
+        $this->channelsEpgs = !Cache::has('channelEpgIds') ? [] : Cache::get('channelEpgIds');
     }
 
     public function update()
     {
         $this->form->update();
 
-        if (! is_null($this->logo)) {
+        if (!is_null($this->logo)) {
             $path = $this->logo->store(path: 'public/Logos');
             $this->channel->update([
                 'logo' => $path,
@@ -53,10 +54,10 @@ class UpdateChannel extends Component
 
         $this->closeDialog();
         // $this->dispatch('update_channels_sidebar');
-        // $this->dispatch('update_iptv_channel.' . $this->channel->id);
-        // $this->dispatch('update_iptv_channel_multicast.' . $this->channel->id, channelId: $this->channel->id);
+        // $this->dispatch('update_iptv_channel');
+        // $this->dispatch('update_multicast.' . $this->channel->id, channelId: $this->channel->id);
 
-        $this->redirect('/channels/'.$this->channel->id.'/multicast', true);
+        $this->redirect('/channels/' . $this->channel->id . '/multicast', true);
 
         return $this->success_alert('Upraveno');
     }
