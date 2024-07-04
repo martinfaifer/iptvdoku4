@@ -114,6 +114,16 @@
                                     Nahrané bannery
                                 </a></li>
                         @endcan
+                        @can('show_settings_channels_multicast_sources', App\Models\User::class)
+                            <li @class([
+                                'ml-1',
+                                'rounded-lg',
+                                'bg-sky-950' => request()->is('settings/channels/multicats/sources'),
+                            ]) href="/settings/channels/multicats/sources" wire:navigate><a>
+                                    <x-heroicon-o-window class="size-4" />
+                                    Zdroje multicastů
+                                </a></li>
+                        @endcan
                     </ul>
                 </details>
             </li>

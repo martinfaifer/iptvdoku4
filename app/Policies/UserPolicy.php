@@ -157,6 +157,15 @@ class UserPolicy
         return false;
     }
 
+    public function show_settings_channels_multicast_sources(User $user)
+    {
+        if ($user->isTechnik()) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function show_settings_nangu(User $user)
     {
         if ($user->isTechnik() || $user->isAdministrativa()) {

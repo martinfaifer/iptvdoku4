@@ -97,6 +97,11 @@ it('return settings channels banners route', function () {
     $this->actingAs($user)->get('settings/channels/banners')->assertSeeLivewire(SettingsChannelsBannersComponent::class);
 });
 
+it('return settings multicats sources route', function () {
+    $user = User::where('user_role_id', UserRole::where('name', 'admin')->first()->id)->first();
+    $this->actingAs($user)->get('settings/channels/multicats/sources')->assertSeeLivewire(SettingsChannelsBannersComponent::class);
+});
+
 it('return settings notifications slack route', function () {
     $user = User::where('user_role_id', UserRole::where('name', 'admin')->first()->id)->first();
     $this->actingAs($user)->get('settings/notifications/slack')->assertSeeLivewire(SettingsSlackNotificationComponent::class);
