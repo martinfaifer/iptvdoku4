@@ -22,5 +22,7 @@ trait CurrencyPriceTrait
         } else {
             $tax = $numberOfSubscriptions * $model->price * $model->currency_name->price;
         }
+
+        return $tax;
     }
 }
