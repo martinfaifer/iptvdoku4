@@ -92,7 +92,7 @@
                 <div class="flex-1">
                 </div>
                 <div class="flex-none">
-                    <button class="btn btn-sm text-slate-200 bg-[#1E293B]" @click='$wire.loadCharts()'>
+                    <button class="btn btn-sm text-slate-200 bg-[#1E293B]" x-on:click='$wire.loadCharts()'>
                         <x-heroicon-s-chart-bar class="size-4" />
                         Zobrazit grafy</button>
                 </div>
@@ -110,7 +110,7 @@
                             <div class="grid grid-cols-12 gap-4 ml-8">
                                 @foreach ($template['snmp'] as $deviceSnmpData)
                                     @if ($deviceSnmpData['type'] == 'read')
-                                        <div class="col-span-12 md:col-span-3 my-4 flex font-semibold">
+                                        <div class="col-span-12 md:col-span-6 xl:col-span-3 my-4 flex font-semibold">
                                             <span class="font-normal">
                                                 {{ $deviceSnmpData['human_description'] }} :
                                             </span>
@@ -179,7 +179,7 @@
                         <div class="grid grid-cols-12 gap-4 min-h-20 ">
                             @foreach ($interfacesData as $interfaceKey => $interface)
                                 {{-- clickable --}}
-                                <div class="col-span-12 md:col-span-3 mb-4 overflow-scroll h-96">
+                                <div class="col-span-12 md:col-span-6 xl:col-span-3 mb-4 overflow-scroll h-96">
                                     <div
                                         class=" bg-[#082F49] rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm hadow-md shadow-slate-900/50">
                                         <div class="card-body text-gray-200 text-sm cursor-pointer"
@@ -235,9 +235,9 @@
                         <div class="grid grid-cols-12 gap-4 min-h-20">
                             @foreach ($interfacesData as $interfaceKey => $interface)
                                 <div @class([
-                                    'mb-4 overflow-scroll col-span-12',
-                                    'md:col-span-2' => count($interfacesData) > 4,
-                                    'md:col-span-3' => count($interfacesData) <= 4,
+                                    'mb-4 overflow-scroll col-span-12 md:col-span-6',
+                                    'xl:col-span-2' => count($interfacesData) > 4,
+                                    'xl:col-span-3' => count($interfacesData) <= 4,
                                 ])>
                                     <div
                                         class=" bg-[#082F49]
