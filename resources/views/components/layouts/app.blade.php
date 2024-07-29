@@ -32,6 +32,12 @@
     <script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.3/dist/umd/photoswipe-lightbox.umd.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.3/dist/photoswipe.min.css" rel="stylesheet">
 
+    {{--  DIFF2HTML  --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/github.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
+
     <style>
         #unsupported-browser {
             display: none;
@@ -50,23 +56,29 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-dvh bg-gradient-to-r from-slate-900 to-sky-950 overflow-x-hidden no-scrollbar">
-    <div id="unsupported-browser">
+<body class="min-h-screen font-sans antialiased bg-gradient-to-r from-slate-900 to-sky-950 ">
+    {{-- <div id="unsupported-browser">
         Tento prohlížeč není podporován. Prosím, použijte jiný prohlížeč.
-    </div>
+    </div> --}}
     <x-toast />
     @auth
         <x-spotlight search-text="Vyhledejte ... " no-results-text="Ops! Nenalezeno." class="justify-center"
             shortcut="ctrl.space" />
         {{-- show alerts --}}
         <livewire:alert-component>
+
+            {{-- pinned trashed channels from iptv dohled --}}
+            <div class="">
+                <livewire:iptv-monitoring.iptv-monitoring-component />
+            </div>
+            {{-- end pinned --}}
         @endauth
 
-        <x-main full-width>
+        <x-main sticky full-width>
             @auth
                 @persist('sidebar-menu')
                     <x-slot:sidebar drawer="sidebar-drawer" @class([
-                        'bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] !min-h-screen sticky border-opacity-10 !w-[320px]',
+                        'bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] border-opacity-10 !w-[320px]',
                     ])>
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
                             <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
@@ -147,10 +159,6 @@
                                     <livewire:iptv.flow-eye.menu.flow-eye-menu-icon-with-alert-component />
                                 @endcan
                             </ul>
-                            {{-- <div class="static">
-                                <x-button @click="toggle" icon="o-bars-3-bottom-left"
-                                    class="bg-transparent border-none absolute bottom-0 left-2" />
-                            </div> --}}
                         </x-menu>
                         {{-- main dynamic navigation --}}
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 fixed !h-[99%]">
@@ -189,11 +197,10 @@
                             </div>
                             {{-- @endpersist --}}
                         </x-menu>
-
                     </x-slot:sidebar>
                 @endpersist
             @endauth
-            <x-slot:content class="mt-14 no-scrollbar">
+            <x-slot:content class="mt-14">
                 @auth
                     @persist('navbar')
                         <livewire:navbar></livewire:navbar>
@@ -202,18 +209,6 @@
                 {{ $slot }}
             </x-slot:content>
         </x-main>
-
-        <script>
-            function isSafari() {
-                var userAgent = navigator.userAgent;
-                console.log(userAgent);
-                return /Safari/.test(userAgent) && !/Chrome/.test(userAgent) && !/iPhone/.test(userAgent);
-            }
-
-            if (isSafari()) {
-                document.getElementById('unsupported-browser').style.display = 'block';
-            }
-        </script>
 </body>
 
 </html>

@@ -25,9 +25,9 @@ class SettingsGeniusTvInvoicesComponent extends Component
         $this->selectedInvoiceMonth = now()->month;
         $this->selectedInvoiceYear = now()->year;
         if ($this->selectedInvoiceMonth < 10) {
-            $this->selectedDate = $this->selectedInvoiceYear.'-0'.$this->selectedInvoiceMonth;
+            $this->selectedDate = $this->selectedInvoiceYear . '-0' . $this->selectedInvoiceMonth;
         } else {
-            $this->selectedDate = $this->selectedInvoiceYear.'-'.$this->selectedInvoiceMonth;
+            $this->selectedDate = $this->selectedInvoiceYear . '-' . $this->selectedInvoiceMonth;
         }
     }
 
@@ -37,6 +37,7 @@ class SettingsGeniusTvInvoicesComponent extends Component
 
         return view('livewire.settings.genius-tv.invoices.settings-genius-tv-invoices-component', [
             'invoicesForSelectedDate' => NanguIspInvoice::with('nanguIsp')
+                ->search($this->query)
                 ->whereMonth('created_at', $dateArray[1])
                 ->whereYear('created_at', $dateArray[0])
                 ->paginate(10),

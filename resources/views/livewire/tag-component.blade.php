@@ -21,7 +21,7 @@
             @endforeach
 
             <div>
-                <button @click='$wire.openModal()' class="btn btn-sm btn-circle bg-transparent border-none">+</button>
+                <button x-on:click='$wire.openModal()' class="btn btn-sm btn-circle bg-transparent border-none">+</button>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
         class="modal-bottom sm:modal-middle backdrop-blur-sm " box-class="overflow-visible">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                @click='$wire.closeDialog'>✕</x-button>
+                x-on:click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
                     <x-choices-offline label="Štítky" wire:model="selectedTags" :options="$tags" searchable
@@ -48,11 +48,11 @@
             <div class="flex justify-between">
                 <div>
                     <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                        @click='$wire.closeDialog' />
+                        x-on:click='$wire.closeDialog' />
                 </div>
                 <div>
                     <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                        type="submit" spinner="store" />
                 </div>
             </div>
         </x-form>

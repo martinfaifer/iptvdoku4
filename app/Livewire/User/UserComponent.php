@@ -32,10 +32,17 @@ class UserComponent extends Component
 
     public bool $editUserDialog = false;
 
+    public bool $isPinned = false;
+
     public function mount()
     {
         $this->user = Auth::user();
         $this->userSessions = $this->agents();
+        if ($this->user->iptv_monitoring_window == 'closed') {
+            $this->isPinned =  false;
+        } else {
+            $this->isPinned =  true;
+        }
     }
 
     public function openEditUserDialog()
@@ -98,6 +105,20 @@ class UserComponent extends Component
         $this->redirect(url()->previous(), true);
 
         return $this->success_alert('Heslo změněno');
+    }
+
+    public function pinIptvWindow()
+    {
+        if ($this->isPinned == true) {
+            $windowStatus = 'maximaze';
+        } else {
+            $windowStatus = 'closed';
+        };
+        $this->user->update([
+            'iptv_monitoring_window' => $windowStatus
+        ]);
+        $this->redirect(url()->previous(), true);
+        return $this->success_alert('Změna provedena');
     }
 
     public function closeDialog()

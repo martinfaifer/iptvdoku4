@@ -53,5 +53,7 @@ class GetAlertsFromIptvDohledJob implements ShouldQueue
             );
             // notify_if_too_many_channels_down
         }
+
+        $allAlerts = (new ConnectService('all-alerts'))->connect('iptv_dohled_all_alerts');
     }
 }

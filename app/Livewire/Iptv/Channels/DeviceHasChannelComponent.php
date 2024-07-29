@@ -8,6 +8,7 @@ use App\Models\ChannelOnLinux;
 use App\Models\Device;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -47,13 +48,13 @@ class DeviceHasChannelComponent extends Component
     public function mount(Device $device)
     {
         $this->device = $device->load('category');
-        $this->checkIfNeedToAddLinuxPath();
+        // $this->checkIfNeedToAddLinuxPath();
     }
 
     public function checkIfNeedToAddLinuxPath()
     {
         if ($this->device->category->name == 'Linux') {
-            if (! $this->linuxPathToStream = ChannelOnLinux::where('device_id', $this->device->id)
+            if (!$this->linuxPathToStream = ChannelOnLinux::where('device_id', $this->device->id)
                 ->where('channel_type', $this->channelType)
                 ->where('channel_id', $this->channel->id)
                 ->first()) {
@@ -74,19 +75,20 @@ class DeviceHasChannelComponent extends Component
             'path' => $this->path,
         ]);
 
-        $this->redirect(url()->previous(), true);
+        // $this->redirect(url()->previous(), true);
         $this->success_alert('Upraveno');
-
+        $this->dispatch('refresh_device_component')->self();
+        $this->path = "";
         return $this->closeDialog();
     }
 
     public function getChannelNameByType()
     {
         if ($this->isBackup == true) {
-            return $this->channelType.':'.$this->channel->id.':backup';
+            return $this->channelType . ':' . $this->channel->id . ':backup';
         }
 
-        return $this->channelType.':'.$this->channel->id;
+        return $this->channelType . ':' . $this->channel->id;
     }
 
     public function openUpdateModal()
@@ -156,7 +158,7 @@ class DeviceHasChannelComponent extends Component
         ]);
 
         // $this->redirect(url()->previous(), true);
-        $this->dispatch('refresh_channel_has_devices_'.$this->channelType.'_'.$this->channel->id);
+        $this->dispatch('refresh_channel_has_devices_' . $this->channelType . '_' . $this->channel->id);
         $this->success_alert('Upraveno');
 
         return $this->closeDialog();
@@ -182,7 +184,7 @@ class DeviceHasChannelComponent extends Component
             }
         }
 
-        if (! is_null($this->device->template)) {
+        if (!is_null($this->device->template)) {
             $template = $this->device->template;
 
             if (array_key_exists('inputs', $template)) {
@@ -202,7 +204,7 @@ class DeviceHasChannelComponent extends Component
         ]);
 
         // $this->redirect(url()->previous(), true);
-        $this->dispatch('refresh_channel_has_devices_'.$this->channelType.'_'.$this->channel->id);
+        $this->dispatch('refresh_channel_has_devices_' . $this->channelType . '_' . $this->channel->id);
 
         return $this->success_alert('Odebráno');
     }
@@ -232,16 +234,32 @@ class DeviceHasChannelComponent extends Component
             ip: $this->device->ip,
             username: $this->device->ssh->username,
             password: $this->device->ssh->password,
-            path: 'bash'.$this->linuxPathToStream
+            path: 'bash' . $this->linuxPathToStream
         );
 
         return $this->success_alert('Příkaz k restartu byl odeslán');
     }
 
+    public function delete_linux_path()
+    {
+        ChannelOnLinux
+            ::where('device_id', $this->device->id)
+            ->where('channel_type', $this->channelType)
+            ->where('channel_id', $this->channel->id)
+            ->delete();
+
+        $this->dispatch('refresh_device_component')->self();
+        return $this->success_alert('Odebráno');
+    }
+
+
+    #[On('refresh_device_component')]
     public function render()
     {
+        $this->checkIfNeedToAddLinuxPath();
+
         if (isset($this->device)) {
-            $this->nmsCahedData = Cache::get('nms_'.$this->device->id);
+            $this->nmsCahedData = Cache::get('nms_' . $this->device->id);
         }
 
         return view('livewire.iptv.channels.device-has-channel-component', [

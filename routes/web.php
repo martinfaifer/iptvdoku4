@@ -13,8 +13,10 @@ use App\Livewire\User\UserNotificationComponent;
 use App\Livewire\Auth\ForgottenPasswordComponent;
 use App\Livewire\Iptv\Calendar\CalendarComponent;
 use App\Livewire\Iptv\Cards\SatelitCardComponent;
+use App\Livewire\Settings\Logs\SettingsLogComponent;
 use App\Livewire\Settings\Tags\SettingsTagComponent;
 use App\Livewire\Settings\Users\SettingsUsersComponent;
+use App\Livewire\IptvMonitoring\IptvMonitoringComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
 use App\Livewire\Nangu\IpPrefixes\NanguIpPrefixesComponent;
 use App\Livewire\Settings\Geniustv\TvChannelPackagesComponent;
@@ -35,7 +37,6 @@ use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationCompo
 use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
 use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
 use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
-use App\Livewire\Settings\Logs\SettingsLogComponent;
 
 Route::get('test', function () {
     return view('pdfs.invoice');
@@ -57,6 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::get('wiki/{topic?}', WikiComponent::class)->middleware('can:show_topics, App\Models\WikiTopic');
     Route::get('prefixes/{ipPrefix?}', NanguIpPrefixesComponent::class);
     Route::get('floweye/{issue?}', FlowEyeComponent::class)->middleware('can:show_tickets, App\Models\User');
+    Route::get('iptv-monitoring', IptvMonitoringComponent::class)->middleware('can:show_iptv_monitoring, App\Models\User');
 
     Route::prefix('profile')->group(function () {
         Route::get('', UserComponent::class);

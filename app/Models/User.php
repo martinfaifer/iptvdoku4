@@ -40,6 +40,7 @@ class User extends Authenticatable
         'notify_if_added_new_event',
         'notify_if_upload_new_banner',
         'notify_if_channel_was_added_to_promo',
+        'iptv_monitoring_window'
     ];
 
     /**

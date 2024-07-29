@@ -5,19 +5,20 @@ namespace App\Livewire\Settings\Logs;
 use App\Models\Loger;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Traits\Loger\ShowCorrectNameOfItemTrait;
 
 class SettingsLogComponent extends Component
 {
-    use WithPagination;
+    use WithPagination, ShowCorrectNameOfItemTrait;
     public string $query = '';
 
     public bool $detailModal = false;
 
-    public $selectedLogDetail;
+    public $selectedLogDetail = "";
 
     public array $sortBy = ['column' => 'created_at', 'direction' => 'desc'];
 
-    public function show($payload)
+    public function show($payload, $logId)
     {
         $this->selectedLogDetail = $payload;
         $this->detailModal = true;

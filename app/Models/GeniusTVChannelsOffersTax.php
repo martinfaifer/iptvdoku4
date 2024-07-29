@@ -22,10 +22,8 @@ class GeniusTVChannelsOffersTax extends Model
 
     public function scopeSearch(Builder $query, string $search = '')
     {
-        $channel = Channel::searchend($search)->first();
-        if ($channel) {
-            return $query->where('price', 'like', '%'.$search.'%')
-                ->orWhere('channels_id', 'like', '%'.$channel->id.'%');
+        if (!blank($search)) {
+            return $query->whereJsonContains('channels_id', Channel::search($search)->first()?->id);
         }
     }
 }

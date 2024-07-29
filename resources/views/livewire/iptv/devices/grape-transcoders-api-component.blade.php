@@ -17,12 +17,18 @@
                                 wire:target='pause({{ $channelOnDevice['pid'] }})'
                                 class="btn btn-sm btn-circle border-none bg-transparent shadow-sm hover:shadow-red-500/50 text-red-500">
                                 <x-heroicon-o-pause-circle class="size-5" />
+                                <div wire:loading wire:target="pause('{{ $channelOnDevice['pid'] }}')">
+                                    <span class="loading loading-spinner loading-md"></span>
+                                </div>
                             </button>
                         @else
-                            <button wire:click="play({{ $channelOnDevice['id'] }})" wire:loading.class.remove='text-blue-500'
-                                wire:target='play({{ $channelOnDevice['id'] }})'
+                            <button wire:click="play({{ $channelOnDevice['id'] }})"
+                                wire:loading.class.remove='text-blue-500' wire:target='play({{ $channelOnDevice['id'] }})'
                                 class="btn btn-sm btn-circle border-none bg-transparent shadow-sm hover:shadow-blue-500/50 text-blue-500">
                                 <x-heroicon-o-play-circle class="size-5" />
+                                <div wire:loading wire:target="play('{{ $channelOnDevice['id'] }}')">
+                                    <span class="loading loading-spinner loading-md"></span>
+                                </div>
                             </button>
                         @endif
                     @endscope

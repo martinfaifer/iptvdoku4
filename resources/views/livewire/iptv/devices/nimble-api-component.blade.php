@@ -109,11 +109,13 @@
                             }
                         @endphp
                         <div class="flex">
-                            {{ $source['description'] }}
-                            <button wire:click='openSourceDetailStream({{ json_encode($source) }})'
-                                class="btn btn-sm btn-circle border-none bg-transparent ml-4 -mt-1">
-                                <x-heroicon-o-magnifying-glass class="w-4 h-4 text-blue-500" />
-                            </button>
+                            @if (array_key_exists('description', $source))
+                                {{ $source['description'] }}
+                                <button wire:click='openSourceDetailStream({{ json_encode($source) }})'
+                                    class="btn btn-sm btn-circle border-none bg-transparent ml-4 -mt-1">
+                                    <x-heroicon-o-magnifying-glass class="w-4 h-4 text-blue-500" />
+                                </button>
+                            @endif
                         </div>
                     @endscope
                 </x-table>
@@ -141,8 +143,17 @@
             <div class="grid grid-cols-12 gap-4 mt-4">
                 <div class="col-span-12 overflow-y-scroll max-h-96">
                     <x-table :headers="$incomingheaders" :rows="$incomingStreams">
+
                         @scope('cell_protocol', $incomingStream)
-                            {{ $incomingStream['protocol'] }} {{ $incomingStream['ip'] }}: {{ $incomingStream['port'] }}
+                            @if (array_key_exists('protocol', $incomingStream))
+                                {{ $incomingStream['protocol'] }}
+                            @endif
+                            @if (array_key_exists('ip', $incomingStream))
+                                {{ $incomingStream['ip'] }}
+                            @endif
+                            @if (array_key_exists('port', $incomingStream))
+                                {{ $incomingStream['port'] }}
+                            @endif
                         @endscope
                         @scope('cell_status', $incomingStream)
                             @if ($incomingStream['status'] == 'online')

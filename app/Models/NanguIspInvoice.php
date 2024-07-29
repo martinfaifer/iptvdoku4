@@ -16,11 +16,13 @@ class NanguIspInvoice extends Model
         'path',
     ];
 
-    public function scopeSearch(Builder $query, string $search)
+    public function scopeSearch(Builder $query, string $search = "")
     {
-        $nanguIsp = NanguIsp::search($search)->first();
-        if ($nanguIsp) {
-            return $query->where('nangu_isp_id', 'like', '%'.$nanguIsp->id.'%');
+        if (!blank($search)) {
+            $nanguIsp = NanguIsp::search($search)->first();
+            if ($nanguIsp) {
+                return $query->where('nangu_isp_id', $nanguIsp->id);
+            }
         }
     }
 }

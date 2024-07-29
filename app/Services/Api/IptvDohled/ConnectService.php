@@ -19,6 +19,11 @@ class ConnectService
             'endpoint' => '/api/v2/stream/alerts',
             'formData' => null,
         ],
+        'all-alerts' => [
+            'method' => 'get',
+            'endpoint' => '/api/v2/stream/streams-with-problems',
+            'formData' => null,
+        ],
         'get-stream-by-ip' => [
             'method' => 'get',
             'endpoint' => '/api/v2/stream/by-ip/%params%',

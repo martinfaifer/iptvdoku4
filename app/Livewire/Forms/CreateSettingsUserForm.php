@@ -44,6 +44,7 @@ class CreateSettingsUserForm extends Form
             'email' => $this->email,
             'password' => $password,
             'user_role_id' => $this->userRoleId,
+            'iptv_monitoring_window' => 'closed'
         ]);
 
         $this->reset();

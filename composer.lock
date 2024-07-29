@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b80507fd58decc0117d942d75f89f2f3",
+    "content-hash": "e59d458981c404b9c8300834a56bf8a2",
     "packages": [
         {
             "name": "adoy/fastcgi-client",
@@ -3913,16 +3913,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.5.0",
+            "version": "v3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "72e900825c560f0e4e620185b26c5441a8914435"
+                "reference": "636725c1f87bc7844dd80277488268db27eec1aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/72e900825c560f0e4e620185b26c5441a8914435",
-                "reference": "72e900825c560f0e4e620185b26c5441a8914435",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/636725c1f87bc7844dd80277488268db27eec1aa",
+                "reference": "636725c1f87bc7844dd80277488268db27eec1aa",
                 "shasum": ""
             },
             "require": {
@@ -3977,7 +3977,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.5.0"
+                "source": "https://github.com/livewire/livewire/tree/v3.5.2"
             },
             "funding": [
                 {
@@ -3985,7 +3985,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-21T13:39:04+00:00"
+            "time": "2024-07-03T17:22:45+00:00"
         },
         {
             "name": "maantje/pulse-php-fpm",
@@ -7346,16 +7346,16 @@
         },
         {
             "name": "robsontenorio/mary",
-            "version": "1.31.3",
+            "version": "1.34.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robsontenorio/mary.git",
-                "reference": "3eb37ac1a115511af0cb4a540175c1658e922f2b"
+                "reference": "42b8a230b02b4112c1db5ce231c9865741261b4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robsontenorio/mary/zipball/3eb37ac1a115511af0cb4a540175c1658e922f2b",
-                "reference": "3eb37ac1a115511af0cb4a540175c1658e922f2b",
+                "url": "https://api.github.com/repos/robsontenorio/mary/zipball/42b8a230b02b4112c1db5ce231c9865741261b4a",
+                "reference": "42b8a230b02b4112c1db5ce231c9865741261b4a",
                 "shasum": ""
             },
             "require": {
@@ -7421,7 +7421,7 @@
             ],
             "support": {
                 "issues": "https://github.com/robsontenorio/mary/issues",
-                "source": "https://github.com/robsontenorio/mary/tree/1.31.3"
+                "source": "https://github.com/robsontenorio/mary/tree/1.34.2"
             },
             "funding": [
                 {
@@ -7429,7 +7429,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-28T16:32:24+00:00"
+            "time": "2024-07-06T11:20:13+00:00"
         },
         {
             "name": "sabberworm/php-css-parser",

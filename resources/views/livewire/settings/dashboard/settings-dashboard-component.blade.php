@@ -15,7 +15,7 @@
 @endphp
 <div>
     <div class="grid grid-cols-12 gap-2">
-        <div class="col-span-12 md:col-span-2">
+        <div class="col-span-12 xl:col-span-2">
             <div
                 class="rounded-lg px-5 py-4  w-full lg:tooltip lg:tooltip-top !bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50">
                 <div class="flex items-center gap-4">
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-span-12 md:col-span-2">
+        <div class="col-span-12 xl:col-span-2">
             <div
                 class="rounded-lg px-5 py-4  w-full lg:tooltip lg:tooltip-top !bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50">
 
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-span-12 md:col-span-2">
+        <div class="col-span-12 xl:col-span-2">
             <div
                 class="rounded-lg px-5 py-4  w-full lg:tooltip lg:tooltip-top !bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50">
                 <div class="flex items-center gap-4">
@@ -85,7 +85,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-span-12 md:col-span-2">
+        <div class="col-span-12 xl:col-span-2">
             <div
                 class="rounded-lg px-5 py-4  w-full lg:tooltip lg:tooltip-top !bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50">
                 <div class="flex items-center gap-4">
@@ -108,7 +108,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-span-12 md:col-span-2">
+        <div class="col-span-12 xl:col-span-2">
             <div
                 class="rounded-lg px-5 py-4  w-full lg:tooltip lg:tooltip-top !bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50">
                 <div class="flex items-center gap-4">
@@ -131,7 +131,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-span-12 md:col-span-2">
+        <div class="col-span-12 xl:col-span-2">
             <div
                 class="rounded-lg px-5 py-4  w-full lg:tooltip lg:tooltip-top !bg-[#0f172a]/50 !backdrop-blur-xl !shadow-md !shadow-[#0D243C]/50">
                 <div class="flex items-center gap-4">
@@ -158,7 +158,7 @@
 
     <div class="grid grid-cols-12 gap-4 mt-8">
         {{-- nejnovější články na wiki --}}
-        <div class="col-span-12 md:col-span-4">
+        <div class="col-span-12 xl:col-span-4">
             <x-share.cards.base-card title="Nejnovější články wiki">
                 <div class=" h-48 overflow-auto">
                     <x-table :headers="$newestWikiTopicsHeader" :rows="$newestTopics">
@@ -171,7 +171,7 @@
             </x-share.cards.base-card>
         </div>
         {{-- nejnovější uživatelé --}}
-        <div class="col-span-12 md:col-span-4">
+        <div class="col-span-12 xl:col-span-4">
             <x-share.cards.base-card title="Nejnovější uživatelé">
                 <div class="h-48 overflow-auto">
                     <x-table :headers="$newestUsersHeader" :rows="$newestUsers">
@@ -193,7 +193,7 @@
             </x-share.cards.base-card>
         </div>
         {{-- proběhlé události --}}
-        <div class="col-span-12 md:col-span-4">
+        <div class="col-span-12 xl:col-span-4">
             <x-share.cards.base-card title="Proběhlé události">
                 <div class=" h-48 overflow-auto">
                     <x-table :headers="$passedEventsHeader" :rows="$passedEvents" />

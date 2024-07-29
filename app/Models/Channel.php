@@ -87,7 +87,6 @@ class Channel extends Model
     public function scopeSearch(Builder $query, string $search)
     {
         return $query->where('name', 'like', "%".$search."%");
-        // return $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($search) . '%']);
     }
 
     public static function scopeSearchend(Builder $query, string $search)

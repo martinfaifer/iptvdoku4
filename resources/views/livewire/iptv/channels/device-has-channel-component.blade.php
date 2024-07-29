@@ -114,6 +114,14 @@
                                 <x-heroicon-o-arrow-path class="h-4 w-4 text-orange-500" />
                             </button>
                         </div>
+
+                        <div class="tooltip tooltip-bottom" data-tip="Odebrání">
+                            <button wire:click='delete_linux_path'
+                                wire:confirm='Opravdu si přejete odebrat cestu ke spuštění?'
+                                class="btn btn-sm btm-circle border-none bg-transparent">
+                                <x-heroicon-o-trash class="h-4 w-4 text-red-500" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             @endif
@@ -270,7 +278,7 @@
         class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="store_path">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                wire:click='closeDialog'>✕</x-button>
+                x-on:click='$wire.storeLinuxPathModal = false'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
                     <x-input label="Cesta k souboru" wire:model="path" />
@@ -286,11 +294,11 @@
             <div class="flex justify-between">
                 <div>
                     <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                        wire:click='closeDialog' />
+                        x-on:click='$wire.storeLinuxPathModal = false' />
                 </div>
                 <div>
                     <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                        type="submit" spinner="store_path" />
                 </div>
             </div>
         </x-form>

@@ -27,9 +27,24 @@
                 @scope('cell_actions', $log)
                     <div class="flex mx-auto gap-4">
                         <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
-                            wire:click="show({{ $log->payload }})">
+                            x-on:click="$wire.show({{ $log->payload }} , {{ $log->id }})">
                             <x-heroicon-o-magnifying-glass class="size-4 text-blue-500" />
                         </button>
+                    </div>
+                @endscope
+
+                @scope('cell_item', $log)
+                    {{-- search in item for finding corrent one --}}
+                    @if (!is_null($this->show_log_item($log->item)))
+                        {{ $this->show_log_item($log->item) }}
+                    @else
+                        {{ $log->item }}
+                    @endif
+                    @php
+                        $itemType = explode(':', $log->item)[0];
+                    @endphp
+                    <div class="italic text-sm inline-block text-blue-200 bg-blue-500/30 rounded-md mx-2 px-2">
+                        {{ $itemType }}
                     </div>
                 @endscope
             </x-table>
@@ -46,6 +61,7 @@
                     </code>
             </pre>
             </div>
+
         </div>
         <div class="flex justify-between">
             <div>
