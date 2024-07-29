@@ -37,9 +37,10 @@
                                 <x-heroicon-o-pencil class="size-4 text-green-500" />
                             </button>
                             <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
-                            wire:click="resetPassword({{ $user->id }})" wire:confirm="Opravdu poslat nové heslo uživately?">
-                            <x-heroicon-o-lock-closed class="size-4 text-orange-500"/>
-                        </button>
+                                wire:click="resetPassword({{ $user->id }})"
+                                wire:confirm="Opravdu poslat nové heslo uživately?">
+                                <x-heroicon-o-lock-closed class="size-4 text-orange-500" />
+                            </button>
                             <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
                                 wire:click="destroy({{ $user->id }})" wire:confirm="Opravdu odebrat uživatele?">
                                 <x-heroicon-o-trash class="w-4 h-4 text-red-500" />
@@ -129,6 +130,31 @@
                 <div class="col-span-12  mb-4">
                     <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model="editForm.userRoleId"
                         single searchable />
+                </div>
+                <div class="col-span-12 xl:col-span-3 mb-4">
+                    <x-checkbox label="Upozornění při změněně kanálu" wire:model="editForm.notify_if_channel_change" />
+                </div>
+                <div class="col-span-12 xl:col-span-3 mb-4">
+                    <x-checkbox label="Upozornění na nový článek ve wiki" wire:model="editForm.notify_if_added_new_wiki_content" />
+                </div>
+                <div class="col-span-12 xl:col-span-3 mb-4">
+                    <x-checkbox label="Upozornění na problém s počasím" wire:model="editForm.notify_if_weather_problem" />
+                </div>
+                <div class="col-span-12 xl:col-span-3 mb-4">
+                    <x-checkbox label="Upozornění na příliš mnoho nefunkčních kanálů"
+                        wire:model="editForm.notify_if_too_many_channels_down" />
+                </div>
+                <div class="col-span-12 xl:col-span-3 mb-4">
+                    <x-checkbox label="Upozornění na expirace satelitních karet"
+                        wire:model="editForm.notify_if_satelit_card_has_expiration" />
+                </div>
+                <div class="col-span-12 xl:col-span-3  mb-4">
+                    <x-checkbox label="Upozornění na novou událost v kalendáři" wire:model="editForm.notify_if_added_new_event" />
+                </div>
+
+                <div class="col-span-12 mb-4">
+                    <x-checkbox label="Připnout PopUp okno s výpadky kanálů"
+                        wire:model="editForm.iptv_monitoring_window" />
                 </div>
             </div>
             <div class="flex justify-between">

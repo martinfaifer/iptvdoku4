@@ -2,21 +2,22 @@
 
 namespace App\Livewire\User;
 
-use App\Events\BroadcastRefreshUserEvent;
-use App\Livewire\Forms\AvatarForm;
-use App\Livewire\Forms\ChangeUserPasswordForm;
-use App\Livewire\Forms\UserEditForm;
-use App\Models\Session;
 use App\Models\User;
-use App\Traits\Livewire\NotificationTrait;
-use App\Traits\Users\SessionUserAgentTrait;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Livewire\Forms\AvatarForm;
+use App\Livewire\Forms\UserEditForm;
+use Illuminate\Support\Facades\Auth;
+use App\Events\BroadcastRefreshUserEvent;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Users\SessionUserAgentTrait;
+use App\Livewire\Forms\ChangeUserPasswordForm;
+use App\Traits\Users\CheckIfIsPinnedIptvWindowTrait;
 
 class UserComponent extends Component
 {
-    use NotificationTrait, SessionUserAgentTrait, WithFileUploads;
+    use NotificationTrait, SessionUserAgentTrait, WithFileUploads, CheckIfIsPinnedIptvWindowTrait;
 
     public AvatarForm $avatarForm;
 
@@ -38,11 +39,7 @@ class UserComponent extends Component
     {
         $this->user = Auth::user();
         $this->userSessions = $this->agents();
-        if ($this->user->iptv_monitoring_window == 'closed') {
-            $this->isPinned =  false;
-        } else {
-            $this->isPinned =  true;
-        }
+        $this->isPinned = $this->pinned($this->user->iptv_monitoring_window);
     }
 
     public function openEditUserDialog()
@@ -109,11 +106,8 @@ class UserComponent extends Component
 
     public function pinIptvWindow()
     {
-        if ($this->isPinned == true) {
-            $windowStatus = 'maximaze';
-        } else {
-            $windowStatus = 'closed';
-        };
+        $windowStatus = $this->convert_response_to_db_string($this->isPinned);
+
         $this->user->update([
             'iptv_monitoring_window' => $windowStatus
         ]);
