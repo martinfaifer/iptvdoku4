@@ -7,11 +7,11 @@
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-12">
                         <p class="text-center text-sm font-semibold mt-2">Nefunkční kanály</p>
-                        <button wire:click='minimizeWindow()'
+                        <button @click='$wire.minimizeWindow()'
                             class="btn btn-circle btn-outline btn-xs border-none bg-transparent absolute right-8 top-1 text-blue-500">
                             <x-heroicon-o-chevron-down class="size-4" />
                         </button>
-                        <button wire:click='closeWindow()'
+                        <button @click='$wire.closeWindow()'
                             class="btn btn-circle btn-outline btn-xs border-none bg-transparent absolute right-1 top-1 text-red-500">
                             <x-heroicon-o-x-circle class="size-4" />
                         </button>
@@ -118,11 +118,11 @@
                             </div>
                         </div>
 
-                        <button wire:click='maximizeWindow()'
+                        <button @click='$wire.maximizeWindow()'
                             class="btn btn-circle btn-outline btn-xs border-none bg-transparent absolute right-8 top-1 text-blue-500">
                             <x-heroicon-o-chevron-up class="size-4" />
                         </button>
-                        <button wire:click='closeWindow()'
+                        <button @click='$wire.closeWindow()'
                             class="btn btn-circle btn-outline btn-xs border-none bg-transparent absolute right-1 top-1 text-red-500">
                             <x-heroicon-o-x-circle class="size-4" />
                         </button>

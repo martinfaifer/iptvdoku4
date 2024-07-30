@@ -25,7 +25,7 @@
             <div class="flex-none">
                 <div class="tooltip tooltip-left" data-tip="Zobrazit / skrýt mapu">
                     <x-button class="btn-sm bg-transparent border-none" icon="o-cube-transparent"
-                        wire:click='showOrHideDeviceConnectionMap()'></x-button>
+                        @click='$wire.showOrHideDeviceConnectionMap()'></x-button>
                 </div>
             </div>
         </div>

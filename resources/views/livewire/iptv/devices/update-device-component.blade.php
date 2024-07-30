@@ -5,7 +5,7 @@
 
     <x-modal wire:model="updateModal" title="Úprava zařízení" persistent class="modal-bottom sm:modal-middle">
         <x-form wire:submit="update">
-            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
+            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" x-on:click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
                     <x-input label="Název" wire:model="form.name" autofocus />
