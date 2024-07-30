@@ -1,5 +1,5 @@
 <div>
-    <button class="btn btn-circle btn-sm mt-7 ml-3 bg-transparent border-none" @click="$wire.edit">
+    <button class="btn btn-circle btn-sm mt-7 ml-3 bg-transparent border-none" x-on:click="$wire.edit">
         <x-icon name="s-pencil" class="w-4 h-4 text-green-500" />
     </button>
 
