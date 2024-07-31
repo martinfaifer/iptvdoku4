@@ -9,7 +9,7 @@
     <x-drawer wire:model='channelDetailDrawer' separator right class="lg:w-1/4 !bg-[#0E1E33]">
         <div class="lg:hidden">
             <x-button class="btn btn-sm btn-circle btn-ghost bg-[#0E1E33] absolute right-2 top-2"
-                wire:click='channelDetailDrawer = false'>✕</x-button>
+                @click='$wire.channelDetailDrawer = false'>✕</x-button>
         </div>
         {{-- informations about channel quality, category, description --}}
         <div>
