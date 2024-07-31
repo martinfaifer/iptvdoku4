@@ -24,7 +24,7 @@
                         @else
                             <div class="grid grid-cols-12">
                                 <div class="col-span-12 mt-4">
-                                    <div class=" fixed h-72 overflow-y-auto mr-4">
+                                    <div class=" fixed h-72 overflow-y-auto">
                                         <table class="table table-xs">
                                             <!-- head -->
                                             <thead>
@@ -117,9 +117,9 @@
                                 'bg-red-500' => $numberOfAlerts != 0,
                                 'bg-green-500' => $numberOfAlerts == 0,
                             ])>
-                                <span @class(['italic font-semibold ml-[6px] text-black'])>
+                                <p @class(['italic font-semibold text-center text-black'])>
                                     {{ $numberOfAlerts }}
-                                </span>
+                                </p>
 
                             </div>
                         </div>
