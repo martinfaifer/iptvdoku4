@@ -24,7 +24,7 @@
                         @else
                             <div class="grid grid-cols-12">
                                 <div class="col-span-12 mt-4">
-                                    <div class=" h-72 overflow-y-auto">
+                                    <div class=" fixed h-72 overflow-y-auto mr-4">
                                         <table class="table table-xs">
                                             <!-- head -->
                                             <thead>
