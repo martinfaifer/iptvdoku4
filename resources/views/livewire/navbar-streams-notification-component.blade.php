@@ -1,5 +1,5 @@
 <div>
-    <label wire:click='openAlertDrawer' class="btn btn-sm btn-circle bg-transparent border-none">
+    <label @click='$wire.openAlertDrawer' class="btn btn-sm btn-circle bg-transparent border-none">
         <x-heroicon-c-bell @class([
             'h-6 w-6',
             'text-red-500' => !empty($iptv_dohled_alerts),

@@ -12,7 +12,7 @@
                     class="input input-bordered input-sm bg-opacity-20 text-white placeholder:text-xs w-full md:w-auto" />
             </div>
             <div>
-                <label wire:click='openCalendarEventsDrawer' class="btn btn-sm btn-circle bg-transparent border-none">
+                <label @click='$wire.openCalendarEventsDrawer' class="btn btn-sm btn-circle bg-transparent border-none">
                     <x-heroicon-o-calendar-days @class([
                         'size-6',
                         'text-white/80' => !empty($runningEvents),
@@ -105,7 +105,7 @@
                         @can('show_settings_link', App\Models\User::class)
                             <li><a href="/settings/dashboard" wire:navigate>Nastavení</a></li>
                         @endcan
-                        <li wire:click='logout()'><a>Odhlásit se</a></li>
+                        <li @click='$wire.logout()'><a>Odhlásit se</a></li>
                     </ul>
                 </div>
             </div>
