@@ -24,7 +24,7 @@
                         @else
                             <div class="grid grid-cols-12">
                                 <div class="col-span-12 mt-4">
-                                    <div class="overflow-x-auto">
+                                    <div class=" h-72 overflow-y-auto">
                                         <table class="table table-xs">
                                             <!-- head -->
                                             <thead>
@@ -43,10 +43,16 @@
                                                         }
                                                     @endphp
                                                     <tr>
-                                                        <td @class(['!bg-orange-800 font-semibold', '!bg-red-800' => $can_not_start])>
+                                                        <td @class([
+                                                            '!bg-orange-800 font-semibold',
+                                                            '!bg-red-800' => $can_not_start,
+                                                        ])>
                                                             {{ $alert['name'] }}
                                                         </td>
-                                                        <td @class(['!bg-orange-800 font-semibold', '!bg-red-800' => $can_not_start])>
+                                                        <td @class([
+                                                            '!bg-orange-800 font-semibold',
+                                                            '!bg-red-800' => $can_not_start,
+                                                        ])>
                                                             @php
                                                                 $streamUrl = $alert['stream_url'];
                                                             @endphp

@@ -1,13 +1,16 @@
 <div>
+    {{-- @dd($othersAlerts) --}}
     <label @click='$wire.openAlertDrawer' class="btn btn-sm btn-circle bg-transparent border-none">
         <x-heroicon-c-bell @class([
             'h-6 w-6',
-            'text-red-500' => !empty($iptv_dohled_alerts),
-            'text-gray-500' => empty($iptv_dohled_alerts),
+            'text-red-500' =>
+                !empty($iptv_dohled_alerts) || !empty($othersAlerts['devices']),
+            'text-gray-500' =>
+                empty($iptv_dohled_alerts) && empty($othersAlerts['devices']),
         ]) />
-        @if (!empty($iptv_dohled_alerts))
+        @if (!empty($iptv_dohled_alerts) || !empty($othersAlerts['devices']))
             <div class="text-white text-sm bg-red-500 rounded-full fixed w-5 h-5 ml-4 mt-3">
-                {{ count($iptv_dohled_alerts) }}
+                {{ count($iptv_dohled_alerts) + count($othersAlerts['devices']) }}
             </div>
         @endif
     </label>
@@ -18,6 +21,15 @@
             @foreach ($iptv_dohled_alerts as $iptv_dohled_alert)
                 <div wire:key="alert-{{ $iptv_dohled_alert['id'] }}" class="mt-3">
                     <x-share.alerts.error title="{{ $iptv_dohled_alert['nazev'] }}"></x-share.alerts.error>
+                </div>
+            @endforeach
+        @endif
+
+        @if (!empty($othersAlerts['devices']))
+            @foreach ($othersAlerts['devices'] as $device)
+            {{-- @dd($device) --}}
+                <div wire:key="alert-device-{{ $device->id }}" class="mt-3">
+                    <x-share.alerts.error title="Zařízení {{ $device->name }} je offline"></x-share.alerts.error>
                 </div>
             @endforeach
         @endif
