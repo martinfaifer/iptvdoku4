@@ -10,6 +10,11 @@ class IptvDohledUrl extends Model
     protected $fillable = [
         'iptv_dohled_id',
         'stream_url',
+        'can_notify'
+    ];
+
+    public $casts = [
+        'can_notify' => 'boolean',
     ];
 
     public function scopeStreamUrl(Builder $query, string $stream_url)

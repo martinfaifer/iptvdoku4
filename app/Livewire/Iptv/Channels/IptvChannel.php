@@ -19,15 +19,6 @@ class IptvChannel extends Component
     public function mount(Channel $channel)
     {
         $this->channel = $channel;
-        // if (!blank($channel)) {
-        //     if (!Cache::has('channel_with_multicast_' . $channel->id)) {
-        //         Cache::forever(
-        //             'channel_with_multicast_' . $channel->id,
-        //             $channel->load(['multicasts', 'multicasts.channel_source'])
-        //         );
-        //     }
-        //     $this->channel = Cache::get('channel_with_multicast_' . $channel->id);
-        // }
     }
 
     public function getTimeShiftTime()
@@ -51,7 +42,6 @@ class IptvChannel extends Component
     // #[On('update_iptv_channel')]
     public function render()
     {
-        // dd($this->channel);
         if (!blank($this->channel)) {
             if (!Cache::has('channel_with_multicast_' . $this->channel->id)) {
                 Cache::forever(

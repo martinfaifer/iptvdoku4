@@ -30,6 +30,7 @@ class GetAlertsFromIptvDohledJob implements ShouldQueue
     public function handle(): void
     {
         $errorStreams = (new ConnectService('alerts'))->connect('iptv_dohled_alerts');
+
         // check how many streams are down and send notification to slack
         if (count($errorStreams) >= 10) {
             // need too slow down process for spaming in slack channel
@@ -55,5 +56,7 @@ class GetAlertsFromIptvDohledJob implements ShouldQueue
         }
 
         $allAlerts = (new ConnectService('all-alerts'))->connect('iptv_dohled_all_alerts');
+
+        SendAlertForStreamWhichIsDownJob::dispatch($errorStreams);
     }
 }

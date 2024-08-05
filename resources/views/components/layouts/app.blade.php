@@ -51,9 +51,9 @@
 </head>
 
 <body class="min-h-screen font-sans antialiased bg-gradient-to-r from-slate-900 to-sky-950 ">
-    {{-- <div id="unsupported-browser">
+    <div id="unsupported-browser">
         Tento prohlížeč není podporován. Prosím, použijte jiný prohlížeč.
-    </div> --}}
+    </div>
     <x-toast />
     @auth
         <x-spotlight search-text="Vyhledejte ... " no-results-text="Ops! Nenalezeno." class="justify-center"
@@ -203,6 +203,16 @@
                 {{ $slot }}
             </x-slot:content>
         </x-main>
+        <script>
+            function isSafari() {
+                var userAgent = navigator.userAgent;
+                return /Safari/.test(userAgent) && !/Chrome/.test(userAgent) && !/iPhone/.test(userAgent);
+            }
+
+            if (isSafari()) {
+                document.getElementById('unsupported-browser').style.display = 'block';
+            }
+        </script>
 </body>
 
 </html>

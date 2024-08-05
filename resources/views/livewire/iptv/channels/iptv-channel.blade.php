@@ -111,6 +111,10 @@
                 @if (request()->is('channels/' . $channel->id . '/epg'))
                     <livewire:iptv.channels.epg.epg-channel-component :channel="$channel">
                 @endif
+
+                @if (request()->has('stream_url'))
+                    <livewire:iptv.channels.notification.channel-notification-component ip="{{ request()->get('stream_url') }}">
+                @endif
             </div>
         @endif
     </div>

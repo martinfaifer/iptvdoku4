@@ -40,6 +40,19 @@
                                     </div>
                                     <div class="col-span-2 -mt-2">
                                         @can('operate_with_childs', App\Models\Channel::class)
+                                            @if ($this->isInIptvDohledDohled($unicast['ip']))
+                                                <div class="tooltip tooltip-bottom" data-tip="Upozornění na výpadky">
+                                                    <button class="btn btn-sm btn-circle bg-transparent border-none"
+                                                        href="/channels/{{ $channel->id }}/notifications?stream_url={{ $unicast['ip'] }}"
+                                                        wire:navigate>
+                                                        <x-heroicon-o-bell @class([
+                                                            'w-4 h-4',
+                                                            'text-green-500' => $this->can_notify($unicast['ip']),
+                                                            'text-slate-500' => !$this->can_notify($unicast['ip']),
+                                                        ]) />
+                                                    </button>
+                                                </div>
+                                            @endif
                                             <button class="btn btn-sm btn-circle bg-transparent border-none"
                                                 @click='$wire.edit({{ $unicast['id'] }})'>
                                                 <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />

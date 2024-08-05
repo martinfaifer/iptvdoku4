@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\IptvDohledUrl;
+use App\Models\IptvDohledUrlsNotification;
 use App\Services\Api\IptvDohled\ConnectService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -27,12 +28,19 @@ class DeleteStreamFromIptvDohledJob implements ShouldQueue
      */
     public function handle(): void
     {
+        $streamInDohled = IptvDohledUrl::where('stream_url', $this->ip)->first();
         (new ConnectService(
             endpointType: 'delete-stream',
-            params: IptvDohledUrl::where('stream_url', $this->ip)->first()->iptv_dohled_id
+            params: $streamInDohled->iptv_dohled_id
         ))->connect();
 
+        // remove custom notifications if are
+        try {
+            IptvDohledUrlsNotification::where('iptv_dohled_url_id', $streamInDohled->id)->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         // remove stream from table
-        IptvDohledUrl::where('stream_url', $this->ip)->delete();
+        $streamInDohled->delete();
     }
 }

@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('devices:data-from-nms')->everyFifteenMinutes()->runInBackground();
         $schedule->command('devices:snmp-get')->everyFiveMinutes()->runInBackground();
 
-        $schedule->command('tag:execute-actions')->everyFiveMinutes()->runInBackground();
+        $schedule->command('tag:execute-actions')->everyFiveMinutes()->runInBackground()->withoutOverlapping();
 
         $schedule->command('channels:get-detail-from-nangu-api')->everyFifteenMinutes();
         $schedule->command('channels:get-informations-from-dohled')->everyMinute();

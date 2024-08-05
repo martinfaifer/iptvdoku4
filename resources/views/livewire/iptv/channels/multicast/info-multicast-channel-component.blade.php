@@ -59,6 +59,19 @@
                 </div>
                 <div class="col-span-12 xl:col-span-1 mt-4 xl:-mt-2">
                     @can('operate_with_childs', App\Models\Channel::class)
+                        @if ($this->isInIptvDohledDohled($multicast->stb_ip))
+                            <div class="tooltip tooltip-bottom" data-tip="Upozornění na výpadky">
+                                <button class="btn btn-sm btn-circle bg-transparent border-none"
+                                    href="/channels/{{ $channel->id }}/notifications?stream_url={{ $multicast->stb_ip }}"
+                                    wire:navigate>
+                                    <x-heroicon-o-bell @class([
+                                        'w-4 h-4',
+                                        'text-green-500' => $this->can_notify($multicast->stb_ip),
+                                        'text-slate-500' => !$this->can_notify($multicast->stb_ip),
+                                    ]) />
+                                </button>
+                            </div>
+                        @endif
                         <button class="btn btn-sm btn-circle bg-transparent border-none"
                             wire:click='edit({{ $multicast->id }})'>
                             <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />
@@ -99,7 +112,8 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline searchable label="Zdroj" wire:model="form.channel_source_id" :options="$channelSources" single />
+                    <x-choices-offline searchable label="Zdroj" wire:model="form.channel_source_id" :options="$channelSources"
+                        single />
                     <div>
                         @error('channel_source_id')
                             <span class="error">{{ $message }}</span>

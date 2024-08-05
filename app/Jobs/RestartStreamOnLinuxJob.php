@@ -32,7 +32,6 @@ class RestartStreamOnLinuxJob implements ShouldQueue
             password: $this->password
         ));
 
-        // $connection->send_command('bash ' . $this->path);
-        dd($connection->send_command('bash '.$this->path));
+        $connection->send_command('bash ' . $this->path);
     }
 }

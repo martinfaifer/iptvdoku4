@@ -13,6 +13,7 @@ use App\Livewire\User\UserNotificationComponent;
 use App\Livewire\Auth\ForgottenPasswordComponent;
 use App\Livewire\Iptv\Calendar\CalendarComponent;
 use App\Livewire\Iptv\Cards\SatelitCardComponent;
+use App\Livewire\Iptv\Channels\Notification\ChannelNotificationComponent;
 use App\Livewire\Settings\Logs\SettingsLogComponent;
 use App\Livewire\Settings\Tags\SettingsTagComponent;
 use App\Livewire\Settings\Users\SettingsUsersComponent;
@@ -59,6 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::get('prefixes/{ipPrefix?}', NanguIpPrefixesComponent::class);
     Route::get('floweye/{issue?}', FlowEyeComponent::class)->middleware('can:show_tickets, App\Models\User');
     Route::get('iptv-monitoring', IptvMonitoringComponent::class)->middleware('can:show_iptv_monitoring, App\Models\User');
+    Route::get('notifications/channels/{ip}', ChannelNotificationComponent::class)->middleware(['can:view,App\Models\Channel']);
 
     Route::prefix('profile')->group(function () {
         Route::get('', UserComponent::class);
