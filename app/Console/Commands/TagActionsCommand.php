@@ -35,9 +35,11 @@ class TagActionsCommand extends Command
         Tag::where('action', 1)->get()->each(function ($tag) {
             // search if tag has bound to device
             TagOnItem::where('type', 'device')->where('tag_id', $tag->id)->get()->each(function ($tagOnItem) {
-                rescue(function () use ($tagOnItem) {
+                try {
                     (new CheckIfGpuWorkingAction(Device::find($tagOnItem->item_id)->load('ssh')))();
-                });
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
             });
         });
 
