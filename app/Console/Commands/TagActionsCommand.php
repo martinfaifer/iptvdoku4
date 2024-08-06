@@ -2,13 +2,15 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\Devices\CheckIfGpuWorkingAction;
-use App\Actions\Devices\GetNimbleDataAction;
-use App\Events\BroadcastAlertEvent;
-use App\Models\Device;
 use App\Models\Tag;
+use App\Models\Device;
 use App\Models\TagOnItem;
+use App\Jobs\GetNimbleDataJob;
+use App\Jobs\GpuDeviceCheckJob;
 use Illuminate\Console\Command;
+use App\Events\BroadcastAlertEvent;
+use App\Actions\Devices\GetNimbleDataAction;
+use App\Actions\Devices\CheckIfGpuWorkingAction;
 
 class TagActionsCommand extends Command
 {
@@ -32,21 +34,10 @@ class TagActionsCommand extends Command
     public function handle()
     {
         // check if gpus working action 1
-        Tag::where('action', 1)->get()->each(function ($tag) {
-            // search if tag has bound to device
-            TagOnItem::where('type', 'device')->where('tag_id', $tag->id)->get()->each(function ($tagOnItem) {
-                try {
-                    (new CheckIfGpuWorkingAction(Device::find($tagOnItem->item_id)->load('ssh')))();
-                } catch (\Throwable $th) {
-                    //throw $th;
-                }
-            });
-        });
+        GpuDeviceCheckJob::dispatch();
 
         // nimble actions
         // get all devices on nimble api and bound ids
-        (new GetNimbleDataAction())();
-
-        BroadcastAlertEvent::dispatch();
+        GetNimbleDataJob::dispatch();
     }
 }
