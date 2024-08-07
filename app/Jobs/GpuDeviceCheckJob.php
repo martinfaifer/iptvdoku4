@@ -36,7 +36,7 @@ class GpuDeviceCheckJob implements ShouldQueue
             // search if tag has bound to device
             TagOnItem::where('type', 'device')->where('tag_id', $tag->id)->get()->each(function ($tagOnItem) {
                 try {
-                    (new CheckIfGpuWorkingAction(Device::find($tagOnItem->item_id)->load('ssh')))();
+                    CheckDeviceGpuJob::dispatch(Device::find($tagOnItem->item_id)->load('ssh'));
                 } catch (\Throwable $th) {
                     //throw $th;
                 }
