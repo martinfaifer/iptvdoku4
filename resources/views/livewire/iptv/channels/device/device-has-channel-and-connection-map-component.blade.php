@@ -33,18 +33,18 @@
 
         <div class="grid grid-cols-12 gap-4">
             @if (count($devices) > 1 || $channelType != 'multicast')
-                @if ($isHiddenChannelConnectionMap == false)
-                    <div class="col-span-12 mb-4">
+                {{-- @if ($isHiddenChannelConnectionMap == false) --}}
+                <div x-show="!$wire.isHiddenChannelConnectionMap" x-collapse class="col-span-12 mb-4">
 
-                        @if ($channelType == 'multicast')
-                            <x-share.cards.channel-connection-card :devices="$devices" :channel="$channel"
-                                :channelType="$channelType"></x-share.cards.channel-connection-card>
-                        @else
-                            <x-share.cards.channel-connection-card :devices="$schemaDevices" :channel="$channel"
-                                :channelType="$channelType"></x-share.cards.channel-connection-card>
-                        @endif
-                    </div>
-                @endif
+                    @if ($channelType == 'multicast')
+                        <x-share.cards.channel-connection-card :devices="$devices" :channel="$channel"
+                            :channelType="$channelType"></x-share.cards.channel-connection-card>
+                    @else
+                        <x-share.cards.channel-connection-card :devices="$schemaDevices" :channel="$channel"
+                            :channelType="$channelType"></x-share.cards.channel-connection-card>
+                    @endif
+                </div>
+                {{-- @endif --}}
             @endif
 
             @foreach ($devices as $device)

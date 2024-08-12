@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scroll-behavior: smooth;
+}
+
 .bg-clip-text {
     -webkit-background-clip: text;
     background-clip: text;

@@ -34,7 +34,7 @@ class Spotlight
 
     public function devices(string $search)
     {
-        return Device::search($search)->get()->map(function (Device $device) {
+        return Device::fulltextSearch($search)->get()->map(function (Device $device) {
             return [
                 'id' => 'device_'.$device->id,
                 'name' => $device->name,
@@ -47,7 +47,7 @@ class Spotlight
 
     public function channels(string $search)
     {
-        return Channel::search($search)->get()->map(function (Channel $channel) {
+        return Channel::fulltextSearch($search)->get()->map(function (Channel $channel) {
             return [
                 'id' => 'channel_'.$channel->id,
                 'name' => $channel->name,

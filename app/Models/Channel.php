@@ -86,13 +86,21 @@ class Channel extends Model
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $query->where('name', 'like', "%".$search."%");
+        return $query->where('name', 'like', "%" . $search . "%");
     }
 
     public static function scopeSearchend(Builder $query, string $search)
     {
-        return $query->where('name', 'like', $search."%");
-        // return $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($search) . '%']);
+        return $query->where('name', 'like', $search . "%");
+    }
+
+    public function scopeFulltextSearch(Builder $query, string $search)
+    {
+        return $query->whereFullText(
+            ['name', 'description', 'nangu_channel_code'],
+            "$search*",
+            ['mode' => 'boolean'],
+        );
     }
 
 

@@ -81,13 +81,22 @@ class Device extends Model
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $this->where('name', 'like', '%'.$search.'%')
-            ->orWhere('ip', 'like', '%'.$search.'%');
+        return $this->where('name', 'like', '%' . $search . '%')
+            ->orWhere('ip', 'like', '%' . $search . '%');
+    }
+
+    public function scopeFulltextSearch(Builder $query, string $search)
+    {
+        return $query->whereFullText(
+            ['name', 'ip', 'controller_ip', 'zbx_status', 'ipmi_ip'],
+            "$search*",
+            ['mode' => 'boolean'],
+        );
     }
 
     public function scopeInTemplate(Builder $query, string $searcheableString)
     {
-        return $query->where('template', 'like', '%'.$searcheableString.'%');
+        return $query->where('template', 'like', '%' . $searcheableString . '%');
     }
 
     // public function scopeGetChannels(Builder $query, string $channel)

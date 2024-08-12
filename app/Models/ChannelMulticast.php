@@ -50,4 +50,13 @@ class ChannelMulticast extends Model
     {
         return $query->where('stb_ip', 'like', '%' . $search . '%')->orWhere('source_ip', 'like', '%' . $search . '%');
     }
+
+    public function scopeFulltextSearch(Builder $query, string $search)
+    {
+        return $query->whereFullText(
+            ['stb_ip', 'source_ip'],
+            "$search*",
+            ['mode' => 'boolean'],
+        );
+    }
 }
