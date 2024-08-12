@@ -1,28 +1,29 @@
 <?php
 
-use App\Livewire\Settings\Channels\Banners\SettingsChannelsBannersComponent;
-use App\Livewire\Settings\Channels\Multicasts\MulticastsSourcesComponent;
-use App\Livewire\Settings\Channels\Restart\SettingsChannelsRestartComponent;
-use App\Livewire\Settings\Dashboard\SettingsDashboardComponent;
-use App\Livewire\Settings\Devices\Distributors\SettingsDevicesDistributorsComponent;
-use App\Livewire\Settings\Devices\Vendors\SettingsDevicesVendorsComponent;
-use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
-use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
-use App\Livewire\Settings\Geniustv\Discounts\SettingsGeniusTvDiscountsComponent;
-use App\Livewire\Settings\Geniustv\Invoices\SettingsGeniusTvInvoicesComponent;
-use App\Livewire\Settings\Geniustv\OfferTaxes\SettingsGeniusTvOfferTaxesComponent;
-use App\Livewire\Settings\Geniustv\StaticTaxes\SettingsGeniusTvStaticTaxesComponent;
-use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
-use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsHboComponent;
+use App\Models\User;
+use Livewire\Livewire;
+use App\Models\UserRole;
 use App\Livewire\Settings\Logs\SettingsLogComponent;
-use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
-use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
-use App\Livewire\Settings\Notifications\Slack\SettingsSlackNotificationComponent;
-use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationComponent;
 use App\Livewire\Settings\Tags\SettingsTagComponent;
 use App\Livewire\Settings\Users\SettingsUsersComponent;
-use App\Models\User;
-use App\Models\UserRole;
+use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
+use App\Livewire\Settings\Dashboard\SettingsDashboardComponent;
+use App\Livewire\Settings\Channels\Multicasts\MulticastsSourcesComponent;
+use App\Livewire\Settings\Devices\Vendors\SettingsDevicesVendorsComponent;
+use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
+use App\Livewire\Settings\Channels\Banners\SettingsChannelsBannersComponent;
+use App\Livewire\Settings\Channels\Restart\SettingsChannelsRestartComponent;
+use App\Livewire\Settings\Geniustv\Invoices\SettingsGeniusTvInvoicesComponent;
+use App\Livewire\Settings\Geniustv\Discounts\SettingsGeniusTvDiscountsComponent;
+use App\Livewire\Settings\Notifications\Slack\SettingsSlackNotificationComponent;
+use App\Livewire\Settings\Geniustv\OfferTaxes\SettingsGeniusTvOfferTaxesComponent;
+use App\Livewire\Settings\Devices\Distributors\SettingsDevicesDistributorsComponent;
+use App\Livewire\Settings\Geniustv\StaticTaxes\SettingsGeniusTvStaticTaxesComponent;
+use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsHboComponent;
+use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationComponent;
+use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
+use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
+use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
 
 it('return settings dashboard route', function () {
     $user = User::where('user_role_id', UserRole::where('name', 'admin')->first()->id)->first();
@@ -74,6 +75,7 @@ it('return settings geniustv channel-packages route', function () {
     $this->actingAs($user)->get('settings/geniustv/channel-packages')->assertSeeLivewire(SettingsGeniusTvChannelPackagesTaxesComponent::class);
 });
 
+// return error but dont known why...
 it('return settings geniustv offer-packages route', function () {
     $user = User::where('user_role_id', UserRole::where('name', 'admin')->first()->id)->first();
     $this->actingAs($user)->get('settings/geniustv/offer-taxes')->assertSeeLivewire(SettingsGeniusTvOfferTaxesComponent::class);

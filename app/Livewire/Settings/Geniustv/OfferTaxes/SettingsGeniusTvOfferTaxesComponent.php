@@ -11,12 +11,13 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use App\Models\GeniusTVChannelsOffersTax;
 use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Channels\GetChannelFromCacheTrait;
 use App\Livewire\Forms\CreateSettingsGeniusTvOfferTaxesForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvOfferTaxesForm;
 
 class SettingsGeniusTvOfferTaxesComponent extends Component
 {
-    use NotificationTrait, WithPagination;
+    use NotificationTrait, WithPagination, GetChannelFromCacheTrait;
 
     public string $query = '';
 
@@ -34,7 +35,7 @@ class SettingsGeniusTvOfferTaxesComponent extends Component
 
     public function mount()
     {
-        $this->channels = Cache::get('channels_menu');
+        $this->channels = $this->get_channels_from_cache();
         $this->currencies = Currency::get();
     }
 
