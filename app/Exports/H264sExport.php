@@ -3,15 +3,37 @@
 namespace App\Exports;
 
 use App\Models\H264;
+use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class H264sExport implements FromCollection
+class H264sExport implements FromArray, WithHeadings
 {
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function collection()
+    public function headings(): array
     {
-        return H264::all();
+        return [
+            'název',
+            'IP',
+        ];
+    }
+
+    public function array(): array
+    {
+        $result = [];
+        $h264s = H264::with(['channel', 'ips'])->get();
+        foreach ($h264s as $h264) {
+            foreach ($h264->ips as $ip) {
+                $ips[] = $ip->ip;
+            }
+
+            $result[] = [
+                'name' => $h264->channel->name,
+                'ip' => implode(",", $ips),
+            ];
+
+            $ips = [];
+        }
+
+        return $result;
     }
 }

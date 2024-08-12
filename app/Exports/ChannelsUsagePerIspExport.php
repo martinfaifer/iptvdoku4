@@ -5,12 +5,23 @@ namespace App\Exports;
 use App\Models\Channel;
 use App\Models\GeniusTvChart;
 use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ChannelsUsagePerIspExport implements FromArray
+class ChannelsUsagePerIspExport implements FromArray, WithHeadings
 {
     public function __construct(public $nanguIsp)
     {
         //
+    }
+
+    public function headings(): array
+    {
+        return [
+            'kanál',
+            'tento měsíc',
+            'minulý měsíc',
+            'průměr'
+        ];
     }
 
     public function array(): array

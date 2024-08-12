@@ -5,9 +5,21 @@ namespace App\Exports;
 use App\Models\Channel;
 use App\Models\GeniusTvChart;
 use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ChannelsUsageExport implements FromArray
+class ChannelsUsageExport implements FromArray, WithHeadings
 {
+
+    public function headings(): array
+    {
+        return [
+            'kanál',
+            'minulý měsíc',
+            'tento měsíc',
+            'průměr'
+        ];
+    }
+
     public function array(): array
     {
         $channels = Channel::withNanguChannelCode()->get(['id', 'name']);
@@ -30,7 +42,7 @@ class ChannelsUsageExport implements FromArray
                 'name' => $channel->name,
                 'last_month' => $lastMonthUsage,
                 'this_month' => $thisMonthUsage,
-                'avg' => ($thisMonthUsage + $lastMonthUsage) / 2,
+                'avg' => ((int)$thisMonthUsage + (int)$lastMonthUsage) / 2,
             ];
         }
 
