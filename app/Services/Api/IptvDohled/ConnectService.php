@@ -39,6 +39,11 @@ class ConnectService
             'endpoint' => '/api/v2/stream/%params%',
             'formData' => null,
         ],
+        'analyze' => [
+            'method' => 'post',
+            'endpoint' => '/api/v2/stream/analyze',
+            'formData' => null
+        ],
     ];
 
     public function __construct($endpointType, ?array $formData = null, ?string $params = null)

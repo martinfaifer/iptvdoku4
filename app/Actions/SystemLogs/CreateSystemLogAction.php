@@ -8,8 +8,8 @@ class CreateSystemLogAction
 {
     public function __construct(
         public string $type = 'warning',
-        public string $action,
-        public string $payload
+        public string $action = "",
+        public string $payload = ""
     ) {
         //
     }

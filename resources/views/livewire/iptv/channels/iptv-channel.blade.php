@@ -41,6 +41,17 @@
                                     EPG</a></li>
                         @endif
 
+                        <li @class(['rounded-lg'])>
+                            <div class="dropdown dropdown-bottom">
+                                <div tabindex="0" class="rounded-none border-none bg-transparent">Nástroje
+                                    <x-heroicon-c-chevron-down class="size-4 inline-block" /></div>
+                                <ul tabindex="0"
+                                    class="dropdown-content menu bg-[#0D1E33] rounded-box border-none z-[1] w-52 p-2">
+                                    <li><a href="/channels/{{ $channel->id }}/streams-analyze" wire:navigate>Analýza
+                                            streamů</a></li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 @endif
             </div>
@@ -113,8 +124,13 @@
                 @endif
 
                 @if (request()->has('stream_url'))
-                    <livewire:iptv.channels.notification.channel-notification-component ip="{{ request()->get('stream_url') }}">
+                    <livewire:iptv.channels.notification.channel-notification-component
+                        ip="{{ request()->get('stream_url') }}">
                 @endif
+
+                @if (request()->is('channels/' . $channel->id . '/streams-analyze'))
+                <livewire:iptv.channels.tools.stream-analyze-component :channel="$channel">
+            @endif
             </div>
         @endif
     </div>
