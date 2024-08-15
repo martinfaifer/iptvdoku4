@@ -11,6 +11,8 @@ class AnalyzeStream extends Model
 {
     use Prunable;
 
+    const MULTICAST_PORT = ":1234";
+
     protected $fillable = [
         'stream_url',
         'analyze'

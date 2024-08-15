@@ -17,25 +17,33 @@ class StreamAnalyzeComponent extends Component
     public Channel $channel;
 
     public array $streams = [];
-    public array $analyzedStreams = [];
+    // public array $analyzedStreams = [];
+
+    public array $sortBy = ['column' => 'created_at', 'direction' => 'desc'];
 
     public $analyzed;
     public bool $analyzedModal = false;
 
-    public function mount() {}
+    public function mount()
+    {
+        $this->getAnalyzedStreams();
+    }
 
     public function getAnalyzedStreams()
     {
+        $analyzedStreams = [];
         foreach ($this->streams as $stream) {
-            if (!str_contains($stream, ":1234")) {
-                $stream = $stream . ":1234";
+            if (!str_contains($stream, AnalyzeStream::MULTICAST_PORT)) {
+                $stream = $stream . AnalyzeStream::MULTICAST_PORT;
             }
             if (AnalyzeStream::where('stream_url', $stream)->first()) {
-                foreach (AnalyzeStream::where('stream_url', $stream)->orderBy('created_at', 'desc')->take(5)->get()->toArray() as $analyzed) {
-                    array_push($this->analyzedStreams, $analyzed);
+                foreach (AnalyzeStream::where('stream_url', $stream)->orderBy(...array_values($this->sortBy))->take(5)->get()->toArray() as $analyzed) {
+                    array_push($analyzedStreams, $analyzed);
                 }
             }
         }
+
+        return array_reverse($analyzedStreams);
     }
 
     public function analyze($stream)
@@ -64,14 +72,15 @@ class StreamAnalyzeComponent extends Component
     public function render()
     {
         $this->streams = $this->getStreams($this->channel);
-        $this->getAnalyzedStreams();
+        // $this->analyzedStreams = $this->getAnalyzedStreams();
         return view('livewire.iptv.channels.tools.stream-analyze-component', [
             'headers' => [
                 ['key' => 'stream_url', 'label' => 'Stream', 'class' => 'text-white/80'],
                 ['key' => 'created_at', 'label' => 'Vytvořeno', 'class' => 'text-white/80'],
                 // ['key' => 'status', 'label' => 'Status', 'class' => 'text-white/80'],
                 ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
-            ]
+            ],
+            'analyzedStreams' => $this->getAnalyzedStreams()
         ]);
     }
 }

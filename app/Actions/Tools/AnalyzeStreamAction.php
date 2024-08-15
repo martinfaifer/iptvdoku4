@@ -9,8 +9,8 @@ class AnalyzeStreamAction
 {
     public function __construct(public string $stream)
     {
-        if (!str_contains($stream, ":1234")) {
-            $this->stream = $stream . ":1234";
+        if (!str_contains($stream, AnalyzeStream::MULTICAST_PORT)) {
+            $this->stream = $stream . AnalyzeStream::MULTICAST_PORT;
         }
     }
 
