@@ -24,7 +24,6 @@ class StreamAnalyzeComponent extends Component
 
     public function mount() {}
 
-    #[On('refresh_analyzed_streams')]
     public function getAnalyzedStreams()
     {
         foreach ($this->streams as $stream) {
