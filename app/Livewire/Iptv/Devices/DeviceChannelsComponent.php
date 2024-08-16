@@ -11,6 +11,8 @@ class DeviceChannelsComponent extends Component
 {
     use GetChannelBelongsToDeviceTrait;
 
+    public string $search = "";
+
     public ?Device $device;
 
     public function mount(Device $device)
