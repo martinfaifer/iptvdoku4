@@ -50,7 +50,7 @@
             <div class="mt-4">
                 <div class="grid grid-cols-12 gap-4">
                     {{-- information about card --}}
-                    <div class="col-span-12 md:col-span-6">
+                    <div class="col-span-12 md:col-span-12 xl:col-span-6">
                         <x-share.cards.base-card title="Informace o kartě">
                             <div class="grid grid-cols-12 gap-4 font-semibold text-[#A3ABB8]">
                                 <div class="col-span-12 md:col-span-4 ">
@@ -81,7 +81,7 @@
                         </x-share.cards.base-card>
                     </div>
                     {{-- expirations --}}
-                    <div class="col-span-12 md:col-span-6">
+                    <div class="col-span-12 md:col-span-12 xl:col-span-6">
                         <livewire:iptv.cards.expiration-component
                             :satelitCard="$satelitCard"></livewire:iptv.cards.expiration-component>
                     </div>
@@ -89,16 +89,19 @@
 
                 <div class="grid grid-cols-12 gap-4 mt-4">
                     {{-- logs --}}
-                    <div class="col-span-12 md:col-span-4 mb-4">
+                    <div class="col-span-12 md:col-span-12 xl:col-span-4 mb-4">
                         <livewire:log-component columnValue="satelit_card:{{ $satelitCard->id }}" column="item" />
                     </div>
                     {{-- contacts --}}
-                    <div class="col-span-12 md:col-span-4">
+                    <div class="col-span-12 md:col-span-12 xl:col-span-4">
                         <livewire:contact-component type="satelit_card" :item_id="$satelitCard->id" />
                     </div>
                     {{-- poznámky --}}
-                    <div class="col-span-12 md:col-span-4 mb-4">
+                    <div class="col-span-12 md:col-span-12 xl:col-span-4">
                         <livewire:notes.note-component column="satelit_card_id" :id="$satelitCard->id" />
+                    </div>
+                    <div class="col-span-12 mb-4">
+                        <livewire:iptv.cards.satelit-card-contents-component :satCard="$satelitCard"/>
                     </div>
                 </div>
             </div>

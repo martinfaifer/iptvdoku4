@@ -1,6 +1,6 @@
 <div class="mt-16">
     <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-12 md:col-span-4 mb-4">
+        <div class="col-span-12 xl:col-span-5 mb-4">
             <x-share.cards.base-card title="Dostupné streamy k analýze">
                 <div class="h-52">
                     <div class="grid grid-cols-12 gap-4">
@@ -12,7 +12,7 @@
                                             {{ $stream }}
                                         </div>
                                         <div class="col-span-4">
-                                            <button class="btn bg-[#082f49] btn-xs md:btn-sm border-none mt-2"
+                                            <button class="btn bg-[#082f49] btn-sm border-none mt-2"
                                                 @click='$wire.analyze("{{ $stream }}")'>
                                                 <div wire:loading wire:target="analyze('{{ $stream }}')">
                                                     <span class="loading loading-spinner loading-md"></span>
@@ -28,7 +28,7 @@
                 </div>
             </x-share.cards.base-card>
         </div>
-        <div class="col-span-12 md:col-span-8 mb-4">
+        <div class="col-span-12 xl:col-span-7 mb-4">
             <x-share.cards.base-card title="Uložené analýzy">
                 <div class="h-52">
                     <div class="grid grid-cols-12 gap-4">

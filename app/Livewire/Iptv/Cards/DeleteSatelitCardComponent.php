@@ -14,6 +14,11 @@ class DeleteSatelitCardComponent extends Component
 
     public function destroy()
     {
+        try {
+            $this->satelitCard->contents->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         $this->satelitCard->delete();
         $this->redirect('/sat-cards', true);
 

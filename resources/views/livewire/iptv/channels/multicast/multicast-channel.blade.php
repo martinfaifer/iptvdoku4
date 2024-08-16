@@ -25,10 +25,10 @@
                 <livewire:iptv.channels.multicast.info-multicast-channel-component
                     :channel="$channel"></livewire:iptv.channels.multicast.info-multicast-channel-component>
             </div>
-            <div class="col-span-12 xl:col-span-4">
+            <div class="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-4">
                 <livewire:notes.note-component column="channel_id" :id="$channel->id" lazy />
             </div>
-            <div class="col-span-12 xl:col-span-4">
+            <div class="col-span-12 md:col-span-6  lg:col-span-6 xl:col-span-4">
                 <livewire:contact-component type="channel" :item_id="$channel->id" lazy />
             </div>
             @can('operate_with_childs', App\Models\Channel::class)
