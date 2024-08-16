@@ -521,19 +521,36 @@
     {{-- modal log --}}
     <x-modal wire:model="logModal" title="Log ze zařízení" persistent class="modal-bottom sm:modal-middle fixed">
 
-        <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
+        <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            @click='$wire.closeDialog'>✕</x-button>
         <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12">
+                <input wire:model.live='search' type="text" placeholder="Vyhledejte ..."
+                    class="input input-bordered bg-opacity-20 text-white placeholder:text-xs w-full md:w-96 mb-4" />
+            </div>
             <div class="col-span-12 mb-4 overflow-y-auto h-96">
                 <ul x-auto-animate>
                     @if (!in_array('n/a', $logs))
                         @foreach ($logs as $log)
-                            <li @class([
-                                'font-semibold',
-                                'text-red-500' => str_contains($log, 'down'),
-                                'text-green-500' => str_contains($log, 'up'),
-                            ])>
-                                {{ $log }}
-                            </li>
+                            @if (blank($search))
+                                <li @class([
+                                    'font-semibold',
+                                    'text-red-500' => str_contains($log, 'down'),
+                                    'text-red-500' => str_contains($log, 'unlocked'),
+                                    'text-red-500' => str_contains($log, 'high'),
+                                ])>
+                                    {{ $log }}
+                                </li>
+                            @elseif (str_contains(strtolower($log), strtolower($search)))
+                                <li @class([
+                                    'font-semibold',
+                                    'text-red-500' => str_contains($log, 'down'),
+                                    'text-red-500' => str_contains($log, 'unlocked'),
+                                    'text-red-500' => str_contains($log, 'high'),
+                                ])>
+                                    {{ $log }}
+                                </li>
+                            @endif
                         @endforeach
                     @else
                         <x-share.alerts.info title="Nepodařilo se načíst logy"></x-share.alerts.info>
@@ -557,7 +574,8 @@
     {{-- modal charts --}}
     <x-modal wire:model="chartModal" title="" persistent class="modal-bottom sm:modal-middle fixed">
 
-        <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
+        <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            @click='$wire.closeDialog'>✕</x-button>
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12 mb-4 overflow-y-auto h-96">
                 @foreach ($charts as $chartKey => $chart)
