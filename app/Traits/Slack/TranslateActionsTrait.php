@@ -52,6 +52,13 @@ trait TranslateActionsTrait
                 ];
             }
 
+            if ($action == 'device_error') {
+                $actionWithTranslation = [
+                    'id' => $action,
+                    'name' => 'Upozornění na změnu/problém na zařízení',
+                ];
+            }
+
             $slackActions[] = $actionWithTranslation;
         }
 

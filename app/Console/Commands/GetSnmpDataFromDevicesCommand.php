@@ -20,7 +20,7 @@ class GetSnmpDataFromDevicesCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Getting data from devices via snmp connection';
 
     /**
      * Execute the console command.

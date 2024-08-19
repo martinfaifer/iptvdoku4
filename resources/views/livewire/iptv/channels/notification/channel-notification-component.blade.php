@@ -86,8 +86,9 @@
             </x-share.cards.base-card>
         </div>
         <div class="col-span-12 ">
-            <p class="mt-2 ml-2 italic font-semibold text-sky-500">Pokud není vyplněn slack channel aplikuje se globální
+            <p class="mt-2 ml-2 text-sm italic font-semibold text-sky-500">Pokud není vyplněn slack channel aplikuje se globální
                 pravidlo pro odesílání!</p>
+                <p class="mt-2 ml-2 text-sm italic font-semibold text-sky-500">U streamu se bude kontrolovat maximální velikost datového toku, pokud se jedá o unicast</p>
         </div>
     </div>
 

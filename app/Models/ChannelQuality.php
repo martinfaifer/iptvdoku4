@@ -11,6 +11,7 @@ class ChannelQuality extends Model
     protected $fillable = [
         'name',
         'bitrate',
+        'min_bitrate',
         'port',
         'format',
     ];

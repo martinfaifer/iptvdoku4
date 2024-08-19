@@ -14,6 +14,7 @@ class Slack extends Model
         'calendar_notification',
         'restart_channel',
         'satelit_cards_expiration',
+        'device_error'
     ];
 
     protected $fillable = [
@@ -45,6 +46,10 @@ class Slack extends Model
         return $query->where('action', 'satelit_cards_expiration');
     }
 
+    public function scopeDeviceError(Builder $query)
+    {
+        return $query->where('action', 'device_error');
+    }
     public function scopeSearch(Builder $query, string $search = '')
     {
         return $query->where('description', 'like', '%'.$search.'%')->orWhere('url', 'like', '%'.$search.'%');

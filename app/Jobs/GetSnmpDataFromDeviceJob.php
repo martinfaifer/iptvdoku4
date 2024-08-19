@@ -2,17 +2,18 @@
 
 namespace App\Jobs;
 
-use App\Engines\Devices\SNMP\DeviceSnmpEngine;
 use App\Models\Chart;
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use App\Engines\Devices\SNMP\DeviceSnmpEngine;
+use App\Traits\Devices\CheckDeviceInterfaceStatusTrait;
 
 class GetSnmpDataFromDeviceJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, CheckDeviceInterfaceStatusTrait;
 
     /**
      * Create a new job instance.
@@ -39,7 +40,7 @@ class GetSnmpDataFromDeviceJob implements ShouldQueue
                         $generalSnmp['value'] = $snmpEngine->get($generalSnmp['oid']);
                         if ($generalSnmp['can_chart'] == 1) {
                             Chart::create([
-                                'item' => 'device:'.$this->device->id.':'.$generalSnmp['human_description'],
+                                'item' => 'device:' . $this->device->id . ':' . $generalSnmp['human_description'],
                                 'value' => (int) $generalSnmp['value'],
                             ]);
                         }
@@ -52,10 +53,21 @@ class GetSnmpDataFromDeviceJob implements ShouldQueue
                     if (array_key_exists('snmp', $input)) {
                         foreach ($input['snmp'] as &$inputSnmp) {
                             if ($inputSnmp['type'] == 'read') {
-                                $inputSnmp['value'] = $snmpEngine->get($inputSnmp['oid']);
+                                $valueOid = $snmpEngine->get($inputSnmp['oid']);
+
+                                if (str_contains($inputSnmp['human_description'], 'status')) {
+                                    $this->check_interface_status(
+                                        device: $this->device,
+                                        newStatus: $valueOid,
+                                        oldStatus: $inputSnmp['value'],
+                                        interface: $inputSnmp['human_description']
+                                    );
+                                }
+
+                                $inputSnmp['value'] = $valueOid;
                                 if ($inputSnmp['can_chart'] == 1) {
                                     Chart::create([
-                                        'item' => 'device:'.$this->device->id.':'.$inputSnmp['human_description'],
+                                        'item' => 'device:' . $this->device->id . ':' . $inputSnmp['human_description'],
                                         'value' => (int) $inputSnmp['value'],
                                     ]);
                                 }
@@ -73,7 +85,7 @@ class GetSnmpDataFromDeviceJob implements ShouldQueue
                                 $outputSnmp['value'] = $snmpEngine->get($outputSnmp['oid']);
                                 if ($outputSnmp['can_chart'] == 1) {
                                     Chart::create([
-                                        'item' => 'device:'.$this->device->id.':'.$outputSnmp['human_description'],
+                                        'item' => 'device:' . $this->device->id . ':' . $outputSnmp['human_description'],
                                         'value' => (int) $outputSnmp['value'],
                                     ]);
                                 }
