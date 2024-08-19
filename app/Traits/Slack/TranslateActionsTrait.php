@@ -6,7 +6,7 @@ use App\Models\Slack;
 
 trait TranslateActionsTrait
 {
-    public function translate()
+    public function translate(): array
     {
         $slackActions = [];
         foreach (Slack::ACTIONS as $action) {
