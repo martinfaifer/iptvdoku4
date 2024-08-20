@@ -7,10 +7,9 @@ use App\Models\Slack;
 
 trait CheckDeviceInterfaceStatusTrait
 {
-    public function check_interface_status($device, $newStatus, $oldStatus, $interface)
+    public function check_interface_status(object $device, string $newStatus, string $oldStatus, string $interface)
     {
-        // compare oldStatus with new status
-        if ($newStatus != "n/a") {
+        if ($newStatus != "n/a" || $oldStatus != "n/a") {
             if ($oldStatus != $newStatus) {
                 $slackChannel = Slack::deviceError()->first();
                 if ($slackChannel) {
