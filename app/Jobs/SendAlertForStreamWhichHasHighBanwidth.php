@@ -45,37 +45,37 @@ class SendAlertForStreamWhichHasHighBanwidth implements ShouldQueue
             foreach (IptvDohledUrlsNotification::where('iptv_dohled_url_id', $monitoredStream->id)->get() as $notification) {
                 // check if is filled slack_channel
                 if (! blank($notification->slack_channel)) {
-                    if (! Cache::has('sended_slack_alert_high_banwidth_'.$this->stream_url.$notification->slack_channel)) {
+                    if (! Cache::has('sended_slack_alert_high_banwidth_' . $this->stream_url . $notification->slack_channel)) {
                         (new SendSlackNotificationAction(
-                            text: 'Stream  '.$this->stream_url.'má datový tok '.implode(', ', $this->highBanwidt).' který je vyšší než povolený maximální '.$this->maxAllowedBanwidth,
+                            text: 'Stream  ' . $this->stream_url . 'má datový tok ' . implode(', ', $this->highBanwidt) . ' který je vyšší než povolený maximální ' . $this->maxAllowedBanwidth,
                             url: $notification->slack_channel
                         ))();
 
-                        Cache::put('sended_slack_alert_high_banwidth_'.$this->stream_url.$notification->slack_channel, [], $this->cacheTimeout);
+                        Cache::put('sended_slack_alert_high_banwidth_' . $this->stream_url . $notification->slack_channel, [], $this->cacheTimeout);
                     }
                 }
                 // check if is filled email
                 if (! blank($notification->email)) {
-                    if (! Cache::has('sended_email_alert_high_banwidth_'.$this->stream_url.$notification->email)) {
+                    if (! Cache::has('sended_email_alert_high_banwidth_' . $this->stream_url . $notification->email)) {
                         // email class need to be here
                         Mail::to($notification->email)->queue(new SendNotificationEmail(
-                            emailSubject: 'Stream '.$this->stream_url.' má vyšší datový tok',
-                            emailContent: 'Stream  '.$this->stream_url.' má datový tok '.implode(', ', $this->highBanwidt).' který je vyšší než povolený maximální '.round($this->maxAllowedBanwidth, 1),
+                            emailSubject: 'Stream ' . $this->stream_url . ' má vyšší datový tok',
+                            emailContent: 'Stream  ' . $this->stream_url . ' má datový tok ' . implode(', ', $this->highBanwidt) . ' který je vyšší než povolený maximální ' . round($this->maxAllowedBanwidth, 1),
                         ));
-                        Cache::put('sended_email_alert_high_banwidth_'.$this->stream_url.$notification->email, [], $this->cacheTimeout);
+                        Cache::put('sended_email_alert_high_banwidth_' . $this->stream_url . $notification->email, [], $this->cacheTimeout);
                     }
                 }
             }
         } else {
             // send to default channel
-            if ($defaultSlackChannel) {
-                if (! Cache::has('sended_slack_alert_high_banwidth_'.$this->stream_url.$defaultSlackChannel->url)) {
+            if (!blank($defaultSlackChannel)) {
+                if (! Cache::has('sended_slack_alert_high_banwidth_' . $this->stream_url . $defaultSlackChannel->url)) {
                     (new SendSlackNotificationAction(
-                        text: 'Stream  '.$this->stream_url.'má datový tok '.implode(', ', $this->highBanwidt).' který je vyšší než povolený maximální '.$this->maxAllowedBanwidth,
+                        text: 'Stream  ' . $this->stream_url . 'má datový tok ' . implode(', ', $this->highBanwidt) . ' který je vyšší než povolený maximální ' . $this->maxAllowedBanwidth,
                         url: $defaultSlackChannel->url
                     ))();
 
-                    Cache::put('sended_slack_alert_high_banwidth_'.$this->stream_url.$defaultSlackChannel->url, [], $this->cacheTimeout);
+                    Cache::put('sended_slack_alert_high_banwidth_' . $this->stream_url . $defaultSlackChannel->url, [], $this->cacheTimeout);
                 }
             }
         }
