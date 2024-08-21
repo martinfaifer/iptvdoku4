@@ -15,63 +15,7 @@ class UserPolicy
         return null;
     }
 
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, User $model): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, User $model): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, User $model): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, User $model): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, User $model): bool
-    {
-        //
-    }
-
-    public function show_settings_link(User $user)
+    public function show_settings_link(User $user): bool
     {
         if ($user->isReader() || $user->isApi()) {
             return false;
@@ -80,7 +24,7 @@ class UserPolicy
         return true;
     }
 
-    public function show_settings_dashboard(User $user)
+    public function show_settings_dashboard(User $user): bool
     {
         if ($user->isReader() || $user->isApi()) {
             return false;
@@ -89,7 +33,7 @@ class UserPolicy
         return true;
     }
 
-    public function show_settings_tags(User $user)
+    public function show_settings_tags(User $user): bool
     {
         if ($user->isTechnik()) {
             return true;
@@ -98,21 +42,12 @@ class UserPolicy
         return false;
     }
 
-    public function show_settings_users(User $user)
+    public function show_settings_users(User $user): bool
     {
         return false;
     }
 
-    public function show_settings_devices(User $user)
-    {
-        if ($user->isTechnik()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function show_settings_notifications(User $user)
+    public function show_settings_devices(User $user): bool
     {
         if ($user->isTechnik()) {
             return true;
@@ -121,7 +56,16 @@ class UserPolicy
         return false;
     }
 
-    public function show_settings_channels(User $user)
+    public function show_settings_notifications(User $user): bool
+    {
+        if ($user->isTechnik()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function show_settings_channels(User $user): bool
     {
         if ($user->isTechnik() || $user->isAdministrativa()) {
             return true;
@@ -130,7 +74,7 @@ class UserPolicy
         return false;
     }
 
-    public function show_settings_channels_restart(User $user)
+    public function show_settings_channels_restart(User $user): bool
     {
         if ($user->isTechnik()) {
             return true;
@@ -139,7 +83,7 @@ class UserPolicy
         return false;
     }
 
-    public function show_ip_prefixes(User $user)
+    public function show_ip_prefixes(User $user): bool
     {
         if ($user->isTechnik()) {
             return true;
@@ -148,7 +92,7 @@ class UserPolicy
         return false;
     }
 
-    public function show_iptv_monitoring(User $user)
+    public function show_iptv_monitoring(User $user): bool
     {
         if ($user->isTechnik()) {
             return true;
@@ -157,7 +101,7 @@ class UserPolicy
         return false;
     }
 
-    public function show_settings_channels_banners(User $user)
+    public function show_settings_channels_banners(User $user): bool
     {
         if ($user->isTechnik() || $user->isAdministrativa()) {
             return true;
@@ -166,7 +110,7 @@ class UserPolicy
         return false;
     }
 
-    public function show_settings_channels_multicast_sources(User $user)
+    public function show_settings_channels_multicast_sources(User $user): bool
     {
         if ($user->isTechnik()) {
             return true;
@@ -175,7 +119,7 @@ class UserPolicy
         return false;
     }
 
-    public function show_settings_nangu(User $user)
+    public function show_settings_nangu(User $user): bool
     {
         if ($user->isTechnik() || $user->isAdministrativa()) {
             return true;
@@ -184,16 +128,16 @@ class UserPolicy
         return false;
     }
 
-    public function show_settings_logs(User $user)
+    public function show_settings_logs(User $user): bool
     {
         if ($user->isAdmin()) {
             return true;
         }
 
-        return null;
+        return false;
     }
 
-    public function show_settings_geniustv(User $user)
+    public function show_settings_geniustv(User $user): bool
     {
         if ($user->isAdministrativa()) {
             return true;
@@ -202,7 +146,7 @@ class UserPolicy
         return false;
     }
 
-    public function show_tickets(User $user)
+    public function show_tickets(User $user): bool
     {
         if ($user->isReader() || $user->isApi()) {
             return false;

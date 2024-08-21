@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class SatelitCardObserver
 {
-    public function created(SatelitCard $satelitCard)
+    public function created(SatelitCard $satelitCard): void
     {
         LogJob::dispatch(
             user: Auth::user()->email,
@@ -24,7 +24,7 @@ class SatelitCardObserver
         BroadcastLogEvent::dispatch('satelit_card', $satelitCard->id);
     }
 
-    public function updated(SatelitCard $satelitCard)
+    public function updated(SatelitCard $satelitCard): void
     {
         if (Auth::user()) {
             LogJob::dispatch(
@@ -40,7 +40,7 @@ class SatelitCardObserver
         BroadcastLogEvent::dispatch('satelit_card', $satelitCard->id);
     }
 
-    public function deleted(SatelitCard $satelitCard)
+    public function deleted(SatelitCard $satelitCard): void
     {
         LogJob::dispatch(
             user: Auth::user()->email,

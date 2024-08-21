@@ -27,7 +27,7 @@ class EndCalendarEventCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         if (Event::where('end_date', now()->format('Y-m-d'))
             ->where('end_time', now()->format('H:i'))

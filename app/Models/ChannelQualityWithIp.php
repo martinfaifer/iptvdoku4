@@ -12,7 +12,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ChannelQualityWithIp extends Model
 {
     protected $fillable = [
-        'h264_id', 'h265_id', 'channel_quality_id', 'ip',
+        'h264_id',
+        'h265_id',
+        'channel_quality_id',
+        'ip',
     ];
 
     public function h264(): BelongsTo
@@ -30,8 +33,8 @@ class ChannelQualityWithIp extends Model
         return $this->belongsTo(ChannelQuality::class, 'channel_quality_id');
     }
 
-    public function scopeSearch(Builder $query, string $search = '')
+    public function scopeSearch(Builder $query, string $search = ''): void
     {
-        return $query->where('ip', 'like', '%'.$search.'%');
+        $query->where('ip', 'like', '%' . $search . '%');
     }
 }

@@ -14,7 +14,7 @@ class CreateGeniusTvTvPackageForm extends Form
     #[Validate('unique:genius_tv_channel_packages,name', message: 'Balíček již existuje')]
     public string $name = '';
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

@@ -20,10 +20,10 @@ class GeniusTVChannelsOffersTax extends Model
         return $this->belongsTo(Currency::class, 'currency', 'id');
     }
 
-    public function scopeSearch(Builder $query, string $search = '')
+    public function scopeSearch(Builder $query, string $search = ''): void
     {
         if (!blank($search)) {
-            return $query->whereJsonContains('channels_id', Channel::search($search)->first()?->id);
+            $query->whereJsonContains('channels_id', Channel::search($search)->first()?->id);
         }
     }
 }

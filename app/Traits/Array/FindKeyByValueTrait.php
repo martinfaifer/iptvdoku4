@@ -4,7 +4,7 @@ namespace App\Traits\Array;
 
 trait FindKeyByValueTrait
 {
-    public function get_value_key($array, $arraySearcheableKey, $needle)
+    public function get_value_key(array $array, string $arraySearcheableKey, string $needle): mixed
     {
         foreach ($array as $key => $value) {
             if ($value[$arraySearcheableKey] == $needle) {

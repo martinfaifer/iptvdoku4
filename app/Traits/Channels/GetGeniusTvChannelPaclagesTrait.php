@@ -10,12 +10,12 @@ trait GetGeniusTvChannelPaclagesTrait
     {
         $packages = [];
 
-        if (is_null($packagesIds)) {
+        if (blank($packagesIds)) {
             return $packages;
         }
 
         foreach ($packagesIds as $packageId) {
-            $packages[] = GeniusTvChannelPackage::find($packageId)->name;
+            $packages[] = GeniusTvChannelPackage::find($packageId)->name;  // @phpstan-ignore-line
         }
 
         return $packages;

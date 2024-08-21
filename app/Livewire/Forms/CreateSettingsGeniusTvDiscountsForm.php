@@ -17,7 +17,7 @@ class CreateSettingsGeniusTvDiscountsForm extends Form
     #[Validate('max:10', message: 'Maximální počet znaků je :max')]
     public string $discount = '';
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

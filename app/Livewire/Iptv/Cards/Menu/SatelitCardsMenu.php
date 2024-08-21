@@ -2,26 +2,27 @@
 
 namespace App\Livewire\Iptv\Cards\Menu;
 
-use App\Models\SatelitCardVendor;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use App\Models\SatelitCardVendor;
+use Illuminate\Contracts\View\Factory;
 
 class SatelitCardsMenu extends Component
 {
-    public $satelitCardsWithVendor;
+    public mixed $satelitCardsWithVendor;
 
-    public function mount()
+    public function mount(): void
     {
         $this->loadSatCards();
     }
 
     #[On('update_satelit_cards_menu')]
-    public function loadSatCards()
+    public function loadSatCards(): void
     {
         $this->satelitCardsWithVendor = SatelitCardVendor::with('satelit_cards')->get();
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.iptv.cards.menu.satelit-cards-menu');
     }

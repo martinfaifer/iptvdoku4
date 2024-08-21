@@ -7,6 +7,7 @@ use App\Models\ChannelMulticast;
 use App\Models\ChannelQualityWithIp;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -15,9 +16,9 @@ class IptvMonitoringComponent extends Component
     use NotificationTrait;
     public bool $isMinimaze = false;
     public bool $isClosed = false;
-    public $user;
+    public mixed $user;
 
-    public function mount()
+    public function mount(): void
     {
         $this->user = Auth::user();
 
@@ -35,7 +36,7 @@ class IptvMonitoringComponent extends Component
             $this->isMinimaze = false;
         }
     }
-    public function toStream($streamUrl)
+    public function toStream(string $streamUrl): mixed
     {
         $channelQualityWithIp = ChannelQualityWithIp::where('ip', $streamUrl)->first();
         if ($channelQualityWithIp) {
@@ -56,7 +57,7 @@ class IptvMonitoringComponent extends Component
         return $this->error_alert("Nepodařilo se najít kanál");
     }
 
-    public function minimizeWindow()
+    public function minimizeWindow(): bool
     {
         $this->user->update([
             'iptv_monitoring_window' => "minimaze"
@@ -64,7 +65,7 @@ class IptvMonitoringComponent extends Component
         return $this->isMinimaze = true;
     }
 
-    public function maximizeWindow()
+    public function maximizeWindow(): bool
     {
         $this->user->update([
             'iptv_monitoring_window' => "maximaze"
@@ -72,7 +73,7 @@ class IptvMonitoringComponent extends Component
         return $this->isMinimaze = false;
     }
 
-    public function closeWindow()
+    public function closeWindow(): bool
     {
         $this->user->update([
             'iptv_monitoring_window' => "closed"
@@ -80,7 +81,7 @@ class IptvMonitoringComponent extends Component
         return $this->isClosed = true;
     }
 
-    public function render()
+    public function render():\Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.iptv-monitoring.iptv-monitoring-component', [
             'alerts' => Cache::get('iptv_dohled_all_alerts')

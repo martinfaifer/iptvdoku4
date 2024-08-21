@@ -6,7 +6,7 @@ use App\Models\NanguSubscription;
 
 class NanguOffersService
 {
-    public function getInfo()
+    public function getInfo(): void
     {
         $connection = (new ConnectService('billing'));
         $subscriptions = NanguSubscription::with('subscriber.nanguIsp')->get();

@@ -24,7 +24,7 @@ class UpdateSftpServerForm extends Form
     #[Validate('string', message: 'Neplatný formát')]
     public ?string $path_to_folder = null;
 
-    public function set_sftp_server($sftpServer)
+    public function set_sftp_server(object $sftpServer): void
     {
         $this->sftpServer = $sftpServer;
         $this->username = $sftpServer->username;
@@ -32,7 +32,7 @@ class UpdateSftpServerForm extends Form
         $this->path_to_folder = $sftpServer->path_to_folder;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

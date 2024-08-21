@@ -11,25 +11,25 @@ class DevicesMenu extends Component
 {
     use CacheDevicesTrait;
 
-    public $categoriesWithDevices;
+    public mixed $categoriesWithDevices;
 
-    public function mount()
+    public function mount(): void
     {
         $this->loadDevices();
     }
 
     #[On('echo:refresh-devices-menu,BroadcastDevicesMenuEvent')]
     #[On('update_devices_menu')]
-    public function loadDevices()
+    public function loadDevices(): void
     {
         if (! Cache::has('devices_menu')) {
             $this->cache_devices_for_menu();
         }
 
-        return $this->categoriesWithDevices = Cache::get('devices_menu');
+        $this->categoriesWithDevices = Cache::get('devices_menu');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.menu.devices-menu');
     }

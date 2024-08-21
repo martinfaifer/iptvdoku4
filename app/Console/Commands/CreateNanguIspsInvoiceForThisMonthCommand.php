@@ -24,7 +24,7 @@ class CreateNanguIspsInvoiceForThisMonthCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         (new CreateNanguInvoicePerIsp())->create();
     }

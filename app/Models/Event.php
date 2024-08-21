@@ -15,13 +15,25 @@ use Illuminate\Support\Str;
 class Event extends Model
 {
     const BANNER_NAMES = [
-        'stb_1113_grape.png', 'stb_1113_grape_ostatni.png',
+        'stb_1113_grape.png',
+        'stb_1113_grape_ostatni.png',
     ];
 
     protected $fillable = [
-        'label', 'description', 'color', 'start_date', 'start_time',
-        'end_date', 'end_time', 'creator', 'users', 'channels', 'tag_id',
-        'fe_notification', 'banner_path', 'sftp_server_id',
+        'label',
+        'description',
+        'color',
+        'start_date',
+        'start_time',
+        'end_date',
+        'end_time',
+        'creator',
+        'users',
+        'channels',
+        'tag_id',
+        'fe_notification',
+        'banner_path',
+        'sftp_server_id',
     ];
 
     // public function description(): Attribute
@@ -51,19 +63,19 @@ class Event extends Model
         return $this->hasOne(SftpServer::class, 'id', 'sftp_server_id');
     }
 
-    public function scopeRunningEvents(Builder $query)
+    public function scopeRunningEvents(Builder $query): void
     {
-        return $query->where('start_date', '<=', now()->format('Y-m-d'))
+        $query->where('start_date', '<=', now()->format('Y-m-d'))
             ->where('end_date', '>=', now()->format('Y-m-d'));
     }
 
-    public function scopeHasFeNotification(Builder $query)
+    public function scopeHasFeNotification(Builder $query): void
     {
-        return $query->where('fe_notification', true);
+        $query->where('fe_notification', true);
     }
 
-    public function scopeForUser(Builder $query, string $userEmail)
+    public function scopeForUser(Builder $query, string $userEmail): void
     {
-        return $query->where('creator', $userEmail);
+        $query->where('creator', $userEmail);
     }
 }

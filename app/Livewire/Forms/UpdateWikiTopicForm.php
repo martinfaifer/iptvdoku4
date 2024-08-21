@@ -21,9 +21,9 @@ class UpdateWikiTopicForm extends Form
 
     #[Validate('required', message: 'Vyberte kategorii')]
     #[Validate('exists:wiki_categories,id', message: 'Neexistující kategrie')]
-    public $wiki_category_id = null;
+    public mixed $wiki_category_id = null;
 
-    public function setTopic(WikiTopic $topic)
+    public function setTopic(WikiTopic $topic): void
     {
         $this->topic = $topic;
         $this->title = $topic->title;
@@ -31,7 +31,7 @@ class UpdateWikiTopicForm extends Form
         $this->wiki_category_id = $topic->wiki_category_id;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->topic->update([
             'title' => $this->title,

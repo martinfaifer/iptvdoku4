@@ -13,8 +13,8 @@ class Session extends Model
         'last_activity' => 'datetime',
     ];
 
-    public function scopeForUser(Builder $query, int $userId)
+    public function scopeForUser(Builder $query, int $userId): void
     {
-        return $query->where('user_id', $userId);
+        $query->where('user_id', $userId);
     }
 }

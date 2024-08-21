@@ -16,9 +16,9 @@ class DeviceTemplateEngine
 
     public function generate(Device $device, ?array $inputs = null, ?array $outputs = null, ?array $modules = null): bool
     {
-        if (! is_null($inputs) || $inputs['numberOfInInterfaces'] != 0) {
+        if (!blank($inputs) || $inputs['numberOfInInterfaces'] != 0) {
             for ($i = 1; $i <= $inputs['numberOfInInterfaces']; $i++) {
-                $this->template['inputs']['input_'.$i] = $this->generate_interface(
+                $this->template['inputs']['input_' . $i] = $this->generate_interface(
                     interfaceData: $inputs,
                     interfaceNumber: $i,
                     deviceVendorId: $device->device_vendor_id,
@@ -27,9 +27,9 @@ class DeviceTemplateEngine
             }
         }
 
-        if (! is_null($outputs) || $outputs['numberOfOutInterfaces'] != 0) {
+        if (!blank($outputs) || $outputs['numberOfOutInterfaces'] != 0) {
             for ($i = 1; $i <= $outputs['numberOfOutInterfaces']; $i++) {
-                $this->template['outputs']['output_'.$i] = $this->generate_interface(
+                $this->template['outputs']['output_' . $i] = $this->generate_interface(
                     interfaceData: $outputs,
                     interfaceNumber: $i,
                     deviceVendorId: $device->device_vendor_id,
@@ -38,9 +38,9 @@ class DeviceTemplateEngine
             }
         }
 
-        if (! is_null($modules) || $modules['numberOfModules'] != 0) {
+        if (!blank($modules) || $modules['numberOfModules'] != 0) {
             for ($i = 1; $i <= $modules['numberOfModules']; $i++) {
-                $this->template['modules']['modul_'.$i] = $this->generate_interface(
+                $this->template['modules']['modul_' . $i] = $this->generate_interface(
                     interfaceData: $modules,
                     interfaceNumber: $i,
                     deviceVendorId: $device->device_vendor_id,
@@ -68,7 +68,7 @@ class DeviceTemplateEngine
         $templateName = explode(' ', $device->name);
 
         DeviceTemplate::create([
-            'name' => $templateName[0].'_'.Str::random(5),
+            'name' => $templateName[0] . '_' . Str::random(5),
             'template' => $this->template,
         ]);
 
@@ -79,9 +79,9 @@ class DeviceTemplateEngine
         return true;
     }
 
-    public function update(Device $device, $updatedInterface, $updatedInterfaceType, $updatedInterfaceKey): bool
+    public function update(Device $device, mixed $updatedInterface, string $updatedInterfaceType, mixed $updatedInterfaceKey): bool
     {
-        $template = $device->template;
+        $template = $device->template;  // @phpstan-ignore-line
         $template[$updatedInterfaceType][$updatedInterfaceKey] = $updatedInterface;
         $device->update([
             'template' => $template,

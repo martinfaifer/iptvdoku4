@@ -32,7 +32,7 @@ class ApiChannelsResource extends JsonResource
         return Cache::get('channels_in_api');
     }
 
-    protected function get_value_from_array(?array $array, string $key)
+    protected function get_value_from_array(?array $array, string $key):mixed
     {
         if (is_null($array)) {
             return null;

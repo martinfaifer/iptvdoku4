@@ -9,7 +9,7 @@ use App\Models\NanguSubscription;
 
 class NanguChannelsService
 {
-    public function get_channels_by_channels_packages_code()
+    public function get_channels_by_channels_packages_code(): void
     {
         $connection = (new ConnectService('billing'));
         $subscriptions = NanguSubscription::with('subscriber.nanguIsp')->get();
@@ -82,7 +82,7 @@ class NanguChannelsService
         }
     }
 
-    public function count_channels_usage_per_isp()
+    public function count_channels_usage_per_isp(): void
     {
         $nanguIsps = NanguIsp::get();
         $channels = Channel::withNanguChannelCode()->get(['id', 'name', 'nangu_channel_code']);
@@ -101,7 +101,7 @@ class NanguChannelsService
         }
     }
 
-    public function count_channels_usage_total()
+    public function count_channels_usage_total(): void
     {
         $channels = Channel::withNanguChannelCode()->get(['id', 'name', 'nangu_channel_code']);
 

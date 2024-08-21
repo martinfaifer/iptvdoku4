@@ -13,12 +13,12 @@ class DeviceAlertComponent extends Component
 
     public Collection $deviceAlerts;
 
-    public function mount()
+    public function mount(): void
     {
         $this->deviceAlerts = Alert::where('item_id', $this->device->id)->orderBy('id', 'DESC')->take(10)->get();
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.device-alert-component');
     }

@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Settings\Geniustv\Invoices;
 
-use App\Models\NanguIspInvoice;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\NanguIspInvoice;
+use Illuminate\Contracts\View\Factory;
 
 class SettingsGeniusTvInvoicesComponent extends Component
 {
@@ -14,13 +15,13 @@ class SettingsGeniusTvInvoicesComponent extends Component
 
     public string $query = '';
 
-    public string $selectedInvoiceMonth;
+    public int $selectedInvoiceMonth;
 
-    public string $selectedInvoiceYear;
+    public int $selectedInvoiceYear;
 
     public array $availableInvoiceDates;
 
-    public function mount()
+    public function mount(): void
     {
         $this->selectedInvoiceMonth = now()->month;
         $this->selectedInvoiceYear = now()->year;
@@ -31,7 +32,7 @@ class SettingsGeniusTvInvoicesComponent extends Component
         }
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         $dateArray = explode('-', $this->selectedDate);
 

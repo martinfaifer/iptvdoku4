@@ -13,7 +13,7 @@ class StoreNoteForm extends Form
     #[Validate('string', message: "Neplatný formát")]
     public string $note = '';
 
-    public function store($column, $id)
+    public function store(string $column, string $id): void
     {
         $this->validate();
         Note::create([

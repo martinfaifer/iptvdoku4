@@ -14,7 +14,7 @@ class CreateSettingsDevicesDistributorsForm extends Form
     #[Validate('unique:satelit_card_vendors,name', message: 'Tento distributor již existuje')]
     public string $name = '';
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

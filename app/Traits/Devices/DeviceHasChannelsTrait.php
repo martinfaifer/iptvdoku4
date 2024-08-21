@@ -6,7 +6,7 @@ use App\Models\Device;
 
 trait DeviceHasChannelsTrait
 {
-    public function devices_belongs_to_channel_type(string $channelWithType)
+    public function devices_belongs_to_channel_type(string $channelWithType): mixed
     {
         return Device::with('category')->get()->filter(function ($device) use ($channelWithType) {
             if (is_array($device->has_channels)) {

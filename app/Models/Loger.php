@@ -25,16 +25,16 @@ class Loger extends Model
 
     public function prunable(): Builder
     {
-        return static::where('created_at', '<=', now()->submonths(2));
+        return static::where('created_at', '<=', now()->submonths(2)); // @phpstan-ignore-line
     }
 
-    public function scopeForUser(Builder $query, string $user)
+    public function scopeForUser(Builder $query, string $user): void
     {
-        return $query->where('user', $user);
+        $query->where('user', $user);
     }
 
-    public function scopeSearch(Builder $query, string $search = "")
+    public function scopeSearch(Builder $query, string $search = ""): void
     {
-        return $query->where('user', "like", "%" . $search . "%")->orWhere('payload', "like", "%" . $search . "%");
+        $query->where('user', "like", "%" . $search . "%")->orWhere('payload', "like", "%" . $search . "%");
     }
 }

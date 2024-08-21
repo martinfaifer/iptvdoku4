@@ -18,40 +18,42 @@ class Slack extends Model
     ];
 
     protected $fillable = [
-        'url', 'description', 'action',
+        'url',
+        'description',
+        'action',
     ];
 
-    public function scopeRestartChannelAction(Builder $query)
+    public function scopeRestartChannelAction(Builder $query): void
     {
-        return $query->where('action', 'restart_channel');
+        $query->where('action', 'restart_channel');
     }
 
-    public function scopeCrashedChannelAction(Builder $query)
+    public function scopeCrashedChannelAction(Builder $query): void
     {
-        return $query->where('action', 'crashed_channel');
+        $query->where('action', 'crashed_channel');
     }
 
-    public function scopeWeatherNotificationAction(Builder $query)
+    public function scopeWeatherNotificationAction(Builder $query): void
     {
-        return $query->where('action', 'weather_notification');
+        $query->where('action', 'weather_notification');
     }
 
-    public function scopeGpuProblemNotificationAction(Builder $query)
+    public function scopeGpuProblemNotificationAction(Builder $query): void
     {
-        return $query->where('action', 'gpu_problem_notification');
+        $query->where('action', 'gpu_problem_notification');
     }
 
-    public function scopeSatelitcardExpiration(Builder $query)
+    public function scopeSatelitcardExpiration(Builder $query): void
     {
-        return $query->where('action', 'satelit_cards_expiration');
+        $query->where('action', 'satelit_cards_expiration');
     }
 
-    public function scopeDeviceError(Builder $query)
+    public function scopeDeviceError(Builder $query): void
     {
-        return $query->where('action', 'device_error');
+        $query->where('action', 'device_error');
     }
-    public function scopeSearch(Builder $query, string $search = '')
+    public function scopeSearch(Builder $query, string $search = ''): void
     {
-        return $query->where('description', 'like', '%'.$search.'%')->orWhere('url', 'like', '%'.$search.'%');
+        $query->where('description', 'like', '%' . $search . '%')->orWhere('url', 'like', '%' . $search . '%');
     }
 }

@@ -10,31 +10,32 @@ use Illuminate\Support\Facades\Auth;
 
 class H265Observer
 {
-    public function created(H265 $h265)
+    public function created(H265 $h265): void
     {
-        if (! Auth::user()) {
-            $email = 'system@';
-
-            SendEmailNotificationJob::dispatch(
-                'Byl přidán H265 k '.$h265->channel->name,
-                'Uživatel '.Auth::user()->email.' přidal H265 k '.$h265->channel->name,
-                Auth::user()->email,
-                'notify_if_channel_change'
-            );
+        $email = 'system@';
+        if (Auth::user()) {
+            $email = Auth::user()->email;
         }
+        SendEmailNotificationJob::dispatch(
+            'Byl přidán H265 k ' . $h265->channel->name,
+            'Uživatel ' . $email . ' přidal H265 k ' . $h265->channel->name,
+            $email,
+            'notify_if_channel_change'
+        );
+
         LogJob::dispatch(
-            user: isset($email) ? $email : Auth::user()->email,
+            user: $email,
             type: Loger::CREATED_TYPE,
             item: "h265:$h265->channel_id",
             payload: json_encode([
                 'id' => $h265->id,
-                'devices_id' => $h265->device_id,
+                'devices_id' => $h265->devices_id,
                 'status' => $h265->status,
             ])
         );
     }
 
-    public function updated(H265 $h265)
+    public function updated(H265 $h265): void
     {
         LogJob::dispatch(
             user: Auth::user()->email,
@@ -42,20 +43,20 @@ class H265Observer
             item: "h265:$h265->channel_id",
             payload: json_encode([
                 'id' => $h265->id,
-                'devices_id' => $h265->device_id,
+                'devices_id' => $h265->devices_id,
                 'status' => $h265->status,
             ])
         );
 
         SendEmailNotificationJob::dispatch(
-            'Byl upraven H265 u '.$h265->channel->name,
-            'Uživatel '.Auth::user()->email.' upravil H265 u '.$h265->channel->name,
+            'Byl upraven H265 u ' . $h265->channel->name,
+            'Uživatel ' . Auth::user()->email . ' upravil H265 u ' . $h265->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );
     }
 
-    public function deleted(H265 $h265)
+    public function deleted(H265 $h265): void
     {
         LogJob::dispatch(
             user: Auth::user()->email,
@@ -63,14 +64,14 @@ class H265Observer
             item: "h265:$h265->channel_id",
             payload: json_encode([
                 'id' => $h265->id,
-                'devices_id' => $h265->device_id,
+                'devices_id' => $h265->devices_id,
                 'status' => $h265->status,
             ])
         );
 
         SendEmailNotificationJob::dispatch(
-            'Byl odebrán H265 u '.$h265->channel->name,
-            'Uživatel '.Auth::user()->email.' odebral H265 u '.$h265->channel->name,
+            'Byl odebrán H265 u ' . $h265->channel->name,
+            'Uživatel ' . Auth::user()->email . ' odebral H265 u ' . $h265->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );

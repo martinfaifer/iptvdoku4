@@ -17,7 +17,7 @@ class ChannelObserver
 {
     use CacheChannelsForApi;
 
-    public function created(Channel $channel)
+    public function created(Channel $channel): void
     {
         if (! Auth::user()) {
             $email = 'system@';
@@ -55,7 +55,7 @@ class ChannelObserver
         $this->cache_channels_with_detail();
     }
 
-    public function updated(Channel $channel)
+    public function updated(Channel $channel): void
     {
         LogJob::dispatch(
             user: Auth::user()->email,
@@ -93,7 +93,7 @@ class ChannelObserver
         $this->cache_channels_with_detail();
     }
 
-    public function deleted(Channel $channel)
+    public function deleted(Channel $channel): void
     {
         LogJob::dispatch(
             user: Auth::user()->email,

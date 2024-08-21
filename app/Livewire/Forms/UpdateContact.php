@@ -25,7 +25,7 @@ class UpdateContact extends Form
     #[Validate('max:255', message: 'Maximální počet znaků je :max')]
     public string $phone = '';
 
-    public function set_contact($contact)
+    public function set_contact(object $contact): void
     {
         $this->contact = $contact;
         $this->full_name = $contact->full_name;
@@ -33,7 +33,7 @@ class UpdateContact extends Form
         $this->phone = $contact->phone;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->contact->update([
             'full_name' => $this->full_name,

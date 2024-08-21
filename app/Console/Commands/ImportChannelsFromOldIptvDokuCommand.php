@@ -31,10 +31,10 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $responseJson = Http::withBasicAuth(config('services.api.5.old_iptv_doku.user'), config('services.api.5.old_iptv_doku.password'))
-            ->get(config('services.api.5.old_iptv_doku.url').'/api/v1/channels')->json();
+            ->get(config('services.api.5.old_iptv_doku.url') . '/api/v1/channels')->json();
 
         foreach ($responseJson['data'] as $channel) {
             $path = null;
@@ -42,7 +42,7 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
                 $logo = str_replace('//', '/', $channel['logo']);
                 $explodedLogo = explode('/', $logo);
                 if (array_key_exists(4, $explodedLogo)) {
-                    $path = 'public/Logos/'.$explodedLogo[4];
+                    $path = 'public/Logos/' . $explodedLogo[4];
                 }
             }
 
@@ -134,30 +134,39 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
         }
     }
 
-    protected function findQuality($oldQualityId)
+    protected function findQuality(int $oldQualityId): int
     {
-        if ($oldQualityId == 1) {
-            return 1;
-        }
+        return match ($oldQualityId) {
+            1 => 1,
+            2 => 2,
+            3 => 3,
+            4 => 5,
+            5 => 6,
+            6 => 4,
+            default => 1,
+        };
+        // if ($oldQualityId == 1) {
+        //     return 1;
+        // }
 
-        if ($oldQualityId == 2) {
-            return 2;
-        }
+        // if ($oldQualityId == 2) {
+        //     return 2;
+        // }
 
-        if ($oldQualityId == 3) {
-            return 3;
-        }
+        // if ($oldQualityId == 3) {
+        //     return 3;
+        // }
 
-        if ($oldQualityId == 4) {
-            return 5;
-        }
+        // if ($oldQualityId == 4) {
+        //     return 5;
+        // }
 
-        if ($oldQualityId == 5) {
-            return 6;
-        }
+        // if ($oldQualityId == 5) {
+        //     return 6;
+        // }
 
-        if ($oldQualityId == 6) {
-            return 4;
-        }
+        // if ($oldQualityId == 6) {
+        //     return 4;
+        // }
     }
 }

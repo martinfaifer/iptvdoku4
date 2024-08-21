@@ -13,7 +13,7 @@ class ChannelNotificationSlackForm extends Form
     #[Validate('max:255', message: "Maximální počet znaků je :max")]
     public string $slack_channel = "";
 
-    public function create(object $iptvDohledUrl)
+    public function create(object $iptvDohledUrl): void
     {
         $this->validate();
         IptvDohledUrlsNotification::create([
@@ -23,7 +23,7 @@ class ChannelNotificationSlackForm extends Form
         $this->reset();
     }
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
         IptvDohledUrlsNotification::where('id', $id)->first()->delete();
     }

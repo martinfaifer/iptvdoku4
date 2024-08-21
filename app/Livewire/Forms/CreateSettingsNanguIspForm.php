@@ -48,7 +48,7 @@ class CreateSettingsNanguIspForm extends Form
     #[Validate('unique:nangu_isps,crm_contract_id', message: 'Tento contract id již existuje')]
     public ?string $crm_contract_id = null;
 
-    public function create()
+    public function create(): mixed
     {
         $this->validate();
 

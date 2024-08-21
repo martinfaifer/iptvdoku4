@@ -14,9 +14,9 @@ class AvatarForm extends Form
     #[Validate('required', message: 'Nemůžete nahrát nic')]
     #[Validate('image', message: 'Neplatný formát')]
     #[Validate('max:1024', message: 'Maximální velikost souboru je :size')]
-    public $avatar;
+    public mixed $avatar;
 
-    public function upload_avatar()
+    public function upload_avatar(): void
     {
         $this->validate();
         $path = $this->avatar->store(path: 'public/avatars');
@@ -27,7 +27,7 @@ class AvatarForm extends Form
         $this->reset();
     }
 
-    public function delete_avatar()
+    public function delete_avatar(): void
     {
         Auth::user()->update([
             'avatar_url' => null,

@@ -14,7 +14,7 @@ class NimbleApiComponent extends Component
 
     public ?Device $device;
 
-    public $deviceNimbleCachedData;
+    public mixed $deviceNimbleCachedData;
 
     public array $nimbleServerApiData;
 
@@ -28,7 +28,7 @@ class NimbleApiComponent extends Component
 
     public bool $editServerApiModal = false;
 
-    public function mount()
+    public function mount(): void
     {
         $this->incomingStreams = Cache::get('nimble_' . $this->device->id . '_incoming_streams');
         // dd($this->incomingStreams);
@@ -37,37 +37,26 @@ class NimbleApiComponent extends Component
         $this->deviceNimbleCachedData = Cache::get('nimble_' . $this->device->id);
     }
 
-    public function openEditServerApiModal()
+    public function openEditServerApiModal(): void
     {
-        // $this->nimbleServerApiData =  (new ConnectService())->connect(
-        //     endpoint: "get_server",
-        //     serverId: $this->deviceNimbleCachedData['nimble_id'],
-        // );
-
-        // dd($this->nimbleServerApiData);
-        return $this->editServerApiModal = true;
+        $this->editServerApiModal = true;
     }
 
-    // public function updateNimbleServerName()
-    // {
-    //     dd($this->nimbleServerApiData['server']['name']);
-    // }
-
-    public function openSourceDetailStream($source)
+    public function openSourceDetailStream(array $source): void
     {
         $this->sourceStream = $source;
 
-        return $this->detailModal = true;
+        $this->detailModal = true;
     }
 
-    public function closeModal()
+    public function closeModal(): void
     {
         $this->editServerApiModal = false;
-        return $this->detailModal = false;
+        $this->detailModal = false;
     }
 
 
-    public function startIncomingStream($streamId)
+    public function startIncomingStream(string|int $streamId): mixed
     {
         (new ConnectService())->connect(
             endpoint: "incoming_streams_resume",
@@ -78,7 +67,7 @@ class NimbleApiComponent extends Component
         return $this->success_alert("Akce odeslána na server");
     }
 
-    public function stopIncomingStream($streamId)
+    public function stopIncomingStream(string|int $streamId): mixed
     {
         (new ConnectService())->connect(
             endpoint: "incoming_streams_pause",
@@ -89,7 +78,7 @@ class NimbleApiComponent extends Component
         return $this->success_alert("Akce odeslána na server");
     }
 
-    public function restartStream($streamId)
+    public function restartStream(string|int $streamId): mixed
     {
         (new ConnectService())->connect(
             endpoint: "incoming_streams_restart",
@@ -100,7 +89,7 @@ class NimbleApiComponent extends Component
         return $this->success_alert("Akce odeslána na server");
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.nimble-api-component');
     }

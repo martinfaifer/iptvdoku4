@@ -2,11 +2,12 @@
 
 namespace App\Traits\Devices\GrapeTranscoders;
 
+use App\Models\Device;
 use App\Services\Api\GrapeTranscoders\ConnectService;
 
 trait GrapeTranscoderChannelTrait
 {
-    public function pause_transcoding(string|int $pid, object $device)
+    public function pause_transcoding(string|int $pid, Device $device): mixed
     {
         $response = (new ConnectService(
             endpointType: 'stop_transcoding_stream',
@@ -20,7 +21,7 @@ trait GrapeTranscoderChannelTrait
         return $response;
     }
 
-    public function start_transcoding(int|string $streamId, object $device)
+    public function start_transcoding(int|string $streamId, Device $device): mixed
     {
         $response = (new ConnectService(
             endpointType: 'start_transcoding_stream',
@@ -34,7 +35,7 @@ trait GrapeTranscoderChannelTrait
         return $response;
     }
 
-    public function streams_on_transcoder(object $device)
+    public function streams_on_transcoder(Device $device): mixed
     {
         $response = (new ConnectService(
             endpointType: 'streams_on_transcoders',

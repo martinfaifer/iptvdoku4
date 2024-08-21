@@ -6,7 +6,7 @@ use phpseclib3\Net\SSH2;
 
 class ConnectService
 {
-    public $ssh;
+    public SSH2|false $ssh;
 
     public function __construct(public string $ip, public string $username, public string $password)
     {

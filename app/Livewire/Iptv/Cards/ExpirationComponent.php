@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Iptv\Cards;
 
+use Livewire\Component;
+use App\Models\SatelitCard;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSatelitCardExpirationForm;
 use App\Livewire\Forms\UpdateSatelitCardExpirationForm;
-use App\Models\SatelitCard;
-use App\Traits\Livewire\NotificationTrait;
-use Livewire\Component;
 
 class ExpirationComponent extends Component
 {
@@ -22,33 +23,33 @@ class ExpirationComponent extends Component
 
     public bool $editModal = false;
 
-    public function mount(SatelitCard $satelitCard)
+    public function mount(SatelitCard $satelitCard): void
     {
         $this->satelitCard = $satelitCard;
     }
 
-    public function openStoreModal()
+    public function openStoreModal(): void
     {
-        return $this->storeModal = true;
+        $this->storeModal = true;
     }
 
-    public function openEditModal()
+    public function openEditModal(): void
     {
         $this->updateForm->setSatelitCard($this->satelitCard);
 
-        return $this->editModal = true;
+        $this->editModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->createForm->reset();
         $this->updateForm->reset();
         $this->editModal = false;
 
-        return $this->storeModal = false;
+        $this->storeModal = false;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->createForm->create($this->satelitCard);
 
@@ -57,7 +58,7 @@ class ExpirationComponent extends Component
         return $this->success_alert('Expirace přidána');
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->updateForm->update();
 
@@ -66,7 +67,7 @@ class ExpirationComponent extends Component
         return $this->success_alert('Expirace upravena');
     }
 
-    public function destroy()
+    public function destroy(): mixed
     {
         $this->satelitCard->update([
             'expiration' => null,
@@ -77,7 +78,7 @@ class ExpirationComponent extends Component
         return $this->success_alert('Expirace odebrána');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.iptv.cards.expiration-component');
     }

@@ -9,7 +9,7 @@ use App\Models\NanguSubscription;
 
 class NanguSubscriptionsService
 {
-    public function get()
+    public function get(): void
     {
         $connection = (new ConnectService('subscriber'));
 
@@ -51,7 +51,7 @@ class NanguSubscriptionsService
         }
     }
 
-    public function getInfo()
+    public function getInfo(): void
     {
         $connection = (new ConnectService('subscription'));
         $subscriptions = NanguSubscription::with('subscriber.nanguIsp')->get();
@@ -86,7 +86,7 @@ class NanguSubscriptionsService
         }
     }
 
-    public function count_subscriptions_per_isp()
+    public function count_subscriptions_per_isp(): void
     {
         foreach (NanguIsp::get() as $nanguIsp) {
             GeniusTvChart::create([

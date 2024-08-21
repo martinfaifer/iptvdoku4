@@ -2,15 +2,16 @@
 
 namespace App\Livewire\Settings\Geniustv\StaticTaxes;
 
-use App\Livewire\Forms\CreateSettingsGeniusTvStaticTaxesForm;
-use App\Livewire\Forms\UpdateSettingsGeniusTvStaticTaxesForm;
+use Livewire\Component;
 use App\Models\Currency;
+use Livewire\Attributes\On;
+use Livewire\WithPagination;
 use App\Models\GeniusTVStaticTax;
+use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
-use Livewire\Attributes\On;
-use Livewire\Component;
-use Livewire\WithPagination;
+use App\Livewire\Forms\CreateSettingsGeniusTvStaticTaxesForm;
+use App\Livewire\Forms\UpdateSettingsGeniusTvStaticTaxesForm;
 
 class SettingsGeniusTvStaticTaxesComponent extends Component
 {
@@ -20,7 +21,7 @@ class SettingsGeniusTvStaticTaxesComponent extends Component
 
     public UpdateSettingsGeniusTvStaticTaxesForm $updateForm;
 
-    public $query = '';
+    public string $query = '';
 
     public bool $createModal = false;
 
@@ -28,26 +29,26 @@ class SettingsGeniusTvStaticTaxesComponent extends Component
 
     public Collection $currencies;
 
-    public function mount()
+    public function mount(): void
     {
         $this->currencies = Currency::get();
     }
 
-    public function openCreateModal()
+    public function openCreateModal(): void
     {
         $this->resetErrorBag();
 
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->updateModal = false;
 
-        return $this->createModal = false;
+        $this->createModal = false;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->form->create();
 
@@ -58,16 +59,16 @@ class SettingsGeniusTvStaticTaxesComponent extends Component
         return $this->success_alert('Přidáno');
     }
 
-    public function edit(GeniusTVStaticTax $staticTax)
+    public function edit(GeniusTVStaticTax $staticTax): void
     {
         $this->resetErrorBag();
 
         $this->updateForm->setStaticTax($staticTax);
 
-        return $this->updateModal = true;
+        $this->updateModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->updateForm->update();
 
@@ -78,18 +79,17 @@ class SettingsGeniusTvStaticTaxesComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function destroy(GeniusTVStaticTax $staticTax)
+    public function destroy(GeniusTVStaticTax $staticTax): mixed
     {
-
         $staticTax->delete();
 
         $this->dispatch('refresh_settings_genius_tv_static_taxes');
 
-        $this->success_alert('Odebráno');
+        return $this->success_alert('Odebráno');
     }
 
     #[On('refresh_settings_genius_tv_static_taxes')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.geniustv.static-taxes.settings-genius-tv-static-taxes-component', [
             'staticTaxes' => GeniusTVStaticTax::orderBy('name')->with('currency_name')->search($this->query)->paginate(5),

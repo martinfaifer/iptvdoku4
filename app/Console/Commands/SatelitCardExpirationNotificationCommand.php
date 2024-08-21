@@ -27,7 +27,7 @@ class SatelitCardExpirationNotificationCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         if (Slack::satelitcardExpiration()->first()) {
             foreach (Slack::satelitcardExpiration()->get() as $slackChannel) {

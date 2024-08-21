@@ -15,13 +15,13 @@ class UpdateSatelitCardExpirationForm extends Form
     #[Validate('max:255', message: 'Maximální počet zanků je :max')]
     public string $expiration = '';
 
-    public function setSatelitCard(SatelitCard $satelitCard)
+    public function setSatelitCard(SatelitCard $satelitCard): void
     {
         $this->satelitCard = $satelitCard;
         $this->expiration = $satelitCard->expiration;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

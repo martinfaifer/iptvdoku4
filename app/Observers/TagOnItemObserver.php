@@ -10,7 +10,7 @@ use App\Models\TagOnItem;
 
 class TagOnItemObserver
 {
-    public function created(TagOnItem $tagOnItem)
+    public function created(TagOnItem $tagOnItem): void
     {
         // launch action for tags
         if (NanguIspTagToChannelPackage::where('tag_id', $tagOnItem->tag_id)->first()) {
@@ -26,12 +26,12 @@ class TagOnItemObserver
         }
     }
 
-    public function updated()
+    public function updated(): void
     {
         //
     }
 
-    public function deleted(TagOnItem $tagOnItem)
+    public function deleted(TagOnItem $tagOnItem): void
     {
         if (NanguIspTagToChannelPackage::where('tag_id', $tagOnItem->tag_id)->first()) {
             // existuje vazba štítek vs NanguIsp vs Programový balíček

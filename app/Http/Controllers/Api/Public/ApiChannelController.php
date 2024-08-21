@@ -15,12 +15,12 @@ class ApiChannelController extends Controller
      * @param  Request  $request  The incoming request object containing parameters and data.
      * @return ApiChannelsResource A resource object containing the requested channels.
      */
-    public function index(Request $request)
+    public function index(Request $request): ApiChannelsResource
     {
         return new ApiChannelsResource($request);
     }
 
-    public function show(Request $request)
+    public function show(Request $request): ApiChannelResource
     {
         return new ApiChannelResource($request);
     }

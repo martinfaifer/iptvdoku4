@@ -2,15 +2,16 @@
 
 namespace App\Livewire\Iptv\Channels;
 
-use App\Jobs\RestartStreamOnLinuxJob;
-use App\Models\Channel;
-use App\Models\ChannelOnLinux;
 use App\Models\Device;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Support\Facades\Cache;
-use Livewire\Attributes\On;
-use Livewire\Attributes\Validate;
+use App\Models\Channel;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use App\Models\ChannelOnLinux;
+use Livewire\Attributes\Validate;
+use App\Jobs\RestartStreamOnLinuxJob;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
 
 class DeviceHasChannelComponent extends Component
 {
@@ -20,13 +21,13 @@ class DeviceHasChannelComponent extends Component
 
     public ?Channel $channel;
 
-    public $channelType;
+    public string $channelType = "";
 
     public ?array $nmsCahedData = null;
 
     public array $deviceInterfaces;
 
-    public $deviceInterface;
+    public mixed $deviceInterface;
 
     public bool $isBackup = false;
 
@@ -38,34 +39,32 @@ class DeviceHasChannelComponent extends Component
 
     public string $selectedOutput = '';
 
-    public $linuxPathToStream = null;
+    public mixed $linuxPathToStream = null;
 
     #[Validate('required', message: 'Vyplňte validní cestu')]
     #[Validate('string', message: 'Neplatný formát')]
     #[Validate('max:255', message: 'Maximální počet znaků je :max')]
     public string $path = '';
 
-    public function mount(Device $device)
+    public function mount(Device $device): void
     {
         $this->device = $device->load('category');
         // $this->checkIfNeedToAddLinuxPath();
     }
 
-    public function checkIfNeedToAddLinuxPath()
+    public function checkIfNeedToAddLinuxPath(): void
     {
         if ($this->device->category->name == 'Linux') {
             if (!$this->linuxPathToStream = ChannelOnLinux::where('device_id', $this->device->id)
                 ->where('channel_type', $this->channelType)
                 ->where('channel_id', $this->channel->id)
                 ->first()) {
-                return $this->storeLinuxPathModal = true;
+                $this->storeLinuxPathModal = true;
             }
-
-            return $this->linuxPathToStream;
         }
     }
 
-    public function store_path()
+    public function store_path(): mixed
     {
         $this->validate();
         ChannelOnLinux::create([
@@ -76,13 +75,13 @@ class DeviceHasChannelComponent extends Component
         ]);
 
         // $this->redirect(url()->previous(), true);
-        $this->success_alert('Upraveno');
         $this->dispatch('refresh_device_component')->self();
         $this->path = "";
-        return $this->closeDialog();
+        $this->closeDialog();
+        return $this->success_alert('Upraveno');
     }
 
-    public function getChannelNameByType()
+    public function getChannelNameByType(): string
     {
         if ($this->isBackup == true) {
             return $this->channelType . ':' . $this->channel->id . ':backup';
@@ -91,36 +90,36 @@ class DeviceHasChannelComponent extends Component
         return $this->channelType . ':' . $this->channel->id;
     }
 
-    public function openUpdateModal()
+    public function openUpdateModal(): mixed
     {
-        if (is_null($this->device->template)) {
+        if (is_null($this->device->template)) {  // @phpstan-ignore-line
             return $this->error_alert('Zařízení nemá šablonu, nelze upravovat!');
         }
 
         return $this->updateModal = true;
     }
 
-    public function bindInput($input)
+    public function bindInput(string $input): void
     {
         if ($this->selectedInput != $input) {
-            return $this->selectedInput = $input;
+            $this->selectedInput = $input;
+        } else {
+            $this->selectedInput = '';
         }
-
-        return $this->selectedInput = '';
     }
 
-    public function bindOutput($output)
+    public function bindOutput(string $output): void
     {
         if ($this->selectedOutput != $output) {
-            return $this->selectedOutput = $output;
+            $this->selectedOutput = $output;
+        } else {
+            $this->selectedOutput = '';
         }
-
-        return $this->selectedOutput = '';
     }
 
-    public function update()
+    public function update(): mixed
     {
-        $template = $this->device->template;
+        $template = $this->device->template;  // @phpstan-ignore-line
         if ($this->selectedInput != '') {
             array_push($template['inputs'][$this->selectedInput]['Vazba na kanály'], $this->getChannelNameByType());
         }
@@ -159,22 +158,21 @@ class DeviceHasChannelComponent extends Component
 
         // $this->redirect(url()->previous(), true);
         $this->dispatch('refresh_channel_has_devices_' . $this->channelType . '_' . $this->channel->id);
-        $this->success_alert('Upraveno');
-
-        return $this->closeDialog();
+        $this->closeDialog();
+        return $this->success_alert('Upraveno');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->selectedInput = '';
         $this->selectedOutput = '';
 
         $this->storeLinuxPathModal = false;
 
-        return $this->updateModal = false;
+        $this->updateModal = false;
     }
 
-    public function delete()
+    public function delete(): mixed
     {
         $hasChannels = $this->device->has_channels;
 
@@ -184,7 +182,7 @@ class DeviceHasChannelComponent extends Component
             }
         }
 
-        if (!is_null($this->device->template)) {
+        if (!is_null($this->device->template)) {  // @phpstan-ignore-line
             $template = $this->device->template;
 
             if (array_key_exists('inputs', $template)) {
@@ -209,7 +207,7 @@ class DeviceHasChannelComponent extends Component
         return $this->success_alert('Odebráno');
     }
 
-    public function remove_channel_from_template($interfaces)
+    public function remove_channel_from_template(array $interfaces): array
     {
         foreach ($interfaces as $inputKey => $input) {
             if (in_array($this->getChannelNameByType(), $input['Vazba na kanály'])) {
@@ -224,7 +222,7 @@ class DeviceHasChannelComponent extends Component
         return $interfaces;
     }
 
-    public function reboot_channel()
+    public function reboot_channel(): mixed
     {
         if (is_null($this->device->ssh)) {
             return $this->error_alert('Zařízení nemá nadefinován ssh přístup');
@@ -240,7 +238,7 @@ class DeviceHasChannelComponent extends Component
         return $this->success_alert('Příkaz k restartu byl odeslán');
     }
 
-    public function delete_linux_path()
+    public function delete_linux_path(): mixed
     {
         ChannelOnLinux
             ::where('device_id', $this->device->id)
@@ -254,7 +252,7 @@ class DeviceHasChannelComponent extends Component
 
 
     #[On('refresh_device_component')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         $this->checkIfNeedToAddLinuxPath();
 

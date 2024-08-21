@@ -18,9 +18,9 @@ class StoreNanguIpPrefixForm extends Form
     public string $nangu_isp_id = '';
 
     #[Validate('required', message: 'Vyplňte pole')]
-    public $cidr;
+    public string|int $cidr;
 
-    public function create()
+    public function create(): mixed
     {
         $this->validate();
         $ip = Ip::create([

@@ -16,12 +16,12 @@ class FlowEyeComponent extends Component
 
     public string $title = 'IPTV dokumentace';
 
-    public function mount()
+    public function mount(): void
     {
         $this->ticket_detail();
     }
 
-    public function ticket_detail()
+    public function ticket_detail(): void
     {
         if (! is_null($this->issue)) {
             if (Cache::has('floweye_active_tickets')) {
@@ -39,7 +39,7 @@ class FlowEyeComponent extends Component
         }
     }
 
-    public function render()
+    public function render(): mixed
     {
         return view('livewire.iptv.flow-eye.flow-eye-component')
             ->title($this->title);

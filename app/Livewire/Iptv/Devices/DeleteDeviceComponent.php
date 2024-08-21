@@ -13,7 +13,7 @@ class DeleteDeviceComponent extends Component
 
     public ?Device $device;
 
-    public function destroy(Device $device)
+    public function destroy(Device $device): void
     {
         // delete ssh ,alerts ,channel if can be restarted
         try {
@@ -24,10 +24,10 @@ class DeleteDeviceComponent extends Component
         RestartChannel::where('device_id', $device->id)->delete();
         $device->delete();
 
-        return $this->redirect('/devices', true);
+        $this->redirect('/devices', true);
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.delete-device-component');
     }

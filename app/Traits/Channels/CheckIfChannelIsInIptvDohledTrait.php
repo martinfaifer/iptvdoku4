@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 trait CheckIfChannelIsInIptvDohledTrait
 {
-    public function isInIptvDohledDohled($ip): bool
+    public function isInIptvDohledDohled(string $ip): bool
     {
         $isIn = IptvDohledUrl::where('stream_url', $ip)->first();
 
@@ -15,7 +15,7 @@ trait CheckIfChannelIsInIptvDohledTrait
         return !$isIn ? false : true;
     }
 
-    public function can_notify($ip): bool
+    public function can_notify(string $ip): bool
     {
         $isIn = IptvDohledUrl::where('stream_url', $ip)->first();
 

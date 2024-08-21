@@ -24,7 +24,7 @@ class AnalyzeStream extends Model
 
     public function prunable(): Builder
     {
-        return static::where('created_at', '<=', now()->submonths(2));
+        return static::where('created_at', '<=', now()->submonths(2)); // @phpstan-ignore-line
     }
 
     protected function analyze(): Attribute

@@ -30,7 +30,7 @@ class StartCalendarEventCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): mixed
     {
         if (Event::where('start_date', now()->format('Y-m-d'))
             ->where('start_time', now()->format('H:i'))
@@ -78,7 +78,10 @@ class StartCalendarEventCommand extends Command
                 }
 
                 Mail::to($event->creator)->queue(new SendEventWasStartedMail($event));
+                return true;
             }
         }
+
+        return false;
     }
 }

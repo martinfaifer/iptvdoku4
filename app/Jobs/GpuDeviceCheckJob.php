@@ -17,7 +17,7 @@ class GpuDeviceCheckJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $timeout = 600; // 10min timeout
+    protected int $timeout = 600; // 10min timeout
 
     /**
      * Create a new job instance.

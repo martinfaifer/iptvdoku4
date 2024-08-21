@@ -18,7 +18,7 @@ class GetSnmpDataFromDeviceJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public $device)
+    public function __construct(public object $device)
     {
         //
     }

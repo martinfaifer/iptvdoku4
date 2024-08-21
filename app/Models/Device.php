@@ -46,8 +46,8 @@ class Device extends Model
     protected function template(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => json_decode($value, true),
-            set: fn ($value) => json_encode($value)
+            get: fn($value) => json_decode($value, true),
+            set: fn($value) => json_encode($value)
         );
     }
 
@@ -55,7 +55,7 @@ class Device extends Model
     {
         return Attribute::make(
             // get: fn ($value) => json_decode($value, true),
-            set: fn ($value) => (array) $value
+            set: fn($value) => (array) $value
         );
     }
 
@@ -79,28 +79,23 @@ class Device extends Model
         return $this->hasMany(DeviceOid::class, 'device_id', 'id');
     }
 
-    public function scopeSearch(Builder $query, string $search)
+    public function scopeSearch(Builder $query, string $search): void
     {
-        return $this->where('name', 'like', '%' . $search . '%')
+        $this->where('name', 'like', '%' . $search . '%')
             ->orWhere('ip', 'like', '%' . $search . '%');
     }
 
-    public function scopeFulltextSearch(Builder $query, string $search)
+    public function scopeFulltextSearch(Builder $query, string $search): void
     {
-        return $query->whereFullText(
+        $query->whereFullText(
             ['name', 'ip', 'controller_ip', 'zbx_status', 'ipmi_ip'],
             "$search*",
             ['mode' => 'boolean'],
         );
     }
 
-    public function scopeInTemplate(Builder $query, string $searcheableString)
+    public function scopeInTemplate(Builder $query, string $searcheableString): void
     {
-        return $query->where('template', 'like', '%' . $searcheableString . '%');
+        $query->where('template', 'like', '%' . $searcheableString . '%');
     }
-
-    // public function scopeGetChannels(Builder $query, string $channel)
-    // {
-
-    // }
 }

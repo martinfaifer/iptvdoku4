@@ -19,10 +19,10 @@ class GeniusTVStaticTax extends Model
         return $this->belongsTo(Currency::class, 'currency', 'id');
     }
 
-    public function scopeSubscriptionTaxes(Builder $query, bool $isAkcionar)
+    public function scopeSubscriptionTaxes(Builder $query, bool $isAkcionar): void
     {
         if ($isAkcionar == true) {
-            return $query
+            $query
                 ->whereIn('name', [
                     'osa',
                     'dilia',
@@ -35,25 +35,25 @@ class GeniusTVStaticTax extends Model
                     'aplikacePocasi',
                     'EPG',
                 ]);
+        } else {
+            $query
+                ->whereIn('name', [
+                    'osa',
+                    'dilia',
+                    'integram',
+                    'oaza',
+                    'OOA-S',
+                    'NanguUser',
+                    'Genius',
+                    'aplikacePocasi',
+                    'aplikacePocasi',
+                    'EPG',
+                ]);
         }
-
-        return $query
-            ->whereIn('name', [
-                'osa',
-                'dilia',
-                'integram',
-                'oaza',
-                'OOA-S',
-                'NanguUser',
-                'Genius',
-                'aplikacePocasi',
-                'aplikacePocasi',
-                'EPG',
-            ]);
     }
 
-    public function scopeSearch(Builder $query, string $search)
+    public function scopeSearch(Builder $query, string $search): void
     {
-        return $query->where('name', 'like', '%'.$search.'%');
+        $query->where('name', 'like', '%' . $search . '%');
     }
 }

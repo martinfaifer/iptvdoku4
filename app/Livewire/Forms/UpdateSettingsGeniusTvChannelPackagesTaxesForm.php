@@ -15,10 +15,10 @@ class UpdateSettingsGeniusTvChannelPackagesTaxesForm extends Form
 
     #[Validate('required', message: 'Vyplňte cenu')]
     #[Validate('string', message: 'Neplatný formát')]
-    public string $price = '0';
+    public string|float $price = '0';
 
     #[Validate('required', message: 'Vyberte měnu')]
-    public $currency = null;
+    public mixed $currency = null;
 
     #[Validate('nullable')]
     public array $exception = [];
@@ -27,7 +27,7 @@ class UpdateSettingsGeniusTvChannelPackagesTaxesForm extends Form
     #[Validate('boolean', message: 'Neplatný formát')]
     public bool $must_contains_all = false;
 
-    public function setChannelPackageTax(GeniusTVchannelPackagesTax $channelPackageTax)
+    public function setChannelPackageTax(GeniusTVchannelPackagesTax $channelPackageTax): void
     {
         $this->channelPackageTax = $channelPackageTax;
         $this->channels_id = json_decode($channelPackageTax->channels_id);
@@ -37,7 +37,7 @@ class UpdateSettingsGeniusTvChannelPackagesTaxesForm extends Form
         $this->must_contains_all = $channelPackageTax->must_contains_all;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

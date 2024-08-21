@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Iptv\Canvas;
 
-use App\Traits\Channels\GetChannelBelongsToDeviceTrait;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Collection;
+use App\Traits\Channels\GetChannelBelongsToDeviceTrait;
 
 class NetworkMapComponent extends Component
 {
@@ -12,12 +13,12 @@ class NetworkMapComponent extends Component
 
     public Collection $devices;
 
-    public function mount()
+    public function mount(): void
     {
         $this->devices = \App\Models\Device::with('category')->get(['id', 'name', 'has_channels', 'device_category_id']);
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.iptv.canvas.network-map-component');
     }

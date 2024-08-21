@@ -8,6 +8,7 @@ use Livewire\Attributes\On;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\SatelitCardContent;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Storage;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
@@ -21,21 +22,21 @@ class SatelitCardContentsComponent extends Component
     public StoreSatelitCardContentForm $storeForm;
     public bool $storeModal = false;
 
-    public function openStoreModal()
+    public function openStoreModal(): void
     {
-        return $this->storeModal = true;
+        $this->storeModal = true;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->storeForm->create($this->satCard->id);
-        $this->success_alert("Nahráno");
         $this->dispatch('refresh_satelit_card_content');
-        return $this->storeModal = false;
+        $this->storeModal = false;
+        return $this->success_alert("Nahráno");
     }
 
 
-    public function destroy(SatelitCardContent $file)
+    public function destroy(SatelitCardContent $file): mixed
     {
         Storage::delete($file->path);
         $file->delete();
@@ -43,13 +44,13 @@ class SatelitCardContentsComponent extends Component
         return $this->success_alert("Soubor odebrán");
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
-        return $this->storeModal = false;
+        $this->storeModal = false;
     }
 
     #[On('refresh_satelit_card_content')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.iptv.cards.satelit-card-contents-component', [
             'headers' => [

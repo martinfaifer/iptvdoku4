@@ -9,41 +9,48 @@ use Livewire\Form;
 
 class StoreMulticastChannelForm extends Form
 {
-    public $stb_ip;
+    public string|null $stb_ip = null;
 
-    public $source_ip;
+    public string $source_ip = "";
 
-    public $channel_source_id;
+    public int|null $channel_source_id = null;
 
     public bool $is_backup = false;
 
     public bool $to_dohled = true;
 
-    public $channel_id;
+    public int|null $channel_id = null;
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'stb_ip' => [
-                'nullable', 'string', 'max:250',
+                'nullable',
+                'string',
+                'max:250',
                 'unique:channel_multicasts,stb_ip',
             ],
             'source_ip' => [
-                'nullable', 'string', 'max:250',
+                'nullable',
+                'string',
+                'max:250',
             ],
             'channel_source_id' => [
-                'required', 'exists:channel_sources,id',
+                'required',
+                'exists:channel_sources,id',
             ],
             'is_backup' => [
-                'required', 'boolean',
+                'required',
+                'boolean',
             ],
             'to_dohled' => [
-                'required', 'boolean',
+                'required',
+                'boolean',
             ],
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'stb_ip.string' => 'Neplatný formát',
@@ -60,12 +67,12 @@ class StoreMulticastChannelForm extends Form
         ];
     }
 
-    public function setChannel(Channel $channel)
+    public function setChannel(Channel $channel): void
     {
         $this->channel_id = $channel->id;
     }
 
-    public function store()
+    public function store(): void
     {
         $this->validate();
 
@@ -82,7 +89,7 @@ class StoreMulticastChannelForm extends Form
         if ($this->to_dohled == true) {
             if (! is_null($this->stb_ip)) {
                 StoreStreamToIptvDohledJob::dispatch(
-                    Channel::find($this->channel_id)->name.'_multicast',
+                    Channel::find($this->channel_id)->name . '_multicast',
                     $this->stb_ip
                 );
             }
@@ -91,7 +98,7 @@ class StoreMulticastChannelForm extends Form
         $this->closeForm();
     }
 
-    public function closeForm()
+    public function closeForm(): void
     {
         $this->reset('stb_ip', 'source_ip', 'channel_source_id', 'is_backup', 'to_dohled');
         $this->resetErrorBag();

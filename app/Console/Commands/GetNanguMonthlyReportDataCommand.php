@@ -34,7 +34,7 @@ class GetNanguMonthlyReportDataCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         Artisan::call('course:get-current');
         // delete all records

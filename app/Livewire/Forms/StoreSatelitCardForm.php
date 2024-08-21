@@ -15,9 +15,9 @@ class StoreSatelitCardForm extends Form
     public string $name = '';
 
     #[Validate('required', message: 'Vyberte distributra')]
-    public $satelit_card_vendor_id;
+    public int $satelit_card_vendor_id;
 
-    public function create()
+    public function create(): mixed
     {
         $this->validate();
 

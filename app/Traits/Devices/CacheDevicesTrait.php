@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 trait CacheDevicesTrait
 {
-    public function cache_devices_for_menu()
+    public function cache_devices_for_menu(): void
     {
         $categoriesWithDevices = DeviceCategory::with('devices:id,name,device_category_id')->get();
         foreach ($categoriesWithDevices as $category) {
@@ -16,7 +16,7 @@ trait CacheDevicesTrait
                     $nmsCachedData = Cache::get('nms_' . $device->id);
 
                     try {
-                        $device->nms_status = $nmsCachedData[0]['nms_device_status_id']['nms_device_status_type_id'];
+                        $device->nms_status = $nmsCachedData[0]['nms_device_status_id']['nms_device_status_type_id']; // @phpstan-ignore-line
                     } catch (\Throwable $th) {
                         //throw $th;
                     }
@@ -28,12 +28,12 @@ trait CacheDevicesTrait
         Cache::forever('devices_menu', $categoriesWithDevices);
     }
 
-    public function cache_device_for_nms_data()
+    public function cache_device_for_nms_data(): void
     {
         //
     }
 
-    public function get_only_offline_devices()
+    public function get_only_offline_devices(): array
     {
         $offlineDevices = [];
         if (!Cache::has('devices_menu')) {

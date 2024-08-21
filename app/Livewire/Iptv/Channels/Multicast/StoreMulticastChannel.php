@@ -18,35 +18,35 @@ class StoreMulticastChannel extends Component
 
     public bool $storeModal = false;
 
-    public $channelSources;
+    public mixed $channelSources;
 
-    public function mount()
+    public function mount(): void
     {
         $this->channelSources = ChannelSource::get();
     }
 
-    public function openModal()
+    public function openModal(): void
     {
         $this->form->setChannel($this->channel);
         $this->storeModal = true;
     }
 
-    public function store()
+    public function store(): mixed
     {
         $this->form->store();
         $this->closeDialog();
-        $this->dispatch('update_multicasts.'.$this->channel->id);
+        $this->dispatch('update_multicasts.' . $this->channel->id);
 
         return $this->success_alert('Přidáno');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->storeModal = false;
         $this->form->closeForm();
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.channels.multicast.store-multicast-channel');
     }

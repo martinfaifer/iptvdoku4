@@ -27,7 +27,7 @@ class MulticastChannel extends Component
 
     // public $multicasts;
 
-    public function mount(Channel $channel)
+    public function mount(Channel $channel): void
     {
         $this->channel = $channel;
 
@@ -68,7 +68,7 @@ class MulticastChannel extends Component
     //     return $this->success_alert('Odebráno');
     // }
 
-    public function placeholder()
+    public function placeholder(): string
     {
         return <<<'HTML'
         <div class="flex items-center justify-center">
@@ -81,7 +81,7 @@ class MulticastChannel extends Component
 
     // #[On('echo:update_multicasts.{channel.id},BroadcastUpdateMulticastEvent')]
     // #[On('update_multicasts.{channel.id}')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.channels.multicast.multicast-channel', [
             'multicasts' => $this->channel->multicasts->load('channel_source'),

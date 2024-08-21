@@ -16,7 +16,7 @@ class CreateDeviceTemplateComponent extends Component
 
     public bool $storeDrawer = false;
 
-    public $availableTemplates;
+    public mixed $availableTemplates;
 
     public int $numberOfInInterfaces = 0;
 
@@ -62,9 +62,9 @@ class CreateDeviceTemplateComponent extends Component
 
     public ?string $moduleName = '';
 
-    public $templateId;
+    public mixed $templateId;
 
-    public function boot()
+    public function boot(): void
     {
         if (! $this->device->oids->isEmpty() && $this->device->showed_create_template == false) {
             $this->storeDrawer = true;
@@ -73,12 +73,12 @@ class CreateDeviceTemplateComponent extends Component
         $this->availableTemplates = DeviceTemplate::get();
     }
 
-    public function openModal()
+    public function openModal(): void
     {
-        return $this->storeDrawer = true;
+        $this->storeDrawer = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->resetErrorBag();
         if ($this->device->showed_create_template == false) {
@@ -87,22 +87,26 @@ class CreateDeviceTemplateComponent extends Component
             ]);
         }
 
-        return $this->storeDrawer = false;
+        $this->storeDrawer = false;
     }
 
-    public function storePrebuildTemplateToDevice()
+    public function storePrebuildTemplateToDevice(): mixed
     {
         $template = DeviceTemplate::find($this->templateId);
+        if (blank($template)) {
+            $this->redirect('/devices/' . $this->device->id, true);
+            return $this->error_alert('Šablona nenalezena');
+        }
         $this->device->update([
-            'template' => $template->template,
+            'template' => $template->template,  // @phpstan-ignore-line
         ]);
 
-        $this->redirect('/devices/'.$this->device->id, true);
+        $this->redirect('/devices/' . $this->device->id, true);
 
         return $this->success_alert('Přidána šablona');
     }
 
-    public function store()
+    public function store(): mixed
     {
         $engineResponse = (new DeviceTemplateEngine())->generate(
             device: $this->device,
@@ -137,12 +141,12 @@ class CreateDeviceTemplateComponent extends Component
         );
 
         $this->storeDrawer = false;
-        $this->redirect('/devices/'.$this->device->id, true);
+        $this->redirect('/devices/' . $this->device->id, true);
 
         return $engineResponse == true ? $this->success_alert('Šablona vytvořena') : $this->error_alert('Nepodařilo se vytvořit');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.create-device-template-component');
     }

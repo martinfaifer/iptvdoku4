@@ -20,14 +20,14 @@ class UserEditForm extends Form
     #[Validate('max:255', message: 'Maximální počet znaků je :max')]
     public string $last_name = '';
 
-    public function setUser(User $user)
+    public function setUser(User $user): void
     {
         $this->user = $user;
         $this->first_name = $user->first_name;
         $this->last_name = $user->last_name;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

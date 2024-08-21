@@ -11,9 +11,9 @@ class StoreH265ChannelForm extends Form
 {
     public ?Channel $channel;
 
-    public $ips = [];
+    public array $ips = [];
 
-    public function setChannel($channel)
+    public function setChannel(object $channel): void
     {
         $this->channel = $channel;
     }

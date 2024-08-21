@@ -7,7 +7,7 @@ use PDOException;
 
 class ConnectService
 {
-    public $connection;
+    public mixed $connection;
 
     public function __construct()
     {
@@ -19,11 +19,11 @@ class ConnectService
             $this->connection = new PDO("mysql:host=$servername;dbname=$dbName", $username, $password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            echo 'Connection failed: '.$e->getMessage();
+            echo 'Connection failed: ' . $e->getMessage();
         }
     }
 
-    public function count_all_results($table)
+    public function count_all_results(string $table): int
     {
         $stmt = $this->connection->prepare("SELECT * FROM $table");
         $stmt->execute();

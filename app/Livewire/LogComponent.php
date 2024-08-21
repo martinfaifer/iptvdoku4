@@ -2,42 +2,43 @@
 
 namespace App\Livewire;
 
-use App\Services\Logger\LoggerService;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use App\Services\Logger\LoggerService;
+use Illuminate\Contracts\View\Factory;
 
 class LogComponent extends Component
 {
-    public $columnValue;
+    public string $columnValue;
 
-    public $column;
+    public string $column;
 
-    public $logs;
+    public mixed $logs;
 
     public array $selectedLogDetail;
 
     public bool $detailModal = false;
 
-    public function mount()
+    public function mount(): void
     {
         $this->refreshLogs();
     }
 
-    public function openModal($payload)
+    public function openModal(array $payload): void
     {
         $this->selectedLogDetail = $payload;
 
-        return $this->detailModal = true;
+        $this->detailModal = true;
     }
 
-    public function closeModal()
+    public function closeModal(): void
     {
         $this->selectedLogDetail = [];
 
-        return $this->detailModal = false;
+        $this->detailModal = false;
     }
 
-    public function placeholder()
+    public function placeholder(): string
     {
         return <<<'HTML'
         <div>
@@ -52,12 +53,12 @@ class LogComponent extends Component
     }
 
     #[On('echo:refresh_logs_{column}_{columnValue},BroadcastLogEvent')]
-    public function refreshLogs()
+    public function refreshLogs(): void
     {
-        return $this->logs = (new LoggerService())->show($this->column, columnValue: $this->columnValue);
+        $this->logs = (new LoggerService())->show($this->column, columnValue: $this->columnValue);
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.log-component');
     }

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Http;
  */
 class ConnectService
 {
-    protected $endPoints = [
+    protected array $endPoints = [
         'search' => 'v2/nms/devices?filter[searcher]=ip:%ip%&includes=all',
     ];
 
@@ -20,23 +20,22 @@ class ConnectService
         //
     }
 
-    public function connect()
+    public function connect(): void
     {
-
         $httpResponse = Http::retry(3, 10000)
             ->withBasicAuth(
                 config('services.api.0.nms.username'),
                 config('services.api.0.nms.password')
             )
-            ->get(config('services.api.0.nms.url').str_replace('%ip%', $this->device->ip, $this->endPoints[$this->endPoint]));
+            ->get(config('services.api.0.nms.url') . str_replace('%ip%', $this->device->ip, $this->endPoints[$this->endPoint]));
 
         if ($httpResponse->ok()) {
             $this->storeData($httpResponse->json());
         }
     }
 
-    public function storeData($httpResponse)
+    public function storeData(mixed $httpResponse): void
     {
-        Cache::add('nms_'.$this->device->id, $httpResponse['data'], 3600);
+        Cache::add('nms_' . $this->device->id, $httpResponse['data'], 3600);
     }
 }

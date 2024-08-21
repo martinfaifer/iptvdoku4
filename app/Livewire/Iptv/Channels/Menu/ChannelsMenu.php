@@ -12,7 +12,7 @@ class ChannelsMenu extends Component
 {
     public Collection $channels;
 
-    public function mount()
+    public function mount(): void
     {
         if (! Cache::has('channels_menu')) {
             Cache::put('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
@@ -21,13 +21,13 @@ class ChannelsMenu extends Component
     }
 
 
-    public function refreshChannelsSidebar()
+    public function refreshChannelsSidebar(): void
     {
-        return $this->channels = Cache::get('channels_menu');
+        $this->channels = Cache::get('channels_menu');
     }
 
     // #[On('update_channels_sidebar')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         $this->channels = Cache::get('channels_menu');
         return view('livewire.iptv.channels.menu.channels-menu');

@@ -16,11 +16,11 @@ class UpdateMulticastChannelForm extends Form
 
     public ?ChannelMulticast $multicast;
 
-    public $stb_ip;
+    public string $stb_ip = "";
 
-    public $source_ip;
+    public string $source_ip = "";
 
-    public $channel_source_id;
+    public int $channel_source_id;
 
     public bool $is_backup = false;
 
@@ -30,26 +30,32 @@ class UpdateMulticastChannelForm extends Form
 
     public bool $delete_from_dohled = false;
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'stb_ip' => [
-                'nullable', 'string', 'max:250',
-                'unique:channel_multicasts,stb_ip,'.$this->multicast->id,
+                'nullable',
+                'string',
+                'max:250',
+                'unique:channel_multicasts,stb_ip,' . $this->multicast->id,
             ],
             'source_ip' => [
-                'nullable', 'string', 'max:250',
+                'nullable',
+                'string',
+                'max:250',
             ],
             'channel_source_id' => [
-                'required', 'exists:channel_sources,id',
+                'required',
+                'exists:channel_sources,id',
             ],
             'is_backup' => [
-                'required', 'boolean',
+                'required',
+                'boolean',
             ],
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'stb_ip.string' => 'Neplatný formát',
@@ -64,7 +70,7 @@ class UpdateMulticastChannelForm extends Form
         ];
     }
 
-    public function setMulticast(ChannelMulticast $multicast)
+    public function setMulticast(ChannelMulticast $multicast): void
     {
         $this->multicast = $multicast;
         $this->stb_ip = $multicast->stb_ip;
@@ -74,7 +80,7 @@ class UpdateMulticastChannelForm extends Form
         $this->isInDohled = $this->isInIptvDohledDohled($multicast->stb_ip);
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 
@@ -83,7 +89,7 @@ class UpdateMulticastChannelForm extends Form
             UpdateStreamUrlInDohledIfIsItJob::dispatch(
                 $this->stb_ip,
                 $this->multicast->stb_ip,
-                Channel::find($this->multicast->channel_id)->name.'_multicast'
+                Channel::find($this->multicast->channel_id)->name . '_multicast'
             );
         }
 
@@ -106,7 +112,7 @@ class UpdateMulticastChannelForm extends Form
 
         if ($this->to_dohled == true) {
             StoreStreamToIptvDohledJob::dispatch(
-                Channel::find($this->multicast->channel_id)->name.'_multicast',
+                Channel::find($this->multicast->channel_id)->name . '_multicast',
                 $this->stb_ip
             );
         }

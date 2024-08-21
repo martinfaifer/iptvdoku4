@@ -20,9 +20,9 @@ class CreateWikiTopicForm extends Form
 
     #[Validate('required', message: 'Vyberte kategorii')]
     #[Validate('exists:wiki_categories,id', message: 'Neexistující kategrie')]
-    public $wiki_category_id = null;
+    public int|null $wiki_category_id = null;
 
-    public function create()
+    public function create(): mixed
     {
         $this->validate();
 

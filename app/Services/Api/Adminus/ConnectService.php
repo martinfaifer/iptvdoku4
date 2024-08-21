@@ -9,7 +9,7 @@ class ConnectService
 {
     use RequestTypeTrait;
 
-    public function create_invoice($contractId, $price): void
+    public function create_invoice(string|int $contractId, float|int $price): void
     {
         Http
             ::withBasicAuth(config('services.api.adminus.username'), config('services.api.adminus.password'))

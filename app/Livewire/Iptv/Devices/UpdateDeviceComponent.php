@@ -21,34 +21,34 @@ class UpdateDeviceComponent extends Component
 
     public bool $updateModal = false;
 
-    public $deviceCategories;
+    public mixed $deviceCategories;
 
-    public $devicesVendors;
+    public mixed $devicesVendors;
 
-    public $deviceSnmps;
+    public mixed $deviceSnmps;
 
-    public function mount()
+    public function mount(): void
     {
         $this->deviceCategories = DeviceCategory::get();
         $this->devicesVendors = $this->get_device_vendors();
         $this->deviceSnmps = DeviceSnmp::get();
     }
 
-    public function edit()
+    public function edit(): void
     {
         $this->form->setDevice($this->device);
 
-        return $this->updateModal = true;
+        $this->updateModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->resetErrorBag();
 
-        return $this->updateModal = false;
+        $this->updateModal = false;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->form->update();
         $this->closeDialog();
@@ -61,7 +61,7 @@ class UpdateDeviceComponent extends Component
         return $this->success_alert('Zařízení upraveno');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.update-device-component');
     }

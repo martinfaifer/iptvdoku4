@@ -5,6 +5,7 @@ namespace App\Livewire\Settings\Logs;
 use App\Models\Loger;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Contracts\View\Factory;
 use App\Traits\Loger\ShowCorrectNameOfItemTrait;
 
 class SettingsLogComponent extends Component
@@ -14,23 +15,23 @@ class SettingsLogComponent extends Component
 
     public bool $detailModal = false;
 
-    public $selectedLogDetail = "";
+    public string $selectedLogDetail = "";
 
     public array $sortBy = ['column' => 'created_at', 'direction' => 'desc'];
 
-    public function show($payload, $logId)
+    public function show(string $payload, mixed $logId): void
     {
         $this->selectedLogDetail = $payload;
         $this->detailModal = true;
     }
 
-    public function closeModal()
+    public function closeModal(): void
     {
-        $this->selectedLogDetail = null;
+        $this->selectedLogDetail = "";
         $this->detailModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.logs.settings-log-component', [
             'logs' => Loger::search($this->query)->orderBy(...array_values($this->sortBy))->paginate(10),

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 trait GetUsersFromCacheTrait
 {
-    public function get_users_from_cache()
+    public function get_users_from_cache(): mixed
     {
         if (! Cache::has('users')) {
             Cache::forever('users', User::orderBy('first_name', 'ASC')->get());

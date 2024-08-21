@@ -7,7 +7,7 @@ use App\Models\NanguSubscriber;
 
 class NanguSubscribersService
 {
-    public function get()
+    public function get(): void
     {
         $connection = (new ConnectService('subscriber'));
 

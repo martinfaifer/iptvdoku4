@@ -11,23 +11,23 @@ class StoreDeviceToChannelForm extends Form
 {
     public ?Channel $channel;
 
-    public $channelType;
+    public string|null $channelType = null;
 
     #[Validate('required', message: 'Vyberte zařízení')]
     #[Validate('exists:devices,id', message: 'Zařízení neexistuje v DB')]
-    public $deviceId = null;
+    public int|null $deviceId = null;
 
     #[Validate('required', message: 'Hodnota musí být vyplněna true / false')]
     #[Validate('boolean', message: 'Neplatný formát')]
     public bool $is_backup = false;
 
-    public function setChannel(Channel $channel, string $channelType)
+    public function setChannel(Channel $channel, string $channelType): void
     {
         $this->channel = $channel;
         $this->channelType = $channelType;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

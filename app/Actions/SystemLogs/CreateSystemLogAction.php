@@ -14,7 +14,7 @@ class CreateSystemLogAction
         //
     }
 
-    public function __invoke()
+    public function __invoke(): void
     {
         SystemLog::create([
             'type' => $this->type,

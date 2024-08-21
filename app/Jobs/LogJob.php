@@ -20,7 +20,7 @@ class LogJob implements ShouldQueue
         public string $user,
         public string $type,
         public string $item,
-        public $payload
+        public mixed $payload
     ) {
         //
     }

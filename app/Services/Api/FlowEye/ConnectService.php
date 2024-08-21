@@ -10,7 +10,7 @@ class ConnectService
 {
     use RequestTypeTrait;
 
-    public $connection;
+    public mixed $connection;
 
     public array $endPoints = [
         'procesess' => [
@@ -30,7 +30,7 @@ class ConnectService
         ],
     ];
 
-    public function __construct($endpointType, ?array $formData = null, ?string $params = null)
+    public function __construct(string $endpointType, ?array $formData = null, ?string $params = null)
     {
         try {
             if (is_array($formData)) {
@@ -46,7 +46,7 @@ class ConnectService
             $this->connection = Http::withHeaders([
                 'x-api-token' => config('services.api.8.floweye.api_token'),
             ])->$requestType(
-                config('services.api.8.floweye.url').$this->endPoints[$endpointType]['endpoint'],
+                config('services.api.8.floweye.url') . $this->endPoints[$endpointType]['endpoint'],
                 $this->endPoints[$endpointType]['formData']
             );
         } catch (\Throwable $th) {
@@ -54,7 +54,7 @@ class ConnectService
         }
     }
 
-    public function connect(?string $cacheKey = null)
+    public function connect(?string $cacheKey = null): mixed
     {
         if (is_null($this->connection)) {
             return [];
@@ -69,10 +69,5 @@ class ConnectService
         }
 
         return [];
-    }
-
-    public function get_user()
-    {
-
     }
 }

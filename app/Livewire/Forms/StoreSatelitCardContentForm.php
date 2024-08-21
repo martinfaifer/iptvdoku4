@@ -13,9 +13,9 @@ class StoreSatelitCardContentForm extends Form
 
     #[Validate('required', message: "Vyberte soubor")]
     #[Validate('max:2048', message: "Maximální velikost je :max")]
-    public $file;
+    public mixed $file;
 
-    public function create(int $satCardId)
+    public function create(int $satCardId): void
     {
         $validated = $this->validate();
         $path = $this->file->store(path: 'public/sat-cards');

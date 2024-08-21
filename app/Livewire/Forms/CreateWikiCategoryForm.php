@@ -14,7 +14,7 @@ class CreateWikiCategoryForm extends Form
     #[Validate('max:255', message: 'Maximální počet znaků je :max')]
     public string $name = '';
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

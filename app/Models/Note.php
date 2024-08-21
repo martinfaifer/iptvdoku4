@@ -49,8 +49,8 @@ class Note extends Model
         return $this->belongsTo(Ip::class, 'ip_id');
     }
 
-    public function scopeForUser(Builder $query, string $userEmail)
+    public function scopeForUser(Builder $query, string $userEmail): void
     {
-        return $query->where('user', $userEmail);
+        $query->where('user', $userEmail);
     }
 }

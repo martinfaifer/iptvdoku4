@@ -26,7 +26,7 @@ class GetGrapeTranscodersCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $serverResponse = (new ConnectService(endpointType: 'transcoders'))->connect();
 

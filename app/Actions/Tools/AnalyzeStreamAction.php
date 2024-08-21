@@ -14,7 +14,7 @@ class AnalyzeStreamAction
         }
     }
 
-    public function __invoke()
+    public function __invoke(): mixed
     {
         $connection = (new ConnectService(
             endpointType: "analyze",

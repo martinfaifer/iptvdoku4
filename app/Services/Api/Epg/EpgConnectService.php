@@ -14,10 +14,10 @@ class EpgConnectService
         $this->url = str_replace('%key%', config('services.api.1.epg.key'), config('services.api.1.epg.url'));
     }
 
-    public function connect(?string $query = null, string $cacheKey = 'channelEpgIds')
+    public function connect(?string $query = null, string $cacheKey = 'channelEpgIds'): mixed
     {
         if (! is_null($query)) {
-            $this->url = $this->url.$query;
+            $this->url = $this->url . $query;
         }
 
         $httpResponse = Http::timeout(60)->get($this->url);
@@ -32,9 +32,11 @@ class EpgConnectService
 
             return $httpResponse->json();
         }
+
+        return false;
     }
 
-    protected function xml2arr($xml, $isShifted = false)
+    protected function xml2arr(mixed $xml, bool $isShifted = false): mixed
     {
         $new = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
 
@@ -49,7 +51,7 @@ class EpgConnectService
         return array_shift($newArr);
     }
 
-    public function get_epg_name_by_id($epgId)
+    public function get_epg_name_by_id(string|int|null $epgId): string
     {
         if (is_null($epgId)) {
             return '';
@@ -69,9 +71,9 @@ class EpgConnectService
         return '';
     }
 
-    public function get_channel_epg(string|int $epgId, string $fromDate, string $toDate)
+    public function get_channel_epg(string|int $epgId, string $fromDate, string $toDate): mixed
     {
-        $this->url = str_replace('channel', 'grapesc', $this->url)."&channel=$epgId&date_from=$fromDate&date_to=$toDate";
+        $this->url = str_replace('channel', 'grapesc', $this->url) . "&channel=$epgId&date_from=$fromDate&date_to=$toDate";
         $httpResponse = Http::get($this->url);
         if ($httpResponse->ok()) {
 
@@ -81,5 +83,7 @@ class EpgConnectService
 
             return $httpResponse->json();
         }
+
+        return false;
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Livewire;
 
-use Illuminate\Support\Collection;
-use Livewire\Component;
 use Mary\Traits\Toast;
+use Livewire\Component;
+use Illuminate\Support\Collection;
+use Illuminate\Contracts\View\Factory;
 
 class Welcome extends Component
 {
@@ -24,7 +25,7 @@ class Welcome extends Component
     }
 
     // Delete action
-    public function delete($id): void
+    public function delete(int|string $id): void
     {
         $this->warning("Will delete #$id", 'It is fake.', position: 'toast-bottom');
     }
@@ -55,11 +56,11 @@ class Welcome extends Component
         ])
             ->sortBy([[...array_values($this->sortBy)]])
             ->when($this->search, function (Collection $collection) {
-                return $collection->filter(fn (array $item) => str($item['name'])->contains($this->search, true));
+                return $collection->filter(fn(array $item) => str($item['name'])->contains($this->search, true));
             });
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.welcome', [
             'users' => $this->users(),

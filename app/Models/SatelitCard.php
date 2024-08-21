@@ -29,8 +29,8 @@ class SatelitCard extends Model
         return $this->hasMany(SatelitCardContent::class, 'satelit_card_id');
     }
 
-    public function scopeSearch(Builder $query, string $search = '')
+    public function scopeSearch(Builder $query, string $search = ''): void
     {
-        return $query->where('name', 'like', '%' . $search . '%');
+        $query->where('name', 'like', '%' . $search . '%');
     }
 }

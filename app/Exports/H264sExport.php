@@ -20,6 +20,7 @@ class H264sExport implements FromArray, WithHeadings
     public function array(): array
     {
         $result = [];
+        $ips = [];
         $h264s = H264::with(['channel', 'ips'])->get();
         foreach ($h264s as $h264) {
             foreach ($h264->ips as $ip) {

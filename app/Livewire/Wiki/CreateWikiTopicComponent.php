@@ -2,10 +2,11 @@
 
 namespace App\Livewire\Wiki;
 
-use App\Livewire\Forms\CreateWikiTopicForm;
-use App\Models\WikiCategory;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
+use App\Models\WikiCategory;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\CreateWikiTopicForm;
 
 class CreateWikiTopicComponent extends Component
 {
@@ -17,12 +18,12 @@ class CreateWikiTopicComponent extends Component
 
     public array $categories;
 
-    public function mount()
+    public function mount(): void
     {
         $this->categories = WikiCategory::get()->toArray();
     }
 
-    public function create()
+    public function create(): mixed
     {
         $topic = $this->form->create();
 
@@ -32,19 +33,19 @@ class CreateWikiTopicComponent extends Component
         return $this->success_alert('Článek vytvořen');
     }
 
-    public function openModal()
+    public function openModal(): void
     {
         $this->resetErrorBag();
 
-        return $this->storeModal = true;
+        $this->storeModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
-        return $this->storeModal = false;
+        $this->storeModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.wiki.create-wiki-topic-component');
     }

@@ -2,14 +2,15 @@
 
 namespace App\Livewire\Settings\Tags;
 
-use App\Models\CssColor;
 use App\Models\Tag;
+use Livewire\Component;
+use App\Models\CssColor;
+use Livewire\Attributes\On;
+use Livewire\WithPagination;
+use Livewire\Attributes\Validate;
+use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
-use Livewire\Attributes\On;
-use Livewire\Attributes\Validate;
-use Livewire\Component;
-use Livewire\WithPagination;
 
 class SettingsTagComponent extends Component
 {
@@ -17,7 +18,7 @@ class SettingsTagComponent extends Component
 
     public bool $createModal = false;
 
-    public $query = '';
+    public string $query = '';
 
     #[Validate('required', message: 'Vyplňte název')]
     public string $name = '';
@@ -27,17 +28,17 @@ class SettingsTagComponent extends Component
 
     public Collection $cssColors;
 
-    public function mount()
+    public function mount(): void
     {
         $this->cssColors = CssColor::get();
     }
 
-    public function openCreateModal()
+    public function openCreateModal(): void
     {
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
         Tag::create([
@@ -49,7 +50,7 @@ class SettingsTagComponent extends Component
         $this->closeDialog();
     }
 
-    public function destroy(Tag $tag)
+    public function destroy(Tag $tag): mixed
     {
         if ($tag->items->isEmpty()) {
             $tag->delete();
@@ -61,14 +62,14 @@ class SettingsTagComponent extends Component
         return $this->error_alert('Štítek má vazbu');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->createModal = false;
         $this->dispatch('refresh-settings-tags');
     }
 
     #[On('refresh-settings-tags')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.tags.settings-tag-component', [
             'tags' => Tag::search($this->query)->paginate(5),

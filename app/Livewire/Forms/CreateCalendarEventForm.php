@@ -26,14 +26,14 @@ class CreateCalendarEventForm extends Form
     public string $start_date = '';
 
     #[Validate('nullable')]
-    public $start_time = null;
+    public mixed $start_time = null;
 
     // #[Validate('required', message: "Vyberte konec akce")]
     #[Validate('nullable')]
-    public $end_date = null;
+    public mixed $end_date = null;
 
     #[Validate('nullable')]
-    public $end_time = null;
+    public mixed $end_time = null;
 
     #[Validate('nullable')]
     public array $users = [];
@@ -53,13 +53,13 @@ class CreateCalendarEventForm extends Form
 
     #[Validate('max:1024', message: 'Maximální velikost banneru je 1Mb')]
     #[Validate('nullable')]
-    public $banner = null;
+    public mixed $banner = null;
 
     #[Validate('nullable')]
     #[Validate('exists:sftp_servers,id', message: 'Neznámý server')]
     public ?string $sftp_server_id = null;
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 
@@ -86,7 +86,7 @@ class CreateCalendarEventForm extends Form
             'sftp_server_id' => $this->sftp_server_id,
         ]);
 
-        if (! is_null($this->users)) {
+        if (! blank($this->users)) {
             SendCreateEventNotificationJob::dispatch($this->users, $event);
         }
 

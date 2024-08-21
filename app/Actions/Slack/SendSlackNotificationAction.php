@@ -14,7 +14,7 @@ class SendSlackNotificationAction
     {
     }
 
-    public function __invoke()
+    public function __invoke(): void
     {
         SendSlackMesssageJob::dispatch(
             $this->url,

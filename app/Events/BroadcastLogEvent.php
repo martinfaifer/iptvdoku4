@@ -15,7 +15,7 @@ class BroadcastLogEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(public $type, public $value)
+    public function __construct(public string $type, public int $value)
     {
         //
     }

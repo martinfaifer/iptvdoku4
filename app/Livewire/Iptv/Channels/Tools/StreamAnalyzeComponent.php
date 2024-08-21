@@ -21,15 +21,15 @@ class StreamAnalyzeComponent extends Component
 
     public array $sortBy = ['column' => 'created_at', 'direction' => 'desc'];
 
-    public $analyzed;
+    public mixed $analyzed;
     public bool $analyzedModal = false;
 
-    public function mount()
+    public function mount(): void
     {
         $this->getAnalyzedStreams();
     }
 
-    public function getAnalyzedStreams()
+    public function getAnalyzedStreams(): array
     {
         $analyzedStreams = [];
         foreach ($this->streams as $stream) {
@@ -46,7 +46,7 @@ class StreamAnalyzeComponent extends Component
         return array_reverse($analyzedStreams);
     }
 
-    public function analyze($stream)
+    public function analyze(string $stream): mixed
     {
         $response = (new AnalyzeStreamAction($stream))();
         if (blank($response)) {
@@ -57,19 +57,19 @@ class StreamAnalyzeComponent extends Component
         return $this->success_alert("Analýza vytvořena");
     }
 
-    public function openAnalyzeModal($analyzeStream)
+    public function openAnalyzeModal(mixed $analyzeStream): mixed
     {
         $this->analyzed = json_decode($analyzeStream, true);
         return $this->analyzedModal = true;
     }
 
-    public function closeModal()
+    public function closeModal(): void
     {
-        return $this->analyzedModal = false;
+        $this->analyzedModal = false;
     }
 
     #[On('refresh_analyzed_streams')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         $this->streams = $this->getStreams($this->channel);
         // $this->analyzedStreams = $this->getAnalyzedStreams();

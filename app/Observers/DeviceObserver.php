@@ -18,7 +18,7 @@ class DeviceObserver
 {
     use CacheDevicesTrait;
 
-    public function created(Device $device)
+    public function created(Device $device): void
     {
         LogJob::dispatch(
             user: Auth::user()->email,
@@ -37,15 +37,15 @@ class DeviceObserver
                 'snmp_version' => $device->snmp_version,
                 'snmp_private_comunity' => $device->snmp_private_comunity,
                 'snmp_public_comunity' => $device->snmp_public_comunity,
-                'template' => $device->template,
+                'template' => $device->template, // @phpstan-ignore-line
                 'showed_create_template' => $device->showed_create_template,
                 'has_channels' => $device->has_channels,
             ])
         );
 
         SendEmailNotificationJob::dispatch(
-            'Bylo přidáno zařízení '.$device->name,
-            'Uživatel '.Auth::user()->email.' přidal zařízení '.$device->name,
+            'Bylo přidáno zařízení ' . $device->name,
+            'Uživatel ' . Auth::user()->email . ' přidal zařízení ' . $device->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );
@@ -54,7 +54,7 @@ class DeviceObserver
         $this->cache_devices_for_menu();
     }
 
-    public function updated(Device $device)
+    public function updated(Device $device): void
     {
         if (Auth::user()) {
             LogJob::dispatch(
@@ -74,15 +74,15 @@ class DeviceObserver
                     'snmp_version' => $device->snmp_version,
                     'snmp_private_comunity' => $device->snmp_private_comunity,
                     'snmp_public_comunity' => $device->snmp_public_comunity,
-                    'template' => $device->template,
+                    'template' => $device->template, // @phpstan-ignore-line
                     'showed_create_template' => $device->showed_create_template,
                     'has_channels' => $device->has_channels,
                 ])
             );
 
             SendEmailNotificationJob::dispatch(
-                'Bylo upraveno zařízení '.$device->name,
-                'Uživatel '.Auth::user()->email.' upravil zařízení '.$device->name,
+                'Bylo upraveno zařízení ' . $device->name,
+                'Uživatel ' . Auth::user()->email . ' upravil zařízení ' . $device->name,
                 Auth::user()->email,
                 'notify_if_channel_change'
             );
@@ -95,10 +95,10 @@ class DeviceObserver
         $this->cache_devices_for_menu();
     }
 
-    public function deleted(Device $device)
+    public function deleted(Device $device): void
     {
         // delete charts
-        Chart::where('item', 'like', '%device:'.$device->id.':%')->delete();
+        Chart::where('item', 'like', '%device:' . $device->id . ':%')->delete();
         // delete alerts
         Alert::where('type', 'gpu_check_failed')->where('item_id', $device->id)->delete();
         Alert::where('type', 'gpu_problem')->where('item_id', $device->id)->delete();
@@ -111,8 +111,8 @@ class DeviceObserver
         $this->cache_devices_for_menu();
 
         SendEmailNotificationJob::dispatch(
-            'Bylo odebráno zařízení '.$device->name,
-            'Uživatel '.Auth::user()->email.' oderbal zařízení '.$device->name,
+            'Bylo odebráno zařízení ' . $device->name,
+            'Uživatel ' . Auth::user()->email . ' oderbal zařízení ' . $device->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );

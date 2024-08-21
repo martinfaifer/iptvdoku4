@@ -9,7 +9,7 @@ use App\Models\NanguSubscription;
 
 class NanguStbService
 {
-    public function get_stbs()
+    public function get_stbs(): void
     {
         $connection = (new ConnectService('subscription'));
         $stbAccountCodes = NanguStbAccountCode::with('subscriptionCode')->get();
@@ -35,7 +35,7 @@ class NanguStbService
         }
     }
 
-    public function count_stbs_model_per_isp()
+    public function count_stbs_model_per_isp(): void
     {
         foreach (NanguIsp::get() as $nanguIsp) {
             $subscriptionsWithStbs = NanguSubscription::forIsp($nanguIsp->id)

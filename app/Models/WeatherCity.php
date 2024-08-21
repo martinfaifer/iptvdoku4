@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class WeatherCity extends Model
 {
     protected $fillable = [
-        'city', 'state',
+        'city',
+        'state',
     ];
 
-    public function scopeSearch(Builder $query, string $search = '')
+    public function scopeSearch(Builder $query, string $search = ''): void
     {
-        return $query->where('city', 'like', '%'.$search.'%');
+        $query->where('city', 'like', '%' . $search . '%');
     }
 }

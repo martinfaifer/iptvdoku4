@@ -10,57 +10,75 @@ class StoreDeviceForm extends Form
 {
     public string $name = '';
 
-    public $device_category_id;
+    public int $device_category_id;
 
-    public $device_vendor_id;
+    public int $device_vendor_id;
 
-    public $ip;
+    public string $ip;
 
-    public $ipmi_ip;
+    public string|null $ipmi_ip;
 
-    public $controller_ip;
+    public string|null $controller_ip;
 
-    public $username;
+    public string|null $username;
 
-    public $password;
+    public string|null $password;
 
     public bool $is_snmp = false;
 
-    public $snmp_version;
+    public int|null $snmp_version;
 
-    public $snmp_private_comunity;
+    public string|null $snmp_private_comunity;
 
-    public $snmp_public_comunity;
+    public string|null $snmp_public_comunity;
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => [
-                'required', 'string', 'max:100', 'unique:devices,name',
+                'required',
+                'string',
+                'max:100',
+                'unique:devices,name',
             ],
             'device_category_id' => [
-                'required', 'exists:device_categories,id',
+                'required',
+                'exists:device_categories,id',
             ],
             'device_vendor_id' => [
-                'required', 'exists:device_vendors,id',
+                'required',
+                'exists:device_vendors,id',
             ],
             'ip' => [
-                'nullable', 'string', 'max:255', 'unique:devices,ip',
+                'nullable',
+                'string',
+                'max:255',
+                'unique:devices,ip',
             ],
             'ipmi_ip' => [
-                'nullable', 'string', 'max:255', 'unique:devices,ipmi_ip',
+                'nullable',
+                'string',
+                'max:255',
+                'unique:devices,ipmi_ip',
             ],
             'controller_ip' => [
-                'nullable', 'string', 'max:255',
+                'nullable',
+                'string',
+                'max:255',
             ],
             'username' => [
-                'nullable', 'string', 'max:255',
+                'nullable',
+                'string',
+                'max:255',
             ],
             'password' => [
-                'nullable', 'string', 'max:255',
+                'nullable',
+                'string',
+                'max:255',
             ],
             'is_snmp' => [
-                'required', 'boolean',
+                'required',
+                'boolean',
             ],
             'snmp_version' => [
                 'nullable',
@@ -74,7 +92,7 @@ class StoreDeviceForm extends Form
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'name.required' => 'Vyplňte popis zařízení',

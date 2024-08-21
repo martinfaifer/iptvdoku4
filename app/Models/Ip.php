@@ -12,7 +12,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Ip extends Model
 {
     protected $fillable = [
-        'ip_address', 'mask', 'cidr', 'ip_cidr_hash', 'nangu_isp_id',
+        'ip_address',
+        'mask',
+        'cidr',
+        'ip_cidr_hash',
+        'nangu_isp_id',
     ];
 
     public function nangu_isp(): BelongsTo
@@ -20,8 +24,8 @@ class Ip extends Model
         return $this->belongsTo(NanguIsp::class, 'nangu_isp_id');
     }
 
-    public function scopeSearch(Builder $query, string $search)
+    public function scopeSearch(Builder $query, string $search): void
     {
-        return $query->where('ip_address', 'like', '%'.$search.'%');
+        $query->where('ip_address', 'like', '%' . $search . '%');
     }
 }

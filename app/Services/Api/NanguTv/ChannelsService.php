@@ -4,7 +4,7 @@ namespace App\Services\Api\NanguTv;
 
 class ChannelsService
 {
-    public function detail(?string $nangu_channel_code)
+    public function detail(?string $nangu_channel_code): mixed
     {
         if (is_null($nangu_channel_code)) {
             return [];

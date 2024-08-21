@@ -20,20 +20,20 @@ class DeviceComponent extends Component
 
     public ?array $grapeTranscoderData = null;
 
-    public function mount()
+    public function mount(): void
     {
         //
     }
 
     #[On('refresh_device')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         if (isset($this->device)) {
-            $this->nmsCahedData = Cache::get('nms_'.$this->device->id);
-            $this->nimbleCachedData = Cache::get('nimble_'.$this->device->id.'_incoming_streams');
-            $this->grapeTranscoderData = Cache::get(('grape_transcoder_'.$this->device->id));
+            $this->nmsCahedData = Cache::get('nms_' . $this->device->id);
+            $this->nimbleCachedData = Cache::get('nimble_' . $this->device->id . '_incoming_streams');
+            $this->grapeTranscoderData = Cache::get(('grape_transcoder_' . $this->device->id));
 
-            return view('livewire.iptv.devices.device-component')->title($this->device?->name);
+            return view('livewire.iptv.devices.device-component')->title($this->device?->name);  // @phpstan-ignore-line
         }
 
         return view('livewire.iptv.devices.device-component');

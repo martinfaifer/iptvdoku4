@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ChannelsUsagePerIspExport implements FromArray, WithHeadings
 {
-    public function __construct(public $nanguIsp)
+    public function __construct(public object $nanguIsp)
     {
         //
     }

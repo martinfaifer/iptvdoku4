@@ -23,7 +23,7 @@ class CreateNanguInvoicePerIsp
 {
     use CurrencyPriceTrait;
 
-    public function create()
+    public function create(): void
     {
         $hboGoTax = GeniusTVStaticTax::where('name', 'osaHBOGO')->first();
         $taxesForTarrifs = [];
@@ -130,7 +130,7 @@ class CreateNanguInvoicePerIsp
         });
     }
 
-    protected function staticTaxesForSubsciptions($isp)
+    protected function staticTaxesForSubsciptions(object $isp): int|float
     {
         $sum = 0;
 
@@ -148,8 +148,9 @@ class CreateNanguInvoicePerIsp
 
     protected function selectUniqueTarrifCodes(int $ispId): array
     {
+        $storedTarrifCodes = NanguSubscription::forIsp($ispId)->isBilling()->uniqueTariffCodes();
         $tarrifCodes = [];
-        foreach (NanguSubscription::forIsp($ispId)->isBilling()->uniqueTariffCodes() as $tarrifCode) {
+        foreach ($storedTarrifCodes as $tarrifCode) { // @phpstan-ignore-line
             array_push($tarrifCodes, $tarrifCode->tariffCode);
         }
 
@@ -201,7 +202,7 @@ class CreateNanguInvoicePerIsp
                     if ($offerTax) {
                         $channelsInOffer = Channel::find(json_decode($offerTax->channels_id));
                         foreach ($channelsInOffer as $channelInOffer) {
-                            if ($channelInOffer->nangu_channel_code != $channelTax->nangu_channel_code) {
+                            if ($channelInOffer->nangu_channel_code != $channelTax->nangu_channel_code) { // @phpstan-ignore-line
                                 $tax = $this->calc_tax(tax: $tax, model: $channelTax);
                             }
                         }
@@ -212,7 +213,7 @@ class CreateNanguInvoicePerIsp
         return $tax;
     }
 
-    protected function channelPackagesTaxes(int $ispId, string $tarrifCode)
+    protected function channelPackagesTaxes(int $ispId, string $tarrifCode): int
     {
         $tax = 0;
 
@@ -267,7 +268,7 @@ class CreateNanguInvoicePerIsp
     }
 
 
-    protected function offerTaxes(int $ispId, string $tarrifCode)
+    protected function offerTaxes(int $ispId, string $tarrifCode): int
     {
         $tax = 0;
         foreach (GeniusTVChannelsOffersTax::with('currency_name')->get() as $geniustvOffer) {
@@ -280,7 +281,7 @@ class CreateNanguInvoicePerIsp
         return $tax;
     }
 
-    private function count_channel_package_tax_for_all_channels_without_exception($channelsInPackage, $ispId, $tarrifCode, $channelPackage)
+    private function count_channel_package_tax_for_all_channels_without_exception(mixed $channelsInPackage, int $ispId, string $tarrifCode, object $channelPackage): int
     {
         $tax = 0;
         $arrayOfSearcheableChannelCodes = [];
@@ -312,7 +313,7 @@ class CreateNanguInvoicePerIsp
         return $tax;
     }
 
-    private function count_channel_package_tax_for_channels_without_exception($channelsInPackage, $ispId, $tarrifCode, $channelPackage)
+    private function count_channel_package_tax_for_channels_without_exception(mixed $channelsInPackage, int $ispId, string $tarrifCode, object $channelPackage): int|float
     {
         $tax = 0;
         foreach ($channelsInPackage as $channelInPackage) {
@@ -325,11 +326,8 @@ class CreateNanguInvoicePerIsp
                         $channelsInOffer = Channel::find(json_decode($offer->channels_id));
                         foreach ($channelsInOffer as $channelInOffer) {
                             if ($channelInOffer->nangu_channel_code != $channelInPackage->nangu_channel_code) {
-                                if ($subscriptionInTarrif) {
-                                    $tax = $this->calc_tax(tax: $tax, model: $channelPackage);
-
-                                    return $tax;
-                                }
+                                $tax = $this->calc_tax(tax: $tax, model: $channelPackage);
+                                return $tax;
                             }
                         }
                     }
@@ -346,7 +344,7 @@ class CreateNanguInvoicePerIsp
         return $tax;
     }
 
-    private function count_channel_package_tax_for_all_channels_with_exception($channelsInPackage, $ispId, $tarrifCode, $channelPackage, $arrayOfExceptions)
+    private function count_channel_package_tax_for_all_channels_with_exception(mixed $channelsInPackage, int $ispId, string $tarrifCode, object $channelPackage, array $arrayOfExceptions): int
     {
         $tax = 0;
         $subscriptionInTarrif = NanguSubscription::forIsp($ispId)->isBilling()->tarrifCode($tarrifCode)->first();
@@ -359,7 +357,7 @@ class CreateNanguInvoicePerIsp
         return $tax;
     }
 
-    private function count_channel_package_tax_for_channels_with_exception($channelsInPackage, $ispId, $tarrifCode, $channelPackage, $arrayOfExceptions)
+    private function count_channel_package_tax_for_channels_with_exception(mixed $channelsInPackage, int $ispId, string $tarrifCode, object $channelPackage, array $arrayOfExceptions): int
     {
         $tax = 0;
         foreach ($channelsInPackage as $channelInPackage) {

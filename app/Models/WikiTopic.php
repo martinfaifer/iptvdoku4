@@ -32,8 +32,8 @@ class WikiTopic extends Model
         return $this->belongsTo(WikiCategory::class, 'wiki_category_id', 'id');
     }
 
-    public function scopeSearch(Builder $query, string $search)
+    public function scopeSearch(Builder $query, string $search): void
     {
-        return $query->where('title', 'like', '%'.$search.'%')->orWhere('text', 'like', '%'.$search.'%');
+        $query->where('title', 'like', '%' . $search . '%')->orWhere('text', 'like', '%' . $search . '%');
     }
 }

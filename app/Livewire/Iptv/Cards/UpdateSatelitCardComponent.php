@@ -2,12 +2,13 @@
 
 namespace App\Livewire\Iptv\Cards;
 
-use App\Livewire\Forms\UpdateSatelitCardForm;
+use Livewire\Component;
 use App\Models\SatelitCard;
 use App\Models\SatelitCardVendor;
-use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Support\Collection;
-use Livewire\Component;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\UpdateSatelitCardForm;
 
 class UpdateSatelitCardComponent extends Component
 {
@@ -21,19 +22,19 @@ class UpdateSatelitCardComponent extends Component
 
     public Collection $satelitCardsVendors;
 
-    public function mount()
+    public function mount(): void
     {
         $this->satelitCardsVendors = SatelitCardVendor::get();
     }
 
-    public function edit()
+    public function edit(): void
     {
         $this->updateForm->set_satelit_card($this->satelitCard);
 
-        return $this->updateModal = true;
+        $this->updateModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->updateForm->update();
 
@@ -41,17 +42,16 @@ class UpdateSatelitCardComponent extends Component
 
         $this->resetErrorBag();
 
-        $this->success_alert('Upraveno');
-
-        return $this->redirect(url()->previous(), true);
+        $this->redirect(url()->previous(), true);
+        return $this->success_alert('Upraveno');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
-        return $this->updateModal = false;
+        $this->updateModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.iptv.cards.update-satelit-card-component');
     }

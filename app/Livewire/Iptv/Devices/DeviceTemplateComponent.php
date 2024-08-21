@@ -18,7 +18,7 @@ class DeviceTemplateComponent extends Component
 
     public string $search = "";
 
-    public $template;
+    public mixed $template;
 
     public bool $hasCharts = false;
 
@@ -28,17 +28,17 @@ class DeviceTemplateComponent extends Component
 
     public array $logs = [];
 
-    public $updatedInterface = [];
+    public array $updatedInterface = [];
 
-    public $updatedInterfaceKey = '';
+    public string $updatedInterfaceKey = '';
 
-    public $interfaceType = '';
+    public string $interfaceType = '';
 
     public bool $updateDrawer = false;
 
     public bool $logModal = false;
 
-    public function mount($template)
+    public function mount(mixed $template): void
     {
         $this->template = $template;
 
@@ -47,16 +47,16 @@ class DeviceTemplateComponent extends Component
         }
     }
 
-    public function openUpdateDrawer($key, $interfaceType)
+    public function openUpdateDrawer(string $key, string $interfaceType): void
     {
         $this->updatedInterface = $this->template[$interfaceType][$key];
         $this->updatedInterfaceKey = $key;
         $this->interfaceType = $interfaceType;
 
-        return $this->updateDrawer = true;
+        $this->updateDrawer = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         (new DeviceTemplateEngine())->update(
             device: $this->device,
@@ -70,39 +70,39 @@ class DeviceTemplateComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function closeDrawer()
+    public function closeDrawer(): void
     {
         $this->updatedInterface = [];
         $this->updatedInterfaceKey = '';
         $this->interfaceType = '';
 
-        return $this->updateDrawer = false;
+        $this->updateDrawer = false;
     }
 
-    public function loadLog($oid)
+    public function loadLog(string $oid): void
     {
         $this->logs = (new DeviceSnmpEngine($this->device))->get_bulk($oid);
 
-        return $this->logModal = true;
+        $this->logModal = true;
     }
 
-    public function restartInterface($oid)
+    public function restartInterface(string $oid): mixed
     {
         return ((new DeviceSnmpEngine($this->device))->set($oid, '') == true)
             ? $this->success_alert('Interface restartován')
             : $this->error_alert('Nepodařilo se restartovat');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->logs = [];
         $this->charts = [];
         $this->chartModal = false;
 
-        return $this->logModal = false;
+        $this->logModal = false;
     }
 
-    public function delete()
+    public function delete(): mixed
     {
         $this->device->update([
             'template' => null,
@@ -113,17 +113,17 @@ class DeviceTemplateComponent extends Component
         return $this->success_alert('Šablona odebrána');
     }
 
-    public function loadCharts()
+    public function loadCharts(): void
     {
         $this->charts = $this->get_charts(
             item: 'device:' . $this->device->id,
             useDisctinct: true
         );
 
-        return $this->chartModal = true;
+        $this->chartModal = true;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.device-template-component');
     }

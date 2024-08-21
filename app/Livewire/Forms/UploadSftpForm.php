@@ -12,9 +12,9 @@ class UploadSftpForm extends Form
     use WithFileUploads;
 
     #[Validate('required', message: 'Vyberte soubor')]
-    public $file = null;
+    public mixed $file = null;
 
-    public function upload_file($sftpServer): bool
+    public function upload_file(object $sftpServer): bool
     {
         $sftp = new SFTP($sftpServer->url);
 

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 trait GetChannelFromCacheTrait
 {
-    public function get_channels_from_cache()
+    public function get_channels_from_cache():mixed
     {
         if (! Cache::has('channels_menu')) {
             Cache::forever('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));

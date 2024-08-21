@@ -3,11 +3,12 @@
 namespace App\Livewire\Iptv\Channels\Epg;
 
 use App\Models\Channel;
-use App\Services\Api\Epg\EpgConnectService;
-use App\Traits\Dates\DateParserTrait;
+use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
-use Livewire\Component;
+use App\Traits\Dates\DateParserTrait;
+use Illuminate\Contracts\View\Factory;
+use App\Services\Api\Epg\EpgConnectService;
 
 class EpgChannelComponent extends Component
 {
@@ -15,18 +16,18 @@ class EpgChannelComponent extends Component
 
     public ?Channel $channel;
 
-    public $epg;
+    public mixed $epg;
 
     #[Url]
-    public $dayInMonth;
+    public string|null $dayInMonth = null;
 
-    public function mount(Channel $channel)
+    public function mount(Channel $channel): void
     {
         $this->channel = $channel;
         $this->epg = $this->load_epg();
     }
 
-    public function load_epg()
+    public function load_epg(): mixed
     {
         if (blank($this->dayInMonth)) {
             $this->dayInMonth = now()->format('Y-m-d');
@@ -36,12 +37,12 @@ class EpgChannelComponent extends Component
     }
 
     #[On('reload_channel_epg')]
-    public function reload_channel_epg()
+    public function reload_channel_epg(): void
     {
-        return $this->redirect(url()->previous(), true);
+        $this->redirect(url()->previous(), true);
     }
 
-    public function placeholder()
+    public function placeholder(): string
     {
         return <<<'HTML'
         <div>
@@ -55,7 +56,7 @@ class EpgChannelComponent extends Component
         HTML;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.iptv.channels.epg.epg-channel-component');
     }

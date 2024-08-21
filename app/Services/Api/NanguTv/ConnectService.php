@@ -6,9 +6,9 @@ use SoapClient;
 
 class ConnectService
 {
-    public $soap;
+    public mixed $soap;
 
-    public $endPoints = [
+    public array $endPoints = [
         'billing' => '/adminws/billing/BillingEndpoint?wsdl',
         'subscription' => '/adminws/provisioning/SubscriptionEndpoint?wsdl',
         'subscriber' => '/adminws/provisioning/SubscriberEndpoint?wsdl',

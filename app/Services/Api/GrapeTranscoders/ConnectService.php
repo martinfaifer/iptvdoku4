@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Http;
 
 class ConnectService
 {
-    public $connection;
+    public mixed $connection;
 
-    public $endPoints = [
+    public array $endPoints = [
         'transcoders' => [
             'method' => 'get',
             'endpoint' => '/transcoders',
@@ -41,7 +41,7 @@ class ConnectService
         ],
     ];
 
-    public function __construct($endpointType, ?array $formData = null, ?string $params = null)
+    public function __construct(string $endpointType, ?array $formData = null)
     {
         try {
             if (! is_null($formData)) {
@@ -55,7 +55,7 @@ class ConnectService
             };
 
             $this->connection = Http::$requestType(
-                config('services.api.3.grape_transcoders.url').$this->endPoints[$endpointType]['endpoint'],
+                config('services.api.3.grape_transcoders.url') . $this->endPoints[$endpointType]['endpoint'],
                 $this->endPoints[$endpointType]['formData']
             );
         } catch (\Throwable $th) {
@@ -66,15 +66,14 @@ class ConnectService
     /**
      * cacheKey is used for storing results in to the cache for faster manipulation with data in fe
      */
-    public function connect(?string $cacheKey = null)
+    public function connect(?string $cacheKey = null): mixed
     {
-        // dd($this->connection);
         if (is_null($this->connection)) {
-            dd('je null', $this->connection);
+            return false;
         }
 
         if (! $this->connection->ok()) {
-            dd('neni ok', $this->connection);
+            return false;
         }
 
         if (array_key_exists('data', $this->connection->json())) {

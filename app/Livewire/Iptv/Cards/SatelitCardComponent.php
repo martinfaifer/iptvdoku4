@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Iptv\Cards;
 
+use App\Models\Device;
+use Livewire\Component;
 use App\Models\SatelitCard;
+use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\SatelitCards\FindSatelitCardOnDeviceTemplateTrait;
-use Livewire\Component;
 
 class SatelitCardComponent extends Component
 {
@@ -13,11 +15,11 @@ class SatelitCardComponent extends Component
 
     public ?SatelitCard $satelitCard;
 
-    public $device;
+    public Device|false $device;
 
     public bool $deviceInfoModal = false;
 
-    public function mount()
+    public function mount(): void
     {
         try {
             $this->device = $this->find_card_in_device_template($this->satelitCard);
@@ -26,17 +28,17 @@ class SatelitCardComponent extends Component
         }
     }
 
-    public function openModal()
+    public function openModal(): void
     {
-        return $this->deviceInfoModal = true;
+        $this->deviceInfoModal = true;
     }
 
-    public function closeModal()
+    public function closeModal(): void
     {
-        return $this->deviceInfoModal = false;
+        $this->deviceInfoModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.iptv.cards.satelit-card-component');
     }

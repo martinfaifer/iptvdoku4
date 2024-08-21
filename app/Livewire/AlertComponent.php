@@ -3,9 +3,10 @@
 namespace App\Livewire;
 
 use App\Models\Alert;
-use Illuminate\Database\Eloquent\Collection;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Collection;
 
 class AlertComponent extends Component
 {
@@ -19,13 +20,13 @@ class AlertComponent extends Component
 
     public Collection $alerts;
 
-    public function mount()
+    public function mount(): void
     {
         $this->check_alerts();
     }
 
     #[On('echo:refresh-alerts,BroadcastAlertEvent')]
-    public function check_alerts()
+    public function check_alerts(): void
     {
         $this->numberOfAlerts = Alert::where('type', 'gpu_problem')->count();
 
@@ -47,12 +48,12 @@ class AlertComponent extends Component
         $this->alerts = Alert::where('type', 'gpu_problem')->get();
     }
 
-    public function changeStack()
+    public function changeStack(): void
     {
-        return $this->isStacked = ! $this->isStacked;
+        $this->isStacked = ! $this->isStacked;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.alert-component');
     }

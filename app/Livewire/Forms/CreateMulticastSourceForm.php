@@ -14,7 +14,7 @@ class CreateMulticastSourceForm extends Form
     #[Validate('max:100', message: "Maximální počet znaků je :max")]
     public string $source = "";
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

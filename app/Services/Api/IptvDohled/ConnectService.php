@@ -11,9 +11,9 @@ class ConnectService
 {
     use RequestTypeTrait;
 
-    public $connection;
+    public mixed $connection;
 
-    public $endPoints = [
+    public array $endPoints = [
         'alerts' => [
             'method' => 'get',
             'endpoint' => '/api/v2/stream/alerts',
@@ -46,7 +46,7 @@ class ConnectService
         ],
     ];
 
-    public function __construct($endpointType, ?array $formData = null, ?string $params = null)
+    public function __construct(string $endpointType, ?array $formData = null, ?string $params = null)
     {
         // try {
         if (is_array($formData)) {
@@ -63,7 +63,7 @@ class ConnectService
             config('services.api.iptvDohled.username'),
             config('services.api.iptvDohled.password')
         )->$requestType(
-            config('services.api.iptvDohled.url').$this->endPoints[$endpointType]['endpoint'],
+            config('services.api.iptvDohled.url') . $this->endPoints[$endpointType]['endpoint'],
             $this->endPoints[$endpointType]['formData']
         );
         // } catch (\Throwable $th) {
@@ -71,10 +71,10 @@ class ConnectService
         // }
     }
 
-    public function connect(?string $cacheKey = null)
+    public function connect(?string $cacheKey = null): mixed
     {
         $response = $this->connection;
-        // info('odpoved primo z fn', [$this->connection]);
+
         if (is_null($response)) {
             if (! is_null($cacheKey)) {
                 Cache::put($cacheKey, [], 3600);
@@ -96,6 +96,6 @@ class ConnectService
         }
 
         // dispatch event
-        BroadcastIptvDohledAlertsEvent::dispatch();
+        BroadcastIptvDohledAlertsEvent::dispatch(); // @phpstan-ignore-line
     }
 }

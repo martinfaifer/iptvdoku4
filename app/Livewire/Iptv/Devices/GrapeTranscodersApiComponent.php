@@ -19,27 +19,27 @@ class GrapeTranscodersApiComponent extends Component
 
     public array $channelsOnDevice = [];
 
-    public function mount(Device $device)
+    public function mount(Device $device): void
     {
         $this->device = $device;
-        $this->grapeTranscoderData = Cache::get(('grape_transcoder_'.$this->device->id));
+        $this->grapeTranscoderData = Cache::get(('grape_transcoder_' . $this->device->id));
         $this->load_channels_from_api();
     }
 
     #[On('reload_streams_on_transcoder.{device.id}')]
-    public function load_channels_from_api()
+    public function load_channels_from_api(): void
     {
         $this->channelsOnDevice = $this->streams_on_transcoder(device: $this->device);
     }
 
-    public function pause(string $pid)
+    public function pause(string $pid): mixed
     {
         $response = $this->pause_transcoding(
             pid: $pid,
             device: $this->device
         );
 
-        $this->dispatch('reload_streams_on_transcoder.'.$this->device->id);
+        $this->dispatch('reload_streams_on_transcoder.' . $this->device->id);
         if (array_key_exists('alert', $response)) {
             if ($response['alert']['status'] == 'success') {
                 return $this->success_alert($response['alert']['msg']);
@@ -49,14 +49,14 @@ class GrapeTranscodersApiComponent extends Component
         return $this->error_alert('Stream se nepodařilo zastavit');
     }
 
-    public function play(string|int $streamId)
+    public function play(string|int $streamId): mixed
     {
         $response = $this->start_transcoding(
             streamId: $streamId,
             device: $this->device
         );
 
-        $this->dispatch('reload_streams_on_transcoder.'.$this->device->id);
+        $this->dispatch('reload_streams_on_transcoder.' . $this->device->id);
         if (array_key_exists('alert', $response)) {
             if ($response['alert']['status'] == 'success') {
                 return $this->success_alert($response['alert']['msg']);
@@ -66,7 +66,7 @@ class GrapeTranscodersApiComponent extends Component
         return $this->error_alert('Stream se nepodařilo spustit');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.grape-transcoders-api-component', [
             'headers' => [

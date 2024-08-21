@@ -6,16 +6,16 @@ use DateTime;
 
 trait DateParserTrait
 {
-    public function stringTimeParseToDayMonthYear(string $stringTime)
+    public function stringTimeParseToDayMonthYear(string $stringTime): string
     {
         $explodedString = explode('T', $stringTime);
         $explodedDate = explode('-', $explodedString[0]);
         $explodedTime = explode('+', $explodedString[1]);
 
-        return $explodedTime[0].' '.$explodedDate[2].'.'.$explodedDate[1].' '.$explodedDate[0];
+        return $explodedTime[0] . ' ' . $explodedDate[2] . '.' . $explodedDate[1] . ' ' . $explodedDate[0];
     }
 
-    public function stringTimeParseToTime(string $stringTime)
+    public function stringTimeParseToTime(string $stringTime):string
     {
         $explodedString = explode('T', $stringTime);
         $explodedDate = explode('-', $explodedString[0]);

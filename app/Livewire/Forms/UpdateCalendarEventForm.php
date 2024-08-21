@@ -20,7 +20,7 @@ class UpdateCalendarEventForm extends Form
 
     #[Validate('nullable')]
     #[Validate('string', message: 'Neplatný formát')]
-    public $description = '';
+    public string $description = '';
 
     #[Validate('nullable')]
     public string $color = '';
@@ -29,14 +29,14 @@ class UpdateCalendarEventForm extends Form
     public string $start_date = '';
 
     #[Validate('nullable')]
-    public $start_time = null;
+    public mixed $start_time = null;
 
     // #[Validate('required', message: "Vyberte konec akce")]
     #[Validate('nullable')]
-    public $end_date = null;
+    public mixed $end_date = null;
 
     #[Validate('nullable')]
-    public $end_time = null;
+    public mixed $end_time = null;
 
     #[Validate('nullable')]
     public array $users = [];
@@ -53,13 +53,13 @@ class UpdateCalendarEventForm extends Form
 
     #[Validate('max:1024', message: 'Maximální velikost banneru je 1Mb')]
     #[Validate('nullable')]
-    public $banner;
+    public mixed $banner = null;
 
     #[Validate('nullable')]
     #[Validate('exists:sftp_servers,id', message: 'Neznámý server')]
     public ?string $sftp_server_id = null;
 
-    public function setEvent($event)
+    public function setEvent(object $event): void
     {
         $this->event = $event;
         $this->label = $event->label;
@@ -77,17 +77,17 @@ class UpdateCalendarEventForm extends Form
         $this->sftp_server_id = $event->sftp_server_id;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->validate();
 
         $bannerPath = $this->event->banner_path;
 
-        if (! is_string($this->banner)) {
+        if (! blank($this->banner)) {
             $bannerPath = $this->banner->store(path: 'public/NanguBanners');
         }
 
-        return $this->event->update([
+        $event = $this->event->update([
             'label' => $this->label,
             'description' => $this->description,
             'start_date' => $this->start_date,
@@ -104,5 +104,6 @@ class UpdateCalendarEventForm extends Form
         ]);
 
         $this->reset();
+        return $event;
     }
 }

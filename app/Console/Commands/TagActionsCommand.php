@@ -31,7 +31,7 @@ class TagActionsCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         // check if gpus working action 1
         GpuDeviceCheckJob::dispatch();

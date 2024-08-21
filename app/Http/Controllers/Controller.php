@@ -10,7 +10,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function api_error(string $message)
+    public function api_error(string $message): \Illuminate\Http\JsonResponse
     {
         return response()->json([
             'status' => 'error',
@@ -18,7 +18,7 @@ class Controller extends BaseController
         ], 404);
     }
 
-    public function api_success($data)
+    public function api_success(mixed $data): \Illuminate\Http\JsonResponse
     {
         return response()->json([
             'status' => 'success',

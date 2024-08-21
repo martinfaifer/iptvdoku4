@@ -16,21 +16,6 @@ class WikiTopicPolicy
         return null;
     }
 
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, WikiTopic $wikiTopic): bool
-    {
-        //
-    }
 
     /**
      * Determine whether the user can create models.

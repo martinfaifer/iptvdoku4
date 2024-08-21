@@ -14,7 +14,7 @@ class UpdateH264ChannelForm extends Form
 
     public ?ChannelQualityWithIp $channelQualityWithIp;
 
-    public $ip = '';
+    public string $ip = '';
 
     public bool $isInDohled = false;
 
@@ -22,16 +22,17 @@ class UpdateH264ChannelForm extends Form
 
     public bool $delete_from_dohled = false;
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'ip' => [
-                'required', 'unique:channel_quality_with_ips,ip,'.$this->channelQualityWithIp->id,
+                'required',
+                'unique:channel_quality_with_ips,ip,' . $this->channelQualityWithIp->id,
             ],
         ];
     }
 
-    public function messeges()
+    public function messeges(): array
     {
         return [
             'ip.required' => 'Vyplňte IP',
@@ -39,14 +40,14 @@ class UpdateH264ChannelForm extends Form
         ];
     }
 
-    public function setUnicast(ChannelQualityWithIp $channelQualityWithIp)
+    public function setUnicast(ChannelQualityWithIp $channelQualityWithIp): void
     {
         $this->channelQualityWithIp = $channelQualityWithIp;
         $this->ip = $channelQualityWithIp->ip;
         $this->isInDohled = $this->isInIptvDohledDohled($channelQualityWithIp->ip);
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
         $this->channelQualityWithIp->update([
@@ -55,7 +56,7 @@ class UpdateH264ChannelForm extends Form
 
         if ($this->to_dohled == true) {
             StoreStreamToIptvDohledJob::dispatch(
-                $this->channelQualityWithIp->h264->channel->name.'_h264',
+                $this->channelQualityWithIp->h264->channel->name . '_h264',
                 $this->ip
             );
         }

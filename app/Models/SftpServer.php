@@ -30,8 +30,8 @@ class SftpServer extends Model
         'connection_type',
     ];
 
-    public function scopeSearch(Builder $query, string $search)
+    public function scopeSearch(Builder $query, string $search): void
     {
-        return $query->where('name', 'like', '%'.$search.'%')->orWhere('url', 'like', '%'.$search.'%');
+        $query->where('name', 'like', '%' . $search . '%')->orWhere('url', 'like', '%' . $search . '%');
     }
 }

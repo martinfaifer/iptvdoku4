@@ -21,7 +21,7 @@ class CreateSettingsTagToChannelPackageForm extends Form
     #[Validate('max:255', message: 'Maximální počet znaků je :max')]
     public string $channelPackageName = '';
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

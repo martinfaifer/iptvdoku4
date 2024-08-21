@@ -2,23 +2,26 @@
 
 namespace App\Traits\Sftps;
 
+use App\Models\SftpServer;
 use Illuminate\Support\Facades\Storage;
 use phpseclib3\Net\SFTP;
 
 trait GetServerContentTrait
 {
-    public function get_content(object $sftpServer): array
+    public function get_content(SftpServer $sftpServer): array
     {
         if ($sftpServer->connection_type == 'sftp') {
             return $this->sftp($sftpServer);
         }
 
-        if ($sftpServer->connection_type == 'ftp') {
-            dd($this->ftp($sftpServer));
-        }
+        // if ($sftpServer->connection_type == 'ftp') {
+        //     dd($this->ftp($sftpServer));
+        // }
+
+        return [];
     }
 
-    public function sftp($sftpServer)
+    public function sftp(SftpServer $sftpServer): array
     {
         $sftp = new SFTP($sftpServer->url);
 
@@ -31,15 +34,15 @@ trait GetServerContentTrait
         }
 
         $contents = $sftp->rawlist();
-        $contentsCollection = collect($contents);
+        $contentsCollection = collect($contents);  // @phpstan-ignore-line
         $sorted = $contentsCollection->sortBy('filename');
 
         return array_values($sorted->values()->all());
     }
 
-    public function ftp($sftpServer)
+    public function ftp(SftpServer $sftpServer): array
     {
-        Storage::createFtpDriver([
+        return Storage::createFtpDriver([
             'host' => $sftpServer->url,
             'username' => $sftpServer->username,
             'password' => $sftpServer->password,

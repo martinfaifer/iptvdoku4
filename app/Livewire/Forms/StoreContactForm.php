@@ -23,7 +23,7 @@ class StoreContactForm extends Form
     #[Validate('max:255', message: 'Maximální počet znaků je :max')]
     public string $phone = '';
 
-    public function create(string $type, int $item_id)
+    public function create(string $type, int $item_id): void
     {
         $this->validate();
 

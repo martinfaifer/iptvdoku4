@@ -18,44 +18,44 @@ class StoreDeviceComponent extends Component
 
     public bool $storeModal = false;
 
-    public $deviceCategories;
+    public mixed $deviceCategories;
 
-    public $devicesVendors;
+    public mixed $devicesVendors;
 
-    public $deviceSnmps;
+    public mixed $deviceSnmps;
 
-    public function mount()
+    public function mount(): void
     {
         $this->deviceCategories = DeviceCategory::get();
         $this->devicesVendors = $this->get_device_vendors();
         $this->deviceSnmps = DeviceSnmp::get();
     }
 
-    public function openModal()
+    public function openModal(): void
     {
-        return $this->storeModal = true;
+        $this->storeModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->resetErrorBag();
 
-        return $this->storeModal = false;
+        $this->storeModal = false;
     }
 
-    public function store()
+    public function store(): mixed
     {
         $device = $this->form->store();
         $this->closeDialog();
 
         $this->dispatch('update_devices_menu');
 
-        $this->redirect('/devices/'.$device->id, true);
+        $this->redirect('/devices/' . $device->id, true);
 
         return $this->success_alert('Zařízení přidáno');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.store-device-component');
     }

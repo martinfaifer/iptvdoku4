@@ -24,7 +24,7 @@ class DeviceSshComponent extends Component
 
     public bool $updateModal = false;
 
-    public $deviceSsh;
+    public mixed $deviceSsh;
 
     #[Validate('required', message: 'Vyplňte uživatelské jméno')]
     #[Validate('string', message: 'Neplatný formát')]
@@ -36,7 +36,7 @@ class DeviceSshComponent extends Component
     #[Validate('max:100', message: 'Maximální počet znaků je :max')]
     public string $password = '';
 
-    public function mount(Device $device)
+    public function mount(Device $device): void
     {
         try {
             $this->device = $device;
@@ -48,7 +48,7 @@ class DeviceSshComponent extends Component
     }
 
     #[On('check_if_need_ssh.{device.id}')]
-    public function checkIfNeedSsh()
+    public function checkIfNeedSsh(): void
     {
         // check if device has tag if need ssh
         // tag action check_gpu id 1
@@ -66,7 +66,7 @@ class DeviceSshComponent extends Component
         }
     }
 
-    public function store()
+    public function store(): mixed
     {
         $this->validate();
 
@@ -83,15 +83,15 @@ class DeviceSshComponent extends Component
         return $this->success_alert('Přidáno');
     }
 
-    public function openUpdateModal()
+    public function openUpdateModal(): void
     {
         $this->username = $this->deviceSsh->username;
         $this->password = $this->deviceSsh->password;
 
-        return $this->updateModal = true;
+        $this->updateModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->validate();
 
@@ -107,16 +107,16 @@ class DeviceSshComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->reset('username', 'password');
         $this->storeModal = false;
         $this->updateModal = false;
 
-        return $this->resetErrorBag();
+        $this->resetErrorBag();
     }
 
-    public function destroy()
+    public function destroy(): mixed
     {
         $this->deviceSsh->delete();
 
@@ -127,12 +127,12 @@ class DeviceSshComponent extends Component
 
     #[On('echo:refresh_device_ssh.{device.id},BroadcastCheckIfDeviceNeedSshEvent')]
     #[On('refresh_device_ssh')]
-    public function refreshDeviceSsh()
+    public function refreshDeviceSsh(): void
     {
-        return $this->deviceSsh = DeviceSsh::where('device_id', $this->device->id)->first();
+        $this->deviceSsh = DeviceSsh::where('device_id', $this->device->id)->first();
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.device-ssh-component');
     }

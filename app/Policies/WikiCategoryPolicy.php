@@ -17,22 +17,6 @@ class WikiCategoryPolicy
     }
 
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, WikiCategory $wikiCategory): bool
-    {
-        //
-    }
-
-    /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool
@@ -68,7 +52,7 @@ class WikiCategoryPolicy
         return true;
     }
 
-    public function view_categories(User $user)
+    public function view_categories(User $user): bool
     {
         if ($user->isApi()) {
             return false;

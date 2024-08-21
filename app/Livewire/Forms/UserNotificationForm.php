@@ -42,7 +42,7 @@ class UserNotificationForm extends Form
     #[Validate('boolean', message: 'Hodnota musí být boolean')]
     public bool $notify_if_channel_was_added_to_promo = false;
 
-    public function setNotifications(User $user)
+    public function setNotifications(User $user): void
     {
         $this->user = $user;
         $this->notify_if_channel_change = $user->notify_if_channel_change;
@@ -55,7 +55,7 @@ class UserNotificationForm extends Form
         $this->notify_if_channel_was_added_to_promo = $user->notify_if_channel_was_added_to_promo;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

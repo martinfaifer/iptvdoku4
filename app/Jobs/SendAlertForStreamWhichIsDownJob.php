@@ -19,7 +19,7 @@ class SendAlertForStreamWhichIsDownJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $cacheTimeout = 1800; // this is seconds
+    protected int $cacheTimeout = 1800; // this is seconds
     /**
      * Create a new job instance.
      */
@@ -72,7 +72,7 @@ class SendAlertForStreamWhichIsDownJob implements ShouldQueue
                             }
                         } else {
                             // send to default channel
-                            if (!$defaultSlackChannel) {
+                            if ($defaultSlackChannel) {
                                 if (!Cache::has('sended_slack_alert_' . $downStream['stream_url'] . $defaultSlackChannel->url)) {
                                     (new SendSlackNotificationAction(
                                         text: "Nefunguje " . $downStream['nazev'] . "s url " . $downStream['stream_url'],

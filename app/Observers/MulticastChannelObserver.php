@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Cache;
 
 class MulticastChannelObserver
 {
-    public function created(ChannelMulticast $multicast)
+    public function created(ChannelMulticast $multicast): void
     {
         if (Auth::user()) {
             LogJob::dispatch(
@@ -43,7 +43,7 @@ class MulticastChannelObserver
         Cache::forever('channel_with_multicast_'.$multicast->channel_id, Channel::find($multicast->channel_id)->load(['multicasts', 'multicasts.channel_source']));
     }
 
-    public function updated(ChannelMulticast $multicast)
+    public function updated(ChannelMulticast $multicast): void
     {
         LogJob::dispatch(
             user: Auth::user()->email,
@@ -78,7 +78,7 @@ class MulticastChannelObserver
         );
     }
 
-    public function deleted(ChannelMulticast $multicast)
+    public function deleted(ChannelMulticast $multicast): void
     {
         if (! is_null($multicast->stb_ip)) {
             DeleteStreamFromIptvDohledJob::dispatch($multicast->stb_ip);

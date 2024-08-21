@@ -2,12 +2,13 @@
 
 namespace App\Livewire\Settings\Notifications\Weather;
 
+use Livewire\Component;
+use App\Models\WeatherCity;
+use Livewire\WithPagination;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsWeatherNotificationForm;
 use App\Livewire\Forms\UpdateSettingsWeatherNotificationForm;
-use App\Models\WeatherCity;
-use App\Traits\Livewire\NotificationTrait;
-use Livewire\Component;
-use Livewire\WithPagination;
 
 class SettingsWeatherNotificationComponent extends Component
 {
@@ -21,14 +22,14 @@ class SettingsWeatherNotificationComponent extends Component
 
     public bool $createModal = false;
 
-    public function openCreateModal()
+    public function openCreateModal(): void
     {
         $this->createForm->reset();
 
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->createForm->create();
 
@@ -37,7 +38,7 @@ class SettingsWeatherNotificationComponent extends Component
         return $this->success_alert('Přidáno');
     }
 
-    public function destroy(WeatherCity $weather)
+    public function destroy(WeatherCity $weather): mixed
     {
         $weather->delete();
 
@@ -46,14 +47,14 @@ class SettingsWeatherNotificationComponent extends Component
         return $this->success_alert('Odebráno');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->createForm->reset();
 
-        return $this->createModal = false;
+        $this->createModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.notifications.weather.settings-weather-notification-component', [
             'headers' => [

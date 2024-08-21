@@ -25,7 +25,7 @@ class GetEcchangeRateCourseCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $swap = (new Builder())
             ->add('fixer', ['access_key' => '5d207d6ea5eedb591e0c32e05adb0259'])

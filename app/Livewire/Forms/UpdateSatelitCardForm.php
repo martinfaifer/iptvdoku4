@@ -13,9 +13,9 @@ class UpdateSatelitCardForm extends Form
     public string $name = '';
 
     #[Validate('required', message: 'Vyberte distributra')]
-    public $satelit_card_vendor_id;
+    public int|string $satelit_card_vendor_id = "";
 
-    public function set_satelit_card(SatelitCard $satelitCard)
+    public function set_satelit_card(SatelitCard $satelitCard): void
     {
         $this->satelitCard = $satelitCard;
         $this->name = $satelitCard->name;

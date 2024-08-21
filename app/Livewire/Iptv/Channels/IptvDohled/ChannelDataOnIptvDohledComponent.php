@@ -11,17 +11,17 @@ class ChannelDataOnIptvDohledComponent extends Component
 
     public string $ip;
 
-    public $channelDataOnIptvDohled;
+    public mixed $channelDataOnIptvDohled;
 
-    public function mount(string $ip)
+    public function mount(string $ip): void
     {
         $this->ip = $ip;
         $this->channelDataOnIptvDohled = $this->channel_on_dohled($ip);
     }
 
-    public function create_chart($streamData)
+    public function create_chart(array $streamData): array
     {
-        [
+        return [
             'type' => 'line',
             'data' => [
                 'labels' => $streamData['xaxis'],
@@ -35,7 +35,7 @@ class ChannelDataOnIptvDohledComponent extends Component
         ];
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component');
     }

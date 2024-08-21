@@ -4,7 +4,7 @@ namespace App\Traits\Api;
 
 trait ApiResponseTrait
 {
-    public function succes_response($data)
+    public function succes_response(mixed $data): array
     {
         return [
             'status' => 'success',
@@ -12,8 +12,8 @@ trait ApiResponseTrait
         ];
     }
 
-    public function not_found_response()
+    public function not_found_response(): never
     {
-        return abort(404);
+        abort(404);
     }
 }

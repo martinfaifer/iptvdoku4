@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Wiki;
 
-use App\Livewire\Forms\UpdateWikiTopicForm;
-use App\Models\WikiCategory;
-use App\Models\WikiTopic;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
+use App\Models\WikiTopic;
+use App\Models\WikiCategory;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\UpdateWikiTopicForm;
 
 class UpdateWikiTopicComponent extends Component
 {
@@ -20,19 +21,19 @@ class UpdateWikiTopicComponent extends Component
 
     public array $categories;
 
-    public function mount()
+    public function mount(): void
     {
         $this->categories = WikiCategory::get()->toArray();
     }
 
-    public function edit()
+    public function edit(): void
     {
         $this->form->setTopic($this->topic);
 
-        return $this->updateModal = true;
+        $this->updateModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->form->update();
 
@@ -42,13 +43,13 @@ class UpdateWikiTopicComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->resetErrorBag();
         $this->updateModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.wiki.update-wiki-topic-component');
     }

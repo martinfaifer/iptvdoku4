@@ -15,7 +15,7 @@ trait RunningEventsTrait
             ->toArray();
     }
 
-    public function running_events_with_frontendNotification()
+    public function running_events_with_frontendNotification(): array
     {
         return Event::runningEvents()
             ->hasFeNotification()

@@ -13,7 +13,7 @@ class CreateSatelitCardExpirationForm extends Form
     #[Validate('max:255', message: 'Maximální počt znaků je :max')]
     public string $expiration = '';
 
-    public function create(SatelitCard $satelitCard)
+    public function create(SatelitCard $satelitCard): void
     {
         $this->validate();
 

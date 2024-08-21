@@ -17,12 +17,12 @@ class UpdateSettingsGeniusTvOfferTaxesForm extends Form
 
     #[Validate('required', message: 'Vyplňte cenu')]
     #[Validate('string', message: 'Neplatný formát')]
-    public string $price = '0';
+    public string|float $price = '0';
 
     #[Validate('required', message: 'Vyberte měnu')]
-    public $currency = null;
+    public mixed $currency = null;
 
-    public function setOfferTax(GeniusTVChannelsOffersTax $offerTax)
+    public function setOfferTax(GeniusTVChannelsOffersTax $offerTax): void
     {
         $this->offerTax = $offerTax;
         $this->offer = $offerTax->offer;
@@ -31,7 +31,7 @@ class UpdateSettingsGeniusTvOfferTaxesForm extends Form
         $this->currency = $offerTax->currency;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

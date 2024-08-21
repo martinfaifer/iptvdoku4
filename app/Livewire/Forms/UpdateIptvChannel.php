@@ -15,42 +15,42 @@ class UpdateIptvChannel extends Form
 
     public string $name = '';
 
-    public $quality;
+    public string $quality = "";
 
-    public $category;
+    public string $category = "";
 
-    public bool $is_radio;
+    public bool $is_radio = false;
 
-    public bool $is_multiscreen;
+    public bool $is_multiscreen = true;
 
-    public $description;
+    public string $description = "";
 
-    public $channelCategories;
+    public mixed $channelCategories = null;
 
-    public $nangu_chunk_store_id;
+    public mixed $nangu_chunk_store_id = "";
 
-    public $nangu_channel_code;
+    public string $nangu_channel_code;
 
     public array $geniustvChannelPackage;
 
     public ?string $epgId = null;
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            'name' => ['required', 'max:250', 'string', 'unique:channels,name,'.$this->channel->id],
+            'name' => ['required', 'max:250', 'string', 'unique:channels,name,' . $this->channel->id],
             'quality' => ['required'],
             'category' => ['required', 'exists:channel_categories,id'],
             'is_radio' => ['required', 'boolean'],
             'is_multiscreen' => ['required', 'boolean'],
             'description' => ['nullable', 'string', 'max:1000'],
-            'nangu_chunk_store_id' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_chunk_store_id,'.$this->channel->id],
-            'nangu_channel_code' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_channel_code,'.$this->channel->id],
+            'nangu_chunk_store_id' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_chunk_store_id,' . $this->channel->id],
+            'nangu_channel_code' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_channel_code,' . $this->channel->id],
             'epgId' => ['nullable'],
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'name.required' => 'Vyplňte název kanálu',
@@ -75,7 +75,7 @@ class UpdateIptvChannel extends Form
         ];
     }
 
-    public function setChannel(Channel $channel, $qualities)
+    public function setChannel(Channel $channel, array $qualities): void
     {
         $this->channel = $channel;
         $this->name = $channel?->name ?? '';
@@ -90,15 +90,15 @@ class UpdateIptvChannel extends Form
         $this->epgId = $channel->epg_id;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
-
+        $qualityToChannel = "";
         $collectionQualities = collect(Channel::QUALITIES);
         $filteredQuality = $collectionQualities->where('id', $this->quality)->all();
 
-        foreach ($filteredQuality as $q) {
-            $qualityToChannel = $q['name'];
+        foreach ($filteredQuality as $quality) {
+            $qualityToChannel = $quality['name'];
         }
 
         $this->channel->update([

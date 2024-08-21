@@ -41,7 +41,6 @@ class MulticastPolicy
      */
     public function update(User $user, ChannelMulticast $multicast): bool
     {
-        dd($multicast);
         if ($user->isTechnik()) {
             return true;
         }
@@ -59,21 +58,5 @@ class MulticastPolicy
         }
 
         return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, ChannelMulticast $multicast): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, ChannelMulticast $multicast): bool
-    {
-        //
     }
 }

@@ -19,11 +19,11 @@ class SendAlertForStreamWhichHasHighBanwidth implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $cacheTimeout = 180; // this is seconds
+    protected int $cacheTimeout = 180; // this is seconds
     /**
      * Create a new job instance.
      */
-    public function __construct(public string $stream_url, public array $highBanwidt, public string $maxAllowedBanwidth)
+    public function __construct(public string $stream_url, public array $highBanwidt, public string|int $maxAllowedBanwidth)
     {
         //
     }
@@ -67,7 +67,7 @@ class SendAlertForStreamWhichHasHighBanwidth implements ShouldQueue
             }
         } else {
             // send to default channel
-            if (!$defaultSlackChannel) {
+            if ($defaultSlackChannel) {
                 if (!Cache::has('sended_slack_alert_high_banwidth_' . $this->stream_url . $defaultSlackChannel->url)) {
                     (new SendSlackNotificationAction(
                         text: "Stream  " . $this->stream_url . "má datový tok " . implode(", ", $this->highBanwidt) . " který je vyšší než povolený maximální " . $this->maxAllowedBanwidth,

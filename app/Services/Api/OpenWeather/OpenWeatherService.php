@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cache;
 
 class OpenWeatherService
 {
-    public function separate_data($openWeatherResponse): array
+    public function separate_data(array $openWeatherResponse): array
     {
         $weather = [
             'main' => $openWeatherResponse['weather'][0]['main'],
@@ -26,7 +26,7 @@ class OpenWeatherService
         // Cache::put('weather_' . $openWeatherResponse['name'], $weather, 3600);
     }
 
-    public function notify_if_necessary(string $weatherDescription)
+    public function notify_if_necessary(string $weatherDescription): void
     {
         Slack::where('action', 'weather_notification')->get()->each(function ($channel) use ($weatherDescription) {
             if (str_contains($weatherDescription, 'thunderstorm')) {
@@ -76,7 +76,7 @@ class OpenWeatherService
         });
     }
 
-    public function send_email_notification(string $description)
+    public function send_email_notification(string $description): void
     {
         SendEmailNotificationJob::dispatch(
             'Varování před počasím!',

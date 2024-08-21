@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Weather;
 
-use App\Traits\Weather\GetCachedWeatherTrait;
 use Livewire\Component;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Weather\GetCachedWeatherTrait;
 
 class WeatherComponent extends Component
 {
@@ -11,12 +12,12 @@ class WeatherComponent extends Component
 
     public array $weathers;
 
-    public function mount()
+    public function mount(): void
     {
-        $this->weathers = $this->get_weathers();
+        $this->weathers = $this->get_weather();
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.weather.weather-component');
     }

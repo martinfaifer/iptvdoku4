@@ -42,7 +42,7 @@ class UpdateSettingsNanguIspForm extends Form
     #[Validate('unique:nangu_isps,crm_contract_id', message: 'Tento contract id již existuje')]
     public ?string $crm_contract_id = null;
 
-    public function setNanguIsp($nanguIsp)
+    public function setNanguIsp(object $nanguIsp): void
     {
         $this->nanguIsp = $nanguIsp;
         $this->name = $nanguIsp->name;
@@ -54,8 +54,9 @@ class UpdateSettingsNanguIspForm extends Form
         $this->crm_contract_id = $nanguIsp->crm_contract_id;
     }
 
-    public function update()
+    public function update(): void
     {
+        $this->validate();
         $this->nanguIsp->update([
             'is_akcionar' => $this->is_akcionar,
             'ic' => $this->ic,
@@ -64,6 +65,6 @@ class UpdateSettingsNanguIspForm extends Form
             'crm_contract_id' => $this->crm_contract_id,
         ]);
 
-        return $this->reset();
+        $this->reset();
     }
 }

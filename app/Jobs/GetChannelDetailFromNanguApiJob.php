@@ -17,7 +17,7 @@ class GetChannelDetailFromNanguApiJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public object $channel, public $ttl)
+    public function __construct(public object $channel, public int $ttl)
     {
         //
     }

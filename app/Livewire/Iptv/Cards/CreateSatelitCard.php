@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Iptv\Cards;
 
-use App\Livewire\Forms\StoreSatelitCardForm;
-use App\Models\SatelitCardVendor;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
+use App\Models\SatelitCardVendor;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\StoreSatelitCardForm;
+use Illuminate\Database\Eloquent\Collection;
 
 class CreateSatelitCard extends Component
 {
@@ -18,12 +19,12 @@ class CreateSatelitCard extends Component
 
     public bool $storeModal = false;
 
-    public function mount()
+    public function mount(): void
     {
         $this->satelitCardsVendors = SatelitCardVendor::get();
     }
 
-    public function create()
+    public function create(): mixed
     {
         $satCard = $this->storeForm->create();
 
@@ -31,24 +32,23 @@ class CreateSatelitCard extends Component
 
         $this->closeDialog();
 
-        $this->success_alert('Vytvořeno');
-
-        return $this->redirect('/sat-cards/'.$satCard->id, true);
+        $this->redirect('/sat-cards/' . $satCard->id, true);
+        return $this->success_alert('Vytvořeno');
     }
 
-    public function openModal()
+    public function openModal(): void
     {
-        return $this->storeModal = true;
+        $this->storeModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->resetErrorBag();
 
-        return $this->storeModal = false;
+        $this->storeModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.iptv.cards.create-satelit-card');
     }

@@ -10,16 +10,16 @@ class UpdateSettingsGeniusTvChannelsTaxesForm extends Form
 {
     public ?GeniusTVchannelsTax $channelTax;
 
-    public string $channel_id = '';
+    public string|int $channel_id = '';
 
     #[Validate('required', message: 'Vyplňte cenu')]
     #[Validate('string', message: 'Neplatný formát')]
-    public string $price = '0';
+    public string|float $price = '0';
 
     #[Validate('required', message: 'Vyberte měnu')]
-    public $currency = null;
+    public mixed $currency = null;
 
-    public function setChannelTax(GeniusTVchannelsTax $channelTax)
+    public function setChannelTax(GeniusTVchannelsTax $channelTax): void
     {
         $this->channelTax = $channelTax;
         $this->channel_id = $channelTax->channel_id;
@@ -27,7 +27,7 @@ class UpdateSettingsGeniusTvChannelsTaxesForm extends Form
         $this->currency = $channelTax->currency;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->channelTax->update([
             'price' => $this->price,

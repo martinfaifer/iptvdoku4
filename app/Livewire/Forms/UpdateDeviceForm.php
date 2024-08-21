@@ -12,29 +12,29 @@ class UpdateDeviceForm extends Form
 
     public string $name = '';
 
-    public $device_category_id;
+    public string|int $device_category_id;
 
-    public $device_vendor_id;
+    public int $device_vendor_id;
 
-    public $ip;
+    public string $ip;
 
-    public $ipmi_ip;
+    public string $ipmi_ip;
 
-    public $controller_ip;
+    public string $controller_ip;
 
-    public $username;
+    public string $username;
 
-    public $password;
+    public string $password;
 
     public bool $is_snmp = false;
 
-    public $snmp_version;
+    public int|null $snmp_version = null;
 
-    public $snmp_private_comunity;
+    public string $snmp_private_comunity;
 
-    public $snmp_public_comunity;
+    public string $snmp_public_comunity;
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => [
@@ -76,7 +76,7 @@ class UpdateDeviceForm extends Form
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'name.required' => 'Vyplňte popis zařízení',
@@ -112,7 +112,7 @@ class UpdateDeviceForm extends Form
         ];
     }
 
-    public function setDevice($device)
+    public function setDevice(object $device): void
     {
         $this->device = $device;
         $this->name = $device->name;

@@ -32,7 +32,7 @@ class CreateSettingsUserForm extends Form
     #[Validate('exists:user_roles,id', message: 'Neexistující role')]
     public string $userRoleId = '';
 
-    public function create()
+    public function create(): mixed
     {
         $this->validate();
 

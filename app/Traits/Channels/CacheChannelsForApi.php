@@ -9,7 +9,7 @@ trait CacheChannelsForApi
 {
     use CheckIfChannelInInPromoTrait, GetGeniusTvChannelPaclagesTrait;
 
-    public function cache_channels_with_detail()
+    public function cache_channels_with_detail(): void
     {
         Cache::pull('channels_in_api');
 
@@ -34,7 +34,7 @@ trait CacheChannelsForApi
         Cache::forever('channels_in_api', $result);
     }
 
-    protected function get_value_from_array(?array $array, string $key)
+    protected function get_value_from_array(?array $array, string $key): mixed
     {
         if (is_null($array)) {
             return null;

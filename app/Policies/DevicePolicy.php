@@ -73,7 +73,7 @@ class DevicePolicy
         return false;
     }
 
-    public function show_blade_functions(User $user)
+    public function show_blade_functions(User $user): bool
     {
         if ($user->isTechnik()) {
             return true;

@@ -18,44 +18,43 @@ class StoreDeviceToChannelComponent extends Component
 
     public ?Channel $channel;
 
-    public $channelType;
+    public string $channelType;
 
-    public $devices;
+    public mixed $devices;
 
-    public $device = null;
+    public mixed $device = null;
 
-    public function mount()
+    public function mount(): void
     {
         $this->devices = Device::get(['id', 'name']);
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->form->create();
         $this->storeModal = false;
         // $this->redirect(url()->previous(), true);
-        $this->dispatch('refresh_channel_has_devices_'.$this->channelType.'_'.$this->channel->id);
+        $this->dispatch('refresh_channel_has_devices_' . $this->channelType . '_' . $this->channel->id);
 
         return $this->success_alert('Upraveno');
     }
 
-    public function openModal()
+    public function openModal(): void
     {
         $this->resetErrorBag();
         $this->form->setChannel($this->channel, $this->channelType);
 
-        return $this->storeModal = true;
+        $this->storeModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->form->reset();
 
-        return $this->storeModal = false;
-        // $this->deviceId = null;
+        $this->storeModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.channels.store-device-to-channel-component');
     }

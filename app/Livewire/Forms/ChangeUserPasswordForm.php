@@ -21,7 +21,7 @@ class ChangeUserPasswordForm extends Form
     #[Validate('same:password', message: 'Hesla se neshodují')]
     public string $newpassword = '';
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

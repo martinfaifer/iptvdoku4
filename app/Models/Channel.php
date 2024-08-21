@@ -84,19 +84,19 @@ class Channel extends Model
         return $this->hasMany(Note::class, 'channel_id');
     }
 
-    public function scopeSearch(Builder $query, string $search)
+    public function scopeSearch(Builder $query, string $search): void
     {
-        return $query->where('name', 'like', "%" . $search . "%");
+        $query->where('name', 'like', "%" . $search . "%");
     }
 
-    public static function scopeSearchend(Builder $query, string $search)
+    public static function scopeSearchend(Builder $query, string $search): void
     {
-        return $query->where('name', 'like', $search . "%");
+        $query->where('name', 'like', $search . "%");
     }
 
-    public function scopeFulltextSearch(Builder $query, string $search)
+    public function scopeFulltextSearch(Builder $query, string $search): void
     {
-        return $query->whereFullText(
+        $query->whereFullText(
             ['name', 'description', 'nangu_channel_code'],
             "$search*",
             ['mode' => 'boolean'],
@@ -104,8 +104,8 @@ class Channel extends Model
     }
 
 
-    public function scopeWithNanguChannelCode(Builder $query)
+    public function scopeWithNanguChannelCode(Builder $query): void
     {
-        return $query->where('nangu_channel_code', '!=', null);
+        $query->where('nangu_channel_code', '!=', null);
     }
 }

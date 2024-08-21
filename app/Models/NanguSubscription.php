@@ -34,33 +34,33 @@ class NanguSubscription extends Model
         return $this->hasMany(NanguStbAccountCode::class, 'nangu_subscription_code_id', 'id');
     }
 
-    public function scopeIsBilling(Builder $query)
+    public function scopeIsBilling(Builder $query): void
     {
-        return $query->where('subscriptionState', 'BILLING');
+        $query->where('subscriptionState', 'BILLING');
     }
 
-    public function scopeForIsp(Builder $query, string|int $nanguIspId)
+    public function scopeForIsp(Builder $query, string|int $nanguIspId): void
     {
-        return $query->where('nangu_isp_id', $nanguIspId);
+        $query->where('nangu_isp_id', $nanguIspId);
     }
 
-    public function scopeHasChannel(Builder $query, string $channel = "")
+    public function scopeHasChannel(Builder $query, string $channel = ""): void
     {
-        return $query->where('channels', 'like', '%'.$channel.'%');
+        $query->where('channels', 'like', '%' . $channel . '%');
     }
 
-    public function scopeUniqueTariffCodes(Builder $query)
+    public function scopeUniqueTariffCodes(Builder $query): void
     {
-        return $query->distinct()->get('tariffCode');
+        $query->distinct()->get('tariffCode');
     }
 
-    public function scopeTarrifCode(Builder $query, string $tarrifCode)
+    public function scopeTarrifCode(Builder $query, string $tarrifCode): void
     {
-        return $query->where('tariffCode', $tarrifCode);
+        $query->where('tariffCode', $tarrifCode);
     }
 
-    public function scopeOfferCode(Builder $query, string $offerCode)
+    public function scopeOfferCode(Builder $query, string $offerCode): void
     {
-        return $query->where('offers', 'like', '%'.$offerCode.'%');
+        $query->where('offers', 'like', '%' . $offerCode . '%');
     }
 }

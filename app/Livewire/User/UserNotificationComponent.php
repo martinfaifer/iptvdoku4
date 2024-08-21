@@ -2,10 +2,11 @@
 
 namespace App\Livewire\User;
 
-use App\Livewire\Forms\UserNotificationForm;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\UserNotificationForm;
 
 class UserNotificationComponent extends Component
 {
@@ -13,17 +14,17 @@ class UserNotificationComponent extends Component
 
     public UserNotificationForm $form;
 
-    public function mount()
+    public function mount(): void
     {
         $this->edit();
     }
 
-    public function edit()
+    public function edit(): void
     {
-        return $this->form->setNotifications(Auth::user());
+        $this->form->setNotifications(Auth::user());
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->form->update();
         $this->redirect(url()->previous(), true);
@@ -31,7 +32,7 @@ class UserNotificationComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.user.user-notification-component');
     }

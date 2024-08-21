@@ -14,12 +14,12 @@ class UpdateSettingsGeniusTvStaticTaxesForm extends Form
 
     #[Validate('required', message: 'Vyplňte cenu')]
     #[Validate('string', message: 'Neplatný formát')]
-    public string $price = '0';
+    public string|float $price = '0';
 
     #[Validate('required', message: 'Vyberte měnu')]
-    public $currency = null;
+    public mixed $currency = null;
 
-    public function setStaticTax(GeniusTVStaticTax $staticTax)
+    public function setStaticTax(GeniusTVStaticTax $staticTax): void
     {
         $this->staticTax = $staticTax;
         $this->name = $staticTax->name;
@@ -27,7 +27,7 @@ class UpdateSettingsGeniusTvStaticTaxesForm extends Form
         $this->currency = $staticTax->currency;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

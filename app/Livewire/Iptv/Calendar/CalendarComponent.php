@@ -7,6 +7,7 @@ use App\Models\Event;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
+use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
 use App\Models\NanguIspTagToChannelPackage;
 use App\Traits\Calendar\RunningEventsTrait;
@@ -52,7 +53,7 @@ class CalendarComponent extends Component
 
     public array $tags;
 
-    public function mount()
+    public function mount(): void
     {
         $this->sftpServers = $this->get_sftp_servers_from_cache();
         $this->cssColors = (new GetCssColorsFromCacheAction())();
@@ -65,7 +66,7 @@ class CalendarComponent extends Component
         $this->show_events();
     }
 
-    public function show_events()
+    public function show_events(): void
     {
         $allEvents = Event::take(50)->with('background_color')->get();
         foreach ($allEvents as $singleEvent) {
@@ -88,14 +89,14 @@ class CalendarComponent extends Component
         // dd($this->events);
     }
 
-    public function edit(Event $event)
+    public function edit(Event $event): void
     {
         $this->form->setEvent($event);
 
-        return $this->updateModal = true;
+        $this->updateModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->form->update();
         $this->closeModal();
@@ -104,16 +105,15 @@ class CalendarComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function closeModal()
+    public function closeModal(): void
     {
         $this->resetErrorBag();
         $this->form->reset();
+        $this->updateModal = false;
         $this->redirect('/calendar', true);
-
-        return $this->updateModal = false;
     }
 
-    public function destroy(Event $event)
+    public function destroy(Event $event): mixed
     {
         $event->delete();
 
@@ -122,7 +122,7 @@ class CalendarComponent extends Component
         return $this->success_alert('Odebrána událost');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.iptv.calendar.calendar-component');
     }

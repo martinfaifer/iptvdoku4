@@ -2,14 +2,15 @@
 
 namespace App\Traits\Devices;
 
-use App\Actions\Slack\SendSlackNotificationAction;
 use App\Models\Slack;
+use App\Models\Device;
+use App\Actions\Slack\SendSlackNotificationAction;
 
 trait CheckDeviceInterfaceStatusTrait
 {
-    public function check_interface_status(object $device, string $newStatus, string $oldStatus, string $interface)
+    public function check_interface_status(Device $device, string $newStatus, string $oldStatus, string $interface): void
     {
-        if ($newStatus != "n/a" || $oldStatus != "n/a") {
+        if (!str_contains($newStatus, "/") || !str_contains($oldStatus, "/")) {
             if ($oldStatus != $newStatus) {
                 $slackChannel = Slack::deviceError()->first();
                 if ($slackChannel) {

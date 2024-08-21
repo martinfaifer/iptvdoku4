@@ -15,7 +15,7 @@ class CheckIfGpuWorkingAction
         //
     }
 
-    public function __invoke()
+    public function __invoke(): void
     {
         try {
             $commandResponse = (new ConnectService(

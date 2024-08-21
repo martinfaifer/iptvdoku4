@@ -24,14 +24,14 @@ class StoreChannel extends Component
 
     #[Validate('max:1024', message: 'Maximální velikost obrázku je 1Mb')]
     #[Validate('nullable')]
-    public $logo;
+    public mixed $logo;
 
     #[Validate('required', message: 'Vyberte kvalitu')]
-    public $quality;
+    public mixed $quality;
 
     #[Validate('required', message: 'Vyberte žánr')]
     #[Validate('exists:channel_categories,id', message: 'Neexistující žánr')]
-    public $category;
+    public mixed $category;
 
     #[Validate('boolean', message: 'Neplatný formát')]
     public bool $is_radio = false;
@@ -51,7 +51,7 @@ class StoreChannel extends Component
 
     #[Validate('string', message: 'Neplatný formát')]
     #[Validate('nullable')]
-    public $description;
+    public mixed $description;
 
     #[Validate('nullable')]
     public array $geniustvChannelPackage;
@@ -61,25 +61,25 @@ class StoreChannel extends Component
 
     public bool $storeModal = false;
 
-    public $qualities = Channel::QUALITIES;
+    public array $qualities = Channel::QUALITIES;
 
-    public $geniusTVChannelPackages;
+    public mixed $geniusTVChannelPackages;
 
-    public $channelCategories;
+    public mixed $channelCategories;
 
     public array $channelsEpgs;
 
-    public function mount()
+    public function mount(): void
     {
         $this->channelCategories = $this->get_channels_categories_from_cache();
         $this->geniusTVChannelPackages = GeniusTvChannelPackage::get();
         $this->channelsEpgs = ! Cache::has('channelEpgIds') ? [] : Cache::get('channelEpgIds');
     }
 
-    public function store()
+    public function store(): mixed
     {
         $this->validate();
-
+        $qualityToChannel = "";
         if (! is_null($this->logo)) {
             $path = $this->logo->store(path: 'public/Logos');
         }
@@ -87,8 +87,8 @@ class StoreChannel extends Component
         $collectionQualities = collect(Channel::QUALITIES);
         $filteredQuality = $collectionQualities->where('id', $this->quality)->all();
 
-        foreach ($filteredQuality as $q) {
-            $qualityToChannel = $q['name'];
+        foreach ($filteredQuality as $quality) {
+            $qualityToChannel = $quality['name'];
         }
 
         $channel = Channel::create([
@@ -108,12 +108,12 @@ class StoreChannel extends Component
         // $this->dispatch('update_channels_sidebar');
         // $this->closeDialog();
 
-        $this->redirect('/channels/'.$channel->id.'/multicast', true);
+        $this->redirect('/channels/' . $channel->id . '/multicast', true);
 
         return $this->success_alert('Kanál přidán');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->storeModal = false;
         $this->resetErrorBag();
@@ -130,7 +130,7 @@ class StoreChannel extends Component
         );
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.channels.store-channel');
     }

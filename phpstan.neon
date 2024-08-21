@@ -1,0 +1,13 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    checkGenericClassInNonGenericObjectType: false
+
+    paths:
+        - app/
+
+    level: 7
+
+    checkMissingIterableValueType: false
+    treatPhpDocTypesAsCertain: false

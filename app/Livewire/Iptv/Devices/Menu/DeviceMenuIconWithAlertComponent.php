@@ -12,7 +12,7 @@ class DeviceMenuIconWithAlertComponent extends Component
 
     public bool $isAlert = false;
 
-    public function mount()
+    public function mount(): void
     {
         // check if today is some alert in device
         if (Alert::whereDate('created_at', now()->today())->first()) {
@@ -21,7 +21,7 @@ class DeviceMenuIconWithAlertComponent extends Component
         }
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.menu.device-menu-icon-with-alert-component');
     }

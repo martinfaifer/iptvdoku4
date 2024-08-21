@@ -2,16 +2,17 @@
 
 namespace App\Livewire\Settings\Geniustv\ChannelsTaxes;
 
+use App\Models\Channel;
+use Livewire\Component;
+use App\Models\Currency;
+use Livewire\Attributes\On;
+use Livewire\WithPagination;
+use Illuminate\Support\Collection;
+use App\Models\GeniusTVchannelsTax;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsGeniusTvChannelsTaxesForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvChannelsTaxesForm;
-use App\Models\Channel;
-use App\Models\Currency;
-use App\Models\GeniusTVchannelsTax;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Support\Collection;
-use Livewire\Attributes\On;
-use Livewire\Component;
-use Livewire\WithPagination;
 
 class SettingsGeniusTvChannelsTaxesComponent extends Component
 {
@@ -21,7 +22,7 @@ class SettingsGeniusTvChannelsTaxesComponent extends Component
 
     public UpdateSettingsGeniusTvChannelsTaxesForm $updateForm;
 
-    public $query = '';
+    public string $query = '';
 
     public bool $createModal = false;
 
@@ -31,27 +32,27 @@ class SettingsGeniusTvChannelsTaxesComponent extends Component
 
     public Collection $channels;
 
-    public function mount()
+    public function mount(): void
     {
         $this->channels = Channel::get(['id', 'name']);
         $this->currencies = Currency::get();
     }
 
-    public function openCreateModal()
+    public function openCreateModal(): void
     {
         $this->resetErrorBag();
 
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->updateModal = false;
 
-        return $this->createModal = false;
+        $this->createModal = false;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->form->create();
 
@@ -59,19 +60,19 @@ class SettingsGeniusTvChannelsTaxesComponent extends Component
 
         $this->dispatch('refresh_settings_genius_tv_channels_taxes');
 
-        $this->success_alert('Vytvořeno');
+        return $this->success_alert('Vytvořeno');
     }
 
-    public function edit(GeniusTVchannelsTax $channelTax)
+    public function edit(GeniusTVchannelsTax $channelTax): void
     {
         $this->resetErrorBag();
 
         $this->updateForm->setChannelTax($channelTax);
 
-        return $this->updateModal = true;
+        $this->updateModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->updateForm->update();
 
@@ -82,7 +83,7 @@ class SettingsGeniusTvChannelsTaxesComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function destroy(GeniusTVchannelsTax $channelTax)
+    public function destroy(GeniusTVchannelsTax $channelTax): void
     {
         $channelTax->delete();
 
@@ -90,7 +91,7 @@ class SettingsGeniusTvChannelsTaxesComponent extends Component
     }
 
     #[On('refresh_settings_genius_tv_channels_taxes')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.geniustv.channels-taxes.settings-genius-tv-channels-taxes-component', [
             'channelsTaxes' => GeniusTVchannelsTax::with('currency_name', 'channel')

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ApiNanguIspController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): ApiIndexNanguIspsResource
     {
         return new ApiIndexNanguIspsResource($request);
     }

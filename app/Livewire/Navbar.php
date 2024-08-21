@@ -2,14 +2,15 @@
 
 namespace App\Livewire;
 
-use App\Traits\Calendar\RunningEventsTrait;
-use App\Traits\Weather\GetCachedWeatherTrait;
-use App\Traits\Weather\GetWeatherIconTrait;
+use Livewire\Component;
+use Livewire\Attributes\On;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Livewire\Attributes\On;
-use Livewire\Component;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Calendar\RunningEventsTrait;
+use App\Traits\Weather\GetWeatherIconTrait;
+use App\Traits\Weather\GetCachedWeatherTrait;
 
 class Navbar extends Component
 {
@@ -19,7 +20,7 @@ class Navbar extends Component
 
     public array $runningEvents;
 
-    public $user;
+    public mixed $user;
 
     public array $weather;
 
@@ -31,7 +32,7 @@ class Navbar extends Component
 
     public bool $calendarEventsDrawer = false;
 
-    public function mount()
+    public function mount(): void
     {
         $this->runningEvents = $this->running_events();
         $this->user = $this->load_user();
@@ -48,29 +49,29 @@ class Navbar extends Component
     }
 
     #[On('echo:refresh_user_data,BroadcastRefreshUserEvent')]
-    public function load_user()
+    public function load_user(): mixed
     {
         return Auth::user();
     }
 
     #[On('echo:refresh_weather,BroadcastWeatherInformationEvent')]
-    public function load_weather()
+    public function load_weather(): void
     {
         $this->weather = $this->get_weather();
     }
 
-    public function openAlertDrawer()
+    public function openAlertDrawer(): void
     {
-        return $this->alertDrawer = true;
+        $this->alertDrawer = true;
     }
 
-    public function openCalendarEventsDrawer()
+    public function openCalendarEventsDrawer(): void
     {
-        return $this->calendarEventsDrawer = true;
+        $this->calendarEventsDrawer = true;
     }
 
     #[On('echo:iptvAlerts,BroadcastIptvDohledAlertsEvent')]
-    public function refreshAlerts()
+    public function refreshAlerts(): void
     {
         if (Cache::has('iptv_dohled_alerts')) {
             $this->iptv_dohled_alerts = Cache::get('iptv_dohled_alerts');
@@ -79,24 +80,24 @@ class Navbar extends Component
         }
     }
 
-    public function closeCalendarNotificationDialog()
+    public function closeCalendarNotificationDialog(): void
     {
         session(['calendarNotificationDialog' => 'seen']);
 
-        return $this->calendarNotificationDialog = false;
+        $this->calendarNotificationDialog = false;
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): void
     {
         Auth::logout();
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return $this->redirect('/', true);
+        $this->redirect('/', true);
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.navbar');
     }

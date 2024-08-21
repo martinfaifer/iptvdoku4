@@ -16,23 +16,23 @@ class GeniusTvChart extends Model
         'nangu_isp_id',
     ];
 
-    public function scopeWithoutNanguIsp(Builder $query)
+    public function scopeWithoutNanguIsp(Builder $query): void
     {
-        return $query->where('nangu_isp_id', null);
+        $query->where('nangu_isp_id', null);
     }
 
-    public function scopeIsChannel(Builder $query, string|int $channelId)
+    public function scopeIsChannel(Builder $query, string|int $channelId): void
     {
-        return $query->where('item', "channel:$channelId");
+        $query->where('item', "channel:$channelId");
     }
 
-    public function scopeLastMonthAndNew(Builder $query)
+    public function scopeLastMonthAndNew(Builder $query): void
     {
-        return $query->where('created_at', '>=', now()->subMonth());
+        $query->where('created_at', '>=', now()->subMonth());
     }
 
-    public function scopeForNanguIsp(Builder $query, string|int $nanguIspId)
+    public function scopeForNanguIsp(Builder $query, string|int $nanguIspId): void
     {
-        return $query->where('nangu_isp_id', $nanguIspId);
+        $query->where('nangu_isp_id', $nanguIspId);
     }
 }

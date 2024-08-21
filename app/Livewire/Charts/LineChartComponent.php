@@ -3,6 +3,7 @@
 namespace App\Livewire\Charts;
 
 use Livewire\Component;
+use Illuminate\Contracts\View\Factory;
 
 class LineChartComponent extends Component
 {
@@ -19,7 +20,7 @@ class LineChartComponent extends Component
         ],
     ];
 
-    public function mount(array $xaxis, array $yaxis, string $label)
+    public function mount(array $xaxis, array $yaxis, string $label): void
     {
         $this->chart['data']['labels'] = $xaxis;
 
@@ -32,7 +33,7 @@ class LineChartComponent extends Component
         $this->chart['data']['datasets'][0]['label'] = $label;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.charts.line-chart-component');
     }

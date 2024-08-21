@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Auth;
 
-use App\Mail\SendForgottenPasswordMail;
 use App\Models\User;
+use Livewire\Component;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Contracts\View\Factory;
+use App\Mail\SendForgottenPasswordMail;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\Users\GeneratePasswordTrait;
-use Illuminate\Support\Facades\Mail;
-use Livewire\Attributes\Validate;
-use Livewire\Component;
 
 class ForgottenPasswordComponent extends Component
 {
@@ -19,7 +20,7 @@ class ForgottenPasswordComponent extends Component
     #[Validate('exists:users,email', message: 'Neexistující email')]
     public string $email = '';
 
-    public function sendNewPassword()
+    public function sendNewPassword(): mixed
     {
         $this->validate();
 
@@ -36,7 +37,7 @@ class ForgottenPasswordComponent extends Component
         return $this->success_alert('Odeslán email s novým heslem');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.auth.forgotten-password-component');
     }

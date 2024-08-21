@@ -19,9 +19,9 @@ class CreateSettingsGeniusTvStaticTaxesForm extends Form
     public string $price = '0';
 
     #[Validate('required', message: 'Vyberte měnu')]
-    public $currency = null;
+    public float|int|null $currency = null;
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

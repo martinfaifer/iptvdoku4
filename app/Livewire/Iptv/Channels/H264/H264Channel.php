@@ -2,14 +2,15 @@
 
 namespace App\Livewire\Iptv\Channels\H264;
 
-use App\Livewire\Forms\UpdateH264ChannelForm;
 use App\Models\Channel;
-use App\Models\ChannelQualityWithIp;
-use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
-use App\Traits\Devices\DeviceHasChannelsTrait;
-use App\Traits\Livewire\NotificationTrait;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use App\Models\ChannelQualityWithIp;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\UpdateH264ChannelForm;
+use App\Traits\Devices\DeviceHasChannelsTrait;
+use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
 
 class H264Channel extends Component
 {
@@ -25,20 +26,20 @@ class H264Channel extends Component
 
     public bool $updateModal = false;
 
-    public $quality;
+    public string|null $quality;
 
-    public function edit(ChannelQualityWithIp $channelQualityWithIp)
+    public function edit(ChannelQualityWithIp $channelQualityWithIp): void
     {
         $this->form->setUnicast($channelQualityWithIp->load('channelQuality'));
-        $this->quality = $channelQualityWithIp?->channelQuality?->name;
+        $this->quality = $channelQualityWithIp?->channelQuality?->name;  // @phpstan-ignore-line
         $this->updateModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_h264.'.$this->channel->id);
+        $this->dispatch('update_h264.' . $this->channel->id);
 
         return $this->success_alert('Změněno');
     }
@@ -49,15 +50,15 @@ class H264Channel extends Component
         $this->resetErrorBag();
     }
 
-    public function destroy(ChannelQualityWithIp $channelQualityWithIp)
+    public function destroy(ChannelQualityWithIp $channelQualityWithIp): mixed
     {
         $channelQualityWithIp->delete();
-        $this->dispatch('update_h264.'.$this->channel->id);
+        $this->dispatch('update_h264.' . $this->channel->id);
 
         return $this->success_alert('Odebráno');
     }
 
-    public function placeholder()
+    public function placeholder(): string
     {
         return <<<'HTML'
         <div class="flex items-center justify-center">
@@ -69,7 +70,7 @@ class H264Channel extends Component
     }
 
     #[On('update_h264.{channel.id}')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         $this->h264 = [];
         if (! is_null($this->channel->h264)) {

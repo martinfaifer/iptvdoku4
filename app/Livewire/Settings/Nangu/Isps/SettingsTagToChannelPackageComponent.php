@@ -2,15 +2,16 @@
 
 namespace App\Livewire\Settings\Nangu\Isps;
 
+use App\Models\Tag;
+use Livewire\Component;
+use App\Models\NanguIsp;
+use Livewire\WithPagination;
+use Illuminate\Support\Collection;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Models\NanguIspTagToChannelPackage;
 use App\Livewire\Forms\CreateSettingsTagToChannelPackageForm;
 use App\Livewire\Forms\UpdateSettingsTagToChannelPackageForm;
-use App\Models\NanguIsp;
-use App\Models\NanguIspTagToChannelPackage;
-use App\Models\Tag;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Support\Collection;
-use Livewire\Component;
-use Livewire\WithPagination;
 
 class SettingsTagToChannelPackageComponent extends Component
 {
@@ -28,41 +29,41 @@ class SettingsTagToChannelPackageComponent extends Component
 
     public Collection $tags;
 
-    public function mount()
+    public function mount(): void
     {
         $this->nanguIsps = NanguIsp::get(['id', 'name']);
         $this->tags = Tag::get();
     }
 
-    public function openCreateModal()
+    public function openCreateModal(): void
     {
         $this->resetErrorBag();
 
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function openEditModal()
+    public function openEditModal(): void
     {
         $this->resetErrorBag();
 
-        return $this->editModal = true;
+        $this->editModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->editModal = false;
 
-        return $this->createModal = false;
+        $this->createModal = false;
     }
 
-    public function edit(NanguIspTagToChannelPackage $nanguIspTagToChannelPackage)
+    public function edit(NanguIspTagToChannelPackage $nanguIspTagToChannelPackage): void
     {
         $this->updateForm->setNanguIspTagToChannelPackage($nanguIspTagToChannelPackage);
 
-        return $this->openEditModal();
+        $this->openEditModal();
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->updateForm->update();
 
@@ -71,7 +72,7 @@ class SettingsTagToChannelPackageComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->createForm->create();
 
@@ -80,7 +81,7 @@ class SettingsTagToChannelPackageComponent extends Component
         return $this->success_alert('Vazba přidána');
     }
 
-    public function destroy(NanguIspTagToChannelPackage $nanguIspTagToChannelPackage)
+    public function destroy(NanguIspTagToChannelPackage $nanguIspTagToChannelPackage): mixed
     {
         $nanguIspTagToChannelPackage->delete();
 
@@ -89,7 +90,7 @@ class SettingsTagToChannelPackageComponent extends Component
         return $this->success_alert('Odebráno');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.nangu.isps.settings-tag-to-channel-package-component', [
             'nanguIspTagToChannelPackages' => NanguIspTagToChannelPackage::with(['nangu_isp', 'tag'])->orderBy('nangu_isp_id', 'ASC')->paginate(5),

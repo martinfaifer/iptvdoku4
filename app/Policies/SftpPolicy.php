@@ -73,7 +73,7 @@ class SftpPolicy
         return false;
     }
 
-    public function upload(User $user)
+    public function upload(User $user): bool
     {
         if ($user->isTechnik() || $user->isAdministrativa()) {
             return true;

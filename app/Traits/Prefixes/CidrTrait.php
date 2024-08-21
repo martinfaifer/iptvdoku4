@@ -4,7 +4,7 @@ namespace App\Traits\Prefixes;
 
 trait CidrTrait
 {
-    public function available_cidrs()
+    public function available_cidrs(): array
     {
         $cidrs = [];
         for ($i = 0; $i <= 32; $i++) {

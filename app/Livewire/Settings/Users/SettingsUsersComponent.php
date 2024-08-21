@@ -2,17 +2,18 @@
 
 namespace App\Livewire\Settings\Users;
 
-use App\Livewire\Forms\CreateSettingsUserForm;
-use App\Livewire\Forms\UpdateSettingsUserForm;
-use App\Mail\SendForgottenPasswordMail;
 use App\Models\User;
+use Livewire\Component;
 use App\Models\UserRole;
+use Livewire\WithPagination;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Contracts\View\Factory;
+use App\Mail\SendForgottenPasswordMail;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\Users\GeneratePasswordTrait;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Mail;
-use Livewire\Component;
-use Livewire\WithPagination;
+use App\Livewire\Forms\CreateSettingsUserForm;
+use App\Livewire\Forms\UpdateSettingsUserForm;
 
 class SettingsUsersComponent extends Component
 {
@@ -26,29 +27,29 @@ class SettingsUsersComponent extends Component
 
     public bool $editModal = false;
 
-    public $query = '';
+    public string $query = '';
 
     public Collection $userRoles;
 
-    public function mount()
+    public function mount(): void
     {
         $this->userRoles = UserRole::get(['id', 'name']);
     }
 
-    public function openCreateModal()
+    public function openCreateModal(): void
     {
         $this->resetErrorBag();
 
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->editModal = false;
         $this->createModal = false;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->form->create();
         $this->closeDialog();
@@ -58,14 +59,14 @@ class SettingsUsersComponent extends Component
         return $this->success_alert('Uživatel vytvořen');
     }
 
-    public function edit(User $user)
+    public function edit(User $user): mixed
     {
         $this->editForm->setUser($user);
 
         return $this->editModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->editForm->update();
 
@@ -74,7 +75,7 @@ class SettingsUsersComponent extends Component
         return $this->success_alert('Uživatel upraven');
     }
 
-    public function resetPassword(User $user)
+    public function resetPassword(User $user): mixed
     {
         $password = $this->generate_password();
         $user->update([
@@ -86,7 +87,7 @@ class SettingsUsersComponent extends Component
         return $this->success_alert('Odeslán email s novým heslem');
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user): mixed
     {
         $user->delete();
         $this->redirect(url()->previous(), true);
@@ -94,7 +95,7 @@ class SettingsUsersComponent extends Component
         return $this->success_alert('Uživatel odebrán');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.users.settings-users-component', [
             'users' => User::search($this->query)->with('userRole')->paginate(),

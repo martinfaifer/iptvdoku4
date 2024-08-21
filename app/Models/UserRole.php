@@ -17,28 +17,28 @@ class UserRole extends Model
         return $this->hasMany(User::class, 'user_role_id', 'id');
     }
 
-    public function scopeAdmin(Builder $query)
+    public function scopeAdmin(Builder $query): void
     {
-        return $query->where('name', 'admin');
+        $query->where('name', 'admin');
     }
 
-    public function scopeTechnik(Builder $query)
+    public function scopeTechnik(Builder $query): void
     {
-        return $query->where('name', 'technik');
+        $query->where('name', 'technik');
     }
 
-    public function scopeAdministrativa(Builder $query)
+    public function scopeAdministrativa(Builder $query): void
     {
-        return $query->where('name', 'administrativa');
+        $query->where('name', 'administrativa');
     }
 
-    public function scopeApi(Builder $query)
+    public function scopeApi(Builder $query): void
     {
-        return $query->where('name', 'API');
+        $query->where('name', 'API');
     }
 
-    public function scopeReader(Builder $query)
+    public function scopeReader(Builder $query): void
     {
-        return $query->where('name', 'reader');
+        $query->where('name', 'reader');
     }
 }

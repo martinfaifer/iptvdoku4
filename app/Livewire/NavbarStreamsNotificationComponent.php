@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Contracts\View\Factory;
 use App\Traits\Devices\CacheDevicesTrait;
 
 class NavbarStreamsNotificationComponent extends Component
@@ -15,18 +16,18 @@ class NavbarStreamsNotificationComponent extends Component
     public array $othersAlerts = [];
     public bool $alertDrawer = false;
 
-    public function mount()
+    public function mount(): void
     {
         $this->refreshAlerts();
     }
 
-    public function openAlertDrawer()
+    public function openAlertDrawer(): void
     {
-        return $this->alertDrawer = true;
+        $this->alertDrawer = true;
     }
 
     #[On('echo:iptvAlerts,BroadcastIptvDohledAlertsEvent')]
-    public function refreshAlerts()
+    public function refreshAlerts(): void
     {
         if (Cache::has('iptv_dohled_alerts')) {
             $this->iptv_dohled_alerts = Cache::get('iptv_dohled_alerts');
@@ -36,14 +37,14 @@ class NavbarStreamsNotificationComponent extends Component
         $this->getOthersAlerts();
     }
 
-    public function getOthersAlerts()
+    public function getOthersAlerts(): void
     {
         $this->othersAlerts = [
             'devices' => $this->get_only_offline_devices()
         ];
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.navbar-streams-notification-component');
     }

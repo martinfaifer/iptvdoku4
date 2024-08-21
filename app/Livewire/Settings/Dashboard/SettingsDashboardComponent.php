@@ -2,24 +2,25 @@
 
 namespace App\Livewire\Settings\Dashboard;
 
-use App\Exports\ChannelsExport;
-use App\Exports\DevicesExport;
+use App\Models\User;
+use App\Models\Event;
+use Livewire\Component;
+use App\Models\NanguIsp;
+use App\Models\WikiTopic;
+use Livewire\Attributes\On;
 use App\Exports\H264sExport;
 use App\Exports\H265sExport;
+use Livewire\Attributes\Url;
+use App\Models\GeniusTvChart;
+use App\Exports\DevicesExport;
+use App\Exports\ChannelsExport;
 use App\Exports\MulticastsExport;
 use App\Exports\SatelitCardsExport;
-use App\Models\Event;
-use App\Models\GeniusTvChart;
-use App\Models\NanguIsp;
-use App\Models\User;
-use App\Models\WikiTopic;
-use App\Traits\Channels\CountChannelsTrait;
-use App\Traits\Devices\CountDevicesTrait;
-use Illuminate\Database\Eloquent\Collection;
-use Livewire\Attributes\On;
-use Livewire\Attributes\Url;
-use Livewire\Component;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Devices\CountDevicesTrait;
+use App\Traits\Channels\CountChannelsTrait;
+use Illuminate\Database\Eloquent\Collection;
 
 class SettingsDashboardComponent extends Component
 {
@@ -54,7 +55,7 @@ class SettingsDashboardComponent extends Component
 
     public array $subscriptionsChartData = [];
 
-    public function mount()
+    public function mount(): void
     {
         $this->channels = $this->count_channels();
         $this->multicasts = $this->count_multicasts();
@@ -69,12 +70,12 @@ class SettingsDashboardComponent extends Component
     }
 
     #[On('reload_new_nangu_isp_charts')]
-    public function refresh_page()
+    public function refresh_page(): void
     {
-        return $this->redirect(url()->previous(), true);
+        $this->redirect(url()->previous(), true);
     }
 
-    public function get_subscriptions_chart_data()
+    public function get_subscriptions_chart_data(): void
     {
         $chartLables = [];
         $data = [];
@@ -94,37 +95,37 @@ class SettingsDashboardComponent extends Component
         ];
     }
 
-    public function export_channels()
+    public function export_channels(): mixed
     {
         return Excel::download(new ChannelsExport, 'channels.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
-    public function export_multicasts()
+    public function export_multicasts(): mixed
     {
         return Excel::download(new MulticastsExport, 'multicasts.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
-    public function export_h264s()
+    public function export_h264s(): mixed
     {
         return Excel::download(new H264sExport, 'h264s.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
-    public function export_h265s()
+    public function export_h265s(): mixed
     {
         return Excel::download(new H265sExport, 'h265s.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
-    public function export_devices()
+    public function export_devices(): mixed
     {
         return Excel::download(new DevicesExport, 'devices.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
-    public function export_sat_cards()
+    public function export_sat_cards(): mixed
     {
         return Excel::download(new SatelitCardsExport, 'satelit_cards.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         $this->get_subscriptions_chart_data();
 

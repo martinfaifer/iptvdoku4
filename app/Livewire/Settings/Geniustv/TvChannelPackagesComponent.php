@@ -2,12 +2,13 @@
 
 namespace App\Livewire\Settings\Geniustv;
 
-use App\Livewire\Forms\CreateGeniusTvTvPackageForm;
-use App\Livewire\Forms\UpdateGeniusTvTvPackageForm;
-use App\Models\GeniusTvChannelPackage;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\GeniusTvChannelPackage;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\CreateGeniusTvTvPackageForm;
+use App\Livewire\Forms\UpdateGeniusTvTvPackageForm;
 
 class TvChannelPackagesComponent extends Component
 {
@@ -23,14 +24,14 @@ class TvChannelPackagesComponent extends Component
 
     public bool $updateModal = false;
 
-    public function store()
+    public function store(): void
     {
         $this->resetErrorBag();
 
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->createForm->create();
         $this->redirect(url()->previous(), true);
@@ -38,14 +39,14 @@ class TvChannelPackagesComponent extends Component
         return $this->success_alert('Přidáno');
     }
 
-    public function edit(GeniusTvChannelPackage $tvPackage)
+    public function edit(GeniusTvChannelPackage $tvPackage): void
     {
         $this->updateForm->setTvPackage($tvPackage);
 
-        return $this->updateModal = true;
+        $this->updateModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->updateForm->update();
         $this->redirect(url()->previous(), true);
@@ -53,7 +54,7 @@ class TvChannelPackagesComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function destroy(GeniusTvChannelPackage $tvPackage)
+    public function destroy(GeniusTvChannelPackage $tvPackage): mixed
     {
         $tvPackage->delete();
         $this->redirect(url()->previous(), true);
@@ -61,13 +62,13 @@ class TvChannelPackagesComponent extends Component
         return $this->success_alert('Odebráno');
     }
 
-    public function closeModal()
+    public function closeModal(): void
     {
         $this->createModal = false;
         $this->updateModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.geniustv.tv-channel-packages-component', [
             'tvPackages' => GeniusTvChannelPackage::search($this->query)->paginate(),

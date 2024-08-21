@@ -25,7 +25,7 @@ class DevicesSnmpWalkCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         Device::where('is_snmp', true)->each(function ($device) {
             (new DeviceSnmpEngine($device))->snmp_walk();

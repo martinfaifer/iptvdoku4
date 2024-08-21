@@ -6,6 +6,7 @@ use App\Models\Tag;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Collection;
+use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
 use App\Models\NanguIspTagToChannelPackage;
 use App\Traits\Users\GetUsersFromCacheTrait;
@@ -38,7 +39,7 @@ class CreateCalendarEventComponent extends Component
 
     public array $tags;
 
-    public function mount()
+    public function mount(): void
     {
         $this->cssColors = (new GetCssColorsFromCacheAction())();
         $this->users = $this->get_users_from_cache();
@@ -47,7 +48,7 @@ class CreateCalendarEventComponent extends Component
         $this->tags = $this->get_nangu_isp_tags_to_channels();
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->form->create();
         $this->redirect(url()->previous(), true);
@@ -56,19 +57,19 @@ class CreateCalendarEventComponent extends Component
         return $this->success_alert('Přidáno');
     }
 
-    public function openModal()
+    public function openModal(): void
     {
-        return $this->storeModal = true;
+        $this->storeModal = true;
     }
 
-    public function closeModal()
+    public function closeModal(): void
     {
         $this->form->reset();
 
-        return $this->storeModal = false;
+        $this->storeModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.iptv.calendar.create-calendar-event-component');
     }

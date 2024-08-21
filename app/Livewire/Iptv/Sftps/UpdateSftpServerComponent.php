@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Iptv\Sftps;
 
-use App\Livewire\Forms\UpdateSftpServerForm;
-use App\Models\SftpServer;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
+use App\Models\SftpServer;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\UpdateSftpServerForm;
 
 class UpdateSftpServerComponent extends Component
 {
@@ -17,31 +19,31 @@ class UpdateSftpServerComponent extends Component
 
     public bool $updateModal = false;
 
-    public function edit()
+    public function edit(): void
     {
         $this->updateForm->set_sftp_server($this->sftpServer);
         $this->resetErrorBag();
 
-        return $this->updateModal = true;
+        $this->updateModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->updateForm->update();
 
         $this->closeDialog();
 
-        $this->redirect('/sftps/'.$this->sftpServer->id, true);
+        $this->redirect('/sftps/' . $this->sftpServer->id, true);
 
         return $this->success_alert('Upraveno');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
-        return $this->updateModal = false;
+        $this->updateModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.sftps.update-sftp-server-component');
     }

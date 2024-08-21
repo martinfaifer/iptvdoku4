@@ -15,13 +15,13 @@ class UpdateSettingsDevicesDistributorsForm extends Form
     #[Validate('max:255', message: 'Maximální počet znaků je :max')]
     public string $name = '';
 
-    public function setDistributor(SatelitCardVendor $satelitCardVendor)
+    public function setDistributor(SatelitCardVendor $satelitCardVendor): void
     {
         $this->satelitCardVendor = $satelitCardVendor;
         $this->name = $satelitCardVendor->name;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
         if ($this->name != $this->satelitCardVendor->name) {

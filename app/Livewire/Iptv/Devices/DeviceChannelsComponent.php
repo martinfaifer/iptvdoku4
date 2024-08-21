@@ -15,23 +15,23 @@ class DeviceChannelsComponent extends Component
 
     public ?Device $device;
 
-    public function mount(Device $device)
+    public function mount(Device $device): void
     {
         $this->device = $device;
     }
 
-    public function get_channel($channelWithType): ?array
+    public function get_channel(string $channelWithType): ?array
     {
         $explodedChannelWithType = explode(':', $channelWithType);
 
         return $this->channel(
             channelType: $explodedChannelWithType[0],
-            channel_id: $explodedChannelWithType[1],
+            channel_id: (int) $explodedChannelWithType[1],
             isBackup: isset($explodedChannelWithType[3]) ? true : false,
         );
     }
 
-    public function placeholder()
+    public function placeholder(): string
     {
         return <<<'HTML'
         <div>
@@ -46,7 +46,7 @@ class DeviceChannelsComponent extends Component
     }
 
     #[On('deviceHasChannel.{device.id}')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.device-channels-component', [
             'channels' => $this->device->has_channels,

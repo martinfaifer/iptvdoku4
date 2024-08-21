@@ -29,15 +29,17 @@ class StartCalendarDailyEventCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): mixed
     {
         if (Event::where('start_date', now()->format('Y-m-d'))
             ->where('start_time', null)
             ->first()
         ) {
-            foreach (Event::where('start_date', now()->format('Y-m-d'))
-                ->where('start_time', null)
-                ->get() as $event) {
+            foreach (
+                Event::where('start_date', now()->format('Y-m-d'))
+                    ->where('start_time', null)
+                    ->get() as $event
+            ) {
 
                 if (! is_null($event->tag_id) && ! empty($event->channels)) {
 
@@ -75,7 +77,9 @@ class StartCalendarDailyEventCommand extends Command
                     }
                 }
                 Mail::to($event->creator)->queue(new SendEventWasStartedMail($event));
+                return true;
             }
         }
+        return false;
     }
 }

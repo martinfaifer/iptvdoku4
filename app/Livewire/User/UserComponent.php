@@ -9,6 +9,7 @@ use Livewire\WithFileUploads;
 use App\Livewire\Forms\AvatarForm;
 use App\Livewire\Forms\UserEditForm;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\View\Factory;
 use App\Events\BroadcastRefreshUserEvent;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\Users\SessionUserAgentTrait;
@@ -35,26 +36,26 @@ class UserComponent extends Component
 
     public bool $isPinned = false;
 
-    public function mount()
+    public function mount(): void
     {
         $this->user = Auth::user();
         $this->userSessions = $this->agents();
         $this->isPinned = $this->pinned($this->user->iptv_monitoring_window);
     }
 
-    public function openEditUserDialog()
+    public function openEditUserDialog(): void
     {
         $this->userEditForm->setUser(Auth::user());
 
-        return $this->editUserDialog = true;
+        $this->editUserDialog = true;
     }
 
-    public function openAvatarDialog()
+    public function openAvatarDialog(): void
     {
         $this->avatarDialog = true;
     }
 
-    public function upload_avatar()
+    public function upload_avatar(): mixed
     {
         $this->avatarForm->upload_avatar();
         $this->redirect(url()->previous(), true);
@@ -63,7 +64,7 @@ class UserComponent extends Component
         return $this->success_alert('Avatar nahrán');
     }
 
-    public function deleteAvatar()
+    public function deleteAvatar(): mixed
     {
         $this->avatarForm->delete_avatar();
         $this->redirect(url()->previous());
@@ -72,7 +73,7 @@ class UserComponent extends Component
         return $this->success_alert('Avatar odebrán');
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->userEditForm->update();
         $this->redirect(url()->previous(), true);
@@ -80,7 +81,7 @@ class UserComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function session_destroy(Session $session)
+    public function session_destroy(Session $session): mixed
     {
         $session->delete();
         $this->redirect(url()->previous(), true);
@@ -88,7 +89,7 @@ class UserComponent extends Component
         return $this->success_alert('Odebráno');
     }
 
-    public function sessions_destroy()
+    public function sessions_destroy(): mixed
     {
         Session::forUser($this->user->id)->delete();
         $this->redirect(url()->previous(), true);
@@ -96,7 +97,7 @@ class UserComponent extends Component
         return $this->success_alert('Odebráno');
     }
 
-    public function changePassword()
+    public function changePassword(): mixed
     {
         $this->changeUserPasswordForm->update();
         $this->redirect(url()->previous(), true);
@@ -104,7 +105,7 @@ class UserComponent extends Component
         return $this->success_alert('Heslo změněno');
     }
 
-    public function pinIptvWindow()
+    public function pinIptvWindow(): mixed
     {
         $windowStatus = $this->convert_response_to_db_string($this->isPinned);
 
@@ -115,7 +116,7 @@ class UserComponent extends Component
         return $this->success_alert('Změna provedena');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->resetErrorBag();
         $this->editUserDialog = false;
@@ -124,7 +125,7 @@ class UserComponent extends Component
         $this->avatarForm->reset();
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.user.user-component');
     }

@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Settings\Geniustv\Statistics;
 
-use App\Exports\ChannelsUsagePerIspExport;
-use App\Models\NanguIsp;
 use Livewire\Component;
+use App\Models\NanguIsp;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Contracts\View\Factory;
+use App\Exports\ChannelsUsagePerIspExport;
 
 class SettingsGeniusTvStatisticsForChannelsPerIspComponent extends Component
 {
@@ -14,14 +15,14 @@ class SettingsGeniusTvStatisticsForChannelsPerIspComponent extends Component
 
     public string $query = '';
 
-    public function downloadChannelsMonthlyUsageReport(NanguIsp $nanguIsp)
+    public function downloadChannelsMonthlyUsageReport(NanguIsp $nanguIsp): mixed
     {
-        $fileName = str_replace(' ', '_', $nanguIsp->name).'_channels_usage.csv';
+        $fileName = str_replace(' ', '_', $nanguIsp->name) . '_channels_usage.csv';
 
         return Excel::download(new ChannelsUsagePerIspExport($nanguIsp), $fileName, \Maatwebsite\Excel\Excel::CSV);
     }
 
-    public function placeholder()
+    public function placeholder(): string
     {
         return <<<'HTML'
         <div class="flex flex-col gap-4 w-52">
@@ -33,7 +34,7 @@ class SettingsGeniusTvStatisticsForChannelsPerIspComponent extends Component
         HTML;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.genius-tv.statistics.settings-genius-tv-statistics-for-channels-per-isp-component', [
             'nanguIsps' => NanguIsp::search($this->query)->paginate(10),

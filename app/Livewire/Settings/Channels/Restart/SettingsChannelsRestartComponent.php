@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Settings\Channels\Restart;
 
-use App\Livewire\Forms\CreateSettingsChannelsRestartForm;
-use App\Models\RestartChannel;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\RestartChannel;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\CreateSettingsChannelsRestartForm;
 
 class SettingsChannelsRestartComponent extends Component
 {
@@ -16,25 +17,25 @@ class SettingsChannelsRestartComponent extends Component
 
     public bool $createModal = false;
 
-    public function mount()
+    public function mount(): void
     {
         //
     }
 
-    public function openCreateModal()
+    public function openCreateModal(): void
     {
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->resetErrorBag();
         $this->createForm->reset();
 
-        return $this->createModal = false;
+        $this->createModal = false;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->createForm->create();
 
@@ -43,14 +44,14 @@ class SettingsChannelsRestartComponent extends Component
         return $this->success_alert('vytvořeno');
     }
 
-    public function destroy(RestartChannel $restartChannel)
+    public function destroy(RestartChannel $restartChannel): mixed
     {
         $restartChannel->delete();
 
         return $this->success_alert('Odebráno');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.channels.restart.settings-channels-restart-component', [
             'channelsFroRestart' => RestartChannel::with(['channel', 'device', 'stream_ip'])->paginate(5),

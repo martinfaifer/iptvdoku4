@@ -2,15 +2,16 @@
 
 namespace App\Livewire\Settings\Geniustv\Discounts;
 
-use App\Livewire\Forms\CreateSettingsGeniusTvDiscountsForm;
-use App\Livewire\Forms\UpdateSettingsGeniusTvDiscountsForm;
-use App\Models\GeniusTvDiscount;
+use Livewire\Component;
 use App\Models\NanguIsp;
+use Livewire\Attributes\On;
+use Livewire\WithPagination;
+use App\Models\GeniusTvDiscount;
+use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
-use Livewire\Attributes\On;
-use Livewire\Component;
-use Livewire\WithPagination;
+use App\Livewire\Forms\CreateSettingsGeniusTvDiscountsForm;
+use App\Livewire\Forms\UpdateSettingsGeniusTvDiscountsForm;
 
 class SettingsGeniusTvDiscountsComponent extends Component
 {
@@ -28,26 +29,26 @@ class SettingsGeniusTvDiscountsComponent extends Component
 
     public Collection $nanguIsps;
 
-    public function mount()
+    public function mount(): void
     {
         $this->nanguIsps = NanguIsp::get(['id', 'name']);
     }
 
-    public function openCreateModal()
+    public function openCreateModal(): void
     {
         $this->resetErrorBag();
 
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->updateModal = false;
 
-        return $this->createModal = false;
+        $this->createModal = false;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->form->create();
 
@@ -55,19 +56,19 @@ class SettingsGeniusTvDiscountsComponent extends Component
 
         $this->dispatch('refresh_settings_genius_tv_discoints');
 
-        $this->success_alert('Vytvořeno');
+        return $this->success_alert('Vytvořeno');
     }
 
-    public function edit(GeniusTvDiscount $geniusTvDiscount)
+    public function edit(GeniusTvDiscount $geniusTvDiscount): void
     {
         $this->resetErrorBag();
 
         $this->updateForm->setGeniusTvDiscount($geniusTvDiscount);
 
-        return $this->updateModal = true;
+        $this->updateModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->updateForm->update();
 
@@ -78,7 +79,7 @@ class SettingsGeniusTvDiscountsComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function destroy(GeniusTvDiscount $geniusTvDiscount)
+    public function destroy(GeniusTvDiscount $geniusTvDiscount): void
     {
         $geniusTvDiscount->delete();
 
@@ -86,7 +87,7 @@ class SettingsGeniusTvDiscountsComponent extends Component
     }
 
     #[On('refresh_settings_genius_tv_discoints')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.geniustv.discounts.settings-genius-tv-discounts-component', [
             'discounts' => GeniusTvDiscount::with('nanguIsp')

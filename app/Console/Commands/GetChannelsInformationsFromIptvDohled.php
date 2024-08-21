@@ -26,7 +26,7 @@ class GetChannelsInformationsFromIptvDohled extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         // multicasts
         ChannelMulticast::get()->each(function ($multicast) {

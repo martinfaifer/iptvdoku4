@@ -19,13 +19,13 @@ class InfoMulticastChannelComponent extends Component
     public Channel $channel;
     public bool $updateModal = false;
 
-    public function edit(ChannelMulticast $multicast)
+    public function edit(ChannelMulticast $multicast): void
     {
         $this->form->setMulticast($multicast);
         $this->updateModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->form->update();
         $this->closeModal();
@@ -35,12 +35,12 @@ class InfoMulticastChannelComponent extends Component
         return $this->success_alert('Změněno');
     }
 
-    public function closeModal()
+    public function closeModal(): void
     {
-        return $this->updateModal = false;
+        $this->updateModal = false;
     }
 
-    public function destroy(ChannelMulticast $multicast)
+    public function destroy(ChannelMulticast $multicast): mixed
     {
         $multicast->delete();
         // $this->dispatch('update_multicasts.' . $this->channel->id);
@@ -49,7 +49,7 @@ class InfoMulticastChannelComponent extends Component
     }
 
     #[On('update_multicasts.{channel.id}')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         // dd($this->channel);
         return view('livewire.iptv.channels.multicast.info-multicast-channel-component', [

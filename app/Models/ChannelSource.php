@@ -21,8 +21,8 @@ class ChannelSource extends Model
         return $this->hasMany(ChannelMulticast::class, 'channel_source_id');
     }
 
-    public function scopeSearch(Builder $query, string $search = "")
+    public function scopeSearch(Builder $query, string $search = ""): void
     {
-        return $query->where('name', "like", "%" . $search. "%");
+        $query->where('name', "like", "%" . $search . "%");
     }
 }

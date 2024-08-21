@@ -37,7 +37,7 @@ class CreateSftpServerForm extends Form
     #[Validate('required', message: 'Vybrrte typ připojení')]
     public string $connection_type = '';
 
-    public function create()
+    public function create(): mixed
     {
         $this->validate();
 

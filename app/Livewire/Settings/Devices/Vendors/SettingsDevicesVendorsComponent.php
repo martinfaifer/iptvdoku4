@@ -2,12 +2,13 @@
 
 namespace App\Livewire\Settings\Devices\Vendors;
 
+use Livewire\Component;
+use App\Models\DeviceVendor;
+use Livewire\WithPagination;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsDevicesVendorsForm;
 use App\Livewire\Forms\UpdateSettingsDevicesVendorsForm;
-use App\Models\DeviceVendor;
-use App\Traits\Livewire\NotificationTrait;
-use Livewire\Component;
-use Livewire\WithPagination;
 
 class SettingsDevicesVendorsComponent extends Component
 {
@@ -23,12 +24,12 @@ class SettingsDevicesVendorsComponent extends Component
 
     public bool $editModal = false;
 
-    public function openCreateModal()
+    public function openCreateModal(): void
     {
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->createForm->create();
 
@@ -37,14 +38,14 @@ class SettingsDevicesVendorsComponent extends Component
         return $this->success_alert('Přidáno');
     }
 
-    public function edit(DeviceVendor $deviceVendor)
+    public function edit(DeviceVendor $deviceVendor): void
     {
         $this->updateForm->setVendor($deviceVendor);
 
-        return $this->editModal = true;
+        $this->editModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->updateForm->update();
 
@@ -53,7 +54,7 @@ class SettingsDevicesVendorsComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function destroy(DeviceVendor $deviceVendor)
+    public function destroy(DeviceVendor $deviceVendor): mixed
     {
         try {
             $deviceVendor->delete();
@@ -64,7 +65,7 @@ class SettingsDevicesVendorsComponent extends Component
         }
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->createForm->reset();
         $this->updateForm->reset();
@@ -72,7 +73,7 @@ class SettingsDevicesVendorsComponent extends Component
         $this->createModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.devices.vendors.settings-devices-vendors-component', [
             'headers' => [

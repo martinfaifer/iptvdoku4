@@ -6,8 +6,9 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
 use App\Models\ChannelSource;
-use App\Livewire\Forms\CreateMulticastSourceForm;
+use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\CreateMulticastSourceForm;
 
 class MulticastsSourcesComponent extends Component
 {
@@ -19,12 +20,12 @@ class MulticastsSourcesComponent extends Component
 
     public bool $createModal = false;
 
-    public function openCreateModal()
+    public function openCreateModal(): void
     {
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->createForm->create();
 
@@ -37,12 +38,12 @@ class MulticastsSourcesComponent extends Component
         return $this->success_alert("Přidáno");
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
-        return $this->createModal = false;
+        $this->createModal = false;
     }
 
-    public function destroy(ChannelSource $channelSource)
+    public function destroy(ChannelSource $channelSource): mixed
     {
         if ($channelSource->multicasts->isEmpty() == false) {
             return $this->error_alert("Existuje vazba na kanál");
@@ -57,7 +58,7 @@ class MulticastsSourcesComponent extends Component
 
 
     #[On('reload_settings_multicasts_sources')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.channels.multicasts.multicasts-sources-component', [
             'sources' => ChannelSource::search($this->query)->paginate(10),

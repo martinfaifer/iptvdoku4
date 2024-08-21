@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Wiki;
 
-use App\Livewire\Forms\CreateWikiCategoryForm;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\CreateWikiCategoryForm;
 
 class CreateWikiCategoryComponent extends Component
 {
@@ -14,7 +15,7 @@ class CreateWikiCategoryComponent extends Component
 
     public bool $storeModal = false;
 
-    public function create()
+    public function create(): mixed
     {
         $this->form->create();
 
@@ -25,19 +26,19 @@ class CreateWikiCategoryComponent extends Component
         return $this->success_alert('Kategorie přidána');
     }
 
-    public function openModal()
+    public function openModal(): void
     {
         $this->resetErrorBag();
 
-        return $this->storeModal = true;
+        $this->storeModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
-        return $this->storeModal = false;
+        $this->storeModal = false;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.wiki.create-wiki-category-component');
     }

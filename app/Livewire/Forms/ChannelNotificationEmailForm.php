@@ -14,7 +14,7 @@ class ChannelNotificationEmailForm extends Form
     #[Validate('max:255', message: "Maximální počet znaků je :max")]
     public string $email = "";
 
-    public function create(object $iptvDohledUrl)
+    public function create(object $iptvDohledUrl): void
     {
         $this->validate();
         IptvDohledUrlsNotification::create([
@@ -23,7 +23,7 @@ class ChannelNotificationEmailForm extends Form
         ]);
     }
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
         IptvDohledUrlsNotification::where('id', $id)->first()->delete();
     }

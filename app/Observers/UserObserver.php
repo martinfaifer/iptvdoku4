@@ -7,17 +7,17 @@ use App\Models\User;
 
 class UserObserver
 {
-    public function created(User $user)
+    public function created(User $user): void
     {
         (new StoreUsersToCacheAction())();
     }
 
-    public function updated(User $user)
+    public function updated(User $user): void
     {
         (new StoreUsersToCacheAction())();
     }
 
-    public function deleted(User $user)
+    public function deleted(User $user): void
     {
         (new StoreUsersToCacheAction())();
     }

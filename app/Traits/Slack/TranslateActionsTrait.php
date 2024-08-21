@@ -8,6 +8,7 @@ trait TranslateActionsTrait
 {
     public function translate(): array
     {
+        $actionWithTranslation = [];
         $slackActions = [];
         foreach (Slack::ACTIONS as $action) {
             if ($action == 'weather_notification') {

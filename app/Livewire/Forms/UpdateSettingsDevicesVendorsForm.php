@@ -15,14 +15,14 @@ class UpdateSettingsDevicesVendorsForm extends Form
     #[Validate('max:255', 'Maximální počet znaků je :max')]
     public string $name = '';
 
-    public function setVendor(DeviceVendor $deviceVendor)
+    public function setVendor(DeviceVendor $deviceVendor): void
     {
         $this->deviceVendor = $deviceVendor;
 
         $this->name = $deviceVendor->name;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

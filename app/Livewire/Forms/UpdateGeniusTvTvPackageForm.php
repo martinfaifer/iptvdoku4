@@ -17,13 +17,13 @@ class UpdateGeniusTvTvPackageForm extends Form
     #[Validate('unique:genius_tv_channel_packages,name', message: 'Balíček již existuje')]
     public string $name = '';
 
-    public function setTvPackage(GeniusTvChannelPackage $tvPackage)
+    public function setTvPackage(GeniusTvChannelPackage $tvPackage): void
     {
         $this->tvPackage = $tvPackage;
         $this->name = $tvPackage->name;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

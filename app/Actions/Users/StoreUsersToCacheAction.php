@@ -12,7 +12,7 @@ class StoreUsersToCacheAction
         //
     }
 
-    public function __invoke()
+    public function __invoke(): void
     {
         if (Cache::has('users')) {
             Cache::forget('users');

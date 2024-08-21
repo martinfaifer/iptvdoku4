@@ -25,7 +25,7 @@ class UpdateSettingsUserForm extends Form
 
     #[Validate('required', message: 'Vyberte roli')]
     #[Validate('exists:user_roles,id', message: 'Neexistující role')]
-    public ?string $userRoleId = '';
+    public string|int|null $userRoleId = '';
 
     #[Validate('required', message: "Chcete nebo nechcete být upozornění?")]
     #[Validate('bool', message: 'Neplatný formát')]
@@ -55,7 +55,7 @@ class UpdateSettingsUserForm extends Form
     #[Validate('bool', message: 'Neplatný formát')]
     public bool $iptv_monitoring_window = false;
 
-    public function setUser(User $user)
+    public function setUser(User $user): void
     {
         $this->user = $user;
         $this->first_name = $user->first_name;
@@ -71,7 +71,7 @@ class UpdateSettingsUserForm extends Form
         $this->iptv_monitoring_window = $this->pinned($this->user->iptv_monitoring_window);
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

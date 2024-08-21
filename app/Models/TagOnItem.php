@@ -22,8 +22,8 @@ class TagOnItem extends Model
         return $this->belongsTo(Tag::class, 'tag_id', 'id');
     }
 
-    public function scopeOnlyDevicesWithTag(Builder $query, ?int $tagId = null)
+    public function scopeOnlyDevicesWithTag(Builder $query, ?int $tagId = null): void
     {
-        return $query->where('type', 'device')->where('tag_id', $tagId);
+        $query->where('type', 'device')->where('tag_id', $tagId);
     }
 }

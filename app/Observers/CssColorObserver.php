@@ -6,7 +6,7 @@ use App\Models\CssColor;
 
 class CssColorObserver
 {
-    public function created(CssColor $cssColor)
+    public function created(CssColor $cssColor): void
     {
         //
     }

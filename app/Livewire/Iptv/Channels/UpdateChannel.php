@@ -20,28 +20,28 @@ class UpdateChannel extends Component
 
     public ?Channel $channel;
 
-    public $channelType;
+    public mixed $channelType;
 
-    public $logo;
+    public mixed $logo;
 
     public bool $updateModal = false;
 
-    public $qualities = Channel::QUALITIES;
+    public array $qualities = Channel::QUALITIES;
 
-    public $channelCategories;
+    public mixed  $channelCategories;
 
-    public $geniusTVChannelPackages;
+    public mixed $geniusTVChannelPackages;
 
     public array $channelsEpgs;
 
-    public function mount($channelType = null)
+    public function mount(string|null $channelType = null): void
     {
         $this->channelCategories = $this->get_channels_categories_from_cache();
         $this->geniusTVChannelPackages = GeniusTvChannelPackage::get();
         $this->channelsEpgs = !Cache::has('channelEpgIds') ? [] : Cache::get('channelEpgIds');
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->form->update();
 
@@ -62,18 +62,18 @@ class UpdateChannel extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->updateModal = false;
     }
 
-    public function edit()
+    public function edit(): void
     {
         $this->form->setChannel($this->channel, $this->qualities);
         $this->updateModal = true;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.channels.update-channel');
     }

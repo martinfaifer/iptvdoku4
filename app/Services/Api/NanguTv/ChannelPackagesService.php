@@ -4,7 +4,7 @@ namespace App\Services\Api\NanguTv;
 
 class ChannelPackagesService
 {
-    public function get_channel_packages(string $nangu_isp_id)
+    public function get_channel_packages(string $nangu_isp_id): mixed
     {
         if (is_null(config('services.api.nanguTv.url'))) {
             return [];
@@ -18,7 +18,7 @@ class ChannelPackagesService
         );
     }
 
-    public function store($channel_package_code, $nangu_channel_code, $nangu_isp_id)
+    public function store(string $channel_package_code, string $nangu_channel_code, string|int $nangu_isp_id): mixed
     {
         if (is_null(config('services.api.nanguTv.url'))) {
             return [];
@@ -34,7 +34,7 @@ class ChannelPackagesService
         );
     }
 
-    public function delete($channel_package_code, $nangu_channel_code, $nangu_isp_id)
+    public function delete(string $channel_package_code, string $nangu_channel_code, int|string $nangu_isp_id): mixed
     {
         if (is_null(config('services.api.nanguTv.url'))) {
             return [];

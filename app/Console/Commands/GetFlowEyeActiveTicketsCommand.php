@@ -27,10 +27,10 @@ class GetFlowEyeActiveTicketsCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $status = null;
-
+        $tickets = [];
         $connectService = (new ConnectService(
             endpointType: 'procesess',
             formData: [

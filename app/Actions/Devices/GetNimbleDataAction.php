@@ -15,7 +15,7 @@ class GetNimbleDataAction
     {
     }
 
-    public function __invoke()
+    public function __invoke(): void
     {
         $nimbleServers = (new ConnectService())->connect();
 

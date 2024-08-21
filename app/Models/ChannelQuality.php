@@ -21,8 +21,8 @@ class ChannelQuality extends Model
         return $this->hasMany(ChannelQualityWithIp::class, 'channel_quality_id', 'id');
     }
 
-    public function scopeAvailableFormatsFor(Builder $query, string $format)
+    public function scopeAvailableFormatsFor(Builder $query, string $format): void
     {
-        return $query->where('format', $format);
+        $query->where('format', $format);
     }
 }

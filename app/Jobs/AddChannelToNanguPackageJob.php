@@ -17,9 +17,9 @@ class AddChannelToNanguPackageJob implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
-        public $channel_package_code,
-        public $nangu_channel_code,
-        public $nangu_isp_id
+        public string $channel_package_code,
+        public string $nangu_channel_code,
+        public string|int $nangu_isp_id
     ) {
         //
     }

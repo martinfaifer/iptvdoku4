@@ -55,14 +55,14 @@ class Tag extends Model
         return $this->hasMany(NanguIspTagToChannelPackage::class, 'tag_id', 'id');
     }
 
-    public function scopeSearch(Builder $query, string $search)
+    public function scopeSearch(Builder $query, string $search): void
     {
         $query
-            ->where('name', 'like', '%'.$search.'%');
+            ->where('name', 'like', '%' . $search . '%');
     }
 
-    public function scopeHasActionChannelRestart(Builder $query)
+    public function scopeHasActionChannelRestart(Builder $query): void
     {
-        return $query->where('action', 6);
+        $query->where('action', 6);
     }
 }

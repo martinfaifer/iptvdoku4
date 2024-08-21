@@ -46,7 +46,7 @@ class ApiChannelResource extends JsonResource
         return abort(404);
     }
 
-    public function setOutput($channel)
+    public function setOutput(object $channel): array
     {
         return [
             'logo' => is_null($channel->channel->logo) ? null : config('app.url') . '/' . str_replace('public', 'storage', $channel->channel->logo),
@@ -78,7 +78,7 @@ class ApiChannelResource extends JsonResource
             'notes' => $channel->notes->take(2)
         ];
     }
-    public function setUnicastOutput($channel, $type)
+    public function setUnicastOutput(object $channel, string $type): array
     {
         return [
             'logo' => is_null($channel->$type->channel->logo) ? null : config('app.url') . '/' . str_replace('public', 'storage', $channel->$type->channel->logo),

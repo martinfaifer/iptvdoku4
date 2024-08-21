@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Settings\Notifications\Slack;
 
-use App\Livewire\Forms\CreateSettingsSlackNotificationForm;
-use App\Livewire\Forms\UpdateSettingsSlackNotificationForm;
 use App\Models\Slack;
-use App\Traits\Livewire\NotificationTrait;
-use App\Traits\Slack\TranslateActionsTrait;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Slack\TranslateActionsTrait;
+use App\Livewire\Forms\CreateSettingsSlackNotificationForm;
+use App\Livewire\Forms\UpdateSettingsSlackNotificationForm;
 
 class SettingsSlackNotificationComponent extends Component
 {
@@ -26,17 +27,17 @@ class SettingsSlackNotificationComponent extends Component
 
     public array $slackActions = [];
 
-    public function mount()
+    public function mount(): void
     {
         $this->slackActions = $this->translate();
     }
 
-    public function openCreateModal()
+    public function openCreateModal(): void
     {
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->createForm->reset();
         $this->updateForm->reset();
@@ -45,7 +46,7 @@ class SettingsSlackNotificationComponent extends Component
         $this->createModal = false;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->createForm->create();
 
@@ -54,14 +55,14 @@ class SettingsSlackNotificationComponent extends Component
         return $this->success_alert('Přidáno');
     }
 
-    public function edit(Slack $slack)
+    public function edit(Slack $slack): void
     {
         $this->updateForm->setChannel($slack);
 
-        return $this->editModal = true;
+        $this->editModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->updateForm->update();
 
@@ -70,7 +71,7 @@ class SettingsSlackNotificationComponent extends Component
         return $this->success_alert('Upraveno');
     }
 
-    public function destroy(Slack $slack)
+    public function destroy(Slack $slack): mixed
     {
         $slack->delete();
 
@@ -79,7 +80,7 @@ class SettingsSlackNotificationComponent extends Component
         return $this->success_alert('Odebráno');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.notifications.slack.settings-slack-notification-component', [
             'headers' => [

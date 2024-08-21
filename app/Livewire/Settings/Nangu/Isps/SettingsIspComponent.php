@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Settings\Nangu\Isps;
 
+use App\Models\Ip;
+use Livewire\Component;
+use App\Models\NanguIsp;
+use Livewire\WithPagination;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsNanguIspForm;
 use App\Livewire\Forms\UpdateSettingsNanguIspForm;
-use App\Models\Ip;
-use App\Models\NanguIsp;
-use App\Traits\Livewire\NotificationTrait;
-use Livewire\Component;
-use Livewire\WithPagination;
 
 class SettingsIspComponent extends Component
 {
@@ -22,30 +23,30 @@ class SettingsIspComponent extends Component
 
     public bool $editModal = false;
 
-    public $query = '';
+    public string $query = '';
 
-    public function openCreateModal()
+    public function openCreateModal(): void
     {
         $this->resetErrorBag();
 
-        return $this->createModal = true;
+        $this->createModal = true;
     }
 
-    public function openEditModal()
+    public function openEditModal(): void
     {
         $this->resetErrorBag();
 
-        return $this->editModal = true;
+        $this->editModal = true;
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->editModal = false;
 
-        return $this->createModal = false;
+        $this->createModal = false;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->createForm->create();
 
@@ -54,14 +55,14 @@ class SettingsIspComponent extends Component
         return $this->success_alert('Poskytovatel vytvořen');
     }
 
-    public function edit(NanguIsp $nanguIsp)
+    public function edit(NanguIsp $nanguIsp): void
     {
         $this->updateForm->setNanguIsp($nanguIsp);
 
-        return $this->openEditModal();
+        $this->openEditModal();
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->updateForm->update();
 
@@ -70,7 +71,7 @@ class SettingsIspComponent extends Component
         return $this->success_alert('Poskytovatel upraven');
     }
 
-    public function destroy(NanguIsp $nanguIsp)
+    public function destroy(NanguIsp $nanguIsp): mixed
     {
         try {
             Ip::where('nangu_isp_id', $nanguIsp->id)->delete();
@@ -84,7 +85,7 @@ class SettingsIspComponent extends Component
         return $this->success_alert('Poskytovatel odebrán');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.nangu.isps.settings-isp-component', [
             'nanguIsps' => NanguIsp::search($this->query)->paginate(5),

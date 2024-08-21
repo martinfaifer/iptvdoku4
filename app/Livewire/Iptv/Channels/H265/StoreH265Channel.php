@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Iptv\Channels\H265;
 
-use App\Livewire\Forms\StoreH265ChannelForm;
 use App\Models\Channel;
-use App\Models\ChannelQuality;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
+use App\Models\ChannelQuality;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\StoreH265ChannelForm;
 
 class StoreH265Channel extends Component
 {
@@ -16,26 +17,26 @@ class StoreH265Channel extends Component
 
     public ?Channel $channel;
 
-    public $availableFormats;
+    public mixed $availableFormats;
 
     public bool $storeModal = false;
 
-    public function boot()
+    public function boot(): void
     {
         $this->availableFormats = ChannelQuality::availableFormatsFor('h265')->get();
     }
 
-    public function openModal()
+    public function openModal(): void
     {
         $this->form->setChannel($this->channel);
         $this->storeModal = true;
     }
 
-    public function store()
+    public function store(): mixed
     {
         $storeResponse = $this->form->store();
         $this->closeDialog();
-        $this->dispatch('update_h265.'.$this->channel->id);
+        $this->dispatch('update_h265.' . $this->channel->id);
         if ($storeResponse == true) {
             return $this->success_alert('Přidáno');
         }
@@ -43,13 +44,13 @@ class StoreH265Channel extends Component
         return $this->error_alert('Nebylo nic vyplněno');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->storeModal = false;
         // $this->form->closeForm();
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.iptv.channels.h265.store-h265-channel');
     }

@@ -7,7 +7,7 @@ use App\Models\NanguIspTagToChannelPackage;
 
 trait GetNanguIspTagsToChannelPackagesTrait
 {
-    public function get_nangu_isp_tags_to_channels()
+    public function get_nangu_isp_tags_to_channels(): array
     {
         $tags = [];
         if (NanguIspTagToChannelPackage::first()) {

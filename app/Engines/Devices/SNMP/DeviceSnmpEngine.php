@@ -15,7 +15,7 @@ class DeviceSnmpEngine
 
     public false|SnmpClient $snmp = false;
 
-    public $webPort = 80;
+    public int $webPort = 80;
 
     public function __construct(public Device $device)
     {
@@ -32,7 +32,7 @@ class DeviceSnmpEngine
         }
     }
 
-    public function get($oid): string
+    public function get(string|int  $oid): string
     {
         try {
             return $this->snmp->getValue($oid);
@@ -41,7 +41,7 @@ class DeviceSnmpEngine
         }
     }
 
-    public function get_bulk($oid)
+    public function get_bulk(string|int $oid): array
     {
         $response = [];
         $maxRepetitions = 40;
@@ -58,7 +58,7 @@ class DeviceSnmpEngine
         return $response;
     }
 
-    public function snmp_walk()
+    public function snmp_walk(): void
     {
         if ($this->snmp == true) {
 
@@ -88,7 +88,7 @@ class DeviceSnmpEngine
         }
     }
 
-    public function set($oid, $value): bool
+    public function set(string|int $oid, mixed $value): bool
     {
         try {
             // override $this->snmp

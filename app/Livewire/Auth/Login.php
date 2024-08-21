@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Auth;
 
-use App\Actions\Auth\LoginAction;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
+use App\Actions\Auth\LoginAction;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
 
 class Login extends Component
 {
@@ -20,7 +21,7 @@ class Login extends Component
     #[Validate('max:255', message: 'Maximální délka je 255')]
     public string $password = '';
 
-    public function login()
+    public function login(): mixed
     {
         $this->validate();
 
@@ -29,11 +30,11 @@ class Login extends Component
 
             return $this->redirect('/', navigate: true);
         }
-        $this->error_alert('Neplatné údaje');
         $this->reset();
+        return $this->error_alert('Neplatné údaje');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         if (Auth::user()) {
             $this->redirect('/', true);

@@ -8,9 +8,9 @@ trait NotificationTrait
 {
     use Toast;
 
-    public function success_alert(string $text)
+    public function success_alert(string $text): mixed
     {
-        $this->toast(
+        return $this->toast(
             type: 'success',
             title: $text,
             position: 'toast-top toast-end',    // optional (daisyUI classes)
@@ -20,9 +20,9 @@ trait NotificationTrait
         );
     }
 
-    public function error_alert(string $text = 'Něco se nepovedlo')
+    public function error_alert(string $text = 'Něco se nepovedlo'): mixed
     {
-        $this->error(
+        return $this->error(
             $text,
             timeout: 5000,
             position: 'toast-top toast-end',

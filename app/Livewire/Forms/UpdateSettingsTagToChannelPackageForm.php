@@ -23,7 +23,7 @@ class UpdateSettingsTagToChannelPackageForm extends Form
     #[Validate('max:255', message: 'Maximální počet znaků je :max')]
     public string $channelPackageName = '';
 
-    public function setNanguIspTagToChannelPackage($nanguIspTagToChannelPackage)
+    public function setNanguIspTagToChannelPackage(object $nanguIspTagToChannelPackage): void
     {
         $this->nanguIspTagToChannelPackage = $nanguIspTagToChannelPackage;
         $this->nangu_isp_id = $nanguIspTagToChannelPackage->nangu_isp_id;
@@ -31,7 +31,7 @@ class UpdateSettingsTagToChannelPackageForm extends Form
         $this->channelPackageName = $nanguIspTagToChannelPackage->nangu_channel_package_name;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

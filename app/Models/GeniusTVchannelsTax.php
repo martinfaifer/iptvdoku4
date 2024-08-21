@@ -24,12 +24,12 @@ class GeniusTVchannelsTax extends Model
         return $this->belongsTo(Currency::class, 'currency', 'id');
     }
 
-    public function scopeSearch(Builder $query, string $search = '')
+    public function scopeSearch(Builder $query, string $search = ''): void
     {
         $channel = Channel::search($search)->first();
         if ($channel) {
-            return $query->where('price', 'like', '%'.$search.'%')
-                ->orWhere('channel_id', 'like', '%'.$channel->id.'%');
+            $query->where('price', 'like', '%' . $search . '%')
+                ->orWhere('channel_id', 'like', '%' . $channel->id . '%');
         }
     }
 }

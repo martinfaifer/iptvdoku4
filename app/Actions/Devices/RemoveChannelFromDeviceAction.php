@@ -31,7 +31,7 @@ class RemoveChannelFromDeviceAction
         });
     }
 
-    public function remove_channel_from_template($interfaces)
+    public function remove_channel_from_template(array $interfaces): array
     {
         foreach ($interfaces as $inputKey => $input) {
             if (in_array($this->getChannelNameByType(), $input['Vazba na kanály'])) {
@@ -46,7 +46,7 @@ class RemoveChannelFromDeviceAction
         return $interfaces;
     }
 
-    public function getChannelNameByType()
+    public function getChannelNameByType(): string
     {
         if ($this->isBackup == true) {
             return $this->channelType.':'.$this->channelId.':backup';

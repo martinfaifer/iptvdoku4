@@ -21,8 +21,8 @@ class ChannelNotificationComponent extends Component
     public ChannelNotificationEmailForm $emailForm;
     public ChannelNotificationSlackForm $slackForm;
 
-    public $ip;
-    public $iptvDohledUrl;
+    public string $ip;
+    public object $iptvDohledUrl;
     public bool $emailNotificationModal = false;
     public bool $slackChannelNotificationModal = false;
 
@@ -30,31 +30,31 @@ class ChannelNotificationComponent extends Component
     #[Validate('boolean', message: "Platný formát je pouze boolean")]
     public bool $can_notify = false;
 
-    public function mount(string $ip)
+    public function mount(string $ip): void
     {
         $this->ip = $ip;
         $this->reload_data($ip);
     }
 
     #[On('channel_notification_refresh')]
-    public function reload_data(string $ip)
+    public function reload_data(string $ip): void
     {
         $this->iptvDohledUrl = IptvDohledUrl::where('stream_url', $ip)->first();
         $this->can_notify = $this->iptvDohledUrl->can_notify;
     }
 
-    public function goBack()
+    public function goBack(): void
     {
         $unicastChannel = ChannelQualityWithIp::where('ip', $this->ip)->first();
         if ($unicastChannel) {
             if (!is_null($unicastChannel->h264_id)) {
-                return $this->redirect('/channels/' . $unicastChannel->h264->channel_id . "/h264", true);
+                $this->redirect('/channels/' . $unicastChannel->h264->channel_id . "/h264", true);
             }
-            return $this->redirect('/channels/' . $unicastChannel->h265->channel_id . "/h265", true);
+            $this->redirect('/channels/' . $unicastChannel->h265->channel_id . "/h265", true);
         }
     }
 
-    public function chnage_if_can_be_notify()
+    public function chnage_if_can_be_notify(): mixed
     {
         $this->iptvDohledUrl->update([
             'can_notify' => $this->can_notify
@@ -63,17 +63,17 @@ class ChannelNotificationComponent extends Component
         return $this->redirect(url()->previous(), true);
     }
 
-    public function openEmailNotificationModal()
+    public function openEmailNotificationModal(): void
     {
-        return $this->emailNotificationModal = true;
+        $this->emailNotificationModal = true;
     }
 
-    public function openSlacklNotificationModal()
+    public function openSlacklNotificationModal(): void
     {
-        return $this->slackChannelNotificationModal = true;
+        $this->slackChannelNotificationModal = true;
     }
 
-    public function add_email()
+    public function add_email(): mixed
     {
         $this->emailForm->create($this->iptvDohledUrl);
         $this->closeDialog();
@@ -81,19 +81,19 @@ class ChannelNotificationComponent extends Component
         return $this->success_alert("Přidáno");
     }
 
-    public function destroy_email($id)
+    public function destroy_email(int $id): mixed
     {
         $this->emailForm->destroy($id);
         return $this->success_alert("Odebráno");
     }
 
-    public function destroy_slack($id)
+    public function destroy_slack(int $id): mixed
     {
         $this->slackForm->destroy($id);
         return $this->success_alert("Odebráno");
     }
 
-    public function add_slack()
+    public function add_slack(): mixed
     {
         $this->slackForm->create($this->iptvDohledUrl);
         $this->dispatch('channel_notification_refresh')->self();
@@ -101,22 +101,22 @@ class ChannelNotificationComponent extends Component
         return $this->success_alert("Přidáno");
     }
 
-    public function closeDialog(): bool
+    public function closeDialog(): void
     {
         $this->slackChannelNotificationModal = false;
-        return $this->emailNotificationModal = false;
+        $this->emailNotificationModal = false;
     }
 
     #[On('channel_notification_refresh')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.channels.notification.channel-notification-component', [
-            'emails' => IptvDohledUrlsNotification::where('iptv_dohled_url_id', $this->iptvDohledUrl->id)->where('email', "!=", null)->take(['id', 'email'])->paginate(),
+            'emails' => IptvDohledUrlsNotification::where('iptv_dohled_url_id', $this->iptvDohledUrl->id)->where('email', "!=", null)->select(['id', 'email'])->paginate(),
             'email_headers' => [
                 ['key' => 'email', 'label' => 'Email', 'class' => 'text-white/80'],
                 ['key' => 'actions', 'label' => '', 'class' => 'text-white/80']
             ],
-            'slack_channels' => IptvDohledUrlsNotification::where('iptv_dohled_url_id', $this->iptvDohledUrl->id)->where('slack_channel', "!=", null)->take(['id', 'slack_channel'])->paginate(),
+            'slack_channels' => IptvDohledUrlsNotification::where('iptv_dohled_url_id', $this->iptvDohledUrl->id)->where('slack_channel', "!=", null)->select(['id', 'slack_channel'])->paginate(),
             'slack_headers' => [
                 ['key' => 'slack_channel', 'label' => 'Slack kanál', 'class' => 'text-white/80'],
                 ['key' => 'actions', 'label' => '', 'class' => 'text-white/80']

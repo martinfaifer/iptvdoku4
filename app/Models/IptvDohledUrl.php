@@ -17,8 +17,8 @@ class IptvDohledUrl extends Model
         'can_notify' => 'boolean',
     ];
 
-    public function scopeStreamUrl(Builder $query, string $stream_url)
+    public function scopeStreamUrl(Builder $query, string $stream_url): void
     {
-        return $query->where('stream_url', $stream_url);
+        $query->where('stream_url', $stream_url);
     }
 }

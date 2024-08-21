@@ -22,7 +22,7 @@ class UpdateSettingsSlackNotificationForm extends Form
     #[Validate('max:255', message: 'Maximální počet znaků je :max')]
     public string $action = '';
 
-    public function setChannel(Slack $slack)
+    public function setChannel(Slack $slack): void
     {
         $this->slack = $slack;
         $this->url = $slack->url;
@@ -30,7 +30,7 @@ class UpdateSettingsSlackNotificationForm extends Form
         $this->action = $slack->action;
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 

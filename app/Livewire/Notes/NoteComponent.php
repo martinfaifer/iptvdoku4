@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Notes;
 
-use App\Livewire\Forms\StoreNoteForm;
 use App\Models\Note;
-use App\Traits\Livewire\NotificationTrait;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use App\Livewire\Forms\StoreNoteForm;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
 
 class NoteComponent extends Component
 {
@@ -16,17 +17,17 @@ class NoteComponent extends Component
 
     public string $column;
 
-    public $id;
+    public string|int $id;
 
     public bool $storeModal = false;
 
-    public function openModal()
+    public function openModal(): void
     {
         $this->storeNoteForm->note = "";
-        return $this->storeModal = true;
+        $this->storeModal = true;
     }
 
-    public function placeholder()
+    public function placeholder(): string
     {
         return <<<'HTML'
         <div>
@@ -40,7 +41,7 @@ class NoteComponent extends Component
         HTML;
     }
 
-    public function store()
+    public function store(): mixed
     {
         $this->storeNoteForm->store($this->column, $this->id);
         $this->dispatch('update_notes.' . $this->column . $this->id);
@@ -49,13 +50,13 @@ class NoteComponent extends Component
         return $this->success_alert('Přidáno');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->storeModal = false;
         $this->resetErrorBag();
     }
 
-    public function destroy(Note $note)
+    public function destroy(Note $note): mixed
     {
         $note->delete();
         $this->dispatch('update_notes.' . $this->column . $this->id);
@@ -64,7 +65,7 @@ class NoteComponent extends Component
     }
 
     #[On('update_notes.{column}{id}')]
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.notes.note-component', [
             'notes' => Note::where($this->column, $this->id)->orderBy('id', 'DESC')->get(),

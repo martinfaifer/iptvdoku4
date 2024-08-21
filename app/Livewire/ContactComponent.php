@@ -2,13 +2,14 @@
 
 namespace App\Livewire;
 
-use App\Livewire\Forms\StoreContactForm;
-use App\Livewire\Forms\UpdateContact;
 use App\Models\Contact;
+use Livewire\Component;
+use Livewire\Attributes\On;
+use App\Livewire\Forms\UpdateContact;
+use Illuminate\Contracts\View\Factory;
+use App\Livewire\Forms\StoreContactForm;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
-use Livewire\Attributes\On;
-use Livewire\Component;
 
 class ContactComponent extends Component
 {
@@ -28,19 +29,19 @@ class ContactComponent extends Component
 
     public int $item_id;
 
-    public function mount(string $type, int $item_id)
+    public function mount(string $type, int $item_id): void
     {
         $this->type = $type;
         $this->item_id = $item_id;
         $this->contacts = Contact::where('type', $type)->where('item_id', $item_id)->get();
     }
 
-    public function openStoreModal()
+    public function openStoreModal(): void
     {
-        return $this->storeModal = true;
+        $this->storeModal = true;
     }
 
-    public function create()
+    public function create(): mixed
     {
         $this->contactForm->create($this->type, $this->item_id);
 
@@ -53,21 +54,21 @@ class ContactComponent extends Component
         return $this->success_alert('Kontakt přidán');
     }
 
-    public function closeDialog()
+    public function closeDialog(): void
     {
         $this->updateModal = false;
 
-        return $this->storeModal = false;
+        $this->storeModal = false;
     }
 
-    public function edit(Contact $contact)
+    public function edit(Contact $contact): void
     {
         $this->updateForm->set_contact($contact);
 
-        return $this->updateModal = true;
+        $this->updateModal = true;
     }
 
-    public function update()
+    public function update(): mixed
     {
         $this->updateForm->update();
 
@@ -80,7 +81,7 @@ class ContactComponent extends Component
         return $this->success_alert('Kontakt upraven');
     }
 
-    public function destroy(Contact $contact)
+    public function destroy(Contact $contact): mixed
     {
         $contact->delete();
 
@@ -90,12 +91,12 @@ class ContactComponent extends Component
     }
 
     #[On('refresh_contacts')]
-    public function refresh_contacts()
+    public function refresh_contacts(): void
     {
-        return $this->contacts = Contact::where('type', $this->type)->where('item_id', $this->item_id)->get();
+        $this->contacts = Contact::where('type', $this->type)->where('item_id', $this->item_id)->get();
     }
 
-    public function placeholder()
+    public function placeholder(): string
     {
         return <<<'HTML'
         <div>
@@ -109,7 +110,7 @@ class ContactComponent extends Component
         HTML;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.contact-component');
     }

@@ -14,7 +14,7 @@ class CreateSettingsDevicesVendorsForm extends Form
     #[Validate('unique:device_vendors,name', message: 'tento výrobce již existuje')]
     public string $name = '';
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 

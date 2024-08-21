@@ -29,7 +29,7 @@ class GetDevicesDataFromNmsCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         Device::where('ip', '!=', null)->each(function ($device) {
             (new ConnectService($device, 'search'))->connect();

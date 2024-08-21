@@ -22,8 +22,8 @@ class DeviceVendor extends Model
         return $this->hasMany(DeviceVendorSnmp::class, 'device_vendor_id');
     }
 
-    public function scopeSearch(Builder $query, string $search)
+    public function scopeSearch(Builder $query, string $search): void
     {
-        return $query->where('name', 'like', '%'.$search.'%');
+        $query->where('name', 'like', '%' . $search . '%');
     }
 }

@@ -7,10 +7,6 @@ class NanguHelper
     public static function getOffersAsString(array $offers): string
     {
         try {
-            if (is_null($offers)) {
-                return '';
-            }
-
             if (is_string($offers['offerCodes'])) {
                 return $offers['offerCodes'];
             }

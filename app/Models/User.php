@@ -74,7 +74,7 @@ class User extends Authenticatable
     protected function password(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => bcrypt($value)
+            set: fn($value) => bcrypt($value)
         );
     }
 
@@ -88,36 +88,36 @@ class User extends Authenticatable
         return $this->hasMany(Session::class, 'user_id', 'id');
     }
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->user_role_id == UserRole::admin()->first()->id;
     }
 
-    public function isTechnik()
+    public function isTechnik(): bool
     {
         return $this->user_role_id == UserRole::technik()->first()->id;
     }
 
-    public function isAdministrativa()
+    public function isAdministrativa(): bool
     {
         return $this->user_role_id == UserRole::administrativa()->first()->id;
     }
 
-    public function isApi()
+    public function isApi(): bool
     {
         return $this->user_role_id == UserRole::api()->first()->id;
     }
 
-    public function isReader()
+    public function isReader(): bool
     {
         return $this->user_role_id == UserRole::reader()->first()->id;
     }
 
-    public function scopeSearch(Builder $query, string $search)
+    public function scopeSearch(Builder $query, string $search): void
     {
-        return $query
-            ->where('first_name', 'like', '%'.$search.'%')
-            ->orWhere('last_name', 'like', '%'.$search.'%')
-            ->orWhere('email', 'like', '%'.$search.'%');
+        $query
+            ->where('first_name', 'like', '%' . $search . '%')
+            ->orWhere('last_name', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%');
     }
 }

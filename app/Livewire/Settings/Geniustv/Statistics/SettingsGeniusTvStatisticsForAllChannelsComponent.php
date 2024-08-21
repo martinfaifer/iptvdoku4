@@ -2,17 +2,18 @@
 
 namespace App\Livewire\Settings\Geniustv\Statistics;
 
-use App\Exports\ChannelsUsageExport;
 use App\Models\Channel;
-use App\Models\GeniusTvChart;
 use Livewire\Component;
+use App\Models\GeniusTvChart;
+use App\Exports\ChannelsUsageExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Contracts\View\Factory;
 
 class SettingsGeniusTvStatisticsForAllChannelsComponent extends Component
 {
     public string $query = '';
 
-    public function get_channels_usage()
+    public function get_channels_usage(): array
     {
         $statisticsForAllChannels = [];
         $channels = Channel::search($this->query)->withNanguChannelCode()->get(['id', 'name', 'nangu_channel_code']);
@@ -27,14 +28,14 @@ class SettingsGeniusTvStatisticsForAllChannelsComponent extends Component
         return $statisticsForAllChannels;
     }
 
-    public function exportChannelsUsageToCsv()
+    public function exportChannelsUsageToCsv(): mixed
     {
         $fileName = 'channels_usage.csv';
 
         return Excel::download(new ChannelsUsageExport(), $fileName, \Maatwebsite\Excel\Excel::CSV);
     }
 
-    public function placeholder()
+    public function placeholder(): string
     {
         return <<<'HTML'
         <div class="flex flex-col gap-4 w-52">
@@ -46,7 +47,7 @@ class SettingsGeniusTvStatisticsForAllChannelsComponent extends Component
         HTML;
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.genius-tv.statistics.settings-genius-tv-statistics-for-all-channels-component', [
             'statisticsForAllChannels' => $this->get_channels_usage(),

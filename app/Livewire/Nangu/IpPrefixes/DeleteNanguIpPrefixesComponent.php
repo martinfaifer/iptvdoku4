@@ -4,8 +4,9 @@ namespace App\Livewire\Nangu\IpPrefixes;
 
 use App\Models\Ip;
 use App\Models\Note;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
 
 class DeleteNanguIpPrefixesComponent extends Component
 {
@@ -13,12 +14,12 @@ class DeleteNanguIpPrefixesComponent extends Component
 
     public ?Ip $prefix;
 
-    public function mount(Ip $prefix)
+    public function mount(Ip $prefix): void
     {
         $this->prefix = $prefix;
     }
 
-    public function destroy()
+    public function destroy(): mixed
     {
         try {
             Note::where('ip_id', $this->prefix->id)->delete();
@@ -32,7 +33,7 @@ class DeleteNanguIpPrefixesComponent extends Component
         return $this->success_alert('Odebráno');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.nangu.ip-prefixes.delete-nangu-ip-prefixes-component');
     }
