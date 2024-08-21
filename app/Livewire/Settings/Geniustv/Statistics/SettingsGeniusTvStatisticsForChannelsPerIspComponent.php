@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Settings\Geniustv\Statistics;
 
-use Livewire\Component;
+use App\Exports\ChannelsUsagePerIspExport;
 use App\Models\NanguIsp;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Contracts\View\Factory;
-use App\Exports\ChannelsUsagePerIspExport;
 
 class SettingsGeniusTvStatisticsForChannelsPerIspComponent extends Component
 {
@@ -17,7 +17,7 @@ class SettingsGeniusTvStatisticsForChannelsPerIspComponent extends Component
 
     public function downloadChannelsMonthlyUsageReport(NanguIsp $nanguIsp): mixed
     {
-        $fileName = str_replace(' ', '_', $nanguIsp->name) . '_channels_usage.csv';
+        $fileName = str_replace(' ', '_', $nanguIsp->name).'_channels_usage.csv';
 
         return Excel::download(new ChannelsUsagePerIspExport($nanguIsp), $fileName, \Maatwebsite\Excel\Excel::CSV);
     }

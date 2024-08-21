@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Settings;
 
-use Livewire\Component;
 use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class SettingsNavigationComponent extends Component
 {

@@ -17,8 +17,8 @@ class H265Observer
             $email = Auth::user()->email;
         }
         SendEmailNotificationJob::dispatch(
-            'Byl přidán H265 k ' . $h265->channel->name,
-            'Uživatel ' . $email . ' přidal H265 k ' . $h265->channel->name,
+            'Byl přidán H265 k '.$h265->channel->name,
+            'Uživatel '.$email.' přidal H265 k '.$h265->channel->name,
             $email,
             'notify_if_channel_change'
         );
@@ -49,8 +49,8 @@ class H265Observer
         );
 
         SendEmailNotificationJob::dispatch(
-            'Byl upraven H265 u ' . $h265->channel->name,
-            'Uživatel ' . Auth::user()->email . ' upravil H265 u ' . $h265->channel->name,
+            'Byl upraven H265 u '.$h265->channel->name,
+            'Uživatel '.Auth::user()->email.' upravil H265 u '.$h265->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );
@@ -70,8 +70,8 @@ class H265Observer
         );
 
         SendEmailNotificationJob::dispatch(
-            'Byl odebrán H265 u ' . $h265->channel->name,
-            'Uživatel ' . Auth::user()->email . ' odebral H265 u ' . $h265->channel->name,
+            'Byl odebrán H265 u '.$h265->channel->name,
+            'Uživatel '.Auth::user()->email.' odebral H265 u '.$h265->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );

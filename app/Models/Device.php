@@ -46,8 +46,8 @@ class Device extends Model
     protected function template(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => json_decode($value, true),
-            set: fn($value) => json_encode($value)
+            get: fn ($value) => json_decode($value, true),
+            set: fn ($value) => json_encode($value)
         );
     }
 
@@ -55,7 +55,7 @@ class Device extends Model
     {
         return Attribute::make(
             // get: fn ($value) => json_decode($value, true),
-            set: fn($value) => (array) $value
+            set: fn ($value) => (array) $value
         );
     }
 
@@ -81,8 +81,8 @@ class Device extends Model
 
     public function scopeSearch(Builder $query, string $search): void
     {
-        $this->where('name', 'like', '%' . $search . '%')
-            ->orWhere('ip', 'like', '%' . $search . '%');
+        $this->where('name', 'like', '%'.$search.'%')
+            ->orWhere('ip', 'like', '%'.$search.'%');
     }
 
     public function scopeFulltextSearch(Builder $query, string $search): void
@@ -96,6 +96,6 @@ class Device extends Model
 
     public function scopeInTemplate(Builder $query, string $searcheableString): void
     {
-        $query->where('template', 'like', '%' . $searcheableString . '%');
+        $query->where('template', 'like', '%'.$searcheableString.'%');
     }
 }

@@ -15,19 +15,19 @@ class UpdateIptvChannel extends Form
 
     public string $name = '';
 
-    public string $quality = "";
+    public string $quality = '';
 
-    public string $category = "";
+    public string $category = '';
 
     public bool $is_radio = false;
 
     public bool $is_multiscreen = true;
 
-    public string $description = "";
+    public string $description = '';
 
     public mixed $channelCategories = null;
 
-    public mixed $nangu_chunk_store_id = "";
+    public mixed $nangu_chunk_store_id = '';
 
     public string $nangu_channel_code;
 
@@ -38,14 +38,14 @@ class UpdateIptvChannel extends Form
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:250', 'string', 'unique:channels,name,' . $this->channel->id],
+            'name' => ['required', 'max:250', 'string', 'unique:channels,name,'.$this->channel->id],
             'quality' => ['required'],
             'category' => ['required', 'exists:channel_categories,id'],
             'is_radio' => ['required', 'boolean'],
             'is_multiscreen' => ['required', 'boolean'],
             'description' => ['nullable', 'string', 'max:1000'],
-            'nangu_chunk_store_id' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_chunk_store_id,' . $this->channel->id],
-            'nangu_channel_code' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_channel_code,' . $this->channel->id],
+            'nangu_chunk_store_id' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_chunk_store_id,'.$this->channel->id],
+            'nangu_channel_code' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_channel_code,'.$this->channel->id],
             'epgId' => ['nullable'],
         ];
     }
@@ -93,7 +93,7 @@ class UpdateIptvChannel extends Form
     public function update(): void
     {
         $this->validate();
-        $qualityToChannel = "";
+        $qualityToChannel = '';
         $collectionQualities = collect(Channel::QUALITIES);
         $filteredQuality = $collectionQualities->where('id', $this->quality)->all();
 

@@ -2,13 +2,13 @@
 
 namespace App\Livewire\User;
 
-use App\Models\Note;
 use App\Models\Event;
 use App\Models\Loger;
-use Livewire\Component;
+use App\Models\Note;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class UserActionsComponent extends Component
 {

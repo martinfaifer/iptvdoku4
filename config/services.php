@@ -109,7 +109,7 @@ return [
             'url' => env('CRM_URL'),
             'username' => env('CRM_USER'),
             'password' => env('CRM_PASSWORD'),
-        ]
+        ],
     ],
 
 ];

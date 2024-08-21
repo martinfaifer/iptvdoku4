@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
                 'email' => 'martinfaifer@gmail.com',
                 'password' => '1122334455',
                 'user_role_id' => 1,
-                'iptv_monitoring_window' => 'closed'
+                'iptv_monitoring_window' => 'closed',
             ]);
         }
     }

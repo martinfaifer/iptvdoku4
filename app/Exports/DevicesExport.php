@@ -4,12 +4,10 @@ namespace App\Exports;
 
 use App\Models\Device;
 use Maatwebsite\Excel\Concerns\FromArray;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class DevicesExport implements FromArray, WithHeadings
 {
-
     public function headings(): array
     {
         return [
@@ -21,7 +19,6 @@ class DevicesExport implements FromArray, WithHeadings
             'password',
         ];
     }
-
 
     public function array(): array
     {

@@ -27,7 +27,7 @@ class UpdateH264ChannelForm extends Form
         return [
             'ip' => [
                 'required',
-                'unique:channel_quality_with_ips,ip,' . $this->channelQualityWithIp->id,
+                'unique:channel_quality_with_ips,ip,'.$this->channelQualityWithIp->id,
             ],
         ];
     }
@@ -56,7 +56,7 @@ class UpdateH264ChannelForm extends Form
 
         if ($this->to_dohled == true) {
             StoreStreamToIptvDohledJob::dispatch(
-                $this->channelQualityWithIp->h264->channel->name . '_h264',
+                $this->channelQualityWithIp->h264->channel->name.'_h264',
                 $this->ip
             );
         }

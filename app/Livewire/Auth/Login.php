@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Auth;
 
-use Livewire\Component;
 use App\Actions\Auth\LoginAction;
-use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class Login extends Component
 {
@@ -31,6 +31,7 @@ class Login extends Component
             return $this->redirect('/', navigate: true);
         }
         $this->reset();
+
         return $this->error_alert('Neplatné údaje');
     }
 

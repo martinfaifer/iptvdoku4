@@ -5,7 +5,6 @@ namespace App\Exports;
 use App\Models\H265;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\FromCollection;
 
 class H265sExport implements FromArray, WithHeadings
 {
@@ -16,6 +15,7 @@ class H265sExport implements FromArray, WithHeadings
             'IP',
         ];
     }
+
     public function array(): array
     {
         $result = [];
@@ -28,7 +28,7 @@ class H265sExport implements FromArray, WithHeadings
 
             $result[] = [
                 'name' => $h265->channel->name,
-                'ip' => implode(",", $ips),
+                'ip' => implode(',', $ips),
             ];
 
             $ips = [];

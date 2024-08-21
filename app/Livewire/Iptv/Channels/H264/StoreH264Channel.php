@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Iptv\Channels\H264;
 
-use App\Models\Channel;
-use Livewire\Component;
-use App\Models\ChannelQuality;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\StoreH264ChannelForm;
+use App\Models\Channel;
+use App\Models\ChannelQuality;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class StoreH264Channel extends Component
 {
@@ -36,7 +36,7 @@ class StoreH264Channel extends Component
     {
         $storeResponse = $this->form->store();
         $this->closeDialog();
-        $this->dispatch('update_h264.' . $this->channel->id);
+        $this->dispatch('update_h264.'.$this->channel->id);
         if ($storeResponse == true) {
             return $this->success_alert('Přidáno');
         }

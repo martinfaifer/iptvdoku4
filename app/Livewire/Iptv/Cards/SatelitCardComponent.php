@@ -3,11 +3,11 @@
 namespace App\Livewire\Iptv\Cards;
 
 use App\Models\Device;
-use Livewire\Component;
 use App\Models\SatelitCard;
-use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\SatelitCards\FindSatelitCardOnDeviceTemplateTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class SatelitCardComponent extends Component
 {

@@ -22,7 +22,7 @@ class Chart extends Model
 
     public function scopeItemCharts(Builder $query, string $item): void
     {
-        $query->where('item', 'like', '%' . $item . ':%');
+        $query->where('item', 'like', '%'.$item.':%');
     }
 
     public function scopeSpecificItemCharts(Builder $query, string $item, int $rows = 20): void

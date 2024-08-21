@@ -26,9 +26,9 @@ Route::prefix('v1')->group(function () {
 });
 
 // Route::middleware('auth.basic')->group(function () {
-    Route::prefix('v2')->group(function () {
-        Route::prefix('channels')->group(function () {
-            Route::get('{channel_url}', [ApiChannelController::class, 'show']);
-        });
+Route::prefix('v2')->group(function () {
+    Route::prefix('channels')->group(function () {
+        Route::get('{channel_url}', [ApiChannelController::class, 'show']);
     });
+});
 // });

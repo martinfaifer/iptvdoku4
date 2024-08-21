@@ -15,15 +15,15 @@ class ChannelQualityWithIpObserver
 {
     public function cerated(ChannelQualityWithIp $channelQualityWithIp): void
     {
-        $item = "";
-        $channel = "";
+        $item = '';
+        $channel = '';
         if (! is_null($channelQualityWithIp->h264_id)) {
-            $item = 'h264:' . H264::find($channelQualityWithIp->h264_id)->channel_id;
+            $item = 'h264:'.H264::find($channelQualityWithIp->h264_id)->channel_id;
             $channel = H264::find($channelQualityWithIp->h264_id)->channel->name;
         }
 
         if (! is_null($channelQualityWithIp->h265_id)) {
-            $item = 'h265:' . H265::find($channelQualityWithIp->h265_id)->channel_id;
+            $item = 'h265:'.H265::find($channelQualityWithIp->h265_id)->channel_id;
             $channel = H265::find($channelQualityWithIp->h265_id)->channel->name;
         }
 
@@ -40,8 +40,8 @@ class ChannelQualityWithIpObserver
             );
 
             SendEmailNotificationJob::dispatch(
-                'Byl přidán nový unicastový výstup u ' . $channel,
-                'Uživatel ' . Auth::user()->email . ' přidal nový unicastový výstup u  ' . $channel,
+                'Byl přidán nový unicastový výstup u '.$channel,
+                'Uživatel '.Auth::user()->email.' přidal nový unicastový výstup u  '.$channel,
                 Auth::user()->email,
                 'notify_if_channel_change'
             );
@@ -50,15 +50,15 @@ class ChannelQualityWithIpObserver
 
     public function updated(ChannelQualityWithIp $channelQualityWithIp): void
     {
-        $item = "";
-        $channel = "";
+        $item = '';
+        $channel = '';
         if (! is_null($channelQualityWithIp->h264_id)) {
-            $item = 'h264:' . H264::find($channelQualityWithIp->h264_id)->channel_id;
+            $item = 'h264:'.H264::find($channelQualityWithIp->h264_id)->channel_id;
             $channel = H264::find($channelQualityWithIp->h264_id)->channel->name;
         }
 
         if (! is_null($channelQualityWithIp->h265_id)) {
-            $item = 'h265:' . H265::find($channelQualityWithIp->h265_id)->channel_id;
+            $item = 'h265:'.H265::find($channelQualityWithIp->h265_id)->channel_id;
             $channel = H265::find($channelQualityWithIp->h265_id)->channel->name;
         }
 
@@ -73,8 +73,8 @@ class ChannelQualityWithIpObserver
             ])
         );
         SendEmailNotificationJob::dispatch(
-            'Byl upraven unicastový výstup u ' . $channel,
-            'Uživatel ' . Auth::user()->email . ' upravil unicastový výstup u  ' . $channel,
+            'Byl upraven unicastový výstup u '.$channel,
+            'Uživatel '.Auth::user()->email.' upravil unicastový výstup u  '.$channel,
             Auth::user()->email,
             'notify_if_channel_change'
         );
@@ -82,15 +82,15 @@ class ChannelQualityWithIpObserver
 
     public function deleted(ChannelQualityWithIp $channelQualityWithIp): void
     {
-        $item = "";
-        $channel = "";
+        $item = '';
+        $channel = '';
         if (! is_null($channelQualityWithIp->h264_id)) {
-            $item = 'h264:' . H264::find($channelQualityWithIp->h264_id)->channel_id;
+            $item = 'h264:'.H264::find($channelQualityWithIp->h264_id)->channel_id;
             $channel = H264::find($channelQualityWithIp->h264_id)->channel->name;
         }
 
         if (! is_null($channelQualityWithIp->h265_id)) {
-            $item = 'h265:' . H264::find($channelQualityWithIp->h265_id)->channel_id;
+            $item = 'h265:'.H264::find($channelQualityWithIp->h265_id)->channel_id;
             $channel = H265::find($channelQualityWithIp->h265_id)->channel->name;
         }
 
@@ -108,8 +108,8 @@ class ChannelQualityWithIpObserver
         );
 
         SendEmailNotificationJob::dispatch(
-            'Byl odebrán unicastový výstup u ' . $channel,
-            'Uživatel ' . Auth::user()->email . ' odebral unicastový výstup u  ' . $channel,
+            'Byl odebrán unicastový výstup u '.$channel,
+            'Uživatel '.Auth::user()->email.' odebral unicastový výstup u  '.$channel,
             Auth::user()->email,
             'notify_if_channel_change'
         );

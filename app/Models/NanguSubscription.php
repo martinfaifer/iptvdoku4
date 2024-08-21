@@ -44,9 +44,9 @@ class NanguSubscription extends Model
         $query->where('nangu_isp_id', $nanguIspId);
     }
 
-    public function scopeHasChannel(Builder $query, string $channel = ""): void
+    public function scopeHasChannel(Builder $query, string $channel = ''): void
     {
-        $query->where('channels', 'like', '%' . $channel . '%');
+        $query->where('channels', 'like', '%'.$channel.'%');
     }
 
     public function scopeUniqueTariffCodes(Builder $query): void
@@ -61,6 +61,6 @@ class NanguSubscription extends Model
 
     public function scopeOfferCode(Builder $query, string $offerCode): void
     {
-        $query->where('offers', 'like', '%' . $offerCode . '%');
+        $query->where('offers', 'like', '%'.$offerCode.'%');
     }
 }

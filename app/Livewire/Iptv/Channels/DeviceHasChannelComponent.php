@@ -2,16 +2,16 @@
 
 namespace App\Livewire\Iptv\Channels;
 
-use App\Models\Device;
-use App\Models\Channel;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use App\Models\ChannelOnLinux;
-use Livewire\Attributes\Validate;
 use App\Jobs\RestartStreamOnLinuxJob;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Contracts\View\Factory;
+use App\Models\Channel;
+use App\Models\ChannelOnLinux;
+use App\Models\Device;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class DeviceHasChannelComponent extends Component
 {
@@ -21,7 +21,7 @@ class DeviceHasChannelComponent extends Component
 
     public ?Channel $channel;
 
-    public string $channelType = "";
+    public string $channelType = '';
 
     public ?array $nmsCahedData = null;
 
@@ -55,7 +55,7 @@ class DeviceHasChannelComponent extends Component
     public function checkIfNeedToAddLinuxPath(): void
     {
         if ($this->device->category->name == 'Linux') {
-            if (!$this->linuxPathToStream = ChannelOnLinux::where('device_id', $this->device->id)
+            if (! $this->linuxPathToStream = ChannelOnLinux::where('device_id', $this->device->id)
                 ->where('channel_type', $this->channelType)
                 ->where('channel_id', $this->channel->id)
                 ->first()) {
@@ -76,18 +76,19 @@ class DeviceHasChannelComponent extends Component
 
         // $this->redirect(url()->previous(), true);
         $this->dispatch('refresh_device_component')->self();
-        $this->path = "";
+        $this->path = '';
         $this->closeDialog();
+
         return $this->success_alert('Upraveno');
     }
 
     public function getChannelNameByType(): string
     {
         if ($this->isBackup == true) {
-            return $this->channelType . ':' . $this->channel->id . ':backup';
+            return $this->channelType.':'.$this->channel->id.':backup';
         }
 
-        return $this->channelType . ':' . $this->channel->id;
+        return $this->channelType.':'.$this->channel->id;
     }
 
     public function openUpdateModal(): mixed
@@ -157,8 +158,9 @@ class DeviceHasChannelComponent extends Component
         ]);
 
         // $this->redirect(url()->previous(), true);
-        $this->dispatch('refresh_channel_has_devices_' . $this->channelType . '_' . $this->channel->id);
+        $this->dispatch('refresh_channel_has_devices_'.$this->channelType.'_'.$this->channel->id);
         $this->closeDialog();
+
         return $this->success_alert('Upraveno');
     }
 
@@ -182,7 +184,7 @@ class DeviceHasChannelComponent extends Component
             }
         }
 
-        if (!is_null($this->device->template)) {  // @phpstan-ignore-line
+        if (! is_null($this->device->template)) {  // @phpstan-ignore-line
             $template = $this->device->template;
 
             if (array_key_exists('inputs', $template)) {
@@ -202,7 +204,7 @@ class DeviceHasChannelComponent extends Component
         ]);
 
         // $this->redirect(url()->previous(), true);
-        $this->dispatch('refresh_channel_has_devices_' . $this->channelType . '_' . $this->channel->id);
+        $this->dispatch('refresh_channel_has_devices_'.$this->channelType.'_'.$this->channel->id);
 
         return $this->success_alert('Odebráno');
     }
@@ -232,7 +234,7 @@ class DeviceHasChannelComponent extends Component
             ip: $this->device->ip,
             username: $this->device->ssh->username,
             password: $this->device->ssh->password,
-            path: 'bash' . $this->linuxPathToStream
+            path: 'bash'.$this->linuxPathToStream
         );
 
         return $this->success_alert('Příkaz k restartu byl odeslán');
@@ -240,16 +242,15 @@ class DeviceHasChannelComponent extends Component
 
     public function delete_linux_path(): mixed
     {
-        ChannelOnLinux
-            ::where('device_id', $this->device->id)
+        ChannelOnLinux::where('device_id', $this->device->id)
             ->where('channel_type', $this->channelType)
             ->where('channel_id', $this->channel->id)
             ->delete();
 
         $this->dispatch('refresh_device_component')->self();
+
         return $this->success_alert('Odebráno');
     }
-
 
     #[On('refresh_device_component')]
     public function render(): \Illuminate\Contracts\View\View|Factory
@@ -257,7 +258,7 @@ class DeviceHasChannelComponent extends Component
         $this->checkIfNeedToAddLinuxPath();
 
         if (isset($this->device)) {
-            $this->nmsCahedData = Cache::get('nms_' . $this->device->id);
+            $this->nmsCahedData = Cache::get('nms_'.$this->device->id);
         }
 
         return view('livewire.iptv.channels.device-has-channel-component', [

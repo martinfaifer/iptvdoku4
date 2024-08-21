@@ -2,10 +2,10 @@
 
 namespace App\Livewire;
 
-use Mary\Traits\Toast;
-use Livewire\Component;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Collection;
+use Livewire\Component;
+use Mary\Traits\Toast;
 
 class Welcome extends Component
 {
@@ -56,7 +56,7 @@ class Welcome extends Component
         ])
             ->sortBy([[...array_values($this->sortBy)]])
             ->when($this->search, function (Collection $collection) {
-                return $collection->filter(fn(array $item) => str($item['name'])->contains($this->search, true));
+                return $collection->filter(fn (array $item) => str($item['name'])->contains($this->search, true));
             });
     }
 

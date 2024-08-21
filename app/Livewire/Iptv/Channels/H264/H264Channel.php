@@ -2,15 +2,15 @@
 
 namespace App\Livewire\Iptv\Channels\H264;
 
-use App\Models\Channel;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use App\Models\ChannelQualityWithIp;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\UpdateH264ChannelForm;
-use App\Traits\Devices\DeviceHasChannelsTrait;
+use App\Models\Channel;
+use App\Models\ChannelQualityWithIp;
 use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
+use App\Traits\Devices\DeviceHasChannelsTrait;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class H264Channel extends Component
 {
@@ -26,7 +26,7 @@ class H264Channel extends Component
 
     public bool $updateModal = false;
 
-    public string|null $quality;
+    public ?string $quality;
 
     public function edit(ChannelQualityWithIp $channelQualityWithIp): void
     {
@@ -39,7 +39,7 @@ class H264Channel extends Component
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_h264.' . $this->channel->id);
+        $this->dispatch('update_h264.'.$this->channel->id);
 
         return $this->success_alert('Změněno');
     }
@@ -53,7 +53,7 @@ class H264Channel extends Component
     public function destroy(ChannelQualityWithIp $channelQualityWithIp): mixed
     {
         $channelQualityWithIp->delete();
-        $this->dispatch('update_h264.' . $this->channel->id);
+        $this->dispatch('update_h264.'.$this->channel->id);
 
         return $this->success_alert('Odebráno');
     }

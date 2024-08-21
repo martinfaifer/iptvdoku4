@@ -3,10 +3,10 @@
 namespace App\Livewire;
 
 use App\Models\Alert;
-use Livewire\Component;
-use Livewire\Attributes\On;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class AlertComponent extends Component
 {

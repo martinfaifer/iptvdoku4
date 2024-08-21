@@ -3,12 +3,12 @@
 namespace App\Livewire\Iptv\Channels\Epg;
 
 use App\Models\Channel;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use Livewire\Attributes\Url;
+use App\Services\Api\Epg\EpgConnectService;
 use App\Traits\Dates\DateParserTrait;
 use Illuminate\Contracts\View\Factory;
-use App\Services\Api\Epg\EpgConnectService;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
+use Livewire\Component;
 
 class EpgChannelComponent extends Component
 {
@@ -19,7 +19,7 @@ class EpgChannelComponent extends Component
     public mixed $epg;
 
     #[Url]
-    public string|null $dayInMonth = null;
+    public ?string $dayInMonth = null;
 
     public function mount(Channel $channel): void
     {

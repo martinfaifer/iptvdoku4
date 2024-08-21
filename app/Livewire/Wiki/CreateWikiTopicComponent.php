@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Wiki;
 
-use Livewire\Component;
-use App\Models\WikiCategory;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateWikiTopicForm;
+use App\Models\WikiCategory;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class CreateWikiTopicComponent extends Component
 {

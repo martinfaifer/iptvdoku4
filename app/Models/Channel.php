@@ -86,12 +86,12 @@ class Channel extends Model
 
     public function scopeSearch(Builder $query, string $search): void
     {
-        $query->where('name', 'like', "%" . $search . "%");
+        $query->where('name', 'like', '%'.$search.'%');
     }
 
     public static function scopeSearchend(Builder $query, string $search): void
     {
-        $query->where('name', 'like', $search . "%");
+        $query->where('name', 'like', $search.'%');
     }
 
     public function scopeFulltextSearch(Builder $query, string $search): void
@@ -102,7 +102,6 @@ class Channel extends Model
             ['mode' => 'boolean'],
         );
     }
-
 
     public function scopeWithNanguChannelCode(Builder $query): void
     {

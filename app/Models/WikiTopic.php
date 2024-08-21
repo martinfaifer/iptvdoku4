@@ -34,6 +34,6 @@ class WikiTopic extends Model
 
     public function scopeSearch(Builder $query, string $search): void
     {
-        $query->where('title', 'like', '%' . $search . '%')->orWhere('text', 'like', '%' . $search . '%');
+        $query->where('title', 'like', '%'.$search.'%')->orWhere('text', 'like', '%'.$search.'%');
     }
 }

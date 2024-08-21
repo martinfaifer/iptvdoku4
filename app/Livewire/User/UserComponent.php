@@ -2,23 +2,23 @@
 
 namespace App\Livewire\User;
 
-use App\Models\User;
+use App\Events\BroadcastRefreshUserEvent;
+use App\Livewire\Forms\AvatarForm;
+use App\Livewire\Forms\ChangeUserPasswordForm;
+use App\Livewire\Forms\UserEditForm;
 use App\Models\Session;
+use App\Models\User;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Users\CheckIfIsPinnedIptvWindowTrait;
+use App\Traits\Users\SessionUserAgentTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Livewire\Forms\AvatarForm;
-use App\Livewire\Forms\UserEditForm;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\View\Factory;
-use App\Events\BroadcastRefreshUserEvent;
-use App\Traits\Livewire\NotificationTrait;
-use App\Traits\Users\SessionUserAgentTrait;
-use App\Livewire\Forms\ChangeUserPasswordForm;
-use App\Traits\Users\CheckIfIsPinnedIptvWindowTrait;
 
 class UserComponent extends Component
 {
-    use NotificationTrait, SessionUserAgentTrait, WithFileUploads, CheckIfIsPinnedIptvWindowTrait;
+    use CheckIfIsPinnedIptvWindowTrait, NotificationTrait, SessionUserAgentTrait, WithFileUploads;
 
     public AvatarForm $avatarForm;
 
@@ -110,9 +110,10 @@ class UserComponent extends Component
         $windowStatus = $this->convert_response_to_db_string($this->isPinned);
 
         $this->user->update([
-            'iptv_monitoring_window' => $windowStatus
+            'iptv_monitoring_window' => $windowStatus,
         ]);
         $this->redirect(url()->previous(), true);
+
         return $this->success_alert('Změna provedena');
     }
 

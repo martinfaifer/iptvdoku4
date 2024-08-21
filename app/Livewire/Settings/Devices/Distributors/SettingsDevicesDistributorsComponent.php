@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Settings\Devices\Distributors;
 
-use Livewire\Component;
-use Livewire\WithPagination;
-use App\Models\SatelitCardVendor;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsDevicesDistributorsForm;
 use App\Livewire\Forms\UpdateSettingsDevicesDistributorsForm;
+use App\Models\SatelitCardVendor;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsDevicesDistributorsComponent extends Component
 {

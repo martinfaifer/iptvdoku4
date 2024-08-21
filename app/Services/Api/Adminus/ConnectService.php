@@ -11,15 +11,14 @@ class ConnectService
 
     public function create_invoice(string|int $contractId, float|int $price): void
     {
-        Http
-            ::withBasicAuth(config('services.api.adminus.username'), config('services.api.adminus.password'))
-            ->post(config('services.api.adminus.url') . str_replace('%contractId%', $contractId, 'v1/adminus-grape/invoice-rule/create/%contractId%'), [
+        Http::withBasicAuth(config('services.api.adminus.username'), config('services.api.adminus.password'))
+            ->post(config('services.api.adminus.url').str_replace('%contractId%', $contractId, 'v1/adminus-grape/invoice-rule/create/%contractId%'), [
                 [
-                    "amount" => 1,
-                    "unit_untaxed_price" => (float) $price,
-                    "description" => "Pronájem IPTV včetně poskytnutých IPTV služeb za období " . now()->subMonth()->format("m/Y"),
-                    "source" => "genius-tv-partner-billing"
-                ]
+                    'amount' => 1,
+                    'unit_untaxed_price' => (float) $price,
+                    'description' => 'Pronájem IPTV včetně poskytnutých IPTV služeb za období '.now()->subMonth()->format('m/Y'),
+                    'source' => 'genius-tv-partner-billing',
+                ],
             ]);
     }
 }

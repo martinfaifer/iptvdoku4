@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Observers\ChannelSourceObserver;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use App\Livewire\Iptv\Channels\Multicast\MulticastChannel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[ObservedBy(ChannelSourceObserver::class)]
@@ -21,8 +20,8 @@ class ChannelSource extends Model
         return $this->hasMany(ChannelMulticast::class, 'channel_source_id');
     }
 
-    public function scopeSearch(Builder $query, string $search = ""): void
+    public function scopeSearch(Builder $query, string $search = ''): void
     {
-        $query->where('name', "like", "%" . $search . "%");
+        $query->where('name', 'like', '%'.$search.'%');
     }
 }

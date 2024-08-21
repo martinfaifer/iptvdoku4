@@ -2,21 +2,21 @@
 
 namespace App\Livewire\Settings\Channels\Multicasts;
 
-use Livewire\Component;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use App\Models\ChannelSource;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateMulticastSourceForm;
+use App\Models\ChannelSource;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class MulticastsSourcesComponent extends Component
 {
-    use WithPagination, NotificationTrait;
+    use NotificationTrait, WithPagination;
 
     public CreateMulticastSourceForm $createForm;
 
-    public string $query = "";
+    public string $query = '';
 
     public bool $createModal = false;
 
@@ -35,7 +35,7 @@ class MulticastsSourcesComponent extends Component
 
         $this->closeDialog();
 
-        return $this->success_alert("Přidáno");
+        return $this->success_alert('Přidáno');
     }
 
     public function closeDialog(): void
@@ -46,16 +46,15 @@ class MulticastsSourcesComponent extends Component
     public function destroy(ChannelSource $channelSource): mixed
     {
         if ($channelSource->multicasts->isEmpty() == false) {
-            return $this->error_alert("Existuje vazba na kanál");
+            return $this->error_alert('Existuje vazba na kanál');
         }
 
         $channelSource->delete();
 
         $this->dispatch('reload_settings_multicasts_sources');
 
-        return $this->success_alert("Odebráno");
+        return $this->success_alert('Odebráno');
     }
-
 
     #[On('reload_settings_multicasts_sources')]
     public function render(): \Illuminate\Contracts\View\View|Factory

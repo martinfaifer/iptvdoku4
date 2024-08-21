@@ -46,7 +46,7 @@ class ConnectService
             $this->connection = Http::withHeaders([
                 'x-api-token' => config('services.api.8.floweye.api_token'),
             ])->$requestType(
-                config('services.api.8.floweye.url') . $this->endPoints[$endpointType]['endpoint'],
+                config('services.api.8.floweye.url').$this->endPoints[$endpointType]['endpoint'],
                 $this->endPoints[$endpointType]['formData']
             );
         } catch (\Throwable $th) {

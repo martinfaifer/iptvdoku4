@@ -16,7 +16,6 @@ class WikiTopicPolicy
         return null;
     }
 
-
     /**
      * Determine whether the user can create models.
      */

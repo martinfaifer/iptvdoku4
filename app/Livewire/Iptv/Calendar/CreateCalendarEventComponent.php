@@ -2,28 +2,26 @@
 
 namespace App\Livewire\Iptv\Calendar;
 
-use App\Models\Tag;
-use Livewire\Component;
-use Livewire\WithFileUploads;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
-use App\Models\NanguIspTagToChannelPackage;
-use App\Traits\Users\GetUsersFromCacheTrait;
-use App\Traits\Sftps\GetSftpServersFromCache;
+use App\Actions\CssColors\GetCssColorsFromCacheAction;
 use App\Livewire\Forms\CreateCalendarEventForm;
 use App\Traits\Channels\GetChannelFromCacheTrait;
-use App\Actions\CssColors\GetCssColorsFromCacheAction;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Sftps\GetSftpServersFromCache;
 use App\Traits\Tags\GetNanguIspTagsToChannelPackagesTrait;
+use App\Traits\Users\GetUsersFromCacheTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Collection;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateCalendarEventComponent extends Component
 {
     use GetChannelFromCacheTrait,
+        GetNanguIspTagsToChannelPackagesTrait,
         GetSftpServersFromCache,
         GetUsersFromCacheTrait,
         NotificationTrait,
-        WithFileUploads,
-        GetNanguIspTagsToChannelPackagesTrait;
+        WithFileUploads;
 
     public CreateCalendarEventForm $form;
 

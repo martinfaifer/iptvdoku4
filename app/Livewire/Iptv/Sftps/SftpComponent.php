@@ -2,14 +2,13 @@
 
 namespace App\Livewire\Iptv\Sftps;
 
-use Livewire\Component;
-use phpseclib3\Net\SFTP;
-use App\Models\SftpServer;
-use Livewire\WithFileUploads;
 use App\Livewire\Forms\UploadSftpForm;
-use Illuminate\Contracts\View\Factory;
+use App\Models\SftpServer;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\Sftps\GetServerContentTrait;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use phpseclib3\Net\SFTP;
 
 class SftpComponent extends Component
 {
@@ -49,7 +48,7 @@ class SftpComponent extends Component
         $this->authorize('upload', SftpServer::class);
         if ($this->uploadForm->upload_file($this->sftpServer) == true) {
             $this->closeDialog();
-            $this->redirect('/sftps/' . $this->sftpServer->id, true);
+            $this->redirect('/sftps/'.$this->sftpServer->id, true);
 
             return $this->success_alert('Soubor nahrán');
         }
@@ -66,13 +65,13 @@ class SftpComponent extends Component
             return $this->error_alert('Nepodařilo se přihlásit do serveru');
         }
 
-        if (! $sftp->file_exists($this->sftpServer->path_to_folder . $item['filename'])) {
+        if (! $sftp->file_exists($this->sftpServer->path_to_folder.$item['filename'])) {
             return $this->error_alert('Nepodařilo se najít soubor');
         }
 
         return response()->streamDownload(
             function () use ($sftp, $item) {
-                echo $sftp->get($this->sftpServer->path_to_folder . $item['filename']);
+                echo $sftp->get($this->sftpServer->path_to_folder.$item['filename']);
             },
             $item['filename']
         );

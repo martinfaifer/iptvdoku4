@@ -28,8 +28,8 @@ class GeniusTVchannelsTax extends Model
     {
         $channel = Channel::search($search)->first();
         if ($channel) {
-            $query->where('price', 'like', '%' . $search . '%')
-                ->orWhere('channel_id', 'like', '%' . $channel->id . '%');
+            $query->where('price', 'like', '%'.$search.'%')
+                ->orWhere('channel_id', 'like', '%'.$channel->id.'%');
         }
     }
 }

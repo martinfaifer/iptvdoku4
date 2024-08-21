@@ -58,7 +58,7 @@ class Tag extends Model
     public function scopeSearch(Builder $query, string $search): void
     {
         $query
-            ->where('name', 'like', '%' . $search . '%');
+            ->where('name', 'like', '%'.$search.'%');
     }
 
     public function scopeHasActionChannelRestart(Builder $query): void

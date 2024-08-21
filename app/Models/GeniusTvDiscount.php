@@ -15,9 +15,9 @@ class GeniusTvDiscount extends Model
         'discount',
     ];
 
-    public function scopeSearch(Builder $query, string $search = ""): void
+    public function scopeSearch(Builder $query, string $search = ''): void
     {
-        if (!blank($search)) {
+        if (! blank($search)) {
             $nanguIsp = NanguIsp::search($search)->first();
             if ($nanguIsp) {
                 $query->where('nangu_isp_id', $nanguIsp->id);

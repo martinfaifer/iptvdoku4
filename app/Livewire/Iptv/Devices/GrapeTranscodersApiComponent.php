@@ -22,7 +22,7 @@ class GrapeTranscodersApiComponent extends Component
     public function mount(Device $device): void
     {
         $this->device = $device;
-        $this->grapeTranscoderData = Cache::get(('grape_transcoder_' . $this->device->id));
+        $this->grapeTranscoderData = Cache::get(('grape_transcoder_'.$this->device->id));
         $this->load_channels_from_api();
     }
 
@@ -39,7 +39,7 @@ class GrapeTranscodersApiComponent extends Component
             device: $this->device
         );
 
-        $this->dispatch('reload_streams_on_transcoder.' . $this->device->id);
+        $this->dispatch('reload_streams_on_transcoder.'.$this->device->id);
         if (array_key_exists('alert', $response)) {
             if ($response['alert']['status'] == 'success') {
                 return $this->success_alert($response['alert']['msg']);
@@ -56,7 +56,7 @@ class GrapeTranscodersApiComponent extends Component
             device: $this->device
         );
 
-        $this->dispatch('reload_streams_on_transcoder.' . $this->device->id);
+        $this->dispatch('reload_streams_on_transcoder.'.$this->device->id);
         if (array_key_exists('alert', $response)) {
             if ($response['alert']['status'] == 'success') {
                 return $this->success_alert($response['alert']['msg']);

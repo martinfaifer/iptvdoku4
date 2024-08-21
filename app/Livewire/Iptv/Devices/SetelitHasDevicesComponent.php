@@ -12,7 +12,7 @@ class SetelitHasDevicesComponent extends Component
 
     public function mount(Device $device): void
     {
-        $this->hasDevices = Device::inTemplate('"Satelit":' . $device->id)->get(['id', 'name']);
+        $this->hasDevices = Device::inTemplate('"Satelit":'.$device->id)->get(['id', 'name']);
     }
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory

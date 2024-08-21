@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Wiki;
 
-use Livewire\Component;
 use App\Models\WikiTopic;
 use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class WikiComponent extends Component
 {

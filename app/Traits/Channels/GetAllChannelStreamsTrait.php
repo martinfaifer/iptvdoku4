@@ -3,7 +3,6 @@
 namespace App\Traits\Channels;
 
 use App\Models\Channel;
-use App\Models\ChannelMulticast;
 
 trait GetAllChannelStreamsTrait
 {
@@ -22,11 +21,11 @@ trait GetAllChannelStreamsTrait
     {
         $streams = [];
         foreach ($channel->multicasts as $multicast) {
-            if (!blank($multicast->stb_ip)) {
+            if (! blank($multicast->stb_ip)) {
                 array_push($streams, $multicast->stb_ip);
             }
 
-            if (!blank($multicast->source_ip)) {
+            if (! blank($multicast->source_ip)) {
                 array_push($streams, $multicast->source_ip);
             }
         }

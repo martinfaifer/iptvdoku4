@@ -19,8 +19,8 @@ class H264Observer
         }
 
         SendEmailNotificationJob::dispatch(
-            'Byl přidán H264 k ' . $h264->channel->name,
-            'Uživatel ' . $email . ' přidal H264 k ' . $h264->channel->name,
+            'Byl přidán H264 k '.$h264->channel->name,
+            'Uživatel '.$email.' přidal H264 k '.$h264->channel->name,
             $email,
             'notify_if_channel_change'
         );
@@ -51,8 +51,8 @@ class H264Observer
         );
 
         SendEmailNotificationJob::dispatch(
-            'Byl upravil H264 u ' . $h264->channel->name,
-            'Uživatel ' . Auth::user()->email . ' upravil H264 u ' . $h264->channel->name,
+            'Byl upravil H264 u '.$h264->channel->name,
+            'Uživatel '.Auth::user()->email.' upravil H264 u '.$h264->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );
@@ -72,8 +72,8 @@ class H264Observer
         );
 
         SendEmailNotificationJob::dispatch(
-            'Byl odebral H264 u ' . $h264->channel->name,
-            'Uživatel ' . Auth::user()->email . ' odebral u ' . $h264->channel->name,
+            'Byl odebral H264 u '.$h264->channel->name,
+            'Uživatel '.Auth::user()->email.' odebral u '.$h264->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );

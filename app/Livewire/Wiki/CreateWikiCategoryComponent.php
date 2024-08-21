@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Wiki;
 
-use Livewire\Component;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateWikiCategoryForm;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class CreateWikiCategoryComponent extends Component
 {

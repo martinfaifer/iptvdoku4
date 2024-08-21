@@ -78,6 +78,7 @@ class StartCalendarEventCommand extends Command
                 }
 
                 Mail::to($event->creator)->queue(new SendEventWasStartedMail($event));
+
                 return true;
             }
         }

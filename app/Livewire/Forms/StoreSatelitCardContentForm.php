@@ -2,17 +2,17 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\SatelitCardContent;
+use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Livewire\WithFileUploads;
-use Livewire\Attributes\Validate;
-use App\Models\SatelitCardContent;
 
 class StoreSatelitCardContentForm extends Form
 {
     use WithFileUploads;
 
-    #[Validate('required', message: "Vyberte soubor")]
-    #[Validate('max:2048', message: "Maximální velikost je :max")]
+    #[Validate('required', message: 'Vyberte soubor')]
+    #[Validate('max:2048', message: 'Maximální velikost je :max')]
     public mixed $file;
 
     public function create(int $satCardId): void
@@ -22,7 +22,7 @@ class StoreSatelitCardContentForm extends Form
         SatelitCardContent::create([
             'satelit_card_id' => $satCardId,
             'file_name' => $this->file->getClientOriginalName(),
-            'path' => $path
+            'path' => $path,
         ]);
     }
 }

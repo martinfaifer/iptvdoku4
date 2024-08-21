@@ -9,17 +9,17 @@ use Livewire\Form;
 
 class StoreMulticastChannelForm extends Form
 {
-    public string|null $stb_ip = null;
+    public ?string $stb_ip = null;
 
-    public string $source_ip = "";
+    public string $source_ip = '';
 
-    public int|null $channel_source_id = null;
+    public ?int $channel_source_id = null;
 
     public bool $is_backup = false;
 
     public bool $to_dohled = true;
 
-    public int|null $channel_id = null;
+    public ?int $channel_id = null;
 
     public function rules(): array
     {
@@ -89,7 +89,7 @@ class StoreMulticastChannelForm extends Form
         if ($this->to_dohled == true) {
             if (! is_null($this->stb_ip)) {
                 StoreStreamToIptvDohledJob::dispatch(
-                    Channel::find($this->channel_id)->name . '_multicast',
+                    Channel::find($this->channel_id)->name.'_multicast',
                     $this->stb_ip
                 );
             }

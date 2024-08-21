@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Nangu\IpPrefixes;
 
-use Livewire\Component;
+use App\Livewire\Forms\StoreNanguIpPrefixForm;
 use App\Models\NanguIsp;
+use App\Traits\Livewire\NotificationTrait;
 use App\Traits\Prefixes\CidrTrait;
 use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Database\Eloquent\Collection;
-use App\Livewire\Forms\StoreNanguIpPrefixForm;
+use Livewire\Component;
 
 class StoreNanguIpPrefixesComponent extends Component
 {
@@ -44,7 +44,7 @@ class StoreNanguIpPrefixesComponent extends Component
     {
         $stored = $this->form->create();
 
-        $this->redirect('/prefixes/' . $stored->id, true);
+        $this->redirect('/prefixes/'.$stored->id, true);
 
         return $this->success_alert('Prefix přidán');
     }

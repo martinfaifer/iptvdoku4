@@ -2,34 +2,32 @@
 
 namespace App\Livewire\Iptv\Calendar;
 
-use App\Models\Tag;
+use App\Actions\CssColors\GetCssColorsFromCacheAction;
+use App\Livewire\Forms\UpdateCalendarEventForm;
 use App\Models\Event;
-use Livewire\Component;
-use Illuminate\Support\Str;
-use Livewire\WithFileUploads;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
-use App\Models\NanguIspTagToChannelPackage;
 use App\Traits\Calendar\RunningEventsTrait;
 use App\Traits\Calendar\UpcomingEventsTrait;
-use App\Traits\Users\GetUsersFromCacheTrait;
-use Illuminate\Database\Eloquent\Collection;
-use App\Traits\Sftps\GetSftpServersFromCache;
-use App\Livewire\Forms\UpdateCalendarEventForm;
 use App\Traits\Channels\GetChannelFromCacheTrait;
-use App\Actions\CssColors\GetCssColorsFromCacheAction;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Sftps\GetSftpServersFromCache;
 use App\Traits\Tags\GetNanguIspTagsToChannelPackagesTrait;
+use App\Traits\Users\GetUsersFromCacheTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CalendarComponent extends Component
 {
     use GetChannelFromCacheTrait,
+        GetNanguIspTagsToChannelPackagesTrait,
         GetSftpServersFromCache,
         GetUsersFromCacheTrait,
         NotificationTrait,
         RunningEventsTrait,
         UpcomingEventsTrait,
-        WithFileUploads,
-        GetNanguIspTagsToChannelPackagesTrait;
+        WithFileUploads;
 
     public UpdateCalendarEventForm $form;
 
@@ -74,14 +72,14 @@ class CalendarComponent extends Component
                 $this->events[] = [
                     'label' => $singleEvent->label,
                     'description' => Str::markdown($singleEvent->description),
-                    'css' => is_null($singleEvent->background_color) ? '!bg-red-500/20' : '!' . $singleEvent->background_color->color . '/20',
+                    'css' => is_null($singleEvent->background_color) ? '!bg-red-500/20' : '!'.$singleEvent->background_color->color.'/20',
                     'date' => now()->createFromFormat('Y-m-d', $singleEvent->start_date),
                 ];
             } else {
                 $this->events[] = [
                     'label' => $singleEvent->label,
                     'description' => Str::markdown($singleEvent->description),
-                    'css' => is_null($singleEvent->background_color) ? '!bg-red-500/20' : '!' . $singleEvent->background_color->color . '/20',
+                    'css' => is_null($singleEvent->background_color) ? '!bg-red-500/20' : '!'.$singleEvent->background_color->color.'/20',
                     'range' => [now()->createFromFormat('Y-m-d', $singleEvent->start_date), now()->createFromFormat('Y-m-d', $singleEvent->end_date)],
                 ];
             }

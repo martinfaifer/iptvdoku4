@@ -2,15 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Tag;
-use App\Models\Device;
-use App\Models\TagOnItem;
 use App\Jobs\GetNimbleDataJob;
 use App\Jobs\GpuDeviceCheckJob;
 use Illuminate\Console\Command;
-use App\Events\BroadcastAlertEvent;
-use App\Actions\Devices\GetNimbleDataAction;
-use App\Actions\Devices\CheckIfGpuWorkingAction;
 
 class TagActionsCommand extends Command
 {

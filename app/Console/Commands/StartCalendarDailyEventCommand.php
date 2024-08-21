@@ -77,9 +77,11 @@ class StartCalendarDailyEventCommand extends Command
                     }
                 }
                 Mail::to($event->creator)->queue(new SendEventWasStartedMail($event));
+
                 return true;
             }
         }
+
         return false;
     }
 }

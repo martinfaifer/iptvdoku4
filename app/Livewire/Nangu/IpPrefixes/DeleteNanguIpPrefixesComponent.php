@@ -4,9 +4,9 @@ namespace App\Livewire\Nangu\IpPrefixes;
 
 use App\Models\Ip;
 use App\Models\Note;
-use Livewire\Component;
-use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class DeleteNanguIpPrefixesComponent extends Component
 {

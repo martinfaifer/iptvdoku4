@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Iptv\Cards;
 
-use Livewire\Component;
+use App\Livewire\Forms\UpdateSatelitCardForm;
 use App\Models\SatelitCard;
 use App\Models\SatelitCardVendor;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
-use App\Livewire\Forms\UpdateSatelitCardForm;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Collection;
+use Livewire\Component;
 
 class UpdateSatelitCardComponent extends Component
 {
@@ -43,6 +43,7 @@ class UpdateSatelitCardComponent extends Component
         $this->resetErrorBag();
 
         $this->redirect(url()->previous(), true);
+
         return $this->success_alert('Upraveno');
     }
 

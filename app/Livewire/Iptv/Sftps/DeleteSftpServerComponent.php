@@ -2,10 +2,9 @@
 
 namespace App\Livewire\Iptv\Sftps;
 
-use Livewire\Component;
 use App\Models\SftpServer;
-use App\Livewire\Iptv\Sftps\Factory;
 use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 class DeleteSftpServerComponent extends Component
 {

@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Weather;
 
-use Livewire\Component;
-use Illuminate\Contracts\View\Factory;
 use App\Traits\Weather\GetCachedWeatherTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class WeatherComponent extends Component
 {

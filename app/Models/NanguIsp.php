@@ -59,10 +59,10 @@ class NanguIsp extends Model
 
     public function scopeSearch(Builder $query, string $search): void
     {
-        $query->where('name', 'like', '%' . $search . '%')
-            ->orWhere('ic', 'like', '%' . $search . '%')
-            ->orWhere('dic', 'like', '%' . $search . '%')
-            ->orWhere('hbo_key', 'like', '%' . $search . '%')
-            ->orWhere('crm_contract_id', 'like', '%' . $search . '%');
+        $query->where('name', 'like', '%'.$search.'%')
+            ->orWhere('ic', 'like', '%'.$search.'%')
+            ->orWhere('dic', 'like', '%'.$search.'%')
+            ->orWhere('hbo_key', 'like', '%'.$search.'%')
+            ->orWhere('crm_contract_id', 'like', '%'.$search.'%');
     }
 }

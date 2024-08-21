@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Settings\GeniusTv\Statistics;
 
-use Livewire\Component;
 use App\Models\NanguIsp;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Component;
 
 class SettingsGeniusTvStatisticsHboComponent extends Component
 {

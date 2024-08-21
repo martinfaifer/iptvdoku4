@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Iptv\Canvas;
 
-use Livewire\Component;
+use App\Traits\Channels\GetChannelBelongsToDeviceTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
-use App\Traits\Channels\GetChannelBelongsToDeviceTrait;
+use Livewire\Component;
 
 class NetworkMapComponent extends Component
 {

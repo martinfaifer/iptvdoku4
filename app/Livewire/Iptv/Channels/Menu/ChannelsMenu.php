@@ -20,7 +20,6 @@ class ChannelsMenu extends Component
         $this->channels = Cache::get('channels_menu');
     }
 
-
     public function refreshChannelsSidebar(): void
     {
         $this->channels = Cache::get('channels_menu');
@@ -30,6 +29,7 @@ class ChannelsMenu extends Component
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         $this->channels = Cache::get('channels_menu');
+
         return view('livewire.iptv.channels.menu.channels-menu');
     }
 }

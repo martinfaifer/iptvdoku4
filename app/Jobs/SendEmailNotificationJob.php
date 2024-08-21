@@ -32,8 +32,8 @@ class SendEmailNotificationJob implements ShouldQueue
         $thirtyMinutesInSecondsTtl = 1800; // prevention of spamming
         User::where($this->eventType, true)->each(function ($user) use ($thirtyMinutesInSecondsTtl) {
             // send email to specific user
-            if (! Cache::has($user->id . '_' . $this->eventType)) {
-                Cache::put($user->id . '_' . $this->eventType, 'is_send', $thirtyMinutesInSecondsTtl);
+            if (! Cache::has($user->id.'_'.$this->eventType)) {
+                Cache::put($user->id.'_'.$this->eventType, 'is_send', $thirtyMinutesInSecondsTtl);
                 Mail::to($user->email)->queue(new SendNotificationEmail(emailSubject: $this->emailSubject, emailContent: $this->text));
             }
         });

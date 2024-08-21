@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
 use App\Models\User;
-use Livewire\Attributes\Validate;
 use App\Traits\Users\CheckIfIsPinnedIptvWindowTrait;
+use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class UpdateSettingsUserForm extends Form
 {
@@ -27,31 +27,31 @@ class UpdateSettingsUserForm extends Form
     #[Validate('exists:user_roles,id', message: 'Neexistující role')]
     public string|int|null $userRoleId = '';
 
-    #[Validate('required', message: "Chcete nebo nechcete být upozornění?")]
+    #[Validate('required', message: 'Chcete nebo nechcete být upozornění?')]
     #[Validate('bool', message: 'Neplatný formát')]
     public bool $notify_if_channel_change = false;
 
-    #[Validate('required', message: "Chcete nebo nechcete být upozornění?")]
+    #[Validate('required', message: 'Chcete nebo nechcete být upozornění?')]
     #[Validate('bool', message: 'Neplatný formát')]
     public bool $notify_if_added_new_wiki_content = false;
 
-    #[Validate('required', message: "Chcete nebo nechcete být upozornění?")]
+    #[Validate('required', message: 'Chcete nebo nechcete být upozornění?')]
     #[Validate('bool', message: 'Neplatný formát')]
     public bool $notify_if_weather_problem = false;
 
-    #[Validate('required', message: "Chcete nebo nechcete být upozornění?")]
+    #[Validate('required', message: 'Chcete nebo nechcete být upozornění?')]
     #[Validate('bool', message: 'Neplatný formát')]
     public bool $notify_if_too_many_channels_down = false;
 
-    #[Validate('required', message: "Chcete nebo nechcete být upozornění?")]
+    #[Validate('required', message: 'Chcete nebo nechcete být upozornění?')]
     #[Validate('bool', message: 'Neplatný formát')]
     public bool $notify_if_satelit_card_has_expiration = false;
 
-    #[Validate('required', message: "Chcete nebo nechcete být upozornění?")]
+    #[Validate('required', message: 'Chcete nebo nechcete být upozornění?')]
     #[Validate('bool', message: 'Neplatný formát')]
     public bool $notify_if_added_new_event = false;
 
-    #[Validate('required', message: "Chcete nebo nechcete připbout popup okno?")]
+    #[Validate('required', message: 'Chcete nebo nechcete připbout popup okno?')]
     #[Validate('bool', message: 'Neplatný formát')]
     public bool $iptv_monitoring_window = false;
 
@@ -89,7 +89,7 @@ class UpdateSettingsUserForm extends Form
             'notify_if_added_new_wiki_content' => $this->notify_if_added_new_wiki_content,
             'notify_if_weather_problem' => $this->notify_if_weather_problem,
             'notify_if_too_many_channels_down' => $this->notify_if_too_many_channels_down,
-            'iptv_monitoring_window' => $windowStatus
+            'iptv_monitoring_window' => $windowStatus,
         ]);
     }
 }

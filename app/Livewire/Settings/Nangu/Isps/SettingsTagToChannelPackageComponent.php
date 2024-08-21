@@ -2,16 +2,16 @@
 
 namespace App\Livewire\Settings\Nangu\Isps;
 
-use App\Models\Tag;
-use Livewire\Component;
-use App\Models\NanguIsp;
-use Livewire\WithPagination;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
-use App\Models\NanguIspTagToChannelPackage;
 use App\Livewire\Forms\CreateSettingsTagToChannelPackageForm;
 use App\Livewire\Forms\UpdateSettingsTagToChannelPackageForm;
+use App\Models\NanguIsp;
+use App\Models\NanguIspTagToChannelPackage;
+use App\Models\Tag;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Collection;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsTagToChannelPackageComponent extends Component
 {

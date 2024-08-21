@@ -5,7 +5,6 @@ namespace App\Exports;
 use App\Models\ChannelMulticast;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\FromCollection;
 
 class MulticastsExport implements FromArray, WithHeadings
 {
@@ -14,7 +13,7 @@ class MulticastsExport implements FromArray, WithHeadings
         return [
             'název',
             'STB IP',
-            'Zdrojová IP'
+            'Zdrojová IP',
         ];
     }
 
@@ -26,7 +25,7 @@ class MulticastsExport implements FromArray, WithHeadings
             $result[] = [
                 'name' => $multicast->channel->name,
                 'stb_ip' => $multicast->stb_ip,
-               'source_ip' => $multicast->source_ip,
+                'source_ip' => $multicast->source_ip,
             ];
         }
 

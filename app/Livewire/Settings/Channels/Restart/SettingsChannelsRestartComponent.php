@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Settings\Channels\Restart;
 
+use App\Livewire\Forms\CreateSettingsChannelsRestartForm;
+use App\Models\RestartChannel;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\RestartChannel;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
-use App\Livewire\Forms\CreateSettingsChannelsRestartForm;
 
 class SettingsChannelsRestartComponent extends Component
 {

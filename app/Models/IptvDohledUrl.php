@@ -10,7 +10,7 @@ class IptvDohledUrl extends Model
     protected $fillable = [
         'iptv_dohled_id',
         'stream_url',
-        'can_notify'
+        'can_notify',
     ];
 
     public $casts = [

@@ -9,7 +9,7 @@ trait GetDeviceVendorsTrait
 {
     public function get_device_vendors(): mixed
     {
-        if (!Cache::has('device_vendors')) {
+        if (! Cache::has('device_vendors')) {
             Cache::forever('device_vendors', DeviceVendor::get());
         }
 

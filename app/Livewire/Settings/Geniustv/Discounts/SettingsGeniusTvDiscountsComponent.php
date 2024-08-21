@@ -2,16 +2,16 @@
 
 namespace App\Livewire\Settings\Geniustv\Discounts;
 
-use Livewire\Component;
-use App\Models\NanguIsp;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use App\Models\GeniusTvDiscount;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Forms\CreateSettingsGeniusTvDiscountsForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvDiscountsForm;
+use App\Models\GeniusTvDiscount;
+use App\Models\NanguIsp;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsGeniusTvDiscountsComponent extends Component
 {

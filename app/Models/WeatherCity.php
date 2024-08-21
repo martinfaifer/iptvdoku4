@@ -14,6 +14,6 @@ class WeatherCity extends Model
 
     public function scopeSearch(Builder $query, string $search = ''): void
     {
-        $query->where('city', 'like', '%' . $search . '%');
+        $query->where('city', 'like', '%'.$search.'%');
     }
 }

@@ -16,21 +16,21 @@ class StoreDeviceForm extends Form
 
     public string $ip;
 
-    public string|null $ipmi_ip;
+    public ?string $ipmi_ip;
 
-    public string|null $controller_ip;
+    public ?string $controller_ip;
 
-    public string|null $username;
+    public ?string $username;
 
-    public string|null $password;
+    public ?string $password;
 
     public bool $is_snmp = false;
 
-    public int|null $snmp_version;
+    public ?int $snmp_version;
 
-    public string|null $snmp_private_comunity;
+    public ?string $snmp_private_comunity;
 
-    public string|null $snmp_public_comunity;
+    public ?string $snmp_public_comunity;
 
     public function rules(): array
     {

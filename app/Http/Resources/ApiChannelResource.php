@@ -2,15 +2,16 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use App\Models\ChannelMulticast;
 use App\Models\ChannelQualityWithIp;
-use Illuminate\Http\Resources\Json\JsonResource;
 use App\Traits\Channels\GetGeniusTvChannelPaclagesTrait;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ApiChannelResource extends JsonResource
 {
     use GetGeniusTvChannelPaclagesTrait;
+
     /**
      * Transform the resource into an array.
      *
@@ -20,8 +21,7 @@ class ApiChannelResource extends JsonResource
     {
         // $request->channel_url
         if (ChannelMulticast::where('stb_ip', $request->channel_url)->first()) {
-            $channel = ChannelMulticast
-                ::where('stb_ip', $request->channel_url)
+            $channel = ChannelMulticast::where('stb_ip', $request->channel_url)
                 ->with('channel', 'channel_source', 'notes')
                 ->first();
 
@@ -29,17 +29,16 @@ class ApiChannelResource extends JsonResource
         }
 
         if (ChannelQualityWithIp::where('ip', $request->channel_url)->first()) {
-            $channel = ChannelQualityWithIp
-                ::where('ip', $request->channel_url)
+            $channel = ChannelQualityWithIp::where('ip', $request->channel_url)
                 ->with('h264.channel', 'h265.channel')
                 ->first();
 
-            if (!is_null($channel->h264_id)) {
-                return $this->setUnicastOutput($channel, "h264");
+            if (! is_null($channel->h264_id)) {
+                return $this->setUnicastOutput($channel, 'h264');
             }
 
-            if (!is_null($channel->h265_id)) {
-                return $this->setUnicastOutput($channel, "h265");
+            if (! is_null($channel->h265_id)) {
+                return $this->setUnicastOutput($channel, 'h265');
             }
         }
 
@@ -49,13 +48,13 @@ class ApiChannelResource extends JsonResource
     public function setOutput(object $channel): array
     {
         return [
-            'logo' => is_null($channel->channel->logo) ? null : config('app.url') . '/' . str_replace('public', 'storage', $channel->channel->logo),
+            'logo' => is_null($channel->channel->logo) ? null : config('app.url').'/'.str_replace('public', 'storage', $channel->channel->logo),
             'kategorie' => $channel->channel->channelCategory->name,
             'chunkStoreId' => null,
             'nanguChannel' => null,
             'tags' => null,
             'channel_packages' => implode($this->get_packages(json_decode($channel->channel->geniustv_channel_packages_id))),
-            'devices' =>  [
+            'devices' => [
                 'source' => [
                     'url' => null,
                     'name' => null,
@@ -73,21 +72,22 @@ class ApiChannelResource extends JsonResource
                     'template' => null,
                     'deviceVendor' => null,
                     'category' => null,
-                ]
+                ],
             ],
-            'notes' => $channel->notes->take(2)
+            'notes' => $channel->notes->take(2),
         ];
     }
+
     public function setUnicastOutput(object $channel, string $type): array
     {
         return [
-            'logo' => is_null($channel->$type->channel->logo) ? null : config('app.url') . '/' . str_replace('public', 'storage', $channel->$type->channel->logo),
+            'logo' => is_null($channel->$type->channel->logo) ? null : config('app.url').'/'.str_replace('public', 'storage', $channel->$type->channel->logo),
             'kategorie' => $channel->$type->channel->channelCategory->name,
             'chunkStoreId' => null,
             'nanguChannel' => null,
             'tags' => null,
             'channel_packages' => implode($this->get_packages(json_decode($channel->$type->channel->geniustv_channel_packages_id))),
-            'devices' =>  [
+            'devices' => [
                 'source' => [
                     'url' => null,
                     'name' => null,
@@ -105,9 +105,9 @@ class ApiChannelResource extends JsonResource
                     'template' => null,
                     'deviceVendor' => null,
                     'category' => null,
-                ]
+                ],
             ],
-            'notes' => $channel->$type->notes->take(2)
+            'notes' => $channel->$type->notes->take(2),
         ];
     }
 }

@@ -2,10 +2,9 @@
 
 namespace App\Livewire\Iptv\FlowEye\Menu;
 
-use Livewire\Component;
-use Livewire\Attributes\On;
-use App\Livewire\Iptv\Sftps\Factory;
 use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class FlowEyeMenuIconWithAlertComponent extends Component
 {

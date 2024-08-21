@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Iptv\Cards;
 
-use Livewire\Component;
 use App\Models\SatelitCard;
-use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class DeleteSatelitCardComponent extends Component
 {

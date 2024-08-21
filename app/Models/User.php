@@ -40,7 +40,7 @@ class User extends Authenticatable
         'notify_if_added_new_event',
         'notify_if_upload_new_banner',
         'notify_if_channel_was_added_to_promo',
-        'iptv_monitoring_window'
+        'iptv_monitoring_window',
     ];
 
     /**
@@ -74,7 +74,7 @@ class User extends Authenticatable
     protected function password(): Attribute
     {
         return Attribute::make(
-            set: fn($value) => bcrypt($value)
+            set: fn ($value) => bcrypt($value)
         );
     }
 
@@ -116,8 +116,8 @@ class User extends Authenticatable
     public function scopeSearch(Builder $query, string $search): void
     {
         $query
-            ->where('first_name', 'like', '%' . $search . '%')
-            ->orWhere('last_name', 'like', '%' . $search . '%')
-            ->orWhere('email', 'like', '%' . $search . '%');
+            ->where('first_name', 'like', '%'.$search.'%')
+            ->orWhere('last_name', 'like', '%'.$search.'%')
+            ->orWhere('email', 'like', '%'.$search.'%');
     }
 }

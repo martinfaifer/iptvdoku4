@@ -10,7 +10,7 @@ class ConnectService
         'get_server' => 'server/%server_id%?client_id=%client_id%&api_key=%api_key%',
         'update_server' => [
             'method' => 'PUT',
-            'path' => 'server/%server_id%?client_id=%client_id%&api_key=%api_key%'
+            'path' => 'server/%server_id%?client_id=%client_id%&api_key=%api_key%',
         ],
         'incoming_streams' => 'server/%server_id%/mpegts/incoming?client_id=%client_id%&api_key=%api_key%',
         'incoming_streams_pause' => 'server/%server_id%/mpegts/incoming/%stream_id%/pause?client_id=%client_id%&api_key=%api_key%',
@@ -26,10 +26,10 @@ class ConnectService
     {
         if (is_null($endpoint) || is_null($serverId)) {
             $response = Http::timeout(30)
-                ->get(config('services.api.2.nimble.url') . 'server?client_id=' . config('services.api.2.nimble.client_id') . '&api_key=' . config('services.api.2.nimble.api_key'));
+                ->get(config('services.api.2.nimble.url').'server?client_id='.config('services.api.2.nimble.client_id').'&api_key='.config('services.api.2.nimble.api_key'));
         } else {
             $response = Http::timeout(30)->get(
-                config('services.api.2.nimble.url') . str_replace(['%server_id%', '%stream_id%', '%client_id%', '%api_key%'], [$serverId, $streamId, config('services.api.2.nimble.client_id'), config('services.api.2.nimble.api_key')], $this->endpoints[$endpoint])
+                config('services.api.2.nimble.url').str_replace(['%server_id%', '%stream_id%', '%client_id%', '%api_key%'], [$serverId, $streamId, config('services.api.2.nimble.client_id'), config('services.api.2.nimble.api_key')], $this->endpoints[$endpoint])
             );
             // $response = Http::timeout(30)
             //     ->get(config('services.api.2.nimble.url') .  $serverId . $this->endpoints[$endpoint] . '?client_id=' . config('services.api.2.nimble.client_id') . '&api_key=' . config('services.api.2.nimble.api_key'));

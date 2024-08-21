@@ -2,24 +2,25 @@
 
 namespace App\Jobs;
 
-use App\Models\Slack;
-use App\Models\IptvDohledUrl;
-use Illuminate\Bus\Queueable;
+use App\Actions\Slack\SendSlackNotificationAction;
 use App\Mail\SendNotificationEmail;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Models\IptvDohledUrl;
 use App\Models\IptvDohledUrlsNotification;
+use App\Models\Slack;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Actions\Slack\SendSlackNotificationAction;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 
 class SendAlertForStreamWhichHasHighBanwidth implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected int $cacheTimeout = 180; // this is seconds
+
     /**
      * Create a new job instance.
      */
@@ -34,7 +35,7 @@ class SendAlertForStreamWhichHasHighBanwidth implements ShouldQueue
     public function handle(): void
     {
         $monitoredStream = IptvDohledUrl::where('stream_url', $this->stream_url)->first();
-        if (!$monitoredStream || !$monitoredStream->can_notify) {
+        if (! $monitoredStream || ! $monitoredStream->can_notify) {
             return;
         }
 
@@ -43,38 +44,38 @@ class SendAlertForStreamWhichHasHighBanwidth implements ShouldQueue
         if ($customNotifications) {
             foreach (IptvDohledUrlsNotification::where('iptv_dohled_url_id', $monitoredStream->id)->get() as $notification) {
                 // check if is filled slack_channel
-                if (!blank($notification->slack_channel)) {
-                    if (!Cache::has('sended_slack_alert_high_banwidth_' . $this->stream_url . $notification->slack_channel)) {
+                if (! blank($notification->slack_channel)) {
+                    if (! Cache::has('sended_slack_alert_high_banwidth_'.$this->stream_url.$notification->slack_channel)) {
                         (new SendSlackNotificationAction(
-                            text: "Stream  " . $this->stream_url . "má datový tok " . implode(", ", $this->highBanwidt) . " který je vyšší než povolený maximální " . $this->maxAllowedBanwidth,
+                            text: 'Stream  '.$this->stream_url.'má datový tok '.implode(', ', $this->highBanwidt).' který je vyšší než povolený maximální '.$this->maxAllowedBanwidth,
                             url: $notification->slack_channel
                         ))();
 
-                        Cache::put('sended_slack_alert_high_banwidth_' . $this->stream_url . $notification->slack_channel, [], $this->cacheTimeout);
+                        Cache::put('sended_slack_alert_high_banwidth_'.$this->stream_url.$notification->slack_channel, [], $this->cacheTimeout);
                     }
                 }
                 // check if is filled email
-                if (!blank($notification->email)) {
-                    if (!Cache::has('sended_email_alert_high_banwidth_' .  $this->stream_url . $notification->email)) {
+                if (! blank($notification->email)) {
+                    if (! Cache::has('sended_email_alert_high_banwidth_'.$this->stream_url.$notification->email)) {
                         // email class need to be here
                         Mail::to($notification->email)->queue(new SendNotificationEmail(
-                            emailSubject: "Stream " . $this->stream_url . " má vyšší datový tok",
-                            emailContent: "Stream  " . $this->stream_url . " má datový tok " . implode(", ", $this->highBanwidt) . " který je vyšší než povolený maximální " . round($this->maxAllowedBanwidth, 1),
+                            emailSubject: 'Stream '.$this->stream_url.' má vyšší datový tok',
+                            emailContent: 'Stream  '.$this->stream_url.' má datový tok '.implode(', ', $this->highBanwidt).' který je vyšší než povolený maximální '.round($this->maxAllowedBanwidth, 1),
                         ));
-                        Cache::put('sended_email_alert_high_banwidth_' .  $this->stream_url . $notification->email, [], $this->cacheTimeout);
+                        Cache::put('sended_email_alert_high_banwidth_'.$this->stream_url.$notification->email, [], $this->cacheTimeout);
                     }
                 }
             }
         } else {
             // send to default channel
             if ($defaultSlackChannel) {
-                if (!Cache::has('sended_slack_alert_high_banwidth_' . $this->stream_url . $defaultSlackChannel->url)) {
+                if (! Cache::has('sended_slack_alert_high_banwidth_'.$this->stream_url.$defaultSlackChannel->url)) {
                     (new SendSlackNotificationAction(
-                        text: "Stream  " . $this->stream_url . "má datový tok " . implode(", ", $this->highBanwidt) . " který je vyšší než povolený maximální " . $this->maxAllowedBanwidth,
+                        text: 'Stream  '.$this->stream_url.'má datový tok '.implode(', ', $this->highBanwidt).' který je vyšší než povolený maximální '.$this->maxAllowedBanwidth,
                         url: $defaultSlackChannel->url
                     ))();
 
-                    Cache::put('sended_slack_alert_high_banwidth_' . $this->stream_url . $defaultSlackChannel->url, [], $this->cacheTimeout);
+                    Cache::put('sended_slack_alert_high_banwidth_'.$this->stream_url.$defaultSlackChannel->url, [], $this->cacheTimeout);
                 }
             }
         }

@@ -9,17 +9,17 @@ class AnalyzeStreamAction
 {
     public function __construct(public string $stream)
     {
-        if (!str_contains($stream, AnalyzeStream::MULTICAST_PORT)) {
-            $this->stream = $stream . AnalyzeStream::MULTICAST_PORT;
+        if (! str_contains($stream, AnalyzeStream::MULTICAST_PORT)) {
+            $this->stream = $stream.AnalyzeStream::MULTICAST_PORT;
         }
     }
 
     public function __invoke(): mixed
     {
         $connection = (new ConnectService(
-            endpointType: "analyze",
+            endpointType: 'analyze',
             formData: [
-                'stream_url' => $this->stream
+                'stream_url' => $this->stream,
             ]
         ));
 
@@ -27,7 +27,7 @@ class AnalyzeStreamAction
 
         AnalyzeStream::create([
             'stream_url' => $this->stream,
-            'analyze' => $response
+            'analyze' => $response,
         ]);
 
         return $response;

@@ -17,7 +17,7 @@ class EpgConnectService
     public function connect(?string $query = null, string $cacheKey = 'channelEpgIds'): mixed
     {
         if (! is_null($query)) {
-            $this->url = $this->url . $query;
+            $this->url = $this->url.$query;
         }
 
         $httpResponse = Http::timeout(60)->get($this->url);
@@ -73,7 +73,7 @@ class EpgConnectService
 
     public function get_channel_epg(string|int $epgId, string $fromDate, string $toDate): mixed
     {
-        $this->url = str_replace('channel', 'grapesc', $this->url) . "&channel=$epgId&date_from=$fromDate&date_to=$toDate";
+        $this->url = str_replace('channel', 'grapesc', $this->url)."&channel=$epgId&date_from=$fromDate&date_to=$toDate";
         $httpResponse = Http::get($this->url);
         if ($httpResponse->ok()) {
 

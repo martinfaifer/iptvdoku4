@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use App\Observers\SatelitCardObserver;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Query\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[ObservedBy(SatelitCardObserver::class)]
 class SatelitCard extends Model
@@ -31,6 +31,6 @@ class SatelitCard extends Model
 
     public function scopeSearch(Builder $query, string $search = ''): void
     {
-        $query->where('name', 'like', '%' . $search . '%');
+        $query->where('name', 'like', '%'.$search.'%');
     }
 }

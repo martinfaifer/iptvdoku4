@@ -9,14 +9,13 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ChannelsUsageExport implements FromArray, WithHeadings
 {
-
     public function headings(): array
     {
         return [
             'kanál',
             'minulý měsíc',
             'tento měsíc',
-            'průměr'
+            'průměr',
         ];
     }
 
@@ -42,7 +41,7 @@ class ChannelsUsageExport implements FromArray, WithHeadings
                 'name' => $channel->name,
                 'last_month' => $lastMonthUsage,
                 'this_month' => $thisMonthUsage,
-                'avg' => ((int)$thisMonthUsage + (int)$lastMonthUsage) / 2,
+                'avg' => ((int) $thisMonthUsage + (int) $lastMonthUsage) / 2,
             ];
         }
 

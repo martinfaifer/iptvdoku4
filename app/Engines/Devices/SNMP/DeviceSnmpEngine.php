@@ -32,7 +32,7 @@ class DeviceSnmpEngine
         }
     }
 
-    public function get(string|int  $oid): string
+    public function get(string|int $oid): string
     {
         try {
             return $this->snmp->getValue($oid);

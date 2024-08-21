@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Wiki\Menu;
 
-use Livewire\Component;
-use Livewire\Attributes\On;
 use App\Models\WikiCategory;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class WikiMenuComponent extends Component
 {

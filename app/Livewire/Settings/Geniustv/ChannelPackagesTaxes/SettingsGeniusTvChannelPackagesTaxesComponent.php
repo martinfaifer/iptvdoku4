@@ -2,17 +2,17 @@
 
 namespace App\Livewire\Settings\Geniustv\ChannelPackagesTaxes;
 
-use App\Models\Channel;
-use Livewire\Component;
-use App\Models\Currency;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\View\Factory;
-use App\Models\GeniusTVchannelPackagesTax;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsGeniusTvChannelPackagesTaxesForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvChannelPackagesTaxesForm;
+use App\Models\Channel;
+use App\Models\Currency;
+use App\Models\GeniusTVchannelPackagesTax;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsGeniusTvChannelPackagesTaxesComponent extends Component
 {

@@ -2,6 +2,6 @@
 
 namespace App\Exports;
 
-
-
-class H264 {}
+class H264
+{
+}

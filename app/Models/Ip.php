@@ -26,6 +26,6 @@ class Ip extends Model
 
     public function scopeSearch(Builder $query, string $search): void
     {
-        $query->where('ip_address', 'like', '%' . $search . '%');
+        $query->where('ip_address', 'like', '%'.$search.'%');
     }
 }

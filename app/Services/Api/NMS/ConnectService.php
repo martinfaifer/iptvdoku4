@@ -27,7 +27,7 @@ class ConnectService
                 config('services.api.0.nms.username'),
                 config('services.api.0.nms.password')
             )
-            ->get(config('services.api.0.nms.url') . str_replace('%ip%', $this->device->ip, $this->endPoints[$this->endPoint]));
+            ->get(config('services.api.0.nms.url').str_replace('%ip%', $this->device->ip, $this->endPoints[$this->endPoint]));
 
         if ($httpResponse->ok()) {
             $this->storeData($httpResponse->json());
@@ -36,6 +36,6 @@ class ConnectService
 
     public function storeData(mixed $httpResponse): void
     {
-        Cache::add('nms_' . $this->device->id, $httpResponse['data'], 3600);
+        Cache::add('nms_'.$this->device->id, $httpResponse['data'], 3600);
     }
 }

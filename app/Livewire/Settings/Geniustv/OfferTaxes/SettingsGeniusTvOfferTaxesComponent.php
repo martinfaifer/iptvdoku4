@@ -2,23 +2,21 @@
 
 namespace App\Livewire\Settings\Geniustv\OfferTaxes;
 
-use App\Models\Channel;
-use Livewire\Component;
-use App\Models\Currency;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Contracts\View\Factory;
-use App\Models\GeniusTVChannelsOffersTax;
-use App\Traits\Livewire\NotificationTrait;
-use App\Traits\Channels\GetChannelFromCacheTrait;
 use App\Livewire\Forms\CreateSettingsGeniusTvOfferTaxesForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvOfferTaxesForm;
+use App\Models\Currency;
+use App\Models\GeniusTVChannelsOffersTax;
+use App\Traits\Channels\GetChannelFromCacheTrait;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsGeniusTvOfferTaxesComponent extends Component
 {
-    use NotificationTrait, WithPagination, GetChannelFromCacheTrait;
+    use GetChannelFromCacheTrait, NotificationTrait, WithPagination;
 
     public string $query = '';
 

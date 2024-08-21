@@ -2,15 +2,16 @@
 
 namespace App\Traits\Loger;
 
-use App\Models\Device;
 use App\Models\Channel;
+use App\Models\Device;
 use App\Models\SatelitCard;
 
 trait ShowCorrectNameOfItemTrait
 {
-    public function show_log_item(string $item): string|null
+    public function show_log_item(string $item): ?string
     {
-        $explodedItem = explode(":", $item);
+        $explodedItem = explode(':', $item);
+
         return match ($explodedItem[0]) {
             'device' => Device::find($explodedItem[1])?->name,
             'channel' => Channel::find($explodedItem[1])?->name,

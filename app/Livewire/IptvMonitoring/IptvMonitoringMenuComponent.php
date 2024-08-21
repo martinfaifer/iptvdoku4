@@ -2,17 +2,17 @@
 
 namespace App\Livewire\IptvMonitoring;
 
-use Livewire\Component;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Component;
 
 class IptvMonitoringMenuComponent extends Component
 {
-
     public int $numberOfAlerts = 0;
+
     public function mount(): void
     {
-        if (!Cache::has('iptv_dohled_all_alerts')) {
+        if (! Cache::has('iptv_dohled_all_alerts')) {
             $this->numberOfAlerts = 0;
         } else {
             $this->numberOfAlerts = count(Cache::get('iptv_dohled_all_alerts')['data']);

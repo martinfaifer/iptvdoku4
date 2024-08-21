@@ -3,10 +3,10 @@
 namespace App\Livewire\Iptv\Devices;
 
 use App\Models\Device;
-use Livewire\Component;
-use Illuminate\Support\Facades\Cache;
 use App\Services\Api\Nimble\ConnectService;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Component;
 
 class NimbleApiComponent extends Component
 {
@@ -30,11 +30,11 @@ class NimbleApiComponent extends Component
 
     public function mount(): void
     {
-        $this->incomingStreams = Cache::get('nimble_' . $this->device->id . '_incoming_streams');
+        $this->incomingStreams = Cache::get('nimble_'.$this->device->id.'_incoming_streams');
         // dd($this->incomingStreams);
-        $this->outcomingStreams = Cache::get('nimble_' . $this->device->id . '_outgoing_streams');
+        $this->outcomingStreams = Cache::get('nimble_'.$this->device->id.'_outgoing_streams');
         // dd($this->outcomingStreams, $this->incomingStreams);
-        $this->deviceNimbleCachedData = Cache::get('nimble_' . $this->device->id);
+        $this->deviceNimbleCachedData = Cache::get('nimble_'.$this->device->id);
     }
 
     public function openEditServerApiModal(): void
@@ -55,38 +55,37 @@ class NimbleApiComponent extends Component
         $this->detailModal = false;
     }
 
-
     public function startIncomingStream(string|int $streamId): mixed
     {
         (new ConnectService())->connect(
-            endpoint: "incoming_streams_resume",
+            endpoint: 'incoming_streams_resume',
             serverId: $this->deviceNimbleCachedData['nimble_id'],
             streamId: $streamId
         );
 
-        return $this->success_alert("Akce odeslána na server");
+        return $this->success_alert('Akce odeslána na server');
     }
 
     public function stopIncomingStream(string|int $streamId): mixed
     {
         (new ConnectService())->connect(
-            endpoint: "incoming_streams_pause",
+            endpoint: 'incoming_streams_pause',
             serverId: $this->deviceNimbleCachedData['nimble_id'],
             streamId: $streamId
         );
 
-        return $this->success_alert("Akce odeslána na server");
+        return $this->success_alert('Akce odeslána na server');
     }
 
     public function restartStream(string|int $streamId): mixed
     {
         (new ConnectService())->connect(
-            endpoint: "incoming_streams_restart",
+            endpoint: 'incoming_streams_restart',
             serverId: $this->deviceNimbleCachedData['nimble_id'],
             streamId: $streamId
         );
 
-        return $this->success_alert("Akce odeslána na server");
+        return $this->success_alert('Akce odeslána na server');
     }
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory

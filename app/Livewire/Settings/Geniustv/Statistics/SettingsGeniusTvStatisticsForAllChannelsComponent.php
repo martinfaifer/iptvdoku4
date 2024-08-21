@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Settings\Geniustv\Statistics;
 
-use App\Models\Channel;
-use Livewire\Component;
-use App\Models\GeniusTvChart;
 use App\Exports\ChannelsUsageExport;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Channel;
+use App\Models\GeniusTvChart;
 use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SettingsGeniusTvStatisticsForAllChannelsComponent extends Component
 {

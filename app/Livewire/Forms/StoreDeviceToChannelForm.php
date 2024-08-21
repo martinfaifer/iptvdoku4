@@ -11,11 +11,11 @@ class StoreDeviceToChannelForm extends Form
 {
     public ?Channel $channel;
 
-    public string|null $channelType = null;
+    public ?string $channelType = null;
 
     #[Validate('required', message: 'Vyberte zařízení')]
     #[Validate('exists:devices,id', message: 'Zařízení neexistuje v DB')]
-    public int|null $deviceId = null;
+    public ?int $deviceId = null;
 
     #[Validate('required', message: 'Hodnota musí být vyplněna true / false')]
     #[Validate('boolean', message: 'Neplatný formát')]

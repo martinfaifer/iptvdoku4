@@ -2,14 +2,14 @@
 
 namespace App\Livewire;
 
-use App\Models\Contact;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use App\Livewire\Forms\UpdateContact;
-use Illuminate\Contracts\View\Factory;
 use App\Livewire\Forms\StoreContactForm;
+use App\Livewire\Forms\UpdateContact;
+use App\Models\Contact;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class ContactComponent extends Component
 {

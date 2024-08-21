@@ -35,7 +35,7 @@ class StoreMulticastChannel extends Component
     {
         $this->form->store();
         $this->closeDialog();
-        $this->dispatch('update_multicasts.' . $this->channel->id);
+        $this->dispatch('update_multicasts.'.$this->channel->id);
 
         return $this->success_alert('Přidáno');
     }

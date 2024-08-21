@@ -23,7 +23,7 @@ class GeniusTVchannelPackagesTax extends Model
 
     public function scopeSearch(Builder $query, string $search = ''): void
     {
-        if (!blank($search)) {
+        if (! blank($search)) {
             $query->whereJsonContains('channels_id', Channel::search($search)->first()?->id);
         }
     }

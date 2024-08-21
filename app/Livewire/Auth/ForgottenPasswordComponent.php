@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Auth;
 
-use App\Models\User;
-use Livewire\Component;
-use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Contracts\View\Factory;
 use App\Mail\SendForgottenPasswordMail;
+use App\Models\User;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\Users\GeneratePasswordTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Mail;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class ForgottenPasswordComponent extends Component
 {

@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
-use Illuminate\Bus\Queueable;
+use App\Actions\Devices\GetNimbleDataAction;
 use App\Events\BroadcastAlertEvent;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Actions\Devices\GetNimbleDataAction;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class GetNimbleDataJob implements ShouldQueue
 {

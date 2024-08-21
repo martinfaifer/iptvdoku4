@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Settings\Geniustv;
 
-use Livewire\Component;
-use Livewire\WithPagination;
-use App\Models\GeniusTvChannelPackage;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateGeniusTvTvPackageForm;
 use App\Livewire\Forms\UpdateGeniusTvTvPackageForm;
+use App\Models\GeniusTvChannelPackage;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class TvChannelPackagesComponent extends Component
 {

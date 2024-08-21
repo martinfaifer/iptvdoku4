@@ -2,8 +2,8 @@
 
 namespace App\Traits\Tags;
 
-use App\Models\Tag;
 use App\Models\NanguIspTagToChannelPackage;
+use App\Models\Tag;
 
 trait GetNanguIspTagsToChannelPackagesTrait
 {

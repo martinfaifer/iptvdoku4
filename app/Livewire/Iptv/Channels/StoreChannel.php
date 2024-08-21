@@ -3,18 +3,17 @@
 namespace App\Livewire\Iptv\Channels;
 
 use App\Models\Channel;
+use App\Models\GeniusTvChannelPackage;
+use App\Traits\Channels\GetChannelsCategoriesFromCacheTrait;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Models\ChannelCategory;
-use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\Cache;
-use App\Models\GeniusTvChannelPackage;
-use App\Traits\Livewire\NotificationTrait;
-use App\Traits\Channels\GetChannelsCategoriesFromCacheTrait;
 
 class StoreChannel extends Component
 {
-    use NotificationTrait, WithFileUploads, GetChannelsCategoriesFromCacheTrait;
+    use GetChannelsCategoriesFromCacheTrait, NotificationTrait, WithFileUploads;
 
     #[Validate('required', message: 'Vyplňte název kanálu')]
     #[Validate('max:250', message: 'Maxilnálně 250 znaků')]
@@ -79,7 +78,7 @@ class StoreChannel extends Component
     public function store(): mixed
     {
         $this->validate();
-        $qualityToChannel = "";
+        $qualityToChannel = '';
         if (! is_null($this->logo)) {
             $path = $this->logo->store(path: 'public/Logos');
         }
@@ -108,7 +107,7 @@ class StoreChannel extends Component
         // $this->dispatch('update_channels_sidebar');
         // $this->closeDialog();
 
-        $this->redirect('/channels/' . $channel->id . '/multicast', true);
+        $this->redirect('/channels/'.$channel->id.'/multicast', true);
 
         return $this->success_alert('Kanál přidán');
     }

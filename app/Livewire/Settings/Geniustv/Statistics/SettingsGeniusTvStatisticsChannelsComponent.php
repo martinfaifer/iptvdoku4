@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Settings\Geniustv\Statistics;
 
-use Livewire\Component;
 use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class SettingsGeniusTvStatisticsChannelsComponent extends Component
 {

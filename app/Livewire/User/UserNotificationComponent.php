@@ -2,11 +2,11 @@
 
 namespace App\Livewire\User;
 
-use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\UserNotificationForm;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class UserNotificationComponent extends Component
 {

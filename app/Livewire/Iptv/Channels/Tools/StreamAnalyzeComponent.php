@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Iptv\Channels\Tools;
 
-use App\Models\Channel;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use App\Models\AnalyzeStream;
 use App\Actions\Tools\AnalyzeStreamAction;
-use App\Traits\Livewire\NotificationTrait;
+use App\Models\AnalyzeStream;
+use App\Models\Channel;
 use App\Traits\Channels\GetAllChannelStreamsTrait;
+use App\Traits\Livewire\NotificationTrait;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class StreamAnalyzeComponent extends Component
 {
@@ -22,6 +22,7 @@ class StreamAnalyzeComponent extends Component
     public array $sortBy = ['column' => 'created_at', 'direction' => 'desc'];
 
     public mixed $analyzed;
+
     public bool $analyzedModal = false;
 
     public function mount(): void
@@ -33,8 +34,8 @@ class StreamAnalyzeComponent extends Component
     {
         $analyzedStreams = [];
         foreach ($this->streams as $stream) {
-            if (!str_contains($stream, AnalyzeStream::MULTICAST_PORT)) {
-                $stream = $stream . AnalyzeStream::MULTICAST_PORT;
+            if (! str_contains($stream, AnalyzeStream::MULTICAST_PORT)) {
+                $stream = $stream.AnalyzeStream::MULTICAST_PORT;
             }
             if (AnalyzeStream::where('stream_url', $stream)->first()) {
                 foreach (AnalyzeStream::where('stream_url', $stream)->orderBy(...array_values($this->sortBy))->take(5)->get()->toArray() as $analyzed) {
@@ -50,16 +51,18 @@ class StreamAnalyzeComponent extends Component
     {
         $response = (new AnalyzeStreamAction($stream))();
         if (blank($response)) {
-            return $this->error_alert("Nepodařilo se provést analýzu");
+            return $this->error_alert('Nepodařilo se provést analýzu');
         }
         $this->dispatch('refresh_analyzed_streams');
         $this->openAnalyzeModal(json_encode($response));
-        return $this->success_alert("Analýza vytvořena");
+
+        return $this->success_alert('Analýza vytvořena');
     }
 
     public function openAnalyzeModal(mixed $analyzeStream): mixed
     {
         $this->analyzed = json_decode($analyzeStream, true);
+
         return $this->analyzedModal = true;
     }
 
@@ -72,6 +75,7 @@ class StreamAnalyzeComponent extends Component
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         $this->streams = $this->getStreams($this->channel);
+
         // $this->analyzedStreams = $this->getAnalyzedStreams();
         return view('livewire.iptv.channels.tools.stream-analyze-component', [
             'headers' => [
@@ -80,7 +84,7 @@ class StreamAnalyzeComponent extends Component
                 // ['key' => 'status', 'label' => 'Status', 'class' => 'text-white/80'],
                 ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
             ],
-            'analyzedStreams' => $this->getAnalyzedStreams()
+            'analyzedStreams' => $this->getAnalyzedStreams(),
         ]);
     }
 }

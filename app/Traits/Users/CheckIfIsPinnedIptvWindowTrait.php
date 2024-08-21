@@ -9,6 +9,7 @@ trait CheckIfIsPinnedIptvWindowTrait
         if ($iptv_monitoring_window == 'closed') {
             return false;
         }
+
         return true;
     }
 
@@ -17,6 +18,7 @@ trait CheckIfIsPinnedIptvWindowTrait
         if ($reponse == true) {
             return 'maximaze';
         }
+
         return 'closed';
     }
 }

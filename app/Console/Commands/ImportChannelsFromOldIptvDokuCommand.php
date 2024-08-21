@@ -34,7 +34,7 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
     public function handle(): void
     {
         $responseJson = Http::withBasicAuth(config('services.api.5.old_iptv_doku.user'), config('services.api.5.old_iptv_doku.password'))
-            ->get(config('services.api.5.old_iptv_doku.url') . '/api/v1/channels')->json();
+            ->get(config('services.api.5.old_iptv_doku.url').'/api/v1/channels')->json();
 
         foreach ($responseJson['data'] as $channel) {
             $path = null;
@@ -42,7 +42,7 @@ class ImportChannelsFromOldIptvDokuCommand extends Command
                 $logo = str_replace('//', '/', $channel['logo']);
                 $explodedLogo = explode('/', $logo);
                 if (array_key_exists(4, $explodedLogo)) {
-                    $path = 'public/Logos/' . $explodedLogo[4];
+                    $path = 'public/Logos/'.$explodedLogo[4];
                 }
             }
 

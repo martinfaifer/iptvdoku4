@@ -2,15 +2,15 @@
 
 namespace App\Livewire\Settings\Tags;
 
-use App\Models\Tag;
-use Livewire\Component;
 use App\Models\CssColor;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use Livewire\Attributes\Validate;
-use Illuminate\Contracts\View\Factory;
+use App\Models\Tag;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsTagComponent extends Component
 {

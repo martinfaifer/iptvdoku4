@@ -14,8 +14,8 @@ class EventObserver
     public function created(Event $event): void
     {
         SendEmailNotificationJob::dispatch(
-            'Byla vytvořena nová událost ' . $event->label,
-            'Uživatel ' . Auth::user()->email . 'vytvořil událost ' . $event->label,
+            'Byla vytvořena nová událost '.$event->label,
+            'Uživatel '.Auth::user()->email.'vytvořil událost '.$event->label,
             Auth::user()->email,
             'notify_if_added_new_event'
         );

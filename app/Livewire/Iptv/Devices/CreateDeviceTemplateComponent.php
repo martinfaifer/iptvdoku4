@@ -94,14 +94,15 @@ class CreateDeviceTemplateComponent extends Component
     {
         $template = DeviceTemplate::find($this->templateId);
         if (blank($template)) {
-            $this->redirect('/devices/' . $this->device->id, true);
+            $this->redirect('/devices/'.$this->device->id, true);
+
             return $this->error_alert('Šablona nenalezena');
         }
         $this->device->update([
             'template' => $template->template,  // @phpstan-ignore-line
         ]);
 
-        $this->redirect('/devices/' . $this->device->id, true);
+        $this->redirect('/devices/'.$this->device->id, true);
 
         return $this->success_alert('Přidána šablona');
     }
@@ -141,7 +142,7 @@ class CreateDeviceTemplateComponent extends Component
         );
 
         $this->storeDrawer = false;
-        $this->redirect('/devices/' . $this->device->id, true);
+        $this->redirect('/devices/'.$this->device->id, true);
 
         return $engineResponse == true ? $this->success_alert('Šablona vytvořena') : $this->error_alert('Nepodařilo se vytvořit');
     }

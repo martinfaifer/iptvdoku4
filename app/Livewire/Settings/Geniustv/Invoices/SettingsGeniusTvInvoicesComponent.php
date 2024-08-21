@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Settings\Geniustv\Invoices;
 
-use Livewire\Component;
-use Livewire\WithPagination;
 use App\Models\NanguIspInvoice;
 use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsGeniusTvInvoicesComponent extends Component
 {
@@ -26,9 +26,9 @@ class SettingsGeniusTvInvoicesComponent extends Component
         $this->selectedInvoiceMonth = now()->month;
         $this->selectedInvoiceYear = now()->year;
         if ($this->selectedInvoiceMonth < 10) {
-            $this->selectedDate = $this->selectedInvoiceYear . '-0' . $this->selectedInvoiceMonth;
+            $this->selectedDate = $this->selectedInvoiceYear.'-0'.$this->selectedInvoiceMonth;
         } else {
-            $this->selectedDate = $this->selectedInvoiceYear . '-' . $this->selectedInvoiceMonth;
+            $this->selectedDate = $this->selectedInvoiceYear.'-'.$this->selectedInvoiceMonth;
         }
     }
 

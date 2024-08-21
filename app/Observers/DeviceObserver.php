@@ -44,8 +44,8 @@ class DeviceObserver
         );
 
         SendEmailNotificationJob::dispatch(
-            'Bylo přidáno zařízení ' . $device->name,
-            'Uživatel ' . Auth::user()->email . ' přidal zařízení ' . $device->name,
+            'Bylo přidáno zařízení '.$device->name,
+            'Uživatel '.Auth::user()->email.' přidal zařízení '.$device->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );
@@ -81,8 +81,8 @@ class DeviceObserver
             );
 
             SendEmailNotificationJob::dispatch(
-                'Bylo upraveno zařízení ' . $device->name,
-                'Uživatel ' . Auth::user()->email . ' upravil zařízení ' . $device->name,
+                'Bylo upraveno zařízení '.$device->name,
+                'Uživatel '.Auth::user()->email.' upravil zařízení '.$device->name,
                 Auth::user()->email,
                 'notify_if_channel_change'
             );
@@ -98,7 +98,7 @@ class DeviceObserver
     public function deleted(Device $device): void
     {
         // delete charts
-        Chart::where('item', 'like', '%device:' . $device->id . ':%')->delete();
+        Chart::where('item', 'like', '%device:'.$device->id.':%')->delete();
         // delete alerts
         Alert::where('type', 'gpu_check_failed')->where('item_id', $device->id)->delete();
         Alert::where('type', 'gpu_problem')->where('item_id', $device->id)->delete();
@@ -111,8 +111,8 @@ class DeviceObserver
         $this->cache_devices_for_menu();
 
         SendEmailNotificationJob::dispatch(
-            'Bylo odebráno zařízení ' . $device->name,
-            'Uživatel ' . Auth::user()->email . ' oderbal zařízení ' . $device->name,
+            'Bylo odebráno zařízení '.$device->name,
+            'Uživatel '.Auth::user()->email.' oderbal zařízení '.$device->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );

@@ -2,24 +2,25 @@
 
 namespace App\Livewire\Iptv\Cards;
 
-use Livewire\Component;
+use App\Livewire\Forms\StoreSatelitCardContentForm;
 use App\Models\SatelitCard;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use Livewire\WithFileUploads;
 use App\Models\SatelitCardContent;
+use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Storage;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Database\Eloquent\Collection;
-use App\Livewire\Forms\StoreSatelitCardContentForm;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class SatelitCardContentsComponent extends Component
 {
-    use WithFileUploads, NotificationTrait, WithPagination;
+    use NotificationTrait, WithFileUploads, WithPagination;
 
     public SatelitCard $satCard;
+
     public StoreSatelitCardContentForm $storeForm;
+
     public bool $storeModal = false;
 
     public function openStoreModal(): void
@@ -32,16 +33,17 @@ class SatelitCardContentsComponent extends Component
         $this->storeForm->create($this->satCard->id);
         $this->dispatch('refresh_satelit_card_content');
         $this->storeModal = false;
-        return $this->success_alert("Nahráno");
-    }
 
+        return $this->success_alert('Nahráno');
+    }
 
     public function destroy(SatelitCardContent $file): mixed
     {
         Storage::delete($file->path);
         $file->delete();
         $this->dispatch('refresh_satelit_card_content');
-        return $this->success_alert("Soubor odebrán");
+
+        return $this->success_alert('Soubor odebrán');
     }
 
     public function closeDialog(): void

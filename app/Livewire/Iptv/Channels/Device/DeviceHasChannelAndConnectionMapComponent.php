@@ -3,11 +3,11 @@
 namespace App\Livewire\Iptv\Channels\Device;
 
 use App\Models\Channel;
-use Livewire\Component;
-use Livewire\Attributes\On;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\View\Factory;
 use App\Traits\Devices\DeviceHasChannelsTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class DeviceHasChannelAndConnectionMapComponent extends Component
 {
@@ -38,19 +38,19 @@ class DeviceHasChannelAndConnectionMapComponent extends Component
     {
         if ($this->isBackup == true) {
             $this->devices = $this->devices_belongs_to_channel_type(
-                channelWithType: $this->channelType . ':' . $this->channel->id . ':backup'
+                channelWithType: $this->channelType.':'.$this->channel->id.':backup'
             );
 
             $this->schemaDevices = $this->devices_belongs_to_channel_type(
-                channelWithType: 'multicast:' . $this->channel->id . ':backup'
+                channelWithType: 'multicast:'.$this->channel->id.':backup'
             );
         } else {
             $this->devices = $this->devices_belongs_to_channel_type(
-                channelWithType: $this->channelType . ':' . $this->channel->id
+                channelWithType: $this->channelType.':'.$this->channel->id
             );
 
             $this->schemaDevices = $this->devices_belongs_to_channel_type(
-                channelWithType: 'multicast:' . $this->channel->id
+                channelWithType: 'multicast:'.$this->channel->id
             );
         }
 

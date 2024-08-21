@@ -2,17 +2,16 @@
 
 namespace App\Livewire\Iptv\Devices;
 
-use Livewire\Component;
-use App\Models\DeviceSnmp;
-use App\Models\DeviceVendor;
-use App\Models\DeviceCategory;
 use App\Livewire\Forms\StoreDeviceForm;
-use App\Traits\Livewire\NotificationTrait;
+use App\Models\DeviceCategory;
+use App\Models\DeviceSnmp;
 use App\Traits\Devices\GetDeviceVendorsTrait;
+use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 class StoreDeviceComponent extends Component
 {
-    use NotificationTrait, GetDeviceVendorsTrait;
+    use GetDeviceVendorsTrait, NotificationTrait;
 
     public StoreDeviceForm $form;
 
@@ -50,7 +49,7 @@ class StoreDeviceComponent extends Component
 
         $this->dispatch('update_devices_menu');
 
-        $this->redirect('/devices/' . $device->id, true);
+        $this->redirect('/devices/'.$device->id, true);
 
         return $this->success_alert('Zařízení přidáno');
     }

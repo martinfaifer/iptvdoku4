@@ -2,8 +2,8 @@
 
 namespace App\Livewire\User\Menu;
 
-use Livewire\Component;
 use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class UserMenuComponent extends Component
 {

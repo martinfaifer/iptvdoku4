@@ -2,18 +2,20 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Livewire\Attributes\On;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Contracts\View\Factory;
 use App\Traits\Devices\CacheDevicesTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class NavbarStreamsNotificationComponent extends Component
 {
     use CacheDevicesTrait;
 
     public array $iptv_dohled_alerts = [];
+
     public array $othersAlerts = [];
+
     public bool $alertDrawer = false;
 
     public function mount(): void
@@ -40,7 +42,7 @@ class NavbarStreamsNotificationComponent extends Component
     public function getOthersAlerts(): void
     {
         $this->othersAlerts = [
-            'devices' => $this->get_only_offline_devices()
+            'devices' => $this->get_only_offline_devices(),
         ];
     }
 

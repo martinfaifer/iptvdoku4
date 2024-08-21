@@ -2,16 +2,16 @@
 
 namespace App\Livewire\Settings\Geniustv\StaticTaxes;
 
-use Livewire\Component;
-use App\Models\Currency;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use App\Models\GeniusTVStaticTax;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Forms\CreateSettingsGeniusTvStaticTaxesForm;
 use App\Livewire\Forms\UpdateSettingsGeniusTvStaticTaxesForm;
+use App\Models\Currency;
+use App\Models\GeniusTVStaticTax;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsGeniusTvStaticTaxesComponent extends Component
 {

@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Iptv\Channels;
 
-use App\Models\Channel;
-use Livewire\Component;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Actions\Channels\CompletlyDeleteChannelAction;
+use App\Models\Channel;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class DeleteChannel extends Component
 {

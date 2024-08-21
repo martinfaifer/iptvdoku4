@@ -10,9 +10,9 @@ class CreateMulticastSourceForm extends Form
 {
     #[Validate('required', message: 'Vyplňte zdroj')]
     #[Validate('unique:channel_sources,name', message: 'Již existuje')]
-    #[Validate('string', message: "Neplatný formát")]
-    #[Validate('max:100', message: "Maximální počet znaků je :max")]
-    public string $source = "";
+    #[Validate('string', message: 'Neplatný formát')]
+    #[Validate('max:100', message: 'Maximální počet znaků je :max')]
+    public string $source = '';
 
     public function create(): void
     {

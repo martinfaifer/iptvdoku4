@@ -3,8 +3,8 @@
 namespace App\Livewire\Nangu\IpPrefixes;
 
 use App\Models\Ip;
-use Livewire\Component;
 use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class NanguIpPrefixesComponent extends Component
 {

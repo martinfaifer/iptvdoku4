@@ -9,8 +9,8 @@ use Livewire\Form;
 
 class StoreNoteForm extends Form
 {
-    #[Validate('required', message: "Vyplňte poznámku")]
-    #[Validate('string', message: "Neplatný formát")]
+    #[Validate('required', message: 'Vyplňte poznámku')]
+    #[Validate('string', message: 'Neplatný formát')]
     public string $note = '';
 
     public function store(string $column, string $id): void
@@ -22,6 +22,6 @@ class StoreNoteForm extends Form
             'user' => Auth::user()->email,
         ]);
 
-        $this->note = "";
+        $this->note = '';
     }
 }

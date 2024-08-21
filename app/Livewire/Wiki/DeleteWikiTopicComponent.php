@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Wiki;
 
-use Livewire\Component;
 use App\Models\WikiTopic;
-use Illuminate\Contracts\View\Factory;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class DeleteWikiTopicComponent extends Component
 {

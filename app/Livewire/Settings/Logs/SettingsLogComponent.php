@@ -3,19 +3,20 @@
 namespace App\Livewire\Settings\Logs;
 
 use App\Models\Loger;
+use App\Traits\Loger\ShowCorrectNameOfItemTrait;
+use Illuminate\Contracts\View\Factory;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Loger\ShowCorrectNameOfItemTrait;
 
 class SettingsLogComponent extends Component
 {
-    use WithPagination, ShowCorrectNameOfItemTrait;
+    use ShowCorrectNameOfItemTrait, WithPagination;
+
     public string $query = '';
 
     public bool $detailModal = false;
 
-    public string $selectedLogDetail = "";
+    public string $selectedLogDetail = '';
 
     public array $sortBy = ['column' => 'created_at', 'direction' => 'desc'];
 
@@ -27,7 +28,7 @@ class SettingsLogComponent extends Component
 
     public function closeModal(): void
     {
-        $this->selectedLogDetail = "";
+        $this->selectedLogDetail = '';
         $this->detailModal = false;
     }
 

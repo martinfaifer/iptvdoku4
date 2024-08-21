@@ -2,18 +2,17 @@
 
 namespace App\Livewire\Iptv\Devices;
 
-use App\Models\Device;
-use Livewire\Component;
-use App\Models\DeviceSnmp;
-use App\Models\DeviceVendor;
-use App\Models\DeviceCategory;
 use App\Livewire\Forms\UpdateDeviceForm;
-use App\Traits\Livewire\NotificationTrait;
+use App\Models\Device;
+use App\Models\DeviceCategory;
+use App\Models\DeviceSnmp;
 use App\Traits\Devices\GetDeviceVendorsTrait;
+use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 class UpdateDeviceComponent extends Component
 {
-    use NotificationTrait, GetDeviceVendorsTrait;
+    use GetDeviceVendorsTrait, NotificationTrait;
 
     public UpdateDeviceForm $form;
 

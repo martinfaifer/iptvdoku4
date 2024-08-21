@@ -42,7 +42,7 @@ class ConnectService
         'analyze' => [
             'method' => 'post',
             'endpoint' => '/api/v2/stream/analyze',
-            'formData' => null
+            'formData' => null,
         ],
     ];
 
@@ -63,7 +63,7 @@ class ConnectService
             config('services.api.iptvDohled.username'),
             config('services.api.iptvDohled.password')
         )->$requestType(
-            config('services.api.iptvDohled.url') . $this->endPoints[$endpointType]['endpoint'],
+            config('services.api.iptvDohled.url').$this->endPoints[$endpointType]['endpoint'],
             $this->endPoints[$endpointType]['formData']
         );
         // } catch (\Throwable $th) {

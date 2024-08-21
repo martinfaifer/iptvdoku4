@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Settings\Devices\Vendors;
 
-use Livewire\Component;
-use App\Models\DeviceVendor;
-use Livewire\WithPagination;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsDevicesVendorsForm;
 use App\Livewire\Forms\UpdateSettingsDevicesVendorsForm;
+use App\Models\DeviceVendor;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsDevicesVendorsComponent extends Component
 {

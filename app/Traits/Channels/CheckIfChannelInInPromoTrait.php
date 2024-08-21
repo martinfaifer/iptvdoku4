@@ -2,8 +2,8 @@
 
 namespace App\Traits\Channels;
 
-use App\Models\Tag;
 use App\Models\Channel;
+use App\Models\Tag;
 use App\Models\TagOnItem;
 
 trait CheckIfChannelInInPromoTrait

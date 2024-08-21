@@ -8,13 +8,12 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ChannelsExport implements FromCollection, WithHeadings
 {
-
     public function headings(): array
     {
         return [
             'název',
             'kvalita',
-            'popis'
+            'popis',
         ];
     }
 

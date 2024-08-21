@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Prunable;
 
 class AnalyzeStream extends Model
 {
     use Prunable;
 
-    const MULTICAST_PORT = ":1234";
+    const MULTICAST_PORT = ':1234';
 
     protected $fillable = [
         'stream_url',
-        'analyze'
+        'analyze',
     ];
 
     protected $casts = [

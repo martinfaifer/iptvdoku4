@@ -16,7 +16,7 @@ class DeviceTemplateComponent extends Component
 
     public ?Device $device;
 
-    public string $search = "";
+    public string $search = '';
 
     public mixed $template;
 
@@ -42,7 +42,7 @@ class DeviceTemplateComponent extends Component
     {
         $this->template = $template;
 
-        if (Chart::itemCharts('device:' . $this->device->id)->first()) {
+        if (Chart::itemCharts('device:'.$this->device->id)->first()) {
             $this->hasCharts = true;
         }
     }
@@ -65,7 +65,7 @@ class DeviceTemplateComponent extends Component
             updatedInterfaceKey: $this->updatedInterfaceKey
         );
 
-        $this->redirect('/devices/' . $this->device->id, true);
+        $this->redirect('/devices/'.$this->device->id, true);
 
         return $this->success_alert('Upraveno');
     }
@@ -108,7 +108,7 @@ class DeviceTemplateComponent extends Component
             'template' => null,
         ]);
 
-        $this->redirect('/devices/' . $this->device->id, true);
+        $this->redirect('/devices/'.$this->device->id, true);
 
         return $this->success_alert('Šablona odebrána');
     }
@@ -116,7 +116,7 @@ class DeviceTemplateComponent extends Component
     public function loadCharts(): void
     {
         $this->charts = $this->get_charts(
-            item: 'device:' . $this->device->id,
+            item: 'device:'.$this->device->id,
             useDisctinct: true
         );
 

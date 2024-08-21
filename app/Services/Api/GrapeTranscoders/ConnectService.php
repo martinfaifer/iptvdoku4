@@ -55,7 +55,7 @@ class ConnectService
             };
 
             $this->connection = Http::$requestType(
-                config('services.api.3.grape_transcoders.url') . $this->endPoints[$endpointType]['endpoint'],
+                config('services.api.3.grape_transcoders.url').$this->endPoints[$endpointType]['endpoint'],
                 $this->endPoints[$endpointType]['formData']
             );
         } catch (\Throwable $th) {

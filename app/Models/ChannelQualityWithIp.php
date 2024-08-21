@@ -35,6 +35,6 @@ class ChannelQualityWithIp extends Model
 
     public function scopeSearch(Builder $query, string $search = ''): void
     {
-        $query->where('ip', 'like', '%' . $search . '%');
+        $query->where('ip', 'like', '%'.$search.'%');
     }
 }

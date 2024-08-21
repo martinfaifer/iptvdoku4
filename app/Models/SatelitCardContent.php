@@ -10,7 +10,7 @@ class SatelitCardContent extends Model
     protected $fillable = [
         'satelit_card_id',
         'file_name',
-        'path'
+        'path',
     ];
 
     public function satelitCard(): BelongsTo

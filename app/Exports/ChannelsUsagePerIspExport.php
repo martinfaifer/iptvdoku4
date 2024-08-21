@@ -20,7 +20,7 @@ class ChannelsUsagePerIspExport implements FromArray, WithHeadings
             'kanál',
             'tento měsíc',
             'minulý měsíc',
-            'průměr'
+            'průměr',
         ];
     }
 

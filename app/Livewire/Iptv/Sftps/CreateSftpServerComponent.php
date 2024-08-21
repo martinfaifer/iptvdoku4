@@ -2,11 +2,10 @@
 
 namespace App\Livewire\Iptv\Sftps;
 
-use Livewire\Component;
-use App\Models\SftpServer;
-use App\Livewire\Iptv\Sftps\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSftpServerForm;
+use App\Models\SftpServer;
+use App\Traits\Livewire\NotificationTrait;
+use Livewire\Component;
 
 class CreateSftpServerComponent extends Component
 {
@@ -22,7 +21,7 @@ class CreateSftpServerComponent extends Component
     {
         $storedServer = $this->storeForm->create();
         $this->closeDialog();
-        $this->redirect('/sftps/' . $storedServer->id, true);
+        $this->redirect('/sftps/'.$storedServer->id, true);
 
         return $this->success_alert('Vytvořeno');
     }

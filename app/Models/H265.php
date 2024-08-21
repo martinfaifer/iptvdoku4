@@ -20,7 +20,7 @@ class H265 extends Model
         'status',
     ];
 
-    public function channel():BelongsTo
+    public function channel(): BelongsTo
     {
         return $this->belongsTo(Channel::class, 'channel_id');
     }

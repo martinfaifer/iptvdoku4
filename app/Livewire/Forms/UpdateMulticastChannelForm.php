@@ -16,9 +16,9 @@ class UpdateMulticastChannelForm extends Form
 
     public ?ChannelMulticast $multicast;
 
-    public string $stb_ip = "";
+    public string $stb_ip = '';
 
-    public string $source_ip = "";
+    public string $source_ip = '';
 
     public int $channel_source_id;
 
@@ -37,7 +37,7 @@ class UpdateMulticastChannelForm extends Form
                 'nullable',
                 'string',
                 'max:250',
-                'unique:channel_multicasts,stb_ip,' . $this->multicast->id,
+                'unique:channel_multicasts,stb_ip,'.$this->multicast->id,
             ],
             'source_ip' => [
                 'nullable',
@@ -89,7 +89,7 @@ class UpdateMulticastChannelForm extends Form
             UpdateStreamUrlInDohledIfIsItJob::dispatch(
                 $this->stb_ip,
                 $this->multicast->stb_ip,
-                Channel::find($this->multicast->channel_id)->name . '_multicast'
+                Channel::find($this->multicast->channel_id)->name.'_multicast'
             );
         }
 
@@ -112,7 +112,7 @@ class UpdateMulticastChannelForm extends Form
 
         if ($this->to_dohled == true) {
             StoreStreamToIptvDohledJob::dispatch(
-                Channel::find($this->multicast->channel_id)->name . '_multicast',
+                Channel::find($this->multicast->channel_id)->name.'_multicast',
                 $this->stb_ip
             );
         }

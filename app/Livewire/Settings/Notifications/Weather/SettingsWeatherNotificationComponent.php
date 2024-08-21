@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Settings\Notifications\Weather;
 
-use Livewire\Component;
-use App\Models\WeatherCity;
-use Livewire\WithPagination;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsWeatherNotificationForm;
 use App\Livewire\Forms\UpdateSettingsWeatherNotificationForm;
+use App\Models\WeatherCity;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsWeatherNotificationComponent extends Component
 {

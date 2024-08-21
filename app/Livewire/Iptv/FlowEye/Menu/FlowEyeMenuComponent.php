@@ -2,10 +2,9 @@
 
 namespace App\Livewire\Iptv\FlowEye\Menu;
 
-use Livewire\Component;
-use Livewire\Attributes\On;
-use App\Livewire\Iptv\Sftps\Factory;
 use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class FlowEyeMenuComponent extends Component
 {
@@ -24,7 +23,7 @@ class FlowEyeMenuComponent extends Component
         }
     }
 
-    public function render():\Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.flow-eye.menu.flow-eye-menu-component');
     }

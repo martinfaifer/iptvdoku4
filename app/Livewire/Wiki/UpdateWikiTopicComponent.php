@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Wiki;
 
-use Livewire\Component;
-use App\Models\WikiTopic;
-use App\Models\WikiCategory;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\UpdateWikiTopicForm;
+use App\Models\WikiCategory;
+use App\Models\WikiTopic;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class UpdateWikiTopicComponent extends Component
 {

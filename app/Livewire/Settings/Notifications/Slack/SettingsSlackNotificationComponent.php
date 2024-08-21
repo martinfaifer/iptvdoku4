@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Settings\Notifications\Slack;
 
-use App\Models\Slack;
-use Livewire\Component;
-use Livewire\WithPagination;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
-use App\Traits\Slack\TranslateActionsTrait;
 use App\Livewire\Forms\CreateSettingsSlackNotificationForm;
 use App\Livewire\Forms\UpdateSettingsSlackNotificationForm;
+use App\Models\Slack;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Slack\TranslateActionsTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsSlackNotificationComponent extends Component
 {

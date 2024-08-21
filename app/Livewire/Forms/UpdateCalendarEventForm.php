@@ -104,6 +104,7 @@ class UpdateCalendarEventForm extends Form
         ]);
 
         $this->reset();
+
         return $event;
     }
 }

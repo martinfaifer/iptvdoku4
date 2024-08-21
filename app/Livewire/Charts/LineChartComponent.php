@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Charts;
 
-use Livewire\Component;
 use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class LineChartComponent extends Component
 {

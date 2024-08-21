@@ -33,8 +33,8 @@ class Loger extends Model
         $query->where('user', $user);
     }
 
-    public function scopeSearch(Builder $query, string $search = ""): void
+    public function scopeSearch(Builder $query, string $search = ''): void
     {
-        $query->where('user', "like", "%" . $search . "%")->orWhere('payload', "like", "%" . $search . "%");
+        $query->where('user', 'like', '%'.$search.'%')->orWhere('payload', 'like', '%'.$search.'%');
     }
 }

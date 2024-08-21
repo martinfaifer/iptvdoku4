@@ -13,6 +13,6 @@ class GeniusTvChannelPackage extends Model
 
     public function scopeSearch(Builder $query, string $search): void
     {
-        $query->where('name', 'like', '%' . $search . '%');
+        $query->where('name', 'like', '%'.$search.'%');
     }
 }

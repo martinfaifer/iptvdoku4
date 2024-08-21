@@ -3,7 +3,6 @@
 namespace App\Traits\Charts;
 
 use App\Models\Chart;
-use Illuminate\Support\Collection;
 
 trait GetItemChartsTrait
 {

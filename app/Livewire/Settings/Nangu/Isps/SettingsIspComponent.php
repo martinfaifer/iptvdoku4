@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Settings\Nangu\Isps;
 
-use App\Models\Ip;
-use Livewire\Component;
-use App\Models\NanguIsp;
-use Livewire\WithPagination;
-use Illuminate\Contracts\View\Factory;
-use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\CreateSettingsNanguIspForm;
 use App\Livewire\Forms\UpdateSettingsNanguIspForm;
+use App\Models\Ip;
+use App\Models\NanguIsp;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsIspComponent extends Component
 {

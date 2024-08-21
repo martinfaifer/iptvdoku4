@@ -5,7 +5,6 @@ namespace App\Exports;
 use App\Models\H264;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\FromCollection;
 
 class H264sExport implements FromArray, WithHeadings
 {
@@ -29,7 +28,7 @@ class H264sExport implements FromArray, WithHeadings
 
             $result[] = [
                 'name' => $h264->channel->name,
-                'ip' => implode(",", $ips),
+                'ip' => implode(',', $ips),
             ];
 
             $ips = [];

@@ -2,24 +2,23 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
-use Livewire\Attributes\Validate;
 use App\Models\IptvDohledUrlsNotification;
+use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class ChannelNotificationEmailForm extends Form
 {
-
-    #[Validate('required', message: "Vyplňte email")]
-    #[Validate('email', message: "Neplatný formát")]
-    #[Validate('max:255', message: "Maximální počet znaků je :max")]
-    public string $email = "";
+    #[Validate('required', message: 'Vyplňte email')]
+    #[Validate('email', message: 'Neplatný formát')]
+    #[Validate('max:255', message: 'Maximální počet znaků je :max')]
+    public string $email = '';
 
     public function create(object $iptvDohledUrl): void
     {
         $this->validate();
         IptvDohledUrlsNotification::create([
             'iptv_dohled_url_id' => $iptvDohledUrl->id,
-            'email' => $this->email
+            'email' => $this->email,
         ]);
     }
 

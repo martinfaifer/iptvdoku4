@@ -2,18 +2,18 @@
 
 namespace App\Livewire\Settings\Users;
 
-use App\Models\User;
-use Livewire\Component;
-use App\Models\UserRole;
-use Livewire\WithPagination;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Contracts\View\Factory;
-use App\Mail\SendForgottenPasswordMail;
-use App\Traits\Livewire\NotificationTrait;
-use App\Traits\Users\GeneratePasswordTrait;
-use Illuminate\Database\Eloquent\Collection;
 use App\Livewire\Forms\CreateSettingsUserForm;
 use App\Livewire\Forms\UpdateSettingsUserForm;
+use App\Mail\SendForgottenPasswordMail;
+use App\Models\User;
+use App\Models\UserRole;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Users\GeneratePasswordTrait;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Mail;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SettingsUsersComponent extends Component
 {

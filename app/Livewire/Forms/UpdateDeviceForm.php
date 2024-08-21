@@ -28,7 +28,7 @@ class UpdateDeviceForm extends Form
 
     public bool $is_snmp = false;
 
-    public int|null $snmp_version = null;
+    public ?int $snmp_version = null;
 
     public string $snmp_private_comunity;
 

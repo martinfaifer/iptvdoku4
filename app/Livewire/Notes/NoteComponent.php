@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Notes;
 
-use App\Models\Note;
-use Livewire\Component;
-use Livewire\Attributes\On;
 use App\Livewire\Forms\StoreNoteForm;
-use Illuminate\Contracts\View\Factory;
+use App\Models\Note;
 use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class NoteComponent extends Component
 {
@@ -23,7 +23,7 @@ class NoteComponent extends Component
 
     public function openModal(): void
     {
-        $this->storeNoteForm->note = "";
+        $this->storeNoteForm->note = '';
         $this->storeModal = true;
     }
 
@@ -44,7 +44,7 @@ class NoteComponent extends Component
     public function store(): mixed
     {
         $this->storeNoteForm->store($this->column, $this->id);
-        $this->dispatch('update_notes.' . $this->column . $this->id);
+        $this->dispatch('update_notes.'.$this->column.$this->id);
         $this->closeDialog();
 
         return $this->success_alert('Přidáno');
@@ -59,7 +59,7 @@ class NoteComponent extends Component
     public function destroy(Note $note): mixed
     {
         $note->delete();
-        $this->dispatch('update_notes.' . $this->column . $this->id);
+        $this->dispatch('update_notes.'.$this->column.$this->id);
 
         return $this->success_alert('Poznámka odebrána');
     }
