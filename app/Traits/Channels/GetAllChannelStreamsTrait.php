@@ -2,11 +2,12 @@
 
 namespace App\Traits\Channels;
 
+use App\Models\Channel;
 use App\Models\ChannelMulticast;
 
 trait GetAllChannelStreamsTrait
 {
-    public function getStreams(object $channel): array
+    public function getStreams(Channel $channel): array
     {
         $streams = [];
 
@@ -17,7 +18,7 @@ trait GetAllChannelStreamsTrait
         return $streams;
     }
 
-    public function getMulticastsStreams(object $channel): array
+    public function getMulticastsStreams(Channel $channel): array
     {
         $streams = [];
         foreach ($channel->multicasts as $multicast) {
@@ -33,7 +34,7 @@ trait GetAllChannelStreamsTrait
         return $streams;
     }
 
-    public function getH264Streams(object $channel): array
+    public function getH264Streams(Channel $channel): array
     {
         $streams = [];
         if (blank($channel->h264)) {
@@ -47,7 +48,7 @@ trait GetAllChannelStreamsTrait
         return $streams;
     }
 
-    public function getH265Streams(object $channel): array
+    public function getH265Streams(Channel $channel): array
     {
         $streams = [];
         if (blank($channel->h265)) {

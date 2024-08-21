@@ -3,11 +3,12 @@
 namespace App\Traits\Channels;
 
 use App\Models\Tag;
+use App\Models\Channel;
 use App\Models\TagOnItem;
 
 trait CheckIfChannelInInPromoTrait
 {
-    public function check_if_is_in_promo(object $channel): bool
+    public function check_if_is_in_promo(Channel $channel): bool
     {
         // Promo tag is has name Kanál v PROMU
 
