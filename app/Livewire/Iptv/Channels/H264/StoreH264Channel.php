@@ -36,8 +36,8 @@ class StoreH264Channel extends Component
     {
         $storeResponse = $this->form->store();
         $this->closeDialog();
-        $this->dispatch('update_h264.'.$this->channel->id);
         if ($storeResponse == true) {
+            $this->redirect(url()->previous(), true);
             return $this->success_alert('Přidáno');
         }
 

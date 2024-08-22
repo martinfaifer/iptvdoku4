@@ -10,27 +10,27 @@ class StoreDeviceForm extends Form
 {
     public string $name = '';
 
-    public int $device_category_id;
+    public string|int|null $device_category_id = null;
 
-    public int $device_vendor_id;
+    public int|null $device_vendor_id = null;
 
-    public string $ip;
+    public string|null $ip = null;
 
-    public ?string $ipmi_ip;
+    public string|null $ipmi_ip = null;
 
-    public ?string $controller_ip;
+    public string|null $controller_ip = null;
 
-    public ?string $username;
+    public ?string $username = null;
 
-    public ?string $password;
+    public ?string $password = null;
 
     public bool $is_snmp = false;
 
-    public ?int $snmp_version;
+    public ?int $snmp_version = null;
 
-    public ?string $snmp_private_comunity;
+    public ?string $snmp_private_comunity = null;
 
-    public ?string $snmp_public_comunity;
+    public ?string $snmp_public_comunity = null;
 
     public function rules(): array
     {

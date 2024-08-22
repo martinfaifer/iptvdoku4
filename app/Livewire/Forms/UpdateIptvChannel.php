@@ -29,9 +29,9 @@ class UpdateIptvChannel extends Form
 
     public mixed $nangu_chunk_store_id = '';
 
-    public string $nangu_channel_code;
+    public string $nangu_channel_code = '';
 
-    public array $geniustvChannelPackage;
+    public array $geniustvChannelPackage = [];
 
     public ?string $epgId = null;
 

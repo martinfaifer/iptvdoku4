@@ -97,19 +97,7 @@ class DeviceObserver
 
     public function deleted(Device $device): void
     {
-        // delete charts
-        Chart::where('item', 'like', '%device:'.$device->id.':%')->delete();
-        // delete alerts
-        Alert::where('type', 'gpu_check_failed')->where('item_id', $device->id)->delete();
-        Alert::where('type', 'gpu_problem')->where('item_id', $device->id)->delete();
-        // delete device contacts
-        Contact::where('type', 'device')->where('item_id', $device->id)->delete();
-
-        SearchIfSatCardIsUsedInDeviceJob::dispatch();
-
-        // cache devices menu
         $this->cache_devices_for_menu();
-
         SendEmailNotificationJob::dispatch(
             'Bylo odebráno zařízení '.$device->name,
             'Uživatel '.Auth::user()->email.' oderbal zařízení '.$device->name,

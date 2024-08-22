@@ -21,7 +21,7 @@ class UpdateChannel extends Component
 
     public mixed $channelType;
 
-    public mixed $logo;
+    public mixed $logo = null;
 
     public bool $updateModal = false;
 
@@ -52,11 +52,7 @@ class UpdateChannel extends Component
         }
 
         $this->closeDialog();
-        // $this->dispatch('update_channels_sidebar');
-        // $this->dispatch('update_iptv_channel');
-        // $this->dispatch('update_multicast.' . $this->channel->id, channelId: $this->channel->id);
-
-        $this->redirect('/channels/'.$this->channel->id.'/multicast', true);
+        $this->redirect('/channels/' . $this->channel->id . '/multicast', true);
 
         return $this->success_alert('Upraveno');
     }

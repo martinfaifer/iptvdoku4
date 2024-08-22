@@ -40,8 +40,7 @@ class H265Channel extends Component
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_h265.'.$this->channel->id);
-
+        $this->redirect(url()->previous(), true);
         return $this->success_alert('Změněno');
     }
 
@@ -55,8 +54,7 @@ class H265Channel extends Component
     public function destroy(ChannelQualityWithIp $channelQualityWithIp): mixed
     {
         $channelQualityWithIp->delete();
-        $this->dispatch('update_h265.'.$this->channel->id);
-
+        $this->redirect(url()->previous(), true);
         return $this->success_alert('Odebráno');
     }
 

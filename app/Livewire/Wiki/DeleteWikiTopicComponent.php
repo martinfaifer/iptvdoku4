@@ -10,16 +10,11 @@ use Livewire\Component;
 class DeleteWikiTopicComponent extends Component
 {
     use NotificationTrait;
-
-    public ?WikiTopic $topic;
-
+    public ?int $id = null;
     public function destroy(): mixed
     {
-        $this->topic->delete();
-
-        $this->redirect(url()->previous(), true);
-        $this->dispatch('refresh_wiki_menu');
-
+        $this->redirect("/wiki", true);
+        WikiTopic::find($this->id)->delete();
         return $this->success_alert('Odebrán článek');
     }
 

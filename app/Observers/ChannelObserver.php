@@ -46,7 +46,7 @@ class ChannelObserver
         if (Auth::user()) {
             SendEmailNotificationJob::dispatch(
                 "Vytvořen nový kanál $channel->name",
-                'Uživatel '.Auth::user()->email." vytvořil kanál $channel->name",
+                'Uživatel ' . Auth::user()->email . " vytvořil kanál $channel->name",
                 Auth::user()->email,
                 'notify_if_channel_change'
             );
@@ -76,15 +76,15 @@ class ChannelObserver
             ])
         );
 
-        if (Cache::has('channel_with_multicast_'.$channel->id)) {
-            Cache::forget('channel_with_multicast_'.$channel->id);
+        if (Cache::has('channel_with_multicast_' . $channel->id)) {
+            Cache::forget('channel_with_multicast_' . $channel->id);
         }
 
         GetChannelDetailFromNanguApiJob::dispatch($channel, 3600);
 
         SendEmailNotificationJob::dispatch(
             "Upraven kanál $channel->name",
-            'Uživatel '.Auth::user()->email." upravil kanál $channel->name",
+            'Uživatel ' . Auth::user()->email . " upravil kanál $channel->name",
             Auth::user()->email,
             'notify_if_channel_change'
         );
@@ -95,35 +95,31 @@ class ChannelObserver
 
     public function deleted(Channel $channel): void
     {
-        LogJob::dispatch(
-            user: Auth::user()->email,
-            type: Loger::DELETED_TYPE,
-            item: "channel:$channel->id",
-            payload: json_encode([
-                'id' => $channel->id,
-                'name' => $channel->name,
-            ])
-        );
-        // delete channel contacts
-        Contact::where('type', 'channel')->where('item_id', $channel->id)->delete();
-        Cache::forever('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
-        $this->cache_channels_with_detail();
-
         try {
-            Note::where('channel_id', $channel->id)->delete();
+            LogJob::dispatch(
+                user: Auth::user()->email,
+                type: Loger::DELETED_TYPE,
+                item: "channel:$channel->id",
+                payload: json_encode([
+                    'id' => $channel->id,
+                    'name' => $channel->name,
+                ])
+            );
+            Cache::forever('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
+            $this->cache_channels_with_detail();
+
+            if (Cache::has('channel_with_multicast_' . $channel->id)) {
+                Cache::forget('channel_with_multicast_' . $channel->id);
+            }
+
+            SendEmailNotificationJob::dispatch(
+                "Odebrán kanál $channel->name",
+                'Uživatel ' . Auth::user()->email . " odebral kanál $channel->name",
+                Auth::user()->email,
+                'notify_if_channel_change'
+            );
         } catch (\Throwable $th) {
             //throw $th;
         }
-
-        if (Cache::has('channel_with_multicast_'.$channel->id)) {
-            Cache::forget('channel_with_multicast_'.$channel->id);
-        }
-
-        SendEmailNotificationJob::dispatch(
-            "Odebrán kanál $channel->name",
-            'Uživatel '.Auth::user()->email." odebral kanál $channel->name",
-            Auth::user()->email,
-            'notify_if_channel_change'
-        );
     }
 }

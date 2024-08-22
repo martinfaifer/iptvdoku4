@@ -23,7 +23,7 @@ class StoreChannel extends Component
 
     #[Validate('max:1024', message: 'Maximální velikost obrázku je 1Mb')]
     #[Validate('nullable')]
-    public mixed $logo;
+    public mixed $logo = null;
 
     #[Validate('required', message: 'Vyberte kvalitu')]
     public mixed $quality;
@@ -50,7 +50,7 @@ class StoreChannel extends Component
 
     #[Validate('string', message: 'Neplatný formát')]
     #[Validate('nullable')]
-    public mixed $description;
+    public mixed $description = "";
 
     #[Validate('nullable')]
     public array $geniustvChannelPackage;
@@ -78,6 +78,7 @@ class StoreChannel extends Component
     public function store(): mixed
     {
         $this->validate();
+
         $qualityToChannel = '';
         if (! is_null($this->logo)) {
             $path = $this->logo->store(path: 'public/Logos');
@@ -107,7 +108,7 @@ class StoreChannel extends Component
         // $this->dispatch('update_channels_sidebar');
         // $this->closeDialog();
 
-        $this->redirect('/channels/'.$channel->id.'/multicast', true);
+        $this->redirect('/channels/' . $channel->id . '/multicast', true);
 
         return $this->success_alert('Kanál přidán');
     }

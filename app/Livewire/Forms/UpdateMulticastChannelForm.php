@@ -20,7 +20,7 @@ class UpdateMulticastChannelForm extends Form
 
     public string $source_ip = '';
 
-    public int $channel_source_id;
+    public mixed $channel_source_id = null;
 
     public bool $is_backup = false;
 

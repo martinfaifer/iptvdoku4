@@ -32,11 +32,15 @@ class StoreH264ChannelForm extends Form
         }
 
         foreach ($this->ips as $qualityId => $ip) {
-            ChannelQualityWithIp::create([
-                'h264_id' => $h264->id,
-                'channel_quality_id' => $qualityId,
-                'ip' => $ip,
-            ]);
+            try {
+                ChannelQualityWithIp::create([
+                    'h264_id' => $h264->id,
+                    'channel_quality_id' => $qualityId,
+                    'ip' => $ip,
+                ]);
+            } catch (\Throwable $th) {
+                //
+            }
         }
 
         return true;

@@ -8,11 +8,19 @@ use Livewire\Component;
 
 class NanguIpPrefixesComponent extends Component
 {
-    public ?Ip $prefix;
+    public mixed $prefix = null;
 
-    public function mount(Ip $ipPrefix): void
+    public function mount(mixed $ipPrefix = null): void
     {
-        $this->prefix = $ipPrefix;
+        if (!blank($ipPrefix)) {
+            if (!$ipPrefixModel = Ip::where('id', $ipPrefix)->first()) {
+                $this->redirect('/prefixes', true);
+            } else {
+                $this->prefix = $ipPrefixModel;
+            }
+        } else {
+            $this->prefix = $ipPrefix;
+        }
     }
 
     public function render(): \Illuminate\Contracts\View\View|Factory

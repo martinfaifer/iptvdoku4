@@ -12,67 +12,43 @@ class UpdateDeviceForm extends Form
 
     public string $name = '';
 
-    public string|int $device_category_id;
+    public string|int|null $device_category_id = null;
 
-    public int $device_vendor_id;
+    public int|null $device_vendor_id = null;
 
-    public string $ip;
+    public string|null $ip = null;
 
-    public string $ipmi_ip;
+    public string|null $ipmi_ip = null;
 
-    public string $controller_ip;
+    public string|null $controller_ip = null;
 
-    public string $username;
+    public string|null $username = null;
 
-    public string $password;
+    public string|null $password = null;
 
     public bool $is_snmp = false;
 
     public ?int $snmp_version = null;
 
-    public string $snmp_private_comunity;
+    public string|null $snmp_private_comunity = null;
 
-    public string $snmp_public_comunity;
+    public string|null $snmp_public_comunity = null;
 
     public function rules(): array
     {
         return [
-            'name' => [
-                'required', 'string', 'max:100', 'unique:devices,name,'.$this->device->id,
-            ],
-            'device_category_id' => [
-                'required', 'exists:device_categories,id',
-            ],
-            'device_vendor_id' => [
-                'required', 'exists:device_vendors,id',
-            ],
-            'ip' => [
-                'nullable', 'string', 'max:255', 'unique:devices,ip,'.$this->device->id,
-            ],
-            'ipmi_ip' => [
-                'nullable', 'string', 'max:255', 'unique:devices,ipmi_ip,'.$this->device->ipmi_ip,
-            ],
-            'controller_ip' => [
-                'nullable', 'string', 'max:255',
-            ],
-            'username' => [
-                'nullable', 'string', 'max:255',
-            ],
-            'password' => [
-                'nullable', 'string', 'max:255',
-            ],
-            'is_snmp' => [
-                'required', 'boolean',
-            ],
-            'snmp_version' => [
-                'nullable',
-            ],
-            'snmp_private_comunity' => [
-                'nullable',
-            ],
-            'snmp_public_comunity' => [
-                'nullable',
-            ],
+            'name' => ['required', 'string', 'max:100', 'unique:devices,name,' . $this->device->id,],
+            'device_category_id' => ['required', 'exists:device_categories,id',],
+            'device_vendor_id' => ['required', 'exists:device_vendors,id',],
+            'ip' => ['nullable', 'string', 'max:255', 'unique:devices,ip,' . $this->device->id,],
+            'ipmi_ip' => ['nullable', 'string', 'max:255', 'unique:devices,ipmi_ip,' . $this->device->ipmi_ip,],
+            'controller_ip' => ['nullable', 'string', 'max:255',],
+            'username' => ['nullable', 'string', 'max:255',],
+            'password' => ['nullable', 'string', 'max:255',],
+            'is_snmp' => ['required', 'boolean',],
+            'snmp_version' => ['nullable',],
+            'snmp_private_comunity' => ['nullable'],
+            'snmp_public_comunity' => ['nullable'],
         ];
     }
 

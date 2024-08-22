@@ -38,19 +38,19 @@ class DeviceHasChannelAndConnectionMapComponent extends Component
     {
         if ($this->isBackup == true) {
             $this->devices = $this->devices_belongs_to_channel_type(
-                channelWithType: $this->channelType.':'.$this->channel->id.':backup'
+                channelWithType: $this->channelType . ':' . $this->channel->id . ':backup'
             );
 
             $this->schemaDevices = $this->devices_belongs_to_channel_type(
-                channelWithType: 'multicast:'.$this->channel->id.':backup'
+                channelWithType: 'multicast:' . $this->channel->id . ':backup'
             );
         } else {
             $this->devices = $this->devices_belongs_to_channel_type(
-                channelWithType: $this->channelType.':'.$this->channel->id
+                channelWithType: $this->channelType . ':' . $this->channel->id
             );
 
             $this->schemaDevices = $this->devices_belongs_to_channel_type(
-                channelWithType: 'multicast:'.$this->channel->id
+                channelWithType: 'multicast:' . $this->channel->id
             );
         }
 

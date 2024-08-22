@@ -17,8 +17,8 @@ class H265Observer
             $email = Auth::user()->email;
         }
         SendEmailNotificationJob::dispatch(
-            'Byl přidán H265 k '.$h265->channel->name,
-            'Uživatel '.$email.' přidal H265 k '.$h265->channel->name,
+            'Byl přidán H265 k ' . $h265->channel->name,
+            'Uživatel ' . $email . ' přidal H265 k ' . $h265->channel->name,
             $email,
             'notify_if_channel_change'
         );
@@ -49,8 +49,8 @@ class H265Observer
         );
 
         SendEmailNotificationJob::dispatch(
-            'Byl upraven H265 u '.$h265->channel->name,
-            'Uživatel '.Auth::user()->email.' upravil H265 u '.$h265->channel->name,
+            'Byl upraven H265 u ' . $h265->channel->name,
+            'Uživatel ' . Auth::user()->email . ' upravil H265 u ' . $h265->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );
@@ -58,22 +58,26 @@ class H265Observer
 
     public function deleted(H265 $h265): void
     {
-        LogJob::dispatch(
-            user: Auth::user()->email,
-            type: Loger::DELETED_TYPE,
-            item: "h265:$h265->channel_id",
-            payload: json_encode([
-                'id' => $h265->id,
-                'devices_id' => $h265->devices_id,
-                'status' => $h265->status,
-            ])
-        );
+        try {
+            LogJob::dispatch(
+                user: Auth::user()->email,
+                type: Loger::DELETED_TYPE,
+                item: "h265:$h265->channel_id",
+                payload: json_encode([
+                    'id' => $h265->id,
+                    'devices_id' => $h265->devices_id,
+                    'status' => $h265->status,
+                ])
+            );
 
-        SendEmailNotificationJob::dispatch(
-            'Byl odebrán H265 u '.$h265->channel->name,
-            'Uživatel '.Auth::user()->email.' odebral H265 u '.$h265->channel->name,
-            Auth::user()->email,
-            'notify_if_channel_change'
-        );
+            SendEmailNotificationJob::dispatch(
+                'Byl odebrán H265 u ' . $h265->channel->name,
+                'Uživatel ' . Auth::user()->email . ' odebral H265 u ' . $h265->channel->name,
+                Auth::user()->email,
+                'notify_if_channel_change'
+            );
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 }

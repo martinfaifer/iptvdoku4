@@ -2,11 +2,14 @@
 
 namespace App\Livewire\Iptv\Channels;
 
-use App\Actions\Channels\CompletlyDeleteChannelAction;
 use App\Models\Channel;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Contracts\View\Factory;
 use Livewire\Component;
+use Livewire\Attributes\Locked;
+use Livewire\Attributes\Renderless;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Actions\Channels\CompletlyDeleteChannelAction;
 
 class DeleteChannel extends Component
 {
@@ -14,16 +17,12 @@ class DeleteChannel extends Component
 
     public ?Channel $channel;
 
-    public function destroy(Channel $channel): mixed
+    public function destroy(): mixed
     {
-        if ((new CompletlyDeleteChannelAction($channel))() == true) {
-            $this->success_alert('Odebráno');
-        } else {
-            $this->error_alert('Nepodařilo se odebrat');
-        }
-        // $channel->delete();
-
-        return $this->redirect('/channels', true);
+        (new CompletlyDeleteChannelAction($this->channel))();
+        // $this->skipRender();
+        $this->redirect('/channels', true);
+        return $this->success_alert('Odebráno');
     }
 
     public function render(): \Illuminate\Contracts\View\View|Factory

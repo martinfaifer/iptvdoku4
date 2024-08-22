@@ -12,7 +12,7 @@ class DeviceComponent extends Component
 {
     use NotificationTrait;
 
-    public ?Device $device;
+    public mixed $device = null;
 
     public ?array $nmsCahedData = null;
 
@@ -20,18 +20,26 @@ class DeviceComponent extends Component
 
     public ?array $grapeTranscoderData = null;
 
-    public function mount(): void
+    public function mount(mixed $device = null): void
     {
-        //
+        if (!blank($device)) {
+            if (!$deviceModel = Device::where('id', $device)->first()) {
+                $this->redirect('/devices', true);
+            } else {
+                $this->device = $deviceModel;
+            }
+        } else {
+            $this->device = $device;
+        }
     }
 
     #[On('refresh_device')]
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         if (isset($this->device)) {
-            $this->nmsCahedData = Cache::get('nms_'.$this->device->id);
-            $this->nimbleCachedData = Cache::get('nimble_'.$this->device->id.'_incoming_streams');
-            $this->grapeTranscoderData = Cache::get(('grape_transcoder_'.$this->device->id));
+            $this->nmsCahedData = Cache::get('nms_' . $this->device->id);
+            $this->nimbleCachedData = Cache::get('nimble_' . $this->device->id . '_incoming_streams');
+            $this->grapeTranscoderData = Cache::get(('grape_transcoder_' . $this->device->id));
 
             return view('livewire.iptv.devices.device-component')->title($this->device?->name);  // @phpstan-ignore-line
         }

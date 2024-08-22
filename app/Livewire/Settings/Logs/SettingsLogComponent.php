@@ -16,11 +16,11 @@ class SettingsLogComponent extends Component
 
     public bool $detailModal = false;
 
-    public string $selectedLogDetail = '';
+    public array $selectedLogDetail = [];
 
     public array $sortBy = ['column' => 'created_at', 'direction' => 'desc'];
 
-    public function show(string $payload, mixed $logId): void
+    public function show(array $payload, mixed $logId): void
     {
         $this->selectedLogDetail = $payload;
         $this->detailModal = true;
@@ -28,7 +28,7 @@ class SettingsLogComponent extends Component
 
     public function closeModal(): void
     {
-        $this->selectedLogDetail = '';
+        $this->selectedLogDetail = [];
         $this->detailModal = false;
     }
 

@@ -34,7 +34,7 @@ class CreateNanguInvoicePerIsp
             $allActiveSubscriptionCount = NanguSubscription::forIsp($isp->id)->isBilling()->count();
             $staticTaxesForSingleSubscription = $this->staticTaxesForSubsciptions($isp);
             $tarrifCodes = $this->selectUniqueTarrifCodes($isp->id);
-
+            // dd($tarrifCodes, $isp->name);
             foreach ($tarrifCodes as $tarrifCode) {
                 $numberOfCustomersInTarrif = NanguSubscription::forIsp($isp->id)->isBilling()->tarrifCode($tarrifCode)->count();
 
@@ -87,6 +87,7 @@ class CreateNanguInvoicePerIsp
             foreach ($taxesForTarrifs as $taxForTarrif) {
                 if (array_key_exists('cost', $taxForTarrif)) {
                     $sumPrice = (float) $sumPrice + (float) $taxForTarrif['cost'];
+                    // dd($sumPrice);
                 }
             }
 
@@ -103,18 +104,18 @@ class CreateNanguInvoicePerIsp
                 ]);
             }
             // create pdf and store them in to the file storage and create link to db for download
-            $invoiceName = str_replace(' ', '', $isp->name).'_'.time().'.pdf';
+            $invoiceName = str_replace(' ', '', $isp->name) . '_' . time() . '.pdf';
             Pdf::loadView('pdfs.invoice', [
                 'allActiveSubscriptionCount' => $allActiveSubscriptionCount,
                 'tarrifs' => $taxesForTarrifs,
                 'sum' => $sumPrice,
                 'isp' => $isp,
-            ])->save('storage/app/public/invoices/'.$invoiceName);
+            ])->save('storage/app/public/invoices/' . $invoiceName);
 
             NanguIspInvoice::create([
                 'nangu_isp_id' => $isp->id,
                 'invoice' => $invoiceName,
-                'path' => '/storage/invoices/'.$invoiceName,
+                'path' => '/storage/invoices/' . $invoiceName,
             ]);
 
             // send to adminus for create invoice with bound to flexibee
@@ -146,11 +147,11 @@ class CreateNanguInvoicePerIsp
         return $sum;
     }
 
-    protected function selectUniqueTarrifCodes(int $ispId): array
+    protected function selectUniqueTarrifCodes(int $ispId): mixed
     {
-        $storedTarrifCodes = NanguSubscription::forIsp($ispId)->isBilling()->uniqueTariffCodes();
+        $storedTarrifCodes = NanguSubscription::forIsp($ispId)->isBilling()->distinct()->get('tariffCode');
         $tarrifCodes = [];
-        foreach ($storedTarrifCodes as $tarrifCode) { // @phpstan-ignore-line
+        foreach ($storedTarrifCodes as $tarrifCode) {
             array_push($tarrifCodes, $tarrifCode->tariffCode);
         }
 
@@ -262,7 +263,7 @@ class CreateNanguInvoicePerIsp
                 }
             }
 
-            echo $tarrifCode.'  '.$tax.PHP_EOL;
+            echo $tarrifCode . '  ' . $tax . PHP_EOL;
         }
 
         return $tax;
@@ -281,7 +282,7 @@ class CreateNanguInvoicePerIsp
         return $tax;
     }
 
-    private function count_channel_package_tax_for_all_channels_without_exception(mixed $channelsInPackage, int $ispId, string $tarrifCode, object $channelPackage): int
+    private function count_channel_package_tax_for_all_channels_without_exception(mixed $channelsInPackage, int $ispId, string $tarrifCode, object $channelPackage): int|float
     {
         $tax = 0;
         $arrayOfSearcheableChannelCodes = [];
@@ -336,18 +337,18 @@ class CreateNanguInvoicePerIsp
                 }
 
                 if (Str::contains($subscriptionInTarrif->channels, $channelInPackage->nangu_channel_code)) {
-                    echo $channelInPackage->nangu_channel_code.PHP_EOL;
+                    echo $channelInPackage->nangu_channel_code . PHP_EOL;
                     $tax = $this->calc_tax(tax: $tax, model: $channelPackage);
                     break;
                 }
             }
         }
-        echo $tarrifCode.' '.$tax.PHP_EOL;
+        echo $tarrifCode . ' ' . $tax . PHP_EOL;
 
         return $tax;
     }
 
-    private function count_channel_package_tax_for_all_channels_with_exception(mixed $channelsInPackage, int $ispId, string $tarrifCode, object $channelPackage, array $arrayOfExceptions): int
+    private function count_channel_package_tax_for_all_channels_with_exception(mixed $channelsInPackage, int $ispId, string $tarrifCode, object $channelPackage, array $arrayOfExceptions): int|float
     {
         $tax = 0;
         $subscriptionInTarrif = NanguSubscription::forIsp($ispId)->isBilling()->tarrifCode($tarrifCode)->first();
@@ -360,7 +361,7 @@ class CreateNanguInvoicePerIsp
         return $tax;
     }
 
-    private function count_channel_package_tax_for_channels_with_exception(mixed $channelsInPackage, int $ispId, string $tarrifCode, object $channelPackage, array $arrayOfExceptions): int
+    private function count_channel_package_tax_for_channels_with_exception(mixed $channelsInPackage, int $ispId, string $tarrifCode, object $channelPackage, array $arrayOfExceptions): int|float
     {
         $tax = 0;
         foreach ($channelsInPackage as $channelInPackage) {

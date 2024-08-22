@@ -15,7 +15,7 @@ class WikiTopicObserver
     {
         SendEmailNotificationJob::dispatch(
             'Byl přidán nový článek do wiki ',
-            'Uživatel '.Auth::user()->email.' vytvořil článek '.$wikiTopic->title,
+            'Uživatel ' . Auth::user()->email . ' vytvořil článek ' . $wikiTopic->title,
             Auth::user()->email,
             'notify_if_added_new_wiki_content'
         );
@@ -28,7 +28,7 @@ class WikiTopicObserver
     {
         SendEmailNotificationJob::dispatch(
             'Byl upraven článek na wiki ',
-            'Uživatel '.Auth::user()->email.' upravil článek '.$wikiTopic->title,
+            'Uživatel ' . Auth::user()->email . ' upravil článek ' . $wikiTopic->title,
             Auth::user()->email,
             'notify_if_added_new_wiki_content'
         );
@@ -39,12 +39,16 @@ class WikiTopicObserver
      */
     public function deleted(WikiTopic $wikiTopic): void
     {
-        SendEmailNotificationJob::dispatch(
-            'Byl odebrán nový článek na wiki ',
-            'Uživatel '.Auth::user()->email.' odebral článek '.$wikiTopic->title,
-            Auth::user()->email,
-            'notify_if_added_new_wiki_content'
-        );
+        try {
+            SendEmailNotificationJob::dispatch(
+                'Byl odebrán nový článek na wiki ',
+                'Uživatel ' . Auth::user()->email . ' odebral článek ' . $wikiTopic->title,
+                Auth::user()->email,
+                'notify_if_added_new_wiki_content'
+            );
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**

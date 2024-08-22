@@ -39,8 +39,8 @@ class H264Channel extends Component
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_h264.'.$this->channel->id);
 
+        $this->redirect(url()->previous(), true);
         return $this->success_alert('Změněno');
     }
 
@@ -53,8 +53,8 @@ class H264Channel extends Component
     public function destroy(ChannelQualityWithIp $channelQualityWithIp): mixed
     {
         $channelQualityWithIp->delete();
-        $this->dispatch('update_h264.'.$this->channel->id);
-
+        // $this->dispatch('update_h264.'.$this->channel->id);
+        $this->redirect(url()->previous(), true);
         return $this->success_alert('Odebráno');
     }
 
@@ -69,7 +69,6 @@ class H264Channel extends Component
         HTML;
     }
 
-    #[On('update_h264.{channel.id}')]
     public function render(): \Illuminate\Contracts\View\View|Factory
     {
         $this->h264 = [];

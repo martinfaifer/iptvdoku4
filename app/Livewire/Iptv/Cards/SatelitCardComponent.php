@@ -13,14 +13,23 @@ class SatelitCardComponent extends Component
 {
     use FindSatelitCardOnDeviceTemplateTrait, NotificationTrait;
 
-    public ?SatelitCard $satelitCard;
+    public mixed $satelitCard = null;
 
     public Device|false $device;
 
     public bool $deviceInfoModal = false;
 
-    public function mount(): void
+    public function mount(mixed $satelitCard = null): void
     {
+        if (!blank($satelitCard)) {
+            if (!$satelitCardModel = SatelitCard::where('id', $satelitCard)->first()) {
+                $this->redirect('/sat-cards', true);
+            } else {
+                $this->satelitCard = $satelitCardModel;
+            }
+        } else {
+            $this->satelitCard = $satelitCard;
+        }
         try {
             $this->device = $this->find_card_in_device_template($this->satelitCard);
         } catch (\Throwable $th) {

@@ -14,9 +14,8 @@ class DeleteSftpServerComponent extends Component
 
     public function destroy(): mixed
     {
+        $this->redirect('/sftps', true);
         $this->sftpServer->delete();
-
-        $this->redirect('/sftps');
 
         return $this->success_alert('Odebráno');
     }

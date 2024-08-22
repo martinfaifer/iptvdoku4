@@ -19,8 +19,8 @@ class H264Observer
         }
 
         SendEmailNotificationJob::dispatch(
-            'Byl přidán H264 k '.$h264->channel->name,
-            'Uživatel '.$email.' přidal H264 k '.$h264->channel->name,
+            'Byl přidán H264 k ' . $h264->channel->name,
+            'Uživatel ' . $email . ' přidal H264 k ' . $h264->channel->name,
             $email,
             'notify_if_channel_change'
         );
@@ -51,8 +51,8 @@ class H264Observer
         );
 
         SendEmailNotificationJob::dispatch(
-            'Byl upravil H264 u '.$h264->channel->name,
-            'Uživatel '.Auth::user()->email.' upravil H264 u '.$h264->channel->name,
+            'Byl upravil H264 u ' . $h264->channel->name,
+            'Uživatel ' . Auth::user()->email . ' upravil H264 u ' . $h264->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );
@@ -60,22 +60,26 @@ class H264Observer
 
     public function deleted(H264 $h264): void
     {
-        LogJob::dispatch(
-            user: Auth::user()->email,
-            type: Loger::DELETED_TYPE,
-            item: "h264:$h264->channel_id",
-            payload: json_encode([
-                'id' => $h264->id,
-                'devices_id' => $h264->devices_id,
-                'status' => $h264->status,
-            ])
-        );
+        try {
+            LogJob::dispatch(
+                user: Auth::user()->email,
+                type: Loger::DELETED_TYPE,
+                item: "h264:$h264->channel_id",
+                payload: json_encode([
+                    'id' => $h264->id,
+                    'devices_id' => $h264->devices_id,
+                    'status' => $h264->status,
+                ])
+            );
 
-        SendEmailNotificationJob::dispatch(
-            'Byl odebral H264 u '.$h264->channel->name,
-            'Uživatel '.Auth::user()->email.' odebral u '.$h264->channel->name,
-            Auth::user()->email,
-            'notify_if_channel_change'
-        );
+            SendEmailNotificationJob::dispatch(
+                'Byl odebral H264 u ' . $h264->channel->name,
+                'Uživatel ' . Auth::user()->email . ' odebral u ' . $h264->channel->name,
+                Auth::user()->email,
+                'notify_if_channel_change'
+            );
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 }

@@ -28,7 +28,7 @@
                     @endcan
 
                     @can('delete', $topic)
-                        <livewire:wiki.delete-wiki-topic-component :topic="$topic" />
+                        <livewire:wiki.delete-wiki-topic-component :id="$topic->id" />
                     @endcan
                     {{-- end of actions --}}
                 </div>
@@ -38,10 +38,7 @@
             <div class="mt-4">
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-12">
-                        {{-- <article> --}}
-                            {!! $topic->text !!}
-                            {{-- {!! Str::markdown($topic->text) !!} --}}
-                        {{-- </article> --}}
+                        {!! $topic->text !!}
                     </div>
                 </div>
             </div>

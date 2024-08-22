@@ -33,14 +33,14 @@ class MulticastChannelObserver
             );
 
             SendEmailNotificationJob::dispatch(
-                'Byl přidán multicast k '.$multicast->channel->name,
-                'Uživatel '.Auth::user()->email.' přidal multicast k '.$multicast->channel->name,
+                'Byl přidán multicast k ' . $multicast->channel->name,
+                'Uživatel ' . Auth::user()->email . ' přidal multicast k ' . $multicast->channel->name,
                 Auth::user()->email,
                 'notify_if_channel_change'
             );
         }
 
-        Cache::forever('channel_with_multicast_'.$multicast->channel_id, Channel::find($multicast->channel_id)->load(['multicasts', 'multicasts.channel_source']));
+        Cache::forever('channel_with_multicast_' . $multicast->channel_id, Channel::find($multicast->channel_id)->load(['multicasts', 'multicasts.channel_source']));
     }
 
     public function updated(ChannelMulticast $multicast): void
@@ -62,17 +62,17 @@ class MulticastChannelObserver
         );
 
         SendEmailNotificationJob::dispatch(
-            'Byl upraven multicast u  '.$multicast->channel->name,
-            'Uživatel '.Auth::user()->email.' upravil multicast u '.$multicast->channel->name,
+            'Byl upraven multicast u  ' . $multicast->channel->name,
+            'Uživatel ' . Auth::user()->email . ' upravil multicast u ' . $multicast->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );
 
-        if (Cache::has('channel_with_multicast_'.$multicast->channel_id)) {
-            Cache::forget('channel_with_multicast_'.$multicast->channel_id);
+        if (Cache::has('channel_with_multicast_' . $multicast->channel_id)) {
+            Cache::forget('channel_with_multicast_' . $multicast->channel_id);
         }
         Cache::forever(
-            'channel_with_multicast_'.$multicast->channel_id,
+            'channel_with_multicast_' . $multicast->channel_id,
             Channel::find($multicast->channel_id)
                 ->load(['multicasts', 'multicasts.channel_source'])
         );
@@ -87,8 +87,8 @@ class MulticastChannelObserver
             DeleteStreamFromIptvDohledJob::dispatch($multicast->source_ip);
         }
 
-        if (Cache::has('channel_with_multicast_'.$multicast->channel_id)) {
-            Cache::forget('channel_with_multicast_'.$multicast->channel_id);
+        if (Cache::has('channel_with_multicast_' . $multicast->channel_id)) {
+            Cache::forget('channel_with_multicast_' . $multicast->channel_id);
         }
 
         LogJob::dispatch(
@@ -103,8 +103,8 @@ class MulticastChannelObserver
         );
 
         SendEmailNotificationJob::dispatch(
-            'Byl odebrán multicast u '.$multicast->channel->name,
-            'Uživatel '.Auth::user()->email.' odebral multicast u '.$multicast->channel->name,
+            'Byl odebrán multicast u ' . $multicast->channel->name,
+            'Uživatel ' . Auth::user()->email . ' odebral multicast u ' . $multicast->channel->name,
             Auth::user()->email,
             'notify_if_channel_change'
         );
