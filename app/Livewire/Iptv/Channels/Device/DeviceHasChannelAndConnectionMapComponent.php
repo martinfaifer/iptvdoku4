@@ -29,7 +29,6 @@ class DeviceHasChannelAndConnectionMapComponent extends Component
 
     public function mount(): void
     {
-        // $this->devices = $devices;
         $this->load_devices_data();
     }
 

@@ -47,20 +47,20 @@ class GetChannelsInformationsFromIptvDohledJob implements ShouldQueue
                     // find min max video bitrate to ip
                     $ipWithQuality = ChannelQualityWithIp::where('ip', $this->ip)->with('channelQuality')->first();
                     if ($ipWithQuality) {
-                        $maxBitrate = $ipWithQuality->channelQuality->bitrate / 1024; // Mbps
+                        $maxBitrate = $ipWithQuality->channelQuality->bitrate / 1000; // Mbps
                         $maxBitrate = $maxBitrate * 2; //
                         foreach ($response['data']['videoCharts'] as $videoPid) {
                             foreach (array_reverse($videoPid['seriesData'][0]['data']) as $key => $bitrate) {
                                 if (round($bitrate, 1) >= $maxBitrate) {
                                     $problemedBitrates[] = round($bitrate, 1);
                                 }
-                                if ($key == 1) {
+                                if ($key == 2) {
                                     break;
                                 }
                             }
                         }
 
-                        if (isset($problemedBitrates) && count($problemedBitrates) == 2) {
+                        if (isset($problemedBitrates) && count($problemedBitrates) == 3) {
                             // send to queue for sending alerts
                             SendAlertForStreamWhichHasHighBanwidth::dispatch(
                                 $this->ip,

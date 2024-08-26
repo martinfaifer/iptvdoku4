@@ -47,7 +47,7 @@ class SendAlertForStreamWhichHasHighBanwidth implements ShouldQueue
                 if (! blank($notification->slack_channel)) {
                     if (! Cache::has('sended_slack_alert_high_banwidth_' . $this->stream_url . $notification->slack_channel)) {
                         (new SendSlackNotificationAction(
-                            text: 'Stream  ' . $this->stream_url . 'má datový tok ' . implode(', ', $this->highBanwidt) . ' který je vyšší než povolený maximální ' . $this->maxAllowedBanwidth,
+                            text: 'Stream  ' . $this->stream_url . ' má datový tok ' . implode(', ', $this->highBanwidt) . ' který je vyšší než povolený maximální ' . $this->maxAllowedBanwidth,
                             url: $notification->slack_channel
                         ))();
 
@@ -71,7 +71,7 @@ class SendAlertForStreamWhichHasHighBanwidth implements ShouldQueue
             if (!blank($defaultSlackChannel)) {
                 if (! Cache::has('sended_slack_alert_high_banwidth_' . $this->stream_url . $defaultSlackChannel->url)) {
                     (new SendSlackNotificationAction(
-                        text: 'Stream  ' . $this->stream_url . 'má datový tok ' . implode(', ', $this->highBanwidt) . ' který je vyšší než povolený maximální ' . $this->maxAllowedBanwidth,
+                        text: 'Stream  ' . $this->stream_url . ' má datový tok ' . implode(', ', $this->highBanwidt) . ' který je vyšší než povolený maximální ' . $this->maxAllowedBanwidth,
                         url: $defaultSlackChannel->url
                     ))();
 
