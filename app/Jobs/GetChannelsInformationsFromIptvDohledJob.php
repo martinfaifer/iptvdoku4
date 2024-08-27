@@ -74,6 +74,7 @@ class GetChannelsInformationsFromIptvDohledJob implements ShouldQueue
                 }
             } catch (\Throwable $th) {
                 // info($this->ip, [$th]);
+                // log  this exception
             }
         }
     }
