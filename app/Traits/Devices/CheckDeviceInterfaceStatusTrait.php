@@ -16,7 +16,7 @@ trait CheckDeviceInterfaceStatusTrait
                 if ($slackChannel) {
                     (new SendSlackNotificationAction(
                         url: $slackChannel->url,
-                        text: ':fire: U zařízení '.$device->name.' a portu '.str_replace('status', '', $interface).' se změnil status z '.$oldStatus.' na '.$newStatus
+                        text: ':fire: U zařízení ' . $device->name . ' a portu ' . str_replace('status', '', $interface) . ' se změnil status z ' . $oldStatus . ' na ' . $newStatus
                     ))();
                 }
             }

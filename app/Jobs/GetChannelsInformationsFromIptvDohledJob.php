@@ -30,7 +30,7 @@ class GetChannelsInformationsFromIptvDohledJob implements ShouldQueue
     {
         $response = (new ConnectService(
             endpointType: 'get-stream-by-ip',
-            params: str_contains($this->ip, ':1234') ? $this->ip : $this->ip.':1234'
+            params: str_contains($this->ip, ':1234') ? $this->ip : $this->ip . ':1234'
         ))->connect(cacheKey: $this->ip);
 
         if (! is_null($response)) {
@@ -60,13 +60,15 @@ class GetChannelsInformationsFromIptvDohledJob implements ShouldQueue
                             }
                         }
 
-                        if (isset($problemedBitrates) && count($problemedBitrates) == 3) {
-                            // send to queue for sending alerts
-                            SendAlertForStreamWhichHasHighBanwidth::dispatch(
-                                $this->ip,
-                                $problemedBitrates,
-                                $maxBitrate
-                            );
+                        if (isset($problemedBitrates)) {
+                            if (count($problemedBitrates) == 3) {
+                                // send to queue for sending alerts
+                                SendAlertForStreamWhichHasHighBanwidth::dispatch(
+                                    $this->ip,
+                                    $problemedBitrates,
+                                    $maxBitrate
+                                );
+                            }
                         }
                     }
                 }

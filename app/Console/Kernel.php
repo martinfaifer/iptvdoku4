@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('iptv-dohled:alerts')->everyTwentySeconds();
 
         $schedule->command('devices:data-from-nms')->everyFifteenMinutes()->runInBackground();
-        $schedule->command('devices:snmp-get')->everyTwoMinutes()->runInBackground();
+        $schedule->command('devices:snmp-get')->everyTenMinutes()->runInBackground();
 
         $schedule->command('tag:execute-actions')->everyFiveMinutes()->runInBackground()->withoutOverlapping();
 
@@ -52,7 +52,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
