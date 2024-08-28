@@ -2,15 +2,18 @@
 
 namespace App\Livewire;
 
+use Livewire\Component;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Locked;
 use App\Services\Logger\LoggerService;
 use Illuminate\Contracts\View\Factory;
-use Livewire\Attributes\On;
-use Livewire\Component;
 
 class LogComponent extends Component
 {
+    #[Locked]
     public string $columnValue;
 
+    #[Locked]
     public string $column;
 
     public mixed $logs;

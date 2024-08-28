@@ -8,13 +8,14 @@ use Livewire\Attributes\On;
 use App\Models\ChannelSource;
 use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\StoreMulticastChannelForm;
+use Livewire\Attributes\Locked;
 
 class StoreMulticastChannel extends Component
 {
     use NotificationTrait;
 
     public StoreMulticastChannelForm $form;
-
+    #[Locked]
     public ?Channel $channel;
 
     public bool $storeModal = false;

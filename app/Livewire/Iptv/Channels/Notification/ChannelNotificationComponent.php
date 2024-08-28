@@ -2,17 +2,19 @@
 
 namespace App\Livewire\Iptv\Channels\Notification;
 
+use Livewire\Component;
+use Livewire\Attributes\On;
+use Livewire\WithPagination;
+use App\Models\IptvDohledUrl;
+use Livewire\Attributes\Locked;
+use Livewire\Attributes\Validate;
+use App\Models\ChannelQualityWithIp;
+use App\Models\IptvDohledUrlsNotification;
+use App\Traits\Livewire\NotificationTrait;
 use App\Livewire\Forms\ChannelNotificationEmailForm;
 use App\Livewire\Forms\ChannelNotificationSlackForm;
-use App\Models\ChannelQualityWithIp;
-use App\Models\IptvDohledUrl;
-use App\Models\IptvDohledUrlsNotification;
 use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
-use App\Traits\Livewire\NotificationTrait;
-use Livewire\Attributes\On;
-use Livewire\Attributes\Validate;
-use Livewire\Component;
-use Livewire\WithPagination;
+use Livewire\Attributes\Computed;
 
 class ChannelNotificationComponent extends Component
 {
@@ -22,6 +24,7 @@ class ChannelNotificationComponent extends Component
 
     public ChannelNotificationSlackForm $slackForm;
 
+    #[Locked]
     public string $ip;
 
     public object $iptvDohledUrl;
@@ -52,9 +55,9 @@ class ChannelNotificationComponent extends Component
         $unicastChannel = ChannelQualityWithIp::where('ip', $this->ip)->first();
         if ($unicastChannel) {
             if (! is_null($unicastChannel->h264_id)) {
-                $this->redirect('/channels/'.$unicastChannel->h264->channel_id.'/h264', true);
+                $this->redirect('/channels/' . $unicastChannel->h264->channel_id . '/h264', true);
             }
-            $this->redirect('/channels/'.$unicastChannel->h265->channel_id.'/h265', true);
+            $this->redirect('/channels/' . $unicastChannel->h265->channel_id . '/h265', true);
         }
     }
 

@@ -2,15 +2,16 @@
 
 namespace App\Livewire\Iptv\Channels\Multicast;
 
-use App\Livewire\Forms\UpdateMulticastChannelForm;
 use App\Models\Channel;
-use App\Models\ChannelMulticast;
-use App\Models\ChannelSource;
-use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
-use App\Traits\Devices\DeviceHasChannelsTrait;
-use App\Traits\Livewire\NotificationTrait;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use App\Models\ChannelSource;
+use Livewire\Attributes\Locked;
+use App\Models\ChannelMulticast;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Devices\DeviceHasChannelsTrait;
+use App\Livewire\Forms\UpdateMulticastChannelForm;
+use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
 
 class InfoMulticastChannelComponent extends Component
 {
@@ -18,6 +19,7 @@ class InfoMulticastChannelComponent extends Component
 
     public UpdateMulticastChannelForm $form;
 
+    #[Locked]
     public Channel $channel;
 
     public bool $updateModal = false;
@@ -32,7 +34,7 @@ class InfoMulticastChannelComponent extends Component
     {
         $this->form->update();
         $this->closeModal();
-        $this->dispatch('update_multicasts.'.$this->channel->id);
+        $this->dispatch('update_multicasts.' . $this->channel->id);
 
         // $this->dispatch('update_iptv_channel');
         // $this->redirect(url()->previous(), true);

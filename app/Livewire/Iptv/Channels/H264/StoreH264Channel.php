@@ -2,12 +2,13 @@
 
 namespace App\Livewire\Iptv\Channels\H264;
 
-use App\Livewire\Forms\StoreH264ChannelForm;
 use App\Models\Channel;
-use App\Models\ChannelQuality;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Contracts\View\Factory;
 use Livewire\Component;
+use App\Models\ChannelQuality;
+use Livewire\Attributes\Locked;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\StoreH264ChannelForm;
 
 class StoreH264Channel extends Component
 {
@@ -15,6 +16,7 @@ class StoreH264Channel extends Component
 
     public StoreH264ChannelForm $form;
 
+    #[Locked]
     public ?Channel $channel;
 
     public mixed $availableFormats;

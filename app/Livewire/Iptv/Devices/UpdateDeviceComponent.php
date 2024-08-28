@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Iptv\Devices;
 
-use App\Livewire\Forms\UpdateDeviceForm;
 use App\Models\Device;
-use App\Models\DeviceCategory;
-use App\Models\DeviceSnmp;
-use App\Traits\Devices\GetDeviceVendorsTrait;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
+use App\Models\DeviceSnmp;
+use App\Models\DeviceCategory;
+use Livewire\Attributes\Locked;
+use App\Livewire\Forms\UpdateDeviceForm;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Devices\GetDeviceVendorsTrait;
 
 class UpdateDeviceComponent extends Component
 {
@@ -16,6 +17,7 @@ class UpdateDeviceComponent extends Component
 
     public UpdateDeviceForm $form;
 
+    #[Locked]
     public ?Device $device;
 
     public bool $updateModal = false;

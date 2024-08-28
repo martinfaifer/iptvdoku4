@@ -15,6 +15,8 @@ class GetChannelsInformationsFromIptvDohledJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    protected $port = ":1234";
+
     /**
      * Create a new job instance.
      */
@@ -30,11 +32,12 @@ class GetChannelsInformationsFromIptvDohledJob implements ShouldQueue
     {
         $response = (new ConnectService(
             endpointType: 'get-stream-by-ip',
-            params: str_contains($this->ip, ':1234') ? $this->ip : $this->ip . ':1234'
+            params: str_contains($this->ip, $this->port) ? $this->ip : $this->ip . $this->port
         ))->connect(cacheKey: $this->ip);
 
         if (! is_null($response)) {
             try {
+
                 if ($response['status'] == 'success') {
                     if (! IptvDohledUrl::where('stream_url', $this->ip)
                         ->first()) {

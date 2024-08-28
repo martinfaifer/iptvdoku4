@@ -15,6 +15,7 @@ class DeleteChannel extends Component
 {
     use NotificationTrait;
 
+    #[Locked]
     public ?Channel $channel;
 
     public function destroy(): mixed

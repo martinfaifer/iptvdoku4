@@ -3,11 +3,12 @@
 namespace App\Livewire\Iptv\Channels\Device;
 
 use App\Models\Channel;
-use App\Traits\Devices\DeviceHasChannelsTrait;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Support\Collection;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Locked;
+use Illuminate\Support\Collection;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Devices\DeviceHasChannelsTrait;
 
 class DeviceHasChannelAndConnectionMapComponent extends Component
 {
@@ -17,8 +18,10 @@ class DeviceHasChannelAndConnectionMapComponent extends Component
 
     public Collection $schemaDevices;
 
+    #[Locked]
     public ?Channel $channel;
 
+    #[Locked]
     public string $channelType;
 
     public bool $isBackup = false;

@@ -2,13 +2,15 @@
 
 namespace App\Livewire\Iptv\Channels\IptvDohled;
 
-use App\Traits\Channels\GetChannelDataOnIptvDohledTrait;
 use Livewire\Component;
+use Livewire\Attributes\Locked;
+use App\Traits\Channels\GetChannelDataOnIptvDohledTrait;
 
 class ChannelDataOnIptvDohledComponent extends Component
 {
     use GetChannelDataOnIptvDohledTrait;
 
+    #[Locked]
     public string $ip;
 
     public mixed $channelDataOnIptvDohled;

@@ -6,6 +6,7 @@ use App\Models\Channel;
 use App\Services\Api\Epg\EpgConnectService;
 use App\Traits\Dates\DateParserTrait;
 use Illuminate\Contracts\View\Factory;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -14,6 +15,7 @@ class EpgChannelComponent extends Component
 {
     use DateParserTrait;
 
+    #[Locked]
     public ?Channel $channel;
 
     public mixed $epg;

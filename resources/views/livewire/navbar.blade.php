@@ -106,11 +106,15 @@
                             <li><a href="/settings/dashboard" wire:navigate>Nastavení</a></li>
                         @endcan
                         <li @click='$wire.logout()'><a>Odhlásit se</a></li>
+                        <hr
+                            class="w-full mx-auto h-[1px] mt-[2px] bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                        <span class="mt-[2px] text-center text-[10px] text-white/50">Verze: {{ config('version.version') }}</span>
                     </ul>
                 </div>
             </div>
             <div>
-                <livewire:navbar-streams-notification-component wire:poll.15s></livewire:navbar-streams-notification-component>
+                <livewire:navbar-streams-notification-component
+                    wire:poll.15s></livewire:navbar-streams-notification-component>
             </div>
         </div>
     </div>

@@ -9,6 +9,7 @@ use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
 use App\Traits\Devices\DeviceHasChannelsTrait;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Contracts\View\Factory;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -18,6 +19,7 @@ class H264Channel extends Component
 
     public UpdateH264ChannelForm $form;
 
+    #[Locked]
     public ?Channel $channel;
 
     public ?ChannelQualityWithIp $channelQualityWithIp;

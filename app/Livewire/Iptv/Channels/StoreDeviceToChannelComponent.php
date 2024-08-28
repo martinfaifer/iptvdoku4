@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Iptv\Channels;
 
-use App\Livewire\Forms\StoreDeviceToChannelForm;
-use App\Models\Channel;
 use App\Models\Device;
-use App\Traits\Livewire\NotificationTrait;
+use App\Models\Channel;
 use Livewire\Component;
+use Livewire\Attributes\Locked;
+use App\Traits\Livewire\NotificationTrait;
+use App\Livewire\Forms\StoreDeviceToChannelForm;
 
 class StoreDeviceToChannelComponent extends Component
 {
@@ -16,6 +17,7 @@ class StoreDeviceToChannelComponent extends Component
 
     public bool $storeModal = false;
 
+    #[Locked]
     public ?Channel $channel;
 
     public string $channelType;
@@ -34,7 +36,7 @@ class StoreDeviceToChannelComponent extends Component
         $this->form->create();
         $this->storeModal = false;
         // $this->redirect(url()->previous(), true);
-        $this->dispatch('refresh_channel_has_devices_'.$this->channelType.'_'.$this->channel->id);
+        $this->dispatch('refresh_channel_has_devices_' . $this->channelType . '_' . $this->channel->id);
 
         return $this->success_alert('Upraveno');
     }

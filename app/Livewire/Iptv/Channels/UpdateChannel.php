@@ -2,14 +2,15 @@
 
 namespace App\Livewire\Iptv\Channels;
 
-use App\Livewire\Forms\UpdateIptvChannel;
 use App\Models\Channel;
-use App\Models\GeniusTvChannelPackage;
-use App\Traits\Channels\GetChannelsCategoriesFromCacheTrait;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Locked;
+use Illuminate\Support\Facades\Cache;
+use App\Models\GeniusTvChannelPackage;
+use App\Livewire\Forms\UpdateIptvChannel;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Channels\GetChannelsCategoriesFromCacheTrait;
 
 class UpdateChannel extends Component
 {
@@ -17,6 +18,7 @@ class UpdateChannel extends Component
 
     public UpdateIptvChannel $form;
 
+    #[Locked]
     public ?Channel $channel;
 
     public mixed $channelType;

@@ -7,6 +7,7 @@ use App\Models\AnalyzeStream;
 use App\Models\Channel;
 use App\Traits\Channels\GetAllChannelStreamsTrait;
 use App\Traits\Livewire\NotificationTrait;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -14,6 +15,7 @@ class StreamAnalyzeComponent extends Component
 {
     use GetAllChannelStreamsTrait, NotificationTrait;
 
+    #[Locked]
     public Channel $channel;
 
     public array $streams = [];
@@ -35,7 +37,7 @@ class StreamAnalyzeComponent extends Component
         $analyzedStreams = [];
         foreach ($this->streams as $stream) {
             if (! str_contains($stream, AnalyzeStream::MULTICAST_PORT)) {
-                $stream = $stream.AnalyzeStream::MULTICAST_PORT;
+                $stream = $stream . AnalyzeStream::MULTICAST_PORT;
             }
             if (AnalyzeStream::where('stream_url', $stream)->first()) {
                 foreach (AnalyzeStream::where('stream_url', $stream)->orderBy(...array_values($this->sortBy))->take(5)->get()->toArray() as $analyzed) {

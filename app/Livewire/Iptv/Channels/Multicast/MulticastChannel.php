@@ -10,6 +10,7 @@ use App\Models\Device;
 use App\Traits\Channels\CheckIfChannelIsInIptvDohledTrait;
 use App\Traits\Devices\DeviceHasChannelsTrait;
 use App\Traits\Livewire\NotificationTrait;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -18,7 +19,7 @@ class MulticastChannel extends Component
     use CheckIfChannelIsInIptvDohledTrait, DeviceHasChannelsTrait, NotificationTrait;
 
     // public UpdateMulticastChannelForm $form;
-
+    #[Locked]
     public Channel $channel;
 
     // public bool $updateModal = false;

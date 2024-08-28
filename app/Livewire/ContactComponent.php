@@ -8,6 +8,7 @@ use App\Models\Contact;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -25,8 +26,10 @@ class ContactComponent extends Component
 
     public bool $updateModal = false;
 
+    #[Locked]
     public string $type;
 
+    #[Locked]
     public int $item_id;
 
     public function mount(string $type, int $item_id): void

@@ -2,12 +2,13 @@
 
 namespace App\Livewire\Notes;
 
-use App\Livewire\Forms\StoreNoteForm;
 use App\Models\Note;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Contracts\View\Factory;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Locked;
+use App\Livewire\Forms\StoreNoteForm;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
 
 class NoteComponent extends Component
 {
@@ -15,8 +16,10 @@ class NoteComponent extends Component
 
     public StoreNoteForm $storeNoteForm;
 
+    #[Locked]
     public string $column;
 
+    #[Locked]
     public string|int $id;
 
     public bool $storeModal = false;
