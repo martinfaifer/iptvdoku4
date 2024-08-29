@@ -105,7 +105,7 @@
                         @can('show_settings_link', App\Models\User::class)
                             <li><a href="/settings/dashboard" wire:navigate>Nastavení</a></li>
                         @endcan
-                        <li @click='$wire.logout()'><a>Odhlásit se</a></li>
+                        <li class="hover:bg-red-500/30 hover:text-red-400/80 rounded-md" @click='$wire.logout()'><a>Odhlásit se</a></li>
                         <hr
                             class="w-full mx-auto h-[1px] mt-[2px] bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                         <span class="mt-[2px] text-center text-[10px] text-white/50">Verze: {{ config('version.version') }}</span>
