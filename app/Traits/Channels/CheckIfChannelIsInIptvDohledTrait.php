@@ -7,8 +7,11 @@ use Illuminate\Support\Facades\Cache;
 
 trait CheckIfChannelIsInIptvDohledTrait
 {
-    public function isInIptvDohledDohled(string $ip): bool
+    public function isInIptvDohledDohled(string|null $ip = null): bool
     {
+        if (is_null($ip)) {
+            return false;
+        }
         $isIn = IptvDohledUrl::where('stream_url', $ip)->first();
 
         // $isIn = Cache::get($ip);
