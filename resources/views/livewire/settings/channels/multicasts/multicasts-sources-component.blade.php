@@ -28,14 +28,14 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-modal wire:model="createModal" persistent class="modal-bottom xl:modal-middle fixed"
+    <x-modal wire:model.live="createModal" persistent class="modal-bottom xl:modal-middle fixed"
         box-class="overflow-visible">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md mb-4">
-                    <x-input label="Zdroj" wire:model="createForm.source" />
+                    <x-input label="Zdroj" wire:model.live="createForm.source" />
                 </div>
             </div>
 

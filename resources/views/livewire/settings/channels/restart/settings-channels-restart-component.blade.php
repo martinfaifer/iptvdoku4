@@ -87,7 +87,7 @@
     </p>
 
     {{-- create modal --}}
-    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="createModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
@@ -101,7 +101,7 @@
                     </x-choices>
                 </div>
                 <div class="col-span-12">
-                    <x-choices-offline label="Vyberte url" wire:model="createForm.ip" :options="$ipBelongsToChannel"
+                    <x-choices-offline label="Vyberte url" wire:model.live="createForm.ip" :options="$ipBelongsToChannel"
                         option-label="ip" single searchable />
                 </div>
             </div>

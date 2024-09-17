@@ -3,12 +3,12 @@
         <x-icon name="s-pencil" class="w-4 h-4 text-green-500" />
     </button>
 
-    <x-modal wire:model="updateModal" title="Úprava sftp serveru" persistent class="modal-bottom sm:modal-middle">
+    <x-modal wire:model.live="updateModal" title="Úprava sftp serveru" persistent class="modal-bottom sm:modal-middle">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Uživtelské jméno pro připojení" wire:model="updateForm.username" />
+                    <x-input label="Uživtelské jméno pro připojení" wire:model.live="updateForm.username" />
                     <div>
                         @error('username')
                             <span class="error">{{ $message }}</span>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Heslo" wire:model="updateForm.password" />
+                    <x-input label="Heslo" wire:model.live="updateForm.password" />
                     <div>
                         @error('password')
                             <span class="error">{{ $message }}</span>
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-input label="Cesta k adreáři" wire:model="updateForm.path_to_folder" />
+                    <x-input label="Cesta k adreáři" wire:model.live="updateForm.path_to_folder" />
                     <div>
                         @error('path_to_folder')
                             <span class="error">{{ $message }}</span>

@@ -46,7 +46,7 @@
                 </div>
             </x-share.cards.base-card>
 
-            <x-modal wire:model="analyzedModal" class="modal-bottom sm:modal-middle fixed" title="">
+            <x-modal wire:model.live="analyzedModal" class="modal-bottom sm:modal-middle fixed" title="">
                 <div class="my-4 overflow-y-auto h-96">
                     <div>
                         <pre>

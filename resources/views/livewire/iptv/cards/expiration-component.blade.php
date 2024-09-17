@@ -33,13 +33,13 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-modal wire:model="storeModal" title="Nová expirace karty" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="storeModal" title="Nová expirace karty" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input type="date" label="Expirace" wire:model="createForm.expiration" />
+                    <x-input type="date" label="Expirace" wire:model.live="createForm.expiration" />
                 </div>
             </div>
             {{-- action section --}}
@@ -56,13 +56,13 @@
         </x-form>
     </x-modal>
 
-    <x-modal wire:model="editModal" title="Změna expirace karty" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="editModal" title="Změna expirace karty" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input type="date" label="Expirace" wire:model="updateForm.expiration" />
+                    <x-input type="date" label="Expirace" wire:model.live="updateForm.expiration" />
                 </div>
             </div>
             {{-- action section --}}

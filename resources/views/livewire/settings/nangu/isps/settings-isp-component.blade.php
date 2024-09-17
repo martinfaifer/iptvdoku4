@@ -39,13 +39,13 @@
     </x-share.cards.base-card>
 
     {{-- create modal --}}
-    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="createModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Poskytovatel" wire:model="createForm.name" />
+                    <x-input label="Poskytovatel" wire:model.live="createForm.name" />
                     <div>
                         @error('name')
                             <span class="error">{{ $message }}</span>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Nangu isp id" wire:model="createForm.nangu_isp_id" />
+                    <x-input label="Nangu isp id" wire:model.live="createForm.nangu_isp_id" />
                     <div>
                         @error('nangu_isp_id')
                             <span class="error">{{ $message }}</span>
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="IČ" wire:model="createForm.ic" />
+                    <x-input label="IČ" wire:model.live="createForm.ic" />
                     <div>
                         @error('ic')
                             <span class="error">{{ $message }}</span>
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="DIČ" wire:model="createForm.dic" />
+                    <x-input label="DIČ" wire:model.live="createForm.dic" />
                     <div>
                         @error('dic')
                             <span class="error">{{ $message }}</span>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="HBO klíč" wire:model="createForm.hbo_key" />
+                    <x-input label="HBO klíč" wire:model.live="createForm.hbo_key" />
                     <div>
                         @error('hbo_key')
                             <span class="error">{{ $message }}</span>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="CRM contract id" wire:model="createForm.crm_contract_id" />
+                    <x-input label="CRM contract id" wire:model.live="createForm.crm_contract_id" />
                     <div>
                         @error('crm_contract_id')
                             <span class="error">{{ $message }}</span>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="col-span-12 mb-4">
                     <x-checkbox class="border-[#085885] active:bg-[#085885]" label="Akcionář ISP alliance"
-                        wire:model="createForm.is_akcionar" hint="Bude uplatněna sleva" />
+                        wire:model.live="createForm.is_akcionar" hint="Bude uplatněna sleva" />
                 </div>
             </div>
             {{-- action section --}}
@@ -114,13 +114,13 @@
     </x-modal>
 
     {{-- edit modal --}}
-    <x-modal wire:model="editModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="editModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Poskytovatel" wire:model="updateForm.name" disabled readonly />
+                    <x-input label="Poskytovatel" wire:model.live="updateForm.name" disabled readonly />
                     <div>
                         @error('name')
                             <span class="error">{{ $message }}</span>
@@ -128,7 +128,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Nangu isp id" wire:model="updateForm.nangu_isp_id" disabled readonly />
+                    <x-input label="Nangu isp id" wire:model.live="updateForm.nangu_isp_id" disabled readonly />
                     <div>
                         @error('nangu_isp_id')
                             <span class="error">{{ $message }}</span>
@@ -137,7 +137,7 @@
                 </div>
 
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="IČ" wire:model="updateForm.ic" />
+                    <x-input label="IČ" wire:model.live="updateForm.ic" />
                     <div>
                         @error('ic')
                             <span class="error">{{ $message }}</span>
@@ -145,7 +145,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="DIČ" wire:model="updateForm.dic" />
+                    <x-input label="DIČ" wire:model.live="updateForm.dic" />
                     <div>
                         @error('dic')
                             <span class="error">{{ $message }}</span>
@@ -153,7 +153,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="HBO klíč" wire:model="updateForm.hbo_key" />
+                    <x-input label="HBO klíč" wire:model.live="updateForm.hbo_key" />
                     <div>
                         @error('hbo_key')
                             <span class="error">{{ $message }}</span>
@@ -161,7 +161,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="CRM contract id" wire:model="updateForm.crm_contract_id" />
+                    <x-input label="CRM contract id" wire:model.live="updateForm.crm_contract_id" />
                     <div>
                         @error('crm_contract_id')
                             <span class="error">{{ $message }}</span>
@@ -170,7 +170,7 @@
                 </div>
                 <div class="col-span-12 mb-4">
                     <x-checkbox class="border-[#085885] active:bg-[#085885]" label="Akcionář ISP alliance"
-                        wire:model="updateForm.is_akcionar" hint="Bude uplatněna sleva" />
+                        wire:model.live="updateForm.is_akcionar" hint="Bude uplatněna sleva" />
                 </div>
             </div>
             {{-- action section --}}

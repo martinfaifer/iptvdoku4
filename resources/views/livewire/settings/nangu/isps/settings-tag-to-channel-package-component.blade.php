@@ -78,7 +78,7 @@
     </x-share.cards.base-card>
 
     {{-- create modal --}}
-    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="createModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Štítek" wire:model="createForm.tag_id" :options="$tags" single
+                    <x-choices-offline label="Štítek" wire:model.live="createForm.tag_id" :options="$tags" single
                         searchable />
                     <div>
                         @error('tag_id')
@@ -104,7 +104,7 @@
                 </div>
 
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Programový balíček" wire:model="createForm.channelPackageName"
+                    <x-choices-offline label="Programový balíček" wire:model.live="createForm.channelPackageName"
                         :options="$channelPackages" single searchable />
                     <div>
                         @error('channelPackageName')
@@ -128,7 +128,7 @@
         </x-form>
     </x-modal>
 
-    <x-modal wire:model="editModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="editModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
@@ -144,7 +144,7 @@
                 </div>
 
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Štítek" wire:model="updateForm.tag_id" :options="$tags" single
+                    <x-choices-offline label="Štítek" wire:model.live="updateForm.tag_id" :options="$tags" single
                         searchable />
                     <div>
                         @error('tag_id')
@@ -154,7 +154,7 @@
                 </div>
 
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Programový balíček" wire:model="updateForm.channelPackageName"
+                    <x-choices-offline label="Programový balíček" wire:model.live="updateForm.channelPackageName"
                         :options="$channelPackages" single searchable />
                     <div>
                         @error('channelPackageName')

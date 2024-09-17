@@ -12,12 +12,12 @@
         Přidat článek
     </button>
 
-    <x-modal wire:model="storeModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="storeModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input label="Nadpis" wire:model="form.title" />
+                    <x-input label="Nadpis" wire:model.live="form.title" />
                     <div>
                         @error('title')
                             <span class="error">{{ $message }}</span>
@@ -25,9 +25,9 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-editor wire:model="form.text" label="Obsah" :config="$config" />
+                    <x-editor wire:model.live="form.text" label="Obsah" :config="$config" />
 
-                    {{-- <x-markdown wire:model="form.text" label="Obsah" /> --}}
+                    {{-- <x-markdown wire:model.live="form.text" label="Obsah" /> --}}
                     <div>
                         @error('text')
                             <span class="error">{{ $message }}</span>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Vyberte kategorii" wire:model="form.wiki_category_id" :options="$categories"
+                    <x-choices-offline label="Vyberte kategorii" wire:model.live="form.wiki_category_id" :options="$categories"
                         searchable single>
                     </x-choices-offline>
                     <div>

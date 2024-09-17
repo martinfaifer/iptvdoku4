@@ -3,12 +3,12 @@
         <x-icon name="s-pencil" class="w-4 h-4 text-green-500" />
     </button>
 
-    <x-modal wire:model="updateModal" title="Úprava satelitní karty" persistent class="modal-bottom sm:modal-middle"  box-class="overflow-visible">
+    <x-modal wire:model.live="updateModal" title="Úprava satelitní karty" persistent class="modal-bottom sm:modal-middle"  box-class="overflow-visible">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Číslo karty" wire:model="updateForm.name" disabled readonly/>
+                    <x-input label="Číslo karty" wire:model.live="updateForm.name" disabled readonly/>
                     <div>
                         @error('name')
                             <span class="error">{{ $message }}</span>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-choices-offline label="Distributor" wire:model="updateForm.satelit_card_vendor_id"
+                    <x-choices-offline label="Distributor" wire:model.live="updateForm.satelit_card_vendor_id"
                         :options="$satelitCardsVendors" single searchable />
                     <div>
                         @error('satelit_card_vendor_id')

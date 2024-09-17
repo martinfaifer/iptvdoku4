@@ -4,19 +4,19 @@
         Přidat prefix
     </button>
 
-    <x-modal wire:model="storeModal" title="Nový prefix" persistent class="modal-bottom sm:modal-middle fixed"
+    <x-modal wire:model.live="storeModal" title="Nový prefix" persistent class="modal-bottom sm:modal-middle fixed"
         box-class="overflow-visible">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 xl:col-span-8 mb-4">
-                    <x-input label="IPv4" wire:model="form.ip_address" />
+                    <x-input label="IPv4" wire:model.live="form.ip_address" />
                 </div>
                 <div class="col-span-12 xl:col-span-4 mb-4">
-                    <x-choices-offline label="Prefix" wire:model='form.cidr' :options="$cidr" searchable single />
+                    <x-choices-offline label="Prefix" wire:model.live='form.cidr' :options="$cidr" searchable single />
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="ISP" wire:model="form.nangu_isp_id" :options="$nanguIsps" searchable single />
+                    <x-choices-offline label="ISP" wire:model.live="form.nangu_isp_id" :options="$nanguIsps" searchable single />
                 </div>
             </div>
 

@@ -15,9 +15,11 @@
         @endif
     </label>
 
-    <x-drawer wire:model="alertDrawer" id="alert-drawer" right class="lg:w-1/4 !bg-[#0E1E33]">
+    <x-drawer wire:model.live="alertDrawer" id="alert-drawer" right class="lg:w-1/4 !bg-[#0E1E33]">
+
         {{-- alerts --}}
         @if (!empty($iptv_dohled_alerts))
+            {{-- <audio src="/storage/sounds/beep-warning.mp3" autoplay></audio> --}}
             @foreach ($iptv_dohled_alerts as $iptv_dohled_alert)
                 <div wire:key="alert-{{ $iptv_dohled_alert['id'] }}" class="mt-3">
                     <x-share.alerts.error title="{{ $iptv_dohled_alert['nazev'] }}"></x-share.alerts.error>
@@ -27,7 +29,7 @@
 
         @if (!empty($othersAlerts['devices']))
             @foreach ($othersAlerts['devices'] as $device)
-            {{-- @dd($device) --}}
+                {{-- @dd($device) --}}
                 <div wire:key="alert-device-{{ $device->id }}" class="mt-3">
                     <x-share.alerts.error title="Zařízení {{ $device->name }} je offline"></x-share.alerts.error>
                 </div>
@@ -47,3 +49,28 @@
         </div>
     @endif
 </div>
+
+<script>
+    import Swal from 'sweetalert2';
+
+    function playAlertSound() {
+        const audio = new Audio('/path/to/your/soundfile.mp3');
+        audio.play().catch(error => console.error("Přehrání zvuku selhalo:", error));
+    }
+
+    function showAlert(message) {
+        Swal.fire({
+            title: 'Upozornění',
+            text: message,
+            icon: 'warning',
+            didOpen: () => {
+                playAlertSound();
+            }
+        });
+    }
+
+    // Příklad použití
+    if (alerts.length > 0) {
+        alerts.forEach(alert => showAlert(alert));
+    }
+</script>

@@ -31,13 +31,13 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="createModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input label="Poplatek" wire:model="form.name" />
+                    <x-input label="Poplatek" wire:model.live="form.name" />
                     <div>
                         @error('name')
                             <span class="error">{{ $message }}</span>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-input label="cena" wire:model="form.price" />
+                    <x-input label="cena" wire:model.live="form.price" />
                     <div>
                         @error('price')
                             <span class="error">{{ $message }}</span>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Měna" wire:model="form.currency" :options="$currencies" searchable single />
+                    <x-choices-offline label="Měna" wire:model.live="form.currency" :options="$currencies" searchable single />
                     <div>
                         @error('currency')
                             <span class="error">{{ $message }}</span>
@@ -77,13 +77,13 @@
     </x-modal>
 
     {{-- edit --}}
-    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="updateModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input readonly disabled label="Poplatek" wire:model="updateForm.name" />
+                    <x-input readonly disabled label="Poplatek" wire:model.live="updateForm.name" />
                     <div>
                         @error('name')
                             <span class="error">{{ $message }}</span>
@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-input label="cena" wire:model="updateForm.price" />
+                    <x-input label="cena" wire:model.live="updateForm.price" />
                     <div>
                         @error('price')
                             <span class="error">{{ $message }}</span>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Měna" wire:model="updateForm.currency" :options="$currencies" searchable
+                    <x-choices-offline label="Měna" wire:model.live="updateForm.currency" :options="$currencies" searchable
                         single />
                     <div>
                         @error('currency')

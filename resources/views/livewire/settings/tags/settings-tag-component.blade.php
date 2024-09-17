@@ -32,13 +32,13 @@
     </x-share.cards.base-card>
 
     {{-- create modal --}}
-    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed"  box-class="overflow-visible">
+    <x-modal wire:model.live="createModal" persistent class="modal-bottom sm:modal-middle fixed"  box-class="overflow-visible">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input label="Název" wire:model="name" />
+                    <x-input label="Název" wire:model.live="name" />
                     <div>
                         @error('form.name')
                             <span class="error">{{ $message }}</span>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="col-span-12">
-                    <x-choices-offline label="Barva" wire:model="color" :options="$cssColors" option-label="color" single
+                    <x-choices-offline label="Barva" wire:model.live="color" :options="$cssColors" option-label="color" single
                         searchable>
                         @scope('item', $cssColor)
                             <x-list-item :item="$cssColor" sub-value="color">

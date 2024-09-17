@@ -4,10 +4,10 @@
         Přidat šablonu zařízení
     </button>
 
-    <x-drawer wire:model="storeDrawer" right class="lg:w-2/3 !bg-[#0E1E33]">
+    <x-drawer wire:model.live="storeDrawer" right class="lg:w-2/3 !bg-[#0E1E33]">
         @if (!$availableTemplates->isEmpty())
             <x-form wire:submit="storePrebuildTemplateToDevice">
-                <x-choices label="Dostupné šablony" wire:model="templateId" :options="$availableTemplates" single />
+                <x-choices label="Dostupné šablony" wire:model.live="templateId" :options="$availableTemplates" single />
                 {{-- action section --}}
                 <div class="flex justify-between">
                     <div>

@@ -121,7 +121,7 @@
     {{-- alert drawer --}}
 
     {{-- calendar events drawer --}}
-    <x-drawer wire:model='calendarEventsDrawer' class="lg:w-1/4 !bg-[#0E1E33]" right>
+    <x-drawer wire:model.live='calendarEventsDrawer' class="lg:w-1/4 !bg-[#0E1E33]" right>
         @if (!empty($runningEvents))
             <div class="col-span-12 mb-6">
                 <p class="font-semibold text-lg">Probíhající události</p>
@@ -235,7 +235,7 @@
         @endif
     </x-drawer>
 
-    <x-modal wire:model="calendarNotificationDialog" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="calendarNotificationDialog" persistent class="modal-bottom sm:modal-middle fixed">
         <x-button class="btn btn-sm btn-circle btn-ghost fixed right-2 top-2"
             wire:click='closeCalendarNotificationDialog'>✕</x-button>
         <div class="overflow-y-auto h-96">

@@ -16,7 +16,7 @@ class UpdateMulticastChannelForm extends Form
 
     public ?ChannelMulticast $multicast;
 
-    public string $stb_ip = '';
+    public string|null $stb_ip = '';
 
     public string $source_ip = '';
 

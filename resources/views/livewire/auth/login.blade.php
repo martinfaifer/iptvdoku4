@@ -7,13 +7,13 @@
                 IPTV Dokumentace
             </h2>
             <x-form wire:submit="login" class="mt-6">
-                <x-input label="Email" wire:model="email" />
+                <x-input label="Email" wire:model.live="email" />
                 <div>
                     @error('form.email')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </div>
-                <x-input label="Heslo" wire:model="password" type="password" />
+                <x-input label="Heslo" wire:model.live="password" type="password" />
                 <div>
                     @error('form.password')
                         <span class="error">{{ $message }}</span>

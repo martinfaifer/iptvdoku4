@@ -398,7 +398,7 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-drawer wire:model="updateDrawer" right class="lg:w-1/3 !bg-[#0E1E33]">
+    <x-drawer wire:model.live="updateDrawer" right class="lg:w-1/3 !bg-[#0E1E33]">
         <x-form wire:submit="update">
             <div class="grid grid-cols-12 mt-12 rounded-sm">
                 <div class="col-span-12 mb-4">
@@ -408,79 +408,79 @@
                                 @foreach ($value as $nestedItemKey => $nestedItem)
                                     <div class="mb-4">
                                         <x-input label="{{ $nestedItem['human_description'] }}"
-                                            wire:model="updatedInterface.{{ $name }}.{{ $nestedItemKey }}.replace"></x-input>
+                                            wire:model.live="updatedInterface.{{ $name }}.{{ $nestedItemKey }}.replace"></x-input>
                                     </div>
                                 @endforeach
                             @endif
                             <div class="mb-4">
                                 @if ($name == 'Název')
                                     <x-input label="{{ $name }}"
-                                        wire:model="updatedInterface.{{ $name }}"></x-input>
+                                        wire:model.live="updatedInterface.{{ $name }}"></x-input>
                                 @endif
 
                                 @if ($name == 'Průměr paraboly')
                                     <x-input label="{{ $name }}"
-                                        wire:model="updatedInterface.{{ $name }}"></x-input>
+                                        wire:model.live="updatedInterface.{{ $name }}"></x-input>
                                 @endif
 
                                 @if ($name == 'Frekvence')
                                     <x-input label="{{ $name }}"
-                                        wire:model="updatedInterface.{{ $name }}" type="number"></x-input>
+                                        wire:model.live="updatedInterface.{{ $name }}" type="number"></x-input>
                                 @endif
 
                                 @if ($name == 'DVB')
                                     <x-choices label="{{ $name }}" :options="$dvbs"
-                                        wire:model="updatedInterface.{{ $name }}" single />
+                                        wire:model.live="updatedInterface.{{ $name }}" single />
                                 @endif
 
                                 @if ($name == 'Satelit')
                                     <x-choices label="{{ $name }}" :options="$satelits"
-                                        wire:model="updatedInterface.{{ $name }}" single />
+                                        wire:model.live="updatedInterface.{{ $name }}" single />
                                 @endif
 
                                 @if ($name == 'Polarizace')
                                     <x-choices label="{{ $name }}" :options="$polarizations"
-                                        wire:model="updatedInterface.{{ $name }}" single />
+                                        wire:model.live="updatedInterface.{{ $name }}" single />
                                 @endif
 
                                 @if ($name == 'Symbol rate')
                                     <x-input label="{{ $name }}"
-                                        wire:model="updatedInterface.{{ $name }}" type="number"></x-input>
+                                        wire:model.live="updatedInterface.{{ $name }}" type="number"></x-input>
                                 @endif
 
                                 @if ($name == 'FEC')
                                     <x-input label="{{ $name }}"
-                                        wire:model="updatedInterface.{{ $name }}"></x-input>
+                                        wire:model.live="updatedInterface.{{ $name }}"></x-input>
                                 @endif
 
                                 @if ($name == 'LNB')
                                     <x-choices label="LNB" :options="$lnbs"
-                                        wire:model="updatedInterface.{{ $name }}" single />
+                                        wire:model.live="updatedInterface.{{ $name }}" single />
                                 @endif
 
                                 @if ($name == 'LNB22KV')
                                     <x-choices label="LNB22KV" :options="$lnbs22"
-                                        wire:model="updatedInterface.{{ $name }}" single />
+                                        wire:model.live="updatedInterface.{{ $name }}" single />
                                 @endif
 
                                 @if ($name == 'Vazba na vstupní interface')
                                     <x-choices label="Vstupní interface" :options="$inputs"
-                                        wire:model="updatedInterface.{{ $name }}" single />
+                                        wire:model.live="updatedInterface.{{ $name }}" single />
                                 @endif
 
                                 @if ($name == 'LNB typ')
                                     <x-choices label="{{ $name }}" :options="$lnbTyps"
-                                        wire:model="updatedInterface.{{ $name }}" single />
+                                        wire:model.live="updatedInterface.{{ $name }}" single />
                                 @endif
 
                                 @if ($name == 'Vazba na satelit')
                                     <x-choices-offline label="{{ $name }}" :options="$satelits"
-                                        wire:model="updatedInterface.{{ $name }}" single searchable />
+                                        wire:model.live="updatedInterface.{{ $name }}" single searchable />
                                 @endif
 
                                 @if ($name == 'Satelitní karta')
                                     <x-choices-offline label="{{ $name }}" :options="$satelitCards"
-                                        wire:model="updatedInterface.{{ $name }}" single searchable />
+                                        wire:model.live="updatedInterface.{{ $name }}" single searchable />
                                 @endif
                             </div>
                         @endforeach
@@ -519,7 +519,7 @@
     </x-drawer>
 
     {{-- modal log --}}
-    <x-modal wire:model="logModal" title="Log ze zařízení" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="logModal" title="Log ze zařízení" persistent class="modal-bottom sm:modal-middle fixed">
 
         <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             @click='$wire.closeDialog'>✕</x-button>
@@ -572,7 +572,7 @@
     </x-modal>
 
     {{-- modal charts --}}
-    <x-modal wire:model="chartModal" title="" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="chartModal" title="" persistent class="modal-bottom sm:modal-middle fixed">
 
         <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             @click='$wire.closeDialog'>✕</x-button>

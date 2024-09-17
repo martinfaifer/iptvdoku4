@@ -52,7 +52,7 @@
     </x-share.cards.base-card>
     <p class="mt-2 ml-2 italic font-semibold text-sky-500">Maximální doba uložených záznamů jsou 2 měsíce</p>
 
-    <x-modal wire:model="detailModal" class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="detailModal" class="modal-bottom sm:modal-middle fixed">
         <div class="my-4 overflow-y-auto h-96">
             <div>
                 <pre>

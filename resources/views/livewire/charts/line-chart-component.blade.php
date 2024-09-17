@@ -1,3 +1,3 @@
 <div>
-    <x-chart wire:model="chart" class=""/>
+    <x-chart wire:model.live="chart" class=""/>
 </div>

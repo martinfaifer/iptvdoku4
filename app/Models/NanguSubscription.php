@@ -39,6 +39,11 @@ class NanguSubscription extends Model
         $query->where('subscriptionState', 'BILLING');
     }
 
+    public function scopeIsNew(Builder $query): void
+    {
+        $query->where('subscriptionState', 'NEW');
+    }
+
     public function scopeForIsp(Builder $query, string|int $nanguIspId): void
     {
         $query->where('nangu_isp_id', $nanguIspId);

@@ -26,13 +26,13 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-modal wire:model="storeModal" title="Nový soubor" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model.live="storeModal" title="Nový soubor" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-file wire:model="storeForm.file" label="Soubor" />
+                    <x-file wire:model.live="storeForm.file" label="Soubor" />
                 </div>
             </div>
             {{-- action section --}}

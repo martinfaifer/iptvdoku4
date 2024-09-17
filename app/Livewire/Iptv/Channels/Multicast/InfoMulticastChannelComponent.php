@@ -44,6 +44,7 @@ class InfoMulticastChannelComponent extends Component
     public function closeModal(): void
     {
         $this->updateModal = false;
+        $this->resetErrorBag();
     }
 
     public function destroy(ChannelMulticast $multicast): mixed
