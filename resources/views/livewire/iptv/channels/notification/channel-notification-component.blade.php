@@ -23,7 +23,7 @@
             <x-form wire:submit="chnage_if_can_be_notify">
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-12 md:col-span-10">
-                        <x-checkbox label="Povolit upozornění?" wire:model.live="can_notify" />
+                        <x-checkbox label="Povolit upozornění?" wire:model="can_notify" />
                     </div>
                     <div class="col-span-12 md:col-span-2 md:-mt-2">
                         <x-button label="Upravit"
@@ -92,7 +92,7 @@
         </div>
     </div>
 
-    <x-modal wire:model.live="emailNotificationModal" persistent class="modal-bottom xl:modal-middle fixed"
+    <x-modal wire:model="emailNotificationModal" persistent class="modal-bottom xl:modal-middle fixed"
         box-class="overflow-visible">
         <x-form wire:submit="add_email">
 
@@ -100,7 +100,7 @@
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-12 mb-4">
-                    <x-input label="Email" wire:model.live="emailForm.email" />
+                    <x-input label="Email" wire:model="emailForm.email" />
                 </div>
             </div>
             <div class="flex justify-between">
@@ -117,7 +117,7 @@
         </x-form>
     </x-modal>
 
-    <x-modal wire:model.live="slackChannelNotificationModal" persistent class="modal-bottom xl:modal-middle fixed"
+    <x-modal wire:model="slackChannelNotificationModal" persistent class="modal-bottom xl:modal-middle fixed"
         box-class="overflow-visible">
         <x-form wire:submit="add_slack">
 
@@ -125,7 +125,7 @@
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-12 mb-4">
-                    <x-input label="Slack kanál" wire:model.live="slackForm.slack_channel" />
+                    <x-input label="Slack kanál" wire:model="slackForm.slack_channel" />
                 </div>
             </div>
             <div class="flex justify-between">

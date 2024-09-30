@@ -6,6 +6,7 @@ use App\Jobs\GetChannelDetailFromNanguApiJob;
 use App\Jobs\LogJob;
 use App\Jobs\SendEmailNotificationJob;
 use App\Models\Channel;
+use App\Models\ChannelRegion;
 use App\Models\Contact;
 use App\Models\Loger;
 use App\Models\Note;
@@ -53,6 +54,9 @@ class ChannelObserver
         }
         Cache::forever('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
         $this->cache_channels_with_detail();
+        foreach (ChannelRegion::get() as $region) {
+            $this->cache_channels_with_region_with_detail($region->name);
+        }
     }
 
     public function updated(Channel $channel): void
@@ -91,6 +95,9 @@ class ChannelObserver
 
         Cache::forever('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
         $this->cache_channels_with_detail();
+        foreach (ChannelRegion::get() as $region) {
+            $this->cache_channels_with_region_with_detail($region->name);
+        }
     }
 
     public function deleted(Channel $channel): void
@@ -107,6 +114,9 @@ class ChannelObserver
             );
             Cache::forever('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
             $this->cache_channels_with_detail();
+            foreach (ChannelRegion::get() as $region) {
+                $this->cache_channels_with_region_with_detail($region->name);
+            }
 
             if (Cache::has('channel_with_multicast_' . $channel->id)) {
                 Cache::forget('channel_with_multicast_' . $channel->id);

@@ -35,18 +35,21 @@ class UpdateIptvChannel extends Form
 
     public ?string $epgId = null;
 
+    public ?int $selectedRegion = null;
+
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:250', 'string', 'unique:channels,name,'.$this->channel->id],
+            'name' => ['required', 'max:250', 'string', 'unique:channels,name,' . $this->channel->id],
             'quality' => ['required'],
             'category' => ['required', 'exists:channel_categories,id'],
             'is_radio' => ['required', 'boolean'],
             'is_multiscreen' => ['required', 'boolean'],
             'description' => ['nullable', 'string', 'max:1000'],
-            'nangu_chunk_store_id' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_chunk_store_id,'.$this->channel->id],
-            'nangu_channel_code' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_channel_code,'.$this->channel->id],
+            'nangu_chunk_store_id' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_chunk_store_id,' . $this->channel->id],
+            'nangu_channel_code' => ['nullable', 'max:250', 'string', 'unique:channels,nangu_channel_code,' . $this->channel->id],
             'epgId' => ['nullable'],
+            'selectedRegion' => ['nullable']
         ];
     }
 
@@ -88,6 +91,7 @@ class UpdateIptvChannel extends Form
         $this->nangu_channel_code = $channel->nangu_channel_code;
         $this->geniustvChannelPackage = is_null(json_decode($channel->geniustv_channel_packages_id)) ? [] : json_decode($channel->geniustv_channel_packages_id);
         $this->epgId = $channel->epg_id;
+        $this->selectedRegion = $channel->channel_region_id;
     }
 
     public function update(): void
@@ -112,6 +116,7 @@ class UpdateIptvChannel extends Form
             'nangu_channel_code' => $this->nangu_channel_code,
             'geniustv_channel_packages_id' => json_encode($this->geniustvChannelPackage),
             'epg_id' => $this->epgId,
+            'channel_region_id' => is_null($this->selectedRegion) ? 3 : $this->selectedRegion,
         ]);
 
         $this->reset('name', 'logo', 'quality', 'category', 'description', 'nangu_chunk_store_id', 'nangu_channel_code');

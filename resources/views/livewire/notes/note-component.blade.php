@@ -60,14 +60,14 @@
             @endif
         </div>
     </x-share.cards.base-card>
-    <x-modal wire:model.live="storeModal" title="Nová poznámka" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" title="Nová poznámka" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    {{-- <x-textarea wire:model.live="storeNoteForm.note" rows="5" inline /> --}}
-                    <x-markdown wire:model.live="storeNoteForm.note" />
+                    {{-- <x-textarea wire:model="storeNoteForm.note" rows="5" inline /> --}}
+                    <x-markdown wire:model="storeNoteForm.note" />
                 </div>
             </div>
             {{-- action section --}}

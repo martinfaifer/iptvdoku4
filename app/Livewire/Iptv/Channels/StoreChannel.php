@@ -3,13 +3,14 @@
 namespace App\Livewire\Iptv\Channels;
 
 use App\Models\Channel;
-use App\Models\GeniusTvChannelPackage;
-use App\Traits\Channels\GetChannelsCategoriesFromCacheTrait;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Support\Facades\Cache;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
+use App\Models\ChannelRegion;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Cache;
+use App\Models\GeniusTvChannelPackage;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Channels\GetChannelsCategoriesFromCacheTrait;
 
 class StoreChannel extends Component
 {
@@ -58,6 +59,10 @@ class StoreChannel extends Component
     #[Validate('nullable')]
     public ?string $epgId = null;
 
+    #[Validate('required', message: "Vyberete území, kde se kanál vysílá")]
+    #[Validate('exists:channel_regions,id', message: "Neexistující region")]
+    public int $selectedRegion = 3;
+
     public bool $storeModal = false;
 
     public array $qualities = Channel::QUALITIES;
@@ -68,11 +73,14 @@ class StoreChannel extends Component
 
     public array $channelsEpgs;
 
+    public $regions;
+
     public function mount(): void
     {
         $this->channelCategories = $this->get_channels_categories_from_cache();
         $this->geniusTVChannelPackages = GeniusTvChannelPackage::get();
         $this->channelsEpgs = ! Cache::has('channelEpgIds') ? [] : Cache::get('channelEpgIds');
+        $this->regions = ChannelRegion::get();
     }
 
     public function store(): mixed
@@ -103,11 +111,12 @@ class StoreChannel extends Component
             'nangu_channel_code' => trim($this->nangu_channel_code),
             'geniustv_channel_packages_id' => json_encode($this->geniustvChannelPackage),
             'epg_id' => $this->epgId,
+            'channel_region_id' => $this->selectedRegion,
         ]);
 
         // $this->dispatch('update_channels_sidebar');
         // $this->closeDialog();
-
+        $this->reset();
         $this->redirect('/channels/' . $channel->id . '/multicast', true);
 
         return $this->success_alert('Kanál přidán');

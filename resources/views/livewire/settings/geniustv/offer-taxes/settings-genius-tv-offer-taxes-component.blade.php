@@ -44,13 +44,13 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-modal wire:model.live="createModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input label="Offer" wire:model.live="form.offer" />
+                    <x-input label="Offer" wire:model="form.offer" />
                     <div>
                         @error('price')
                             <span class="error">{{ $message }}</span>
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Kanály" wire:model.live="form.channels_id" :options="$channels" searchable />
+                    <x-choices-offline label="Kanály" wire:model="form.channels_id" :options="$channels" searchable />
                     <div>
                         @error('name')
                             <span class="error">{{ $message }}</span>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-input type="number" step="0.001" label="cena" wire:model.live="form.price" />
+                    <x-input type="number" step="0.001" label="cena" wire:model="form.price" />
                     <div>
                         @error('price')
                             <span class="error">{{ $message }}</span>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Měna" wire:model.live="form.currency" :options="$currencies" searchable single />
+                    <x-choices-offline label="Měna" wire:model="form.currency" :options="$currencies" searchable single />
                     <div>
                         @error('currency')
                             <span class="error">{{ $message }}</span>
@@ -97,13 +97,13 @@
         </x-form>
     </x-modal>
 
-    <x-modal wire:model.live="updateModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input disabled readonly label="Offer" wire:model.live="updateForm.offer" />
+                    <x-input disabled readonly label="Offer" wire:model="updateForm.offer" />
                     <div>
                         @error('price')
                             <span class="error">{{ $message }}</span>
@@ -111,7 +111,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Kanály" wire:model.live="updateForm.channels_id" :options="$channels" searchable />
+                    <x-choices-offline label="Kanály" wire:model="updateForm.channels_id" :options="$channels" searchable />
                     <div>
                         @error('name')
                             <span class="error">{{ $message }}</span>
@@ -119,7 +119,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-input type="number" step="0.001" label="cena" wire:model.live="updateForm.price" />
+                    <x-input type="number" step="0.001" label="cena" wire:model="updateForm.price" />
                     <div>
                         @error('price')
                             <span class="error">{{ $message }}</span>
@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Měna" wire:model.live="updateForm.currency" :options="$currencies" searchable single />
+                    <x-choices-offline label="Měna" wire:model="updateForm.currency" :options="$currencies" searchable single />
                     <div>
                         @error('currency')
                             <span class="error">{{ $message }}</span>

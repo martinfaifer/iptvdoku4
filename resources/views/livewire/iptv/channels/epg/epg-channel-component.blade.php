@@ -48,7 +48,7 @@
 
         </div>
         <div class="col-span-12 xl:col-span-2">
-            <x-input type="date" wire:model.live="dayInMonth" wire:change="$dispatch('reload_channel_epg')" />
+            <x-input type="date" wire:model="dayInMonth" wire:change="$dispatch('reload_channel_epg')" />
         </div>
     </div>
 </div>

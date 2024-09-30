@@ -7,6 +7,7 @@ use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -44,6 +45,7 @@ class Channel extends Model
         'nangu_channel_code',
         'geniustv_channel_packages_id',
         'epg_id',
+        'channel_region_id'
     ];
 
     protected $casts = [
@@ -82,6 +84,11 @@ class Channel extends Model
     public function notes(): HasMany
     {
         return $this->hasMany(Note::class, 'channel_id');
+    }
+
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(ChannelRegion::class, 'channel_region_id', 'id');
     }
 
     public function scopeSearch(Builder $query, string $search): void

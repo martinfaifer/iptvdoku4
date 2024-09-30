@@ -4,12 +4,12 @@
         Přidat sftp server
     </button>
 
-    <x-modal wire:model.live="storeModal" title="Nový sftp server" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" title="Nový sftp server" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-4 mb-4">
-                    <x-input label="Popis serveru" wire:model.live="storeForm.name" />
+                    <x-input label="Popis serveru" wire:model="storeForm.name" />
                     <div>
                         @error('name')
                             <span class="error">{{ $message }}</span>
@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-4 mb-4">
-                    <x-choices label="Typ připojení" :options="$connectionTypes" wire:model.live="storeForm.connection_type" single />
+                    <x-choices label="Typ připojení" :options="$connectionTypes" wire:model="storeForm.connection_type" single />
                     <div>
                         @error('connection_type')
                             <span class="error">{{ $message }}</span>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-4 mb-4">
-                    <x-input label="Url" wire:model.live="storeForm.url" />
+                    <x-input label="Url" wire:model="storeForm.url" />
                     <div>
                         @error('url')
                             <span class="error">{{ $message }}</span>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Uživtelské jméno pro připojení" wire:model.live="storeForm.username" />
+                    <x-input label="Uživtelské jméno pro připojení" wire:model="storeForm.username" />
                     <div>
                         @error('username')
                             <span class="error">{{ $message }}</span>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Heslo" wire:model.live="storeForm.password" />
+                    <x-input label="Heslo" wire:model="storeForm.password" />
                     <div>
                         @error('password')
                             <span class="error">{{ $message }}</span>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-input label="Cesta k adreáři" wire:model.live="storeForm.path_to_folder" />
+                    <x-input label="Cesta k adreáři" wire:model="storeForm.path_to_folder" />
                     <div>
                         @error('path_to_folder')
                             <span class="error">{{ $message }}</span>

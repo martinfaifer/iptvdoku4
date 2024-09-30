@@ -211,7 +211,7 @@
                 </div>
                 <div class="md:flex-none gap-2 md:overflow-x-auto">
                     <div class="right-2">
-                        <x-select label="Vyberte poskytovatele GeniusTV" wire:model.live="nanguIsp" :options="$nanguIsps"
+                        <x-select label="Vyberte poskytovatele GeniusTV" wire:model="nanguIsp" :options="$nanguIsps"
                             wire:change="$dispatch('reload_new_nangu_isp_charts')" single />
                     </div>
                 </div>

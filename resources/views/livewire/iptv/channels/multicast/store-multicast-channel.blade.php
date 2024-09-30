@@ -4,13 +4,13 @@
         Přidat multicast
     </button>
 
-    <x-modal wire:model.live="storeModal" title="Nový multicast" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" title="Nový multicast" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 {{-- name --}}
                 <div class="col-span-12 mb-4">
-                    <x-input label="IP k STB" wire:model.live="form.stb_ip" />
+                    <x-input label="IP k STB" wire:model="form.stb_ip" />
                     <div>
                         @error('stb_ip')
                             <span class="error">{{ $message }}</span>
@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-input label="Zdrojová IP" wire:model.live="form.source_ip" />
+                    <x-input label="Zdrojová IP" wire:model="form.source_ip" />
                     <div>
                         @error('source_ip')
                             <span class="error">{{ $message }}</span>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline searchable label="Zdroj" wire:model.live="form.channel_source_id" :options="$channelSources" single />
+                    <x-choices-offline searchable label="Zdroj" wire:model="form.channel_source_id" :options="$channelSources" single />
                     <div>
                         @error('channel_source_id')
                             <span class="error">{{ $message }}</span>
@@ -36,7 +36,7 @@
 
                 {{-- is_backup --}}
                 <div class="col-span-6 mb-4">
-                    <x-toggle label="Záloha" wire:model.live="form.is_backup" />
+                    <x-toggle label="Záloha" wire:model="form.is_backup" />
                     <div>
                         @error('is_backup')
                             <span class="error">{{ $message }}</span>
@@ -45,7 +45,7 @@
                 </div>
                 {{-- store to dohled --}}
                 <div class="col-span-6 mb-4">
-                    <x-toggle label="Uložit do dohledu" wire:model.live="form.to_dohled" />
+                    <x-toggle label="Uložit do dohledu" wire:model="form.to_dohled" />
                     <div>
                         @error('to_dohled')
                             <span class="error">{{ $message }}</span>

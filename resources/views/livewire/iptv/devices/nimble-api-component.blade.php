@@ -124,13 +124,13 @@
     </x-share.cards.base-card>
 
 
-    <x-modal wire:model.live="editServerApiModal" title="Vzdálená správa serveru" persistent>
+    <x-modal wire:model="editServerApiModal" title="Vzdálená správa serveru" persistent>
         <div class="my-4">
             {{-- @if (array_key_exists('status', $nimbleServerApiData) && $nimbleServerApiData['status'] == 'Ok')
                 <x-form wire:submit="updateNimbleServerName">
                     <div class="grid grid-cols-12 gap-4 ">
                         <div class="col-span-12 md:col-span-10">
-                            <x-input label="Název serveru v Nimble WMS" wire:model.live="nimbleServerApiData.server.name" />
+                            <x-input label="Název serveru v Nimble WMS" wire:model="nimbleServerApiData.server.name" />
                         </div>
                         <div class="col-span-12 md:col-span-2">
                             <x-button label="Upravit"
@@ -203,7 +203,7 @@
         </div>
     </x-modal>
 
-    <x-modal wire:model.live="detailModal" title="Informace o vstupním streamu">
+    <x-modal wire:model="detailModal" title="Informace o vstupním streamu">
         <div class="my-4">
             @if (!empty($sourceStream))
                 <div class="grid grid-cols-12 gap-4">

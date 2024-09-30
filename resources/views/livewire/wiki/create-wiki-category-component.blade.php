@@ -4,12 +4,12 @@
         Přidat kategorii
     </button>
 
-    <x-modal wire:model.live="storeModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input label="Název kategorie" wire:model.live="form.name" />
+                    <x-input label="Název kategorie" wire:model="form.name" />
                     <div>
                         @error('name')
                             <span class="error">{{ $message }}</span>

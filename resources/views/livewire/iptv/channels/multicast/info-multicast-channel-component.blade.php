@@ -89,14 +89,14 @@
         @endforeach
     </x-share.cards.base-card>
     {{-- edit dialog --}}
-    <x-modal wire:model.live="updateModal" title="Změna multicastu" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="updateModal" title="Změna multicastu" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeModal'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 {{-- name --}}
                 <div class="col-span-12 mb-4">
-                    <x-input label="IP k STB" wire:model.live="form.stb_ip" />
+                    <x-input label="IP k STB" wire:model="form.stb_ip" />
                     <div>
                         @error('stb_ip')
                             <span class="error">{{ $message }}</span>
@@ -104,7 +104,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-input label="Zdrojová IP" wire:model.live="form.source_ip" />
+                    <x-input label="Zdrojová IP" wire:model="form.source_ip" />
                     <div>
                         @error('source_ip')
                             <span class="error">{{ $message }}</span>
@@ -112,7 +112,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline searchable label="Zdroj" wire:model.live="form.channel_source_id" :options="$channelSources"
+                    <x-choices-offline searchable label="Zdroj" wire:model="form.channel_source_id" :options="$channelSources"
                         single />
                     <div>
                         @error('channel_source_id')
@@ -123,7 +123,7 @@
 
                 {{-- is_backup --}}
                 <div class="col-span-6 mb-4">
-                    <x-toggle label="Záloha" wire:model.live="form.is_backup" />
+                    <x-toggle label="Záloha" wire:model="form.is_backup" />
                     <div>
                         @error('is_backup')
                             <span class="error">{{ $message }}</span>
@@ -132,7 +132,7 @@
                 </div>
                 @if ($form->isInDohled)
                     <div class="col-span-6 mb-4">
-                        <x-toggle label="Odebrat z dohledu" wire:model.live="form.delete_from_dohled" />
+                        <x-toggle label="Odebrat z dohledu" wire:model="form.delete_from_dohled" />
                         <div>
                             @error('delete_from_dohled')
                                 <span class="error">{{ $message }}</span>
@@ -142,7 +142,7 @@
                 @endif
                 @if (!$form->isInDohled)
                     <div class="col-span-6 mb-4">
-                        <x-toggle label="Přidat do dohledu" wire:model.live="form.to_dohled" />
+                        <x-toggle label="Přidat do dohledu" wire:model="form.to_dohled" />
                         <div>
                             @error('to_dohled')
                                 <span class="error">{{ $message }}</span>

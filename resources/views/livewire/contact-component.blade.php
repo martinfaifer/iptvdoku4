@@ -77,13 +77,13 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-modal wire:model.live="storeModal" title="Nový kontakt" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" title="Nový kontakt" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input label="Osoba" wire:model.live="contactForm.full_name" />
+                    <x-input label="Osoba" wire:model="contactForm.full_name" />
                     <div>
                         @error('full_name')
                             <span class="error">{{ $message }}</span>
@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-input label="Email" wire:model.live="contactForm.email" />
+                    <x-input label="Email" wire:model="contactForm.email" />
                     <div>
                         @error('email')
                             <span class="error">{{ $message }}</span>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-input label="Telefon" wire:model.live="contactForm.phone" />
+                    <x-input label="Telefon" wire:model="contactForm.phone" />
                     <div>
                         @error('phone')
                             <span class="error">{{ $message }}</span>
@@ -121,13 +121,13 @@
         </x-form>
     </x-modal>
 
-    <x-modal wire:model.live="updateModal" title="" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="updateModal" title="" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input label="Osoba" wire:model.live="updateForm.full_name" />
+                    <x-input label="Osoba" wire:model="updateForm.full_name" />
                     <div>
                         @error('full_name')
                             <span class="error">{{ $message }}</span>
@@ -135,7 +135,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-input label="Email" wire:model.live="updateForm.email" />
+                    <x-input label="Email" wire:model="updateForm.email" />
                     <div>
                         @error('email')
                             <span class="error">{{ $message }}</span>
@@ -143,7 +143,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-input label="Telefon" wire:model.live="updateForm.phone" />
+                    <x-input label="Telefon" wire:model="updateForm.phone" />
                     <div>
                         @error('phone')
                             <span class="error">{{ $message }}</span>

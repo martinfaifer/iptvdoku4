@@ -11,12 +11,12 @@
         <x-icon name="s-pencil" class="w-4 h-4 text-green-500" />
     </button>
 
-    <x-modal wire:model.live="updateModal" persistent class="modal-bottom sm:modal-middle">
+    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input label="Nadpis" wire:model.live="form.title" />
+                    <x-input label="Nadpis" wire:model="form.title" />
                     <div>
                         @error('title')
                             <span class="error">{{ $message }}</span>
@@ -25,12 +25,12 @@
                 </div>
                 <div class="col-span-12 mb-4">
                     <template x-if="$wire.updateModal">
-                        <x-editor wire:model.live="form.text" label="Obsah" :config="$config" />
-                        {{-- <x-markdown wire:model.live="form.text" label="Obsah" /> --}}
+                        <x-editor wire:model="form.text" label="Obsah" :config="$config" />
+                        {{-- <x-markdown wire:model="form.text" label="Obsah" /> --}}
                     </template>
                 </div>
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Vyberte kategorii" wire:model.live="form.wiki_category_id" :options="$categories"
+                    <x-choices-offline label="Vyberte kategorii" wire:model="form.wiki_category_id" :options="$categories"
                         searchable single>
                     </x-choices-offline>
                     <div>

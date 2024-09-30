@@ -9,6 +9,7 @@ use Livewire\Attributes\Locked;
 use Illuminate\Support\Facades\Cache;
 use App\Models\GeniusTvChannelPackage;
 use App\Livewire\Forms\UpdateIptvChannel;
+use App\Models\ChannelRegion;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\Channels\GetChannelsCategoriesFromCacheTrait;
 
@@ -35,11 +36,14 @@ class UpdateChannel extends Component
 
     public array $channelsEpgs;
 
+    public $regions;
+
     public function mount(?string $channelType = null): void
     {
         $this->channelCategories = $this->get_channels_categories_from_cache();
         $this->geniusTVChannelPackages = GeniusTvChannelPackage::get();
         $this->channelsEpgs = ! Cache::has('channelEpgIds') ? [] : Cache::get('channelEpgIds');
+        $this->regions = ChannelRegion::get();
     }
 
     public function update(): mixed

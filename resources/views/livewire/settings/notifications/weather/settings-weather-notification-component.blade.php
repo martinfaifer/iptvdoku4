@@ -29,16 +29,16 @@
     </x-share.cards.base-card>
 
     {{-- create modal --}}
-    <x-modal wire:model.live="createModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-6">
-                    <x-input label="Město" wire:model.live="createForm.city" />
+                    <x-input label="Město" wire:model="createForm.city" />
                 </div>
                 <div class="col-span-12 md:col-span-6">
-                    <x-input label="Stát" wire:model.live="createForm.state" />
+                    <x-input label="Stát" wire:model="createForm.state" />
                 </div>
             </div>
             {{-- action section --}}

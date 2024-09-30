@@ -53,7 +53,7 @@
     </x-share.cards.base-card>
 
     {{-- create modal --}}
-    <x-modal wire:model.live="createModal" persistent class="modal-bottom xl:modal-middle fixed"
+    <x-modal wire:model="createModal" persistent class="modal-bottom xl:modal-middle fixed"
         box-class="overflow-visible">
         <x-form wire:submit="create">
 
@@ -61,7 +61,7 @@
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Jméno" wire:model.live="form.first_name" />
+                    <x-input label="Jméno" wire:model="form.first_name" />
                     <div>
                         @error('first_name')
                             <span class="error">{{ $message }}</span>
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Příjmení" wire:model.live="form.last_name" />
+                    <x-input label="Příjmení" wire:model="form.last_name" />
                     <div>
                         @error('last_name')
                             <span class="error">{{ $message }}</span>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Email" wire:model.live="form.email" />
+                    <x-input label="Email" wire:model="form.email" />
                     <div>
                         @error('email')
                             <span class="error">{{ $message }}</span>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model.live="form.userRoleId" single
+                    <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model="form.userRoleId" single
                         searchable />
                 </div>
             </div>
@@ -105,14 +105,14 @@
         </x-form>
     </x-modal>
     {{-- edit modal --}}
-    <x-modal wire:model.live="editModal" persistent class="modal-bottom xl:modal-middle fixed" box-class="overflow-visible">
+    <x-modal wire:model="editModal" persistent class="modal-bottom xl:modal-middle fixed" box-class="overflow-visible">
         <x-form wire:submit="update">
 
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Jméno" wire:model.live="editForm.first_name" />
+                    <x-input label="Jméno" wire:model="editForm.first_name" />
                     <div>
                         @error('first_name')
                             <span class="error">{{ $message }}</span>
@@ -120,7 +120,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Příjmení" wire:model.live="editForm.last_name" />
+                    <x-input label="Příjmení" wire:model="editForm.last_name" />
                     <div>
                         @error('last_name')
                             <span class="error">{{ $message }}</span>
@@ -128,33 +128,33 @@
                     </div>
                 </div>
                 <div class="col-span-12  mb-4">
-                    <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model.live="editForm.userRoleId"
+                    <x-choices-offline label="Uživatelská role" :options="$userRoles" wire:model="editForm.userRoleId"
                         single searchable />
                 </div>
                 <div class="col-span-12 xl:col-span-3 mb-4">
-                    <x-checkbox label="Upozornění při změněně kanálu" wire:model.live="editForm.notify_if_channel_change" />
+                    <x-checkbox label="Upozornění při změněně kanálu" wire:model="editForm.notify_if_channel_change" />
                 </div>
                 <div class="col-span-12 xl:col-span-3 mb-4">
-                    <x-checkbox label="Upozornění na nový článek ve wiki" wire:model.live="editForm.notify_if_added_new_wiki_content" />
+                    <x-checkbox label="Upozornění na nový článek ve wiki" wire:model="editForm.notify_if_added_new_wiki_content" />
                 </div>
                 <div class="col-span-12 xl:col-span-3 mb-4">
-                    <x-checkbox label="Upozornění na problém s počasím" wire:model.live="editForm.notify_if_weather_problem" />
+                    <x-checkbox label="Upozornění na problém s počasím" wire:model="editForm.notify_if_weather_problem" />
                 </div>
                 <div class="col-span-12 xl:col-span-3 mb-4">
                     <x-checkbox label="Upozornění na příliš mnoho nefunkčních kanálů"
-                        wire:model.live="editForm.notify_if_too_many_channels_down" />
+                        wire:model="editForm.notify_if_too_many_channels_down" />
                 </div>
                 <div class="col-span-12 xl:col-span-3 mb-4">
                     <x-checkbox label="Upozornění na expirace satelitních karet"
-                        wire:model.live="editForm.notify_if_satelit_card_has_expiration" />
+                        wire:model="editForm.notify_if_satelit_card_has_expiration" />
                 </div>
                 <div class="col-span-12 xl:col-span-3  mb-4">
-                    <x-checkbox label="Upozornění na novou událost v kalendáři" wire:model.live="editForm.notify_if_added_new_event" />
+                    <x-checkbox label="Upozornění na novou událost v kalendáři" wire:model="editForm.notify_if_added_new_event" />
                 </div>
 
                 <div class="col-span-12 mb-4">
                     <x-checkbox label="Připnout PopUp okno s výpadky kanálů"
-                        wire:model.live="editForm.iptv_monitoring_window" />
+                        wire:model="editForm.iptv_monitoring_window" />
                 </div>
             </div>
             <div class="flex justify-between">

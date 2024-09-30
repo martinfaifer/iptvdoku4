@@ -15,7 +15,7 @@
         @endif
     </label>
 
-    <x-drawer wire:model.live="alertDrawer" id="alert-drawer" right class="lg:w-1/4 !bg-[#0E1E33]">
+    <x-drawer wire:model="alertDrawer" id="alert-drawer" right class="lg:w-1/4 !bg-[#0E1E33]">
 
         {{-- alerts --}}
         @if (!empty($iptv_dohled_alerts))

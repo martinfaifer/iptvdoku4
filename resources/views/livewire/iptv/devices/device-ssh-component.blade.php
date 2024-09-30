@@ -37,13 +37,13 @@
             </div>
         </x-share.cards.base-card>
     @endif
-    <x-modal wire:model.live="storeModal" title="Přidání ssh přístupu" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" title="Přidání ssh přístupu" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-6 mb-4">
-                    <x-input label="Uživatelské jméno" wire:model.live="username" />
+                    <x-input label="Uživatelské jméno" wire:model="username" />
                     <div>
                         @error('form.username')
                             <span class="error">{{ $message }}</span>
@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="col-span-6 mb-4">
-                    <x-input label="Heslo" wire:model.live="password" />
+                    <x-input label="Heslo" wire:model="password" />
                     <div>
                         @error('form.password')
                             <span class="error">{{ $message }}</span>
@@ -74,13 +74,13 @@
         </x-form>
     </x-modal>
 
-    <x-modal wire:model.live="updateModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-6 mb-4">
-                    <x-input label="Uživatelské jméno" wire:model.live="username" />
+                    <x-input label="Uživatelské jméno" wire:model="username" />
                     <div>
                         @error('form.username')
                             <span class="error">{{ $message }}</span>
@@ -89,7 +89,7 @@
                 </div>
 
                 <div class="col-span-6 mb-4">
-                    <x-input label="Heslo" wire:model.live="password" />
+                    <x-input label="Heslo" wire:model="password" />
                     <div>
                         @error('form.password')
                             <span class="error">{{ $message }}</span>

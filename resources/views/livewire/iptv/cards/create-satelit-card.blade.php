@@ -4,12 +4,12 @@
         Přidat satelitní kartu
     </button>
 
-    <x-modal wire:model.live="storeModal" title="Nová satelitní karta" persistent class="modal-bottom sm:modal-middle fixed"  box-class="overflow-visible">
+    <x-modal wire:model="storeModal" title="Nová satelitní karta" persistent class="modal-bottom sm:modal-middle fixed"  box-class="overflow-visible">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Číslo karty" wire:model.live="storeForm.name" />
+                    <x-input label="Číslo karty" wire:model="storeForm.name" />
                     <div>
                         @error('name')
                             <span class="error">{{ $message }}</span>
@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-choices-offline label="Distributor" wire:model.live="storeForm.satelit_card_vendor_id" :options="$satelitCardsVendors" single searchable />
+                    <x-choices-offline label="Distributor" wire:model="storeForm.satelit_card_vendor_id" :options="$satelitCardsVendors" single searchable />
                     <div>
                         @error('satelit_card_vendor_id')
                             <span class="error">{{ $message }}</span>

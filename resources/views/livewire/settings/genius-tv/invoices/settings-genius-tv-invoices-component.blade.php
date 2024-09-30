@@ -6,7 +6,7 @@
                     class="!bg-[#0F151F] input-md placeholder:text-gray-600" icon="o-magnifying-glass" autofocus />
             </div>
             <div class="col-span-6 md:col-span-3">
-                <x-input type="month" wire:model.live="selectedDate" min="2024-04" />
+                <x-input type="month" wire:model="selectedDate" min="2024-04" />
             </div>
         </div>
         <div>

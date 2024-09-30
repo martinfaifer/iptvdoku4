@@ -1,4 +1,5 @@
 <div wire.poll.5s>
+    {{-- @dd($channelRegion->region->name) --}}
     <div class="tooltip tooltip-left absolute mt-7 md:mt-6 md:right-10" data-tip="informace o kanálu">
         <label @click='$wire.openChannelDetailDrawer' class="btn btn-sm bg-transparent border-none" label="Bottom"
             tooltip-bottom="Detail o kanálu">
@@ -6,7 +7,7 @@
         </label>
     </div>
     {{-- info drawer --}}
-    <x-drawer wire:model.live='channelDetailDrawer' separator right class="lg:w-1/4 !bg-[#0E1E33]">
+    <x-drawer wire:model='channelDetailDrawer' separator right class="lg:w-1/4 !bg-[#0E1E33]">
         <div class="lg:hidden">
             <x-button class="btn btn-sm btn-circle btn-ghost bg-[#0E1E33] absolute right-2 top-2"
                 @click='$wire.channelDetailDrawer = false'>✕</x-button>
@@ -70,6 +71,14 @@
                         </div>
                     </div>
                 @endif
+
+                <div class="tooltip" data-tip="Region">
+                    <div
+                        class="text-xs inline-flex items-center font-semibold leading-sm px-3 py-1 bg-sky-800 text-sky-200 rounded-lg w-18 h-6">
+                       Region <span class="font-bold ml-1"> {{ $channel->region?->name }}</span>
+                    </div>
+                </div>
+
 
             </div>
         </div>

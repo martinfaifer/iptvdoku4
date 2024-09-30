@@ -129,7 +129,7 @@
     </x-share.cards.base-card>
 
     {{-- update modal --}}
-    <x-modal wire:model.live="updateModal" title="Úprava kanálu na zařízení" persistent
+    <x-modal wire:model="updateModal" title="Úprava kanálu na zařízení" persistent
         class="modal-bottom sm:modal-middle ">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -274,14 +274,14 @@
     {{-- end of update modal --}}
 
     {{-- linux path modal --}}
-    <x-modal wire:model.live="storeLinuxPathModal" title="Cesta k souboru pro spuštění streamu" persistent
+    <x-modal wire:model="storeLinuxPathModal" title="Cesta k souboru pro spuštění streamu" persistent
         class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="store_path">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 x-on:click='$wire.storeLinuxPathModal = false'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input label="Cesta k souboru" wire:model.live="path" />
+                    <x-input label="Cesta k souboru" wire:model="path" />
                     <div>
                         @error('form.path')
                             <span class="error">{{ $message }}</span>

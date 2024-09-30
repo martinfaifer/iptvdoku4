@@ -7,7 +7,7 @@
                 Zapomenuté heslo
             </h2>
             <x-form wire:submit="sendNewPassword" class="mt-6">
-                <x-input label="Email" wire:model.live="email" placeholder="vas_email@"/>
+                <x-input label="Email" wire:model="email" placeholder="vas_email@"/>
                 <div>
                     @error('form.email')
                         <span class="error">{{ $message }}</span>

@@ -285,14 +285,14 @@
         </div>
     </div>
 
-    <x-drawer wire:model.live="updateModal" right class="lg:w-2/3 !bg-[#0E1E33]">
+    <x-drawer wire:model="updateModal" right class="lg:w-2/3 !bg-[#0E1E33]">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeModal'>✕</x-button>
             <div class="overflow-y-auto">
                 <div class="grid grid-cols-12 gap-4 ">
                     <div class="col-span-12 mb-4">
-                        <x-input label="Název události" wire:model.live="form.label" />
+                        <x-input label="Název události" wire:model="form.label" />
                         <div>
                             @error('label')
                                 <span class="error">{{ $message }}</span>
@@ -300,7 +300,7 @@
                         </div>
                     </div>
                     <div class="col-span-6 mb-4">
-                        <x-input type="date" label="Den začátku události" wire:model.live="form.start_date" />
+                        <x-input type="date" label="Den začátku události" wire:model="form.start_date" />
                         <div>
                             @error('start_date')
                                 <span class="error">{{ $message }}</span>
@@ -308,7 +308,7 @@
                         </div>
                     </div>
                     <div class="col-span-6 mb-4">
-                        <x-input type="time" label="Čas začátku události" wire:model.live="form.start_time" />
+                        <x-input type="time" label="Čas začátku události" wire:model="form.start_time" />
                         <div>
                             @error('start_time')
                                 <span class="error">{{ $message }}</span>
@@ -316,7 +316,7 @@
                         </div>
                     </div>
                     <div class="col-span-6 mb-4">
-                        <x-input type="date" label="Den konce události" wire:model.live="form.end_date" />
+                        <x-input type="date" label="Den konce události" wire:model="form.end_date" />
                         <div>
                             @error('end_date')
                                 <span class="error">{{ $message }}</span>
@@ -324,7 +324,7 @@
                         </div>
                     </div>
                     <div class="col-span-6 mb-4">
-                        <x-input type="time" label="Čas konce události" wire:model.live="form.end_time" />
+                        <x-input type="time" label="Čas konce události" wire:model="form.end_time" />
                         <div>
                             @error('end_time')
                                 <span class="error">{{ $message }}</span>
@@ -332,7 +332,7 @@
                         </div>
                     </div>
                     <div class="col-span-12 md:col-span-6 mb-4">
-                        <x-choices-offline label="Vyberte kanál/y" wire:model.live="form.channels" :options="$channels"
+                        <x-choices-offline label="Vyberte kanál/y" wire:model="form.channels" :options="$channels"
                             searchable>
                         </x-choices-offline>
                         <div>
@@ -342,7 +342,7 @@
                         </div>
                     </div>
                     <div class="col-span-12 md:col-span-6 mb-4">
-                        <x-choices-offline label="Štítek s akcí" wire:model.live="form.tag_id" :options="$tags" searchable
+                        <x-choices-offline label="Štítek s akcí" wire:model="form.tag_id" :options="$tags" searchable
                             single>
                         </x-choices-offline>
                         <div>
@@ -352,7 +352,7 @@
                         </div>
                     </div>
                     <div class="col-span-12 md:col-span-6 mb-4">
-                        <x-choices-offline label="Vyberte uživatele pro upozornění" wire:model.live="form.users"
+                        <x-choices-offline label="Vyberte uživatele pro upozornění" wire:model="form.users"
                             :options="$users" option-label="email" searchable>
                         </x-choices-offline>
                         <div>
@@ -362,10 +362,10 @@
                         </div>
                     </div>
                     <div class="col-span-12 md:col-span-6 mb-4 md:mt-10">
-                        <x-checkbox label="Zobrazit upozornění v banneru?" wire:model.live="form.fe_notification" />
+                        <x-checkbox label="Zobrazit upozornění v banneru?" wire:model="form.fe_notification" />
                     </div>
                     <div class="col-span-12 md:col-span-6 mb-4">
-                        <x-choices-offline label="Barva" wire:model.live="form.color" :options="$cssColors"
+                        <x-choices-offline label="Barva" wire:model="form.color" :options="$cssColors"
                             option-label="color" single searchable>
                             @scope('item', $cssColor)
                                 <x-list-item :item="$cssColor" sub-value="color">
@@ -382,7 +382,7 @@
                         </x-choices-offline>
                     </div>
                     <div class="col-span-12 md:col-span-6 mb-4">
-                        <x-choices-offline label="Vyberte server pro nahrání banneru" wire:model.live="form.sftp_server_id"
+                        <x-choices-offline label="Vyberte server pro nahrání banneru" wire:model="form.sftp_server_id"
                             :options="$sftpServers" single searchable>
                         </x-choices-offline>
                     </div>
@@ -390,7 +390,7 @@
                         <div class="grid grid-cols-12 gap-4">
                             <div class="col-span-6">
                                 <x-file class="!file-input-xs" label="Zde můžete nahrát banner"
-                                    wire:model.live="form.banner" accept="image/png" />
+                                    wire:model="form.banner" accept="image/png" />
                             </div>
                             <div class="col-span-6">
                                 @if (!is_null($form->banner))
@@ -404,7 +404,7 @@
                     </div>
                     <div class="col-span-12 mb-4">
                         <template x-if="$wire.updateModal">
-                            <x-markdown wire:model.live="form.description" label="Popis události" />
+                            <x-markdown wire:model="form.description" label="Popis události" />
                         </template>
                     </div>
                 </div>

@@ -71,7 +71,7 @@
                     @endforeach
                 </x-share.cards.base-card>
                 {{-- edit dialog --}}
-                <x-modal wire:model.live="updateModal" title="Změna ip u kvality" persistent
+                <x-modal wire:model="updateModal" title="Změna ip u kvality" persistent
                     class="modal-bottom sm:modal-middle fixed">
                     <x-form wire:submit="update">
                         <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -79,7 +79,7 @@
                         <div class="grid grid-cols-12 gap-4">
                             {{-- name --}}
                             <div class="col-span-12 mb-4">
-                                <x-input label="Kvalita {{ $quality }}" wire:model.live="form.ip" />
+                                <x-input label="Kvalita {{ $quality }}" wire:model="form.ip" />
                                 <div>
                                     @error('ip')
                                         <span class="error">{{ $message }}</span>
@@ -88,7 +88,7 @@
                             </div>
                             @if ($form->isInDohled)
                                 <div class="col-span-6 mb-4">
-                                    <x-toggle label="Odebrat z dohledu" wire:model.live="form.delete_from_dohled" />
+                                    <x-toggle label="Odebrat z dohledu" wire:model="form.delete_from_dohled" />
                                     <div>
                                         @error('delete_from_dohled')
                                             <span class="error">{{ $message }}</span>
@@ -98,7 +98,7 @@
                             @endif
                             @if (!$form->isInDohled)
                                 <div class="col-span-6 mb-4">
-                                    <x-toggle label="Přidat do dohledu" wire:model.live="form.to_dohled" />
+                                    <x-toggle label="Přidat do dohledu" wire:model="form.to_dohled" />
                                     <div>
                                         @error('to_dohled')
                                             <span class="error">{{ $message }}</span>

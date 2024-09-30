@@ -31,13 +31,13 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-modal wire:model.live="createModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeModal'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input label="Balíček" wire:model.live="createForm.name" />
+                    <x-input label="Balíček" wire:model="createForm.name" />
                 </div>
 
             </div>
@@ -55,13 +55,13 @@
         </x-form>
     </x-modal>
 
-    <x-modal wire:model.live="updateModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeModal'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-input label="Balíček" wire:model.live="updateForm.name" />
+                    <x-input label="Balíček" wire:model="updateForm.name" />
                 </div>
             </div>
             <div class="flex justify-between">

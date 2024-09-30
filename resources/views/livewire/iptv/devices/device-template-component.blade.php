@@ -398,7 +398,7 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-drawer wire:model.live="updateDrawer" right class="lg:w-1/3 !bg-[#0E1E33]">
+    <x-drawer wire:model="updateDrawer" right class="lg:w-1/3 !bg-[#0E1E33]">
         <x-form wire:submit="update">
             <div class="grid grid-cols-12 mt-12 rounded-sm">
                 <div class="col-span-12 mb-4">
@@ -519,7 +519,7 @@
     </x-drawer>
 
     {{-- modal log --}}
-    <x-modal wire:model.live="logModal" title="Log ze zařízení" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="logModal" title="Log ze zařízení" persistent class="modal-bottom sm:modal-middle fixed">
 
         <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             @click='$wire.closeDialog'>✕</x-button>
@@ -572,7 +572,7 @@
     </x-modal>
 
     {{-- modal charts --}}
-    <x-modal wire:model.live="chartModal" title="" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="chartModal" title="" persistent class="modal-bottom sm:modal-middle fixed">
 
         <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             @click='$wire.closeDialog'>✕</x-button>

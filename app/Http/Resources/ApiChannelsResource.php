@@ -21,10 +21,19 @@ class ApiChannelsResource extends JsonResource
      * It first checks if the 'channels_in_api' cache exists. If it doesn't, it calls the 'cache_channels_with_detail' method to populate the cache.
      * Then, it retrieves the 'api/v1/public/channels' cache and returns it.
      *
+     * if $request->query('region) == cz, sk, czsk get new collection of channels belongs to region
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
     {
+        if ($request->query('region')) {
+            if (!Cache::has('channels_in_api_' . $request->query('region'))) {
+                $this->cache_channels_with_region_with_detail($request->query('region'));
+            }
+
+            return Cache::get('channels_in_api_' . $request->query('region'));
+        }
+
         if (! Cache::has('channels_in_api')) {
             $this->cache_channels_with_detail();
         }

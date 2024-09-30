@@ -33,13 +33,13 @@
     </x-share.cards.base-card>
 
     {{-- create modal --}}
-    <x-modal wire:model.live="createModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="createModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 ">
-                    <x-input label="Výrobce" wire:model.live="createForm.name" />
+                    <x-input label="Výrobce" wire:model="createForm.name" />
                 </div>
             </div>
             {{-- action section --}}
@@ -57,13 +57,13 @@
         </x-form>
     </x-modal>
 
-    <x-modal wire:model.live="editModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="editModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12">
-                    <x-input label="Výrobce" wire:model.live="updateForm.name" />
+                    <x-input label="Výrobce" wire:model="updateForm.name" />
                 </div>
             </div>
             {{-- action section --}}
