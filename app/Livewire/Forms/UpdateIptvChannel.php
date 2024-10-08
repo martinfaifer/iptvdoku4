@@ -17,13 +17,13 @@ class UpdateIptvChannel extends Form
 
     public string $quality = '';
 
-    public string $category = '';
+    public mixed $category = '';
 
     public bool $is_radio = false;
 
     public bool $is_multiscreen = true;
 
-    public string $description = '';
+    public mixed $description = '';
 
     public mixed $channelCategories = null;
 
