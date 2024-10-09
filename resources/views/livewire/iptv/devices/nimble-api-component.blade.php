@@ -109,12 +109,14 @@
                             }
                         @endphp
                         <div class="flex">
-                            @if (array_key_exists('description', $source))
-                                {{ $source['description'] }}
-                                <button wire:click='openSourceDetailStream({{ json_encode($source) }})'
-                                    class="btn btn-sm btn-circle border-none bg-transparent ml-4 -mt-1">
-                                    <x-heroicon-o-magnifying-glass class="w-4 h-4 text-blue-500" />
-                                </button>
+                            @if (isset($source))
+                                @if (array_key_exists('description', $source))
+                                    {{ $source['description'] }}
+                                    <button wire:click='openSourceDetailStream({{ json_encode($source) }})'
+                                        class="btn btn-sm btn-circle border-none bg-transparent ml-4 -mt-1">
+                                        <x-heroicon-o-magnifying-glass class="w-4 h-4 text-blue-500" />
+                                    </button>
+                                @endif
                             @endif
                         </div>
                     @endscope
