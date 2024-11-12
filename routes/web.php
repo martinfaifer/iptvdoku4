@@ -12,6 +12,7 @@ use App\Livewire\Iptv\Sftps\SftpComponent;
 use App\Livewire\IptvMonitoring\IptvMonitoringComponent;
 use App\Livewire\Nangu\IpPrefixes\NanguIpPrefixesComponent;
 use App\Livewire\Settings\Channels\Banners\SettingsChannelsBannersComponent;
+use App\Livewire\Settings\Channels\ChannelsProgrammersComponent;
 use App\Livewire\Settings\Channels\Multicasts\MulticastsSourcesComponent;
 use App\Livewire\Settings\Channels\Restart\SettingsChannelsRestartComponent;
 use App\Livewire\Settings\Dashboard\SettingsDashboardComponent;
@@ -95,6 +96,7 @@ Route::middleware('auth')->group(function () {
             Route::get('restart', SettingsChannelsRestartComponent::class)->middleware('can:show_settings_channels_restart,App\Models\User');
             Route::get('banners', SettingsChannelsBannersComponent::class)->middleware('can:show_settings_channels_banners,App\Models\User');
             Route::get('multicats/sources', MulticastsSourcesComponent::class)->middleware('can:show_settings_channels_multicast_sources,App\Models\User');
+            Route::get('programmers', ChannelsProgrammersComponent::class)->middleware('can:show_settings_channels_programmes,App\Models\User');
         });
 
         Route::prefix('notifications')->group(function () {

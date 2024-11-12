@@ -135,6 +135,16 @@
                                     Zdroje multicastů
                                 </a></li>
                         @endcan
+                        @can('show_channels_programers', App\Models\User::class)
+                            <li @class([
+                                'ml-1',
+                                'rounded-lg',
+                                'bg-sky-950' => request()->is('settings/channels/programmers'),
+                            ]) href="/settings/channels/programmers" wire:navigate><a>
+                                    <x-heroicon-o-users class="size-4" />
+                                    Programeři
+                                </a></li>
+                        @endcan
                     </ul>
                 </details>
             </li>

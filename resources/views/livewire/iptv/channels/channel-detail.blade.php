@@ -75,10 +75,9 @@
                 <div class="tooltip" data-tip="Region">
                     <div
                         class="text-xs inline-flex items-center font-semibold leading-sm px-3 py-1 bg-sky-800 text-sky-200 rounded-lg w-18 h-6">
-                       Region <span class="font-bold ml-1"> {{ $channel->region?->name }}</span>
+                        Region <span class="font-bold ml-1"> {{ $channel->region?->name }}</span>
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -89,6 +88,56 @@
                 </article>
             </div>
         </div>
+        @if (!is_null($channel->channelProgramer))
+            <hr
+                class="w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+            <div class="mt-4 subpixel-antialiased">
+                <p class="font-semibold">Informace o programeru {{ $channel->channelProgramer->name }}</p>
+                @if (!blank($channelProgrammer->channelProgramer->contacts))
+                    @foreach ($channelProgrammer->channelProgramer->contacts as $contact)
+                        <div class="grid grid-cols-12 gap-2 my-2 mx-2 text-sm">
+                            <div class="col-span-12">
+                                <div class="inline-flex">
+                                    <x-heroicon-o-user class="w-4 h-4" />
+                                    <span class="ml-2">
+                                        Osoba:
+                                    </span>
+                                    <span class="ml-4">
+                                        {{ $contact->name }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-span-12">
+                                <div class="inline-flex">
+                                    <x-heroicon-o-envelope class="w-4 h-4" />
+                                    <span class="ml-2">
+                                        email:
+                                    </span>
+                                    <span class="ml-4">
+                                        <a class="text-blue-500 hover:underline" href="mailto:{{ $contact->email }}">
+                                            {{ $contact->email }}
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-span-12">
+                                <div class="inline-flex">
+                                    <x-heroicon-o-phone class="w-4 h-4" />
+                                    <span class="ml-2">
+                                        telefon:
+                                    </span>
+                                    <span class="ml-4">
+                                        <a class="text-blue-500 hover:underline" href="tel:{{ $contact->phone }}">
+                                            {{ $contact->phone }}
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        @endif
         <hr
             class="w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
         <div class="mt-4 subpixel-antialiased">

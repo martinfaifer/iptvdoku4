@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 {{-- qualities --}}
-                <div class="col-span-6 mb-4">
+                <div class="col-span-4 mb-4">
                     <x-choices label="Kvalita" wire:model="quality" :options="$qualities" single />
                     <div>
                         @error('form.quality')
@@ -37,10 +37,19 @@
                     </div>
                 </div>
                 {{-- channel category --}}
-                <div class="col-span-6 mb-4">
+                <div class="col-span-4 mb-4">
                     <x-choices label="Žánr" wire:model="category" :options="$channelCategories" single />
                     <div>
                         @error('form.category')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                {{-- channel programers --}}
+                <div class="col-span-4 mb-4">
+                    <x-choices label="Programer" wire:model="programer" :options="$channelProgramers" single />
+                    <div>
+                        @error('form.programer')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>

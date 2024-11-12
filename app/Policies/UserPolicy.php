@@ -154,4 +154,22 @@ class UserPolicy
 
         return true;
     }
+
+    public function show_channels_programers(User $user): bool
+    {
+        if ($user->isTechnik() || $user->isAdministrativa()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function show_settings_channels_programmes(User $user): bool
+    {
+        if ($user->isTechnik() || $user->isAdministrativa()) {
+            return true;
+        }
+
+        return false;
+    }
 }

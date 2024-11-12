@@ -45,7 +45,8 @@ class Channel extends Model
         'nangu_channel_code',
         'geniustv_channel_packages_id',
         'epg_id',
-        'channel_region_id'
+        'channel_region_id',
+        'channel_programmer_id'
     ];
 
     protected $casts = [
@@ -91,14 +92,19 @@ class Channel extends Model
         return $this->belongsTo(ChannelRegion::class, 'channel_region_id', 'id');
     }
 
+    public function channelProgramer(): BelongsTo
+    {
+        return $this->belongsTo(ChannelProgramer::class, 'channel_programmer_id', 'id');
+    }
+
     public function scopeSearch(Builder $query, string $search): void
     {
-        $query->where('name', 'like', '%'.$search.'%');
+        $query->where('name', 'like', '%' . $search . '%');
     }
 
     public static function scopeSearchend(Builder $query, string $search): void
     {
-        $query->where('name', 'like', $search.'%');
+        $query->where('name', 'like', $search . '%');
     }
 
     public function scopeFulltextSearch(Builder $query, string $search): void

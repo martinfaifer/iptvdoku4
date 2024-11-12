@@ -3,6 +3,7 @@
 namespace App\Livewire\Iptv\Channels;
 
 use App\Models\Channel;
+use App\Models\ChannelProgramer;
 use Livewire\Component;
 use App\Models\ChannelRegion;
 use Livewire\WithFileUploads;
@@ -63,6 +64,9 @@ class StoreChannel extends Component
     #[Validate('exists:channel_regions,id', message: "Neexistující region")]
     public int $selectedRegion = 3;
 
+    #[Validate('nullable')]
+    public string|null $programer = null;
+
     public bool $storeModal = false;
 
     public array $qualities = Channel::QUALITIES;
@@ -74,6 +78,7 @@ class StoreChannel extends Component
     public array $channelsEpgs;
 
     public $regions;
+    public $channelProgramers;
 
     public function mount(): void
     {
@@ -81,6 +86,7 @@ class StoreChannel extends Component
         $this->geniusTVChannelPackages = GeniusTvChannelPackage::get();
         $this->channelsEpgs = ! Cache::has('channelEpgIds') ? [] : Cache::get('channelEpgIds');
         $this->regions = ChannelRegion::get();
+        $this->channelProgramers = ChannelProgramer::get();
     }
 
     public function store(): mixed
@@ -112,6 +118,7 @@ class StoreChannel extends Component
             'geniustv_channel_packages_id' => json_encode($this->geniustvChannelPackage),
             'epg_id' => $this->epgId,
             'channel_region_id' => $this->selectedRegion,
+            'channel_programmer_id' => $this->programer
         ]);
 
         // $this->dispatch('update_channels_sidebar');
