@@ -3,20 +3,22 @@
 namespace App\Console\Commands;
 
 use App\Models\NanguStb;
-use App\Models\NanguStbAccountCode;
 use App\Models\NanguSubscriber;
-use App\Models\NanguSubscription;
-use App\Services\Api\NanguTv\NanguChannelsService;
-use App\Services\Api\NanguTv\NanguOffersService;
-use App\Services\Api\NanguTv\NanguStbService;
-use App\Services\Api\NanguTv\NanguSubscribersService;
-use App\Services\Api\NanguTv\NanguSubscriptionsService;
-use App\Services\Invoices\CreateNanguInvoicePerIsp;
 use Illuminate\Console\Command;
+use App\Models\NanguSubscription;
+use App\Models\NanguStbAccountCode;
 use Illuminate\Support\Facades\Artisan;
+use App\Services\Api\NanguTv\NanguStbService;
+use App\Services\Api\NanguTv\NanguOffersService;
+use App\Services\Api\NanguTv\NanguChannelsService;
+use App\Services\Invoices\CreateNanguInvoicePerIsp;
+use App\Services\Api\NanguTv\NanguSubscribersService;
+use App\Traits\Programmers\CountProgrammersUsageTrait;
+use App\Services\Api\NanguTv\NanguSubscriptionsService;
 
 class GetNanguMonthlyReportDataCommand extends Command
 {
+    use CountProgrammersUsageTrait;
     /**
      * The name and signature of the console command.
      *
@@ -64,5 +66,8 @@ class GetNanguMonthlyReportDataCommand extends Command
         (new NanguChannelsService())->count_channels_usage_per_isp();
         (new NanguChannelsService())->count_channels_usage_total();
         (new NanguSubscriptionsService())->count_subscriptions_per_isp();
+
+        // count programmers usage
+        $this->count_programmers_usage();
     }
 }

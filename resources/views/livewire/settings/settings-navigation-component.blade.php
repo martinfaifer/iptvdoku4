@@ -242,6 +242,17 @@
                                             Offery
                                         </a>
                                     </li>
+                                    <li @class([
+                                        'ml-1',
+                                        'rounded-lg',
+                                        'bg-sky-950' => request()->is('settings/geniustv/statistics/programers'),
+                                    ]) href="/settings/geniustv/statistics/programers"
+                                        wire:navigate>
+                                        <a>
+                                            <x-heroicon-o-chart-pie class="size-4" />
+                                            Programeři
+                                        </a>
+                                    </li>
                                 </ul>
                             </details>
                         </li>

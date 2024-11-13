@@ -14,7 +14,7 @@ class ChannelProgramer extends Model
 
     public function channels(): HasMany
     {
-        return $this->hasMany(ChannelProgramerChannel::class, 'channel_programmer_id', 'id');
+        return $this->hasMany(Channel::class, 'channel_programmer_id', 'id');
     }
 
     public function contacts(): HasMany
