@@ -20,9 +20,7 @@ class ProgrammersUsageExport implements FromView
             foreach ($this->programer->channels as $channel) {
                 $result[$channel->name]['celkem'] = NanguSubscription::where('channels', "like", "%" . $channel->nangu_channel_code . "%")->count();
                 foreach ($isps as $isp) {
-                    if (NanguSubscription::where('nangu_isp_id', $isp->id)->where('channels', "like", "%" . $channel->nangu_channel_code . "%")->count() != 0) {
-                        $result[$channel->name][$isp->name] = NanguSubscription::where('nangu_isp_id', $isp->id)->where('channels', "like", "%" . $channel->nangu_channel_code . "%")->count();
-                    }
+                    $result[$channel->name][$isp->name] = NanguSubscription::where('nangu_isp_id', $isp->id)->where('channels', "like", "%" . $channel->nangu_channel_code . "%")->count();
                 }
             }
         }
