@@ -39,7 +39,7 @@ use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationCompo
 use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
 use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
 use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
-use App\Livewire\Settings\GeniusTv\Statistics\SettingsGeniusTvStatisticsOffersComponent;
+use App\Livewire\Settings\GeniusTv\Geniustv\SettingsGeniusTvStatisticsOffersComponent;
 
 Route::get('test', function () {
     return view('pdfs.invoice');
