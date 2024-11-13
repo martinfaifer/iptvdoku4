@@ -19,9 +19,7 @@ trait CountProgrammersUsageTrait
                 foreach ($programmer->channels as $channel) {
                     $result[$programmer->name][$channel->name]['celkem'] = NanguSubscription::where('channels', "like", "%" . $channel->nangu_channel_code . "%")->count();
                     foreach ($isps as $isp) {
-                        if (NanguSubscription::where('nangu_isp_id', $isp->id)->where('channels', "like", "%" . $channel->nangu_channel_code . "%")->count() != 0) {
-                            $result[$programmer->name][$channel->name][$isp->name] = NanguSubscription::where('nangu_isp_id', $isp->id)->where('channels', "like", "%" . $channel->nangu_channel_code . "%")->count();
-                        }
+                        $result[$programmer->name][$channel->name][$isp->name] = NanguSubscription::where('nangu_isp_id', $isp->id)->where('channels', "like", "%" . $channel->nangu_channel_code . "%")->count();
                     }
                 }
             }
