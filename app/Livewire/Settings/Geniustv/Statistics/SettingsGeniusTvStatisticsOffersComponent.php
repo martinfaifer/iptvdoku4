@@ -3,11 +3,12 @@
 namespace App\Livewire\Settings\GeniusTv\Statistics;
 
 use App\Exports\OffersUsageExport;
-use Livewire\Component;
 use App\Models\NanguIsp;
 use App\Models\NanguSubscription;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\GeniusTVChannelsOffersTax;
+use Illuminate\Contracts\View\Factory;
+use Livewire\Component;
 
 class SettingsGeniusTvStatisticsOffersComponent extends Component
 {
@@ -40,7 +41,7 @@ class SettingsGeniusTvStatisticsOffersComponent extends Component
         return Excel::download(new OffersUsageExport(), $fileName);
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.settings.genius-tv.statistics.settings-genius-tv-statistics-offers-component', [
             'offersUsage' => $this->offers_usage()
