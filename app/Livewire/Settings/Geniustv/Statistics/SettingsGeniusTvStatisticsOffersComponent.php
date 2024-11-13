@@ -1,11 +1,12 @@
 <?php
-namespace App\Livewire\Settings\GeniusTv\Statistics;
+
+namespace App\Livewire\Settings\Geniustv\Statistics;
 
 use Livewire\Component;
 use App\Models\NanguIsp;
 use App\Models\NanguSubscription;
-// use App\Exports\OffersUsageExport;
-// use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OffersUsageExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\GeniusTVChannelsOffersTax;
 
 class SettingsGeniusTvStatisticsOffersComponent extends Component
@@ -33,11 +34,11 @@ class SettingsGeniusTvStatisticsOffersComponent extends Component
         return $result;
     }
 
-    // public function exportToCsv()
-    // {
-    //     $fileName = 'offers_usage.csv';
-    //     return Excel::download(new OffersUsageExport(), $fileName);
-    // }
+    public function exportToCsv()
+    {
+        $fileName = 'offers_usage.csv';
+        return Excel::download(new OffersUsageExport(), $fileName);
+    }
 
     public function render()
     {
