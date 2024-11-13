@@ -19,8 +19,8 @@ class SettingsGeniusTvStatisticsProgramersComponent extends Component
     public function exportToCsv(string $programmerName)
     {
         $programmer = ChannelProgramer::where('name', $programmerName)->first();
-        $fileName = $programmerName . '.csv';
-        return Excel::download(new ProgrammersUsageExport($programmer), $fileName);
+        $fileName = $programmerName . '.xlsx';
+        return Excel::download(new ProgrammersUsageExport($programmer), $fileName, \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function render()

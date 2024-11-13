@@ -36,8 +36,8 @@ class SettingsGeniusTvStatisticsOffersComponent extends Component
 
     public function exportToCsv()
     {
-        $fileName = 'offers_usage.csv';
-        return Excel::download(new OffersUsageExport(), $fileName);
+        $fileName = 'offers_usage.xlsx';
+        return Excel::download(new OffersUsageExport(), $fileName, \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function render()
