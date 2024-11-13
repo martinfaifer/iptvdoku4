@@ -231,6 +231,17 @@
                                             Kanály
                                         </a>
                                     </li>
+                                    <li @class([
+                                        'ml-1',
+                                        'rounded-lg',
+                                        'bg-sky-950' => request()->is('settings/geniustv/statistics/offers'),
+                                    ]) href="/settings/geniustv/statistics/offers"
+                                        wire:navigate>
+                                        <a>
+                                            <x-heroicon-o-chart-pie class="size-4" />
+                                            Offery
+                                        </a>
+                                    </li>
                                 </ul>
                             </details>
                         </li>
