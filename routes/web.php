@@ -39,7 +39,7 @@ use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationCompo
 use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
 use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
 use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
-use App\Livewire\Settings\GeniusTv\Geniustv\SettingsGeniusTvStatisticsOffersComponent;
+use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsOffersComponent;
 
 Route::get('test', function () {
     return view('pdfs.invoice');
@@ -84,7 +84,7 @@ Route::middleware('auth')->group(function () {
             Route::prefix('statistics')->group(function () {
                 Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
                 Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
-                // Route::get('offers', SettingsGeniusTvStatisticsOffersComponent::class);
+                Route::get('offers', SettingsGeniusTvStatisticsOffersComponent::class);
             });
             Route::get('static-taxes', SettingsGeniusTvStaticTaxesComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
             Route::get('channels-taxes', SettingsGeniusTvChannelsTaxesComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
