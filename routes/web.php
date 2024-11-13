@@ -112,4 +112,4 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::get('offers', SettingsGeniusTvStatisticsOffersComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
+// Route::get('offers', SettingsGeniusTvStatisticsOffersComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
