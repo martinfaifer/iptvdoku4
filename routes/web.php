@@ -37,10 +37,11 @@ use App\Livewire\Settings\Geniustv\StaticTaxes\SettingsGeniusTvStaticTaxesCompon
 use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsHboComponent;
 use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationComponent;
 use App\Livewire\Settings\Geniustv\ChannelsTaxes\SettingsGeniusTvChannelsTaxesComponent;
-use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
-use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
 use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsOffersComponent;
+use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
+use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsHboStatsComponent;
 use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsProgramersComponent;
+use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
 
 Route::get('test', function () {
     return view('pdfs.invoice');
@@ -87,6 +88,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
                 Route::get('offers', SettingsGeniusTvStatisticsOffersComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');;
                 Route::get('programers', SettingsGeniusTvStatisticsProgramersComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');;
+                Route::get('hbo-stats', SettingsGeniusTvStatisticsHboStatsComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');;
             });
             Route::get('static-taxes', SettingsGeniusTvStaticTaxesComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
             Route::get('channels-taxes', SettingsGeniusTvChannelsTaxesComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');

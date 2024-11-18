@@ -217,7 +217,7 @@
                                         wire:navigate>
                                         <a>
                                             <x-heroicon-o-chart-pie class="size-4" />
-                                            HBO
+                                            HBO grafy
                                         </a>
                                     </li>
                                     <li @class([
@@ -251,6 +251,17 @@
                                         <a>
                                             <x-heroicon-o-chart-pie class="size-4" />
                                             Programeři
+                                        </a>
+                                    </li>
+                                    <li @class([
+                                        'ml-1',
+                                        'rounded-lg',
+                                        'bg-sky-950' => request()->is('settings/geniustv/statistics/hbo-stats'),
+                                    ]) href="/settings/geniustv/statistics/hbo-stats"
+                                        wire:navigate>
+                                        <a>
+                                            <x-heroicon-o-chart-pie class="size-4" />
+                                            HBO
                                         </a>
                                     </li>
                                 </ul>

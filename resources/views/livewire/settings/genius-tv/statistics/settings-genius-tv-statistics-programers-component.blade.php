@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="col-span-12">
-                            <div class="h-96 overflow-y-auto mt-12">
+                            <div class="max-h-96 overflow-y-auto mt-12">
                                 <div class="overflow-x-auto">
                                     <table class="table table-xs">
                                         <!-- head -->
@@ -35,7 +35,7 @@
                                                 <tr>
                                                     <th>{{ $channel }}</th>
                                                     @foreach ($usagePerIsp as $isp => $usage)
-                                                        <td>{{ $isp }}</td>
+                                                        <td class="font-semibold">{{ $isp }}</td>
                                                         <td>{{ $usage }}</td>
                                                     @endforeach
                                                 </tr>
