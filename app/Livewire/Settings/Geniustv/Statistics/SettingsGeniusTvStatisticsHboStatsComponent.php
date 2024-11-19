@@ -30,19 +30,27 @@ class SettingsGeniusTvStatisticsHboStatsComponent extends Component
         return $result;
     }
 
+    protected function get_hbo_max_usage_per_isp(int $ispId): int
+    {
+        return match ($ispId) {
+            26 => NanguSubscription::where('nangu_isp_id', $ispId)->where('offers', "like", "%HBOMAX%")->where('subscriptionState', "!=", "SUSPENDED")->count(), // trionet
+            25 => NanguSubscription::where('nangu_isp_id', $ispId)->where('offers', "like", "%HBO_MAX%")->where('subscriptionState', "!=", "SUSPENDED")->count(), // tlapnet
+            5 => NanguSubscription::where('nangu_isp_id', $ispId)->where('tariffCode', "not like", "%komplet%")->where('channelPackagesCodes', "like", "%HBOMAX%")->where('subscriptionState', "!=", "SUSPENDED")->count(), // cbc
+            default => NanguSubscription
+                ::where('nangu_isp_id', $ispId)
+                ->where('offers', "like", "%TV HBO MAX%")
+                ->where('subscriptionState', "!=", "SUSPENDED")
+                ->count(),
+        };
+    }
+
     public function hbo_max_usage(): array
     {
         $result = [];
         $isps = NanguIsp::get();
 
         foreach ($isps as $isp) {
-            $result[$isp->name] =
-                NanguSubscription
-                ::where('nangu_isp_id', $isp->id)
-                ->where('offers', "like", "%TV HBO MAX%")
-                ->where('subscriptionState', "!=", "SUSPENDED")
-                ->where('nangu_isp_id', $isp->id)
-                ->count();
+            $result[$isp->name] = $this->get_hbo_max_usage_per_isp($isp->id);
         }
 
         return $result;
