@@ -35,7 +35,7 @@ class SettingsGeniusTvStatisticsPlusOrFilmChannelPackageComponent extends Compon
             25 => NanguSubscription::where('nangu_isp_id', $ispId)->where('subscriptionState', "!=", "SUSPENDED")->where('offers', "like", "%film%")->where('offers', "not like", "%filmbox%")->count(),
             26 => NanguSubscription::where('nangu_isp_id', $ispId)->where('subscriptionState', "!=", "SUSPENDED")->where('offers', "like", "%film%")->where('offers', "not like", "%filmbox%")->count(),
             27 => NanguSubscription::where('nangu_isp_id', $ispId)->where('subscriptionState', "!=", "SUSPENDED")->where('tariffCode', "like", "%plus%")->count(),
-            28 => NanguSubscription::where('nangu_isp_id', $ispId)->where('subscriptionState', "!=", "SUSPENDED")->where('tariffCode', "like", "%plus%")->count(),
+            28 => NanguSubscription::where('nangu_isp_id', $ispId)->where('subscriptionState', "!=", "SUSPENDED")->where('tariffCode', "like", "%film%")->count(),
             default => 0
         };
     }
