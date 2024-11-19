@@ -264,6 +264,28 @@
                                             HBO
                                         </a>
                                     </li>
+                                    <li @class([
+                                        'ml-1',
+                                        'rounded-lg',
+                                        'bg-sky-950' => request()->is('settings/geniustv/statistics/max-stats'),
+                                    ]) href="/settings/geniustv/statistics/max-stats"
+                                        wire:navigate>
+                                        <a>
+                                            <x-heroicon-o-chart-pie class="size-4" />
+                                            Balík MAX
+                                        </a>
+                                    </li>
+                                    <li @class([
+                                        'ml-1',
+                                        'rounded-lg',
+                                        'bg-sky-950' => request()->is('settings/geniustv/statistics/plus-or-film-stats'),
+                                    ]) href="/settings/geniustv/statistics/plus-or-film-stats"
+                                        wire:navigate>
+                                        <a>
+                                            <x-heroicon-o-chart-pie class="size-4" />
+                                            Balík PLUS / FILM
+                                        </a>
+                                    </li>
                                 </ul>
                             </details>
                         </li>

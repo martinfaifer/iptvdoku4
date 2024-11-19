@@ -23,6 +23,7 @@ class SettingsGeniusTvStatisticsHboStatsComponent extends Component
                 ->where('channels', "like", "%hbo%")
                 ->where("channels", "not like", "%cinemax%")
                 ->where('subscriptionState', "!=", "SUSPENDED")
+                ->where('nangu_isp_id', $isp->id)
                 ->count();
         }
 
@@ -40,6 +41,7 @@ class SettingsGeniusTvStatisticsHboStatsComponent extends Component
                 ::where('nangu_isp_id', $isp->id)
                 ->where('offers', "like", "%TV HBO MAX%")
                 ->where('subscriptionState', "!=", "SUSPENDED")
+                ->where('nangu_isp_id', $isp->id)
                 ->count();
         }
 

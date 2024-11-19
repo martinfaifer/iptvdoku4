@@ -41,7 +41,9 @@ use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsOffersCo
 use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsChannelsComponent;
 use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsHboStatsComponent;
 use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsProgramersComponent;
+use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsMaxChannelPackageComponent;
 use App\Livewire\Settings\Geniustv\ChannelPackagesTaxes\SettingsGeniusTvChannelPackagesTaxesComponent;
+use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsPlusOrFilmChannelPackageComponent;
 
 Route::get('test', function () {
     return view('pdfs.invoice');
@@ -86,9 +88,11 @@ Route::middleware('auth')->group(function () {
             Route::prefix('statistics')->group(function () {
                 Route::get('hbo', SettingsGeniusTvStatisticsHboComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
                 Route::get('channels', SettingsGeniusTvStatisticsChannelsComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
-                Route::get('offers', SettingsGeniusTvStatisticsOffersComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');;
-                Route::get('programers', SettingsGeniusTvStatisticsProgramersComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');;
-                Route::get('hbo-stats', SettingsGeniusTvStatisticsHboStatsComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');;
+                Route::get('offers', SettingsGeniusTvStatisticsOffersComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
+                Route::get('programers', SettingsGeniusTvStatisticsProgramersComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
+                Route::get('hbo-stats', SettingsGeniusTvStatisticsHboStatsComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
+                Route::get('max-stats', SettingsGeniusTvStatisticsMaxChannelPackageComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
+                Route::get('plus-or-film-stats', SettingsGeniusTvStatisticsPlusOrFilmChannelPackageComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
             });
             Route::get('static-taxes', SettingsGeniusTvStaticTaxesComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
             Route::get('channels-taxes', SettingsGeniusTvChannelsTaxesComponent::class)->middleware('can:show_settings_geniustv,App\Models\User');
