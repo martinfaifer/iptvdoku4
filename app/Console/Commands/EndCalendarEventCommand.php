@@ -2,14 +2,16 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\SendEventWasEndedMail;
 use App\Models\Event;
 use App\Models\TagOnItem;
 use Illuminate\Console\Command;
+use App\Mail\SendEventWasEndedMail;
 use Illuminate\Support\Facades\Mail;
+use App\Traits\Channels\CacheChannelsForApi;
 
 class EndCalendarEventCommand extends Command
 {
+    use CacheChannelsForApi;
     /**
      * The name and signature of the console command.
      *
@@ -44,6 +46,8 @@ class EndCalendarEventCommand extends Command
                             ->where('type', 'channel')
                             ->where('tag_id', $event->tag_id)->delete();
                     }
+
+                    $this->cache_channels_with_detail();
                 }
 
                 Mail::to($event->creator)->queue(new SendEventWasEndedMail($event));

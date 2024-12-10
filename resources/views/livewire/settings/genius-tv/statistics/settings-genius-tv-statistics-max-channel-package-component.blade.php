@@ -1,7 +1,7 @@
 <div>
     <div class="grid grid-cols-12 gap-4">
         <div class="col-span-12">
-            <x-share.cards.base-card title="Využití HBO">
+            <x-share.cards.base-card title="Využití balíku MAX">
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-6 md:col-span-9 ">
                         {{-- <x-input placeholder="Vyhledejte ..." wire:model.live="query"

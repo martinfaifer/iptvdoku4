@@ -2,16 +2,18 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\SendEventWasStartedMail;
 use App\Models\Event;
+use phpseclib3\Net\SFTP;
 use App\Models\TagOnItem;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEventWasStartedMail;
 use Illuminate\Support\Facades\Storage;
-use phpseclib3\Net\SFTP;
+use App\Traits\Channels\CacheChannelsForApi;
 
 class StartCalendarDailyEventCommand extends Command
 {
+    use CacheChannelsForApi;
     /**
      * The name and signature of the console command.
      *
@@ -50,6 +52,8 @@ class StartCalendarDailyEventCommand extends Command
                             'tag_id' => $event->tag_id,
                         ]);
                     }
+
+                    $this->cache_channels_with_detail();
                 }
 
                 if (! is_null($event->sftp_server_id) && ! is_null($event->banner_path)) {
