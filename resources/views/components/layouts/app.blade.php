@@ -205,7 +205,7 @@
                 {{ $slot }}
             </x-slot:content>
         </x-main>
-        <script>
+        {{-- <script>
             function isSafari() {
                 var userAgent = navigator.userAgent;
                 return /Safari/.test(userAgent) && !/Chrome/.test(userAgent) && !/iPhone/.test(userAgent);
@@ -214,7 +214,7 @@
             if (isSafari()) {
                 document.getElementById('unsupported-browser').style.display = 'block';
             }
-        </script>
+        </script> --}}
 </body>
 
 </html>
