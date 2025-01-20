@@ -378,4 +378,12 @@ class CreateNanguInvoicePerIsp
 
         return $tax;
     }
+
+    private function count_cinematography_fund(int|float $priceForAllChannels): int|float
+    {
+        // info has Lada Ruzicka
+        $const = $priceForAllChannels / 101;
+        $priceForAny = $const * 100;
+        return $priceForAny * 0.01;
+    }
 }

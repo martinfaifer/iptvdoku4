@@ -17,7 +17,8 @@
     <div>
         {{-- logo spolecnosti GRAPE --}}
         <div class="company_logo">
-            <img src="https://iptvdoku.grapesc.cz/storage/companyLogos/grapesc.png" width="150" height="38" alt="logo">
+            <img src="https://iptvdoku.grapesc.cz/storage/companyLogos/grapesc.png" width="150" height="38"
+                alt="logo">
         </div>
 
         {{-- Hlavicka ISP který fakturuje --}}
@@ -109,6 +110,15 @@
             </table>
         </div>
 
+
+        <div class="cinematography_fund">
+            <p>
+                <strong>
+                    Poplatek za fond kinematografie:
+                </strong>
+                {{ $cinematographyFund }}
+            </p>
+        </div>
 
 
         {{-- Cena celkem --}}
