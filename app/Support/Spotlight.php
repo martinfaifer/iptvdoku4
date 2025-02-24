@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Spotlight
 {
-    public int $dbLimit = 5;
+    public int $dbLimit = 10;
     public function search(Request $request): mixed
     {
         if (! Auth::user()) {
