@@ -44,6 +44,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Model::automaticallyEagerLoadRelationships();
+
         Pulse::user(fn ($user) => [
             'name' => $user->email,
             'extra' => 'user role '.$user->userRole->name,

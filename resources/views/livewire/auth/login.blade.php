@@ -7,19 +7,8 @@
                 IPTV Dokumentace
             </h2>
             <x-form wire:submit="login" class="mt-6">
-                <x-input label="Email" wire:model="email" />
-                <div>
-                    @error('form.email')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
-                </div>
-                <x-input label="Heslo" wire:model="password" type="password" />
-                <div>
-                    @error('form.password')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
-                </div>
-
+                <x-input label="Email" wire:model="email" class="input-primary" />
+                <x-input label="Heslo" wire:model="password" type="password" class="input-primary"/>
                 <div>
                     <x-button label="Přihlásit se" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full"
                         type="submit" />

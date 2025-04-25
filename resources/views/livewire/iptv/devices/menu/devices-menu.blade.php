@@ -59,17 +59,15 @@
             let url = window.location.href;
             let parsedUrl = url.split("/");
 
-            document.addEventListener('livewire:navigating', () => {
-                //
-            });
+            if (parsedUrl =! null) {
+                document.addEventListener('livewire:navigated', () => {
+                    let element = document.getElementById('device_' + parsedUrl.slice(-1));
+                    // element.classList.add('bg-sky-950');
+                    element.scrollIntoView({
 
-            document.addEventListener('livewire:navigated', () => {
-                let element = document.getElementById('device_' + parsedUrl.slice(-1));
-                // element.classList.add('bg-sky-950');
-                element.scrollIntoView({
-
+                    });
                 });
-            });
+            }
         </script>
     @endscript
     {{-- @endcan --}}

@@ -10,9 +10,6 @@
     <link rel="shortcut icon" type="image/x-icon" class="text-red-500" href="{{ asset('favicon.svg') }}">
     <link rel="manifest" href="/site.webmanifest">
     <title>{{ $title ?? 'IPTV dokumentace' }}</title>
-    {{-- <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" /> --}}
-    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/a6yh9ynf4jozp4fh5ifm4ge2jyxhqtpzbisgvawi52igqueb/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
@@ -31,8 +28,6 @@
     <script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.3/dist/umd/photoswipe.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.3/dist/umd/photoswipe-lightbox.umd.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.3/dist/photoswipe.min.css" rel="stylesheet">
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         #unsupported-browser {
@@ -205,16 +200,6 @@
                 {{ $slot }}
             </x-slot:content>
         </x-main>
-        {{-- <script>
-            function isSafari() {
-                var userAgent = navigator.userAgent;
-                return /Safari/.test(userAgent) && !/Chrome/.test(userAgent) && !/iPhone/.test(userAgent);
-            }
-
-            if (isSafari()) {
-                document.getElementById('unsupported-browser').style.display = 'block';
-            }
-        </script> --}}
 </body>
 
 </html>

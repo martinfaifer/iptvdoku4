@@ -7,7 +7,6 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Cache;
 use App\Traits\Livewire\NotificationTrait;
-use App\Actions\Channels\CompletlyDeleteChannelAction;
 
 class IptvChannel extends Component
 {
