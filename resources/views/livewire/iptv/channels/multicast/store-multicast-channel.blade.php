@@ -1,5 +1,5 @@
 <div>
-    <button class='btn bg-[#082f49] btn-xs md:btn-sm border-none' @click="$wire.openModal()">
+    <button class='btn btn-doku-navigation btn-xs md:btn-sm' @click="$wire.openModal()">
         <x-heroicon-o-plus-circle class="hidden md:block size-5" />
         Přidat multicast
     </button>

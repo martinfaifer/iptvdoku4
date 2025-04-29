@@ -1,5 +1,5 @@
 <div>
-    <button class='btn bg-[#082f49] btn-sm border-none' @click="$wire.openModal()">
+    <button class='btn btn-doku-navigation btn-sm' @click="$wire.openModal()">
         <x-heroicon-o-plus-circle class="w-5 h-5" />
         Přidat šablonu zařízení
     </button>
@@ -453,7 +453,8 @@
                                     </div>
                                 </div>
                                 <div class="col-span-6 mb-4">
-                                    <x-checkbox wire:model.live="hasOutInterfacefaceSatelit" label="Vazba na satelit?" />
+                                    <x-checkbox wire:model.live="hasOutInterfacefaceSatelit"
+                                        label="Vazba na satelit?" />
                                     <div>
                                         @error('form.hasOutInterfacefaceSatelit')
                                             <span class="error">{{ $message }}</span>

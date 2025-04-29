@@ -6,7 +6,7 @@
                 'rounded-lg',
                 'bg-sky-950' => request()->is('channels/' . $channel->id . '/*'),
             ])
-                href="/channels/{{ $channel->id }}/multicast" wire:navigate>
+                href="/channels/{{ $channel->id }}/multicast" wire:navigate.hover>
                 <a class="grid grid-cols-12">
                     <div class="col-span-2">
                         @if (!is_null($channel->logo))

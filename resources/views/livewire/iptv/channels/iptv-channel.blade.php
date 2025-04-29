@@ -4,7 +4,7 @@
         <div class="relative">
             <div class="absolute left">
                 @can('create', $channel)
-                    <livewire:iptv.channels.store-channel />
+                    <livewire:iptv.channels.store-channel lazy />
                 @endcan
             </div>
             <div class="flex justify-center">
@@ -60,12 +60,12 @@
         {{-- show alert about no channel found --}}
         @if (is_null($channel) || is_null($channel->name))
             <div class="mt-12">
-                <x-share.alerts.info title="Vyberte kanál z menu vlevo"></x-share.alerts.info>
+                <x-share.alerts.info title="Vyberte kanál z menu vlevo" lazy />
             </div>
         @else
             {{-- tags --}}
             <div>
-                <livewire:tag-component type="channel" itemId="{{ $channel->id }}"></livewire:tag-component lazy>
+                <livewire:tag-component type="channel" itemId="{{ $channel->id }}" lazy />
             </div>
             <div class="grid grid-cols-12">
                 <div class="col-span-1 mt-4">
@@ -87,10 +87,10 @@
 
                     {{-- actions --}}
                     @can('update', $channel)
-                        <livewire:iptv.channels.update-channel :channel="$channel"></livewire:iptv.channels.update-channel>
+                        <livewire:iptv.channels.update-channel :channel="$channel" lazy />
                     @endcan
                     @can('delete', $channel)
-                        <livewire:iptv.channels.delete-channel :channel="$channel"></livewire:iptv.channels.delete-channel>
+                        <livewire:iptv.channels.delete-channel :channel="$channel" lazy />
                     @endcan
                     {{-- end of actions --}}
                     <div class="hidden md:block absolute md:mt-7 md:right-32" data-tip="informace o kanálu">
@@ -101,8 +101,7 @@
                             </div>
                         </div>
                     </div>
-                    <livewire:iptv.channels.channel-detail :channel="$channel"></livewire:iptv.channels.channel-detail
-                        lazy>
+                    <livewire:iptv.channels.channel-detail :channel="$channel" lazy />
                 </div>
             </div>
             <hr
@@ -121,16 +120,16 @@
                 @endif
 
                 @if (request()->is('channels/' . $channel->id . '/epg'))
-                    <livewire:iptv.channels.epg.epg-channel-component :channel="$channel">
+                    <livewire:iptv.channels.epg.epg-channel-component :channel="$channel" lazy />
                 @endif
 
                 @if (request()->has('stream_url'))
                     <livewire:iptv.channels.notification.channel-notification-component
-                        ip="{{ request()->get('stream_url') }}">
+                        ip="{{ request()->get('stream_url') }}" lazy>
                 @endif
 
                 @if (request()->is('channels/' . $channel->id . '/streams-analyze'))
-                    <livewire:iptv.channels.tools.stream-analyze-component :channel="$channel">
+                    <livewire:iptv.channels.tools.stream-analyze-component :channel="$channel" lazy>
                 @endif
             </div>
         @endif

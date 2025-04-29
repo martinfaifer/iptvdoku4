@@ -4,17 +4,17 @@
         <div class="flex-1">
             @if ($multicasts->isEmpty())
                 @can('create', $channel)
-                    <livewire:iptv.channels.multicast.store-multicast-channel :channel="$channel" />
+                    <livewire:iptv.channels.multicast.store-multicast-channel :channel="$channel" lazy/>
                 @endcan
             @endif
         </div>
         @if (!$multicasts->isEmpty())
             <div class="md:flex-none gap-2 md:overflow-x-auto">
                 @can('operate_with_childs', App\Models\Channel::class)
-                    <livewire:iptv.channels.multicast.store-multicast-channel :channel="$channel" />
+                    <livewire:iptv.channels.multicast.store-multicast-channel :channel="$channel" lazy/>
                 @endcan
                 @can('operate_with_childs', App\Models\Channel::class)
-                    <livewire:iptv.channels.store-device-to-channel-component :channel="$channel" channelType="multicast" />
+                    <livewire:iptv.channels.store-device-to-channel-component :channel="$channel" channelType="multicast" lazy/>
                 @endcan
             </div>
         @endif
@@ -23,7 +23,7 @@
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12 mb-4">
                 <livewire:iptv.channels.multicast.info-multicast-channel-component
-                    :channel="$channel" />
+                    :channel="$channel" lazy/>
             </div>
             <div class="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-4">
                 <livewire:notes.note-component column="channel_id" :id="$channel->id" lazy />
@@ -39,7 +39,7 @@
             @can('operate_with_childs', App\Models\Channel::class)
                 <div class="col-span-12 mb-4">
                     <livewire:iptv.channels.device.device-has-channel-and-connection-map-component :channel="$channel"
-                        channelType="multicast">
+                        channelType="multicast" lazy>
                 </div>
 
                 <div class="col-span-12 mb-4">

@@ -9,12 +9,12 @@
         {{-- show alert about no channel found --}}
         @if (is_null($device) || is_null($device->name))
             <div class="mt-12">
-                <x-share.alerts.info title="Vyberte zařízení z menu vlevo"></x-share.alerts.info>
+                <x-share.alerts.info title="Vyberte zařízení z menu vlevo" />
             </div>
         @else
             {{-- tags --}}
             <div>
-                <livewire:tag-component type="device" itemId="{{ $device->id }}"></livewire:tag-component>
+                <livewire:tag-component type="device" itemId="{{ $device->id }}" lazy />
             </div>
             <div class="grid grid-cols-12 mt-8">
                 <div class="col-span-12 flex">
@@ -40,10 +40,8 @@
                     @endif
 
                     {{-- actions --}}
-                    <livewire:iptv.devices.update-device-component
-                        :device="$device"></livewire:iptv.devices.update-device-component>
-                    <livewire:iptv.devices.delete-device-component
-                        :device="$device"></livewire:iptv.devices.delete-device-component>
+                    <livewire:iptv.devices.update-device-component :device="$device" lazy />
+                    <livewire:iptv.devices.delete-device-component :device="$device" lazy />
                     {{-- end of actions --}}
                 </div>
             </div>
@@ -53,8 +51,7 @@
                 <div class="grid grid-cols-12 gap-4">
                     @if (!is_null($device->template))
                         <div class="col-span-12 mb-4">
-                            <livewire:iptv.devices.device-template-component :device="$device" :template="$device->template"
-                                lazy></livewire:iptv.devices.device-template-component>
+                            <livewire:iptv.devices.device-template-component :device="$device" :template="$device->template" lazy />
                         </div>
                     @else
                         {{-- device has not template but if has oids can we show dialog for create one --}}
@@ -62,7 +59,7 @@
                             <div class="navbar bg-transparent">
                                 <div class="flex-1">
                                     <livewire:iptv.devices.create-device-template-component class="my-4"
-                                        :device="$device" lazy></livewire:iptv.devices.create-device-template-component>
+                                        :device="$device" lazy />
                                 </div>
                                 <div class="flex-none">
                                 </div>
@@ -73,7 +70,6 @@
                         'col-span-12 mb-4',
                         'xl:col-span-12' => blank($nmsCahedData),
                         'xl:col-span-8' => !blank($nmsCahedData),
-
                     ])>
                         <x-share.cards.base-card title="Informace o zařízení">
                             {{-- ip and login block --}}
@@ -91,7 +87,7 @@
                                                 </a>
                                             </span>
                                         </p>
-                                        <x-share.btns.copy-btn  dataToCopy="{{ $device->ip }}"/>
+                                        <x-share.btns.copy-btn dataToCopy="{{ $device->ip }}" />
                                         <hr
                                             class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
@@ -109,7 +105,7 @@
                                                 </a>
                                             </span>
                                         </p>
-                                        <x-share.btns.copy-btn  dataToCopy="{{ $device->ipmi_ip }}"/>
+                                        <x-share.btns.copy-btn dataToCopy="{{ $device->ipmi_ip }}" />
                                         <hr
                                             class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>

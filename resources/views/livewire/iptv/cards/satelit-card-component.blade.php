@@ -2,7 +2,7 @@
     <div class="flex flex-col">
         <div class="relative">
             <div class="absolute left">
-                <livewire:iptv.cards.create-satelit-card>
+                <livewire:iptv.cards.create-satelit-card lazy/>
             </div>
         </div>
         {{-- show alert about no sat card found --}}

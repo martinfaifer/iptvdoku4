@@ -674,7 +674,7 @@ html {
 }
 
 .btn-doku-navigation {
-    @apply bg-[#082f49] hover:bg-[#20435b] text-white font-semibold shadow-none border-none;
+    @apply bg-[#082f49] hover:bg-[#20435b] text-white/80 font-semibold shadow-none border-[1px] border-[#072a41] hover:border-[#072a41];
 }
 
 .btn-doku-icon {

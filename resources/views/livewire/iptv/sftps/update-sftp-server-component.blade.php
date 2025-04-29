@@ -8,28 +8,13 @@
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 md:col-span-6 mb-4">
-                    <x-input label="Uživtelské jméno pro připojení" wire:model="updateForm.username" />
-                    <div>
-                        @error('username')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    <x-input label="Uživatelské jméno pro připojení" wire:model="updateForm.username" />
                 </div>
                 <div class="col-span-12 md:col-span-6 mb-4">
                     <x-input label="Heslo" wire:model="updateForm.password" />
-                    <div>
-                        @error('password')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
                 <div class="col-span-12 mb-4">
                     <x-input label="Cesta k adreáři" wire:model="updateForm.path_to_folder" />
-                    <div>
-                        @error('path_to_folder')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
             </div>
             {{-- action section --}}
@@ -41,7 +26,7 @@
                 <div>
                     <x-button label="Upravit"
                         class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28" type="submit"
-                        spinner="save2" />
+                        spinner="update" />
                 </div>
             </div>
         </x-form>

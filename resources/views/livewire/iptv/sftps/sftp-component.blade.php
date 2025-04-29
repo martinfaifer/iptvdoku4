@@ -3,7 +3,7 @@
         <div class="relative">
             <div class="absolute left">
                 @can('create', App\Models\SftpServer::class)
-                    <livewire:iptv.sftps.create-sftp-server-component />
+                    <livewire:iptv.sftps.create-sftp-server-component lazy/>
                 @endcan
             </div>
         </div>
@@ -26,11 +26,11 @@
                     </h1>
                     {{-- actions --}}
                     @can('update', $sftpServer)
-                        <livewire:iptv.sftps.update-sftp-server-component :sftpServer="$sftpServer" />
+                        <livewire:iptv.sftps.update-sftp-server-component :sftpServer="$sftpServer" lazy/>
                     @endcan
 
                     @can('delete', $sftpServer)
-                        <livewire:iptv.sftps.delete-sftp-server-component :sftpServer="$sftpServer" />
+                        <livewire:iptv.sftps.delete-sftp-server-component :sftpServer="$sftpServer" lazy/>
                     @endcan
                     {{-- end of actions --}}
                 </div>

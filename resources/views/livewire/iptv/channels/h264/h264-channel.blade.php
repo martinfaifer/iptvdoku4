@@ -3,13 +3,13 @@
         @can('operate_with_childs', App\Models\Channel::class)
             <div class="flex-1">
                 @if (is_null($channel->h264))
-                    <livewire:iptv.channels.h264.store-h264-channel :channel="$channel">
+                    <livewire:iptv.channels.h264.store-h264-channel :channel="$channel" lazy>
                 @endif
             </div>
             @if (!is_null($channel->h264))
                 <div class="flex-none gap-2">
-                    <livewire:iptv.channels.h264.store-h264-channel :channel="$channel">
-                        <livewire:iptv.channels.store-device-to-channel-component :channel="$channel" channelType="h264">
+                    <livewire:iptv.channels.h264.store-h264-channel :channel="$channel" lazy>
+                        <livewire:iptv.channels.store-device-to-channel-component :channel="$channel" channelType="h264" lazy>
                 </div>
             @endif
         @endcan
@@ -131,11 +131,11 @@
                 </div>
             @endcan
             <div class="col-span-12 xl:col-span-6 mb-4">
-                <livewire:notes.note-component column="h264_id" id="{{ $channel->h264->id }}" lazy>
+                <livewire:notes.note-component column="h264_id" id="{{ $channel->h264->id }}" lazy />
             </div>
             @can('operate_with_childs', App\Models\Channel::class)
                 <div class="col-span-12 xl:col-span-6 mb-4">
-                    <livewire:log-component columnValue="h264:{{ $channel->id }}" column="item" lazy>
+                    <livewire:log-component columnValue="h264:{{ $channel->id }}" column="item" lazy />
                 </div>
             @endcan
             @can('operate_with_childs', App\Models\Channel::class)
@@ -143,7 +143,7 @@
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 mb-4">
                             <livewire:iptv.channels.device.device-has-channel-and-connection-map-component :channel="$channel"
-                                :isBackup="false" channelType="h264">
+                                :isBackup="false" channelType="h264" lazy />
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 mb-4">
                             <livewire:iptv.channels.device.device-has-channel-and-connection-map-component :channel="$channel"
-                                :isBackup="true" channelType="h264">
+                                :isBackup="true" channelType="h264" lazy />
                         </div>
                     </div>
                 </div>
@@ -161,8 +161,8 @@
             @can('operate_with_childs', App\Models\Channel::class)
                 @foreach ($h264 as $unicast)
                     <div wire:key="unicast-{{ $unicast['ip'] }}" class="col-span-12 mb-4 gap-4">
-                        <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component
-                            ip="{{ $unicast['ip'] }}">
+                        <livewire:iptv.channels.iptv-dohled.channel-data-on-iptv-dohled-component ip="{{ $unicast['ip'] }}"
+                            lazy />
                     </div>
                 @endforeach
             @endcan
