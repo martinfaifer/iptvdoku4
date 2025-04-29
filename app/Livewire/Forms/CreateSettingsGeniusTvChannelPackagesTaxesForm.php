@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Forms;
 
-use App\Models\GeniusTVchannelPackagesTax;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Livewire\Attributes\Validate;
+use App\Models\GeniusTVchannelPackagesTax;
+use App\Traits\Channels\GeniusTVChannelPackagesTrait;
 
 class CreateSettingsGeniusTvChannelPackagesTaxesForm extends Form
 {
+    use GeniusTVChannelPackagesTrait;
+
     #[Validate('required', message: 'Vyberte kanály')]
     public array $channels_id = [];
 
@@ -28,6 +31,7 @@ class CreateSettingsGeniusTvChannelPackagesTaxesForm extends Form
             'currency' => $this->currency,
         ]);
 
+        $this->removeCachedGeniusTvChannelPackages();
         $this->reset();
     }
 }

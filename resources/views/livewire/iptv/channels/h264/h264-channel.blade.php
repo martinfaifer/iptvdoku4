@@ -23,7 +23,7 @@
                         <div class="grid grid-cols-12 gap-4 text-white/80 font-semibold text-[#A3ABB8]">
                             <div class="col-span-12">
                                 <div class="grid grid-cols-12 gap-4">
-                                    <div class="col-span-10">
+                                    <div class="col-span-10 flex">
                                         <p>
                                             <span class="font-normal">
                                                 {{ $unicast['quality']['name'] }}p:
@@ -38,8 +38,9 @@
                                                 {{ $unicast['quality']['bitrate'] }}kbps
                                             </span>
                                         </p>
+                                        <x-share.btns.copy-btn dataToCopy="{{ $unicast['ip'] }}" />
                                     </div>
-                                    <div class="col-span-2 -mt-2">
+                                    <div class="col-span-2 -mt-1">
                                         @can('operate_with_childs', App\Models\Channel::class)
                                             @if ($this->isInIptvDohledDohled($unicast['ip']))
                                                 <div class="tooltip tooltip-bottom" data-tip="Upozornění na výpadky">

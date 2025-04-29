@@ -7,6 +7,7 @@ use App\Models\TagOnItem;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -30,15 +31,21 @@ class TagComponent extends Component
 
     public function mount(string $type, int $itemId): void
     {
-        $this->tags = Tag::get();
+        $this->tags = Tag::get(['id', 'name']);
         $this->type = $type;
         $this->itemId = $itemId;
-        $this->tagsOnItem = TagOnItem::where('type', $type)->where('item_id', $itemId)->with('tag')->get();
+        // $this->tagsOnItem = TagOnItem::where('type', $type)->where('item_id', $itemId)->with('tag')->get();
     }
 
     public function openModal(): void
     {
         $this->storeModal = true;
+    }
+
+    #[Computed()]
+    public function getTags(): Collection
+    {
+        return TagOnItem::where('type', $this->type)->where('item_id', $this->itemId)->with('tag')->get();
     }
 
     public function closeDialog(): void
@@ -59,9 +66,9 @@ class TagComponent extends Component
             ]);
         }
 
-        $this->dispatch('tag-component.'.$this->type.'.'.$this->itemId);
+        $this->dispatch('tag-component.' . $this->type . '.' . $this->itemId);
         if ($this->type == 'device') {
-            $this->dispatch('check_if_need_ssh.'.$this->itemId);
+            $this->dispatch('check_if_need_ssh.' . $this->itemId);
         }
         $this->closeDialog();
 
@@ -70,9 +77,8 @@ class TagComponent extends Component
 
     public function destroy(TagOnItem $tagOnItem): mixed
     {
-        $tag = $tagOnItem->tag;
         $tagOnItem->delete();
-        $this->dispatch('tag-component.'.$this->type.'.'.$this->itemId);
+        $this->dispatch('tag-component.' . $this->type . '.' . $this->itemId);
 
         return $this->success_alert('Upraveno');
     }

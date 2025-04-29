@@ -71,7 +71,7 @@ class NoteComponent extends Component
     public function render(): \Illuminate\Contracts\View\View|Factory
     {
         return view('livewire.notes.note-component', [
-            'notes' => Note::where($this->column, $this->id)->orderBy('id', 'DESC')->get(),
+            'notes' => Note::where($this->column, $this->id)->orderBy('id', 'DESC')->take(10)->get(),
         ]);
     }
 }

@@ -79,7 +79,7 @@
                             {{-- ip and login block --}}
                             <div class="grid grid-cols-12 font-semibold text-[#A3ABB8]">
                                 @if (!blank($device->ip))
-                                    <div class="col-span-12 xl:col-span-4">
+                                    <div class="col-span-12 xl:col-span-4 flex">
                                         <p>
                                             <span class="font-normal">
                                                 IP:
@@ -91,12 +91,13 @@
                                                 </a>
                                             </span>
                                         </p>
+                                        <x-share.btns.copy-btn  dataToCopy="{{ $device->ip }}"/>
                                         <hr
                                             class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
                                 @if (!blank($device->ipmi_ip) && !blank($device->ipmi_ip))
-                                    <div class="col-span-12 xl:col-span-4">
+                                    <div class="col-span-12 xl:col-span-4 flex">
                                         <p>
                                             <span class="font-normal">
                                                 IPMI:
@@ -108,12 +109,13 @@
                                                 </a>
                                             </span>
                                         </p>
+                                        <x-share.btns.copy-btn  dataToCopy="{{ $device->ipmi_ip }}"/>
                                         <hr
                                             class="xl:hidden w-full h-[1px] mt-2 mb-2 mx-auto bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
                                     </div>
                                 @endif
                                 @if (!blank($device->controller_ip))
-                                    <div class="col-span-12 xl:col-span-4">
+                                    <div class="col-span-12 xl:col-span-4 flex">
                                         <p>
                                             <span class="font-normal">
                                                 URL kontroleru:
@@ -130,7 +132,7 @@
                                     </div>
                                 @endif
                                 @if (!blank($device->username) || !blank($device->password))
-                                    <div class="col-span-12 xl:col-span-4">
+                                    <div class="col-span-12 xl:col-span-4 flex">
                                         <p>
                                             <span class="font-normal">
                                                 Přístupy:

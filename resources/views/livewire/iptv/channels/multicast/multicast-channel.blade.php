@@ -23,7 +23,7 @@
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12 mb-4">
                 <livewire:iptv.channels.multicast.info-multicast-channel-component
-                    :channel="$channel"></livewire:iptv.channels.multicast.info-multicast-channel-component>
+                    :channel="$channel" />
             </div>
             <div class="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-4">
                 <livewire:notes.note-component column="channel_id" :id="$channel->id" lazy />

@@ -8,7 +8,7 @@
             </button>
         </div>
         <div class="grid grid-cols-12 gap-4 font-semibold text-[#A3ABB8]">
-            <div class="col-span-12">
+            <div class="col-span-12 flex">
                 {{-- show expiration if is not null --}}
                 @if (!is_null($satelitCard->expiration))
                     <p>
@@ -17,14 +17,17 @@
                         </span>
                         <span class="ml-3">
                             {{ $satelitCard->expiration }}
-                            <button @click='$wire.openEditModal()' class="ml-1 inline btn-sm bg-transparent border-none">
-                                <x-heroicon-o-pencil class="size-4 text-green-500" />
-                            </button>
-                            <button wire:click='destroy()' class="inline btn-sm bg-transparent border-none" wire:submit='Opravdu odebrat expiraci?'>
-                                <x-heroicon-o-trash class="size-4 text-red-500" />
-                            </button>
                         </span>
                     </p>
+                    <div class="-mt-1">
+                        <button @click='$wire.openEditModal()' class="btn btn-sm ml-1 inline btn-sm bg-transparent border-none">
+                            <x-heroicon-o-pencil class="h-4 text-green-500" />
+                        </button>
+                        <button wire:click='destroy()' class="inline btn btn-sm bg-transparent border-none"
+                            wire:submit='Opravdu odebrat expiraci?'>
+                            <x-heroicon-o-trash class="h-4 text-red-500" />
+                        </button>
+                    </div>
                 @else
                     {{-- show alert if is null --}}
                     <x-share.alerts.info title="Není nastavena expirace"></x-share.alerts.info>
@@ -72,8 +75,9 @@
                         @click='$wire.closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Upravit" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="update" />
+                    <x-button label="Upravit"
+                        class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28" type="submit"
+                        spinner="update" />
                 </div>
             </div>
         </x-form>

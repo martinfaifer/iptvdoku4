@@ -2,17 +2,18 @@
 
 namespace App\Livewire\Settings\Geniustv;
 
-use App\Livewire\Forms\CreateGeniusTvTvPackageForm;
-use App\Livewire\Forms\UpdateGeniusTvTvPackageForm;
-use App\Models\GeniusTvChannelPackage;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Contracts\View\Factory;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\GeniusTvChannelPackage;
+use Illuminate\Contracts\View\Factory;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Channels\GetChannelPackagesTrait;
+use App\Livewire\Forms\CreateGeniusTvTvPackageForm;
+use App\Livewire\Forms\UpdateGeniusTvTvPackageForm;
 
 class TvChannelPackagesComponent extends Component
 {
-    use NotificationTrait, WithPagination;
+    use NotificationTrait, WithPagination, GetChannelPackagesTrait;
 
     public CreateGeniusTvTvPackageForm $createForm;
 
@@ -57,6 +58,7 @@ class TvChannelPackagesComponent extends Component
     public function destroy(GeniusTvChannelPackage $tvPackage): mixed
     {
         $tvPackage->delete();
+        $this->removeChannelPackagesFromCache();
         $this->redirect(url()->previous(), true);
 
         return $this->success_alert('Odebráno');

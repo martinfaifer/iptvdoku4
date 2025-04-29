@@ -53,7 +53,6 @@ class DeviceHasChannelComponent extends Component
     public function mount(Device $device): void
     {
         $this->device = $device->load('category');
-        // $this->checkIfNeedToAddLinuxPath();
     }
 
     public function checkIfNeedToAddLinuxPath(): void
@@ -78,7 +77,6 @@ class DeviceHasChannelComponent extends Component
             'path' => $this->path,
         ]);
 
-        // $this->redirect(url()->previous(), true);
         $this->dispatch('refresh_device_component')->self();
         $this->path = '';
         $this->closeDialog();

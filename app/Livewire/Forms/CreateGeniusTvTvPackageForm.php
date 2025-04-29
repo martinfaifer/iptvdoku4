@@ -2,12 +2,16 @@
 
 namespace App\Livewire\Forms;
 
-use App\Models\GeniusTvChannelPackage;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Livewire\Attributes\Validate;
+use App\Models\GeniusTvChannelPackage;
+use App\Traits\Channels\GetChannelPackagesTrait;
 
 class CreateGeniusTvTvPackageForm extends Form
 {
+
+    use GetChannelPackagesTrait;
+
     #[Validate('required', message: 'Vyplňte název balíčku')]
     #[Validate('string', message: 'Neplatný formát')]
     #[Validate('max:255', message: 'Maximální délka je :max')]
@@ -21,6 +25,8 @@ class CreateGeniusTvTvPackageForm extends Form
         GeniusTvChannelPackage::create([
             'name' => $this->name,
         ]);
+
+        $this->removeChannelPackagesFromCache();
 
         $this->reset();
     }

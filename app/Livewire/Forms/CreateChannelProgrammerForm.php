@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Forms;
 
+use Livewire\Form;
 use App\Models\ChannelProgramer;
 use Livewire\Attributes\Validate;
-use Livewire\Form;
+use App\Traits\Channels\ChannelProgramerTrait;
 
 class CreateChannelProgrammerForm extends Form
 {
+    use ChannelProgramerTrait;
+
     #[Validate('required', message: "Vyplňte jméno")]
     #[Validate('string', message: "Neplatná formát")]
     #[Validate('max:255', message: "Maximální počet znaků je :max")]
@@ -21,5 +24,7 @@ class CreateChannelProgrammerForm extends Form
         ChannelProgramer::create([
             'name' => $this->name
         ]);
+
+        $this->removeCachedChannelProgramers();
     }
 }

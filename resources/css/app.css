@@ -664,3 +664,19 @@ html {
 .cs-rose-950 {
     @apply bg-[#4c0519];
 }
+
+.btn-doku-primary {
+    @apply bg-sky-800 hover:bg-sky-700 text-white font-semibold shadow-none border-none;
+}
+
+.btn-doku-close {
+    @apply bg-[#334155] hover:bg-[#475466] text-white font-semibold
+}
+
+.btn-doku-navigation {
+    @apply bg-[#082f49] hover:bg-[#20435b] text-white font-semibold shadow-none border-none;
+}
+
+.btn-doku-icon {
+   @apply btn-circle  bg-transparent border-none;
+}

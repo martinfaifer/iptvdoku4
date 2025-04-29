@@ -3,19 +3,21 @@
 namespace App\Livewire\Iptv\Channels;
 
 use App\Models\Channel;
-use App\Models\ChannelProgramer;
 use Livewire\Component;
 use App\Models\ChannelRegion;
 use Livewire\WithFileUploads;
+use App\Models\ChannelProgramer;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Cache;
 use App\Models\GeniusTvChannelPackage;
 use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Channels\ChannelRegionTrait;
+use App\Traits\Channels\GetChannelPackagesTrait;
 use App\Traits\Channels\GetChannelsCategoriesFromCacheTrait;
 
 class StoreChannel extends Component
 {
-    use GetChannelsCategoriesFromCacheTrait, NotificationTrait, WithFileUploads;
+    use GetChannelsCategoriesFromCacheTrait, NotificationTrait, WithFileUploads, GetChannelPackagesTrait, ChannelRegionTrait;
 
     #[Validate('required', message: 'Vyplňte název kanálu')]
     #[Validate('max:250', message: 'Maxilnálně 250 znaků')]
@@ -83,9 +85,9 @@ class StoreChannel extends Component
     public function mount(): void
     {
         $this->channelCategories = $this->get_channels_categories_from_cache();
-        $this->geniusTVChannelPackages = GeniusTvChannelPackage::get();
+        $this->geniusTVChannelPackages = $this->getPackages();
         $this->channelsEpgs = ! Cache::has('channelEpgIds') ? [] : Cache::get('channelEpgIds');
-        $this->regions = ChannelRegion::get();
+        $this->regions = $this->getCachedChannelRegions();
         $this->channelProgramers = ChannelProgramer::get();
     }
 

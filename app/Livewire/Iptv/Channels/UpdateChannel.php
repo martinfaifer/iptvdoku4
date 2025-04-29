@@ -12,11 +12,14 @@ use Illuminate\Support\Facades\Cache;
 use App\Models\GeniusTvChannelPackage;
 use App\Livewire\Forms\UpdateIptvChannel;
 use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Channels\ChannelRegionTrait;
+use App\Traits\Channels\ChannelProgramerTrait;
+use App\Traits\Channels\GeniusTVChannelPackagesTrait;
 use App\Traits\Channels\GetChannelsCategoriesFromCacheTrait;
 
 class UpdateChannel extends Component
 {
-    use GetChannelsCategoriesFromCacheTrait, NotificationTrait, WithFileUploads;
+    use GetChannelsCategoriesFromCacheTrait, NotificationTrait, WithFileUploads, ChannelRegionTrait, ChannelProgramerTrait, GeniusTVChannelPackagesTrait;
 
     public UpdateIptvChannel $form;
 
@@ -43,10 +46,10 @@ class UpdateChannel extends Component
     public function mount(?string $channelType = null): void
     {
         $this->channelCategories = $this->get_channels_categories_from_cache();
-        $this->geniusTVChannelPackages = GeniusTvChannelPackage::get();
+        $this->geniusTVChannelPackages = $this->getCachedGeniusTvChannelPackages();
         $this->channelsEpgs = ! Cache::has('channelEpgIds') ? [] : Cache::get('channelEpgIds');
-        $this->regions = ChannelRegion::get();
-        $this->channelProgramers = ChannelProgramer::get();
+        $this->regions = $this->getCachedChannelRegions();
+        $this->channelProgramers = $this->getCachedChannelProgramers();
     }
 
     public function update(): mixed

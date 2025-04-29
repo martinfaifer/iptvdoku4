@@ -5,6 +5,7 @@ namespace App\Livewire\Iptv\Channels;
 use App\Models\Channel;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Cache;
 use App\Traits\Livewire\NotificationTrait;
 use App\Actions\Channels\CompletlyDeleteChannelAction;
@@ -30,6 +31,7 @@ class IptvChannel extends Component
         }
     }
 
+    #[Computed(persist: true)]
     public function getTimeShiftTime(): void
     {
         $cachedNanguApiResult = Cache::get('nangu_channel_' . $this->channel->id . '_timeshift');

@@ -33,6 +33,7 @@
                             {{ $device->ip }}
                         </span>
                     </div>
+                    <x-share.btns.copy-btn  dataToCopy="{{ $device->ip }}"/>
                 </div>
             @endif
 

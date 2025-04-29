@@ -12,20 +12,31 @@ trait CheckIfChannelIsInIptvDohledTrait
         if (is_null($ip)) {
             return false;
         }
-        $isIn = IptvDohledUrl::where('stream_url', $ip)->first();
+        if (!Cache::has('in_iptv_dohled_' . $ip)) {
+            if (IptvDohledUrl::where('stream_url', $ip)->first()) {
+                $isIn = true;
+            } else {
+                $isIn = false;
+            }
+
+            Cache::put('in_iptv_dohled_' . $ip, $isIn, 60);
+        }
 
         // $isIn = Cache::get($ip);
-        return ! $isIn ? false : true;
+        return Cache::get('in_iptv_dohled_' . $ip);
     }
 
     public function can_notify(string $ip): bool
     {
-        $isIn = IptvDohledUrl::where('stream_url', $ip)->first();
+        $isIn = false;
 
-        if (! $isIn) {
-            return false;
+        if (!Cache::has('can_notify_from_dohled_' . $ip)) {
+            if (IptvDohledUrl::where('stream_url', $ip)->first()) {
+                $isIn = true;
+            }
+            Cache::put('can_notify_from_dohled_' . $ip, $isIn, 60);
         }
 
-        return $isIn->can_notify;
+        return Cache::get('can_notify_from_dohled_' . $ip);
     }
 }

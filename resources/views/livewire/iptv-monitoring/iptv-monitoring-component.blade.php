@@ -1,4 +1,4 @@
-<div wire:poll>
+<div wire:poll.30s>
     @if (!$isClosed)
         @if (!$isMinimaze)
             <div @class([

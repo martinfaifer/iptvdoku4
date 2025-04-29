@@ -7,13 +7,14 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
 use App\Models\ChannelProgramer;
-use App\Traits\Livewire\NotificationTrait;
-use App\Livewire\Forms\CreateChannelProgrammerForm;
 use App\Models\ChannelProgramerContanct;
+use App\Traits\Livewire\NotificationTrait;
+use App\Traits\Channels\ChannelProgramerTrait;
+use App\Livewire\Forms\CreateChannelProgrammerForm;
 
 class ChannelsProgrammersComponent extends Component
 {
-    use WithPagination, NotificationTrait;
+    use WithPagination, NotificationTrait, ChannelProgramerTrait;
 
     public CreateChannelProgrammerForm $createForm;
 
@@ -65,6 +66,7 @@ class ChannelsProgrammersComponent extends Component
 
         ChannelProgramerContanct::where('channel_programmer_id', $programer->id)->delete();
         $programer->delete();
+        $this->removeCachedChannelProgramers();
         $this->dispatch('reload_settings_programmers');
         $this->success_alert('Odebráno');
     }

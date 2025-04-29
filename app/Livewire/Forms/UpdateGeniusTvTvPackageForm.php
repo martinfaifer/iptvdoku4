@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Forms;
 
-use App\Models\GeniusTvChannelPackage;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Livewire\Attributes\Validate;
+use App\Models\GeniusTvChannelPackage;
+use App\Traits\Channels\GetChannelPackagesTrait;
 
 class UpdateGeniusTvTvPackageForm extends Form
 {
+    use GetChannelPackagesTrait;
+
     public ?GeniusTvChannelPackage $tvPackage;
 
     #[Validate('required', message: 'Vyplňte název balíčku')]
@@ -30,6 +33,8 @@ class UpdateGeniusTvTvPackageForm extends Form
         $this->tvPackage->update([
             'name' => $this->name,
         ]);
+
+        $this->removeChannelPackagesFromCache();
 
         $this->reset();
     }

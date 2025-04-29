@@ -50,27 +50,3 @@
     @endif
 </div>
 
-<script>
-    import Swal from 'sweetalert2';
-
-    function playAlertSound() {
-        const audio = new Audio('/path/to/your/soundfile.mp3');
-        audio.play().catch(error => console.error("Přehrání zvuku selhalo:", error));
-    }
-
-    function showAlert(message) {
-        Swal.fire({
-            title: 'Upozornění',
-            text: message,
-            icon: 'warning',
-            didOpen: () => {
-                playAlertSound();
-            }
-        });
-    }
-
-    // Příklad použití
-    if (alerts.length > 0) {
-        alerts.forEach(alert => showAlert(alert));
-    }
-</script>

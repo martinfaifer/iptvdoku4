@@ -10,12 +10,12 @@
             </div>
             <div
                 class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold text-[#A3ABB8] max-h-44 overflow-y-scroll">
-                @if ($contacts->isEmpty())
+                @if ($this->getContacts()->isEmpty())
                     <div class="col-span-12">
                         <x-share.alerts.info title="Není nadefinován žádný kontakt"></x-share.alerts.info>
                     </div>
                 @else
-                    @foreach ($contacts as $contact)
+                    @foreach ($this->getContacts() as $contact)
                         <div class="col-span-12 bg-[#2A323C]/20 rounded-md">
                             <div class="flex flex-row-reverse">
                                 <button
@@ -84,27 +84,12 @@
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
                     <x-input label="Osoba" wire:model="contactForm.full_name" />
-                    <div>
-                        @error('full_name')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
                 <div class="col-span-12 mb-4">
                     <x-input label="Email" wire:model="contactForm.email" />
-                    <div>
-                        @error('email')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
                 <div class="col-span-12 mb-4">
                     <x-input label="Telefon" wire:model="contactForm.phone" />
-                    <div>
-                        @error('phone')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
             </div>
             {{-- action section --}}

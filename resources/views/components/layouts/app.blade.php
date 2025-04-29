@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" class="text-red-500" href="{{ asset('favicon.svg') }}">
-    <link rel="manifest" href="/site.webmanifest">
+    {{-- <link rel="manifest" href="/site.webmanifest"> --}}
     <title>{{ $title ?? 'IPTV dokumentace' }}</title>
     {{-- <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" /> --}}

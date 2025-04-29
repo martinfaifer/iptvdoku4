@@ -2,8 +2,8 @@
     <x-share.cards.base-card title="Informace o multicastu">
         {{-- list of multicast datas --}}
         @foreach ($multicasts as $multicast)
-            <div wire:key='multicast-{{ $multicast->id }}' class="grid grid-cols-12 font-semibold text-[#A3ABB8]">
-                <div class="col-span-12 xl:col-span-3">
+            <div wire:key='multicast-{{ $multicast->id }}' class="grid grid-cols-12 gap-4 font-semibold text-[#A3ABB8]">
+                <div class="col-span-12 xl:col-span-3 flex">
                     <p>
                         <span class="font-normal">
                             Zdrojová IP:
@@ -15,6 +15,7 @@
                             {{ $multicast->source_ip }}
                         </span>
                     </p>
+                    <x-share.btns.copy-btn dataToCopy="{{ $multicast->source_ip }}" />
                 </div>
                 <div class="col-span-12 xl:col-span-3 mt-4 xl:mt-0">
                     <p>
@@ -26,7 +27,7 @@
                         </span>
                     </p>
                 </div>
-                <div class="xl:col-span-3 col-span-12 mt-4 xl:mt-0">
+                <div class="xl:col-span-3 col-span-12 mt-4 xl:mt-0 flex">
                     <p>
                         <span class="font-normal">
                             STB IP:
@@ -38,6 +39,7 @@
                             {{ $multicast->stb_ip }}
                         </span>
                     </p>
+                    <x-share.btns.copy-btn dataToCopy="{{ $multicast->stb_ip }}" />
                 </div>
                 <div class="col-span-12 xl:col-span-2 mt-4 xl:mt-0">
                     <p>

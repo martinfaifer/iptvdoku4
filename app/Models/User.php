@@ -5,15 +5,16 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Observers\UserObserver;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 #[ObservedBy(UserObserver::class)]
 class User extends Authenticatable
@@ -74,7 +75,7 @@ class User extends Authenticatable
     protected function password(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => bcrypt($value)
+            set: fn($value) => bcrypt($value)
         );
     }
 
@@ -90,34 +91,49 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return $this->user_role_id == UserRole::admin()->first()->id;
+        if (!Cache::has('is_admin')) {
+            Cache::forever('is_admin', UserRole::admin()->first()->id);
+        }
+        return $this->user_role_id == Cache::get('is_admin');
     }
 
     public function isTechnik(): bool
     {
-        return $this->user_role_id == UserRole::technik()->first()->id;
+        if (!Cache::has('is_technik')) {
+            Cache::forever('is_technik', UserRole::technik()->first()->id);
+        }
+        return $this->user_role_id == Cache::get('is_technik');
     }
 
     public function isAdministrativa(): bool
     {
-        return $this->user_role_id == UserRole::administrativa()->first()->id;
+        if (!Cache::has('is_administrativa')) {
+            Cache::forever('is_administrativa', UserRole::administrativa()->first()->id);
+        }
+        return $this->user_role_id == Cache::get('is_administrativa');
     }
 
     public function isApi(): bool
     {
-        return $this->user_role_id == UserRole::api()->first()->id;
+        if (!Cache::has('is_api')) {
+            Cache::forever('is_api', UserRole::api()->first()->id);
+        }
+        return $this->user_role_id == Cache::get('is_api');
     }
 
     public function isReader(): bool
     {
+        if (!Cache::has('is_reader')) {
+            Cache::forever('is_reader', UserRole::reader()->first()->id);
+        }
         return $this->user_role_id == UserRole::reader()->first()->id;
     }
 
     public function scopeSearch(Builder $query, string $search): void
     {
         $query
-            ->where('first_name', 'like', '%'.$search.'%')
-            ->orWhere('last_name', 'like', '%'.$search.'%')
-            ->orWhere('email', 'like', '%'.$search.'%');
+            ->where('first_name', 'like', '%' . $search . '%')
+            ->orWhere('last_name', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%');
     }
 }

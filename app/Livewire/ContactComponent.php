@@ -2,15 +2,16 @@
 
 namespace App\Livewire;
 
-use App\Livewire\Forms\StoreContactForm;
-use App\Livewire\Forms\UpdateContact;
 use App\Models\Contact;
-use App\Traits\Livewire\NotificationTrait;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Database\Eloquent\Collection;
-use Livewire\Attributes\Locked;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Locked;
+use Livewire\Attributes\Computed;
+use App\Livewire\Forms\UpdateContact;
+use Illuminate\Contracts\View\Factory;
+use App\Livewire\Forms\StoreContactForm;
+use App\Traits\Livewire\NotificationTrait;
+use Illuminate\Database\Eloquent\Collection;
 
 class ContactComponent extends Component
 {
@@ -36,7 +37,12 @@ class ContactComponent extends Component
     {
         $this->type = $type;
         $this->item_id = $item_id;
-        $this->contacts = Contact::where('type', $type)->where('item_id', $item_id)->get();
+    }
+
+    #[Computed(persist: true)]
+    public function getContacts()
+    {
+        return Contact::where('type', $this->type)->where('item_id', $this->item_id)->get();
     }
 
     public function openStoreModal(): void

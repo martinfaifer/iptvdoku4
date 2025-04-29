@@ -23,6 +23,6 @@ class LoggerService
 
     public function show(string $column, string $columnValue, int $records = 10, string $order = 'DESC'): mixed
     {
-        return Loger::where($column, $columnValue)->take($records)->orderBy('id', $order)->get();
+        return Loger::where($column, $columnValue)->take($records)->orderBy('id', $order)->take(10)->get();
     }
 }

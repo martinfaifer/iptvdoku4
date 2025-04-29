@@ -2,21 +2,22 @@
 
 namespace App\Observers;
 
-use App\Jobs\GetChannelDetailFromNanguApiJob;
 use App\Jobs\LogJob;
-use App\Jobs\SendEmailNotificationJob;
-use App\Models\Channel;
-use App\Models\ChannelRegion;
-use App\Models\Contact;
-use App\Models\Loger;
 use App\Models\Note;
-use App\Traits\Channels\CacheChannelsForApi;
+use App\Models\Loger;
+use App\Models\Channel;
+use App\Models\Contact;
+use App\Models\ChannelRegion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use App\Jobs\SendEmailNotificationJob;
+use App\Traits\Channels\ChannelRegionTrait;
+use App\Traits\Channels\CacheChannelsForApi;
+use App\Jobs\GetChannelDetailFromNanguApiJob;
 
 class ChannelObserver
 {
-    use CacheChannelsForApi;
+    use CacheChannelsForApi, ChannelRegionTrait;
 
     public function created(Channel $channel): void
     {
@@ -54,7 +55,7 @@ class ChannelObserver
         }
         Cache::forever('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
         $this->cache_channels_with_detail();
-        foreach (ChannelRegion::get() as $region) {
+        foreach ($this->getCachedChannelRegions() as $region) {
             $this->cache_channels_with_region_with_detail($region->name);
         }
     }
@@ -95,7 +96,7 @@ class ChannelObserver
 
         Cache::forever('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
         $this->cache_channels_with_detail();
-        foreach (ChannelRegion::get() as $region) {
+        foreach ($this->getCachedChannelRegions() as $region) {
             $this->cache_channels_with_region_with_detail($region->name);
         }
     }
@@ -114,7 +115,7 @@ class ChannelObserver
             );
             Cache::forever('channels_menu', Channel::orderBy('name')->get(['id', 'name', 'logo', 'is_radio']));
             $this->cache_channels_with_detail();
-            foreach (ChannelRegion::get() as $region) {
+            foreach ($this->getCachedChannelRegions() as $region) {
                 $this->cache_channels_with_region_with_detail($region->name);
             }
 
