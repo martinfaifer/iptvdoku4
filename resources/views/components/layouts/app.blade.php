@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -73,9 +73,9 @@
         <x-main sticky full-width>
             @auth
                 @persist('sidebar-menu')
-                    <x-slot:sidebar drawer="sidebar-drawer" @class([
-                        'bg-gradient-to-b from-slate-950/80 to-black/40 border-r border-[#64748b] border-opacity-10 !w-[320px]',
-                    ])>
+                    <x-slot:sidebar drawer="sidebar-drawer"
+                        class="bg-gradient-to-b from-slate-950/80 to-black/50 border-r border-[#64748b] border-opacity-10 !w-[320px]">
+
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
                             <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
                                 <div class="tooltip tooltip-bottom" data-tip="Kanály">
@@ -154,13 +154,17 @@
                                 @can('show_tickets', App\Models\User::class)
                                     <livewire:iptv.flow-eye.menu.flow-eye-menu-icon-with-alert-component />
                                 @endcan
+                                {{-- <li class="rounded-lg fixed bottom-2">
+                                    <a>
+                                        <x-theme-toggle />
+                                    </a>
+                                </li> --}}
                             </ul>
                         </x-menu>
+
                         {{-- main dynamic navigation --}}
                         <x-menu activate-by-route active-bg-color="bg-sky-950" class="ml-16 fixed !h-[99%]">
-                            {{-- @persist('dynamic-sidebar-navigation') --}}
                             <div class="overflow-y-scroll hover:overflow-y-scroll">
-                                {{-- @persist('device-sidebar') --}}
                                 @if (request()->is('/') || request()->is('channels') || request()->is('channels/*'))
                                     <livewire:iptv.channels.menu.channels-menu />
                                 @endif
@@ -189,9 +193,7 @@
                                 @if (request()->is('settings') || request()->is('settings/*'))
                                     <livewire:settings.settings-navigation-component class="fixed" />
                                 @endif
-                                {{-- @endpersist --}}
                             </div>
-                            {{-- @endpersist --}}
                         </x-menu>
                     </x-slot:sidebar>
                 @endpersist
@@ -205,16 +207,6 @@
                 {{ $slot }}
             </x-slot:content>
         </x-main>
-        {{-- <script>
-            function isSafari() {
-                var userAgent = navigator.userAgent;
-                return /Safari/.test(userAgent) && !/Chrome/.test(userAgent) && !/iPhone/.test(userAgent);
-            }
-
-            if (isSafari()) {
-                document.getElementById('unsupported-browser').style.display = 'block';
-            }
-        </script> --}}
 </body>
 
 </html>
