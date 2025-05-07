@@ -78,7 +78,7 @@
                                 <div class="tooltip tooltip-bottom" data-tip="Kanály">
                                     <li href="/channels" wire:navigate.hover @class([
                                         'rounded-lg',
-                                        'bg-[#1A1E2A]' => request()->is('channels') || request()->is('channels/*'),
+                                        'bg-[#1E1D1E] dark:bg-[#1A1E2A]' => request()->is('channels') || request()->is('channels/*'),
                                     ])>
                                         <a>
                                             <x-sui-tv-mode class="size-6 text-white" fill="none" />
@@ -92,7 +92,7 @@
                                     <div class="tooltip tooltip-bottom" data-tip="Satelitní karty">
                                         <li href="/sat-cards" wire:navigate.hover @class([
                                             'rounded-lg',
-                                            'bg-[#1A1E2A]' =>
+                                            'bg-[#1E1D1E] dark:bg-[#1A1E2A]' =>
                                                 request()->is('sat-cards') || request()->is('sat-cards/*'),
                                         ])>
                                             <a>
@@ -105,7 +105,7 @@
                                     <div class="tooltip tooltip-bottom" data-tip="Kalendář">
                                         <li href="/calendar" wire:navigate.hover @class([
                                             'rounded-lg',
-                                            'bg-[#1A1E2A]' => request()->is('calendar') || request()->is('calendar/*'),
+                                            'bg-[#1E1D1E] dark:bg-[#1A1E2A]' => request()->is('calendar') || request()->is('calendar/*'),
                                         ])>
                                             <a>
                                                 <x-heroicon-o-calendar-days class="size-6 text-white/80" fill="none" />
@@ -117,7 +117,7 @@
                                     <div class="tooltip tooltip-bottom" data-tip="Sftp servery">
                                         <li href="/sftps" wire:navigate.hover @class([
                                             'rounded-lg',
-                                            'bg-[#1A1E2A]' => request()->is('sftps') || request()->is('sftps/*'),
+                                            'bg-[#1E1D1E] dark:bg-[#1A1E2A]' => request()->is('sftps') || request()->is('sftps/*'),
                                         ])>
                                             <a>
                                                 <x-heroicon-o-arrow-up-on-square-stack class="size-6 text-white/80"
@@ -129,7 +129,7 @@
                                 <div class="tooltip tooltip-bottom" data-tip="Wiki">
                                     <li href="/wiki" wire:navigate.hover @class([
                                         'rounded-lg',
-                                        'bg-[#1A1E2A]' => request()->is('wiki') || request()->is('wiki/*'),
+                                        'bg-[#1E1D1E] dark:bg-[#1A1E2A]' => request()->is('wiki') || request()->is('wiki/*'),
                                     ])>
                                         <a>
                                             <x-heroicon-o-academic-cap class="size-6 text-white/80" fill="none" />
@@ -140,7 +140,7 @@
                                     <div class="tooltip tooltip-bottom" data-tip="Ip prefixy">
                                         <li href="/prefixes" wire:navigate.hover @class([
                                             'rounded-lg',
-                                            'bg-[#1A1E2A]' => request()->is('prefixes') || request()->is('prefixes/*'),
+                                            'bg-[#1E1D1E] dark:bg-[#1A1E2A]' => request()->is('prefixes') || request()->is('prefixes/*'),
                                         ])>
                                             <a>
                                                 <x-heroicon-o-rectangle-stack class="size-6 text-white/80" fill="none" />

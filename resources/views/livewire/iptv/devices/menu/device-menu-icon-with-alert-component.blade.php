@@ -1,7 +1,7 @@
 <div class="tooltip tooltip-bottom" data-tip="{{ $dataType }}">
     <li href="/devices" wire:navigate.hover @class([
         'rounded-lg',
-        'bg-[#1A1E2A]' => request()->is('devices') || request()->is('devices/*'),
+        'bg-[#1E1D1E] dark:bg-[#1A1E2A]' => request()->is('devices') || request()->is('devices/*'),
     ])>
         <a>
             <x-sui-flip-view class="size-6 text-white" fill="none" />

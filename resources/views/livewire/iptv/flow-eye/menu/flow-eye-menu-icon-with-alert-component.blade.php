@@ -2,7 +2,7 @@
     <div class="tooltip tooltip-bottom" data-tip="FlowEye">
         <li href="/floweye" wire:navigate.hover @class([
             'rounded-lg',
-            'bg-[#1A1E2A]' => request()->is('floweye') || request()->is('floweye/*'),
+            'bg-[#1E1D1E] dark:bg-[#1A1E2A]' => request()->is('floweye') || request()->is('floweye/*'),
         ])>
             <a>
                 <x-heroicon-o-viewfinder-circle class="size-6 text-white/80" fill="none" />

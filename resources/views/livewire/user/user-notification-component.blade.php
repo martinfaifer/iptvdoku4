@@ -6,7 +6,7 @@
             </h1>
         </div>
     </div>
-    <hr class="w-full h-1 mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-none rounded">
+    <hr class="w-full h-[1px] dark:h-1 mt-2 mx-auto my-1 bg-slate-800/5 dark:bg-gradient-to-r dark:from-sky-950 dark:via-blue-850 dark:to-sky-950 border-none rounded">
     <x-form wire:submit="update" class="mt-6">
         <div class="grid grid-cols-12 gap-4 mt-6">
             <div class="col-span-12 xl:col-span-3">
