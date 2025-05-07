@@ -1,9 +1,9 @@
 <div>
-    <button class="btn btn-circle btn-sm mt-7 ml-3 bg-transparent border-none" @click="$wire.edit">
+    <button class="btn btn-circle btn-sm mt-7 ml-3 bg-transparent border-none shadow-none" @click="$wire.edit">
         <x-icon name="s-pencil" class="w-4 h-4 text-green-500" />
     </button>
 
-    <x-modal wire:model="updateModal" title="Úprava kanálu" persistent class="modal-bottom sm:modal-middle">
+    <x-modal wire:model="updateModal" title="Úprava kanálu {{ $channel->name }}" persistent class="modal-bottom sm:modal-middle" box-class="!max-w-6xl">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>
@@ -142,12 +142,12 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                         @click='$wire.closeDialog' />
                 </div>
                 <div>
                     <x-button label="Upravit"
-                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-sky-700/50 border-none text-white font-semibold w-full sm:w-28"
+                        class="btn btn-doku-primary w-full sm:w-28"
                         type="submit" spinner="update" />
                 </div>
             </div>

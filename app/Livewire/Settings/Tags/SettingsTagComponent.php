@@ -74,9 +74,9 @@ class SettingsTagComponent extends Component
         return view('livewire.settings.tags.settings-tag-component', [
             'tags' => Tag::search($this->query)->paginate(5),
             'headers' => [
-                ['key' => 'name', 'label' => 'Název', 'class' => 'text-white/80'],
-                ['key' => 'color', 'label' => 'Barva', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'name', 'label' => 'Název', 'class' => 'dark:text-white/80'],
+                ['key' => 'color', 'label' => 'Barva', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

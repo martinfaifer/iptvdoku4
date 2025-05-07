@@ -12,7 +12,7 @@
                                 @class([
                                     'ml-1',
                                     'rounded-lg',
-                                    'bg-sky-950' =>
+                                    'bg-slate-800/5 dark:bg-sky-950' =>
                                         request()->is('sat-cards/' . $satCard->id) ||
                                         request()->is('sat-cards/' . $satCard->id . '/*'),
                                 ]) href="/sat-cards/{{ $satCard->id }}" wire:navigate><a>

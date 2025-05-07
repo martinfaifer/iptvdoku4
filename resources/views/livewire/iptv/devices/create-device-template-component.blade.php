@@ -4,7 +4,7 @@
         Přidat šablonu zařízení
     </button>
 
-    <x-drawer wire:model="storeDrawer" right class="lg:w-2/3 !bg-[#0E1E33]">
+    <x-drawer wire:model="storeDrawer" right class="lg:w-2/3 !dark:bg-[#0E1E33]">
         @if (!$availableTemplates->isEmpty())
             <x-form wire:submit="storePrebuildTemplateToDevice">
                 <x-choices label="Dostupné šablony" wire:model.live="templateId" :options="$availableTemplates" single />
@@ -15,8 +15,8 @@
                     </div>
                     <div>
                         <x-button label="Přidat"
-                            class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28" type="submit"
-                            spinner="save2" />
+                            class="btn btn-doku-primary w-full sm:w-28" type="submit"
+                            spinner="storePrebuildTemplateToDevice" />
                     </div>
                 </div>
             </x-form>
@@ -29,7 +29,7 @@
                 </div>
             </div>
         @endif
-        <div class="grid grid-cols-12 mt-12 bg-[#0F2138] rounded-sm">
+        <div class="grid grid-cols-12 mt-12 bg-slate-800/5 dark:bg-[#0F2138] rounded-sm">
             <div class="col-span-12 mb-4">
                 <div class="mx-4 mt-4">
                     @if ($numberOfInInterfaces != 0 || $numberOfOutInterfaces != 0 || $numberOfModules != 0)
@@ -489,13 +489,13 @@
                     {{-- action section --}}
                     <div class="flex justify-between">
                         <div>
-                            <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                            <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                                 @click='$wire.closeDialog' />
                         </div>
                         <div>
                             <x-button label="Přidat"
-                                class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                                type="submit" spinner="save2" />
+                                class="btn btn-doku-primary w-full sm:w-28"
+                                type="submit" spinner="store" />
                         </div>
                     </div>
                 </x-form>

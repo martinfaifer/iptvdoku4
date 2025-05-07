@@ -56,10 +56,10 @@ class SettingsChannelsRestartComponent extends Component
         return view('livewire.settings.channels.restart.settings-channels-restart-component', [
             'channelsFroRestart' => RestartChannel::with(['channel', 'device', 'stream_ip'])->paginate(5),
             'headers' => [
-                ['key' => 'channel.name', 'label' => 'Kanál', 'class' => 'text-white/80'],
-                ['key' => 'stream_ip.ip', 'label' => 'Url streamu', 'class' => 'text-white/80'],
-                ['key' => 'device.name', 'label' => 'Vazba na zařízení', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'channel.name', 'label' => 'Kanál', 'class' => 'dark:text-white/80'],
+                ['key' => 'stream_ip.ip', 'label' => 'Url streamu', 'class' => 'dark:text-white/80'],
+                ['key' => 'device.name', 'label' => 'Vazba na zařízení', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

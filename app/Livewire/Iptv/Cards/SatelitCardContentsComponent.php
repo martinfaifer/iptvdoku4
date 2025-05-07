@@ -56,9 +56,9 @@ class SatelitCardContentsComponent extends Component
     {
         return view('livewire.iptv.cards.satelit-card-contents-component', [
             'headers' => [
-                ['key' => 'file_name', 'label' => 'Soubor', 'class' => 'text-white/80'],
-                ['key' => 'created_at', 'label' => 'Nahráno', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'file_name', 'label' => 'Soubor', 'class' => 'dark:text-white/80'],
+                ['key' => 'created_at', 'label' => 'Nahráno', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
             'contents' => $this->satCard->contents()->paginate(10),
         ]);

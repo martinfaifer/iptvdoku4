@@ -37,12 +37,12 @@ class SettingsLogComponent extends Component
         return view('livewire.settings.logs.settings-log-component', [
             'logs' => Loger::search($this->query)->orderBy(...array_values($this->sortBy))->paginate(10),
             'headers' => [
-                ['key' => 'user', 'label' => 'Uživatel', 'class' => 'text-white/80'],
-                ['key' => 'type', 'label' => 'Typ události', 'class' => 'text-white/80'],
-                ['key' => 'item', 'label' => 'Předmět', 'class' => 'text-white/80'],
-                // ['key' => 'payload', 'label' => 'Payload', 'class' => 'text-white/80'],
-                ['key' => 'created_at', 'label' => 'Vytvořeno', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'user', 'label' => 'Uživatel', 'class' => 'dark:text-white/80'],
+                ['key' => 'type', 'label' => 'Typ události', 'class' => 'dark:text-white/80'],
+                ['key' => 'item', 'label' => 'Předmět', 'class' => 'dark:text-white/80'],
+                // ['key' => 'payload', 'label' => 'Payload', 'class' => 'dark:text-white/80'],
+                ['key' => 'created_at', 'label' => 'Vytvořeno', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

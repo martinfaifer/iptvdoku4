@@ -75,8 +75,8 @@ class TvChannelPackagesComponent extends Component
         return view('livewire.settings.geniustv.tv-channel-packages-component', [
             'tvPackages' => GeniusTvChannelPackage::search($this->query)->paginate(),
             'headers' => [
-                ['key' => 'name', 'label' => 'Balíček', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'name', 'label' => 'Balíček', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

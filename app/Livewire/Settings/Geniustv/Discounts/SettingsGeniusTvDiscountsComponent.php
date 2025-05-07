@@ -94,9 +94,9 @@ class SettingsGeniusTvDiscountsComponent extends Component
                 ->search($this->query)
                 ->paginate(5),
             'headers' => [
-                ['key' => 'nanguIsp.name', 'label' => 'Poskytoval', 'class' => 'text-white/80'],
-                ['key' => 'discount', 'label' => 'Sleva', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'nanguIsp.name', 'label' => 'Poskytoval', 'class' => 'dark:text-white/80'],
+                ['key' => 'discount', 'label' => 'Sleva', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

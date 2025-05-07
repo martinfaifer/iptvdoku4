@@ -4,7 +4,7 @@
             <li wire:key='sftpserver_{{ $sftpServer->id }}' @class([
                 'ml-1',
                 'rounded-lg',
-                'bg-sky-950' => request()->is('sftps/' . $sftpServer->id),
+                'bg-slate-800/5 dark:bg-sky-950' => request()->is('sftps/' . $sftpServer->id),
             ])
                 href="/sftps/{{ $sftpServer->id }}" wire:navigate>
                 <a class="grid grid-cols-12">

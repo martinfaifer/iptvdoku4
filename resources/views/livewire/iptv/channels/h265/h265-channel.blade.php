@@ -7,7 +7,7 @@
                 @endif
             </div>
             @if (!is_null($channel->h265))
-                <div class="flex-none">
+                <div class="flex-none gap-2">
                     <livewire:iptv.channels.h265.store-h265-channel :channel="$channel" lazy />
                     <livewire:iptv.channels.store-device-to-channel-component :channel="$channel" channelType="h265" lazy />
                 </div>
@@ -19,7 +19,7 @@
             <div class="col-span-12 xl:col-span-6 mb-4">
                 <x-share.cards.base-card title="Informace o unicastu">
                     @foreach ($h265 as $unicast)
-                        <div class="grid grid-cols-12 gap-4 text-white/80 font-semibold text-[#A3ABB8]">
+                        <div class="grid grid-cols-12 gap-4 dark:text-white/80 font-semibold">
                             <div class="col-span-12">
                                 <div class="grid grid-cols-12 gap-4">
                                     <div class="col-span-10 flex">
@@ -111,13 +111,13 @@
                         {{-- action section --}}
                         <div class="flex justify-between">
                             <div>
-                                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                                     @click='$wire.closeModal' />
                             </div>
                             <div>
                                 <x-button label="Změnit"
-                                    class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                                    type="submit" spinner="save2" />
+                                    class="btn btn-doku-primary w-full sm:w-28"
+                                    type="submit" spinner="update" />
                             </div>
                         </div>
                     </x-form>

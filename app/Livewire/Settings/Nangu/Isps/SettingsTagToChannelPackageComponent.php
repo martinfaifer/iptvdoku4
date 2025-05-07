@@ -95,10 +95,10 @@ class SettingsTagToChannelPackageComponent extends Component
         return view('livewire.settings.nangu.isps.settings-tag-to-channel-package-component', [
             'nanguIspTagToChannelPackages' => NanguIspTagToChannelPackage::with(['nangu_isp', 'tag'])->orderBy('nangu_isp_id', 'ASC')->paginate(5),
             'headers' => [
-                ['key' => 'nangu_isp.name', 'label' => 'Poskytovatel', 'class' => 'text-white/80'],
-                ['key' => 'tag.name', 'label' => 'Štítek', 'class' => 'text-white/80'],
-                ['key' => 'nangu_channel_package_name', 'label' => 'Balíček', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'nangu_isp.name', 'label' => 'Poskytovatel', 'class' => 'dark:text-white/80'],
+                ['key' => 'tag.name', 'label' => 'Štítek', 'class' => 'dark:text-white/80'],
+                ['key' => 'nangu_channel_package_name', 'label' => 'Balíček', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

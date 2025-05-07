@@ -12,7 +12,7 @@
                                             {{ $stream }}
                                         </div>
                                         <div class="col-span-4">
-                                            <button class="btn bg-[#082f49] btn-sm border-none mt-2"
+                                            <button class="btn btn-doku-navigation btn-sm border-none mt-2"
                                                 @click='$wire.analyze("{{ $stream }}")'>
                                                 <div wire:loading wire:target="analyze('{{ $stream }}')">
                                                     <span class="loading loading-spinner loading-md"></span>

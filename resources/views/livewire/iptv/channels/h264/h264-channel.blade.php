@@ -17,10 +17,10 @@
     @if (!empty($h264))
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12 xl:col-span-6 mb-4">
-                <x-share.cards.base-card title="Informace o unicastu">
+                <x-share.cards.base-card title="Informace o unicastu" >
                     {{-- list of multicast datas --}}
                     @foreach ($h264 as $unicast)
-                        <div class="grid grid-cols-12 gap-4 text-white/80 font-semibold text-[#A3ABB8]">
+                        <div class="grid grid-cols-12 gap-4 dark:text-white/80 font-semibold">
                             <div class="col-span-12">
                                 <div class="grid grid-cols-12 gap-4">
                                     <div class="col-span-10 flex">
@@ -112,13 +112,13 @@
                         {{-- action section --}}
                         <div class="flex justify-between">
                             <div>
-                                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                                     wire:click='closeModal' />
                             </div>
                             <div>
                                 <x-button label="Změnit"
-                                    class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                                    type="submit" spinner="save2" />
+                                    class="btn btn-doku-primary w-full sm:w-28"
+                                    type="submit" spinner="update" />
                             </div>
                         </div>
                     </x-form>

@@ -125,13 +125,13 @@ class ChannelNotificationComponent extends Component
         return view('livewire.iptv.channels.notification.channel-notification-component', [
             'emails' => IptvDohledUrlsNotification::where('iptv_dohled_url_id', $this->iptvDohledUrl->id)->where('email', '!=', null)->select(['id', 'email'])->paginate(),
             'email_headers' => [
-                ['key' => 'email', 'label' => 'Email', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'email', 'label' => 'Email', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
             'slack_channels' => IptvDohledUrlsNotification::where('iptv_dohled_url_id', $this->iptvDohledUrl->id)->where('slack_channel', '!=', null)->select(['id', 'slack_channel'])->paginate(),
             'slack_headers' => [
-                ['key' => 'slack_channel', 'label' => 'Slack kanál', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'slack_channel', 'label' => 'Slack kanál', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

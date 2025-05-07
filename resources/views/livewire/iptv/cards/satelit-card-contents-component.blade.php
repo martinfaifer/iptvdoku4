@@ -16,7 +16,7 @@
                             target="_blank">{{ $content->file_name }}</a>
                     @endscope
                     @scope('cell_actions', $content)
-                        <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
+                        <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent shadow-none"
                             wire:click="destroy({{ $content->id }})" wire:confirm="Opravdu odebrat soubor?">
                             <x-heroicon-o-trash class="w-4 h-4 text-red-500" />
                         </button>
@@ -38,11 +38,11 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28"
                         @click='$wire.closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
+                    <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28"
                         type="submit" spinner="create" />
                 </div>
             </div>

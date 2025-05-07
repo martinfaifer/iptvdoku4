@@ -17,7 +17,7 @@
                                 @class([
                                     'ml-1',
                                     'rounded-lg',
-                                    'bg-sky-950' =>
+                                    'bg-slate-800/5 dark:bg-sky-950' =>
                                         request()->is('devices/' . $device->id) ||
                                         request()->is('devices/' . $device->id . '/*'),
                                 ]) href="/devices/{{ $device->id }}" wire:navigate><a>

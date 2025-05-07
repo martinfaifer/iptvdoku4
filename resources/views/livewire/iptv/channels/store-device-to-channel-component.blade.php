@@ -21,11 +21,11 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close sm:w-28 mb-4"
                         @click='$wire.closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
+                    <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28"
                         type="submit" spinner="create" />
                 </div>
             </div>

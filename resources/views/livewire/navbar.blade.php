@@ -1,6 +1,6 @@
 <div>
     <div
-        class="navbar fixed bg-gradient-to-r from-slate-900/20 to-sky-950/20 mb-1 top-0 right-0 z-10 min-h-8 backdrop-blur-xl">
+        class="navbar fixed bg-transparent dark:bg-gradient-to-r from-slate-900/20 to-sky-950/20 mb-1 top-0 right-0 z-10 min-h-8 backdrop-blur-xl">
         <div class="flex-1">
             <label for="sidebar-drawer" class="lg:hidden mr-3">
                 <x-icon name="o-bars-3" class="cursor-pointer" />
@@ -12,11 +12,12 @@
                     class="input input-bordered input-sm bg-opacity-20 text-white placeholder:text-xs w-full md:w-auto" />
             </div>
             <div>
-                <label @click='$wire.openCalendarEventsDrawer' class="btn btn-sm btn-circle bg-transparent border-none">
+                <label @click='$wire.openCalendarEventsDrawer'
+                    class="btn btn-sm btn-circle bg-transparent border-none shadow-none">
                     <x-heroicon-o-calendar-days @class([
                         'size-6',
-                        'text-white/80' => !empty($runningEvents),
-                        'text-white/20' => empty($runningEvents),
+                        'dark:text-white/80' => !empty($runningEvents),
+                        'dark:text-white/20' => empty($runningEvents),
                     ]) fill="none" />
                 </label>
             </div>
@@ -35,7 +36,7 @@
                     </div>
                     @if (!empty($weather))
                         <div tabindex="0"
-                            class="hidden md:block card compact dropdown-content z-[1] shadow bg-[#0c111b] rounded-box w-96">
+                            class="hidden md:block card compact dropdown-content z-[1] shadow dark:bg-[#0c111b] rounded-box w-96">
                             <div tabindex="0" class="card-body">
                                 <div class="grid grid-cols-12 gap-4">
                                     <div class="col-span-12">
@@ -95,7 +96,7 @@
                         @endif
                     </div>
                     <ul tabindex="0"
-                        class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-[#0e151f] bg-clip-padding backdrop-filter
+                        class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-white dark:bg-[#0e151f] bg-clip-padding backdrop-filter
                     backdrop-blur-sm rounded-box w-52">
                         <li>
                             <a class="justify-between" href="/profile" wire:navigate>
@@ -105,10 +106,12 @@
                         @can('show_settings_link', App\Models\User::class)
                             <li><a href="/settings/dashboard" wire:navigate>Nastavení</a></li>
                         @endcan
-                        <li class="hover:bg-red-500/30 hover:text-red-400/80 rounded-md" @click='$wire.logout()'><a>Odhlásit se</a></li>
+                        <li class="hover:bg-red-500/30 hover:text-red-400/80 rounded-md" @click='$wire.logout()'>
+                            <a>Odhlásit se</a></li>
                         <hr
                             class="w-full mx-auto h-[1px] mt-[2px] bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
-                        <span class="mt-[2px] text-center text-[10px] text-white/50">Verze: {{ config('version.version') }}</span>
+                        <span class="mt-[2px] text-center text-[10px] dark:text-white/50">Verze:
+                            {{ config('version.version') }}</span>
                     </ul>
                 </div>
             </div>
@@ -121,7 +124,7 @@
     {{-- alert drawer --}}
 
     {{-- calendar events drawer --}}
-    <x-drawer wire:model='calendarEventsDrawer' class="lg:w-1/4 !bg-[#0E1E33]" right>
+    <x-drawer wire:model='calendarEventsDrawer' class="lg:w-1/4 !dark:bg-[#0E1E33]" right>
         @if (!empty($runningEvents))
             <div class="col-span-12 mb-6">
                 <p class="font-semibold text-lg">Probíhající události</p>
@@ -129,7 +132,7 @@
                     <div class="overflow-auto max-h-80">
                         @foreach ($runningEvents as $event)
                             <x-list-item wire:key="$event->id" :item="$event"
-                                class="bg-sky-600/20 hover:bg-sky-600/50 mb-2 rounded-lg">
+                                class="bg-slate-800/5 dark:bg-sky-600/20 hover:dark:bg-sky-600/50 mb-2 rounded-lg">
                                 <x-slot:avatar>
                                     <div class="avatar placeholder">
                                         <div class="bg-neutral text-neutral-content rounded-full w-11">
@@ -235,7 +238,8 @@
         @endif
     </x-drawer>
 
-    <x-modal wire:model="calendarNotificationDialog" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="calendarNotificationDialog" persistent class="modal-bottom sm:modal-middle fixed"
+        box-class="!max-w-6xl">
         <x-button class="btn btn-sm btn-circle btn-ghost fixed right-2 top-2"
             wire:click='closeCalendarNotificationDialog'>✕</x-button>
         <div class="overflow-y-auto h-96">

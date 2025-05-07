@@ -1,7 +1,7 @@
 <div>
     <div class="grid grid-cols-12">
         <div class="col-span-12">
-            <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
+            <h1 class="text-2xl dark:text-white/80 subpixel-antialiased font-bold mt-6 ">
                 Přehled
             </h1>
         </div>
@@ -29,7 +29,7 @@
                     <div class="col-span-12 xl:col-span-6">
                         <div class="text-xl font-semibold">
                             Informace o Vás <x-button wire:click='openEditUserDialog()'
-                                class="bg-transparent btn-xs text-green-500 border-none">
+                                class="bg-transparent btn-xs text-green-500 border-none shadow-none">
                                 <x-heroicon-o-pencil class="size-4" />
                             </x-button>
                         </div>
@@ -58,8 +58,8 @@
                                 @foreach ($userSessions as $agent)
                                     <div class="col-span-12">
                                         <div
-                                            class="bg-[#0f172a]/50 backdrop-blur-xl shadow-md shadow-[#0D243C]/50 rounded-lg">
-                                            <div class="card-body text-gray-200 text-sm">
+                                            class="bg-slate-800/5 dark:bg-[#0f172a]/50 backdrop-blur-xl shadow-sm dark:shadow-md dark:shadow-[#0D243C]/50 rounded-lg">
+                                            <div class="card-body dark:text-gray-200 text-sm">
                                                 <div class="grid grid-cols-12 gap-2">
                                                     <div class="col-span-2">
                                                         @if ($agent['device']['isDesktop'])
@@ -92,7 +92,7 @@
 
                                 <div class="col-span-12">
                                     <x-button wire:click='sessions_destroy()' label="Odebrat všechny zařízení"
-                                        class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full" />
+                                        class="btn btn-doku-primary w-full" />
                                 </div>
                             </div>
                         @endif
@@ -112,15 +112,13 @@
                     <div class="col-span-12 xl:col-span-6 xl:mt-12">
                         <x-form wire:submit="changePassword">
                             <x-input label="Nové heslo" wire:model="changeUserPasswordForm.password" />
-
                             <x-input label="Nové heslo ještě jednou" wire:model="changeUserPasswordForm.newpassword" />
-
                             <div>
                                 <x-button label="Změnit heslo"
-                                    class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full"
+                                    class="btn btn-doku-primary w-full"
+                                    spinner="changePassword"
                                     type="submit" />
                             </div>
-
                         </x-form>
                     </div>
                 </div>
@@ -141,7 +139,7 @@
 
                             <div>
                                 <x-button label="Potvrdit"
-                                    class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full"
+                                    class="btn btn-doku-primary w-full"
                                     type="submit" />
                             </div>
 
@@ -173,11 +171,11 @@
                 <div>
                     @if (!is_null($user->avatar_url))
                         <x-button label="Odebrat"
-                            class="bg-red-800 hover:bg-red-700 hover:shadow-red-700/50 border-none  text-white font-semibold w-full sm:w-28"
+                            class="btn btn-doku-close w-full sm:w-28"
                             wire:click='deleteAvatar()' spinner="upload" />
                     @endif
                     <x-button label="Nahrát"
-                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
+                        class="btn btn-doku-primary w-full sm:w-28"
                         type="submit" spinner="upload" />
                 </div>
             </div>
@@ -189,22 +187,22 @@
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 xl:col-span-6">
+                <div class="col-span-12">
                     <x-input label="Jméno" wire:model="userEditForm.first_name" />
                 </div>
-                <div class="col-span-12 xl:col-span-6">
+                <div class="col-span-12">
                     <x-input label="Příjmení" wire:model="userEditForm.last_name" />
                 </div>
             </div>
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28"
                         wire:click='closeDialog' />
                 </div>
                 <div>
                     <x-button label="Upravit"
-                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
+                        class="btn btn-doku-primary w-full sm:w-28"
                         type="submit" spinner="update" />
                 </div>
             </div>

@@ -4,7 +4,7 @@
         Přidat zařízení
     </button>
 
-    <x-modal wire:model="storeModal" title="Nové zařízení" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" title="Nové zařízení" persistent class="modal-bottom sm:modal-middle fixed" box-class="!max-w-6xl">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
@@ -117,12 +117,12 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                         @click='$wire.closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                    <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28"
+                        type="submit" spinner="store" />
                 </div>
             </div>
         </x-form>

@@ -111,14 +111,14 @@
         </div>
 
 
-        <div class="cinematography_fund">
+        {{-- <div class="cinematography_fund">
             <p>
                 <strong>
                     Poplatek za fond kinematografie:
                 </strong>
                 {{ $cinematographyFund }}
             </p>
-        </div>
+        </div> --}}
 
 
         {{-- Cena celkem --}}

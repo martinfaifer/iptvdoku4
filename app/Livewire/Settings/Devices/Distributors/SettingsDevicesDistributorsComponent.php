@@ -80,8 +80,8 @@ class SettingsDevicesDistributorsComponent extends Component
     {
         return view('livewire.settings.devices.distributors.settings-devices-distributors-component', [
             'headers' => [
-                ['key' => 'name', 'label' => 'Distributor', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'name', 'label' => 'Distributor', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
             'distributors' => SatelitCardVendor::search($this->query)->paginate(5),
         ]);

@@ -92,7 +92,7 @@
                 <div class="flex-1">
                 </div>
                 <div class="flex-none">
-                    <button class="btn btn-sm text-slate-200 bg-[#1E293B]" x-on:click='$wire.loadCharts()'>
+                    <button class="btn btn-sm btn-doku-navigation" x-on:click='$wire.loadCharts()'>
                         <x-heroicon-s-chart-bar class="size-4" />
                         Zobrazit grafy</button>
                 </div>
@@ -106,7 +106,7 @@
                     </p>
                     <div class="grid grid-cols-12 gap-4 mb-4">
                         <div
-                            class="col-span-12 bg-[#082F49] rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm shadow-md shadow-slate-900/50">
+                            class="col-span-12 dark:bg-[#082F49] rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm shadow-sm dark:shadow-md dark:shadow-slate-900/50">
                             <div class="grid grid-cols-12 gap-4 ml-8">
                                 @foreach ($template['snmp'] as $deviceSnmpData)
                                     @if ($deviceSnmpData['type'] == 'read')
@@ -151,7 +151,7 @@
                                         </div>
                                     @else
                                         <div class="col-span-3 my-4 flex font-semibold">
-                                            <x-button class="btn-sm bg-[#131B2F] text-red-500"
+                                            <x-button class="btn-sm btn-doku-navigation !text-red-500"
                                                 @click="$wire.restartInterface('{{ $deviceSnmpData['oid'] }}')">
                                                 <div class="flex">
                                                     Restart zařízení
@@ -181,8 +181,8 @@
                                 {{-- clickable --}}
                                 <div class="col-span-12 md:col-span-6 xl:col-span-3 mb-4 overflow-scroll h-96">
                                     <div
-                                        class=" bg-[#082F49] rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm hadow-md shadow-slate-900/50">
-                                        <div class="card-body text-gray-200 text-sm cursor-pointer"
+                                        class="bg-slate-800/5 dark:bg-[#082F49] rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm hadow-md shadow-slate-900/50">
+                                        <div class="card-body dark:text-gray-200 text-sm cursor-pointer"
                                             @click="$wire.openUpdateDrawer('{{ $interfaceKey }}', 'inputs')">
                                             <div class="grid grid-cols-12 mb-4">
                                                 {{-- snmp data --}}
@@ -235,19 +235,13 @@
                         <div class="grid grid-cols-12 gap-4 min-h-20">
                             @foreach ($interfacesData as $interfaceKey => $interface)
                                 <div @class([
-                                    'mb-4 overflow-scroll col-span-12 md:col-span-6',
+                                    'mb-4 overflow-scroll col-span-12 md:col-span-6 h-48',
                                     'xl:col-span-2' => count($interfacesData) > 4,
                                     'xl:col-span-3' => count($interfacesData) <= 4,
                                 ])>
                                     <div
-                                        class=" bg-[#082F49]
-                             rounded-lg
-                             bg-clip-padding
-                             backdrop-filter
-                             backdrop-blur-sm
-                             shadow-md
-                             shadow-slate-900/50">
-                                        <div class="card-body text-gray-200 text-sm cursor-pointer"
+                                        class="bg-slate-800/5 dark:bg-[#082F49] rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm shadow-md shadow-slate-900/50">
+                                        <div class="card-body dark:text-gray-200 text-sm cursor-pointer"
                                             @click="$wire.openUpdateDrawer('{{ $interfaceKey }}', 'outputs')">
                                             <div class="grid grid-cols-12 mb-4">
                                                 @foreach ($interface as $interfaceValueName => $interfaceValue)
@@ -258,7 +252,7 @@
                                                                 @if ($snmp['type'] == 'write')
                                                                     @if (str_contains($snmp['human_description'], 'reset'))
                                                                         <x-button
-                                                                            class="bg-[#131B2F] text-red-500 btn-sm w-32 h-4"
+                                                                            class="btn btn-sm btn-doku-navigation !text-red-500 w-32 h-4"
                                                                             wire:click="restartInterface('{{ $snmp['oid'] }}')">
                                                                             <div class="flex">
                                                                                 <div>
@@ -361,14 +355,14 @@
                             @foreach ($interfacesData as $interfaceKey => $interface)
                                 <div class="col-span-3 mb-4 overflow-scroll">
                                     <div
-                                        class=" bg-[#082F49]
+                                        class="bg-slate-800/5 dark:bg-[#082F49]
                          rounded-lg
                          bg-clip-padding
                          backdrop-filter
                          backdrop-blur-sm
                          shadow-md
                          shadow-slate-900/50">
-                                        <div class="card-body text-gray-200 text-sm cursor-pointer"
+                                        <div class="card-body dark:text-gray-200 text-sm cursor-pointer"
                                             @click="$wire.openUpdateDrawer('{{ $interfaceKey }}', 'modules')">
                                             <div class="grid grid-cols-12 mb-4">
                                                 @foreach ($interface as $interfaceValueName => $interfaceValue)
@@ -398,7 +392,7 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-drawer wire:model="updateDrawer" right class="lg:w-1/3 !bg-[#0E1E33]">
+    <x-drawer wire:model="updateDrawer" right class="lg:w-1/3 !dark:bg-[#0E1E33]">
         <x-form wire:submit="update">
             <div class="grid grid-cols-12 mt-12 rounded-sm">
                 <div class="col-span-12 mb-4">
@@ -425,7 +419,8 @@
 
                                 @if ($name == 'Frekvence')
                                     <x-input label="{{ $name }}"
-                                        wire:model.live="updatedInterface.{{ $name }}" type="number"></x-input>
+                                        wire:model.live="updatedInterface.{{ $name }}"
+                                        type="number"></x-input>
                                 @endif
 
                                 @if ($name == 'DVB')
@@ -445,7 +440,8 @@
 
                                 @if ($name == 'Symbol rate')
                                     <x-input label="{{ $name }}"
-                                        wire:model.live="updatedInterface.{{ $name }}" type="number"></x-input>
+                                        wire:model.live="updatedInterface.{{ $name }}"
+                                        type="number"></x-input>
                                 @endif
 
                                 @if ($name == 'FEC')
@@ -502,14 +498,12 @@
                         {{-- action section --}}
                         <div class="flex justify-between">
                             <div>
-                                <x-button label="Zavřít"
-                                    class="bg-[#334155] font-semibold w-full sm:w-28 mb-4 border-none"
+                                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                                     wire:click='closeDrawer' />
                             </div>
                             <div>
-                                <x-button label="Upravit"
-                                    class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28 border-none"
-                                    type="submit" spinner="save2" />
+                                <x-button label="Upravit" class="btn btn-doku-primary w-full sm:w-28" type="submit"
+                                    spinner="store" />
                             </div>
                         </div>
                     </x-form>
@@ -519,7 +513,8 @@
     </x-drawer>
 
     {{-- modal log --}}
-    <x-modal wire:model="logModal" title="Log ze zařízení" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="logModal" title="Log ze zařízení" persistent class="modal-bottom sm:modal-middle fixed"
+        box-class="!max-w-6xl">
 
         <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             @click='$wire.closeDialog'>✕</x-button>
@@ -564,15 +559,15 @@
             <div>
             </div>
             <div>
-                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4 border-none"
-                    @click='$wire.closeDialog' />
+                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28" @click='$wire.closeDialog' />
             </div>
         </div>
 
     </x-modal>
 
     {{-- modal charts --}}
-    <x-modal wire:model="chartModal" title="" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="chartModal" title="" persistent class="modal-bottom sm:modal-middle fixed"
+        box-class="!max-w-6xl">
 
         <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             @click='$wire.closeDialog'>✕</x-button>
@@ -593,11 +588,9 @@
         {{-- action section --}}
         <div class="flex justify-between">
             <div>
-
             </div>
             <div>
-                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4 border-none"
-                    @click='$wire.closeDialog' />
+                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28" @click='$wire.closeDialog' />
             </div>
         </div>
 

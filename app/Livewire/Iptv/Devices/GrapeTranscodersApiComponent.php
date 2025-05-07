@@ -70,14 +70,14 @@ class GrapeTranscodersApiComponent extends Component
     {
         return view('livewire.iptv.devices.grape-transcoders-api-component', [
             'headers' => [
-                ['key' => 'nazev', 'label' => 'Stream', 'class' => 'text-white/80'],
-                ['key' => 'src', 'label' => 'Zdroj', 'class' => 'text-white/80'],
-                ['key' => 'dst', 'label' => 'Dst1', 'class' => 'text-white/80'],
-                ['key' => 'dst2', 'label' => 'Dst2', 'class' => 'text-white/80'],
-                ['key' => 'dst3', 'label' => 'Dst3', 'class' => 'text-white/80'],
-                ['key' => 'dst4', 'label' => 'Dst4', 'class' => 'text-white/80'],
-                ['key' => 'status', 'label' => 'Status', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'nazev', 'label' => 'Stream', 'class' => 'dark:text-white/80'],
+                ['key' => 'src', 'label' => 'Zdroj', 'class' => 'dark:text-white/80'],
+                ['key' => 'dst', 'label' => 'Dst1', 'class' => 'dark:text-white/80'],
+                ['key' => 'dst2', 'label' => 'Dst2', 'class' => 'dark:text-white/80'],
+                ['key' => 'dst3', 'label' => 'Dst3', 'class' => 'dark:text-white/80'],
+                ['key' => 'dst4', 'label' => 'Dst4', 'class' => 'dark:text-white/80'],
+                ['key' => 'status', 'label' => 'Status', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

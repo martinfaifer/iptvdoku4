@@ -1,7 +1,7 @@
 <div>
     <div class="grid grid-cols-12">
         <div class="col-span-12">
-            <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
+            <h1 class="text-2xl dark:text-white/80 subpixel-antialiased font-bold mt-6 ">
                 Nastavení upozornění
             </h1>
         </div>
@@ -37,8 +37,8 @@
         <div class="xl:flex xl:flex-row-reverse">
             <div>
                 <x-button label="Upravit"
-                    class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full xl:w-28"
-                    type="submit" spinner="save2" />
+                    class="btn btn-doku-primary w-full xl:w-28"
+                    type="submit" spinner="update" />
             </div>
         </div>
     </x-form>

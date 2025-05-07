@@ -52,9 +52,9 @@ class SettingsGeniusTvStatisticsForAllChannelsComponent extends Component
         return view('livewire.settings.genius-tv.statistics.settings-genius-tv-statistics-for-all-channels-component', [
             'statisticsForAllChannels' => $this->get_channels_usage(),
             'headers' => [
-                ['key' => 'name', 'label' => 'Kanál', 'class' => 'text-white/80'],
-                ['key' => 'amount_last_month', 'label' => 'Předchozí měsíc', 'class' => 'text-white/80'],
-                ['key' => 'amount_this_month', 'label' => 'Tento měsíc', 'class' => 'text-white/80'],
+                ['key' => 'name', 'label' => 'Kanál', 'class' => 'dark:text-white/80'],
+                ['key' => 'amount_last_month', 'label' => 'Předchozí měsíc', 'class' => 'dark:text-white/80'],
+                ['key' => 'amount_this_month', 'label' => 'Tento měsíc', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

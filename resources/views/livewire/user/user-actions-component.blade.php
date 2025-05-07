@@ -1,7 +1,7 @@
 <div>
     <div class="grid grid-cols-12">
         <div class="col-span-12">
-            <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
+            <h1 class="text-2xl dark:text-white/80 subpixel-antialiased font-bold mt-6 ">
                 Vaše akce v dokumentaci
             </h1>
         </div>

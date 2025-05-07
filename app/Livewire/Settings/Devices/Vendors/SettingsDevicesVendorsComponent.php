@@ -77,8 +77,8 @@ class SettingsDevicesVendorsComponent extends Component
     {
         return view('livewire.settings.devices.vendors.settings-devices-vendors-component', [
             'headers' => [
-                ['key' => 'name', 'label' => 'Výrobce', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'name', 'label' => 'Výrobce', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
             'vendors' => DeviceVendor::search($this->query)->paginate(5),
         ]);

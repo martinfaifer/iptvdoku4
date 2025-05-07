@@ -78,24 +78,34 @@
                                         </div>
                                         <div class="col-span-11">
                                             <div class="grid grid-rows-5 gap-4 mt-4 text-sm font-semibold">
-                                                <div>
-                                                    TSID: {{ $channelDataOnIptvDohled['data']['streamTS']['tsid'] }}
-                                                </div>
-                                                <div>
-                                                    PMT Pid:
-                                                    {{ $channelDataOnIptvDohled['data']['streamTS']['pmtpid'] }}
-                                                </div>
-                                                <div>
-                                                    PCR Pid:
-                                                    {{ $channelDataOnIptvDohled['data']['streamTS']['pcrpid'] }}
-                                                </div>
-                                                <div>
-                                                    Provider:
-                                                    {{ $channelDataOnIptvDohled['data']['streamTS']['provider'] }}
-                                                </div>
-                                                <div>
-                                                    Name: {{ $channelDataOnIptvDohled['data']['streamTS']['name'] }}
-                                                </div>
+                                                @if (array_key_exists('tsid', $channelDataOnIptvDohled['data']['streamTS']))
+                                                    <div>
+                                                        TSID: {{ $channelDataOnIptvDohled['data']['streamTS']['tsid'] }}
+                                                    </div>
+                                                @endif
+                                                @if (array_key_exists('pmtpid', $channelDataOnIptvDohled['data']['streamTS']))
+                                                    <div>
+                                                        PMT Pid:
+                                                        {{ $channelDataOnIptvDohled['data']['streamTS']['pmtpid'] }}
+                                                    </div>
+                                                @endif
+                                                @if (array_key_exists('pcrpid', $channelDataOnIptvDohled['data']['streamTS']))
+                                                    <div>
+                                                        PCR Pid:
+                                                        {{ $channelDataOnIptvDohled['data']['streamTS']['pcrpid'] }}
+                                                    </div>
+                                                @endif
+                                                @if (array_key_exists('pcrpid', $channelDataOnIptvDohled['data']['streamTS']))
+                                                    <div>
+                                                        Provider:
+                                                        {{ $channelDataOnIptvDohled['data']['streamTS']['pcrpid'] }}
+                                                    </div>
+                                                @endif
+                                                @if (array_key_exists('name', $channelDataOnIptvDohled['data']['streamTS']))
+                                                    <div>
+                                                        Name: {{ $channelDataOnIptvDohled['data']['streamTS']['name'] }}
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

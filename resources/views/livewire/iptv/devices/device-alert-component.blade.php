@@ -1,7 +1,7 @@
 @php
     $headers = [
-        ['key' => 'message', 'label' => 'Problém', 'class' => 'text-white/80'],
-        ['key' => 'created_at', 'label' => 'Vytvořeno', 'class' => 'text-white/80'],
+        ['key' => 'message', 'label' => 'Problém', 'class' => 'dark:text-white/80'],
+        ['key' => 'created_at', 'label' => 'Vytvořeno', 'class' => 'dark:text-white/80'],
     ];
 @endphp
 <div>

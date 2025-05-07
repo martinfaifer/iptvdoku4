@@ -98,11 +98,11 @@ class SettingsGeniusTvOfferTaxesComponent extends Component
                 ->search($this->query)
                 ->paginate(5),
             'headers' => [
-                ['key' => 'offer', 'label' => 'Offer', 'class' => 'text-white/80'],
-                ['key' => 'channels_id', 'label' => 'Kanály', 'class' => 'text-white/80'],
-                ['key' => 'price', 'label' => 'Cena', 'class' => 'text-white/80'],
-                ['key' => 'currency_name.name', 'label' => 'Měna', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'offer', 'label' => 'Offer', 'class' => 'dark:text-white/80'],
+                ['key' => 'channels_id', 'label' => 'Kanály', 'class' => 'dark:text-white/80'],
+                ['key' => 'price', 'label' => 'Cena', 'class' => 'dark:text-white/80'],
+                ['key' => 'currency_name.name', 'label' => 'Měna', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

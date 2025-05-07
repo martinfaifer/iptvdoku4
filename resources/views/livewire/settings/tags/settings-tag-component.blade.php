@@ -7,7 +7,7 @@
             </div>
             <div class="col-span-6 md:col-span-3 ">
                 <x-button
-                    class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 hover:shadow-cyan-500/50 text-white/80 btn-sm mt-2 absolute right-5 md:right-10"
+                    class="btn btn-sm btn-doku-primary mt-2 absolute right-5 md:right-10"
                     wire:click="openCreateModal">
                     + Nový štítek
                 </x-button>
@@ -21,7 +21,7 @@
                 @endscope
                 @scope('cell_actions', $tag)
                     <div class="flex mx-auto gap-4">
-                        <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent"
+                        <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent shadow-none"
                             wire:click="destroy({{ $tag->id }})" wire:confirm="Opravdu odebrat štítek?">
                             <x-heroicon-o-trash class="w-4 h-4 text-red-500" />
                         </button>
@@ -39,11 +39,6 @@
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
                     <x-input label="Název" wire:model="name" />
-                    <div>
-                        @error('form.name')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
                 <div class="col-span-12">
                     <x-choices-offline label="Barva" wire:model="color" :options="$cssColors" option-label="color" single
@@ -65,13 +60,13 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28"
                         wire:click='closeDialog' />
                 </div>
                 <div>
                     <x-button label="Přidat"
-                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                        class="btn btn-doku-primary w-full sm:w-28"
+                        type="submit" spinner="create" />
                 </div>
             </div>
         </x-form>

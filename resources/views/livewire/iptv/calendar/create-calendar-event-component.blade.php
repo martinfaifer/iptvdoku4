@@ -1,53 +1,27 @@
 <div>
-    <x-button label="Přidat událost"
-        class="bg-cyan-700 shadow-md border-none hover:bg-cyan-500 shadow-cyan-50/10 hover:shadow-cyan-500/50 text-white/80 btn-md w-full"
-        type="submit" spinner="openModal" wire:click='openModal()' />
+    <x-button label="Přidat událost" class="btn btn-doku-primary w-full" type="submit" spinner="openModal"
+        wire:click='openModal()' />
 
     {{-- create modal --}}
-    <x-drawer wire:model="storeModal"  right class="lg:w-2/3 !bg-[#0E1E33]">
+    <x-drawer wire:model="storeModal" right class="lg:w-2/3 !dark:bg-[#0E1E33]">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeModal'>✕</x-button>
             <div class="overflow-y-auto">
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-12 mb-4">
                         <x-input label="Název události" wire:model="form.label" />
-                        <div>
-                            @error('label')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
                     </div>
                     <div class="col-span-12 md:col-span-6 mb-4">
                         <x-input type="date" label="Den začátku události" wire:model="form.start_date" />
-                        <div>
-                            @error('start_date')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
                     </div>
                     <div class="col-span-12 md:col-span-6 mb-4">
                         <x-input type="time" label="Čas začátku události" wire:model="form.start_time" />
-                        <div>
-                            @error('start_time')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
                     </div>
                     <div class="col-span-12 md:col-span-6 mb-4">
                         <x-input type="date" label="Den konce události" wire:model="form.end_date" />
-                        <div>
-                            @error('end_date')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
                     </div>
                     <div class="col-span-12 md:col-span-6 mb-4">
                         <x-input type="time" label="Čas konce události" wire:model="form.end_time" />
-                        <div>
-                            @error('end_time')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
                     </div>
                     <div class="col-span-12 md:col-span-6 mb-4">
                         <x-choices-offline label="Vyberte kanál/y" wire:model="form.channels" :options="$channels"
@@ -119,12 +93,11 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                        wire:click='closeModal' />
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28" wire:click='closeModal' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                    <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28" type="submit"
+                        spinner="create" />
                 </div>
             </div>
         </x-form>

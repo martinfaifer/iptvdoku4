@@ -7,7 +7,7 @@
                 <x-heroicon-o-plus-circle class="w-4 h-4" />
             </button>
         </div>
-        <div class="grid grid-cols-12 gap-4 font-semibold text-[#A3ABB8]">
+        <div class="grid grid-cols-12 gap-4 font-semibold dark:text-[#A3ABB8]">
             <div class="col-span-12 flex">
                 {{-- show expiration if is not null --}}
                 @if (!is_null($satelitCard->expiration))
@@ -20,10 +20,10 @@
                         </span>
                     </p>
                     <div class="-mt-1">
-                        <button @click='$wire.openEditModal()' class="btn btn-sm ml-1 inline btn-sm bg-transparent border-none">
+                        <button @click='$wire.openEditModal()' class="btn btn-sm ml-1 inline btn-sm bg-transparent border-none shadow-none">
                             <x-heroicon-o-pencil class="h-4 text-green-500" />
                         </button>
-                        <button wire:click='destroy()' class="inline btn btn-sm bg-transparent border-none"
+                        <button wire:click='destroy()' class="inline btn btn-sm bg-transparent border-none shadow-none"
                             wire:submit='Opravdu odebrat expiraci?'>
                             <x-heroicon-o-trash class="h-4 text-red-500" />
                         </button>
@@ -48,11 +48,11 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28"
                         wire:click='closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
+                    <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28"
                         type="submit" spinner="create" />
                 </div>
             </div>
@@ -71,12 +71,12 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28"
                         @click='$wire.closeDialog' />
                 </div>
                 <div>
                     <x-button label="Upravit"
-                        class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28" type="submit"
+                        class="btn btn-doku-primary w-full sm:w-28" type="submit"
                         spinner="update" />
                 </div>
             </div>

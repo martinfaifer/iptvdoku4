@@ -2,7 +2,7 @@
     <x-share.cards.base-card title="Informace o multicastu">
         {{-- list of multicast datas --}}
         @foreach ($multicasts as $multicast)
-            <div wire:key='multicast-{{ $multicast->id }}' class="grid grid-cols-12 gap-4 font-semibold text-[#A3ABB8]">
+            <div wire:key='multicast-{{ $multicast->id }}' class="grid grid-cols-12 gap-4 font-semibold dark:text-[#A3ABB8]">
                 <div class="col-span-12 xl:col-span-3 flex">
                     <p>
                         <span class="font-normal">
@@ -63,7 +63,7 @@
                     @can('operate_with_childs', App\Models\Channel::class)
                         @if ($this->isInIptvDohledDohled($multicast->stb_ip))
                             <div class="tooltip tooltip-bottom" data-tip="Upozornění na výpadky">
-                                <button class="btn btn-sm btn-circle bg-transparent border-none"
+                                <button class="btn btn-sm btn-circle bg-transparent border-none shadow-none"
                                     href="/channels/{{ $channel->id }}/notifications?stream_url={{ $multicast->stb_ip }}"
                                     wire:navigate>
                                     <x-heroicon-o-bell @class([
@@ -74,13 +74,13 @@
                                 </button>
                             </div>
                         @endif
-                        <button class="btn btn-sm btn-circle bg-transparent border-none"
+                        <button class="btn btn-sm btn-circle bg-transparent border-none shadow-none"
                             wire:click='edit({{ $multicast->id }})'>
                             <x-heroicon-m-pencil class="w-4 h-4 text-green-500" />
                         </button>
                     @endcan
                     @can('operate_with_childs', App\Models\Channel::class)
-                        <button class="btn btn-sm btn-circle bg-transparent border-none"
+                        <button class="btn btn-sm btn-circle bg-transparent border-none shadow-none"
                             wire:click='destroy({{ $multicast->id }})' wire:confirm="Opravdu odebrat?">
                             <x-heroicon-m-trash class="w-4 h-4 text-red-500" />
                         </button>
@@ -157,11 +157,11 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                         wire:click='closeModal' />
                 </div>
                 <div>
-                    <x-button label="Změnit" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
+                    <x-button label="Změnit" class="btn btn-doku-primary w-full sm:w-28"
                         type="submit" spinner="update" />
                 </div>
             </div>

@@ -21,11 +21,11 @@ html {
 }
 
 .alert-warning {
-    @apply bg-gradient-to-r from-slate-900 to-sky-950 border-2 border-b-red-900 rounded-md;
+    @apply bg-black dark:bg-gradient-to-r from-slate-900 to-sky-950 dark:border-2 dark:border-b-red-900 rounded-md;
 }
 
 .alert-success {
-    @apply bg-gradient-to-r from-slate-900 to-sky-950 border-2 border-b-green-600 rounded-md;
+    @apply bg-black dark:bg-gradient-to-r from-slate-900 to-sky-950 dark:border-2 dark:border-b-green-600 rounded-md;
 }
 
 .arrow-left {
@@ -36,17 +36,17 @@ html {
 }
 
 .mary-table-pagination span[aria-current="page"] > span {
-    @apply bg-[#082F49] border-[#082F49] text-white/60;
+    @apply bg-[#082F49] border-[#082F49] dark:text-white/60;
 }
 
 /* For dark mode*/
 .mary-table-pagination span[aria-disabled="true"] span {
-    @apply bg-transparent border-[#082F49] text-white/60;
+    @apply bg-transparent border-[#082F49] dark:text-white/60;
 }
 
 /* For dark mode*/
 .mary-table-pagination button {
-    @apply bg-transparent border-[#082F49] text-white/60;
+    @apply bg-transparent border-[#082F49] dark:text-white/60;
 }
 
 .w-fit {
@@ -55,7 +55,7 @@ html {
 
 .vanilla-calendar {
     /* @apply !bg-[#0c111b]; */
-    @apply bg-[#0f172a]/50 backdrop-blur-xl shadow-md shadow-[#0D243C]/50 rounded-lg;
+    @apply bg-[#0f172a]/50 backdrop-blur-xl shadow-none dark:shadow-md shadow-[#0D243C]/50 rounded-lg;
 }
 
 .EasyMDEContainer .CodeMirror {
@@ -67,7 +67,7 @@ html {
 }
 
 .CodeMirror {
-    @apply !bg-transparent !text-white/80;
+    @apply !bg-transparent dark:!text-white/80;
 }
 
 .CodeMirror-cursor {
@@ -108,7 +108,7 @@ html {
 }
 
 .modal-box {
-    @apply bg-gradient-to-r from-slate-900 to-sky-950 shadow-md shadow-[#0D243C]/50 !max-w-6xl;
+    @apply dark:bg-gradient-to-r from-slate-900 to-sky-950 shadow-md shadow-[#0D243C]/50;
     /* @apply bg-gradient-to-r from-[#162131] to-[#0e151f] backdrop-blur-lg !max-w-6xl; */
 }
 
@@ -670,11 +670,11 @@ html {
 }
 
 .btn-doku-close {
-    @apply bg-[#334155] hover:bg-[#475466] text-white font-semibold
+    @apply bg-[#334155] hover:bg-[#475466] text-white font-semibold shadow-none border-none
 }
 
 .btn-doku-navigation {
-    @apply bg-[#082f49] hover:bg-[#20435b] text-white/80 font-semibold shadow-none border-[1px] border-[#072a41] hover:border-[#072a41];
+    @apply bg-[#27272a] hover:bg-[#3D3D40] dark:bg-[#082f49] dark:hover:bg-[#20435b] text-[#fff] font-semibold shadow-none border-[1px] border-[#072a41] hover:border-[#072a41];
 }
 
 .btn-doku-icon {

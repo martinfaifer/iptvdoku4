@@ -12,7 +12,7 @@
         Přidat článek
     </button>
 
-    <x-modal wire:model="storeModal" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" persistent class="modal-bottom sm:modal-middle fixed" box-class="!max-w-6xl">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">

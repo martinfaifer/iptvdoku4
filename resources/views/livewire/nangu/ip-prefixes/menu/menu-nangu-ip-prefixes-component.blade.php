@@ -12,7 +12,7 @@
                                 @class([
                                     'ml-1',
                                     'rounded-lg',
-                                    'bg-sky-950' =>
+                                    'bg-slate-800/5 dark:bg-sky-950' =>
                                         request()->is('prefixes/' . $ipprefix->id) ||
                                         request()->is('prefixes/' . $ipprefix->id . '/*'),
                                 ]) href="/prefixes/{{ $ipprefix->id }}" wire:navigate><a>

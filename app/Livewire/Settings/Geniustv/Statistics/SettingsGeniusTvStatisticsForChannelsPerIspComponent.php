@@ -39,8 +39,8 @@ class SettingsGeniusTvStatisticsForChannelsPerIspComponent extends Component
         return view('livewire.settings.genius-tv.statistics.settings-genius-tv-statistics-for-channels-per-isp-component', [
             'nanguIsps' => NanguIsp::search($this->query)->paginate(10),
             'headers' => [
-                ['key' => 'name', 'label' => 'Poskytovatel', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'name', 'label' => 'Poskytovatel', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

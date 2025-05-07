@@ -10,34 +10,24 @@
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 md:col-span-6 mb-4">
+                <div class="col-span-12 mb-4">
                     <x-input label="Číslo karty" wire:model="storeForm.name" />
-                    <div>
-                        @error('name')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
-                <div class="col-span-12 md:col-span-6 mb-4">
+                <div class="col-span-12 mb-4">
                     <x-choices-offline label="Distributor" wire:model="storeForm.satelit_card_vendor_id"
                         :options="$satelitCardsVendors" single searchable />
-                    <div>
-                        @error('satelit_card_vendor_id')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
             </div>
 
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn-doku-close w-full sm:w-28"
                         @click='$wire.closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                    <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28"
+                        type="submit" spinner="create" />
                 </div>
             </div>
         </x-form>

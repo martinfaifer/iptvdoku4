@@ -7,11 +7,11 @@
     ];
 @endphp
 <div>
-    <button class="btn btn-sm btn-doku-icon mt-7 ml-3" wire:click="edit">
+    <button class="btn btn-sm btn-doku-icon mt-7 ml-3 shadow-none" wire:click="edit">
         <x-icon name="s-pencil" class="w-4 h-4 text-green-500" />
     </button>
 
-    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle">
+    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle" box-class="!max-w-6xl">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">

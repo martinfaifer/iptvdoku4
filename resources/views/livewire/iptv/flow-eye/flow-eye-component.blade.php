@@ -7,7 +7,7 @@
         @else
             <div class="grid grid-cols-12">
                 <div class="col-span-12">
-                    <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
+                    <h1 class="text-2xl dark:text-white/80 subpixel-antialiased font-bold mt-6 ">
                         <a href="{{ $ticket['url'] }}" target="_blank" class="hover:underline">
                             {{ strip_tags($ticket['current_step']['inbox']) }}</a>
                         <div class="absolute right-10 -mt-16 md:-mt-8">
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <hr
-                class="w-full h-1 mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-none rounded">
+                class="w-full h-[1px] dark:h-1 mt-2 mx-auto my-1 bg-slate-800/5 dark:bg-gradient-to-r dark:from-sky-950 dark:via-blue-850 dark:to-sky-950 border-none rounded">
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mt-4">
                     <x-share.cards.base-card title="">
@@ -42,7 +42,7 @@
                                 </p>
                             </div>
                             <div class="col-span-12">
-                                <div class="rounded-lg bg-[#082D46] overflow-y-auto max-h-96">
+                                <div class="rounded-lg bg-slate-800/5 dark:bg-[#082D46] overflow-y-auto max-h-96">
                                     <div class="py-4 px-4">
                                         {!! $ticket['variables']['ticket']['data']['detail'] !!}
                                     </div>
@@ -58,7 +58,7 @@
                                 @foreach ($ticket['discussion'] as $discussion)
                                     @if (str_contains($discussion['message'], 'Odchozí email pro:'))
                                         <div class="col-span-12">
-                                            <div class="rounded-lg bg-[#082D46]">
+                                            <div class="rounded-lg bg-slate-800/5 dark:bg-[#082D46]">
                                                 <div class="text-xs text-start font-thin pt-2 px-2">
                                                     {{ $discussion['author']['email'] }}
                                                 </div>
@@ -97,7 +97,7 @@
                                 @foreach ($ticket['discussion'] as $discussion)
                                     @if (!str_contains($discussion['message'], 'Odchozí email pro:'))
                                         <div class="col-span-12">
-                                            <div class="rounded-lg bg-[#082D46]">
+                                            <div class="rounded-lg bg-slate-800/5 dark:bg-[#082D46]">
                                                 <div class="text-xs text-start font-thin pt-2 px-2">
                                                     {{ $discussion['author']['email'] }}
                                                 </div>

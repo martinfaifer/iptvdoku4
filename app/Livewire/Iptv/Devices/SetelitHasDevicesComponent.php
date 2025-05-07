@@ -19,7 +19,7 @@ class SetelitHasDevicesComponent extends Component
     {
         return view('livewire.iptv.devices.setelit-has-devices-component', [
             'headers' => [
-                ['key' => 'name', 'label' => 'zařízení', 'class' => 'text-white/80'],
+                ['key' => 'name', 'label' => 'zařízení', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

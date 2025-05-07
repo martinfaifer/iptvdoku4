@@ -7,7 +7,7 @@
                         class="input input-bordered input-sm bg-opacity-20 text-white placeholder:text-xs w-full md:w-96 mb-4" />
                 </div>
                 <div class="col-span-12 mb-4 ">
-                    <table class="table table-xs md:table-sm w-full text-[#A3ABB8]">
+                    <table class="table table-xs md:table-sm w-full dark:text-[#A3ABB8]">
                         <!-- head -->
                         <thead>
                             <tr>
@@ -23,7 +23,7 @@
                                     @endphp
                                     @if (!is_null($channelDetailOnDevice))
                                         @if (blank($search))
-                                            <tr class="cursor-pointer hover:bg-slate-600 "
+                                            <tr class="cursor-pointer hover:bg-slate-800/5 hover:dark:bg-slate-600 "
                                                 href="/channels/{{ $channelDetailOnDevice['id'] }}/{{ $channelDetailOnDevice['channelType'] }}"
                                                 wire:navigate>
                                                 <td>{{ $channelDetailOnDevice['name'] }}

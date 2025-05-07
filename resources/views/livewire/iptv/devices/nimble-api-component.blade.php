@@ -199,7 +199,7 @@
             <div>
             </div>
             <div>
-                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4 border-none"
+                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28"
                     wire:click='closeModal' />
             </div>
         </div>
@@ -254,7 +254,7 @@
             <div>
             </div>
             <div>
-                <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4 border-none"
+                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28"
                     wire:click='closeModal' />
             </div>
         </div>

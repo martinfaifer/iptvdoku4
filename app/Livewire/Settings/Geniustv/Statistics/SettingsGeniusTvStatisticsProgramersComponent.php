@@ -11,7 +11,7 @@ use App\Exports\ProgrammersUsageExport;
 class SettingsGeniusTvStatisticsProgramersComponent extends Component
 {
 
-    public function programers_usage(): array
+    public function programers_usage(): array|null
     {
         return Cache::get('programmers_usage');
     }

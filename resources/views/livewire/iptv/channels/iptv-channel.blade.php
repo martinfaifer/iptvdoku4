@@ -13,13 +13,13 @@
                         <li href="/channels/{{ $channel->id }}/multicast" wire:navigate.hover
                             @class([
                                 'rounded-lg',
-                                'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/multicast'),
+                                'bg-slate-800/5 dark:bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/multicast'),
                             ])><a>
                                 multicast</a></li>
 
                         <li href="/channels/{{ $channel->id }}/h264" wire:navigate.hover @class([
                             'rounded-lg',
-                            'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/h264'),
+                            'bg-slate-800/5 dark:bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/h264'),
                         ])>
                             <a>
                                 H264</a>
@@ -27,7 +27,7 @@
 
                         <li href="/channels/{{ $channel->id }}/h265" wire:navigate.hover @class([
                             'rounded-lg',
-                            'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/h265'),
+                            'bg-slate-800/5 dark:bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/h265'),
                         ])>
                             <a>
                                 H265</a>
@@ -36,7 +36,7 @@
                         @if (!blank($channel->epg_id))
                             <li href="/channels/{{ $channel->id }}/epg" wire:navigate @class([
                                 'rounded-lg',
-                                'bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/epg'),
+                                'bg-slate-800/5 dark:bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/epg'),
                             ])><a>
                                     EPG</a></li>
                         @endif
@@ -47,7 +47,7 @@
                                     <x-heroicon-c-chevron-down class="size-4 inline-block" />
                                 </div>
                                 <ul tabindex="0"
-                                    class="dropdown-content menu bg-[#0D1E33] rounded-box border-none z-[1] w-52 p-2">
+                                    class="dropdown-content menu dark:bg-[#0D1E33] rounded-box border-none z-[1] w-52 p-2 shadow-none dark:shadow-sm">
                                     <li><a href="/channels/{{ $channel->id }}/streams-analyze" wire:navigate>Analýza
                                             streamů</a></li>
                                 </ul>
@@ -75,7 +75,7 @@
                     @endif
                 </div>
                 <div class="col-span-11 flex">
-                    <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
+                    <h1 class="text-2xl text-[#27272a] dark:text-white/80 subpixel-antialiased font-bold mt-6 ">
                         {{ $channel->name }}
                     </h1>
                     @if ($channel->is_radio == true)
@@ -105,18 +105,18 @@
                 </div>
             </div>
             <hr
-                class="w-full h-1 mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-none rounded">
+                class="w-full h-[1px] dark:h-1 mt-2 mx-auto my-1 bg-slate-800/5 dark:bg-gradient-to-r dark:from-sky-950 dark:via-blue-850 dark:to-sky-950 border-none rounded">
             <div>
                 @if (request()->is('channels/' . $channel->id . '/multicast'))
-                    <livewire:iptv.channels.multicast.multicast-channel :channel="$channel">
+                    <livewire:iptv.channels.multicast.multicast-channel :channel="$channel" />
                 @endif
 
                 @if (request()->is('channels/' . $channel->id . '/h264'))
-                    <livewire:iptv.channels.h264.h264-channel :channel="$channel">
+                    <livewire:iptv.channels.h264.h264-channel :channel="$channel" />
                 @endif
 
                 @if (request()->is('channels/' . $channel->id . '/h265'))
-                    <livewire:iptv.channels.h265.h265-channel :channel="$channel">
+                    <livewire:iptv.channels.h265.h265-channel :channel="$channel" />
                 @endif
 
                 @if (request()->is('channels/' . $channel->id . '/epg'))
@@ -125,11 +125,11 @@
 
                 @if (request()->has('stream_url'))
                     <livewire:iptv.channels.notification.channel-notification-component
-                        ip="{{ request()->get('stream_url') }}" lazy>
+                        ip="{{ request()->get('stream_url') }}" lazy />
                 @endif
 
                 @if (request()->is('channels/' . $channel->id . '/streams-analyze'))
-                    <livewire:iptv.channels.tools.stream-analyze-component :channel="$channel" lazy>
+                    <livewire:iptv.channels.tools.stream-analyze-component :channel="$channel" lazy />
                 @endif
             </div>
         @endif

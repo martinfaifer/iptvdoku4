@@ -12,7 +12,7 @@
                                 @class([
                                     'ml-1',
                                     'rounded-lg',
-                                    'bg-sky-950' =>
+                                    'bg-slate-800/5 dark:bg-sky-950' =>
                                         request()->is('wiki/' . $topic->id) ||
                                         request()->is('wiki/' . $topic->id . '/*'),
                                 ]) href="/wiki/{{ $topic->id }}" wire:navigate><a>

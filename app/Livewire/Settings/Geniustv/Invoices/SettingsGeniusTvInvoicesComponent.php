@@ -43,9 +43,9 @@ class SettingsGeniusTvInvoicesComponent extends Component
                 ->whereYear('created_at', $dateArray[0])
                 ->paginate(10),
             'headers' => [
-                ['key' => 'nanguIsp.name', 'label' => 'Poskytovalel', 'class' => 'text-white/80'],
-                ['key' => 'created_at', 'label' => 'Vytvořeno', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'nanguIsp.name', 'label' => 'Poskytovalel', 'class' => 'dark:text-white/80'],
+                ['key' => 'created_at', 'label' => 'Vytvořeno', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

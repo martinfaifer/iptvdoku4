@@ -77,11 +77,11 @@ class ChannelsProgrammersComponent extends Component
         return view('livewire.settings.channels.channels-programmers-component', [
             'programers' => ChannelProgramer::with('contacts')->search($this->query)->paginate(10),
             'headers' => [
-                ['key' => 'name', 'label' => 'Název', 'class' => 'text-white/80'],
-                ['key' => 'contacts.name', 'label' => 'Kontaktní osoba', 'class' => 'text-white/80'],
-                ['key' => 'contacts.email', 'label' => 'Kontaktní email', 'class' => 'text-white/80'],
-                ['key' => 'contacts.phone', 'label' => 'Kontaktní telefon', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'name', 'label' => 'Název', 'class' => 'dark:text-white/80'],
+                ['key' => 'contacts.name', 'label' => 'Kontaktní osoba', 'class' => 'dark:text-white/80'],
+                ['key' => 'contacts.email', 'label' => 'Kontaktní email', 'class' => 'dark:text-white/80'],
+                ['key' => 'contacts.phone', 'label' => 'Kontaktní telefon', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

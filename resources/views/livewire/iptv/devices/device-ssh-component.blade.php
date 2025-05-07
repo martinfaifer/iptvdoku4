@@ -1,7 +1,7 @@
 <div>
     @if (!is_null($deviceSsh))
         <x-share.cards.base-card title="SSH">
-            <div class="h-32 text-[#A3ABB8]">
+            <div class="h-32 dark:text-[#A3ABB8]">
                 <div>
                     <button
                         class="btn btn-circle btn-outline btn-sm border-none bg-transparent fixed top-1 right-8 text-sky-500"
@@ -44,31 +44,21 @@
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-6 mb-4">
                     <x-input label="Uživatelské jméno" wire:model="username" />
-                    <div>
-                        @error('form.username')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
 
                 <div class="col-span-6 mb-4">
                     <x-input label="Heslo" wire:model="password" />
-                    <div>
-                        @error('form.password')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
             </div>
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28"
                         wire:click='closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                    <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28"
+                        type="submit" spinner="store" />
                 </div>
             </div>
         </x-form>
@@ -81,31 +71,21 @@
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-6 mb-4">
                     <x-input label="Uživatelské jméno" wire:model="username" />
-                    <div>
-                        @error('form.username')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
 
                 <div class="col-span-6 mb-4">
                     <x-input label="Heslo" wire:model="password" />
-                    <div>
-                        @error('form.password')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
             </div>
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28"
                         wire:click='closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Upravit" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                    <x-button label="Upravit" class="btn btn-doku-primary w-full sm:w-28"
+                        type="submit" spinner="update" />
                 </div>
             </div>
         </x-form>

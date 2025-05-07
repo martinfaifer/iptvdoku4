@@ -84,10 +84,10 @@ class SettingsSlackNotificationComponent extends Component
     {
         return view('livewire.settings.notifications.slack.settings-slack-notification-component', [
             'headers' => [
-                ['key' => 'url', 'label' => 'Url', 'class' => 'text-white/80'],
-                ['key' => 'description', 'label' => 'Popis', 'class' => 'text-white/80'],
-                ['key' => 'action', 'label' => 'Vazba na akci', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'url', 'label' => 'Url', 'class' => 'dark:text-white/80'],
+                ['key' => 'description', 'label' => 'Popis', 'class' => 'dark:text-white/80'],
+                ['key' => 'action', 'label' => 'Vazba na akci', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
             'slackChannels' => Slack::search($this->query)->paginate(5),
         ]);

@@ -11,7 +11,7 @@
                 <x-heroicon-o-trash class="size-4" />
             </button>
         </div>
-        <div class="flex flex-col gap-4 md:grid sm:grid-cols-12 font-semibold text-[#A3ABB8]">
+        <div class="flex flex-col gap-4 md:grid sm:grid-cols-12 font-semibold dark:text-[#A3ABB8]">
             <div class="flex justify-between md:col-span-6">
                 <div>
                     <span>
@@ -131,7 +131,7 @@
 
     {{-- update modal --}}
     <x-modal wire:model="updateModal" title="Úprava kanálu na zařízení" persistent
-        class="modal-bottom sm:modal-middle ">
+        class="modal-bottom sm:modal-middle" box-class="!max-w-6xl">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog()'>✕</x-button>
@@ -261,13 +261,13 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                         wire:click='closeDialog()' />
                 </div>
                 <div>
                     <x-button label="Upravit"
-                        class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28" type="submit"
-                        spinner="save2" />
+                        class="btn btn-doku-primary w-full sm:w-28" type="submit"
+                        spinner="update" />
                 </div>
             </div>
         </x-form>
@@ -294,11 +294,11 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                         x-on:click='$wire.storeLinuxPathModal = false' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
+                    <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28"
                         type="submit" spinner="store_path" />
                 </div>
             </div>

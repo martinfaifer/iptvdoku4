@@ -81,10 +81,10 @@ class StreamAnalyzeComponent extends Component
         // $this->analyzedStreams = $this->getAnalyzedStreams();
         return view('livewire.iptv.channels.tools.stream-analyze-component', [
             'headers' => [
-                ['key' => 'stream_url', 'label' => 'Stream', 'class' => 'text-white/80'],
-                ['key' => 'created_at', 'label' => 'Vytvořeno', 'class' => 'text-white/80'],
-                // ['key' => 'status', 'label' => 'Status', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'stream_url', 'label' => 'Stream', 'class' => 'dark:text-white/80'],
+                ['key' => 'created_at', 'label' => 'Vytvořeno', 'class' => 'dark:text-white/80'],
+                // ['key' => 'status', 'label' => 'Status', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
             'analyzedStreams' => $this->getAnalyzedStreams(),
         ]);

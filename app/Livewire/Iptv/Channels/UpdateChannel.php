@@ -4,12 +4,9 @@ namespace App\Livewire\Iptv\Channels;
 
 use App\Models\Channel;
 use Livewire\Component;
-use App\Models\ChannelRegion;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Locked;
-use App\Models\ChannelProgramer;
 use Illuminate\Support\Facades\Cache;
-use App\Models\GeniusTvChannelPackage;
 use App\Livewire\Forms\UpdateIptvChannel;
 use App\Traits\Livewire\NotificationTrait;
 use App\Traits\Channels\ChannelRegionTrait;

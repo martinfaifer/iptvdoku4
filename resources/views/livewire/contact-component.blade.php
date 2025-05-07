@@ -9,14 +9,14 @@
                 </button>
             </div>
             <div
-                class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold text-[#A3ABB8] max-h-44 overflow-y-scroll">
+                class="flex flex-col gap-4 sm:grid sm:grid-cols-12 font-semibold dark:text-[#A3ABB8] max-h-44 overflow-y-scroll">
                 @if ($this->getContacts()->isEmpty())
                     <div class="col-span-12">
                         <x-share.alerts.info title="Není nadefinován žádný kontakt"></x-share.alerts.info>
                     </div>
                 @else
                     @foreach ($this->getContacts() as $contact)
-                        <div class="col-span-12 bg-[#2A323C]/20 rounded-md">
+                        <div class="col-span-12 dark:bg-[#2A323C]/20 border-[1px] border-slate-200 dark:border-none rounded-md">
                             <div class="flex flex-row-reverse">
                                 <button
                                     class="btn btn-circle btn-outline btn-xs border-none bg-transparent text-red-500"
@@ -95,12 +95,12 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                         @click='$wire.closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                    <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28"
+                        type="submit" spinner="create" />
                 </div>
             </div>
         </x-form>
@@ -139,12 +139,12 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                         @click='$wire.closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Upravit" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                    <x-button label="Upravit" class="btn btn-doku-primary w-full sm:w-28"
+                        type="submit" spinner="update" />
                 </div>
             </div>
         </x-form>

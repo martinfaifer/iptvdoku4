@@ -1,6 +1,6 @@
 <div>
     {{-- @dd($othersAlerts) --}}
-    <label @click='$wire.openAlertDrawer' class="btn btn-sm btn-circle bg-transparent border-none">
+    <label @click='$wire.openAlertDrawer' class="btn btn-sm btn-circle bg-transparent border-none shadow-none">
         <x-heroicon-c-bell @class([
             'h-6 w-6',
             'text-red-500' =>
@@ -15,7 +15,7 @@
         @endif
     </label>
 
-    <x-drawer wire:model="alertDrawer" id="alert-drawer" right class="lg:w-1/4 !bg-[#0E1E33]">
+    <x-drawer wire:model="alertDrawer" id="alert-drawer" right class="lg:w-1/4 dark:!bg-[#0E1E33]">
 
         {{-- alerts --}}
         @if (!empty($iptv_dohled_alerts))

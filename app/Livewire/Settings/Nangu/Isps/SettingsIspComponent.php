@@ -90,14 +90,14 @@ class SettingsIspComponent extends Component
         return view('livewire.settings.nangu.isps.settings-isp-component', [
             'nanguIsps' => NanguIsp::search($this->query)->paginate(5),
             'headers' => [
-                ['key' => 'name', 'label' => 'Název', 'class' => 'text-white/80'],
-                ['key' => 'nangu_isp_id', 'label' => 'Nangu ID', 'class' => 'text-white/80'],
-                ['key' => 'is_akcionar', 'label' => 'Akcionář', 'class' => 'text-white/80'],
-                ['key' => 'ic', 'label' => 'IČ', 'class' => 'text-white/80'],
-                ['key' => 'dic', 'label' => 'DIČ', 'class' => 'text-white/80'],
-                ['key' => 'hbo_key', 'label' => 'HBO', 'class' => 'text-white/80'],
-                ['key' => 'crm_contract_id', 'label' => 'CRM contract id', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'name', 'label' => 'Název', 'class' => 'dark:text-white/80'],
+                ['key' => 'nangu_isp_id', 'label' => 'Nangu ID', 'class' => 'dark:text-white/80'],
+                ['key' => 'is_akcionar', 'label' => 'Akcionář', 'class' => 'dark:text-white/80'],
+                ['key' => 'ic', 'label' => 'IČ', 'class' => 'dark:text-white/80'],
+                ['key' => 'dic', 'label' => 'DIČ', 'class' => 'dark:text-white/80'],
+                ['key' => 'hbo_key', 'label' => 'HBO', 'class' => 'dark:text-white/80'],
+                ['key' => 'crm_contract_id', 'label' => 'CRM contract id', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

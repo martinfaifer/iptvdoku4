@@ -18,7 +18,7 @@
             </div>
             <div class="grid grid-cols-12 mt-8">
                 <div class="col-span-12 flex">
-                    <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
+                    <h1 class="text-2xl dark:text-white/80 subpixel-antialiased font-bold mt-6 ">
                         {{ $device->name }}
                     </h1>
 
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <hr
-                class="w-full h-1 mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                class="w-full h-[1px] dark:h-1 mt-2 mx-auto my-1 bg-slate-800/5 dark:bg-gradient-to-r dark:from-sky-950 dark:via-blue-850 dark:to-sky-950 border-0 rounded">
             <div class="mt-4">
                 <div class="grid grid-cols-12 gap-4">
                     @if (!is_null($device->template))
@@ -73,7 +73,7 @@
                     ])>
                         <x-share.cards.base-card title="Informace o zařízení">
                             {{-- ip and login block --}}
-                            <div class="grid grid-cols-12 font-semibold text-[#A3ABB8]">
+                            <div class="grid grid-cols-12 font-semibold dark:text-[#A3ABB8]">
                                 @if (!blank($device->ip))
                                     <div class="col-span-12 xl:col-span-4 flex">
                                         <p>
@@ -144,7 +144,7 @@
                             </div>
 
                             {{-- informations about device --}}
-                            <div class="grid md:grid-cols-12 font-semibold text-[#A3ABB8] mt-1">
+                            <div class="grid md:grid-cols-12 font-semibold dark:text-[#A3ABB8] mt-1">
                                 <div class="col-span-12 xl:col-span-4">
                                     <p>
                                         <span class="font-normal">
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                             {{-- snmp block --}}
-                            <div class="grid md:grid-cols-12 font-semibold text-[#A3ABB8] mt-1">
+                            <div class="grid md:grid-cols-12 font-semibold dark:text-[#A3ABB8] mt-1">
                                 @if ($device->is_snmp == true)
                                     <div class="col-span-12 xl:col-span-12">
                                     </div>
@@ -240,7 +240,7 @@
                     @if (!blank($nmsCahedData) && !blank($nmsCahedData))
                         <div class="col-span-12 xl:col-span-4 mb-4">
                             <x-share.cards.base-card title="Informace o zařízení z NMS">
-                                <div class="grid grid-cols-12 gap-4 font-semibold text-[#A3ABB8]">
+                                <div class="grid grid-cols-12 gap-4 font-semibold dark:text-[#A3ABB8]">
                                     <div class="col-span-12">
                                         <span class="font-normal">
                                             Název v NMS:
@@ -287,8 +287,7 @@
 
                     @if ($device->category->name == 'Satelity')
                         <div class="col-span-12  xl:col-span-4 mb-4">
-                            <livewire:iptv.devices.setelit-has-devices-component
-                                :device="$device"></livewire:iptv.devices.setelit-has-devices-component>
+                            <livewire:iptv.devices.setelit-has-devices-component :device="$device" lazy />
                         </div>
                     @endif
                 </div>
@@ -297,8 +296,7 @@
                 @if (!blank($nimbleCachedData))
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 xl:col-span-12 mb-4">
-                            <livewire:iptv.devices.nimble-api-component :device="$device"
-                                lazy></livewire:iptv.devices.nimble-api-component>
+                            <livewire:iptv.devices.nimble-api-component :device="$device" lazy />
                         </div>
                     </div>
                 @endif
@@ -306,8 +304,7 @@
                 @if (!blank($grapeTranscoderData))
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 xl:col-span-12 mb-4">
-                            <livewire:iptv.devices.grape-transcoders-api-component :device="$device"
-                                lazy></livewire:iptv.devices.grape-transcoders-api-component>
+                            <livewire:iptv.devices.grape-transcoders-api-component :device="$device" lazy />
                         </div>
                     </div>
                 @endif

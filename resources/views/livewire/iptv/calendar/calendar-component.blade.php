@@ -8,7 +8,8 @@
                         <div class="mt-4">
                             <div class="overflow-auto max-h-80">
                                 @foreach ($runningEvents as $event)
-                                    <x-list-item wire:key='running-events-{{ $event["id"] }}' :item="$event" class="bg-sky-600/20 hover:bg-sky-600/50">
+                                    <x-list-item wire:key="running-events-{{ $event['id'] }}" :item="$event"
+                                        class="bg-sky-600/20 hover:bg-sky-600/50">
                                         <x-slot:avatar>
                                             <div class="avatar placeholder">
                                                 <div class="bg-neutral text-neutral-content rounded-full w-11">
@@ -44,7 +45,9 @@
 
                                                                     @endphp
                                                                     @if (!is_null($channel))
-                                                                        <span wire:key='runnings-event-channel-{{ $channel->id }}' class="text-sky-300 text-wrap">
+                                                                        <span
+                                                                            wire:key='runnings-event-channel-{{ $channel->id }}'
+                                                                            class="text-sky-300 text-wrap">
                                                                             <a target="_blank" class="hover:underline"
                                                                                 href="channels/{{ $channel->id }}/multicast">{{ $channel->name }}</a>
                                                                             ,
@@ -68,7 +71,8 @@
                                                                                 $user->last_name[0];
                                                                         }
                                                                     @endphp
-                                                                    <div wire:key='running-event-user-{{ $user->id }}' class="avatar placeholder">
+                                                                    <div wire:key='running-event-user-{{ $user->id }}'
+                                                                        class="avatar placeholder">
                                                                         <div
                                                                             class="bg-neutral text-neutral-content rounded-full w-8">
                                                                             <span class="text-md">
@@ -108,14 +112,12 @@
                                             </div>
                                         </x-slot:sub-value>
                                         <x-slot:actions>
-                                            <x-slot:actions>
-                                                <x-button wire:click="edit({{ $event['id'] }})"
-                                                    class="btn-sm bg-transparent border-none text-green-500"
-                                                    icon="o-pencil"></x-button>
-                                                <x-button wire:click="destroy({{ $event['id'] }})"
-                                                    class="btn-sm bg-transparent border-none text-red-500"
-                                                    icon="o-trash"></x-button>
-                                            </x-slot:actions>
+                                            <x-button wire:click="edit({{ $event['id'] }})"
+                                                class="btn-sm bg-transparent border-none text-green-500 shadow-none"
+                                                icon="o-pencil"></x-button>
+                                            <x-button wire:click="destroy({{ $event['id'] }})"
+                                                class="btn-sm bg-transparent border-none text-red-500 shadow-none"
+                                                icon="o-trash"></x-button>
                                         </x-slot:actions>
                                     </x-list-item>
                                 @endforeach
@@ -132,7 +134,7 @@
                         @if (!empty($upcomingEvents))
                             <div class="overflow-auto max-h-[38rem]">
                                 @foreach ($upcomingEvents as $event)
-                                    <x-list-item wire:key='upcoming-event-{{ $event["id"] }}' :item="$event">
+                                    <x-list-item wire:key="upcoming-event-{{ $event['id'] }}" :item="$event">
                                         <x-slot:avatar>
                                             <div class="avatar placeholder">
                                                 <div class="bg-neutral text-neutral-content rounded-full w-11">
@@ -191,7 +193,9 @@
                                                                         $channel = App\Models\Channel::find($channelId);
 
                                                                     @endphp
-                                                                    <span wire:key='upcoming-event-channel-{{ $channel->id }}' class="text-sky-300">
+                                                                    <span
+                                                                        wire:key='upcoming-event-channel-{{ $channel->id }}'
+                                                                        class="text-sky-300">
                                                                         <a target="_blank" class="hover:underline"
                                                                             href="channels/{{ $channel->id }}/multicast">{{ $channel->name }}</a>
                                                                         ,
@@ -214,7 +218,8 @@
                                                                                 $user->last_name[0];
                                                                         }
                                                                     @endphp
-                                                                    <div wire:key='upcoming-event-user-{{ $user->id }}' class="avatar placeholder">
+                                                                    <div wire:key='upcoming-event-user-{{ $user->id }}'
+                                                                        class="avatar placeholder">
                                                                         <div
                                                                             class="bg-neutral text-neutral-content rounded-full w-8">
                                                                             <span class="text-md">
@@ -255,10 +260,10 @@
                                         </x-slot:sub-value>
                                         <x-slot:actions>
                                             <x-button wire:click="edit({{ $event['id'] }})"
-                                                class="btn-sm bg-transparent border-none text-green-500"
+                                                class="btn-sm bg-transparent border-none text-green-500 shadow-none"
                                                 icon="o-pencil"></x-button>
                                             <x-button wire:click="destroy({{ $event['id'] }})"
-                                                class="btn-sm bg-transparent border-none text-red-500"
+                                                class="btn-sm bg-transparent border-none text-red-500 shadow-none"
                                                 icon="o-trash"></x-button>
                                         </x-slot:actions>
                                     </x-list-item>
@@ -285,7 +290,7 @@
         </div>
     </div>
 
-    <x-drawer wire:model="updateModal" right class="lg:w-2/3 !bg-[#0E1E33]">
+    <x-drawer wire:model="updateModal" right class="lg:w-2/3 !dark:bg-[#0E1E33]">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeModal'>✕</x-button>
@@ -412,13 +417,11 @@
             {{-- action section --}}
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
-                        wire:click='closeModal' />
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28" wire:click='closeModal' />
                 </div>
                 <div>
-                    <x-button label="Upravit"
-                        class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full sm:w-28" type="submit"
-                        spinner="save2" />
+                    <x-button label="Upravit" class="btn btn-doku-primary w-full sm:w-28" type="submit"
+                        spinner="update" />
                 </div>
             </div>
         </x-form>

@@ -101,11 +101,11 @@ class SettingsUsersComponent extends Component
             'users' => User::search($this->query)->with('userRole')->paginate(),
             'headers' => [
                 ['key' => 'avatar', 'label' => ''],
-                ['key' => 'first_name', 'label' => 'Jméno', 'class' => 'text-white/80'],
-                ['key' => 'last_name', 'label' => 'Příjmení', 'class' => 'text-white/80'],
-                ['key' => 'email', 'label' => 'Email', 'class' => 'text-white/80'],
-                ['key' => 'userRole.name', 'label' => 'Role', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'first_name', 'label' => 'Jméno', 'class' => 'dark:text-white/80'],
+                ['key' => 'last_name', 'label' => 'Příjmení', 'class' => 'dark:text-white/80'],
+                ['key' => 'email', 'label' => 'Email', 'class' => 'dark:text-white/80'],
+                ['key' => 'userRole.name', 'label' => 'Role', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

@@ -62,8 +62,8 @@ class MulticastsSourcesComponent extends Component
         return view('livewire.settings.channels.multicasts.multicasts-sources-component', [
             'sources' => ChannelSource::search($this->query)->paginate(10),
             'headers' => [
-                ['key' => 'name', 'label' => 'Zdroj', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'name', 'label' => 'Zdroj', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);
     }

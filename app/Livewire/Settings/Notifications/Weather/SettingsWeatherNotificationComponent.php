@@ -58,9 +58,9 @@ class SettingsWeatherNotificationComponent extends Component
     {
         return view('livewire.settings.notifications.weather.settings-weather-notification-component', [
             'headers' => [
-                ['key' => 'city', 'label' => 'Město', 'class' => 'text-white/80'],
-                ['key' => 'state', 'label' => 'Stát', 'class' => 'text-white/80'],
-                ['key' => 'actions', 'label' => '', 'class' => 'text-white/80'],
+                ['key' => 'city', 'label' => 'Město', 'class' => 'dark:text-white/80'],
+                ['key' => 'state', 'label' => 'Stát', 'class' => 'dark:text-white/80'],
+                ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
             'weathers' => WeatherCity::search($this->query)->paginate(5),
         ]);

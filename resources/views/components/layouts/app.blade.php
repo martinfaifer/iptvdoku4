@@ -52,10 +52,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen font-sans antialiased bg-gradient-to-r from-slate-900 to-sky-950 ">
-    <div id="unsupported-browser">
-        Tento prohlížeč není podporován. Prosím, použijte jiný prohlížeč.
-    </div>
+<body class="min-h-screen font-sans antialiased bg-[#f6f7f9] dark:bg-gradient-to-r from-slate-900 to-sky-950 ">
     <x-toast />
     @auth
         <x-spotlight search-text="Vyhledejte ... " no-results-text="Ops! Nenalezeno." class="justify-center"
@@ -74,10 +71,10 @@
             @auth
                 @persist('sidebar-menu')
                     <x-slot:sidebar drawer="sidebar-drawer"
-                        class="bg-gradient-to-b from-slate-950/80 to-black/50 border-r border-[#64748b] border-opacity-10 !w-[320px]">
+                        class="dark:bg-gradient-to-b from-slate-950/80 to-black/50 border-r border-[#64748b] border-opacity-10 !w-[320px]">
 
-                        <x-menu activate-by-route active-bg-color="bg-sky-950" class="-ml-4 -mt-2 ">
-                            <ul class="menu bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
+                        <x-menu activate-by-route active-bg-color="bg-slate-800 dark:bg-sky-950" class="-ml-4 -mt-2 ">
+                            <ul class="menu bg-[#252425] dark:bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
                                 <div class="tooltip tooltip-bottom" data-tip="Kanály">
                                     <li href="/channels" wire:navigate.hover @class([
                                         'rounded-lg',
@@ -154,11 +151,11 @@
                                 @can('show_tickets', App\Models\User::class)
                                     <livewire:iptv.flow-eye.menu.flow-eye-menu-icon-with-alert-component />
                                 @endcan
-                                {{-- <li class="rounded-lg fixed bottom-2">
+                                <li class="rounded-lg fixed bottom-2">
                                     <a>
-                                        <x-theme-toggle />
+                                        <x-theme-toggle class="text-white"/>
                                     </a>
-                                </li> --}}
+                                </li>
                             </ul>
                         </x-menu>
 

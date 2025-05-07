@@ -4,7 +4,7 @@
             <li id="channel_{{ $channel->id }}" wire:key='{{ $channel->id }}' @class([
                 'ml-1',
                 'rounded-lg',
-                'bg-sky-950' => request()->is('channels/' . $channel->id . '/*'),
+                'bg-slate-800/5 dark:bg-sky-950' => request()->is('channels/' . $channel->id . '/*'),
             ])
                 href="/channels/{{ $channel->id }}/multicast" wire:navigate.hover>
                 <a class="grid grid-cols-12">

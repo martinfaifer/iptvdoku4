@@ -1,21 +1,12 @@
 <div>
-    {{-- <div>
-        <button @click="$wire.goBack()" class='btn bg-[#082f49] btn-xs md:btn-sm border-none'>
-            <x-heroicon-o-arrow-left class="hidden md:block size-5" />
-            Zpět na kanál
-        </button>
-    </div> --}}
-
     <div class="mt-4">
         <div class="grid grid-cols-12">
             <div class="col-span-12 flex">
-                <h1 class="text-lg text-white/80 font-semibold mt-6 ">
+                <h1 class="text-lg dark:text-white/80 font-semibold mt-6 ">
                     Nastavení upozornění u {{ $ip }}
                 </h1>
             </div>
         </div>
-        {{-- <hr
-            class="w-full h-[1px] mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-none rounded"> --}}
     </div>
 
     <div class="grid grid-cols-12 gap-4 mt-4">
@@ -27,8 +18,8 @@
                     </div>
                     <div class="col-span-12 md:col-span-2 md:-mt-2">
                         <x-button label="Upravit"
-                            class="bg-sky-800 hover:bg-sky-700 text-white font-semibold border-none w-full md:w-36 btn-sm"
-                            type="submit" />
+                            class="btn btn-doku-primary w-full md:w-36 btn-sm"
+                            type="chnage_if_can_be_notify" />
                     </div>
                 </div>
             </x-form>
@@ -86,9 +77,11 @@
             </x-share.cards.base-card>
         </div>
         <div class="col-span-12 ">
-            <p class="mt-2 ml-2 text-sm italic font-semibold text-sky-500">Pokud není vyplněn slack channel aplikuje se globální
+            <p class="mt-2 ml-2 text-sm italic font-semibold text-sky-500">Pokud není vyplněn slack channel aplikuje se
+                globální
                 pravidlo pro odesílání!</p>
-                <p class="mt-2 ml-2 text-sm italic font-semibold text-sky-500">U streamu se bude kontrolovat maximální velikost datového toku, pokud se jedá o unicast</p>
+            <p class="mt-2 ml-2 text-sm italic font-semibold text-sky-500">U streamu se bude kontrolovat maximální
+                velikost datového toku, pokud se jedá o unicast</p>
         </div>
     </div>
 
@@ -105,12 +98,12 @@
             </div>
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                         wire:click='closeDialog' />
                 </div>
                 <div>
                     <x-button label="Přidat"
-                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
+                        class="btn btn-doku-primary w-full sm:w-28"
                         type="submit" spinner="add_email" />
                 </div>
             </div>
@@ -130,12 +123,12 @@
             </div>
             <div class="flex justify-between">
                 <div>
-                    <x-button label="Zavřít" class="bg-[#334155] font-semibold w-full sm:w-28 mb-4"
+                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
                         wire:click='closeDialog' />
                 </div>
                 <div>
                     <x-button label="Přidat"
-                        class="bg-sky-800 hover:bg-sky-700 hover:shadow-cyan-700/50 border-none  text-white font-semibold w-full sm:w-28"
+                        class="btn btn-doku-primary w-full sm:w-28"
                         type="submit" spinner="add_slack" />
                 </div>
             </div>

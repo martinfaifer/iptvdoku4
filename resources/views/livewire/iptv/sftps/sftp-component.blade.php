@@ -3,14 +3,14 @@
         <div class="relative">
             <div class="absolute left">
                 @can('create', App\Models\SftpServer::class)
-                    <livewire:iptv.sftps.create-sftp-server-component lazy/>
+                    <livewire:iptv.sftps.create-sftp-server-component lazy />
                 @endcan
             </div>
         </div>
         {{-- show alert about no sat card found --}}
         @if (is_null($sftpServer) || is_null($sftpServer->name))
             <div class="mt-12">
-                <x-share.alerts.info title="Vyberte server z menu vlevo"></x-share.alerts.info>
+                <x-share.alerts.info title="Vyberte server z menu vlevo" />
             </div>
         @else
             <div class="grid grid-cols-12 mt-8">
@@ -21,27 +21,27 @@
                     </div>
                 @endif
                 <div class="col-span-12 flex">
-                    <h1 class="text-2xl text-white/80 subpixel-antialiased font-bold mt-6 ">
+                    <h1 class="text-2xl dark:text-white/80 subpixel-antialiased font-bold mt-6 ">
                         {{ $sftpServer->name }}
                     </h1>
                     {{-- actions --}}
                     @can('update', $sftpServer)
-                        <livewire:iptv.sftps.update-sftp-server-component :sftpServer="$sftpServer" lazy/>
+                        <livewire:iptv.sftps.update-sftp-server-component :sftpServer="$sftpServer" lazy />
                     @endcan
 
                     @can('delete', $sftpServer)
-                        <livewire:iptv.sftps.delete-sftp-server-component :sftpServer="$sftpServer" lazy/>
+                        <livewire:iptv.sftps.delete-sftp-server-component :sftpServer="$sftpServer" lazy />
                     @endcan
                     {{-- end of actions --}}
                 </div>
             </div>
             <hr
-                class="w-full h-1 mt-2 mx-auto my-1 bg-gradient-to-r from-sky-950 via-blue-850 to-sky-950 border-0 rounded">
+                class="w-full h-[1px] dark:h-1 mt-2 mx-auto my-1 bg-slate-800/5 dark:bg-gradient-to-r dark:from-sky-950 dark:via-blue-850 dark:to-sky-950 border-0 rounded">
             <div class="mt-4">
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-12">
                         <x-share.cards.base-card title="Informace o serveru">
-                            <div class="flex flex-col gap-4 md:grid md:grid-cols-12 font-semibold text-[#A3ABB8]">
+                            <div class="flex flex-col gap-4 md:grid md:grid-cols-12 font-semibold dark:text-[#A3ABB8]">
                                 <div class="flex justify-between md:col-span-4 md:inline-flex">
                                     <p>
                                         <span class="font-normal">
@@ -89,7 +89,7 @@
                                     @endcan
                                 </div>
                                 <div class=" h-96 overflow-auto">
-                                    <div class="grid grid-cols-12 font-semibold text-[#A3ABB8]">
+                                    <div class="grid grid-cols-12 font-semibold dark:text-[#A3ABB8]">
                                         <div class="col-span-12">
                                             <div class="overflow-x-auto">
                                                 <table class="table">

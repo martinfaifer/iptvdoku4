@@ -19,6 +19,5 @@ export default {
         extend: {},
     },
 
-    // Add daisyUI
     plugins: [require("@tailwindcss/typography"), require("daisyui")],
 };

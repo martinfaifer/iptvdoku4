@@ -2,7 +2,7 @@
     <x-share.cards.base-card title="Historie">
         <div class="h-44">
             <div class="overflow-x-auto">
-                <table class="table table-xs md:table-sm w-full text-[#A3ABB8]">
+                <table class="table table-xs md:table-sm w-full dark:text-[#A3ABB8]">
                     <thead>
                         <tr>
                             <th></th>
@@ -26,7 +26,7 @@
                                 @endif
                                 <td class="text-xs xl:text-sm">{{ $log->created_at->format('d.m. Y') }}</td>
                                 <td>
-                                    <button class="btn btn-circle btn-sm bg-transparent border-none"
+                                    <button class="btn btn-circle btn-sm bg-transparent border-none shadow-none"
                                         wire:click='openModal({{ $log->payload }})'>
                                         <x-heroicon-o-magnifying-glass class="text-blue-500 h-3 w-3" />
                                     </button>
@@ -53,7 +53,7 @@
             <div>
             </div>
             <div>
-                <x-button label="Zavřít" class="bg-sky-800 hover:bg-sky-700 border-none text-white font-semibold w-full sm:w-28"
+                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28"
                     wire:click='closeModal' />
             </div>
         </div>
