@@ -27,7 +27,7 @@ class SendCreateEventNotificationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('iptv-dokumentace@grapesc.cz', 'Grapesc'),
+            from: new Address('iptv-dokumentace@grapesc.cz', 'IPTV dokumentace Grapesc'),
             replyTo: [
                 new Address('iptv-dokumentace@grapesc.cz', 'IPTV dokumentace Grapesc'),
             ],

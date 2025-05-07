@@ -1,6 +1,6 @@
 <div class="flex items-center justify-center min-h-screen">
     <div
-        class="card w-full md:w-2/6 bg-[#131B2F] rounded-xl shadow-xl shadow-gray-850 bg-clip-padding backdrop-filter backdrop-blur-sm">
+        class="card w-full md:w-2/6 dark:bg-[#131B2F] rounded-xl shadow-xl shadow-gray-850 bg-clip-padding backdrop-filter backdrop-blur-sm">
         <div class="card-body">
             <h2 class="text-3xl font-bold text-center">
                 {{-- <x-heroicon-m-tv class="h-8 w-8 absolute lg:ml-20 xl:ml-20 2xl:ml-20 md:h-12 md:w-12 text-red-500" /> --}}
@@ -14,7 +14,7 @@
                     @enderror
                 </div>
                 <div>
-                    <x-button label="Odeslat nové heslo" class="bg-sky-800 hover:bg-sky-700 text-white font-semibold w-full"
+                    <x-button label="Odeslat nové heslo" class="btn btn-doku-primary w-full"
                         type="submit" />
                 </div>
 
