@@ -52,7 +52,8 @@
                         <li @class([
                             'ml-1',
                             'rounded-lg',
-                            'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/devices/vendors'),
+                            'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                'settings/devices/vendors'),
                         ]) href="/settings/devices/vendors" wire:navigate><a>
                                 <x-heroicon-o-device-tablet class="size-4" />
                                 Výrobci zařízení
@@ -60,7 +61,8 @@
                         <li @class([
                             'ml-1',
                             'rounded-lg',
-                            'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/devices/distributors'),
+                            'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                'settings/devices/distributors'),
                         ]) href="/settings/devices/distributors" wire:navigate><a>
                                 <x-heroicon-o-credit-card class="size-4" />
                                 Distributoři sat. caret
@@ -80,7 +82,8 @@
                         <li @class([
                             'ml-1',
                             'rounded-lg',
-                            'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/notifications/slack'),
+                            'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                'settings/notifications/slack'),
                         ]) href="/settings/notifications/slack" wire:navigate><a>
                                 <x-heroicon-o-bell-alert class="size-4" />
                                 Slack
@@ -88,7 +91,8 @@
                         <li @class([
                             'ml-1',
                             'rounded-lg',
-                            'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/notifications/weather'),
+                            'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                'settings/notifications/weather'),
                         ]) href="/settings/notifications/weather" wire:navigate><a>
                                 <x-heroicon-o-sun class="size-4" />
                                 Počasí
@@ -109,7 +113,8 @@
                             <li @class([
                                 'ml-1',
                                 'rounded-lg',
-                                'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/channels/restart'),
+                                'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                    'settings/channels/restart'),
                             ]) href="/settings/channels/restart" wire:navigate><a>
                                     <x-heroicon-o-arrow-path class="size-4" />
                                     Automatický restart
@@ -119,7 +124,8 @@
                             <li @class([
                                 'ml-1',
                                 'rounded-lg',
-                                'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/channels/banners'),
+                                'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                    'settings/channels/banners'),
                             ]) href="/settings/channels/banners" wire:navigate><a>
                                     <x-heroicon-o-photo class="size-4" />
                                     Nahrané bannery
@@ -129,7 +135,8 @@
                             <li @class([
                                 'ml-1',
                                 'rounded-lg',
-                                'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/channels/multicats/sources'),
+                                'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                    'settings/channels/multicats/sources'),
                             ]) href="/settings/channels/multicats/sources" wire:navigate><a>
                                     <x-heroicon-o-window class="size-4" />
                                     Zdroje multicastů
@@ -139,10 +146,22 @@
                             <li @class([
                                 'ml-1',
                                 'rounded-lg',
-                                'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/channels/programmers'),
+                                'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                    'settings/channels/programmers'),
                             ]) href="/settings/channels/programmers" wire:navigate><a>
                                     <x-heroicon-o-users class="size-4" />
                                     Programeři
+                                </a></li>
+                        @endcan
+                        @can('show_channels_programers', App\Models\User::class)
+                            <li @class([
+                                'ml-1',
+                                'rounded-lg',
+                                'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                    'settings/channels/qualities'),
+                            ]) href="/settings/channels/qualities" wire:navigate><a>
+                                    <x-heroicon-o-tv class="size-4" />
+                                    Kvality
                                 </a></li>
                         @endcan
                     </ul>
@@ -195,7 +214,8 @@
                         <li @class([
                             'ml-1',
                             'rounded-lg',
-                            'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/tv-channel-packages'),
+                            'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                'settings/geniustv/tv-channel-packages'),
                         ]) href="/settings/geniustv/tv-channel-packages" wire:navigate>
                             <a>
                                 <x-heroicon-o-tv class="size-4" />
@@ -212,7 +232,8 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/statistics/hbo'),
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/statistics/hbo'),
                                     ]) href="/settings/geniustv/statistics/hbo"
                                         wire:navigate>
                                         <a>
@@ -223,7 +244,8 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/statistics/channels'),
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/statistics/channels'),
                                     ]) href="/settings/geniustv/statistics/channels"
                                         wire:navigate>
                                         <a>
@@ -234,7 +256,8 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/statistics/offers'),
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/statistics/offers'),
                                     ]) href="/settings/geniustv/statistics/offers"
                                         wire:navigate>
                                         <a>
@@ -245,7 +268,8 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/statistics/programers'),
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/statistics/programers'),
                                     ]) href="/settings/geniustv/statistics/programers"
                                         wire:navigate>
                                         <a>
@@ -256,7 +280,8 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/statistics/hbo-stats'),
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/statistics/hbo-stats'),
                                     ]) href="/settings/geniustv/statistics/hbo-stats"
                                         wire:navigate>
                                         <a>
@@ -267,7 +292,8 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/statistics/max-stats'),
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/statistics/max-stats'),
                                     ]) href="/settings/geniustv/statistics/max-stats"
                                         wire:navigate>
                                         <a>
@@ -278,9 +304,10 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/statistics/plus-or-film-stats'),
-                                    ]) href="/settings/geniustv/statistics/plus-or-film-stats"
-                                        wire:navigate>
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/statistics/plus-or-film-stats'),
+                                    ])
+                                        href="/settings/geniustv/statistics/plus-or-film-stats" wire:navigate>
                                         <a>
                                             <x-heroicon-o-chart-pie class="size-4" />
                                             Balík PLUS / FILM
@@ -302,7 +329,8 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/static-taxes'),
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/static-taxes'),
                                     ]) href="/settings/geniustv/static-taxes" wire:navigate>
                                         <a>
                                             <x-heroicon-o-currency-dollar class="w-4 h-4" />
@@ -313,7 +341,8 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/channels-taxes'),
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/channels-taxes'),
                                     ]) href="/settings/geniustv/channels-taxes"
                                         wire:navigate>
                                         <a>
@@ -324,7 +353,8 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/channel-packages'),
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/channel-packages'),
                                     ]) href="/settings/geniustv/channel-packages"
                                         wire:navigate>
                                         <a>
@@ -335,7 +365,8 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/offer-taxes'),
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/offer-taxes'),
                                     ]) href="/settings/geniustv/offer-taxes" wire:navigate>
                                         <a>
                                             <x-heroicon-o-currency-dollar class="size-4" />
@@ -345,7 +376,8 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/discounts'),
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/discounts'),
                                     ]) href="/settings/geniustv/discounts" wire:navigate>
                                         <a>
                                             <x-heroicon-o-currency-dollar class="size-4" />
@@ -355,7 +387,8 @@
                                     <li @class([
                                         'ml-1',
                                         'rounded-lg',
-                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is('settings/geniustv/invoices'),
+                                        'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                            'settings/geniustv/invoices'),
                                     ]) href="/settings/geniustv/invoices" wire:navigate>
                                         <a>
                                             <x-heroicon-o-currency-dollar class="size-4" />

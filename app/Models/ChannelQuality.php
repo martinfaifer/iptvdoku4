@@ -25,4 +25,9 @@ class ChannelQuality extends Model
     {
         $query->where('format', $format);
     }
+
+    public function scopeSearch(Builder $query, string $search = ""): void
+    {
+        $query->where('name', 'like', $search . '%')->orWhere('format', 'like', $search . '%');
+    }
 }

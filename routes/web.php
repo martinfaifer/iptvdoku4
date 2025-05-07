@@ -28,6 +28,7 @@ use App\Livewire\Settings\Devices\Vendors\SettingsDevicesVendorsComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
 use App\Livewire\Settings\Channels\Banners\SettingsChannelsBannersComponent;
 use App\Livewire\Settings\Channels\Restart\SettingsChannelsRestartComponent;
+use App\Livewire\Settings\Channels\SettingsChannelsQualitiesComponent;
 use App\Livewire\Settings\Geniustv\Invoices\SettingsGeniusTvInvoicesComponent;
 use App\Livewire\Settings\Geniustv\Discounts\SettingsGeniusTvDiscountsComponent;
 use App\Livewire\Settings\Notifications\Slack\SettingsSlackNotificationComponent;
@@ -107,6 +108,7 @@ Route::middleware('auth')->group(function () {
             Route::get('banners', SettingsChannelsBannersComponent::class)->middleware('can:show_settings_channels_banners,App\Models\User');
             Route::get('multicats/sources', MulticastsSourcesComponent::class)->middleware('can:show_settings_channels_multicast_sources,App\Models\User');
             Route::get('programmers', ChannelsProgrammersComponent::class)->middleware('can:show_settings_channels_programmes,App\Models\User');
+            Route::get('qualities', SettingsChannelsQualitiesComponent::class)->middleware('can:show_settings_channels_programmes,App\Models\User');
         });
 
         Route::prefix('notifications')->group(function () {
