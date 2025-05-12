@@ -360,7 +360,8 @@
                          bg-clip-padding
                          backdrop-filter
                          backdrop-blur-sm
-                         shadow-md
+                         shadow-none
+                         dark:shadow-md
                          shadow-slate-900/50">
                                         <div class="card-body dark:text-gray-200 text-sm cursor-pointer"
                                             @click="$wire.openUpdateDrawer('{{ $interfaceKey }}', 'modules')">
@@ -372,8 +373,30 @@
                                                                 {{ $interfaceValueName }} :
                                                             </div>
                                                             <div class="font-semibold">
-                                                                @if (!str_contains($interfaceValue, '%'))
-                                                                    {{ $interfaceValue }}
+                                                                @if ($interfaceValueName == 'Model')
+                                                                    @php
+                                                                        $gpu = $this->getGpuTemplate($interfaceValue);
+                                                                        $gpuName = '';
+                                                                        $gpuMaxChannels = '';
+                                                                        if ($gpu) {
+                                                                            $gpuName = $gpu->name;
+                                                                            $gpuMaxChannels = $gpu->max_streams;
+                                                                        }
+                                                                    @endphp
+                                                                    {{ $gpuName }} <span
+                                                                        class="text-xs font-normal"> (
+                                                                        <span class="tooltip -mt-1"
+                                                                            data-tip="Max streamů">
+                                                                            {{ $gpuMaxChannels }}
+                                                                        </span> /
+                                                                        <span class="tooltip -mt-1" data-tip="Využito">
+                                                                            {{ count($interface['Vazba na kanály']) }})
+                                                                        </span>
+                                                                    </span>
+                                                                @else
+                                                                    @if (!str_contains($interfaceValue, '%'))
+                                                                        {{ $interfaceValue }}
+                                                                    @endif
                                                                 @endif
                                                             </div>
                                                         </div>
@@ -410,6 +433,11 @@
                                 @if ($name == 'Název')
                                     <x-input label="{{ $name }}"
                                         wire:model.live="updatedInterface.{{ $name }}"></x-input>
+                                @endif
+
+                                @if ($name == 'Model')
+                                    <x-choices label="GPU model" wire:model.live="updatedInterface.{{ $name }}"
+                                        :options="$gpuModules" single />
                                 @endif
 
                                 @if ($name == 'Průměr paraboly')
@@ -482,6 +510,14 @@
                         @endforeach
                     </div>
                 </div>
+                @if (!array_key_exists('Model', $updatedInterface) && $interfaceType == 'modules')
+                    <div class="col-span-12 mb-4">
+                        <div class="mx-4">
+                            <x-choices label="GPU model" wire:model="gpuModel" :options="$gpuModules"
+                                single />
+                        </div>
+                    </div>
+                @endif
             </div>
 
             <div class="grid grid-cols-12 mt-6">

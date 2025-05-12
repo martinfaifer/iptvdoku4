@@ -34,6 +34,7 @@ use App\Livewire\Settings\Geniustv\Discounts\SettingsGeniusTvDiscountsComponent;
 use App\Livewire\Settings\Notifications\Slack\SettingsSlackNotificationComponent;
 use App\Livewire\Settings\Geniustv\OfferTaxes\SettingsGeniusTvOfferTaxesComponent;
 use App\Livewire\Settings\Devices\Distributors\SettingsDevicesDistributorsComponent;
+use App\Livewire\Settings\Devices\Templates\SettingsDeviceGpuModulTemplateComponent;
 use App\Livewire\Settings\Geniustv\StaticTaxes\SettingsGeniusTvStaticTaxesComponent;
 use App\Livewire\Settings\Geniustv\Statistics\SettingsGeniusTvStatisticsHboComponent;
 use App\Livewire\Settings\Notifications\Weather\SettingsWeatherNotificationComponent;
@@ -119,6 +120,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('devices')->group(function () {
             Route::get('vendors', SettingsDevicesVendorsComponent::class)->middleware('can:show_settings_devices,App\Models\User');
             Route::get('distributors', SettingsDevicesDistributorsComponent::class)->middleware('can:show_settings_devices,App\Models\User');
+            Route::get('templates/gpu-modules', SettingsDeviceGpuModulTemplateComponent::class)->middleware('can:show_settings_devices,App\Models\User');
         });
     });
 });

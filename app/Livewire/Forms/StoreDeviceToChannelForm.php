@@ -32,9 +32,9 @@ class StoreDeviceToChannelForm extends Form
         $this->validate();
 
         if ($this->is_backup == true) {
-            $channelToDevice = $this->channelType.':'.$this->channel->id.':backup';
+            $channelToDevice = $this->channelType . ':' . $this->channel->id . ':backup';
         } else {
-            $channelToDevice = $this->channelType.':'.$this->channel->id;
+            $channelToDevice = $this->channelType . ':' . $this->channel->id;
         }
 
         $device = Device::find($this->deviceId);

@@ -2,17 +2,20 @@
 
 namespace App\Livewire\Iptv\Devices;
 
-use App\Engines\Devices\SNMP\DeviceSnmpEngine;
-use App\Engines\Devices\Templates\DeviceTemplateEngine;
 use App\Models\Chart;
 use App\Models\Device;
+use Livewire\Component;
+use App\Models\DeviceTemplateGpu;
 use App\Traits\Charts\GetItemChartsTrait;
 use App\Traits\Livewire\NotificationTrait;
-use Livewire\Component;
+use Illuminate\Database\Eloquent\Collection;
+use App\Engines\Devices\SNMP\DeviceSnmpEngine;
+use App\Engines\Devices\Templates\DeviceTemplateEngine;
+use App\Traits\Devices\GetDeviceGpuModuleTemplateTrait;
 
 class DeviceTemplateComponent extends Component
 {
-    use GetItemChartsTrait, NotificationTrait;
+    use GetItemChartsTrait, NotificationTrait, GetDeviceGpuModuleTemplateTrait;
 
     public ?Device $device;
 
@@ -20,29 +23,26 @@ class DeviceTemplateComponent extends Component
 
     public mixed $template;
 
-    public bool $hasCharts = false;
-
     public array $charts = [];
 
+    public bool $updateDrawer = false;
+    public bool $logModal = false;
     public bool $chartModal = false;
+    public bool $hasCharts = false;
 
     public array $logs = [];
-
     public array $updatedInterface = [];
-
     public string $updatedInterfaceKey = '';
-
     public string $interfaceType = '';
 
-    public bool $updateDrawer = false;
-
-    public bool $logModal = false;
+    public array $gpuModules = [];
+    public ?string $gpuModel = "";
 
     public function mount(mixed $template): void
     {
         $this->template = $template;
 
-        if (Chart::itemCharts('device:'.$this->device->id)->first()) {
+        if (Chart::itemCharts('device:' . $this->device->id)->first()) {
             $this->hasCharts = true;
         }
     }
@@ -52,12 +52,15 @@ class DeviceTemplateComponent extends Component
         $this->updatedInterface = $this->template[$interfaceType][$key];
         $this->updatedInterfaceKey = $key;
         $this->interfaceType = $interfaceType;
-
+        $this->gpuModules = DeviceTemplateGpu::get()->toArray();
         $this->updateDrawer = true;
     }
 
     public function update(): mixed
     {
+        if (!blank($this->gpuModel)) {
+            $this->updatedInterface['Model'] = $this->gpuModel;
+        }
         (new DeviceTemplateEngine())->update(
             device: $this->device,
             updatedInterface: $this->updatedInterface,
@@ -65,7 +68,7 @@ class DeviceTemplateComponent extends Component
             updatedInterfaceKey: $this->updatedInterfaceKey
         );
 
-        $this->redirect('/devices/'.$this->device->id, true);
+        $this->redirect('/devices/' . $this->device->id, true);
 
         return $this->success_alert('Upraveno');
     }
@@ -77,6 +80,7 @@ class DeviceTemplateComponent extends Component
         $this->interfaceType = '';
 
         $this->updateDrawer = false;
+        $this->reset('gpuModel');
     }
 
     public function loadLog(string $oid): void
@@ -108,7 +112,7 @@ class DeviceTemplateComponent extends Component
             'template' => null,
         ]);
 
-        $this->redirect('/devices/'.$this->device->id, true);
+        $this->redirect('/devices/' . $this->device->id, true);
 
         return $this->success_alert('Šablona odebrána');
     }
@@ -116,7 +120,7 @@ class DeviceTemplateComponent extends Component
     public function loadCharts(): void
     {
         $this->charts = $this->get_charts(
-            item: 'device:'.$this->device->id,
+            item: 'device:' . $this->device->id,
             useDisctinct: true
         );
 

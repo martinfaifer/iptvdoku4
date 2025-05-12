@@ -2,15 +2,17 @@
 
 namespace App\Livewire\Iptv\Devices;
 
-use App\Engines\Devices\Templates\DeviceTemplateEngine;
 use App\Models\Device;
-use App\Models\DeviceTemplate;
-use App\Traits\Livewire\NotificationTrait;
 use Livewire\Component;
+use App\Models\DeviceTemplate;
+use App\Models\DeviceTemplateGpu;
+use App\Traits\Livewire\NotificationTrait;
+use App\Engines\Devices\Templates\DeviceTemplateEngine;
+use App\Traits\Devices\GetDeviceGpuModuleTemplateTrait;
 
 class CreateDeviceTemplateComponent extends Component
 {
-    use NotificationTrait;
+    use NotificationTrait, GetDeviceGpuModuleTemplateTrait;
 
     public ?Device $device;
 
@@ -62,6 +64,12 @@ class CreateDeviceTemplateComponent extends Component
 
     public ?string $moduleName = '';
 
+    public bool $isGpuModule = false;
+
+    public array $gpuModules = [];
+
+    public ?string $gpuModule = null;
+
     public mixed $templateId;
 
     public function boot(): void
@@ -71,6 +79,7 @@ class CreateDeviceTemplateComponent extends Component
         }
 
         $this->availableTemplates = DeviceTemplate::get();
+        $this->gpuModules = DeviceTemplateGpu::get()->toArray();
     }
 
     public function openModal(): void
@@ -94,7 +103,7 @@ class CreateDeviceTemplateComponent extends Component
     {
         $template = DeviceTemplate::find($this->templateId);
         if (blank($template)) {
-            $this->redirect('/devices/'.$this->device->id, true);
+            $this->redirect('/devices/' . $this->device->id, true);
 
             return $this->error_alert('Šablona nenalezena');
         }
@@ -102,7 +111,7 @@ class CreateDeviceTemplateComponent extends Component
             'template' => $template->template,  // @phpstan-ignore-line
         ]);
 
-        $this->redirect('/devices/'.$this->device->id, true);
+        $this->redirect('/devices/' . $this->device->id, true);
 
         return $this->success_alert('Přidána šablona');
     }
@@ -138,11 +147,12 @@ class CreateDeviceTemplateComponent extends Component
             modules: [
                 'moduleName' => $this->moduleName,
                 'numberOfModules' => $this->numberOfModules,
+                'moduleGpu' => $this->gpuModule
             ]
         );
 
         $this->storeDrawer = false;
-        $this->redirect('/devices/'.$this->device->id, true);
+        $this->redirect('/devices/' . $this->device->id, true);
 
         return $engineResponse == true ? $this->success_alert('Šablona vytvořena') : $this->error_alert('Nepodařilo se vytvořit');
     }

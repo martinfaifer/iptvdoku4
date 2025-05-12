@@ -67,6 +67,15 @@
                                 <x-heroicon-o-credit-card class="size-4" />
                                 Distributoři sat. caret
                             </a></li>
+                        <li @class([
+                            'ml-1',
+                            'rounded-lg',
+                            'bg-slate-800/5 dark:bg-sky-950' => request()->is(
+                                'settings/devices/templates/gpu-modules'),
+                        ]) href="/settings/devices/templates/gpu-modules" wire:navigate><a>
+                                <x-heroicon-o-computer-desktop class="size-4" />
+                                Šablony GPU
+                            </a></li>
                     </ul>
                 </details>
             </li>

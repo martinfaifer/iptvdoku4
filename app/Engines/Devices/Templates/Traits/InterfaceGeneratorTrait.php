@@ -126,6 +126,13 @@ trait InterfaceGeneratorTrait
             'replace' => '%moduleName%',
             'human_description' => 'Název',
         ],
+
+        'moduleGpu' => [
+            'default' => false,
+            'model' => "Model",
+            'max_channels' => "%maxChannels%",
+            'human_description' => 'GPU model',
+        ]
     ];
 
     public array $linkToChannels = [];
@@ -137,21 +144,32 @@ trait InterfaceGeneratorTrait
     public function generate_interface(array $interfaceData, int $interfaceNumber, int $deviceVendorId, string $interfaceType): array
     {
         $interface = [];
+
         foreach ($this->listOfInterfacePosibilities as $key => $posibility) {
             if (array_key_exists($key, $interfaceData)) {
                 if ($posibility['default'] != $interfaceData[$key]) {
                     if (! is_bool($interfaceData[$key])) {
-                        $interface[$posibility['human_description']] = $interfaceData[$key].' '.$interfaceNumber;
+                        if ($posibility['human_description'] === "GPU model") {
+                            $interface[$posibility['model']] = $interfaceData[$key];
+                        } else {
+                            $interface[$posibility['human_description']] = $interfaceData[$key] . ' ' . $interfaceNumber;
+                        }
+                        if (array_key_exists('moduleGpu', $posibility)) {
+                            dd($posibility, $interfaceData);
+                        }
                         if (array_key_exists('nested', $posibility)) {
                             if (array_key_exists('nested', $posibility)) {
-                                $interface['nested_'.$posibility['human_description']] = $posibility['nested'];
+                                $interface['nested_' . $posibility['human_description']] = $posibility['nested'];
                             }
                         }
                     } else {
                         $interface[$posibility['human_description']] = $posibility['replace'];
                         if (array_key_exists('nested', $posibility)) {
-                            $interface['nested_'.$posibility['human_description']] = $posibility['nested'];
+                            $interface['nested_' . $posibility['human_description']] = $posibility['nested'];
                         }
+                        // if (array_key_exists('moduleGpu', $posibility)) {
+                        //     dd($posibility, $interfaceData);
+                        // }
                     }
                 }
             }

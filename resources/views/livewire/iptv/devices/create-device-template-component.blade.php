@@ -4,7 +4,7 @@
         Přidat šablonu zařízení
     </button>
 
-    <x-drawer wire:model="storeDrawer" right class="lg:w-2/3 !dark:bg-[#0E1E33]">
+    <x-drawer wire:model="storeDrawer" right class="lg:w-2/3 dark:!bg-[#0E1E33]">
         @if (!$availableTemplates->isEmpty())
             <x-form wire:submit="storePrebuildTemplateToDevice">
                 <x-choices label="Dostupné šablony" wire:model.live="templateId" :options="$availableTemplates" single />
@@ -14,8 +14,7 @@
                         {{--  --}}
                     </div>
                     <div>
-                        <x-button label="Přidat"
-                            class="btn btn-doku-primary w-full sm:w-28" type="submit"
+                        <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28" type="submit"
                             spinner="storePrebuildTemplateToDevice" />
                     </div>
                 </div>
@@ -245,12 +244,27 @@
                                         <div
                                             class="bg-[#131B2F] rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm shadow-md shadow-slate-900/50">
                                             <div class="card-body text-gray-200 text-sm">
-                                                <div class="grid grid-cols-12 mb-4">
+                                                <div class="grid grid-cols-12 gap-4 mb-4">
                                                     <div class="col-span-12">
                                                         <p>
                                                             Interface: {{ $moduleName }} {{ $i }}
                                                         </p>
                                                     </div>
+                                                    @if (!blank($gpuModule))
+                                                    @php
+                                                        $gpuModelModule = $this->getGpuTemplate($gpuModule);
+                                                    @endphp
+                                                        <div class="col-span-12">
+                                                            <p>
+                                                                Model: {{ $gpuModelModule->name }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-span-12">
+                                                            <p>
+                                                                Počet kanálů: {{ $gpuModelModule->max_streams }}
+                                                            </p>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -465,7 +479,7 @@
                         </div>
                         <div class="col-span-4 mb-4">
                             {{-- modules --}}
-                            <div class="grid grid-cols-12 gap-4">
+                            <div x-data="{ isGpuModule: $wire.entangle('isGpuModule') }" class="grid grid-cols-12 gap-4">
                                 <div class="col-span-12 mb-4">
                                     <x-input label="Počet modulů" wire:model.live="numberOfModules" type="number" />
                                     <div>
@@ -482,6 +496,17 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-span-12 mb-4">
+                                    <x-toggle label="Grafická karta" wire:model.live="isGpuModule" />
+                                    <div>
+                                        @error('form.isGpuModule')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div x-show="isGpuModule" class="col-span-12 mb-4">
+                                    <x-choices label="GPU model" wire:model.live="gpuModule" :options="$gpuModules" single />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -493,9 +518,8 @@
                                 @click='$wire.closeDialog' />
                         </div>
                         <div>
-                            <x-button label="Přidat"
-                                class="btn btn-doku-primary w-full sm:w-28"
-                                type="submit" spinner="store" />
+                            <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28" type="submit"
+                                spinner="store" />
                         </div>
                     </div>
                 </x-form>
