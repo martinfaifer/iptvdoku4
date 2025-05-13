@@ -178,7 +178,7 @@
                         @scope('cell_avatar', $newestUser)
                             <div class="rounded-full size-8 bg-black flex items-center justify-center cursor-pointer">
                                 @if (is_null($newestUser->avatar_url))
-                                    <div class="font-semibold">
+                                    <div class="text-white/90 font-semibold">
                                         {{ $newestUser->first_name[0] }}
                                         {{ $newestUser->last_name[0] }}
                                     </div>
