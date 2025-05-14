@@ -76,6 +76,7 @@ class TvChannelPackagesComponent extends Component
             'tvPackages' => GeniusTvChannelPackage::search($this->query)->paginate(),
             'headers' => [
                 ['key' => 'name', 'label' => 'Balíček', 'class' => 'dark:text-white/80'],
+                ['key' => 'is_optional', 'label' => 'Příplatkový balíček', 'class' => 'dark:text-white/80'],
                 ['key' => 'actions', 'label' => '', 'class' => 'dark:text-white/80'],
             ],
         ]);

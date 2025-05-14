@@ -18,12 +18,17 @@ class CreateGeniusTvTvPackageForm extends Form
     #[Validate('unique:genius_tv_channel_packages,name', message: 'Balíček již existuje')]
     public string $name = '';
 
+    #[Validate('required')]
+    #[Validate('boolean', message: 'Neplatný formát')]
+    public bool $is_optional = false;
+
     public function create(): void
     {
         $this->validate();
 
         GeniusTvChannelPackage::create([
             'name' => $this->name,
+            'is_optional' => $this->is_optional
         ]);
 
         $this->removeChannelPackagesFromCache();

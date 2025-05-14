@@ -9,6 +9,7 @@ class GeniusTvChannelPackage extends Model
 {
     protected $fillable = [
         'name',
+        'is_optional'
     ];
 
     public function scopeSearch(Builder $query, string $search): void

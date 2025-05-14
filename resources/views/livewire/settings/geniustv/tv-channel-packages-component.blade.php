@@ -13,6 +13,13 @@
         </div>
         <div>
             <x-table :headers="$headers" :rows="$tvPackages" with-pagination>
+                @scope('cell_is_optional', $tvPackage)
+                    @if ($tvPackage->is_optional == true)
+                        <x-icon name="o-check" class="text-green-500 w-4 h-4" />
+                    @else
+                        <x-icon name="o-x-mark" class="text-red-500 w-4 h-4" />
+                    @endif
+                @endscope
                 @scope('cell_actions', $tvPackage)
                     <div class="flex mx-auto gap-4">
                         <button class="btn btn-sm btn-circle bg-opacity-0 border-transparent shadow-none"
@@ -37,6 +44,9 @@
                 <div class="col-span-12">
                     <x-input label="Balíček" wire:model="createForm.name" />
                 </div>
+                <div class="col-span-12">
+                    <x-checkbox label="Příplatkový balíček" wire:model="createForm.is_optional" />
+                </div>
 
             </div>
             <div class="flex justify-between">
@@ -58,6 +68,9 @@
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12">
                     <x-input label="Balíček" wire:model="updateForm.name" />
+                </div>
+                <div class="col-span-12">
+                    <x-checkbox label="Příplatkový balíček" wire:model="updateForm.is_optional" />
                 </div>
             </div>
             <div class="flex justify-between">

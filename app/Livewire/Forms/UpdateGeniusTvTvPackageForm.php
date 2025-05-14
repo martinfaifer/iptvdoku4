@@ -17,13 +17,18 @@ class UpdateGeniusTvTvPackageForm extends Form
     #[Validate('required', message: 'Vyplňte název balíčku')]
     #[Validate('string', message: 'Neplatný formát')]
     #[Validate('max:255', message: 'Maximální délka je :max')]
-    #[Validate('unique:genius_tv_channel_packages,name', message: 'Balíček již existuje')]
+    // #[Validate('unique:genius_tv_channel_packages,name', message: 'Balíček již existuje')]
     public string $name = '';
+
+    #[Validate('required')]
+    #[Validate('boolean', message: 'Neplatný formát')]
+    public bool $is_optional = false;
 
     public function setTvPackage(GeniusTvChannelPackage $tvPackage): void
     {
         $this->tvPackage = $tvPackage;
         $this->name = $tvPackage->name;
+        $this->is_optional = $tvPackage->is_optional;
     }
 
     public function update(): void
@@ -32,6 +37,7 @@ class UpdateGeniusTvTvPackageForm extends Form
 
         $this->tvPackage->update([
             'name' => $this->name,
+            'is_optional' => $this->is_optional
         ]);
 
         $this->removeChannelPackagesFromCache();
