@@ -110,6 +110,11 @@ return [
             'username' => env('CRM_USER'),
             'password' => env('CRM_PASSWORD'),
         ],
+        'zabbix' => [
+            'url' => env('ZABBIX_URL'),
+            'user' => env('ZABBIX_USER'),
+            'password' => env('ZABBIX_PASSWORD')
+        ]
     ],
 
 ];

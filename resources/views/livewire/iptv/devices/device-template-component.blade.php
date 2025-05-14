@@ -595,7 +595,7 @@
             <div>
             </div>
             <div>
-                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28" @click='$wire.closeDialog' />
+                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28" @click='$wire.closeDialog' spinner="closeDialog"/>
             </div>
         </div>
 
@@ -626,7 +626,7 @@
             <div>
             </div>
             <div>
-                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28" @click='$wire.closeDialog' />
+                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28" @click='$wire.closeDialog' spinner="closeDialog"/>
             </div>
         </div>
 

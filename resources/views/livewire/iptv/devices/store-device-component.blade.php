@@ -118,7 +118,7 @@
             <div class="flex justify-between">
                 <div>
                     <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
-                        @click='$wire.closeDialog' />
+                        @click='$wire.closeDialog' spinner="closeDialog" />
                 </div>
                 <div>
                     <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28"

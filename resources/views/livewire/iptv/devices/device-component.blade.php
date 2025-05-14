@@ -252,25 +252,75 @@
                                             </a>
                                         </span>
                                     </div>
-                                    <div class="col-span-12">
+                                    {{-- <div class="col-span-12">
                                         <span class="font-normal">
                                             SN:
                                         </span>
                                         <span class="ml-3">
                                             {{ $nmsCahedData[0]['m_deviceregister_device_id']['serial_number'] }}
                                         </span>
-                                    </div>
-                                    <div class="col-span-12">
+                                    </div> --}}
+                                    {{-- <div class="col-span-12">
                                         <span class="font-normal">
                                             POP:
                                         </span>
                                         <span class="ml-3">
                                             {{ $nmsCahedData[0]['m_deviceregister_device_id']['owner_name'] }}
                                         </span>
+                                    </div> --}}
+                                    {{-- zabbix charts --}}
+                                    <div class="col-span-12 max-h-24 overflow-y-scroll">
+                                        <span class="font-normal">
+                                            Grafy:
+                                        </span>
+                                        <span class="ml-3">
+                                            @php
+                                                $charts = $this->availableCharts($nmsCahedData[0]['m_nmszabbix_id']);
+                                            @endphp
+                                            @if (blank($charts))
+                                                Nejsou žádné grafy
+                                            @else
+                                                @foreach ($charts as $chart)
+                                                    <a wire:key='zabbixKey-{{ $chart['graphid'] }}'
+                                                        wire:click="openZabbixChart({{ $chart['graphid'] }})"
+                                                        wire:loading.remove
+                                                        class="hover:underline text-blue-500 cursor-pointer">
+                                                        {{ $chart['name'] }}
+                                                    </a>
+                                                    <span wire:loading
+                                                        wire:target="openZabbixChart('{{ $chart['graphid'] }}')">
+                                                        <span class="loading loading-spinner loading-xs"></span>
+                                                    </span>,
+                                                @endforeach
+                                            @endif
+                                        </span>
                                     </div>
                                 </div>
                             </x-share.cards.base-card>
                         </div>
+
+                        <x-modal wire:model="chartZabbixModal" title="" persistent
+                            class="modal-bottom sm:modal-middle fixed" box-class="!max-w-4xl">
+
+                            <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                                @click='$wire.closeDialog'>✕</x-button>
+                            <div class="grid grid-cols-12 gap-4">
+                                <div class="col-span-12 mb-4">
+                                    <img src="{{ $image }}" alt="image" />
+                                </div>
+                            </div>
+
+                            {{-- action section --}}
+                            <div class="flex justify-between">
+                                <div>
+                                </div>
+                                <div>
+                                    <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28" spinner="closeDialog"
+                                        @click='$wire.closeDialog' />
+                                </div>
+                            </div>
+
+                        </x-modal>
                     @endif
                 </div>
 

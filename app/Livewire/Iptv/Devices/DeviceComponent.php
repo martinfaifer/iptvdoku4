@@ -3,8 +3,10 @@
 namespace App\Livewire\Iptv\Devices;
 
 use App\Models\Device;
+use App\Services\Api\Zabbix\ConnectService;
 use App\Traits\Livewire\NotificationTrait;
 use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -20,6 +22,9 @@ class DeviceComponent extends Component
 
     public ?array $grapeTranscoderData = null;
 
+    public bool $chartZabbixModal = false;
+    public string $image = "";
+
     public function mount(mixed $device = null): void
     {
         if (!blank($device)) {
@@ -31,6 +36,24 @@ class DeviceComponent extends Component
         } else {
             $this->device = $device;
         }
+    }
+
+    #[Computed()]
+    public function availableCharts(string|int $zabbixId): mixed
+    {
+        return (new ConnectService())->getGraphIdFromItem(hostid: $zabbixId);
+    }
+
+    public function openZabbixChart(string|int $graphid)
+    {
+        $this->image = (new ConnectService())->getDeviceChart(graphid: $graphid);
+        $this->chartZabbixModal = true;
+    }
+
+    public function closeDialog(): void
+    {
+        $this->chartZabbixModal = false;
+        $this->image = "";
     }
 
     #[On('refresh_device')]
