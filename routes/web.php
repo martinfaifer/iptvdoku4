@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Iptv\Sftps\SftpComponent;
 use App\Livewire\Iptv\Channels\IptvChannel;
 use App\Livewire\User\UserActionsComponent;
-use App\Services\Api\Zabbix\ConnectService;
 use App\Livewire\Iptv\Devices\DeviceComponent;
 use App\Livewire\Iptv\FlowEye\FlowEyeComponent;
 use App\Livewire\User\UserNotificationComponent;
