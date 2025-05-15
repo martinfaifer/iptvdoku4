@@ -1,6 +1,6 @@
 <div class=" overflow-hidden">
     <div class="flex flex-col">
-        {{-- create new channel --}}
+        {{-- create new device --}}
         <div class="relative">
             <div class="absolute left">
                 <livewire:iptv.devices.store-device-component>

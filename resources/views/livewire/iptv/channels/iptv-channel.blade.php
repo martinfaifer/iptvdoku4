@@ -3,9 +3,9 @@
         {{-- create new channel --}}
         <div class="relative">
             <div class="absolute left">
-                @can('create', $channel)
+                {{-- @can('create', $channel) --}}
                     <livewire:iptv.channels.store-channel lazy />
-                @endcan
+                {{-- @endcan --}}
             </div>
             <div class="flex justify-center">
                 @if (!is_null($channel) && !is_null($channel->name))
@@ -13,13 +13,15 @@
                         <li href="/channels/{{ $channel->id }}/multicast" wire:navigate.hover
                             @class([
                                 'rounded-lg',
-                                'bg-slate-800/5 dark:bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/multicast'),
+                                'bg-slate-800/5 dark:bg-[#1C3D56]' => request()->is(
+                                    'channels/' . $channel->id . '/multicast'),
                             ])><a>
                                 multicast</a></li>
 
                         <li href="/channels/{{ $channel->id }}/h264" wire:navigate.hover @class([
                             'rounded-lg',
-                            'bg-slate-800/5 dark:bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/h264'),
+                            'bg-slate-800/5 dark:bg-[#1C3D56]' => request()->is(
+                                'channels/' . $channel->id . '/h264'),
                         ])>
                             <a>
                                 H264</a>
@@ -27,7 +29,8 @@
 
                         <li href="/channels/{{ $channel->id }}/h265" wire:navigate.hover @class([
                             'rounded-lg',
-                            'bg-slate-800/5 dark:bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/h265'),
+                            'bg-slate-800/5 dark:bg-[#1C3D56]' => request()->is(
+                                'channels/' . $channel->id . '/h265'),
                         ])>
                             <a>
                                 H265</a>
@@ -36,7 +39,8 @@
                         @if (!blank($channel->epg_id))
                             <li href="/channels/{{ $channel->id }}/epg" wire:navigate @class([
                                 'rounded-lg',
-                                'bg-slate-800/5 dark:bg-[#1C3D56]' => request()->is('channels/' . $channel->id . '/epg'),
+                                'bg-slate-800/5 dark:bg-[#1C3D56]' => request()->is(
+                                    'channels/' . $channel->id . '/epg'),
                             ])><a>
                                     EPG</a></li>
                         @endif
@@ -59,6 +63,11 @@
         </div>
         {{-- show alert about no channel found --}}
         @if (is_null($channel) || is_null($channel->name))
+            <div class="absolute left">
+                {{-- @can('create', $channel) --}}
+                    <livewire:iptv.channels.store-channel lazy />
+                {{-- @endcan --}}
+            </div>
             <div class="mt-12">
                 <x-share.alerts.info title="Vyberte kanál z menu vlevo" lazy />
             </div>

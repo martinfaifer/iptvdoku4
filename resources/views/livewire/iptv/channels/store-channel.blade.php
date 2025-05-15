@@ -4,109 +4,55 @@
         Přidat kanál
     </button>
 
-    <x-modal wire:model="storeModal" title="Nový kanál" persistent class="modal-bottom sm:modal-middle backdrop-blur-sm" box-class="!max-w-6xl">
+    <x-modal wire:model="storeModal" title="Nový kanál" persistent class="modal-bottom sm:modal-middle backdrop-blur-sm"
+        box-class="!max-w-6xl">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 {{-- name --}}
                 <div class="col-span-12 mb-4">
-                    <x-input label="Název" wire:model="name" />
-                    <div>
-                        @error('form.name')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    <x-input label="Název" wire:model="form.name" />
                 </div>
                 {{-- logo --}}
                 <div class="col-span-12 mb-4">
-                    <input type="file" wire:model="logo">
-                    <div>
-                        @error('form.logo')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    <input type="file" wire:model="form.logo">
                 </div>
                 {{-- qualities --}}
                 <div class="col-span-4 mb-4">
-                    <x-choices label="Kvalita" wire:model="quality" :options="$qualities" single />
-                    <div>
-                        @error('form.quality')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    <x-choices label="Kvalita" wire:model="form.quality" :options="$qualities" single />
                 </div>
                 {{-- channel category --}}
                 <div class="col-span-4 mb-4">
-                    <x-choices label="Žánr" wire:model="category" :options="$channelCategories" single />
-                    <div>
-                        @error('form.category')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    <x-choices label="Žánr" wire:model="form.category" :options="$channelCategories" single />
                 </div>
                 {{-- channel programers --}}
                 <div class="col-span-4 mb-4">
-                    <x-choices label="Programer" wire:model="programer" :options="$channelProgramers" single />
-                    <div>
-                        @error('form.programer')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    <x-choices label="Programer" wire:model="form.programer" :options="$channelProgramers" single />
                 </div>
                 {{-- geniustv packages --}}
                 <div class="col-span-6 mb-4">
-                    <x-choices label="GeniusTV balíčky" wire:model="geniustvChannelPackage" :options="$geniusTVChannelPackages"
+                    <x-choices label="GeniusTV balíčky" wire:model="form.geniustvChannelPackage" :options="$geniusTVChannelPackages"
                         multiple />
-                    <div>
-                        @error('form.geniustvChannelPackage')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
                 {{-- epgs --}}
                 <div class="col-span-6 mb-4">
-                    <x-choices-offline label="EPG" wire:model="epgId" :options="$channelsEpgs" searchable single />
-                    <div>
-                        @error('form.epgId')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    <x-choices-offline label="EPG" wire:model="form.epgId" :options="$channelsEpgs" searchable single />
                 </div>
                 {{-- NANGU section --}}
                 <div class="col-span-6 mb-4">
-                    <x-input label="Nangu chunk store ID" wire:model="nangu_chunk_store_id" />
-                    <div>
-                        @error('form.nangu_chunk_store_id')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    <x-input label="Nangu chunk store ID" wire:model="form.nangu_chunk_store_id" />
                 </div>
                 <div class="col-span-6 mb-4">
-                    <x-input label="Nangu channel code" wire:model="nangu_channel_code" />
-                    <div>
-                        @error('form.nangu_channel_code')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    <x-input label="Nangu channel code" wire:model="form.nangu_channel_code" />
                 </div>
                 {{-- is_radio --}}
                 <div class="col-span-6 mb-4">
-                    <x-toggle label="Rádio ?" wire:model="is_radio" />
-                    <div>
-                        @error('form.is_radio')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    <x-toggle label="Rádio ?" wire:model="form.is_radio" />
                 </div>
                 {{-- is_multiscreen --}}
                 <div class="col-span-6 mb-4">
-                    <x-toggle label="Multiscreen ?" wire:model="is_multiscreen" />
-                    <div>
-                        @error('form.is_multiscreen')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    <x-toggle label="Multiscreen ?" wire:model="form.is_multiscreen" />
                 </div>
 
                 {{-- channel region --}}
@@ -119,7 +65,7 @@
                                         <span class="label-text font-semibold">Vysílání na území
                                             {{ $region->name }}</span>
                                         <input type="radio" name="region" class="radio checked:bg-indigo-500"
-                                            value="{{ $region->id }}" wire:model='selectedRegion' />
+                                            value="{{ $region->id }}" wire:model='form.selectedRegion' />
                                     </label>
                                 </div>
                             </div>
@@ -133,8 +79,8 @@
                 </div>
 
                 <div class="col-span-12 mb-4">
-                    <x-textarea placeholder="Popis kanálu" wire:model="description" hint="Max 1000 znaků" rows="5"
-                        inline />
+                    <x-textarea placeholder="Popis kanálu" wire:model="form.description" hint="Max 1000 znaků"
+                        rows="5" inline />
                 </div>
             </div>
 
@@ -145,9 +91,7 @@
                         @click='$wire.closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Přidat"
-                        class="btn btn-doku-primary w-full sm:w-28"
-                        type="submit" spinner="store">
+                    <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28" type="submit" spinner="store">
                     </x-button>
                 </div>
             </div>
