@@ -7,8 +7,8 @@
                 IPTV Dokumentace
             </h2>
             <x-form wire:submit="login" class="mt-6">
-                <x-input label="Email" wire:model="email" class="input-primary" />
-                <x-input label="Heslo" wire:model="password" type="password" />
+                <x-input label="Email" wire:model="form.email" class="input-primary" />
+                <x-input label="Heslo" wire:model="form.password" type="password" />
                 <div>
                     <x-button label="Přihlásit se" class="btn btn-doku-primary w-full"
                         type="submit" spinner="login"/>

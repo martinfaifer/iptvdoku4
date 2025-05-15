@@ -3,22 +3,22 @@
         [
             'key' => 'stream',
             'label' => 'Stream',
-            'class' => 'text-[#A3ABB8]',
+            'class' => 'dark:text-[#A3ABB8]',
         ],
         [
             'key' => 'paused',
             'label' => 'Pozastaveno / Akce',
-            'class' => 'text-[#A3ABB8]',
+            'class' => 'dark:text-[#A3ABB8]',
         ],
         [
             'key' => 'status',
             'label' => 'Status',
-            'class' => 'text-[#A3ABB8]',
+            'class' => 'dark:text-[#A3ABB8]',
         ],
         [
             'key' => 'video_source',
             'label' => 'Zdroj',
-            'class' => 'text-[#A3ABB8]',
+            'class' => 'dark:text-[#A3ABB8]',
         ],
     ];
 
@@ -26,22 +26,22 @@
         [
             'key' => 'protocol',
             'label' => 'Stream',
-            'class' => 'text-[#A3ABB8]',
+            'class' => 'dark:text-[#A3ABB8]',
         ],
         [
             'key' => 'status',
             'label' => 'Status',
-            'class' => 'text-[#A3ABB8]',
+            'class' => 'dark:text-[#A3ABB8]',
         ],
         [
             'key' => 'description',
             'label' => 'Description',
-            'class' => 'text-[#A3ABB8]',
+            'class' => 'dark:text-[#A3ABB8]',
         ],
         [
             'key' => 'bandwidth',
             'label' => 'Bandwidth',
-            'class' => 'text-[#A3ABB8]',
+            'class' => 'dark:text-[#A3ABB8]',
         ],
         [
             'key' => 'actions',
