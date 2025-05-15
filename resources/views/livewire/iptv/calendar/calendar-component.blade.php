@@ -30,7 +30,7 @@
                                                         {!! Str::markdown($event['description']) !!}
                                                     </article>
                                                 </div>
-                                                <div class="col-span-5 text-white/50">
+                                                <div class="col-span-5 dark:text-white/50">
                                                     <div class="grid grid-rows-1 gap-1 text-xs">
                                                         {{-- channels --}}
                                                         <div>
@@ -179,7 +179,7 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div class="col-span-5 text-white/50">
+                                                <div class="col-span-5 dark:text-white/50">
                                                     <div class="grid grid-rows-1 gap-1 text-xs">
                                                         {{-- channels --}}
                                                         <div>
