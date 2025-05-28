@@ -3,8 +3,7 @@
         <x-icon name="s-pencil" class="w-4 h-4 text-green-500" />
     </button>
 
-    <x-modal wire:model="updateModal" title="Úprava kanálu {{ $channel->name }}" persistent
-        class="modal-bottom sm:modal-middle" box-class="!max-w-6xl">
+    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle" box-class="!max-w-6xl">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>

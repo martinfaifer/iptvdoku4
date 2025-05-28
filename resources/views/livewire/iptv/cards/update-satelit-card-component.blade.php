@@ -3,7 +3,7 @@
         <x-icon name="s-pencil" class="w-4 h-4 text-green-500" />
     </button>
 
-    <x-modal wire:model="updateModal" title="Úprava satelitní karty" persistent class="modal-bottom sm:modal-middle"
+    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle"
         box-class="overflow-visible">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"

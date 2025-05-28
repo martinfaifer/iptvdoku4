@@ -91,7 +91,7 @@
         @endforeach
     </x-share.cards.base-card>
     {{-- edit dialog --}}
-    <x-modal wire:model="updateModal" title="Změna multicastu" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeModal'>✕</x-button>

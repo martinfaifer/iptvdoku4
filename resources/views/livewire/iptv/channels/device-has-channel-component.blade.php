@@ -130,7 +130,7 @@
     </x-share.cards.base-card>
 
     {{-- update modal --}}
-    <x-modal wire:model="updateModal" title="Úprava kanálu na zařízení" persistent
+    <x-modal wire:model="updateModal" persistent
         class="modal-bottom sm:modal-middle" box-class="!max-w-6xl">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"

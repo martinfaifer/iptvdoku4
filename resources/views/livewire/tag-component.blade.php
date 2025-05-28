@@ -26,20 +26,15 @@
         </div>
     </div>
 
-    <x-modal wire:model="storeModal" title="Přídat štítek" persistent
+    <x-modal wire:model="storeModal" persistent
         class="modal-bottom sm:modal-middle backdrop-blur-sm " box-class="overflow-visible">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                x-on:click='$wire.closeDialog'>✕</x-button>
+                x-on:click='$wire.closeDialog' spinner="closeDialog">✕</x-button>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mb-4">
-                    <x-choices-offline label="Štítky" wire:model="selectedTags" :options="$tags" searchable
+                    <x-choices-offline label="Štítky" wire:model="form.selectedTags" :options="$tags" searchable
                         autofocus />
-                    <div>
-                        @error('form.selectedTags')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
                 </div>
 
             </div>
@@ -48,7 +43,7 @@
             <div class="flex justify-between">
                 <div>
                     <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28 mb-4"
-                        x-on:click='$wire.closeDialog' spinner="closeDialog"/>
+                        x-on:click='$wire.closeDialog' spinner="closeDialog" spinner="closeDialog"/>
                 </div>
                 <div>
                     <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28"

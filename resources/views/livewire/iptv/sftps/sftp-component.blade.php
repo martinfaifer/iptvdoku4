@@ -150,7 +150,7 @@
                 </div>
             </div>
 
-            <x-modal wire:model="uploadDialog" title="Nahrát soubor" persistent
+            <x-modal wire:model="uploadDialog" persistent
                 class="modal-bottom sm:modal-middle fixed">
                 <x-form wire:submit="upload_file">
                     <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"

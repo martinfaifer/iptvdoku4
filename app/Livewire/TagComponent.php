@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Forms\StoreTagform;
 use App\Models\Tag;
 use App\Models\TagOnItem;
 use App\Traits\Livewire\NotificationTrait;
@@ -16,6 +17,8 @@ class TagComponent extends Component
 {
     use NotificationTrait;
 
+    public StoreTagform $form;
+
     public Collection $tags;
 
     public Collection $tagsOnItem;
@@ -24,8 +27,8 @@ class TagComponent extends Component
 
     public int $itemId = 0;
 
-    #[Validate('required', message: 'Vyberte alespoň jeden štítek')]
-    public array $selectedTags = [];
+    // #[Validate('required', message: 'Vyberte alespoň jeden štítek')]
+    // public array $selectedTags = [];
 
     public bool $storeModal = false;
 
@@ -50,21 +53,16 @@ class TagComponent extends Component
 
     public function closeDialog(): void
     {
-        $this->reset('selectedTags');
-
+        $this->form->reset();
         $this->storeModal = false;
     }
 
     public function store(): mixed
     {
-        $this->validate();
-        foreach ($this->selectedTags as $selectedTag) {
-            TagOnItem::create([
-                'item_id' => $this->itemId,
-                'type' => $this->type,
-                'tag_id' => $selectedTag,
-            ]);
-        }
+        $this->form->submit(
+            itemId: $this->itemId,
+            type: $this->type
+        );
 
         $this->dispatch('tag-component.' . $this->type . '.' . $this->itemId);
         if ($this->type == 'device') {

@@ -4,7 +4,7 @@
         Přidat satelitní kartu
     </button>
 
-    <x-modal wire:model="storeModal" title="Nová satelitní karta" persistent class="modal-bottom sm:modal-middle fixed"
+    <x-modal wire:model="storeModal" persistent class="modal-bottom sm:modal-middle fixed"
         box-class="overflow-visible">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"

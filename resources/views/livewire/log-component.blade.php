@@ -39,7 +39,7 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-modal wire:model="detailModal" class="modal-bottom sm:modal-middle fixed" title="Provedené změny">
+    <x-modal wire:model="detailModal" class="modal-bottom sm:modal-middle fixed">
         <div class="my-4 overflow-y-auto h-96">
             <div>
                 <pre>

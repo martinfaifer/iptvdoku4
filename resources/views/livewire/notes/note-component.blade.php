@@ -60,7 +60,7 @@
             @endif
         </div>
     </x-share.cards.base-card>
-    <x-modal wire:model="storeModal" title="Nová poznámka" persistent class="modal-bottom sm:modal-middle fixed" box-class="!max-w-6xl">
+    <x-modal wire:model="storeModal" persistent class="modal-bottom sm:modal-middle fixed" box-class="!max-w-6xl">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>
@@ -77,8 +77,8 @@
                         @click='$wire.closeDialog' />
                 </div>
                 <div>
-                    <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28"
-                        type="submit" spinner="save2" />
+                    <x-button label="Přidat" class="btn btn-doku-primary w-full sm:w-28" type="submit"
+                        spinner="save2" />
                 </div>
             </div>
         </x-form>

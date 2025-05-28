@@ -3,7 +3,7 @@
         wire:click='openModal()' />
 
     {{-- create modal --}}
-    <x-drawer wire:model="storeModal" right class="lg:w-2/3 !dark:bg-[#0E1E33]">
+    <x-drawer wire:model="storeModal" right class="lg:w-2/3 dark:!bg-[#0E1E33]">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" wire:click='closeModal'>✕</x-button>
             <div class="overflow-y-auto">

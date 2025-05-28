@@ -4,7 +4,7 @@
         Přidat multicast
     </button>
 
-    <x-modal wire:model="storeModal" title="Nový multicast" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">

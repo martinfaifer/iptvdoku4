@@ -3,7 +3,7 @@
         <x-icon name="s-pencil" class="w-4 h-4 text-green-500" />
     </button>
 
-    <x-modal wire:model="updateModal" title="Úprava sftp serveru" persistent class="modal-bottom sm:modal-middle">
+    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">

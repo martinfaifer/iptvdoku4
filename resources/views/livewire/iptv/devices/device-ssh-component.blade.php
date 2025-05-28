@@ -37,7 +37,7 @@
             </div>
         </x-share.cards.base-card>
     @endif
-    <x-modal wire:model="storeModal" title="Přidání ssh přístupu" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>

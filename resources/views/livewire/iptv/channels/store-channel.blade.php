@@ -4,7 +4,7 @@
         Přidat kanál
     </button>
 
-    <x-modal wire:model="storeModal" title="Nový kanál" persistent class="modal-bottom sm:modal-middle backdrop-blur-sm"
+    <x-modal wire:model="storeModal"  persistent class="modal-bottom sm:modal-middle backdrop-blur-sm"
         box-class="!max-w-6xl">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"

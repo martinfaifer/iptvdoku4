@@ -549,7 +549,7 @@
     </x-drawer>
 
     {{-- modal log --}}
-    <x-modal wire:model="logModal" title="Log ze zařízení" persistent class="modal-bottom sm:modal-middle fixed"
+    <x-modal wire:model="logModal" persistent class="modal-bottom sm:modal-middle fixed"
         box-class="!max-w-6xl">
 
         <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"

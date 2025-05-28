@@ -36,7 +36,7 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-modal wire:model="storeModal" title="Nová expirace karty" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeDialog'>✕</x-button>
@@ -59,7 +59,7 @@
         </x-form>
     </x-modal>
 
-    <x-modal wire:model="editModal" title="Změna expirace karty" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="editModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>

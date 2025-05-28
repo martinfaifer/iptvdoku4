@@ -77,7 +77,7 @@
         </div>
     </x-share.cards.base-card>
 
-    <x-modal wire:model="storeModal" title="Nový kontakt" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="storeModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="create">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>
@@ -106,7 +106,7 @@
         </x-form>
     </x-modal>
 
-    <x-modal wire:model="updateModal" title="" persistent class="modal-bottom sm:modal-middle fixed">
+    <x-modal wire:model="updateModal" persistent class="modal-bottom sm:modal-middle fixed">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 @click='$wire.closeDialog'>✕</x-button>

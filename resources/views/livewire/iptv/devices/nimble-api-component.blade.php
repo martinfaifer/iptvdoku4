@@ -126,7 +126,7 @@
     </x-share.cards.base-card>
 
 
-    <x-modal wire:model="editServerApiModal" title="Vzdálená správa serveru" persistent>
+    <x-modal wire:model="editServerApiModal" persistent>
         <div class="my-4">
             {{-- @if (array_key_exists('status', $nimbleServerApiData) && $nimbleServerApiData['status'] == 'Ok')
                 <x-form wire:submit="updateNimbleServerName">
@@ -199,13 +199,12 @@
             <div>
             </div>
             <div>
-                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28"
-                    wire:click='closeModal' />
+                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28" wire:click='closeModal' />
             </div>
         </div>
     </x-modal>
 
-    <x-modal wire:model="detailModal" title="Informace o vstupním streamu">
+    <x-modal wire:model="detailModal">
         <div class="my-4">
             @if (!empty($sourceStream))
                 <div class="grid grid-cols-12 gap-4">
@@ -254,8 +253,7 @@
             <div>
             </div>
             <div>
-                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28"
-                    wire:click='closeModal' />
+                <x-button label="Zavřít" class="btn btn-doku-close w-full sm:w-28" wire:click='closeModal' />
             </div>
         </div>
     </x-modal>

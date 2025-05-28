@@ -4,7 +4,7 @@
         Přidat zařízení
     </button>
 
-    <x-modal wire:model="storeModal" title="Nové zařízení" persistent class="modal-bottom sm:modal-middle fixed" box-class="!max-w-6xl">
+    <x-modal wire:model="storeModal" persistent class="modal-bottom sm:modal-middle fixed" box-class="!max-w-6xl">
         <x-form wire:submit="store">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" @click='$wire.closeDialog'>✕</x-button>
             <div class="grid grid-cols-12 gap-4">

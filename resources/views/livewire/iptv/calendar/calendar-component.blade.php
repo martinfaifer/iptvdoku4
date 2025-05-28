@@ -290,7 +290,7 @@
         </div>
     </div>
 
-    <x-drawer wire:model="updateModal" right class="lg:w-2/3 !dark:bg-[#0E1E33]">
+    <x-drawer wire:model="updateModal" right class="lg:w-2/3 dark:!bg-[#0E1E33]">
         <x-form wire:submit="update">
             <x-button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                 wire:click='closeModal'>✕</x-button>
