@@ -127,6 +127,20 @@ class DeviceTemplateComponent extends Component
         $this->chartModal = true;
     }
 
+    public function placeholder(): string
+    {
+        return <<<'HTML'
+        <div>
+            <div class="flex flex-row gap-4 w-full">
+                <div class="skeleton h-24 w-full "></div>
+                <div class="skeleton h-24 w-full"></div>
+                <div class="skeleton h-24 w-full"></div>
+                <div class="skeleton h-24 w-full"></div>
+            </div>
+        </div>
+        HTML;
+    }
+
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         return view('livewire.iptv.devices.device-template-component');
