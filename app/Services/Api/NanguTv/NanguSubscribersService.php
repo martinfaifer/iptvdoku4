@@ -39,7 +39,7 @@ class NanguSubscribersService
                                 'nangu_isp_id' => $nanguIsp->id,
                             ]);
                         } else {
-                            echo $subscriber['subscriberCode'].' '.$nanguIsp->nangu_isp_id.PHP_EOL;
+                            echo $subscriber['subscriberCode'] . ' ' . $nanguIsp->nangu_isp_id . PHP_EOL;
                         }
                     } catch (\Throwable $th) {
                         if (! NanguSubscriber::where('subscriberCode', $nanguResponse['subscribers']['subscriberCode'])
@@ -55,5 +55,21 @@ class NanguSubscribersService
             } while (count($nanguResponse['subscribers']) == 500);
             $numberOfRecords = 0;
         }
+    }
+
+    public function create(string|int $subscriberCode, string|int $ispCode)
+    {
+        $connection = (new ConnectService('subscriber'));
+
+        $connection->connect(
+            params: [
+                'Create' =>
+                [
+                    "subscriberCode" => $subscriberCode,
+                    'ispCode' => intval($ispCode)
+                ]
+            ],
+            soap_call_parameter: 'Create'
+        );
     }
 }

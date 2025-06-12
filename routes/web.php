@@ -9,6 +9,7 @@ use App\Livewire\Iptv\Channels\IptvChannel;
 use App\Livewire\User\UserActionsComponent;
 use App\Livewire\Iptv\Devices\DeviceComponent;
 use App\Livewire\Iptv\FlowEye\FlowEyeComponent;
+use App\Livewire\Iptv\Promo\IptvPromoComponent;
 use App\Livewire\User\UserNotificationComponent;
 use App\Livewire\Auth\ForgottenPasswordComponent;
 use App\Livewire\Iptv\Calendar\CalendarComponent;
@@ -21,10 +22,10 @@ use App\Livewire\Settings\Nangu\Isps\SettingsIspComponent;
 use App\Livewire\Nangu\IpPrefixes\NanguIpPrefixesComponent;
 use App\Livewire\Settings\Geniustv\TvChannelPackagesComponent;
 use App\Livewire\Settings\Dashboard\SettingsDashboardComponent;
+use App\Livewire\Iptv\Devices\Zabbix\DeviceZabbixChartComponent;
 use App\Livewire\Settings\Channels\ChannelsProgrammersComponent;
 use App\Livewire\Settings\Channels\SettingsChannelsQualitiesComponent;
 use App\Livewire\Iptv\Channels\Notification\ChannelNotificationComponent;
-use App\Livewire\Iptv\Devices\Zabbix\DeviceZabbixChartComponent;
 use App\Livewire\Settings\Channels\Multicasts\MulticastsSourcesComponent;
 use App\Livewire\Settings\Devices\Vendors\SettingsDevicesVendorsComponent;
 use App\Livewire\Settings\Nangu\Isps\SettingsTagToChannelPackageComponent;
@@ -66,10 +67,11 @@ Route::middleware('auth')->group(function () {
     Route::get('calendar', CalendarComponent::class)->middleware('can:show_events,App\Models\Event');
     Route::get('sftps/{sftpServer?}', SftpComponent::class)->middleware('can:show_servers,App\Models\SftpServer');
     Route::get('wiki/{topic?}', WikiComponent::class)->middleware('can:show_topics, App\Models\WikiTopic');
-    Route::get('prefixes/{ipPrefix?}', NanguIpPrefixesComponent::class);
+    Route::get('prefixes/{ipPrefix?}', NanguIpPrefixesComponent::class)->middleware('can:show_nangu_prefixes, App\Models\User');
     Route::get('floweye/{issue?}', FlowEyeComponent::class)->middleware('can:show_tickets, App\Models\User');
     Route::get('iptv-monitoring', IptvMonitoringComponent::class)->middleware('can:show_iptv_monitoring, App\Models\User');
     Route::get('notifications/channels/{ip}', ChannelNotificationComponent::class)->middleware(['can:view,App\Models\Channel']);
+    Route::get('iptv-promo/{promo?}', IptvPromoComponent::class)->middleware('can:show_iptv_promos, App\Models\User');
 
     Route::prefix('profile')->group(function () {
         Route::get('', UserComponent::class);

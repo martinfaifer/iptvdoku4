@@ -2,10 +2,11 @@
 
 namespace App\Services\Api\NanguTv;
 
-use App\Models\GeniusTvChart;
 use App\Models\NanguIsp;
+use App\Models\GeniusTvChart;
 use App\Models\NanguSubscriber;
 use App\Models\NanguSubscription;
+use App\Actions\Networking\GenerateMacAddressAction;
 
 class NanguSubscriptionsService
 {
@@ -95,5 +96,47 @@ class NanguSubscriptionsService
                 'nangu_isp_id' => $nanguIsp->id,
             ]);
         }
+    }
+
+    public function create(string|int $subscriberCode, string|int $ispCode): string|int
+    {
+        $connection = (new ConnectService('subscription'));
+        $subscriptionCode = $subscriberCode . rand(1, 10); // give a random number for unique datas
+
+        $connection->connect(
+            params: [
+                'Create' =>
+                [
+                    "subscriberCode" => $subscriberCode,
+                    "subscriptionCode" => $subscriptionCode,
+                    "subscriptionStbAccountCode" => $subscriptionCode,
+                    "currencyCode" => config('services.api.iptv_promo.currency'),
+                    "tariffCode" => config('services.api.iptv_promo.tarrifCode'),
+                    "localityCode" => config('services.api.iptv_promo.locality'),
+                    "ispCode" => intval($ispCode)
+                ]
+            ],
+            soap_call_parameter: 'Create'
+        );
+
+        return $subscriptionCode;
+    }
+
+    public function enable(string|int $subscriptionCode, string|int $ispCode): void
+    {
+        $connection = (new ConnectService('subscription'));
+
+        $connection->connect(
+            params: [
+                'Enable' =>
+                [
+                    "subscriptionCode" => $subscriptionCode,
+                    "subscriptionStbAccountCode" => $subscriptionCode,
+                    "puk" => (new GenerateMacAddressAction())->execute(),
+                    "ispCode" => $ispCode
+                ]
+            ],
+            soap_call_parameter: 'Enable'
+        );
     }
 }

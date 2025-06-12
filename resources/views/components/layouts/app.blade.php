@@ -74,11 +74,13 @@
                         class="dark:bg-gradient-to-b from-slate-950/80 to-black/50 border-r border-[#64748b] border-opacity-10 !w-[320px]">
 
                         <x-menu activate-by-route active-bg-color="bg-slate-800 dark:bg-sky-950" class="-ml-4 -mt-2 ">
-                            <ul class="menu bg-[#252425] dark:bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
+                            <ul
+                                class="menu bg-[#252425] dark:bg-[#020411]/20 border-r border-[#64748b] border-opacity-10 h-full ml-2 fixed">
                                 <div class="tooltip tooltip-bottom" data-tip="Kanály">
                                     <li href="/channels" wire:navigate.hover @class([
                                         'rounded-lg',
-                                        'bg-[#1E1D1E] dark:bg-[#1A1E2A]' => request()->is('channels') || request()->is('channels/*'),
+                                        'bg-[#1E1D1E] dark:bg-[#1A1E2A]' =>
+                                            request()->is('channels') || request()->is('channels/*'),
                                     ])>
                                         <a>
                                             <x-sui-tv-mode class="size-6 text-white" fill="none" />
@@ -105,7 +107,8 @@
                                     <div class="tooltip tooltip-bottom" data-tip="Kalendář">
                                         <li href="/calendar" wire:navigate.hover @class([
                                             'rounded-lg',
-                                            'bg-[#1E1D1E] dark:bg-[#1A1E2A]' => request()->is('calendar') || request()->is('calendar/*'),
+                                            'bg-[#1E1D1E] dark:bg-[#1A1E2A]' =>
+                                                request()->is('calendar') || request()->is('calendar/*'),
                                         ])>
                                             <a>
                                                 <x-heroicon-o-calendar-days class="size-6 text-white/80" fill="none" />
@@ -117,7 +120,8 @@
                                     <div class="tooltip tooltip-bottom" data-tip="Sftp servery">
                                         <li href="/sftps" wire:navigate.hover @class([
                                             'rounded-lg',
-                                            'bg-[#1E1D1E] dark:bg-[#1A1E2A]' => request()->is('sftps') || request()->is('sftps/*'),
+                                            'bg-[#1E1D1E] dark:bg-[#1A1E2A]' =>
+                                                request()->is('sftps') || request()->is('sftps/*'),
                                         ])>
                                             <a>
                                                 <x-heroicon-o-arrow-up-on-square-stack class="size-6 text-white/80"
@@ -129,7 +133,8 @@
                                 <div class="tooltip tooltip-bottom" data-tip="Wiki">
                                     <li href="/wiki" wire:navigate.hover @class([
                                         'rounded-lg',
-                                        'bg-[#1E1D1E] dark:bg-[#1A1E2A]' => request()->is('wiki') || request()->is('wiki/*'),
+                                        'bg-[#1E1D1E] dark:bg-[#1A1E2A]' =>
+                                            request()->is('wiki') || request()->is('wiki/*'),
                                     ])>
                                         <a>
                                             <x-heroicon-o-academic-cap class="size-6 text-white/80" fill="none" />
@@ -140,7 +145,8 @@
                                     <div class="tooltip tooltip-bottom" data-tip="Ip prefixy">
                                         <li href="/prefixes" wire:navigate.hover @class([
                                             'rounded-lg',
-                                            'bg-[#1E1D1E] dark:bg-[#1A1E2A]' => request()->is('prefixes') || request()->is('prefixes/*'),
+                                            'bg-[#1E1D1E] dark:bg-[#1A1E2A]' =>
+                                                request()->is('prefixes') || request()->is('prefixes/*'),
                                         ])>
                                             <a>
                                                 <x-heroicon-o-rectangle-stack class="size-6 text-white/80" fill="none" />
@@ -151,9 +157,21 @@
                                 @can('show_tickets', App\Models\User::class)
                                     <livewire:iptv.flow-eye.menu.flow-eye-menu-icon-with-alert-component />
                                 @endcan
+                                {{-- <div class="tooltip tooltip-bottom" data-tip="IPTV Promo">
+                                    <li href="/iptv-promo" wire:navigate.hover @class([
+                                        'rounded-lg',
+                                        'bg-[#1E1D1E] dark:bg-[#1A1E2A]' =>
+                                            request()->is('iptv-promo') || request()->is('iptv-promo/*'),
+                                    ])>
+                                        <a>
+                                            <x-heroicon-o-gift class="size-6 text-white/80" fill="none" />
+                                        </a>
+                                    </li>
+                                </div> --}}
+
                                 <li class="rounded-lg fixed bottom-2">
                                     <a>
-                                        <x-theme-toggle class="text-white"/>
+                                        <x-theme-toggle class="text-white" />
                                     </a>
                                 </li>
                             </ul>

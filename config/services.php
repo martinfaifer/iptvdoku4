@@ -114,6 +114,12 @@ return [
             'url' => env('ZABBIX_URL'),
             'user' => env('ZABBIX_USER'),
             'password' => env('ZABBIX_PASSWORD')
+        ],
+        'iptv_promo' => [
+            'currency' => env('IPTV_PROMO_CURRENCY'),
+            'tarrifCode' => env('IPTV_PROMO_TARRIF_CODE'),
+            'locality' => env('IPTV_PROMO_LOCALITY'),
+            'ispCode' => env('IPTV_PROMO_ISP_CODE')
         ]
     ],
 

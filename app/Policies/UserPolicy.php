@@ -172,4 +172,22 @@ class UserPolicy
 
         return false;
     }
+
+    public function show_nangu_prefixes(User $user): bool
+    {
+        if ($user->isTechnik()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function show_iptv_promos(User $user): bool
+    {
+        if ($user->isTechnik() || $user->isAdministrativa()) {
+            return true;
+        }
+
+        return false;
+    }
 }

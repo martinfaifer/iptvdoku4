@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use App\Traits\Livewire\NotificationTrait;
 
 class IptvChannel extends Component
@@ -38,6 +39,11 @@ class IptvChannel extends Component
         if (! is_null($cachedNanguApiResult)) {
             $this->availableTimeShiftTime = $cachedNanguApiResult['timeshift'] / 1440;
         }
+    }
+
+    public function downloadLogo(): \Symfony\Component\HttpFoundation\StreamedResponse
+    {
+        return Storage::download($this->channel->logo);
     }
 
     #[On('update_iptv_channel')]

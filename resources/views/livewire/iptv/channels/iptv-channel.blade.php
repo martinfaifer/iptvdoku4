@@ -4,7 +4,7 @@
         <div class="relative">
             <div class="absolute left">
                 {{-- @can('create', $channel) --}}
-                    <livewire:iptv.channels.store-channel lazy />
+                <livewire:iptv.channels.store-channel lazy />
                 {{-- @endcan --}}
             </div>
             <div class="flex justify-center">
@@ -65,7 +65,7 @@
         @if (is_null($channel) || is_null($channel->name))
             <div class="absolute left">
                 {{-- @can('create', $channel) --}}
-                    <livewire:iptv.channels.store-channel lazy />
+                <livewire:iptv.channels.store-channel lazy />
                 {{-- @endcan --}}
             </div>
             <div class="mt-12">
@@ -79,8 +79,12 @@
             <div class="grid grid-cols-12">
                 <div class="col-span-1 mt-4">
                     @if (!is_null($channel->logo))
-                        <img class="object-contain w-16 h-12"
-                            src="/storage/{{ str_replace('public/', '', $channel->logo) }}" alt="" />
+                        {{-- add download option --}}
+                        <div class="tooltip tooltip-right" data-tip="kliknutím stáhnete logo">
+                            <img class="object-contain w-16 h-12 cursor-pointer" wire:click='downloadLogo()'
+                                wire:confirm='Přejete si stáhnout logo?'
+                                src="/storage/{{ str_replace('public/', '', $channel->logo) }}" alt="" />
+                        </div>
                     @endif
                 </div>
                 <div class="col-span-11 flex">

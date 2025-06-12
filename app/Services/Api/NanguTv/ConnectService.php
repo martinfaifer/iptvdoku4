@@ -28,17 +28,22 @@ class ConnectService
                 ]);
 
                 $this->soap = (! is_null(config('services.api.nanguTv.ssl_url')))
-                    ? new SoapClient(config('services.api.nanguTv.ssl_url').$this->endPoints[$wsdl], [
+                    ? new SoapClient(config('services.api.nanguTv.ssl_url') . $this->endPoints[$wsdl], [
                         'stream_context' => $context,
                     ])
                     : [];
             } else {
                 $this->soap = (! is_null(config('services.api.nanguTv.url')))
-                    ? new SoapClient(config('services.api.nanguTv.url').$this->endPoints[$wsdl])
+                    ? new SoapClient(config('services.api.nanguTv.url') . $this->endPoints[$wsdl], [
+                        'trace' => 1,
+                        'exceptions' => true,
+                        'connection_timeout' => 10,
+                    ])
                     : [];
             }
         } catch (\Throwable $th) {
             $this->soap = [];
+            info('error_wsdl_log', [$th]);
         }
     }
 
@@ -48,8 +53,24 @@ class ConnectService
             $soap_data = $this->soap->__soapCall($soap_call_parameter, $params);
             $response = json_decode(json_encode($soap_data), true);
 
+            info('wsdl_request', $params);
+            info('wsdl_response', [$response]);
             return $response;
+        } catch (\SoapFault $e) {
+            // Specifická chyba od SOAP serveru
+            logger()->error('SOAP Fault', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'trace' => $e->getTraceAsString(),
+                'params' => $params,
+                'call' => $soap_call_parameter,
+            ]);
+            return [];
         } catch (\Throwable $th) {
+            logger()->error('SOAP error', [
+                'message' => $th->getMessage(),
+                'trace' => $th->getTraceAsString(),
+            ]);
             return [];
         }
     }
