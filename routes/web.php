@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Device;
 use App\Livewire\Auth\Login;
 use App\Livewire\User\UserComponent;
 use App\Livewire\Wiki\WikiComponent;
@@ -7,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Iptv\Sftps\SftpComponent;
 use App\Livewire\Iptv\Channels\IptvChannel;
 use App\Livewire\User\UserActionsComponent;
+use App\Actions\Devices\CheckCpuUsageAction;
 use App\Livewire\Iptv\Devices\DeviceComponent;
 use App\Livewire\Iptv\FlowEye\FlowEyeComponent;
 use App\Livewire\Iptv\Promo\IptvPromoComponent;
@@ -127,5 +129,3 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
-
-Route::get('test', DeviceZabbixChartComponent::class);

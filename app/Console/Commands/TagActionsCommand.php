@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\CpuDeviceCheckJob;
 use App\Jobs\GetNimbleDataJob;
 use App\Jobs\GpuDeviceCheckJob;
 use Illuminate\Console\Command;
@@ -29,6 +30,9 @@ class TagActionsCommand extends Command
     {
         // check if gpus working action 1
         GpuDeviceCheckJob::dispatch();
+        // check cpu usage
+        CpuDeviceCheckJob::dispatch();
+        // command for getting info is top -bn1 | grep "Cpu(s)" | awk '{print 100 - $8"%"}'
 
         // nimble actions
         // get all devices on nimble api and bound ids

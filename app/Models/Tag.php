@@ -37,6 +37,10 @@ class Tag extends Model
             'id' => 7,
             'name' => 'channel_restart',
         ],
+        [
+            'id' => 8,
+            'name' => 'check_cpu'
+        ]
     ];
 
     protected $fillable = [
@@ -58,7 +62,7 @@ class Tag extends Model
     public function scopeSearch(Builder $query, string $search): void
     {
         $query
-            ->where('name', 'like', '%'.$search.'%');
+            ->where('name', 'like', '%' . $search . '%');
     }
 
     public function scopeHasActionChannelRestart(Builder $query): void

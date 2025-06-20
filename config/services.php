@@ -120,6 +120,12 @@ return [
             'tarrifCode' => env('IPTV_PROMO_TARRIF_CODE'),
             'locality' => env('IPTV_PROMO_LOCALITY'),
             'ispCode' => env('IPTV_PROMO_ISP_CODE')
+        ],
+        'geniustv_database' => [
+            'host' => env('GENIUSTV_DB_HOST'),
+            'name' => env('GENIUSTV_DB_NAME'),
+            'username' => env('GENIUSTV_DB_USERNAME'),
+            'password' => env('GENIUSTV_DB_PASSWORD')
         ]
     ],
 

@@ -13,7 +13,7 @@ class ConnectService
     {
         $servername = config('services.api.6.hbo_go.url');
         $dbName = config('services.api.6.hbo_go.database');
-        $username = config('services.api.6.hbo_go.usernam+e');
+        $username = config('services.api.6.hbo_go.username');
         $password = config('services.api.6.hbo_go.password');
         try {
             $this->connection = new PDO("mysql:host=$servername;dbname=$dbName", $username, $password);

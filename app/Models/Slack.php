@@ -42,6 +42,10 @@ class Slack extends Model
     {
         $query->where('action', 'gpu_problem_notification');
     }
+    public function scopeCpuHighUsageAction(Builder $query): void
+    {
+        $query->where('action', 'cpu_high_usage');
+    }
 
     public function scopeSatelitcardExpiration(Builder $query): void
     {
@@ -55,6 +59,6 @@ class Slack extends Model
 
     public function scopeSearch(Builder $query, string $search = ''): void
     {
-        $query->where('description', 'like', '%'.$search.'%')->orWhere('url', 'like', '%'.$search.'%');
+        $query->where('description', 'like', '%' . $search . '%')->orWhere('url', 'like', '%' . $search . '%');
     }
 }
